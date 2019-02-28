@@ -267,7 +267,7 @@
     ]
   },
   {
-    "Uid": "MN_D",
+    "Uid": "MN_F",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -276,7 +276,7 @@
     ]
   },
   {
-    "Uid": "MN_F",
+    "Uid": "MN_I",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -687,7 +687,7 @@
     ]
   },
   {
-    "Uid": "CH1_D",
+    "Uid": "CH1_I",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -696,7 +696,7 @@
     ]
   },
   {
-    "Uid": "CH2_D",
+    "Uid": "CH2_I",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -711,7 +711,7 @@
     ]
   },
   {
-    "Uid": "CH3_D",
+    "Uid": "CH3_I",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -726,7 +726,7 @@
     ]
   },
   {
-    "Uid": "CH1_E",
+    "Uid": "CH1_G",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -735,7 +735,7 @@
     ]
   },
   {
-    "Uid": "CH2_E",
+    "Uid": "CH2_G",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -750,7 +750,7 @@
     ]
   },
   {
-    "Uid": "CH3_E",
+    "Uid": "CH3_G",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -3132,6 +3132,214 @@
   },
   {
     "Uid": "NPC_G6",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_H1",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_H2",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 1
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_H3",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 2
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_H4",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_H5",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_H6",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_I1",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_I2",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 1
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_I3",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 2
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_I4",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_I5",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_I6",
     "CreateRewards": [
       {
         "Currency": "Coins",
