@@ -4,7 +4,11 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
 {
     public override void Execute()
     {
+        ProfileService.Instance.Manager.UploadCurrentProfile();
+        
+#if UNITY_EDITOR
         ProfileService.Instance.Manager.SaveLocalProfile();
+#endif
         
         var manager = GameDataService.Current.QuestsManager;
         manager.Cleanup();
@@ -13,13 +17,15 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
         BoardService.Instance.SetManager(null);
 
         ShopService.Current.Cleanup();
-        // ShopService.Instance.SetManager(null);// Do not kill shop!
+        ShopService.Instance.SetManager(null);
 
         GameDataService.Instance.SetManager(null);
          
         ProfileService.Current.QueueComponent.StopAndClear();
         
         ProfileService.Instance.SetManager(null);
+        
+        LocalNotificationsService.Instance.SetManager(null);
         
         var ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);
             

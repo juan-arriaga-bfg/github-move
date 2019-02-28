@@ -472,12 +472,18 @@ public class DevTools : UIContainerElementViewController
                 .SetDependency(typeof(ShowLoadingWindowInitComponent)))
 
             .AddComponent(new CleanupForReloadInitComponent()
-                .SetDependency(typeof(ReloadSceneLoaderComponent)))            
+                .SetDependency(typeof(ReloadSceneLoaderComponent)))     
+                         
+            .AddComponent(new ShopServiceInitComponent()
+                .SetDependency(typeof(CleanupForReloadInitComponent)))
                         
             .AddComponent(new ProfileInitComponent()
                 .SetDependency(typeof(CleanupForReloadInitComponent)))
             
             .AddComponent(new GameDataInitComponent()
+                .SetDependency(typeof(ProfileInitComponent)))
+         
+            .AddComponent(new NotificationServiceInitComponent()
                 .SetDependency(typeof(ProfileInitComponent)))
             
             .AddComponent(new MainSceneLoaderComponent()
