@@ -447,29 +447,13 @@ public class DevTools : UIContainerElementViewController
     [UsedImplicitly]
     public void OnReloadSceneClick()
     {
-        // var mainWindowGo = UIService.Get.Get(UIWindowType.LauncherWindow).gameObject;
-        
-        UIService.Get.CloseWindow(UIWindowType.MainWindow);
-        UIService.Get.CloseWindow(UIWindowType.ResourcePanelWindow);
-
-        // var findGo = GameObject.Find("UIContainer");
-        // var refGo = IWUIManager.Instance.gameObject;
-        // DontDestroyOnLoad(IWUIManager.Instance.transform.parent);
-        //
-        // if (!ReferenceEquals(findGo, refGo))
-        // {
-        //     Debug.LogError("SUKA!!!!!!!");
-        // }
-        // else
-        // {
-        //     Debug.LogError("OK!!!!!!!");
-        // }
-
         AsyncInitService.Current
             .AddComponent(new ShowLoadingWindowInitComponent())
+            .AddComponent(new ClosePermanentWindowsInitComponent())
 
             .AddComponent(new ReloadSceneLoaderComponent()
-                .SetDependency(typeof(ShowLoadingWindowInitComponent)))
+                .SetDependency(typeof(ShowLoadingWindowInitComponent))
+                .SetDependency(typeof(ClosePermanentWindowsInitComponent)))
 
             .AddComponent(new CleanupForReloadInitComponent()
                 .SetDependency(typeof(ReloadSceneLoaderComponent)))            
@@ -484,27 +468,6 @@ public class DevTools : UIContainerElementViewController
                 .SetDependency(typeof(GameDataInitComponent)))
 
             .Run(null);
-
-        // Undo dont destroy on load
-        // SceneManager.MoveGameObjectToScene(mainWindowGo, SceneManager.GetActiveScene());
-
-        // SceneManager.LoadScene("Reload", LoadSceneMode.Single);
-        // return;
-
-        // IEnumerator LoadSceneCoroutine(Action onComplete)
-        // {
-        //     var loadingOperation = SceneManager.LoadSceneAsync("Reload", LoadSceneMode.Single);
-        //
-        //     // Wait until the asynchronous scene fully loads
-        //     while (!loadingOperation.isDone)
-        //     {
-        //         yield return null;
-        //     }
-        //
-        //     onComplete?.Invoke();
-        // }
-        //
-        // StartCoroutine(LoadSceneCoroutine(null));
     }
     
     private void UpdateFpsMeter()
