@@ -168,10 +168,6 @@
             "Y": 5
           },
           {
-            "X": 21,
-            "Y": 9
-          },
-          {
             "X": 22,
             "Y": 6
           }
@@ -184,6 +180,12 @@
           {
             "X": 23,
             "Y": 7
+          }
+        ],
+        "A2": [
+          {
+            "X": 21,
+            "Y": 9
           }
         ],
         "OB2_A": [
@@ -683,14 +685,10 @@
         }
       ],
       "Pieces": {
-        "NPC_C2": [
+        "Hard1": [
           {
             "X": 15,
             "Y": 5
-          },
-          {
-            "X": 21,
-            "Y": 4
           }
         ],
         "OB4_A": [
@@ -751,6 +749,10 @@
           {
             "X": 17,
             "Y": 5
+          },
+          {
+            "X": 21,
+            "Y": 4
           }
         ],
         "OB5_A": [
@@ -910,10 +912,14 @@
             "Y": 6
           }
         ],
-        "NPC_C3": [
+        "Soft1": [
           {
             "X": 13,
             "Y": 7
+          },
+          {
+            "X": 15,
+            "Y": 8
           }
         ],
         "OB9_A": [
@@ -950,12 +956,6 @@
           {
             "X": 15,
             "Y": 6
-          }
-        ],
-        "Soft1": [
-          {
-            "X": 15,
-            "Y": 8
           }
         ],
         "Hard1": [
@@ -1049,7 +1049,7 @@
             "Y": 9
           }
         ],
-        "NPC_C2": [
+        "A5": [
           {
             "X": 10,
             "Y": 10
@@ -1110,7 +1110,7 @@
       "Level": "9",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 350
+        "Amount": 300
       },
       "Reward": {
         "Currency": "Experience",
@@ -1206,14 +1206,6 @@
             "Y": 8
           },
           {
-            "X": 17,
-            "Y": 11
-          },
-          {
-            "X": 17,
-            "Y": 12
-          },
-          {
             "X": 18,
             "Y": 10
           }
@@ -1224,13 +1216,23 @@
             "Y": 10
           }
         ],
+        "OB3_A": [
+          {
+            "X": 17,
+            "Y": 11
+          }
+        ],
         "PR_D4": [
           {
             "X": 17,
-            "Y": 13
+            "Y": 12
           }
         ],
         "Boost_CR2": [
+          {
+            "X": 17,
+            "Y": 13
+          },
           {
             "X": 18,
             "Y": 8
@@ -1249,7 +1251,7 @@
       "Level": "10",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 500
+        "Amount": 450
       },
       "Reward": {
         "Currency": "Experience",
@@ -1378,7 +1380,7 @@
       "Level": "11",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 650
+        "Amount": 450
       },
       "Reward": {
         "Currency": "Experience",
@@ -1520,7 +1522,7 @@
       "Level": "12",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 750
+        "Amount": 550
       },
       "Reward": {
         "Currency": "Experience",
@@ -1654,7 +1656,7 @@
       "Level": "13",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 1000
+        "Amount": 550
       },
       "Reward": {
         "Currency": "Experience",
