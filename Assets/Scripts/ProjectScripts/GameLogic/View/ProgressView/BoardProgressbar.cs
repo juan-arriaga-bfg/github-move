@@ -80,4 +80,9 @@ public class BoardProgressbar : MonoBehaviour
         DOTween.Kill(light);
         light.DOFade(1f, 0f);
     }
+
+    private void OnDisable()
+    {
+        DOTween.Kill(light); 
+    }
 }
