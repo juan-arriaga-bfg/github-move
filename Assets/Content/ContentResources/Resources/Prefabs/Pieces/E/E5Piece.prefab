@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 114154012225628988}
   - component: {fileID: 114915371257863050}
   m_Layer: 0
-  m_Name: E5Piece
+  m_Name: F5Piece
   m_TagString: Untagged
   m_Icon: {fileID: 4660412927644837186, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498410286280418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: 0.39, z: 0}
+  m_LocalPosition: {x: 0.05, y: 0.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4725771498046544}
@@ -145,7 +145,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 183935382c85ff241818f3f01257b630, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ed44bb05a487ee646a0e89a982b460a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
