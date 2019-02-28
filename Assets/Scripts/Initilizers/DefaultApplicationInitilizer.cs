@@ -84,7 +84,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         var energyLogic = BoardService.Current?.FirstBoard?.GetComponent<EnergyCurrencyLogicComponent>(EnergyCurrencyLogicComponent.ComponentGuid);
         if (pauseStatus)
         {
-            if (ProfileService.Instance != null)
+            if (ProfileService.Instance != null && ProfileService.Instance.Manager != null)
             {
                 ProfileService.Instance.Manager.UploadCurrentProfile();
 
