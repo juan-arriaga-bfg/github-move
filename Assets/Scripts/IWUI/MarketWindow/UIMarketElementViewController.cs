@@ -123,10 +123,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 
 	private void OnClickInfo()
 	{
-		var contentEntity = entity as UIMarketElementEntity;
-		var index = GameDataService.Current.MarketManager.Defs.IndexOf(contentEntity.Def);
-		
-		UIMessageWindowController.CreateDefaultMessage($"Slot {index + 1}");
+		UIMessageWindowController.CreateDefaultMessage($"Slot {GetIndex()}");
 	}
 
 	private void OnClick()
@@ -181,7 +178,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	{
 		var contentEntity = entity as UIMarketElementEntity;
 		
-		Analytics.SendPurchase($"market{CachedTransform.GetSiblingIndex() + 1}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Current.Price}, null, false, false);
+		Analytics.SendPurchase($"market{GetIndex()}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Current.Price}, null, false, false);
 		CurrencyHelper.Purchase(Currency.Market.Name, 1, contentEntity.Def.Current.Price, success =>
 		{
 			if (success == false)
@@ -212,5 +209,11 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		rewardPosition = position;
 		isReward = true;
 		context.Controller.CloseCurrentWindow();
+	}
+	
+	protected virtual int GetIndex()
+	{
+		var contentEntity = entity as UIMarketElementEntity;
+		return GameDataService.Current.MarketManager.Defs.IndexOf(contentEntity.Def) + 1;
 	}
 }

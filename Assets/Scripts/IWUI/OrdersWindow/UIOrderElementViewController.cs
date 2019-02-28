@@ -1,9 +1,11 @@
-﻿using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class UIOrderElementViewController : UISimpleScrollElementViewController
 {
 	[IWUIBinding] private UIOrdersTabButtonViewController button;
 	[IWUIBinding("#Mark")] private Image mark;
+	[IWUIBinding("#Clock")] private GameObject clock;
 	
 	public override void Init()
 	{
@@ -20,7 +22,7 @@ public class UIOrderElementViewController : UISimpleScrollElementViewController
 	{
 		var contentEntity = entity as UIOrderElementEntity;
 		
-		contentEntity.Data.SetMark(mark);
+		contentEntity.Data.SetMark(mark, clock);
 	}
 
 	public override void OnViewShowCompleted()

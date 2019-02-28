@@ -3,31 +3,31 @@
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
 
-	public TimerComponent Timer { get; } = new TimerComponent();
+	public TimerComponent ResetMarketTimer { get; } = new TimerComponent();
+	public TimerComponent ResetEnergyTimer { get; } = new TimerComponent();
 
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
-		RegisterComponent(Timer);
+		RegisterComponent(ResetMarketTimer, true);
+		RegisterComponent(ResetEnergyTimer, true);
 		
-		LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.MarketRefresh));
+		LocalNotificationsService.Current.RegisterNotifier(new Notifier(ResetMarketTimer, NotifyType.MarketRefresh));
 		
-		Timer.Delay = GameDataService.Current.ConstantsManager.MarketUpdateDelay;
+		ResetMarketTimer.Delay = GameDataService.Current.ConstantsManager.MarketUpdateDelay;
+		ResetEnergyTimer.Delay = GameDataService.Current.ConstantsManager.FreeEnergyDelay;
 		
-		Timer.OnComplete += () =>
+		ResetMarketTimer.OnComplete += () =>
 		{
 			GameDataService.Current.MarketManager.UpdateSlots(true);
-			Timer.Start();
+			ResetMarketTimer.Start();
 		};
 		
 		var save = ProfileService.Current.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
 
-		if (save != null && string.IsNullOrEmpty(save.ResetMarketStartTime) == false)
-		{
-			Timer.Start(long.Parse(save.ResetMarketStartTime));
-			return;
-		}
+		if (save != null && string.IsNullOrEmpty(save.ResetMarketStartTime) == false) ResetMarketTimer.Start(long.Parse(save.ResetMarketStartTime));
+		else ResetMarketTimer.Start();
 		
-		Timer.Start();
+		if (save != null && string.IsNullOrEmpty(save.ResetEnergyStartTime) == false) ResetEnergyTimer.Start(long.Parse(save.ResetEnergyStartTime));
 	}
 
     public override void OnUnRegisterEntity(ECSEntity entity)

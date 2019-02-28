@@ -500,14 +500,14 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "45_CreatePiece_PR_B5",
-    "PieceUid": "PR_B5",
-    "TargetValue": 10,
+    "$type": "TaskCollectIngredientEntity, GameAssembly",
+    "Id": "45_CollectIngredient",
+    "TargetValue": 15,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message"
+        "Ico": "collectIngredientDailyQuestIcon",
+        "Title": "quest.collect.ingredient.title",
+        "Message": "quest.collect.ingredient.message"
       }
     }
   },
@@ -600,7 +600,7 @@
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Collection_C_Icon",
+        "Ico": "NPC_CIcon",
         "Title": "quest.complete.orders.title",
         "Message": "quest.complete.orders.message",
         "Hint": "task.complete.orders.hint"
@@ -735,7 +735,7 @@
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Collection_A_Icon",
+        "Ico": "NPC_AIcon",
         "Title": "quest.complete.orders.title",
         "Message": "quest.complete.orders.message",
         "Hint": "task.complete.orders.hint"
@@ -761,7 +761,7 @@
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Collection_B_Icon",
+        "Ico": "NPC_BIcon",
         "Title": "quest.create.piece.title",
         "Message": "quest.create.piece.message"
       }
@@ -785,7 +785,7 @@
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Collection_B_Icon",
+        "Ico": "NPC_BIcon",
         "Title": "quest.complete.orders.title",
         "Message": "quest.complete.orders.message"
       }
@@ -822,7 +822,7 @@
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Collection_C_Icon",
+        "Ico": "NPC_CIcon",
         "Title": "quest.create.piece.title",
         "Message": "quest.create.piece.message"
       }
@@ -883,7 +883,7 @@
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Collection_D_Icon",
+        "Ico": "NPC_DIcon",
         "Title": "quest.create.piece.title",
         "Message": "quest.create.piece.message"
       }
@@ -920,7 +920,7 @@
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Collection_E_Icon",
+        "Ico": "NPC_EIcon",
         "Title": "quest.create.piece.title",
         "Message": "quest.create.piece.message"
       }

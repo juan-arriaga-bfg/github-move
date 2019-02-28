@@ -106,8 +106,14 @@ public class MarketItem
             case MarketRandomType.Ingredients:
                 piece = GetRandomIngredient();
                 break;
-            case MarketRandomType.BaseChests:
-                piece = GetRandomChest();
+            case MarketRandomType.BaseChestsFirst:
+                piece = GetRandomChest(0);
+                break;
+            case MarketRandomType.BaseChestsSecond:
+                piece = GetRandomChest(1);
+                break;
+            case MarketRandomType.BaseChestsLast:
+                piece = GetRandomChest(2);
                 break;
             case MarketRandomType.NPCChests:
                 piece = GameDataService.Current.CharactersManager.Characters.Count == 0 ? null : def.Weight.Uid;
@@ -174,7 +180,7 @@ public class MarketItem
         return item?.Uid;
     }
     
-    private string GetRandomChest()
+    private string GetRandomChest(int index)
     {
         var chests = PieceType.GetIdsByFilter(PieceTypeFilter.Chest, PieceTypeFilter.Bag);
 
@@ -188,7 +194,8 @@ public class MarketItem
         var chest = chests[Random.Range(0, chests.Count)];
         var board = BoardService.Current.FirstBoard;
         var definition = board.BoardLogic.MatchDefinition;
+        var chain = definition.GetChain(chest);
         
-        return PieceType.Parse(definition.GetLast(chest));
+        return PieceType.Parse(chain[index]);
     }
 }

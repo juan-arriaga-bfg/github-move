@@ -36,8 +36,8 @@ public class UIMarketWindowView : UIGenericPopupWindowView
             .SetId(content)
             .OnComplete(() => { content.GetScrollRect().enabled = true; });
         
-        BoardService.Current.FirstBoard.MarketLogic.Timer.OnTimeChanged += UpdateLabel;
-        BoardService.Current.FirstBoard.MarketLogic.Timer.OnComplete += UpdateSlots;
+        BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnExecute += UpdateLabel;
+        BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnComplete += UpdateSlots;
     }
 
     public override void OnViewShowCompleted()
@@ -56,15 +56,15 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         DOTween.Kill(content);
         
-        BoardService.Current.FirstBoard.MarketLogic.Timer.OnTimeChanged -= UpdateLabel;
-        BoardService.Current.FirstBoard.MarketLogic.Timer.OnComplete -= UpdateSlots;
+        BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnExecute -= UpdateLabel;
+        BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnComplete -= UpdateSlots;
     }
     
     private void UpdateLabel()
     {
         var windowModel = Model as UIMarketWindowModel;
         
-        timerLabel.Text =  BoardService.Current.FirstBoard.MarketLogic.Timer.CompleteTime.GetTimeLeftText();
+        timerLabel.Text =  BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.CompleteTime.GetTimeLeftText();
     }
     
     private List<IUIContainerElementEntity> UpdateEntities()
@@ -102,7 +102,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         {
             if(success == false) return;
             
-            BoardService.Current.FirstBoard.MarketLogic.Timer.Complete();
+            BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.Complete();
             Analytics.SendPurchase("skip_market", "item1", new List<CurrencyPair>{windowModel.Price}, null, false, false);
         });
     }

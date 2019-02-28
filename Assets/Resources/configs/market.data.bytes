@@ -14,7 +14,35 @@
     "RandomType": "BasePiecesEasy"
   },
   {
-    "Uid": "Base Chests",
+    "Uid": "Base Chests First",
+    "UnlockLevel": 1,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "Empty",
+      "Weight": 1
+    },
+    "Price": {
+      "Currency": "Coins",
+      "Amount": 25
+    },
+    "RandomType": "BaseChestsFirst"
+  },
+  {
+    "Uid": "Base Chests Second",
+    "UnlockLevel": 1,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "Empty",
+      "Weight": 1
+    },
+    "Price": {
+      "Currency": "Coins",
+      "Amount": 50
+    },
+    "RandomType": "BaseChestsSecond"
+  },
+  {
+    "Uid": "Base Chests Last",
     "UnlockLevel": 1,
     "Amount": 1,
     "Weight": {
@@ -23,9 +51,9 @@
     },
     "Price": {
       "Currency": "Crystals",
-      "Amount": 25
+      "Amount": 75
     },
-    "RandomType": "BaseChests"
+    "RandomType": "BaseChestsLast"
   },
   {
     "Uid": "Boosts",

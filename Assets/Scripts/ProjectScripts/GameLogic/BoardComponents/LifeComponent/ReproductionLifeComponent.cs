@@ -29,7 +29,7 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
             if (view.IsShow == false)
             {
                 view.SetData(
-                    LocalizationService.Get("common.message.forbidden", "common.message.forbidden"),
+                    LocalizationService.Get("common.message.unavailable.candy", "common.message.unavailable.candy"),
                     LocalizationService.Get("common.button.ok", "common.button.ok"),
                     (p) => { view.Change(false); },
                     true,
