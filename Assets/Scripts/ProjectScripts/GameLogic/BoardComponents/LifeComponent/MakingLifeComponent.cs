@@ -18,7 +18,7 @@ public class MakingLifeComponent : WorkplaceLifeComponent
         def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).MakingDef;
         
         HP = -1;
-        TimerWork.Delay = 2;
+        TimerWork.Delay = WorkerCurrencyLogicComponent.MinDelay;
         
         TimerCooldown = new TimerComponent{Delay = def.Delay};
         RegisterComponent(TimerCooldown);

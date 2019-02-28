@@ -12,7 +12,7 @@
 
 		if (life == null || IsDone) return true;
 
-		if (life.TimerWork.IsPaused || life.IsUseCooldown && life.TimerCooldown.IsPaused) return false;
+		if (life.TimerWork.IsPaused || life.IsHideTimer && life.TimerWork.IsExecuteable() || life.IsUseCooldown && life.TimerCooldown.IsPaused) return false;
 
 		IsDone = life.TimerWork.IsExecuteable() == false;
         

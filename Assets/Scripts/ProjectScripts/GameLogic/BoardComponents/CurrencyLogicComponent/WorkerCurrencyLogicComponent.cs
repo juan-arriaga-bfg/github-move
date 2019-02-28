@@ -8,6 +8,8 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
+    public const int MinDelay = 2;
+    
     public BoardPosition? Last;
     
     private List<KeyValuePair<BoardPosition, TimerComponent>> completeTimesList = new List<KeyValuePair<BoardPosition, TimerComponent>>();
@@ -81,6 +83,9 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             var select = completeTimesList[0];
             
             UIErrorWindowController.AddError(LocalizationService.Get("message.error.workerBusy", "message.error.workerBusy"));
+
+            if (select.Value.CompleteTime.GetTimeLeft().TotalSeconds <= MinDelay) return false;
+            
             context.HintCooldown.Step(select.Key);
             
             select.Value.View.SetState(TimerViewSate.Select);
