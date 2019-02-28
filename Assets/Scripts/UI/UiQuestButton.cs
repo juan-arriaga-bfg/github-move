@@ -11,6 +11,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     [SerializeField] private UiQuestButtonArrow arrow;
     [SerializeField] private Button button;
     [SerializeField] private Transform iconAnchor;
+    [SerializeField] private Transform iconAnchorHero;
     
     public QuestEntity Quest { get; private set; }
     private bool isUp;
@@ -137,14 +138,13 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         SetLabelValue(currentValue);
     }
     
-    public static Transform GetIcon(TaskEntity task, Transform anchor, Image icon = null)
+    public static Transform GetIcon(TaskEntity task, Transform anchor, Transform anchorHero, Image icon = null)
     {
         var id = task.GetIco();
 
         if (string.IsNullOrEmpty(id))
         {
-            var taskAboutCurrency = task as TaskCurrencyEntity;
-            if (taskAboutCurrency != null && !string.IsNullOrEmpty(taskAboutCurrency.CurrencyName))
+            if (task is TaskCurrencyEntity taskAboutCurrency && !string.IsNullOrEmpty(taskAboutCurrency.CurrencyName))
             {
                 var pair = new CurrencyPair {Currency = taskAboutCurrency.CurrencyName};
                 id = pair.GetIcon();
@@ -153,8 +153,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
         if (string.IsNullOrEmpty(id))
         {
-            var taskAboutPiece = task as IHavePieceId;
-            if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id && taskAboutPiece.PieceId != PieceType.Empty.Id)
+            if (task is IHavePieceId taskAboutPiece && taskAboutPiece.PieceId != PieceType.None.Id && taskAboutPiece.PieceId != PieceType.Empty.Id)
             {
                 id = PieceType.Parse(taskAboutPiece.PieceId);
             }
@@ -172,7 +171,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         }
         
         var obj = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
-        obj.SetParentAndReset(anchor);
+        obj.SetParentAndReset(id.Contains("NPC_") && anchorHero != null ? anchorHero : anchor);
         
         return obj;
     }
@@ -204,7 +203,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             content = null;
         }
         
-        content = GetIcon(Quest.Tasks[0], iconAnchor, icon);
+        content = GetIcon(Quest.Tasks[0], iconAnchor, iconAnchorHero, icon);
         icon.gameObject.SetActive(content == null);
 
         var isComplete = Quest.IsCompletedOrClaimed();

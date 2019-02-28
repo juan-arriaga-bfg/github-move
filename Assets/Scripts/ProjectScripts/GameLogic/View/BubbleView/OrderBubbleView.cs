@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class OrderBubbleView : UIBoardView
 {
 	[SerializeField] private Image mark;
+	[SerializeField] private GameObject clock;
 	[SerializeField] private GameObject question;
 
 	protected override ViewType Id => ViewType.OrderBubble;
@@ -28,9 +29,9 @@ public class OrderBubbleView : UIBoardView
 	{
 		if (customer == null) return;
 		
-		customer.Order.SetMark(mark);
+		customer.Order.SetMark(mark, clock);
 
-		if (anchor != null) anchor.gameObject.SetActive(customer.Order.State != OrderState.Init);
+		if (anchor != null) anchor.gameObject.SetActive(customer.Order.State != OrderState.Init && customer.Order.State != OrderState.InProgress);
 		
 		question.SetActive(customer.Order.State == OrderState.Init);
 		

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class OrdersButton : UIFakePanelViewController
 {
 	[SerializeField] private Image markIcon;
+	[SerializeField] private GameObject clock;
 	[SerializeField] private GameObject shine;
 	[SerializeField] private GameObject exclamationMark;
 	[SerializeField] private NSText label;
@@ -26,6 +27,7 @@ public class OrdersButton : UIFakePanelViewController
 	{
 		var isWarning = false;
 		var isComplete = false;
+		var isInProgress = false;
 
 		var orders = GameDataService.Current.OrdersManager.Orders;
 
@@ -38,12 +40,14 @@ public class OrdersButton : UIFakePanelViewController
 			}
 			
 			if (order.State == OrderState.Enough) isWarning = true;
+			if (order.State == OrderState.InProgress) isInProgress = true;
 		}
 
 		var isShowIndicator = isWarning || isComplete;
 		
 		shine.SetActive(isShowIndicator);
 		exclamationMark.SetActive(isShowIndicator);
+		clock.SetActive(isShowIndicator == false && isInProgress);
 		
 		if(isShowIndicator) markIcon.sprite = IconService.Current.GetSpriteById($"icon_{(isComplete ? "Complete" : "Warning")}");
 	}

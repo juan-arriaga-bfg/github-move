@@ -94,10 +94,6 @@
       {
         "Uid": "A1",
         "Weight": 5
-      },
-      {
-        "Uid": "Boost_CR1",
-        "Weight": 1
       }
     ]
   },
@@ -129,7 +125,11 @@
       },
       {
         "Uid": "Boost_CR1",
-        "Weight": 1,
+        "Weight": 3
+      },
+      {
+        "Uid": "Boost_CR2",
+        "Weight": 2,
         "Override": true
       }
     ]
@@ -171,11 +171,15 @@
       },
       {
         "Uid": "Hard1",
-        "Weight": 1,
+        "Weight": 2,
         "Override": true
       },
       {
         "Uid": "Soft1",
+        "Weight": 2
+      },
+      {
+        "Uid": "Soft2",
         "Weight": 1
       }
     ]
@@ -304,13 +308,13 @@
     },
     "ResourcesAmount": {
       "Min": 0,
-      "Max": 0
+      "Max": 1
     },
     "CharactersAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
-    "PieceAmount": 4,
+    "PieceAmount": 5,
     "PieceWeights": [
       {
         "Uid": "C1",
@@ -336,7 +340,7 @@
       "Min": 1,
       "Max": 3
     },
-    "PieceAmount": 6,
+    "PieceAmount": 7,
     "PieceWeights": [
       {
         "Uid": "C1",
@@ -351,6 +355,14 @@
       {
         "Uid": "C3",
         "Weight": 2
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 2
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 1
       }
     ]
   },
@@ -368,7 +380,7 @@
       "Min": 2,
       "Max": 3
     },
-    "PieceAmount": 8,
+    "PieceAmount": 10,
     "PieceWeights": [
       {
         "Uid": "C2",
@@ -382,6 +394,20 @@
       {
         "Uid": "C4",
         "Weight": 5
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1,
+        "Override": true
+      },
+      {
+        "Uid": "Boost_CR2",
+        "Weight": 2
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 1,
+        "Override": true
       }
     ]
   },

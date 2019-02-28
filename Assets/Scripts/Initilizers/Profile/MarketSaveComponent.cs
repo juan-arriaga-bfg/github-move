@@ -9,6 +9,7 @@ public class MarketSaveComponent : ECSEntity, IECSSerializeable
     public override int Guid => ComponentGuid;
     
     [JsonProperty] public string ResetMarketStartTime;
+    [JsonProperty] public string ResetEnergyStartTime;
     
     private List<MarketSaveItem> slots;
 
@@ -27,7 +28,8 @@ public class MarketSaveComponent : ECSEntity, IECSSerializeable
         var board = BoardService.Current.FirstBoard;
         var defs = GameDataService.Current.MarketManager.Defs;
         
-        ResetMarketStartTime = board.MarketLogic.Timer.StartTimeLong.ToString();
+        ResetMarketStartTime = board.MarketLogic.ResetMarketTimer.StartTimeLong.ToString();
+        ResetEnergyStartTime = board.MarketLogic.ResetEnergyTimer.StartTimeLong.ToString();
         
         slots = new List<MarketSaveItem>();
 

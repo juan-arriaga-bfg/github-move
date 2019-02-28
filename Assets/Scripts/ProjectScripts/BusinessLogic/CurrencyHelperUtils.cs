@@ -136,11 +136,7 @@ public static partial class CurrencyHelper
         
         if (currency == Currency.Energy.Name)
         {
-            var model = UIService.Get.GetCachedModel<UISoftShopWindowModel>(UIWindowType.SoftShopWindow);
-
-            model.ShopType = Currency.Energy;
-            
-            UIService.Get.ShowWindow(UIWindowType.SoftShopWindow);
+            UIService.Get.ShowWindow(UIWindowType.EnergyShopWindow);
             return;
         }
         
