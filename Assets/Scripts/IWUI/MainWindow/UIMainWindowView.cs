@@ -39,8 +39,6 @@ public class UIMainWindowView : UIBaseWindowView
     
     private readonly List<UiQuestButton> questButtons = new List<UiQuestButton>();
 
-    private int maxCountOfVisibleQuestButtonsCached = -1;
-    
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
         base.InitView(model, controller);
@@ -67,10 +65,12 @@ public class UIMainWindowView : UIBaseWindowView
         UpdateCodexButton();
     }
 
-    private void OnDestroy()
+    public override void OnViewClose()
     {
         GameDataService.Current.QuestsManager.OnActiveQuestsListChanged -= OnActiveQuestsListChanged;
         GameDataService.Current.CodexManager.OnNewItemUnlocked -= OnNewPieceBuilded;
+        
+        CheckQuestButtons(new List<QuestEntity>()); // Provide empty list to destroy all buttons 
     }
 
     public void ChangeVisibility(UiLockTutorialItem item, bool isLock, bool isAnimate)
