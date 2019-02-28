@@ -50,7 +50,7 @@ public class IngredientPieceView : PieceBoardElementView
         sequence.Goto(Random.Range(0, 0.95f), true);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         DOTween.Kill(body);
     }

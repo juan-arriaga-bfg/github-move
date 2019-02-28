@@ -53,7 +53,7 @@ public class FogProgressView : UIBoardView
         base.ResetViewOnDestroy();
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         KillTweens();
     }

@@ -61,14 +61,14 @@ public class TapToContinueTextViewController : IWBaseMonoBehaviour
 
     public void Hide(bool animated)
     {
+        DOTween.Kill(this);
+        
         if (!visible)
         {
             return;
         }
 
         visible = false;
-        
-        DOTween.Kill(this);
 
         if (!animated)
         {
@@ -79,10 +79,5 @@ public class TapToContinueTextViewController : IWBaseMonoBehaviour
         DOTween.ToAlpha(() => label.color, x => label.color = x, 0, fadeTime)
                .SetTarget(label)
                .SetId(this);
-    }
-
-    private void OnDestroy()
-    {
-        DOTween.Kill(this);
     }
 }
