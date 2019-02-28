@@ -32,7 +32,8 @@
 
     public override void OnUnRegisterEntity(ECSEntity entity)
     {
-        Timer.OnComplete = null;
+        ResetMarketTimer.OnComplete = null;
+        ResetEnergyTimer.OnComplete = null;
         
         base.OnUnRegisterEntity(entity);
     }
