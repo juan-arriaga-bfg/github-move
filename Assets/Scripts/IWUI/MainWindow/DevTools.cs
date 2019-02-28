@@ -71,13 +71,15 @@ public class DevTools : UIContainerElementViewController
     
     public void OnResetProgressClick()
     {
-        UIMessageWindowController.CreateMessageWithTwoButtons(
-            "Reset the progress",
-            "Do you want to reset the progress and start playing from the beginning?",
-            "<size=30>Reset progress!</size>",
-            "No!",
-            () => { ReloadScene(true); },
-            () => {});
+        UIService.Get.ShowWindow(UIWindowType.ProfileCheatSheetWindow);
+        
+        // UIMessageWindowController.CreateMessageWithTwoButtons(
+        //     "Reset the progress",
+        //     "Do you want to reset the progress and start playing from the beginning?",
+        //     "<size=30>Reset progress!</size>",
+        //     "No!",
+        //     () => { ReloadScene(true); },
+        //     () => {});
     }
 
     public void OnCurrencyCheatSheetClick()
