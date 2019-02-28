@@ -7,7 +7,7 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
         ProfileService.Instance.Manager.SaveLocalProfile();
         
         var manager = GameDataService.Current.QuestsManager;
-        manager.DisconnectFromBoard();
+        manager.Cleanup();
             
         BoardService.Current.Cleanup();
         BoardService.Instance.SetManager(null);

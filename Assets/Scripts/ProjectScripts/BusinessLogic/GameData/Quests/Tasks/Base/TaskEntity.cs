@@ -240,4 +240,10 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
         
         return LocalizationService.Get(key, key);
     }
+
+    public void Cleanup()
+    {
+        DisconnectFromBoard();
+        OnChanged = null;
+    }
 }

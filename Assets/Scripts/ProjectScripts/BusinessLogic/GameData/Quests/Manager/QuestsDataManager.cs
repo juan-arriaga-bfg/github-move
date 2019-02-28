@@ -639,4 +639,16 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         //
         // return resultLocal;
     }
+    
+    public void Cleanup()
+    {
+        DisconnectFromBoard();
+        OnQuestStateChanged = null;
+        OnActiveQuestsListChanged = null;
+
+        foreach (var questEntity in ActiveQuests)
+        {
+            questEntity.Cleanup();
+        }
+    }
 }
