@@ -93,7 +93,7 @@ public class R
      public const string OB_PR_EPiece = "OB_PR_EPiece";
      public const string MN_BPiece = "MN_BPiece";
      public const string MN_CPiece = "MN_CPiece";
-     public const string MN_DPiece = "MN_DPiece";
+     public const string MN_IPiece = "MN_IPiece";
      public const string Hard1Piece = "Hard1Piece";
      public const string Hard2Piece = "Hard2Piece";
      public const string Hard3Piece = "Hard3Piece";
