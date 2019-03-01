@@ -54,7 +54,7 @@ public class LevelsDataManager : SequenceData, IDataLoader<List<LevelsDef>>
 		});
 	}
 
-	public int Level => ProfileService.Current.GetStorageItem(Currency.Level.Name).Amount;
+	public int Level => ((GameDataManager)context).UserProfile.GetStorageItem(Currency.Level.Name).Amount; 
 
 	public int Price
 	{

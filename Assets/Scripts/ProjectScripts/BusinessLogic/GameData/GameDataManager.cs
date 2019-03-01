@@ -54,8 +54,12 @@
     private CharactersDataManager charactersManager;
     public CharactersDataManager CharactersManager => charactersManager ?? (charactersManager = GetComponent<CharactersDataManager>(CharactersDataManager.ComponentGuid));
     
-    public void SetupComponents()
+    public UserProfile UserProfile { get; private set; } 
+    
+    public void SetupComponents(UserProfile userProfile)
     {
+        UserProfile = userProfile;
+        
         RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()));
         
         RegisterComponent(new ChestsDataManager());

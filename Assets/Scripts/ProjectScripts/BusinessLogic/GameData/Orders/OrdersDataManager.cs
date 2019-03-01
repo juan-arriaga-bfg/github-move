@@ -9,12 +9,23 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
     private LockerComponent locker;
     public LockerComponent Locker => locker ?? GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
     
+    private ECSEntity context;
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
+        context = entity;
+        
         locker = new LockerComponent();
         RegisterComponent(locker);
         
         Reload();
+    }
+    
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {
+        base.OnUnRegisterEntity(entity);
+        
+        context = null;
     }
 
     public List<OrderDef> Recipes;
@@ -36,7 +47,7 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
             if (string.IsNullOrEmpty(error))
             {
                 var levels = GameDataService.Current.LevelsManager.Levels;
-                var save = ProfileService.Current.GetComponent<OrdersSaveComponent>(OrdersSaveComponent.ComponentGuid);
+                var save = ((GameDataManager)context).UserProfile.GetComponent<OrdersSaveComponent>(OrdersSaveComponent.ComponentGuid);
 
                 foreach (var level in levels)
                 {

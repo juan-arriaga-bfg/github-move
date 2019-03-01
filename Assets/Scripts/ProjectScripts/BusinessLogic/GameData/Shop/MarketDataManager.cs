@@ -11,13 +11,18 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
 
     public Action UpdateState;
 
+    private ECSEntity context;
+
     public void OnRegisterEntity(ECSEntity entity)
     {
+        context = entity;
+        
         Reload();
     }
 
     public void OnUnRegisterEntity(ECSEntity entity)
     {
+        context = null;
     }
 	
     public void Reload()
@@ -45,7 +50,7 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
                     item.AddDef(def);
                 }
                 
-                var save = ProfileService.Current.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
+                var save = ((GameDataManager)context).UserProfile.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
                 
                 if(save?.Slots == null || save.Slots.Count == 0) return;
                 
