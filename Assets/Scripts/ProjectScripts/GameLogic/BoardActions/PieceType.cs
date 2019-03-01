@@ -398,6 +398,14 @@ public static partial class PieceType
     public static readonly PieceTypeDef CH2_G = new PieceTypeDef{Id = 10702, Abbreviations = new List<string>{ "CH2_G" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef CH3_G = new PieceTypeDef{Id = 10703, Abbreviations = new List<string>{ "CH3_G" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     
+    public static readonly PieceTypeDef CH1_H = new PieceTypeDef{Id = 10801, Abbreviations = new List<string>{ "CH1_H" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    public static readonly PieceTypeDef CH2_H = new PieceTypeDef{Id = 10802, Abbreviations = new List<string>{ "CH2_H" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    public static readonly PieceTypeDef CH3_H = new PieceTypeDef{Id = 10803, Abbreviations = new List<string>{ "CH3_H" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    
+    public static readonly PieceTypeDef CH1_I = new PieceTypeDef{Id = 10901, Abbreviations = new List<string>{ "CH1_I" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    public static readonly PieceTypeDef CH2_I = new PieceTypeDef{Id = 10902, Abbreviations = new List<string>{ "CH2_I" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    public static readonly PieceTypeDef CH3_I = new PieceTypeDef{Id = 10903, Abbreviations = new List<string>{ "CH3_I" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    
 #endregion
     
 #region Obstacles

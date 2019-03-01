@@ -367,6 +367,14 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.CH2_G.Id, R.CH2_GPiece);
         dict.Add(PieceType.CH3_G.Id, R.CH3_GPiece);
         
+        dict.Add(PieceType.CH1_H.Id, R.CH1_HPiece);
+        dict.Add(PieceType.CH2_H.Id, R.CH2_HPiece);
+        dict.Add(PieceType.CH3_H.Id, R.CH3_HPiece);
+        
+        dict.Add(PieceType.CH1_I.Id, R.CH1_IPiece);
+        dict.Add(PieceType.CH2_I.Id, R.CH2_IPiece);
+        dict.Add(PieceType.CH3_I.Id, R.CH3_IPiece);
+        
 #endregion
         
 #region Obstacles

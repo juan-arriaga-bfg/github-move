@@ -336,6 +336,14 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.CH2_G.Id, new PieceMatchDef {Next = PieceType.CH3_G.Id, Previous = PieceType.CH1_G.Id, Amount = 3});
         dict.Add(PieceType.CH3_G.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.CH2_G.Id});
         
+        dict.Add(PieceType.CH1_H.Id, new PieceMatchDef {Next = PieceType.CH2_H.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.CH2_H.Id, new PieceMatchDef {Next = PieceType.CH3_H.Id, Previous = PieceType.CH1_H.Id, Amount = 3});
+        dict.Add(PieceType.CH3_H.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.CH2_H.Id});
+        
+        dict.Add(PieceType.CH1_I.Id, new PieceMatchDef {Next = PieceType.CH2_I.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.CH2_I.Id, new PieceMatchDef {Next = PieceType.CH3_I.Id, Previous = PieceType.CH1_I.Id, Amount = 3});
+        dict.Add(PieceType.CH3_I.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.CH2_I.Id});
+        
 #endregion
         
 #region Simple Pieces

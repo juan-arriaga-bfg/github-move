@@ -435,4 +435,10 @@ public class R
      public const string OB7_DPiece = "OB7_DPiece";
      public const string OB8_DPiece = "OB8_DPiece";
      public const string OB9_DPiece = "OB9_DPiece";
+     public const string CH1_HPiece = "CH1_HPiece";
+     public const string CH2_HPiece = "CH2_HPiece";
+     public const string CH3_HPiece = "CH3_HPiece";
+     public const string CH1_IPiece = "CH1_IPiece";
+     public const string CH2_IPiece = "CH2_IPiece";
+     public const string CH3_IPiece = "CH3_IPiece";
 }
