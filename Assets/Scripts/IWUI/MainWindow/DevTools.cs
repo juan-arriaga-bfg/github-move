@@ -44,31 +44,6 @@ public class DevTools : UIContainerElementViewController
         panel.SetActive(!isChecked);
     }
     
-    public static void ReloadScene(bool resetProgress)
-    {
-        var manager = GameDataService.Current.QuestsManager;
-        manager.DisconnectFromBoard();
-            
-        BoardService.Instance.SetManager(null);
-
-        if (resetProgress)
-        {
-            var profileBuilder = new DefaultProfileBuilder();
-            ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
-        }
-
-        GameDataService.Current.Reload();
-                   
-        var ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);
-            
-        foreach (var system in ecsSystems)
-        {
-            ECSService.Current.SystemProcessor.UnRegisterSystem(system);
-        }
-        
-        SceneManager.LoadScene("Main", LoadSceneMode.Single);
-    }
-    
     public void OnProfilesClick()
     {
         UIService.Get.ShowWindow(UIWindowType.ProfileCheatSheetWindow);
