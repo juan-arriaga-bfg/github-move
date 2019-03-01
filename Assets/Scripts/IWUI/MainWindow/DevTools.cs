@@ -69,17 +69,9 @@ public class DevTools : UIContainerElementViewController
         SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
     
-    public void OnResetProgressClick()
+    public void OnProfilesClick()
     {
         UIService.Get.ShowWindow(UIWindowType.ProfileCheatSheetWindow);
-        
-        // UIMessageWindowController.CreateMessageWithTwoButtons(
-        //     "Reset the progress",
-        //     "Do you want to reset the progress and start playing from the beginning?",
-        //     "<size=30>Reset progress!</size>",
-        //     "No!",
-        //     () => { ReloadScene(true); },
-        //     () => {});
     }
 
     public void OnCurrencyCheatSheetClick()
@@ -449,20 +441,31 @@ public class DevTools : UIContainerElementViewController
     [UsedImplicitly]
     public void OnReloadSceneClick()
     {
+        ProfileService.Instance.Manager.UploadCurrentProfile();
+        
+#if UNITY_EDITOR
+        ProfileService.Instance.Manager.SaveLocalProfile();
+#endif
+
+        ReloadScene();
+    }
+
+    public static void ReloadScene()
+    {
         AsyncInitService.Current
             .AddComponent(new ShowLoadingWindowInitComponent())
             .AddComponent(new ClosePermanentWindowsInitComponent())
 
             .AddComponent(new ReloadSceneLoaderComponent()
-                .SetDependency(typeof(ShowLoadingWindowInitComponent))
-                .SetDependency(typeof(ClosePermanentWindowsInitComponent)))
+                         .SetDependency(typeof(ShowLoadingWindowInitComponent))
+                         .SetDependency(typeof(ClosePermanentWindowsInitComponent)))
 
             .AddComponent(new CleanupForReloadInitComponent()
                 .SetDependency(typeof(ReloadSceneLoaderComponent)))     
-                         
+             
             .AddComponent(new ShopServiceInitComponent()
                 .SetDependency(typeof(CleanupForReloadInitComponent)))
-                        
+            
             .AddComponent(new ProfileInitComponent()
                 .SetDependency(typeof(CleanupForReloadInitComponent)))
             

@@ -3,22 +3,9 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class UIProfileCheatSheetSlotData
-{
-    public int SlotId;
-    public string SlotPath;
-    public ProfileManager<UserProfile> Profile;
-    /// <summary>
-    /// Means that we can't use profile for some reason and default profile created
-    /// </summary>
-    public bool IsDefault;
-
-    public string Error;
-}
-
 public class UIProfileCheatSheetWindowModel : IWWindowModel
 {
-    public string Title => "Profile slots";
+    public string Title => "Saves";
 
     public const int MAX_SLOTS = 20;
     
@@ -27,28 +14,23 @@ public class UIProfileCheatSheetWindowModel : IWWindowModel
         List<UIProfileCheatSheetSlotData> ret = new List<UIProfileCheatSheetSlotData>();
         
         List<string> paths = new List<string>();
-        paths.Add(ProfileLoader.DEFAULT_PATH);
 
-        for (int i = 1; i < MAX_SLOTS; i++)
+        for (int i = 0; i < MAX_SLOTS; i++)
         {
-            string slotPath = $"{ProfileLoader.DEFAULT_PATH}_{i}";
+            string slotPath = GetSlotPathByIndex(i);
             paths.Add(slotPath);
         }
 
         for (var i = 0; i < paths.Count; i++)
         {
             var slotPath = paths[i];
-#if UNITY_EDITOR
-            var dataMapper = new ResourceConfigDataMapper<UserProfile>(slotPath, false);
-#else
-            var dataMapper = new StoragePlayerPrefsDataMapper<UserProfile>(slotPath);
-#endif
 
-            if (dataMapper.IsDataExists())
+            if (IsSlotUsed(slotPath))
             {
                 var index = i; //closure
                 Load(slotPath, data =>
                 {
+                    data.SlotIndex = index;
                     ret.Add(data);
 
                     if (index == paths.Count - 1)
@@ -67,18 +49,43 @@ public class UIProfileCheatSheetWindowModel : IWWindowModel
         }
     }
 
+    public static string GetSlotPathByIndex(int index)
+    {
+        return index == 0 ? ProfileSlots.DEFAULT_SLOT_PATH : $"{ProfileSlots.DEFAULT_SLOT_PATH}_{index}";
+    }
+
     private void Load(string path, Action<UIProfileCheatSheetSlotData> onComplete)
     {
-        ProfileLoader.LoadProfile(path, (manager, dataExistsOnPath, error) =>
+        ProfileSlots.Load(path, (manager, dataExistsOnPath, error) =>
         {
             UIProfileCheatSheetSlotData data = new UIProfileCheatSheetSlotData();
-            data.SlotId = 0;
+            data.SlotIndex = 0;
             data.Profile = manager;
-            data.SlotPath = ProfileLoader.DEFAULT_PATH;
+            data.SlotPath = path;
             data.IsDefault = false;
             data.Error = error;
             
             onComplete(data);
         });
+    }
+
+    public static string GetFreeSlotPath()
+    {
+        for (int i = 0; i < MAX_SLOTS; i++)
+        {
+            string slotPath = GetSlotPathByIndex(i);
+            if (!IsSlotUsed(slotPath))
+            {
+                return slotPath;
+            }
+        }
+
+        return null;
+    }
+
+    public static bool IsSlotUsed(string slotPath)
+    {
+        var dataMapper = ProfileSlots.GetDataMapper(slotPath);
+        return dataMapper.IsDataExists();
     }
 }

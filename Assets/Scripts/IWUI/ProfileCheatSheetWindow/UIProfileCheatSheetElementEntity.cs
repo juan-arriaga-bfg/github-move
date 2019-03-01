@@ -9,4 +9,6 @@ public class UIProfileCheatSheetElementEntity : IUIContainerElementEntity
     public IWWindowController WindowController { get; set; }
 
     public UIProfileCheatSheetSlotData SlotData;
+
+    public UIProfileCheatSheetWindowView WindowView;
 }
