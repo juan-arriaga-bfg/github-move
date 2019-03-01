@@ -159,7 +159,7 @@ public class UIQuestCheatSheetElementViewController : UIContainerElementViewCont
             content = null;
         }
         
-        content = UiQuestButton.GetIcon(targetTask, taskIconAnchor, taskIcon);
+        content = UiQuestButton.GetIcon(targetTask, taskIconAnchor, null, taskIcon);
         taskIcon.gameObject.SetActive(content == null);
 
         var data = GetData();

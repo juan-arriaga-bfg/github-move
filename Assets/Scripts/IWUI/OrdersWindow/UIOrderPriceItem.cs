@@ -8,6 +8,7 @@ public class UIOrderPriceItem : IWUIWindowViewController
     [IWUIBinding("/canvas/#Body/Back/Contents/Tabs/#TabRecipes/Viewport/#ContentRecipes", true)] private UIContainerViewController contentRecipes;
     [IWUIBinding] private UIContainerViewController container;
     [IWUIBinding] private CanvasGroup canvasGroup;
+    [IWUIBinding("#Required")] private NSText requiredLabel;
     
     private Transform parent;
     private Transform target;
@@ -18,6 +19,13 @@ public class UIOrderPriceItem : IWUIWindowViewController
         base.OnViewInit(context);
 
         parent = CachedTransform.parent;
+    }
+
+    public override void OnViewShow(IWUIWindowView context)
+    {
+        base.OnViewShow(context);
+
+        requiredLabel.Text = LocalizationService.Get("window.orders.required", "window.orders.required");
     }
 
     public void Hide(ScrollRect scroll)
@@ -68,13 +76,10 @@ public class UIOrderPriceItem : IWUIWindowViewController
             for (var i = 0; i < entities.Count; i++)
             {
                 var def = entities[i];
-                var current = ProfileService.Current.GetStorageItem(def.Currency).Amount;
-                var color = current == def.Amount ? "FFFFFF" : (current > def.Amount ? "28EC6D" : "EC5928"); 
             
                 var entity = new UISimpleScrollElementEntity
                 {
                     ContentId = def.Currency,
-                    LabelText = $"<color=#{color}>{current}</color><size=35>/{def.Amount}</size>",
                     OnSelectEvent = null,
                     OnDeselectEvent = null
                 };

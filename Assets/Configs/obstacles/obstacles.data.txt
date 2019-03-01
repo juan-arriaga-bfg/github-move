@@ -86,7 +86,7 @@
         "Weight": 2
       },
       {
-        "Uid": "Boost_CR1",
+        "Uid": "A2",
         "Weight": 1
       }
     ],
@@ -125,7 +125,7 @@
       },
       {
         "Uid": "Boost_CR1",
-        "Weight": 2
+        "Weight": 1
       },
       {
         "Uid": "Boost_CR2",
@@ -332,6 +332,340 @@
       }
     ],
     "ChestId": "CH3_A"
+  },
+  {
+    "Uid": "OB1_D",
+    "Delay": 2,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 5
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "CharactersAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 2,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 1
+      }
+    ]
+  },
+  {
+    "Uid": "OB2_D",
+    "Delay": 3,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 10
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 0,
+      "Max": 1
+    },
+    "CharactersAmount": {
+      "Min": 0,
+      "Max": 1
+    },
+    "PieceAmount": 2,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 1
+      }
+    ],
+    "ChestId": "CH1_D"
+  },
+  {
+    "Uid": "OB3_D",
+    "Delay": 5,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 15
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 0,
+      "Max": 1
+    },
+    "CharactersAmount": {
+      "Min": 0,
+      "Max": 1
+    },
+    "PieceAmount": 3,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 2
+      },
+      {
+        "Uid": "A2",
+        "Weight": 1
+      }
+    ],
+    "ChestId": "CH1_D"
+  },
+  {
+    "Uid": "OB4_D",
+    "Delay": 10,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 15
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 20
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "CharactersAmount": {
+      "Min": 0,
+      "Max": 1
+    },
+    "PieceAmount": 4,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 2
+      },
+      {
+        "Uid": "A2",
+        "Weight": 2
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
+      },
+      {
+        "Uid": "Boost_CR2",
+        "Weight": 1
+      }
+    ],
+    "ChestId": "CH2_D"
+  },
+  {
+    "Uid": "OB5_D",
+    "Delay": 15,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 1,
+      "Max": 3
+    },
+    "CharactersAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 2
+      },
+      {
+        "Uid": "A2",
+        "Weight": 4
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 2
+      },
+      {
+        "Uid": "Boost_CR2",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
+      }
+    ],
+    "ChestId": "CH2_D"
+  },
+  {
+    "Uid": "OB6_D",
+    "Delay": 30,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 30
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 2,
+      "Max": 3
+    },
+    "CharactersAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 2
+      },
+      {
+        "Uid": "A2",
+        "Weight": 3
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
+      },
+      {
+        "Uid": "Boost_CR2",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
+      }
+    ],
+    "ChestId": "CH2_D"
+  },
+  {
+    "Uid": "OB7_D",
+    "Delay": 180,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 30
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 35
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 2,
+      "Max": 3
+    },
+    "CharactersAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 1
+      },
+      {
+        "Uid": "A2",
+        "Weight": 5
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
+      },
+      {
+        "Uid": "Boost_CR2",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 3
+      }
+    ],
+    "ChestId": "CH2_D"
+  },
+  {
+    "Uid": "OB8_D",
+    "Delay": 300,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 30
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 40
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 2,
+      "Max": 3
+    },
+    "CharactersAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "PieceAmount": 6,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 1
+      },
+      {
+        "Uid": "A2",
+        "Weight": 6
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
+      },
+      {
+        "Uid": "Boost_CR2",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 3
+      }
+    ],
+    "ChestId": "CH2_D"
+  },
+  {
+    "Uid": "OB9_D",
+    "Delay": 1800,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 35
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 45
+      }
+    ],
+    "ChestId": "CH3_D"
   },
   {
     "Uid": "OB_PR_A",
@@ -651,7 +985,7 @@
     ]
   },
   {
-    "Uid": "OB1_E",
+    "Uid": "OB1_G",
     "Delay": 45,
     "Price": {
       "Currency": "Energy",
@@ -680,7 +1014,7 @@
     ]
   },
   {
-    "Uid": "OB2_E",
+    "Uid": "OB2_G",
     "Delay": 90,
     "Price": {
       "Currency": "Energy",
@@ -711,10 +1045,10 @@
         "Weight": 1
       }
     ],
-    "ChestId": "CH1_E"
+    "ChestId": "CH1_G"
   },
   {
-    "Uid": "OB3_E",
+    "Uid": "OB3_G",
     "Delay": 180,
     "Price": {
       "Currency": "Energy",
@@ -749,10 +1083,10 @@
         "Weight": 1
       }
     ],
-    "ChestId": "CH2_E"
+    "ChestId": "CH2_G"
   },
   {
-    "Uid": "OB4_E",
+    "Uid": "OB4_G",
     "Delay": 360,
     "Price": {
       "Currency": "Energy",
@@ -787,10 +1121,10 @@
         "Weight": 1
       }
     ],
-    "ChestId": "CH2_E"
+    "ChestId": "CH2_G"
   },
   {
-    "Uid": "OB5_E",
+    "Uid": "OB5_G",
     "Delay": 540,
     "Price": {
       "Currency": "Energy",
@@ -802,6 +1136,6 @@
         "Amount": 45
       }
     ],
-    "ChestId": "CH3_E"
+    "ChestId": "CH3_G"
   }
 ]

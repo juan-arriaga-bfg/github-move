@@ -27,6 +27,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.ConfirmationWindow,
             UIWindowType.WaitWindow,
             UIWindowType.CreditsWindow,
+            UIWindowType.EnergyShopWindow,
 #if DEBUG
             UIWindowType.CurrencyCheatSheetWindow,
             UIWindowType.PiecesCheatSheetWindow,

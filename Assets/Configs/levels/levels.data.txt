@@ -95,7 +95,7 @@
     "Index": 4,
     "Price": {
       "Currency": "Experience",
-      "Amount": 500
+      "Amount": 450
     },
     "Rewards": [
       {
@@ -172,7 +172,7 @@
     ],
     "OrdersWeights": [
       {
-        "Uid": "Order4",
+        "Uid": "Order10",
         "Weight": 2
       }
     ],
@@ -252,7 +252,7 @@
       },
       {
         "Uid": "PR_B1",
-        "Weight": 2,
+        "Weight": 1,
         "Override": true
       },
       {
@@ -264,7 +264,7 @@
     "ResourcesWeights": [
       {
         "Uid": "PR_A5",
-        "Weight": 3,
+        "Weight": 2,
         "Override": true
       },
       {
@@ -293,6 +293,10 @@
       {
         "Currency": "Crystals",
         "Amount": 5
+      },
+      {
+        "Currency": "Energy",
+        "Amount": 100
       }
     ],
     "OrdersWeights": [
@@ -344,17 +348,16 @@
       {
         "Currency": "Crystals",
         "Amount": 5
+      },
+      {
+        "Currency": "Energy",
+        "Amount": 120
       }
     ],
     "OrdersWeights": [
       {
-        "Uid": "Order16",
+        "Uid": "Order4",
         "Weight": 3
-      },
-      {
-        "Uid": "Order17",
-        "Weight": 3,
-        "Override": true
       }
     ],
     "PieceWeights": [
@@ -370,12 +373,12 @@
       },
       {
         "Uid": "PR_C1",
-        "Weight": 1,
+        "Weight": 2,
         "Override": true
       },
       {
         "Uid": "PR_D1",
-        "Weight": 2,
+        "Weight": 1,
         "Override": true
       }
     ],
@@ -401,21 +404,26 @@
       {
         "Currency": "Crystals",
         "Amount": 5
+      },
+      {
+        "Currency": "Energy",
+        "Amount": 150
       }
     ],
     "OrdersWeights": [
       {
-        "Uid": "Order10",
-        "Weight": 2
-      },
-      {
-        "Uid": "Order16",
+        "Uid": "Order4",
         "Weight": 2,
         "Override": true
       },
       {
+        "Uid": "Order16",
+        "Weight": 3,
+        "Override": true
+      },
+      {
         "Uid": "Order7",
-        "Weight": 2,
+        "Weight": 3,
         "Override": true
       }
     ],

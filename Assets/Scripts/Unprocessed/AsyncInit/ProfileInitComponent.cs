@@ -19,7 +19,7 @@ public class ProfileInitComponent : AsyncInitComponentBase
         ProfileService.Instance.SetManager(profileManager);
         
         // load local base profile
-        ProfileService.Instance.Manager.LoadBaseProfile((baseProfile) =>
+        ProfileService.Instance.Manager.LoadBaseProfile((baseProfile, errorBase) =>
         {
             // condition to reset profile
             if (baseProfile == null || profileManager.SystemVersion > baseProfile.SystemVersion)
@@ -46,7 +46,7 @@ public class ProfileInitComponent : AsyncInitComponentBase
             else
             {
                 // load local profile
-                ProfileService.Instance.Manager.LoadCurrentProfile((profile) =>
+                ProfileService.Instance.Manager.LoadCurrentProfile((profile, errorCurrent) =>
                 {
                     if (profile == null)
                     {

@@ -1,8 +1,8 @@
 ﻿[
   {
     "Uid": "MN_B",
-    "Cooldown": 3600,
-    "Delay": 15,
+    "Cooldown": 4800,
+    "Delay": 2,
     "Size": 20,
     "Price": {
       "Currency": "Energy",
@@ -31,8 +31,8 @@
   },
   {
     "Uid": "MN_C",
-    "Cooldown": 3600,
-    "Delay": 15,
+    "Cooldown": 4800,
+    "Delay": 2,
     "Size": 20,
     "Price": {
       "Currency": "Energy",
@@ -60,16 +60,16 @@
     ]
   },
   {
-    "Uid": "MN_D",
-    "Cooldown": 3600,
-    "Delay": 15,
+    "Uid": "MN_I",
+    "Cooldown": 4800,
+    "Delay": 2,
     "Size": 20,
     "Price": {
       "Currency": "Energy",
       "Amount": 20
     },
     "Reward": {
-      "Currency": "CH1_D",
+      "Currency": "CH1_I",
       "Amount": 1
     },
     "StepRewards": [
@@ -91,8 +91,8 @@
   },
   {
     "Uid": "MN_F",
-    "Cooldown": 3600,
-    "Delay": 15,
+    "Cooldown": 4800,
+    "Delay": 2,
     "Size": 20,
     "Price": {
       "Currency": "Energy",

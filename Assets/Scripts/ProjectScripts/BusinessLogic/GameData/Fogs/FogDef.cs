@@ -5,6 +5,19 @@ public class FogDef
 {
     public string Uid { get; set; }
     public int Level { get; set; }
+    
+    public string Hero { get; set; }
+
+    private int heroId = PieceType.None.Id;
+    public int HeroId
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(Hero) == false && heroId == PieceType.None.Id) heroId = PieceType.Parse(Hero);
+            
+            return heroId;
+        }
+    }
 
     public bool IsActive { get; set; }
 

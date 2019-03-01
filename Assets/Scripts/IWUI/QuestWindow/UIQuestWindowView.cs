@@ -7,6 +7,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 {
     [IWUIBinding("#TaskIcon")] private Image targetIcon;
     [IWUIBinding("#TaskIconAnchor")] private Transform targetIconAnchor;
+    [IWUIBinding("#TaskIconHeroAnchor")] private Transform targetIconHeroAnchor;
     [IWUIBinding("#RewardLabel")] private NSText rewardLabel;
     [IWUIBinding("#TaskProgress")] private NSText progressLabel;
     [IWUIBinding("#FindButtonLabel")] private NSText buttonLabel;
@@ -40,7 +41,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             content = null;
         }
         
-        content = UiQuestButton.GetIcon(firstTask, targetIconAnchor, targetIcon);
+        content = UiQuestButton.GetIcon(firstTask, targetIconAnchor, targetIconHeroAnchor, targetIcon);
         targetIcon.gameObject.SetActive(content == null);
         
         if (!ShowChain(model))

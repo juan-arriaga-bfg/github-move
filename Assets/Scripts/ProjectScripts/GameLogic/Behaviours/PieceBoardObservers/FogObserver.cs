@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 {
-    private int level;
     public FogDef Def { get; private set; }
     public CurrencyPair AlreadyPaid { get; private set; }
     
@@ -51,7 +50,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         if (viewDef != null)
         {
             viewDef.OnAddToBoard(position, context);
-            level = Def.Level;
             storageItem = ProfileService.Current.GetStorageItem(GetResourceId());
             ResourcesViewManager.Instance.RegisterView(this);
         }
@@ -105,18 +103,20 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         canBeReachedCached = null;
         
         var canPath = CanBeReached();
-        var levelAccess = RequiredLevelReached();
         
-        if(LockView == null && (Def.IsActive && canPath ^ levelAccess) || Def.IsActive == false && canPath)
+        if(LockView == null && (Def.IsActive && canPath ^ RequiredConditionReached()) || Def.IsActive == false && canPath)
         {
             LockView =  Context.Context.RendererContext.CreateBoardElement<LockView>((int)ViewType.Lock);
             LockView.Init(Context.Context.RendererContext);
             LockView.SetSortingOrder(Def.GetCenter());
-            LockView.Value = Def.IsActive ? level.ToString() : "?";
             LockView.transform.position = Def.GetCenter(Context.Context);
         }
 
-        if(LockView != null) LockView.SetGrayscale(canPath == false || Def.IsActive == false);
+        if (LockView != null)
+        {
+            LockView.SetCondition(Def.IsActive ? (IsLevelReached ? null : Def.Level.ToString()) : "?", IsHeroReached ? null : Def.Hero);
+            LockView.SetGrayscale(canPath == false || Def.IsActive == false);
+        }
         
         var fog = Context.ActorView as FogPieceView;
 
@@ -175,7 +175,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     public bool CanBeCleared()
     {
         var pathExists = CanBeReached();
-        var resourcesEnough = RequiredLevelReached();
+        var resourcesEnough = RequiredConditionReached();
 
         return pathExists && resourcesEnough && Def.IsActive;
     }
@@ -185,12 +185,16 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         return AlreadyPaid.Amount < Def.Condition.Amount;
     }
     
-    public bool RequiredLevelReached()
+    public bool RequiredConditionReached()
     {
-        return storageItem.Amount >= level;
+        return IsLevelReached && IsHeroReached;
     }
 
-    public bool IsActive => CanBeReached() || (RequiredLevelReached() && Def.IsActive);
+    public bool IsLevelReached => storageItem.Amount >= Def.Level;
+    
+    public bool IsHeroReached => Def.HeroId == PieceType.None.Id || GameDataService.Current.CodexManager.IsPieceUnlocked(Def.HeroId);
+
+    public bool IsActive => CanBeReached() || (RequiredConditionReached() && Def.IsActive);
 
     public void Filling(int value, out int change)
     {

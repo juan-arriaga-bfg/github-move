@@ -4,7 +4,9 @@
     BasePiecesEasy,
     BasePiecesHard,
     Ingredients,
-    BaseChests,
+    BaseChestsFirst,
+    BaseChestsSecond,
+    BaseChestsLast,
     NPCChests,
 }
 

@@ -24,7 +24,6 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     public Dictionary<BoardPosition, FogDef> ClearedFogPositions;
     
     public Dictionary<BoardPosition, FogObserver> FogObservers;
-    private List<FogDef> ActiveFogs;
 
     private FogDef lastOpenFog;
     public FogDef LastOpenFog
@@ -39,7 +38,6 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         VisibleFogPositions = null;
         ClearedFogPositions = null;
         FogObservers = new Dictionary<BoardPosition, FogObserver>();
-        ActiveFogs   = new List<FogDef>();
         LoadData(new ResourceConfigDataMapper<FogsDataManager>("configs/fogs.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
     
@@ -127,6 +125,16 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     {
         return FogObservers.TryGetValue(pos, out var ret) ? ret : null;
     }
+
+    public void UpdateFogObserver(int id)
+    {
+        foreach (var observer in FogObservers.Values)
+        {
+            if(observer.Def.HeroId != id) continue;
+            
+            observer.UpdateResource(0);
+        }
+    }
     
     public bool IsFogCleared(string uid)
     {
@@ -147,7 +155,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         bool ignorePrice = false;
         bool ignoreLevel = false;
         
-        List<FogObserver> fogsWithBubbles = visibleFogs.Where(e => e.CanBeReached() && e.RequiredLevelReached()).ToList();
+        List<FogObserver> fogsWithBubbles = visibleFogs.Where(e => e.CanBeReached() && e.RequiredConditionReached()).ToList();
 
         if (fogsWithBubbles.Count > 0)
         {
@@ -178,7 +186,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         {
             var fog = sortedFogs[i];
             if ((fog.CanBeReached() == firstFog.CanBeReached())
-             && (fog.RequiredLevelReached() == firstFog.RequiredLevelReached())
+             && (fog.RequiredConditionReached() == firstFog.RequiredConditionReached())
              && (fog.Def.Condition.Amount == firstFog.Def.Condition.Amount || ignorePrice)
              && (fog.Def.Level == firstFog.Def.Level || ignoreLevel))
             {
@@ -204,7 +212,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
                     ? "[CANDIDATE]" 
                     : "";
             
-            sb.AppendLine($"Fog [{fog.Def.Uid}]: Path found: {fog.CanBeReached()}, Required level reached: {fog.RequiredLevelReached()}, Price: {fog.Def.Condition.Amount}, Required level: {fog.Def.Level} {tag}");
+            sb.AppendLine($"Fog [{fog.Def.Uid}]: Path found: {fog.CanBeReached()}, Required level reached: {fog.RequiredConditionReached()}, Price: {fog.Def.Condition.Amount}, Required level: {fog.Def.Level} {tag}");
         }
         
         Debug.Log(sb);
@@ -306,17 +314,11 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     public void RegisterFogObserver(FogObserver observer)
     {
         FogObservers.Add(observer.Key, observer);
-        if (observer.IsActive)
-        {
-            ActiveFogs.Add(observer.Def);
-            ActiveFogs.Sort((def1, def2) => def1.Level - def2.Level);
-        }
     }
     
     public void UnregisterFogObserver(FogObserver observer)
     {
         FogObservers.Remove(observer.Key);
-        ActiveFogs.Remove(observer.Def);
     }
 
     public bool SetMana(Piece piece, BoardPosition targetPosition)

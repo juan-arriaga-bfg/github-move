@@ -18,6 +18,13 @@
 			UIErrorWindowController.AddError(LocalizationService.Get("message.error.fogLock", "message.error.fogLock"));
 			return false;
 		}
+
+		if (def.HeroId != PieceType.None.Id && GameDataService.Current.CodexManager.IsPieceUnlocked(def.HeroId) == false)
+		{
+			var hero = LocalizationService.Get($"piece.name.{PieceType.Parse(def.HeroId)}", $"piece.name.{PieceType.Parse(def.HeroId)}");
+			UIErrorWindowController.AddError(string.Format(LocalizationService.Get("message.error.fogHero", "message.error.fogHero {0}"), hero));
+			return false;
+		}
 		
 		if (def.Level > GameDataService.Current.LevelsManager.Level)
 		{

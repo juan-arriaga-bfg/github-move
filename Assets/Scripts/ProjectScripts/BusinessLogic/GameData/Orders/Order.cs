@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine;
 using UnityEngine.UI;
 
 public enum OrderState
@@ -79,7 +80,7 @@ public class Order
         }
     }
 
-    public void SetMark(Image mark)
+    public void SetMark(Image mark, GameObject clock = null)
     {
         switch (state)
         {
@@ -95,6 +96,10 @@ public class Order
                 mark.gameObject.SetActive(false);
                 break;
         }
+
+        if (clock == null) return;
+        
+        clock.SetActive(state == OrderState.InProgress);
     }
     
     public void Check()

@@ -265,7 +265,7 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 75a76f3ef9cd4cb489f17edf428c73fb, type: 3}
     - {fileID: 21300000, guid: f596fcc0659312c40a7a37ad00d2234e, type: 3}
     - {fileID: 21300000, guid: d131040c24f4bd741b0fe3e0e8a89a2a, type: 3}
-    totalSpriteSurfaceArea: 5153880
+    totalSpriteSurfaceArea: 5559557
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -494,24 +494,24 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 05de65df03e80b74a8e628542a71de11, type: 3}
   - {fileID: 21300000, guid: 34c8a4efe194a9c4b8ab974391f6508a, type: 3}
   m_PackedSpriteNamesToIndex:
-  - I3
+  - D3
   - NPC_B3
   - grass
   - NPC_C8
-  - G1
+  - F1
   - NPC_E3
   - OB7_A
   - PR_A3
   - NPC_C7
   - PR_A4
   - PR_C1
-  - OB4_E
+  - OB4_G
   - PR_G4_lock
   - Hard6
   - Mana4
   - NPC_D4
   - Hard2
-  - OB1_E
+  - OB1_G
   - NPC_D8
   - OB4_A
   - J2
@@ -520,14 +520,14 @@ SpriteAtlas:
   - Boost_CR2
   - PR_A2
   - Boost_CR3
-  - E9
-  - I5
+  - G9
+  - D5
   - Hard5
   - OB_PR_C
   - H6
   - Boost_WR
   - Hard1
-  - E8
+  - G8
   - OB_grass
   - J6
   - PR_D5
@@ -542,29 +542,29 @@ SpriteAtlas:
   - NPC_F3
   - H4
   - PR_A4_lock
-  - D3
+  - I3
   - C3
-  - G5
+  - F5
   - NPC_F6
-  - D9
+  - I9
   - NPC_C4
   - NPC_C5
   - Mana2
-  - D8
-  - F6
+  - I8
+  - E6
   - OB_PR_F
   - B2
   - H5
   - C10
   - Mana3
-  - D2
+  - I2
   - C7
-  - F5
+  - E5
   - B10
   - J1
   - Hard4
-  - OB5_E
-  - G3
+  - OB5_G
+  - F3
   - A2
   - A6
   - NPC_E5
@@ -572,12 +572,12 @@ SpriteAtlas:
   - B9
   - crystallShine
   - Boost_CR
-  - I9
+  - D9
   - NPC_D1
-  - F7
-  - F2
+  - E7
+  - E2
   - B3
-  - D4
+  - I4
   - OB8_A
   - A4
   - PR_F4_lock
@@ -588,35 +588,35 @@ SpriteAtlas:
   - PR_A5
   - OB_PR_D
   - PR_G2
-  - F9
-  - D7
+  - E9
+  - I7
   - PR_C5
   - OB_PR_B
   - PR_C4_lock
   - PR_E1
   - PR_A1
-  - I1
-  - E4
+  - D1
+  - G4
   - J5
-  - G9
+  - F9
   - C6
-  - I6
-  - D5
+  - D6
+  - I5
   - B1
-  - F8
+  - E8
   - Mana5
   - NPC_D3
   - NPC_F1
   - NPC_C3
   - Soft2
   - Boost_CR1
-  - E2
+  - G2
   - C4
   - OB_PR_G
   - NPC_B4
   - PR_E3
   - Soft4
-  - E5
+  - G5
   - PR_G1
   - OB_PR_A
   - NPC_C6
@@ -624,35 +624,35 @@ SpriteAtlas:
   - fence
   - NPC_E2
   - OB2_TT
-  - E9_moon
+  - G9_moon
   - C9
   - A3
-  - OB3_E
+  - OB3_G
   - OB1_A
-  - D1
+  - I1
   - Soft3
-  - E1
+  - G1
   - NPC_F4
-  - I8
+  - D8
   - J4
   - B4
   - NPC_E8
-  - F1
-  - F4
+  - E1
+  - E4
   - PR_D4
-  - G2
-  - I2
+  - F2
+  - D2
   - PR_D2
   - PR_F5
   - NPC_F5
   - Soft6
   - C2
   - A5
-  - D6
+  - I6
   - NPC_E6
   - NPC_C2
   - NPC_D2
-  - G7
+  - F7
   - NPC_F2
   - PR_B1
   - NPC_D6
@@ -663,19 +663,19 @@ SpriteAtlas:
   - PR_C2
   - Mana1
   - NPC_E1
-  - I7
+  - D7
   - PR_D4_lock
   - H1
   - OB6_A
-  - F3
+  - E3
   - J8
   - J7
   - PR_G5
-  - I4
+  - D4
   - PR_F4
   - PR_B5
   - NPC_C1
-  - E3
+  - G3
   - NPC_F7
   - H7
   - PR_B4
@@ -686,9 +686,9 @@ SpriteAtlas:
   - PR_B4_lock
   - PR_E5
   - NPC_B1
-  - E7
+  - G7
   - PR_F3
-  - E6
+  - G6
   - A7
   - PR_C4
   - OB1_TT
@@ -699,7 +699,7 @@ SpriteAtlas:
   - PR_G4
   - PR_D3
   - H2
-  - G8
+  - F8
   - J9
   - PR_D1
   - PR_E2
@@ -713,10 +713,10 @@ SpriteAtlas:
   - PR_E4_lock
   - C8
   - NPC_B2
-  - G6
+  - F6
   - PR_F2
-  - G4
+  - F4
   - PR_E4
-  - OB2_E
+  - OB2_G
   m_Tag: gamefield
   m_IsVariant: 0

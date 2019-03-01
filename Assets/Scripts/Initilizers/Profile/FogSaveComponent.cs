@@ -42,7 +42,7 @@ public class FogSaveComponent : BaseSaveComponent, IECSSerializeable
         {
             if (data.FogObservers.TryGetValue(key, out var observer) == false
                 || observer.IsRemoved
-                || observer.RequiredLevelReached() == false
+                || observer.RequiredConditionReached() == false
                 || observer.AlreadyPaid.Amount == 0) continue;
             
             inprogressFogs.Add(new FogSaveItem {Position = key, AlreadyPaid = observer.AlreadyPaid.Amount});

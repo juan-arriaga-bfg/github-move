@@ -11,7 +11,7 @@ public class UIShopElementEntity : UISimpleScrollElementEntity
             
             foreach (var pair in Products)
             {
-                str.Append($"{pair.ToStringIcon(false, 35)}\n");
+                str.Append($"{pair.ToStringIcon(false, MessageIconSize)}\n");
             }
             
             return str.ToString().TrimEnd();
@@ -43,9 +43,13 @@ public class UIShopElementEntity : UISimpleScrollElementEntity
         }
     }
 
+    public int MessageIconSize = -1;
+
     public string PurchaseKey;
 
     public string NameLabel;
+
+    public bool IsPermanent;
     
     public List<CurrencyPair> Products;
     public CurrencyPair Price;

@@ -136,6 +136,147 @@ public class ElementsResourcesBuilder
 
         #endregion
         
+        #region NPC_H
+
+        dict.Add(PieceType.NPC_H1.Id, R.NPC_H1Piece);
+        dict.Add(PieceType.NPC_H2.Id, R.NPC_H2Piece);
+        dict.Add(PieceType.NPC_H3.Id, R.NPC_H3Piece);
+        dict.Add(PieceType.NPC_H4.Id, R.NPC_H4Piece);
+        dict.Add(PieceType.NPC_H5.Id, R.NPC_H5Piece);
+        dict.Add(PieceType.NPC_H6.Id, R.NPC_H6Piece);
+
+        #endregion
+        
+        #region NPC_I
+
+        dict.Add(PieceType.NPC_I1.Id, R.NPC_I1Piece);
+        dict.Add(PieceType.NPC_I2.Id, R.NPC_I2Piece);
+        dict.Add(PieceType.NPC_I3.Id, R.NPC_I3Piece);
+        dict.Add(PieceType.NPC_I4.Id, R.NPC_I4Piece);
+        dict.Add(PieceType.NPC_I5.Id, R.NPC_I5Piece);
+        dict.Add(PieceType.NPC_I6.Id, R.NPC_I6Piece);
+        dict.Add(PieceType.NPC_I7.Id, R.NPC_I7Piece);
+        dict.Add(PieceType.NPC_I8.Id, R.NPC_I8Piece);
+
+        #endregion
+        
+        #region NPC_J
+
+        dict.Add(PieceType.NPC_J1.Id, R.NPC_J1Piece);
+        dict.Add(PieceType.NPC_J2.Id, R.NPC_J2Piece);
+        dict.Add(PieceType.NPC_J3.Id, R.NPC_J3Piece);
+        dict.Add(PieceType.NPC_J4.Id, R.NPC_J4Piece);
+        dict.Add(PieceType.NPC_J5.Id, R.NPC_J5Piece);
+        dict.Add(PieceType.NPC_J6.Id, R.NPC_J6Piece);
+        dict.Add(PieceType.NPC_J7.Id, R.NPC_J7Piece);
+        dict.Add(PieceType.NPC_J8.Id, R.NPC_J8Piece);
+
+        #endregion
+        
+        #region NPC_K
+
+        dict.Add(PieceType.NPC_K1.Id, R.NPC_K1Piece);
+        dict.Add(PieceType.NPC_K2.Id, R.NPC_K2Piece);
+        dict.Add(PieceType.NPC_K3.Id, R.NPC_K3Piece);
+        dict.Add(PieceType.NPC_K4.Id, R.NPC_K4Piece);
+        dict.Add(PieceType.NPC_K5.Id, R.NPC_K5Piece);
+        dict.Add(PieceType.NPC_K6.Id, R.NPC_K6Piece);
+        dict.Add(PieceType.NPC_K7.Id, R.NPC_K7Piece);
+        dict.Add(PieceType.NPC_K8.Id, R.NPC_K8Piece);
+
+        #endregion
+        
+        #region NPC_L
+
+        dict.Add(PieceType.NPC_L1.Id, R.NPC_L1Piece);
+        dict.Add(PieceType.NPC_L2.Id, R.NPC_L2Piece);
+        dict.Add(PieceType.NPC_L3.Id, R.NPC_L3Piece);
+        dict.Add(PieceType.NPC_L4.Id, R.NPC_L4Piece);
+        dict.Add(PieceType.NPC_L5.Id, R.NPC_L5Piece);
+        dict.Add(PieceType.NPC_L6.Id, R.NPC_L6Piece);
+        dict.Add(PieceType.NPC_L7.Id, R.NPC_L7Piece);
+        dict.Add(PieceType.NPC_L8.Id, R.NPC_L8Piece);
+
+        #endregion
+        
+        #region NPC_M
+
+        dict.Add(PieceType.NPC_M1.Id, R.NPC_M1Piece);
+        dict.Add(PieceType.NPC_M2.Id, R.NPC_M2Piece);
+        dict.Add(PieceType.NPC_M3.Id, R.NPC_M3Piece);
+        dict.Add(PieceType.NPC_M4.Id, R.NPC_M4Piece);
+        dict.Add(PieceType.NPC_M5.Id, R.NPC_M5Piece);
+        dict.Add(PieceType.NPC_M6.Id, R.NPC_M6Piece);
+        dict.Add(PieceType.NPC_M7.Id, R.NPC_M7Piece);
+        dict.Add(PieceType.NPC_M8.Id, R.NPC_M8Piece);
+
+        #endregion
+        
+        #region NPC_N
+
+        dict.Add(PieceType.NPC_N1.Id, R.NPC_N1Piece);
+        dict.Add(PieceType.NPC_N2.Id, R.NPC_N2Piece);
+        dict.Add(PieceType.NPC_N3.Id, R.NPC_N3Piece);
+        dict.Add(PieceType.NPC_N4.Id, R.NPC_N4Piece);
+        dict.Add(PieceType.NPC_N5.Id, R.NPC_N5Piece);
+        dict.Add(PieceType.NPC_N6.Id, R.NPC_N6Piece);
+        dict.Add(PieceType.NPC_N7.Id, R.NPC_N7Piece);
+        dict.Add(PieceType.NPC_N8.Id, R.NPC_N8Piece);
+
+        #endregion
+        
+        #region NPC_O
+
+        dict.Add(PieceType.NPC_O1.Id, R.NPC_O1Piece);
+        dict.Add(PieceType.NPC_O2.Id, R.NPC_O2Piece);
+        dict.Add(PieceType.NPC_O3.Id, R.NPC_O3Piece);
+        dict.Add(PieceType.NPC_O4.Id, R.NPC_O4Piece);
+        dict.Add(PieceType.NPC_O5.Id, R.NPC_O5Piece);
+        dict.Add(PieceType.NPC_O6.Id, R.NPC_O6Piece);
+        dict.Add(PieceType.NPC_O7.Id, R.NPC_O7Piece);
+        dict.Add(PieceType.NPC_O8.Id, R.NPC_O8Piece);
+
+        #endregion
+        
+        #region NPC_P
+
+        dict.Add(PieceType.NPC_P1.Id, R.NPC_P1Piece);
+        dict.Add(PieceType.NPC_P2.Id, R.NPC_P2Piece);
+        dict.Add(PieceType.NPC_P3.Id, R.NPC_P3Piece);
+        dict.Add(PieceType.NPC_P4.Id, R.NPC_P4Piece);
+        dict.Add(PieceType.NPC_P5.Id, R.NPC_P5Piece);
+        dict.Add(PieceType.NPC_P6.Id, R.NPC_P6Piece);
+        dict.Add(PieceType.NPC_P7.Id, R.NPC_P7Piece);
+        dict.Add(PieceType.NPC_P8.Id, R.NPC_P8Piece);
+
+        #endregion
+        
+        #region NPC_Q
+
+        dict.Add(PieceType.NPC_Q1.Id, R.NPC_Q1Piece);
+        dict.Add(PieceType.NPC_Q2.Id, R.NPC_Q2Piece);
+        dict.Add(PieceType.NPC_Q3.Id, R.NPC_Q3Piece);
+        dict.Add(PieceType.NPC_Q4.Id, R.NPC_Q4Piece);
+        dict.Add(PieceType.NPC_Q5.Id, R.NPC_Q5Piece);
+        dict.Add(PieceType.NPC_Q6.Id, R.NPC_Q6Piece);
+        dict.Add(PieceType.NPC_Q7.Id, R.NPC_Q7Piece);
+        dict.Add(PieceType.NPC_Q8.Id, R.NPC_Q8Piece);
+
+        #endregion
+        
+        #region NPC_R
+
+        dict.Add(PieceType.NPC_R1.Id, R.NPC_R1Piece);
+        dict.Add(PieceType.NPC_R2.Id, R.NPC_R2Piece);
+        dict.Add(PieceType.NPC_R3.Id, R.NPC_R3Piece);
+        dict.Add(PieceType.NPC_R4.Id, R.NPC_R4Piece);
+        dict.Add(PieceType.NPC_R5.Id, R.NPC_R5Piece);
+        dict.Add(PieceType.NPC_R6.Id, R.NPC_R6Piece);
+        dict.Add(PieceType.NPC_R7.Id, R.NPC_R7Piece);
+        dict.Add(PieceType.NPC_R8.Id, R.NPC_R8Piece);
+
+        #endregion
+        
 #endregion
 
 #region Enemies
@@ -184,7 +325,7 @@ public class ElementsResourcesBuilder
         
         dict.Add(PieceType.MN_B.Id, R.MN_BPiece);
         dict.Add(PieceType.MN_C.Id, R.MN_CPiece);
-        dict.Add(PieceType.MN_D.Id, R.MN_DPiece);
+        dict.Add(PieceType.MN_I.Id, R.MN_IPiece);
         dict.Add(PieceType.MN_F.Id, R.MN_FPiece);
         
 #endregion
@@ -226,6 +367,14 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.CH2_G.Id, R.CH2_GPiece);
         dict.Add(PieceType.CH3_G.Id, R.CH3_GPiece);
         
+        dict.Add(PieceType.CH1_H.Id, R.CH1_HPiece);
+        dict.Add(PieceType.CH2_H.Id, R.CH2_HPiece);
+        dict.Add(PieceType.CH3_H.Id, R.CH3_HPiece);
+        
+        dict.Add(PieceType.CH1_I.Id, R.CH1_IPiece);
+        dict.Add(PieceType.CH2_I.Id, R.CH2_IPiece);
+        dict.Add(PieceType.CH3_I.Id, R.CH3_IPiece);
+        
 #endregion
         
 #region Obstacles
@@ -245,6 +394,16 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.OB8_A.Id, R.OB8_APiece);
         dict.Add(PieceType.OB9_A.Id, R.OB9_APiece);
         
+        dict.Add(PieceType.OB1_D.Id, R.OB1_DPiece);
+        dict.Add(PieceType.OB2_D.Id, R.OB2_DPiece);
+        dict.Add(PieceType.OB3_D.Id, R.OB3_DPiece);
+        dict.Add(PieceType.OB4_D.Id, R.OB4_DPiece);
+        dict.Add(PieceType.OB5_D.Id, R.OB5_DPiece);
+        dict.Add(PieceType.OB6_D.Id, R.OB6_DPiece);
+        dict.Add(PieceType.OB7_D.Id, R.OB7_DPiece);
+        dict.Add(PieceType.OB8_D.Id, R.OB8_DPiece);
+        dict.Add(PieceType.OB9_D.Id, R.OB9_DPiece);
+        
         dict.Add(PieceType.OB_PR_A.Id, R.OB_PR_APiece);
         dict.Add(PieceType.OB_PR_B.Id, R.OB_PR_BPiece);
         dict.Add(PieceType.OB_PR_C.Id, R.OB_PR_CPiece);
@@ -253,11 +412,11 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.OB_PR_F.Id, R.OB_PR_FPiece);
         dict.Add(PieceType.OB_PR_G.Id, R.OB_PR_GPiece);
         
-        dict.Add(PieceType.OB1_E.Id, R.OB1_EPiece);
-        dict.Add(PieceType.OB2_E.Id, R.OB2_EPiece);
-        dict.Add(PieceType.OB3_E.Id, R.OB3_EPiece);
-        dict.Add(PieceType.OB4_E.Id, R.OB4_EPiece);
-        dict.Add(PieceType.OB5_E.Id, R.OB5_EPiece);
+        dict.Add(PieceType.OB1_G.Id, R.OB1_GPiece);
+        dict.Add(PieceType.OB2_G.Id, R.OB2_GPiece);
+        dict.Add(PieceType.OB3_G.Id, R.OB3_GPiece);
+        dict.Add(PieceType.OB4_G.Id, R.OB4_GPiece);
+        dict.Add(PieceType.OB5_G.Id, R.OB5_GPiece);
         
 #endregion
         

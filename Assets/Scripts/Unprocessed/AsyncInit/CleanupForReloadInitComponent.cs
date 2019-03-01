@@ -10,13 +10,11 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
         manager.DisconnectFromBoard();
             
         BoardService.Current.Cleanup();
-        
         BoardService.Instance.SetManager(null);
 
         GameDataService.Instance.SetManager(null);
-         
+
         ProfileService.Current.QueueComponent.StopAndClear();
-        
         ProfileService.Instance.SetManager(null);
         
         var ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);
