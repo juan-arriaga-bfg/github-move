@@ -61,7 +61,10 @@ public class UIMainWindowView : UIBaseWindowView
         GameDataService.Current.QuestsManager.OnActiveQuestsListChanged += OnActiveQuestsListChanged;
         GameDataService.Current.CodexManager.OnNewItemUnlocked += OnNewPieceBuilded;
         
+        InitWindowViewControllers(); 
+        
         OnActiveQuestsListChanged();
+        
         UpdateCodexButton();
     }
 
@@ -134,8 +137,6 @@ public class UIMainWindowView : UIBaseWindowView
         var activeQuests = GameDataService.Current.QuestsManager.ActiveStoryQuests;
         
         CheckQuestButtons(activeQuests);
-
-        InitWindowViewControllers();
     }
 
     private void CheckQuestButtons(List<QuestEntity> active)
@@ -185,7 +186,7 @@ public class UIMainWindowView : UIBaseWindowView
         pattern.SetActive(false);
 
         // Scroll list to top
-        if (listChanged)
+        if (listChanged && questButtons.Count > 0)
         {
             StartCoroutine(UpdateQuestListDelimiters());
             questListScroll.verticalNormalizedPosition  = 1f;
