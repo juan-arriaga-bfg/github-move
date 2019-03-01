@@ -32,7 +32,7 @@ MonoBehaviour:
   - Key: fogs
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseFogs
-    Pattern: '{"Uid":"","Level":0,"Condition":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"IsActive":false}'
+    Pattern: '{"Uid":"","Level":0,"Condition":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"IsActive":false,"Hero":""}'
   - Key: pieces
     Link: 15C96r0vcgzzhJ6Fo_OQXBcCoIkSogZnTZg8Jc6MKDH8
     Route: parse

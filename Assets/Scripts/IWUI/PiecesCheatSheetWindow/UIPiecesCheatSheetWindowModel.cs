@@ -44,7 +44,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.AddRange(GetPieceIds(PieceType.Hard1.Id, PieceType.Hard6.Id));
                 break;
             case "Mines":
-                ids.AddRange(GetPieceIds(PieceType.MN_B.Id, PieceType.MN_F.Id));
+                ids.AddRange(GetPieceIds(PieceType.MN_B.Id, PieceType.MN_I.Id));
                 break;
             case "Chests":
                 ids.Add(PieceType.CH_Free.Id);
@@ -57,11 +57,14 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.AddRange(GetPieceIds(PieceType.CH1_E.Id, PieceType.CH3_E.Id));
                 ids.AddRange(GetPieceIds(PieceType.CH1_F.Id, PieceType.CH3_F.Id));
                 ids.AddRange(GetPieceIds(PieceType.CH1_G.Id, PieceType.CH3_G.Id));
+                ids.AddRange(GetPieceIds(PieceType.CH1_H.Id, PieceType.CH3_H.Id));
+                ids.AddRange(GetPieceIds(PieceType.CH1_I.Id, PieceType.CH3_I.Id));
                 break;
             case "Obstacles":
                 ids.AddRange(GetPieceIds(PieceType.OB1_TT.Id, PieceType.OB2_TT.Id));
                 ids.AddRange(GetPieceIds(PieceType.OB1_A.Id, PieceType.OB9_A.Id));
-                ids.AddRange(GetPieceIds(PieceType.OB1_E.Id, PieceType.OB5_E.Id));
+                ids.AddRange(GetPieceIds(PieceType.OB1_D.Id, PieceType.OB9_D.Id));
+                ids.AddRange(GetPieceIds(PieceType.OB1_G.Id, PieceType.OB5_G.Id));
                 ids.AddRange(GetPieceIds(PieceType.OB_PR_A.Id, PieceType.OB_PR_G.Id));
                 break;
             case "Simple A":
@@ -122,6 +125,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.AddRange(GetPieceIds(PieceType.NPC_E1.Id, PieceType.NPC_E6.Id));
                 ids.AddRange(GetPieceIds(PieceType.NPC_F1.Id, PieceType.NPC_F6.Id));
                 ids.AddRange(GetPieceIds(PieceType.NPC_G1.Id, PieceType.NPC_G6.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_H1.Id, PieceType.NPC_H6.Id));
                 break;
         }
         

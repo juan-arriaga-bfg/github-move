@@ -57,6 +57,7 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
         UpdateSequence();
         GetSequence(Currency.Character.Name).Reinit(CharactersWeights);
         OnUpdateSequence?.Invoke();
+        GameDataService.Current.FogsManager.UpdateFogObserver(id);
     }
 
     private void UpdateSequence()
