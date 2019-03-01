@@ -1,8 +1,10 @@
 public class ProfileInitComponent : AsyncInitComponentBase
-{
+{   
     public override void Execute()
     {
-        ProfileLoader.LoadProfile(ProfileLoader.DEFAULT_PATH, (profile, exists, error) =>
+        string path = ProfileSlots.ActiveSlot;
+        
+        ProfileSlots.Load(path, (profile, exists, error) =>
         {
             ProfileService.Instance.SetManager(profile);
             ProfileLoaded();

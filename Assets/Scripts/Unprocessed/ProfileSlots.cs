@@ -1,26 +1,56 @@
 using System;
 using System.IO;
+using CodeStage.AntiCheat.ObscuredTypes;
+
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
+
 using UnityEngine;
 
-public static class ProfileLoader
+public static class ProfileSlots
 {
+    private const string KEY = "ActiveSlot";
+    
 #if UNITY_EDITOR
-    public const string DEFAULT_PATH = "configs/profile.data";
+    public const string DEFAULT_SLOT_PATH = "configs/profile.data";
 #else
     public const string DEFAULT_PATH = "user.profile";
 #endif
 
-    public delegate void LoadProfileCallback(ProfileManager<UserProfile> profileManager, bool dataExistsOnPath, string error);
-    public static void LoadProfile(string path, LoadProfileCallback onComplete)
+    public static string ActiveSlot
+    {
+        get
+        {
+            var activeSlot = ObscuredPrefs.GetString(KEY, null);
+            if (string.IsNullOrEmpty(activeSlot))
+            {
+                ObscuredPrefs.SetString(KEY, DEFAULT_SLOT_PATH);
+                return DEFAULT_SLOT_PATH;
+            }
+
+            return activeSlot;
+        }
+        set => ObscuredPrefs.SetString(KEY, value);
+    }
+
+    public static IJsonDataMapper<UserProfile> GetDataMapper(string path)
+    {
+#if UNITY_EDITOR
+        IJsonDataMapper<UserProfile> dataMapper = new ResourceConfigDataMapper<UserProfile>(path, false);
+#else
+        IJsonDataMapper<UserProfile> dataMapper = new StoragePlayerPrefsDataMapper<UserProfile>(path);
+#endif
+        return dataMapper;
+    }
+    
+    public delegate void LoadCallback(ProfileManager<UserProfile> profileManager, bool dataExistsOnPath, string error);
+    public static void Load(string path, LoadCallback onComplete)
     {
         //init profile 
-        var profileManager = new ProfileManager<UserProfile> {SystemVersion = IWVersion.Get.BuildNumber};
+        ProfileManager<UserProfile> profileManager = new ProfileManager<UserProfile> {SystemVersion = IWVersion.Get.BuildNumber};
 
-#if UNITY_EDITOR
-        var dataMapper = new ResourceConfigDataMapper<UserProfile>(path, false);
-#else
-        var dataMapper = new StoragePlayerPrefsDataMapper<UserProfile>(path);
-#endif
+        var dataMapper = GetDataMapper(path);
 
         bool dataExists = dataMapper.IsDataExists();
         
@@ -82,7 +112,6 @@ public static class ProfileLoader
         });
     }
 
-    
 #if DEBUG
     private static void PrintProfileText(IJsonDataMapper<UserProfile> dataMapper)
     {
@@ -112,6 +141,26 @@ public static class ProfileLoader
             {
                 Debug.Log(line);
             }
+        }
+    }
+
+    public static void Delete(string path)
+    {
+        var dataMapper = GetDataMapper(path);
+
+        switch (dataMapper)
+        {
+            case ResourceConfigDataMapper<UserProfile> filesystem:
+                var fileName = $"{Application.dataPath}/Resources/{path}.txt";
+                File.Delete(fileName);
+#if UNITY_EDITOR
+                AssetDatabase.Refresh();
+#endif
+                break;
+               
+            case StoragePlayerPrefsDataMapper<UserProfile> prefs:
+                ObscuredPrefs.DeleteKey(path);
+                break; 
         }
     }
 }

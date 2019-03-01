@@ -4,12 +4,6 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
 {
     public override void Execute()
     {
-        ProfileService.Instance.Manager.UploadCurrentProfile();
-        
-#if UNITY_EDITOR
-        ProfileService.Instance.Manager.SaveLocalProfile();
-#endif
-        
         var manager = GameDataService.Current.QuestsManager;
         manager.Cleanup();
             
