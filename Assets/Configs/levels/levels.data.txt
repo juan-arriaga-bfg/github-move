@@ -283,7 +283,7 @@
     "Index": 8,
     "Price": {
       "Currency": "Experience",
-      "Amount": 3000
+      "Amount": 1800
     },
     "Rewards": [
       {
@@ -338,7 +338,7 @@
     "Index": 9,
     "Price": {
       "Currency": "Experience",
-      "Amount": 4500
+      "Amount": 2500
     },
     "Rewards": [
       {
@@ -394,7 +394,7 @@
     "Index": 10,
     "Price": {
       "Currency": "Experience",
-      "Amount": 5500
+      "Amount": 3000
     },
     "Rewards": [
       {
@@ -447,11 +447,6 @@
         "Uid": "PR_D1",
         "Weight": 1,
         "Override": true
-      },
-      {
-        "Uid": "PR_E1",
-        "Weight": 1,
-        "Override": true
       }
     ],
     "OrdersDelay": 30
@@ -460,7 +455,7 @@
     "Index": 11,
     "Price": {
       "Currency": "Experience",
-      "Amount": 7000
+      "Amount": 3500
     },
     "Rewards": [
       {
@@ -475,34 +470,64 @@
     "OrdersWeights": [
       {
         "Uid": "Order3",
-        "Weight": 3
+        "Weight": 8
       },
       {
         "Uid": "Order16",
-        "Weight": 2,
+        "Weight": 6,
+        "Override": true
+      },
+      {
+        "Uid": "Order2",
+        "Weight": 1,
+        "Override": true
+      },
+      {
+        "Uid": "Order4",
+        "Weight": 1,
+        "Override": true
+      },
+      {
+        "Uid": "Order7",
+        "Weight": 1,
+        "Override": true
+      },
+      {
+        "Uid": "Order1",
+        "Weight": 4,
+        "Override": true
+      },
+      {
+        "Uid": "Order5",
+        "Weight": 4,
         "Override": true
       }
     ],
     "PieceWeights": [
       {
         "Uid": "PR_A1",
-        "Weight": 1
+        "Weight": 3,
+        "Override": true
       },
       {
         "Uid": "PR_B1",
-        "Weight": 1
+        "Weight": 1,
+        "Override": true
       },
       {
         "Uid": "PR_C1",
-        "Weight": 1
+        "Weight": 3,
+        "Override": true
       },
       {
         "Uid": "PR_D1",
-        "Weight": 1
+        "Weight": 3,
+        "Override": true
       },
       {
         "Uid": "PR_E1",
-        "Weight": 1
+        "Weight": 3,
+        "Override": true
       }
     ],
     "OrdersDelay": 30
@@ -523,38 +548,31 @@
         "Amount": 5
       }
     ],
-    "OrdersWeights": [
-      {
-        "Uid": "Order15",
-        "Weight": 2,
-        "Override": true
-      },
-      {
-        "Uid": "Order6",
-        "Weight": 3,
-        "Override": true
-      }
-    ],
     "PieceWeights": [
       {
         "Uid": "PR_A1",
-        "Weight": 1
+        "Weight": 1,
+        "Override": true
       },
       {
         "Uid": "PR_B1",
-        "Weight": 1
+        "Weight": 0,
+        "Override": true
       },
       {
         "Uid": "PR_C1",
-        "Weight": 1
+        "Weight": 1,
+        "Override": true
       },
       {
         "Uid": "PR_D1",
-        "Weight": 1
+        "Weight": 1,
+        "Override": true
       },
       {
         "Uid": "PR_E1",
-        "Weight": 1
+        "Weight": 1,
+        "Override": true
       }
     ],
     "OrdersDelay": 30
@@ -575,26 +593,36 @@
         "Amount": 5
       }
     ],
+    "OrdersWeights": [
+      {
+        "Uid": "Order15",
+        "Weight": 3
+      },
+      {
+        "Uid": "Order6",
+        "Weight": 3
+      }
+    ],
     "PieceWeights": [
       {
         "Uid": "PR_A1",
-        "Weight": 1
-      },
-      {
-        "Uid": "PR_B1",
-        "Weight": 1
+        "Weight": 1,
+        "Override": true
       },
       {
         "Uid": "PR_C1",
-        "Weight": 1
+        "Weight": 1,
+        "Override": true
       },
       {
         "Uid": "PR_D1",
-        "Weight": 1
+        "Weight": 1,
+        "Override": true
       },
       {
         "Uid": "PR_E1",
-        "Weight": 1
+        "Weight": 1,
+        "Override": true
       }
     ],
     "OrdersDelay": 30
