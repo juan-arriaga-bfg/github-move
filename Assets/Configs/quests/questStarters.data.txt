@@ -506,9 +506,9 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
-        "Id": "FogCleared",
-        "Value": "Fog 8"
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "26_UseMine"
       }
     ]
   },
@@ -864,9 +864,9 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
-        "Id": "FogCleared",
-        "Value": "Fog 8"
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "45_CollectIngredient"
       }
     ]
   },

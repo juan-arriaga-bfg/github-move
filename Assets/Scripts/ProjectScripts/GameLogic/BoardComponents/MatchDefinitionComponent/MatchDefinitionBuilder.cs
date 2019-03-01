@@ -247,11 +247,10 @@ public class MatchDefinitionBuilder
         
         dict.Add(PieceType.Mana1.Id, new PieceMatchDef {Next = PieceType.Mana2.Id, Previous = PieceType.None.Id, Amount = 3});
         dict.Add(PieceType.Mana2.Id, new PieceMatchDef {Next = PieceType.Mana3.Id, Previous = PieceType.Mana1.Id, Amount = 3});
-        dict.Add(PieceType.Mana3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Mana2.Id});
-        /*dict.Add(PieceType.Mana3.Id, new PieceMatchDef {Next = PieceType.Mana4.Id, Previous = PieceType.Mana2.Id, Amount = 3});
+        dict.Add(PieceType.Mana3.Id, new PieceMatchDef {Next = PieceType.Mana4.Id, Previous = PieceType.Mana2.Id, Amount = 3});
         dict.Add(PieceType.Mana4.Id, new PieceMatchDef {Next = PieceType.Mana5.Id, Previous = PieceType.Mana3.Id, Amount = 3});
-        dict.Add(PieceType.Mana5.Id, new PieceMatchDef {Next = PieceType.Mana6.Id, Previous = PieceType.Mana4.Id, Amount = 3});
-        dict.Add(PieceType.Mana6.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Mana5.Id});*/
+        dict.Add(PieceType.Mana5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Mana4.Id});
+//        dict.Add(PieceType.Mana6.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Mana5.Id});
         
         dict.Add(PieceType.Soft1.Id, new PieceMatchDef {Next = PieceType.Soft2.Id, Previous = PieceType.None.Id, Amount = 3});
         dict.Add(PieceType.Soft2.Id, new PieceMatchDef {Next = PieceType.Soft3.Id, Previous = PieceType.Soft1.Id, Amount = 3});

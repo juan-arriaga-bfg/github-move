@@ -552,6 +552,44 @@
     ]
   },
   {
+    "Uid": "Mana4",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Mana",
+      "Amount": 135
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 6
+      }
+    ]
+  },
+  {
+    "Uid": "Mana5",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 7
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Mana",
+      "Amount": 405
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 7
+      }
+    ]
+  },
+  {
     "Uid": "CH_Free",
     "UnlockBonus": [
       {
@@ -687,45 +725,6 @@
     ]
   },
   {
-    "Uid": "CH1_I",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      }
-    ]
-  },
-  {
-    "Uid": "CH2_I",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 10
-      }
-    ],
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 3
-      }
-    ]
-  },
-  {
-    "Uid": "CH3_I",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      }
-    ],
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
-  },
-  {
     "Uid": "CH1_D",
     "UnlockBonus": [
       {
@@ -751,6 +750,45 @@
   },
   {
     "Uid": "CH3_D",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "CH1_E",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "CH2_E",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "CH3_E",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -833,6 +871,84 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "CH1_H",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "CH2_H",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "CH3_H",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "CH1_I",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "CH2_I",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "CH3_I",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
       }
     ],
     "UnlockBonus": [
