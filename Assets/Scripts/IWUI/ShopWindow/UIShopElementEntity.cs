@@ -28,17 +28,13 @@ public class UIShopElementEntity : UISimpleScrollElementEntity
             {
                 ret = IapService.Current.GetLocalizedPriceStr(PurchaseKey);
                 
-                if (string.IsNullOrEmpty(ret))
-                {
-                    ret = $"${Price.Amount}";
-                }
+                if (string.IsNullOrEmpty(ret)) ret = $"${Price.Amount}";
             }
             else
             {
                 ret = string.Format(LocalizationService.Get("common.button.buy", "common.button.buy {0}"), Price.ToStringIcon());
             }
-
-
+            
             return ret;
         }
     }

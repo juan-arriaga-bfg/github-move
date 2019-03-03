@@ -1,11 +1,6 @@
-using System.Collections.Generic;
-
-public class UISoftShopWindowModel : IWWindowModel
+public class UISoftShopWindowModel : UIShopWindowModel
 {
-    public CurrencyDef ShopType;
+    protected override CurrencyDef ShopType => Currency.Coins;
     
-    public string Title => LocalizationService.Get($"window.shop.{ShopType.Name.ToLower()}.title", $"window.shop.{ShopType.Name.ToLower()}.title");
-    public string Message => LocalizationService.Get($"window.shop.{ShopType.Name.ToLower()}.message", $"window.shop.{ShopType.Name.ToLower()}.message");
-
-    public List<ShopDef> Products => GameDataService.Current.ShopManager.Defs[ShopType.Name];
+    public override string AnalyticLocation => $"shop_soft";
 }

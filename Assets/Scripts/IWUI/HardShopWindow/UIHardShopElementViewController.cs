@@ -1,26 +1,57 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class UIHardShopElementViewController : UIShopElementViewController
+public class UIHardShopElementViewController : UISoftShopElementViewController
 {
-    [IWUIBinding("#BackPurple")] protected GameObject backPurple;
-    [IWUIBinding("#BackBrown")] protected GameObject backBrown;
+    [IWUIBinding] protected Image back;
+    [IWUIBinding("#ClaimName")] protected NSText claimName;
     
+    protected bool isClaimed;
+
     public override void Init()
     {
         base.Init();
         
         var contentEntity = entity as UIShopElementEntity;
-        var isPack = contentEntity.Products.Count > 1;
         
-        label.StyleId = isPack ? 15 : 14;
-        label.ApplyStyle();
-        
-        backPurple.SetActive(isPack);
-        backBrown.SetActive(!isPack);
+        claimName.Text = contentEntity.NameLabel;
     }
 
-    protected override string GetAnalyticLocation()
+    public override void OnViewCloseCompleted()
     {
-        return "shop_premium";
+        isClaimed = false;
+        base.OnViewCloseCompleted();
+    }
+
+    protected override void ChangeView()
+    {
+        var contentEntity = entity as UIShopElementEntity;
+        var key = $"window.shop.energy.item.{(isClaimed ? "claimed" : "locked")}";
+	    
+        unlockObj.SetActive(!isLock && !isClaimed);
+        lockObj.SetActive(isLock || isClaimed);
+	    
+        lockMessage.gameObject.SetActive(!isClaimed);
+        claimName.gameObject.SetActive(isClaimed);
+	    
+        btnLockLabel.Text = LocalizationService.Get(key, key);
+	    
+        CreateIcon(isLock || isClaimed ? lockAnchor : anchor, isLock ? PieceType.Empty.Abbreviations[0] : contentEntity.ContentId);
+        if (isClaimed) Sepia = true;
+
+        back.color = new Color(1, 1, 1, isClaimed ? 0.5f : 1);
+    }
+
+    protected override void OnPurchaseComplete()
+    {
+        base.OnPurchaseComplete();
+        
+        var contentEntity = entity as UIShopElementEntity;
+        
+        if (contentEntity.IsPermanent == false)
+        {
+            isClaimed = true;
+            ChangeView();
+        }
     }
 }

@@ -8,6 +8,8 @@ public class ShopDef
     public string PurchaseKey;
     public List<CurrencyPair> Products;
     public CurrencyPair Price;
+    public bool IsPermanent;
+    
     
     public ShopDef Copy()
     {
@@ -25,7 +27,8 @@ public class ShopDef
             Name = this.Name,
             PurchaseKey = this.PurchaseKey,
             Price = new CurrencyPair{Currency = this.Price.Currency, Amount = this.Price.Amount},
-            Products = products
+            Products = products,
+            IsPermanent = this.IsPermanent
         };
     }
 }

@@ -20,24 +20,24 @@ public static partial class CurrencyHelper
         return diffs.Count == 0;
     }
 
-    public static bool IsCanPurchase(CurrencyPair price, out int diff, bool isMessageShow = false, Action onMessageConfirm = null)
+    public static bool IsCanPurchase(CurrencyPair price, out int diff, bool isMessageShow = false)
     {
-        return IsCanPurchase(price.Currency, price.Amount, out diff, isMessageShow, onMessageConfirm);
+        return IsCanPurchase(price.Currency, price.Amount, out diff, isMessageShow);
     }
     
-    public static bool IsCanPurchase(CurrencyPair price, bool isMessageShow = false, Action onMessageConfirm = null)
-    {
-        var diff = 0;
-        return IsCanPurchase(price.Currency, price.Amount, out diff, isMessageShow, onMessageConfirm);
-    }
-    
-    public static bool IsCanPurchase(string price, int amount, bool isMessageShow = false, Action onMessageConfirm = null)
+    public static bool IsCanPurchase(CurrencyPair price, bool isMessageShow = false)
     {
         var diff = 0;
-        return IsCanPurchase(price, amount, out diff, isMessageShow, onMessageConfirm);
+        return IsCanPurchase(price.Currency, price.Amount, out diff, isMessageShow);
     }
     
-    public static bool IsCanPurchase(string price, int amount, out int diff, bool isMessageShow = false, Action onMessageConfirm = null)
+    public static bool IsCanPurchase(string price, int amount, bool isMessageShow = false)
+    {
+        var diff = 0;
+        return IsCanPurchase(price, amount, out diff, isMessageShow);
+    }
+    
+    public static bool IsCanPurchase(string price, int amount, out int diff, bool isMessageShow = false)
     {
         diff = 0;
         
@@ -60,7 +60,7 @@ public static partial class CurrencyHelper
         return false;
     }
     
-    public static bool IsCanPurchase(List<CurrencyPair> prices, bool isMessageShow = false, Action onMessageConfirm = null)
+    public static bool IsCanPurchase(List<CurrencyPair> prices, bool isMessageShow = false)
     {
         var isCan = true;
         
@@ -124,19 +124,15 @@ public static partial class CurrencyHelper
     {
         BoardService.Current.FirstBoard?.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, null);
         
-        if (currency == Currency.Coins.Name)
-        {
-            var model = UIService.Get.GetCachedModel<UISoftShopWindowModel>(UIWindowType.SoftShopWindow);
-
-            model.ShopType = Currency.Coins;
-            
-            UIService.Get.ShowWindow(UIWindowType.SoftShopWindow);
-            return;
-        }
-        
         if (currency == Currency.Energy.Name)
         {
             UIService.Get.ShowWindow(UIWindowType.EnergyShopWindow);
+            return;
+        }
+        
+        if (currency == Currency.Coins.Name)
+        {
+            UIService.Get.ShowWindow(UIWindowType.SoftShopWindow);
             return;
         }
         

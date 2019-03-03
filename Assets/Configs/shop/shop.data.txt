@@ -42,7 +42,8 @@
       "Amount": 500
     },
     "Icon": "EnergyShopIcon3",
-    "Name": "window.shop.energy.item3"
+    "Name": "window.shop.energy.item3",
+    "IsPermanent": true
   },
   {
     "Uid": "Energy",
@@ -52,7 +53,8 @@
         "Amount": 30
       }
     ],
-    "Name": "window.shop.energy.item4"
+    "Name": "window.shop.energy.item4",
+    "IsPermanent": true
   },
   {
     "Uid": "Energy",
@@ -62,7 +64,8 @@
         "Amount": 99
       }
     ],
-    "Name": "window.shop.energy.item5"
+    "Name": "window.shop.energy.item5",
+    "IsPermanent": true
   },
   {
     "Uid": "Coins",
@@ -76,7 +79,9 @@
       "Currency": "Crystals",
       "Amount": 15
     },
-    "Icon": "CoinsShopIcon1"
+    "Icon": "CoinsShopIcon1",
+    "Name": "window.shop.coins.item1",
+    "IsPermanent": true
   },
   {
     "Uid": "Coins",
@@ -90,7 +95,9 @@
       "Currency": "Crystals",
       "Amount": 45
     },
-    "Icon": "CoinsShopIcon2"
+    "Icon": "CoinsShopIcon2",
+    "Name": "window.shop.coins.item2",
+    "IsPermanent": true
   },
   {
     "Uid": "Coins",
@@ -104,7 +111,31 @@
       "Currency": "Crystals",
       "Amount": 75
     },
-    "Icon": "CoinsShopIcon3"
+    "Icon": "CoinsShopIcon3",
+    "Name": "window.shop.coins.item3",
+    "IsPermanent": true
+  },
+  {
+    "Uid": "Coins",
+    "Products": [
+      {
+        "Currency": "Coins",
+        "Amount": 9999
+      }
+    ],
+    "Name": "window.shop.coins.item4",
+    "IsPermanent": true
+  },
+  {
+    "Uid": "Coins",
+    "Products": [
+      {
+        "Currency": "Coins",
+        "Amount": 999999
+      }
+    ],
+    "Name": "window.shop.coins.item5",
+    "IsPermanent": true
   },
   {
     "Uid": "Crystals",
@@ -120,7 +151,8 @@
     },
     "Icon": "HardShopIcon3",
     "Name": "window.shop.crystals.item3",
-    "PurchaseKey": "iap1"
+    "PurchaseKey": "iap1",
+    "IsPermanent": true
   },
   {
     "Uid": "Crystals",
@@ -136,7 +168,8 @@
     },
     "Icon": "HardShopIcon4",
     "Name": "window.shop.crystals.item4",
-    "PurchaseKey": "iap2"
+    "PurchaseKey": "iap2",
+    "IsPermanent": true
   },
   {
     "Uid": "Crystals",
@@ -152,7 +185,8 @@
     },
     "Icon": "HardShopIcon5",
     "Name": "window.shop.crystals.item5",
-    "PurchaseKey": "iap3"
+    "PurchaseKey": "iap3",
+    "IsPermanent": true
   },
   {
     "Uid": "Crystals",
@@ -168,7 +202,8 @@
     },
     "Icon": "HardShopIcon6",
     "Name": "window.shop.crystals.item6",
-    "PurchaseKey": "iap4"
+    "PurchaseKey": "iap4",
+    "IsPermanent": true
   },
   {
     "Uid": "Crystals",
@@ -184,7 +219,8 @@
     },
     "Icon": "HardShopIcon7",
     "Name": "window.shop.crystals.item7",
-    "PurchaseKey": "iap5"
+    "PurchaseKey": "iap5",
+    "IsPermanent": true
   },
   {
     "Uid": "Crystals",
@@ -200,6 +236,7 @@
     },
     "Icon": "HardShopIcon7",
     "Name": "window.shop.crystals.item8",
-    "PurchaseKey": "iap6"
+    "PurchaseKey": "iap6",
+    "IsPermanent": true
   }
 ]

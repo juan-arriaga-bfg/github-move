@@ -60,11 +60,12 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         
         if(!(entity is UIShopElementEntity contentEntity) || entity == null || isClick == false) return;
 
-        if (!IsBuyUsingCash())
-        {
-            CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, contentEntity.Price, rewardPosition, null, false, true);
-            Analytics.SendPurchase(GetAnalyticLocation(), GetAnalyticReason(), new List<CurrencyPair>{contentEntity.Price}, new List<CurrencyPair>(currenciesReward), false, false);
-        }
+        if (IsBuyUsingCash()) return;
+        
+        var shopModel = context.Model as UIShopWindowModel;
+            
+        CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, contentEntity.Price, rewardPosition, null, false, true);
+        Analytics.SendPurchase(shopModel.AnalyticLocation, GetAnalyticReason(), new List<CurrencyPair>{contentEntity.Price}, new List<CurrencyPair>(currenciesReward), false, false);
     }
 
     public override void OnViewClose(IWUIWindowView context)
@@ -109,6 +110,8 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
     private void OnBuyUsingCash(UIShopElementEntity contentEntity)
     {
+        var shopModel = context.Model as UIShopWindowModel;
+        
         // HACK to handle the case when we have a purchase but BFG still not add it to the Store
         if (IapService.Current.IapCollection.Defs.All(e => e.Id != contentEntity.PurchaseKey))
         {
@@ -121,7 +124,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
             {
                 context.Controller.CloseCurrentWindow();
                 CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, contentEntity.Price, rewardPosition, null, false, true);
-                Analytics.SendPurchase(GetAnalyticLocation(), GetAnalyticReason(), new List<CurrencyPair>{contentEntity.Price}, new List<CurrencyPair>(currenciesReward), true, false);
+                Analytics.SendPurchase(shopModel.AnalyticLocation, GetAnalyticReason(), new List<CurrencyPair>{contentEntity.Price}, new List<CurrencyPair>(currenciesReward), true, false);
             };
             model.OnClose = () =>
             {
@@ -141,7 +144,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
             }
             else
             {
-                Analytics.SendPurchase(GetAnalyticLocation(), GetAnalyticReason(), null, new List<CurrencyPair>(currenciesReward), true, false);
+                Analytics.SendPurchase(shopModel.AnalyticLocation, GetAnalyticReason(), null, new List<CurrencyPair>(currenciesReward), true, false);
                 context.Controller.CloseCurrentWindow();
             }
         });
@@ -174,16 +177,6 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         model.OnCancel = () => { isClick = false; };
 
         UIService.Get.ShowWindow(UIWindowType.ConfirmationWindow);
-    }
-
-    protected virtual string GetAnalyticLocation()
-    {
-        var model = context.Model as UISoftShopWindowModel;
-        
-        if (model.ShopType.Id == Currency.Energy.Id) return "screen_energy";
-        if (model.ShopType.Id == Currency.Coins.Id) return "screen_soft";
-
-        return string.Empty;
     }
 
     private string GetAnalyticReason()

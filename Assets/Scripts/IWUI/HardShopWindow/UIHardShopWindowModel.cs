@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-
-public class UIHardShopWindowModel : IWWindowModel 
+public class UIHardShopWindowModel : UIShopWindowModel 
 {
-    public string Title => LocalizationService.Get($"window.shop.{Currency.Crystals.Name.ToLower()}.title", $"window.shop.{Currency.Crystals.Name.ToLower()}.title");
-    public string Message => LocalizationService.Get($"window.shop.{Currency.Crystals.Name.ToLower()}.message", $"window.shop.{Currency.Crystals.Name.ToLower()}.message");
+    protected override CurrencyDef ShopType => Currency.Crystals;
 
-    public List<ShopDef> Products => GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name];
+    public override string AnalyticLocation => $"shop_premium";
 }
