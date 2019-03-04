@@ -23,6 +23,9 @@ public class UILauncherWindowView : IWUIWindowView
 
         isGameLoaded = false;
         progressBarStartValue = -1;
+
+        progressBar.UpdateProgress(0, false);
+        progressText.Text = "";
     }
 
     public override void OnViewClose()
