@@ -31,6 +31,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     public void OnUnRegisterEntity(ECSEntity entity)
     {
+        OnRemoveFromBoard(Position, thisContext);
     }
 
     public void OnSwap(bool isEnd)
