@@ -47,14 +47,13 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
            .AddComponent(new UIServiceInitComponent()
                .SetDependency(typeof(LocalAssetBundlesCacheInitComponent)))  
 
+           .AddComponent(new NotificationServiceInitComponent()
+               .SetDependency(typeof(ProfileInitComponent)))
+            
            .AddComponent(new GameDataInitComponent()  
             .SetDependency(typeof(ProfileInitComponent)))
             
            .AddComponent(new LocalizationInitComponent()
-               .SetDependency(typeof(ProfileInitComponent)))
-
-           .AddComponent(new NotificationServiceInitComponent()
-               .SetDependency(typeof(LocalizationInitComponent))
                .SetDependency(typeof(ProfileInitComponent)))
             
            .AddComponent(new IapInitComponent()                                     // In-app purchases implementation

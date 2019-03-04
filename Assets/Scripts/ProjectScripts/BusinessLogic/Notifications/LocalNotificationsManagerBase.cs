@@ -44,9 +44,10 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
 
     public virtual void CancelNotifications()
     {
-        notifyItems.Clear();
         Debug.Log("[LocalNotificationService] => CancelNotifications");
 
+        notifyItems.Clear();
+        
         CancelAllOnDevice();
     }
 
@@ -129,6 +130,12 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
         {
             Debug.Log($"[LocalNotificationService] => Notification(Title: {item.Title}, Message: {item.Message}, NotifyTime: UTC {item.NotifyTime})");
         } 
+    }
+
+    public void Cleanup()
+    {
+        CancelNotifications();
+        notifiers = null;
     }
 
     protected abstract void CancelAllOnDevice();

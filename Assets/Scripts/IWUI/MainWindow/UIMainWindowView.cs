@@ -267,6 +267,15 @@ public class UIMainWindowView : UIBaseWindowView
             UIErrorWindowController.AddError(LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
             return;
         }
+
+        if (GameDataService.Current.QuestsManager.DailyQuest == null)
+        {
+#if UNITY_EDITOR
+            GameDataService.Current.QuestsManager.StartNewDailyQuest();
+#else
+            return;
+#endif
+        }
         
         UIService.Get.ShowWindow(UIWindowType.DailyQuestWindow);
         

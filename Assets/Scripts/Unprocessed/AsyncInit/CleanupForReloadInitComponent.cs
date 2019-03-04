@@ -23,7 +23,8 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
 
         ProfileService.Current.QueueComponent.StopAndClear();
         ProfileService.Instance.SetManager(null);
-        
+
+        LocalNotificationsService.Current.Cleanup();
         LocalNotificationsService.Instance.SetManager(null);
         
         var ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);

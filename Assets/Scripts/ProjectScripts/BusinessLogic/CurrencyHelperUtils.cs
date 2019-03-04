@@ -228,29 +228,32 @@ public static partial class CurrencyHelper
         {
             rewards.Add(pair.ToStringIcon());
         }
-            
-        foreach (var reward in pieces)
-        {
-            var def = GameDataService.Current.PiecesManager.GetPieceDef(reward.Key);
 
-            if (def?.SpawnResources == null)
+        if (pieces != null)
+        {
+            foreach (var reward in pieces)
             {
-                rewards.Add(new CurrencyPair{Currency = PieceType.Parse(reward.Key), Amount = reward.Value}.ToStringIcon(noAmount));
-                continue;
+                var def = GameDataService.Current.PiecesManager.GetPieceDef(reward.Key);
+
+                if (def?.SpawnResources == null)
+                {
+                    rewards.Add(new CurrencyPair {Currency = PieceType.Parse(reward.Key), Amount = reward.Value}.ToStringIcon(noAmount));
+                    continue;
+                }
+
+                var currency = def.SpawnResources.Currency;
+
+                if (types.Contains(currency)) continue;
+
+                var pair = ResourcePieceToCurrency(pieces, currency);
+
+                if (pair.Amount == 0) pair.Amount = reward.Value;
+
+                types.Add(currency);
+                rewards.Add(pair.ToStringIcon());
             }
-                
-            var currency = def.SpawnResources.Currency;
-                
-            if(types.Contains(currency)) continue;
-                
-            var pair = ResourcePieceToCurrency(pieces, currency);
-            
-            if (pair.Amount == 0) pair.Amount = reward.Value;
-                
-            types.Add(currency);
-            rewards.Add(pair.ToStringIcon());
         }
-        
+
         return string.Join(separator, rewards);
     }
 }

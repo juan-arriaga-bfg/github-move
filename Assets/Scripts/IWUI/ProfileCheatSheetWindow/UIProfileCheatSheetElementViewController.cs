@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using CodeStage.AntiCheat.ObscuredTypes;
 using UnityEngine;
@@ -102,9 +103,15 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
         lblTimestamp.Text = $"{timestamp.Replace("Z", "")}";
 
         int level = dm.LevelsManager.Level;
-        int coins = userProfile.GetStorageItem(Currency.Coins.Name).Amount;
+
+        var listResources = new List<CurrencyPair>
+        {
+            new CurrencyPair {Currency = Currency.Coins.Name, Amount = userProfile.GetStorageItem(Currency.Coins.Name).Amount},
+            new CurrencyPair {Currency = Currency.Crystals.Name, Amount = userProfile.GetStorageItem(Currency.Crystals.Name).Amount},
+        };
+        string resourcesStr = CurrencyHelper.RewardsToString("  ", null, listResources);
         
-        lblData.Text = !string.IsNullOrEmpty(slotData.Error) ? slotData.Error : $"Level: {level}, coins: {coins}";
+        lblData.Text = !string.IsNullOrEmpty(slotData.Error) ? slotData.Error : $"Level: {level}    {resourcesStr}";
 
         ToggleBackColor();
     }

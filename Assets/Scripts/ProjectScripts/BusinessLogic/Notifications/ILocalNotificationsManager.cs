@@ -13,4 +13,6 @@ public interface ILocalNotificationsManager
     void RegisterNotifier(Notifier notifier);
 
     void UnRegisterNotifier(TimerComponent timer);
+
+    void Cleanup();
 }
