@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using DG.Tweening.Core;
 using UnityEngine;
 
 public class InternetMonitor : IInternetMonitor
@@ -86,5 +87,11 @@ public class InternetMonitor : IInternetMonitor
 
             return checkMethod();
         }
+    }
+
+    public void Cleanup()
+    {
+        DOTween.Kill(this);
+        OnStateChange = null;
     }
 }

@@ -32,6 +32,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.CurrencyCheatSheetWindow,
             UIWindowType.PiecesCheatSheetWindow,
             UIWindowType.QuestCheatSheetWindow,
+            UIWindowType.ProfileCheatSheetWindow,
 #endif
         };
     

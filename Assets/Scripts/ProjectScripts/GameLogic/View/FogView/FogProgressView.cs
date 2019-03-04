@@ -43,9 +43,7 @@ public class FogProgressView : UIBoardView
     
     public override void ResetViewOnDestroy()
     {
-        DOTween.Kill(line);
-        DOTween.Kill(lineFake);
-        DOTween.Kill(light);
+        KillTweens();
 
         if (arrow != null)
         {
@@ -53,6 +51,18 @@ public class FogProgressView : UIBoardView
         }
         
         base.ResetViewOnDestroy();
+    }
+
+    private void OnDisable()
+    {
+        KillTweens();
+    }
+
+    private void KillTweens()
+    {
+        DOTween.Kill(line);
+        DOTween.Kill(lineFake);
+        DOTween.Kill(light);
     }
 
     public void UpdateProgress(Action onComplete)

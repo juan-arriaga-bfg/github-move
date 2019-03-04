@@ -23,6 +23,15 @@ public class CollapseFogToAction : IBoardAction
         if (Positions == null || Positions.Count == 0) return false;
 		
         // gameBoardController.BoardLogic.LockCells(Positions, this);
+        var context = FogObserver.Context;
+        var posByMask = new List<BoardPosition>();
+        foreach (var boardPosition in FogObserver.Mask)
+        {
+            posByMask.Add(FogObserver.GetPointInMask(context.CachedPosition, boardPosition));
+        }
+
+        var pathObserver = context.PathfindLockObserver;
+        
         gameBoardController.BoardLogic.RemovePiecesAt(Positions);
         
         var animation = new CollapseFogToAnimation
@@ -85,28 +94,23 @@ public class CollapseFogToAction : IBoardAction
             Pieces = addedPieces,
             LogicCallback = (pieces) =>
             {
-                var Context = FogObserver.Context;
-                var board = Context.Context;
-                var posByMask = new List<BoardPosition>();
-                foreach (var boardPosition in FogObserver.Mask)
-                {
-                    posByMask.Add(FogObserver.GetPointInMask(Context.CachedPosition, boardPosition));
-                }
-                board.PathfindLocker.OnAddComplete(posByMask);
                 
-                Context.PathfindLockObserver.RemoveRecalculate(Context.CachedPosition);
-                var emptyCells = board.PathfindLocker.CollectUnlockedEmptyCells();
+                gameBoardController.PathfindLocker.OnAddComplete(posByMask);
+                pathObserver.OnRemoveFromBoard(context.CachedPosition);
+                
+                context.PathfindLockObserver.RemoveRecalculate(context.CachedPosition);
+                var emptyCells = gameBoardController.PathfindLocker.CollectUnlockedEmptyCells();
                 foreach (var emptyCell in emptyCells)
                 {
-                    var hasPath = board.PathfindLocker.HasPath(emptyCell);
+                    var hasPath = gameBoardController.PathfindLocker.HasPath(emptyCell);
                     if (hasPath && pieces.ContainsKey(emptyCell.CachedPosition))
                     {
                         pieces.Remove(emptyCell.CachedPosition);    
-                        board.BoardLogic.RemovePieceAt(emptyCell.CachedPosition);    
+                        gameBoardController.BoardLogic.RemovePieceAt(emptyCell.CachedPosition);    
                     }
                     else if(hasPath)
                     {
-                        board.ActionExecutor.PerformAction(new CollapsePieceToAction()
+                        gameBoardController.ActionExecutor.PerformAction(new CollapsePieceToAction()
                         {
                             IsMatch = false,
                             Positions = new List<BoardPosition>() {emptyCell.CachedPosition},

@@ -387,4 +387,21 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         }
         return count;
     }
+    
+    public void Cleanup()
+    {
+        DisconnectFromBoard();
+        OnChanged = null;
+        
+        if (ActiveTasks == null)
+        {
+            return;
+        }
+        
+        for (int i = 0; i < ActiveTasks.Count; i++)
+        {
+            var task = ActiveTasks[i];
+            task.Cleanup(); 
+        }
+    }
 }

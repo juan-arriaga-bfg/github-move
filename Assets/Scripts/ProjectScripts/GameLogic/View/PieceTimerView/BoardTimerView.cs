@@ -47,10 +47,10 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     public void SetTimer(TimerComponent timer)
     {
         if(timer == null) return;
-        if(this.timer != null) this.timer.OnExecute -= UpdateView;
+        if(this.timer != null) this.timer.OnTimeChanged -= UpdateView;
         
         this.timer = timer;
-        this.timer.OnExecute += UpdateView;
+        this.timer.OnTimeChanged += UpdateView;
         this.timer.View = this;
         
         timerState = TimerViewSate.Default;
@@ -85,14 +85,14 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         if(timer == null) return;
 
         timer.View = null;
-        timer.OnExecute -= UpdateView;
+        timer.OnTimeChanged -= UpdateView;
     }
 
     public override void ResetViewOnDestroy()
     {
         timerState = TimerViewSate.Default;
         Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
-        timer.OnExecute -= UpdateView;
+        timer.OnTimeChanged -= UpdateView;
         base.ResetViewOnDestroy();
     }
 

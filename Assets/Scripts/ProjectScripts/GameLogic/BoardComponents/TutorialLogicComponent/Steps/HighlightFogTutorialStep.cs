@@ -86,4 +86,11 @@ public class HighlightFogTutorialStep : LoopFingerTutorialStep
     {
         return isSpawn && bubble == null && base.IsExecuteable();
     }
+    
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {
+        base.OnUnRegisterEntity(entity);
+        DOTween.Kill(this);
+        bubble = null;
+    }
 }

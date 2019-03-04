@@ -2,9 +2,18 @@
 
 public abstract class SequenceData : ECSEntity, IDataManager
 {
+    public ECSEntity context;
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
+        context = entity;
+        
         Reload();
+    }
+    
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {
+        context = null;
     }
     
     public virtual void Reload()
@@ -45,10 +54,14 @@ public abstract class SequenceData : ECSEntity, IDataManager
 
     public void AddSequence(string uid, List<ItemWeight> weights)
     {
-        var sequenceData = new SequenceComponent{Key = uid};
-                    
-        sequenceData.Init(weights);
+        var sequenceData = new SequenceComponent
+        {
+            Key = uid, 
+            Context = context
+        };
+        
         RegisterComponent(sequenceData, true);
+        sequenceData.Init(weights);
     }
     
     public SequenceComponent GetSequence(string uid)

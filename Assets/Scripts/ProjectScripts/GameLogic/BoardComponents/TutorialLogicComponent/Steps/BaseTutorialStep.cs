@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,7 +37,9 @@ public class BaseTutorialStep : ECSEntity
 	public override void OnUnRegisterEntity(ECSEntity entity)
 	{
 		base.OnUnRegisterEntity(entity);
-	}
+        OnFirstStartCallback = null;
+        OnCompleteCallback = null;
+    }
 
 	public bool IsStart()
 	{

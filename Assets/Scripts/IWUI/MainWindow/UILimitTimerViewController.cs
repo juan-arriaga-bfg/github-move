@@ -13,12 +13,25 @@ public class UILimitTimerViewController : IWUIWindowViewController
     public override void OnViewInit(IWUIWindowView context)
     {
         base.OnViewInit(context);
+    }
 
+    public override void OnViewShow(IWUIWindowView context)
+    {
+        base.OnViewShow(context);
+        
         var board = BoardService.Current.FirstBoard;
         
         energyLogic = board.GetComponent<EnergyCurrencyLogicComponent>(EnergyCurrencyLogicComponent.ComponentGuid);
         energyLogic.OnExecute += UpdateView;
-        energyLogic.Timer.OnExecute += UpdateView;
+        energyLogic.Timer.OnTimeChanged += UpdateView;
+    }
+
+    public override void OnViewClose(IWUIWindowView context)
+    {
+        base.OnViewClose(context);
+        
+        energyLogic.OnExecute -= UpdateView;
+        energyLogic.Timer.OnTimeChanged -= UpdateView;
     }
 
     private void UpdateView()

@@ -50,7 +50,15 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		Context.RegisterComponent(TimerWork);
 	}
 
-	protected void PlaySoundOnStart()
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {
+        TimerWork.OnStart -= OnTimerStart;
+        TimerWork.OnComplete -= OnTimerComplete;
+        
+        base.OnUnRegisterEntity(entity);
+    }
+
+    protected void PlaySoundOnStart()
 	{
 	}
 
@@ -75,8 +83,6 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	
 	public virtual void OnRemoveFromBoard(BoardPosition position, Piece context = null)
 	{
-		TimerWork.OnStart -= OnTimerStart;
-		TimerWork.OnComplete -= OnTimerComplete;
 	}
 
 	protected virtual LifeSaveItem InitInSave(BoardPosition position)

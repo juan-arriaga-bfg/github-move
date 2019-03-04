@@ -11,8 +11,19 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     public int Delay;
     
     public Action OnStart;
+    
+    /// <summary>
+    /// Raised every frame. DO NOT use for updating labels to avoid heavy GC load.
+    /// </summary>
     public Action OnExecute;
+    
+    /// <summary>
+    /// Raised once per second.
+    /// </summary>
+    public Action OnTimeChanged;
+    
     public Action OnComplete;
+    
     public Action OnStop;
     
     public DateTime StartTime { get; set; }
@@ -31,6 +42,8 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     private CurrencyPair price = new CurrencyPair{Currency = Currency.Crystals.Name};
 
     public string Tag;
+
+    private int lastProcessedSecond = -1;  
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -72,7 +85,14 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
         OnExecute?.Invoke();
 
         var elapsedTime = StartTime.GetTime(UseUTC);
-        var elapsedSeconds = elapsedTime.TotalSeconds;
+        int elapsedSeconds = (int) elapsedTime.TotalSeconds;
+
+        if (lastProcessedSecond < 0 || lastProcessedSecond != elapsedSeconds)
+        {
+            lastProcessedSecond = elapsedSeconds;
+            OnTimeChanged?.Invoke();
+        }
+        
         if (elapsedSeconds < Delay)
         {
             return;

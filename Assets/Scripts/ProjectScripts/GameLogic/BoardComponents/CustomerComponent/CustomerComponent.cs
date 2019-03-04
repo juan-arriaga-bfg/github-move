@@ -32,6 +32,14 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         RegisterComponent(Cooldown);
     }
 
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {
+        Timer.OnComplete = null;
+        Cooldown.OnComplete = null;
+        
+        base.OnUnRegisterEntity(entity);
+    }
+
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         InitInSave();
@@ -47,8 +55,6 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
-        Timer.OnComplete = null;
-        Cooldown.OnComplete = null;
     }
 
     private void InitInSave()

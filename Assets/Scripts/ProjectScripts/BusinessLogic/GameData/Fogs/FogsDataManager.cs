@@ -9,13 +9,18 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
 
+    private ECSEntity context;
+    
     public void OnRegisterEntity(ECSEntity entity)
     {
+        context = entity;
+        
         Reload();
     }
 
     public void OnUnRegisterEntity(ECSEntity entity)
     {
+        context = null;
     }
     
     public List<FogDef> Fogs { get; set; }
@@ -52,7 +57,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
             {
                 Fogs = data.Fogs;
 
-                var save = ProfileService.Current.GetComponent<FogSaveComponent>(FogSaveComponent.ComponentGuid);
+                var save = ((GameDataManager)context).UserProfile.GetComponent<FogSaveComponent>(FogSaveComponent.ComponentGuid);
                 var completeFogPositions = save?.CompleteFogPositions ?? new List<BoardPosition>();
                 
                 BoardPosition lastCompleteFogPosition = BoardPosition.Default();

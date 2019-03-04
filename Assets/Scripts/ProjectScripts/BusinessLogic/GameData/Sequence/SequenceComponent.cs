@@ -23,11 +23,13 @@ public class SequenceComponent : IECSComponent
     {
     }
     
+    public ECSEntity Context;
+    
     public void Init(List<ItemWeight> value)
     {
         weights = value ?? new List<ItemWeight>();
         
-        var save = ProfileService.Current.GetComponent<SequenceSaveComponent>(SequenceSaveComponent.ComponentGuid)?.GetSave(Key);
+        var save = ((GameDataManager)Context).UserProfile.GetComponent<SequenceSaveComponent>(SequenceSaveComponent.ComponentGuid)?.GetSave(Key);
         
         seed = save?.Seed ?? Random.Range(0, Range);
         sequence = ItemWeight.GetRandomSequence(weights, seed);

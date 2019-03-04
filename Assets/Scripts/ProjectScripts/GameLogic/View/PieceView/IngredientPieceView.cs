@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using UnityEngine;
 
 public class IngredientPieceView : PieceBoardElementView
@@ -48,6 +48,11 @@ public class IngredientPieceView : PieceBoardElementView
         sequence.Append(body.DOScale(Vector3.one, 0.40f).SetEase(Ease.OutSine));
         
         sequence.Goto(Random.Range(0, 0.95f), true);
+    }
+
+    private void OnDisable()
+    {
+        DOTween.Kill(body);
     }
 
     public override void ToggleLockView(bool enabled)

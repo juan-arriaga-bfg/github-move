@@ -106,4 +106,10 @@ public class BubbleBounceTutorialStep<T> : DelayTutorialStep
         DOTween.Kill(this);
         bubble = null;
     }
+
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {
+        base.OnUnRegisterEntity(entity);
+        KillBubble();
+    }
 }

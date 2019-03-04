@@ -95,4 +95,9 @@ public class TutorialMergeFinger : BoardElementView
         shine.localScale = Vector3.one;
         CachedTransform.localPosition = Context.Context.BoardDef.GetPiecePosition(start.X, start.Y);
     }
+
+    private void OnDestroy()
+    {
+        DOTween.Kill(anchor);
+    }
 }

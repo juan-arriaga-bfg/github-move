@@ -63,13 +63,18 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     /// </summary>
     public bool ConnectedToBoard { get; private set; }
 
+    private ECSEntity context;
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
+        context = entity;
+        
         Reload();
     }
 	
     public override void OnUnRegisterEntity(ECSEntity entity)
     {
+        context = null;
     }
 
 #region Save/Load    
@@ -103,7 +108,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
 
     private void LoadProfile()
     {
-        var questSave = ProfileService.Current.GetComponent<QuestSaveComponent>(QuestSaveComponent.ComponentGuid);
+        var questSave = ((GameDataManager)context).UserProfile.GetComponent<QuestSaveComponent>(QuestSaveComponent.ComponentGuid);
 
         FinishedQuests = questSave.FinishedQuests ?? new List<string>();
 
@@ -638,5 +643,17 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         // // var resultUtc = resultLocal.ToUniversalTime();
         //
         // return resultLocal;
+    }
+    
+    public void Cleanup()
+    {
+        DisconnectFromBoard();
+        OnQuestStateChanged = null;
+        OnActiveQuestsListChanged = null;
+
+        foreach (var questEntity in ActiveQuests)
+        {
+            questEntity.Cleanup();
+        }
     }
 }

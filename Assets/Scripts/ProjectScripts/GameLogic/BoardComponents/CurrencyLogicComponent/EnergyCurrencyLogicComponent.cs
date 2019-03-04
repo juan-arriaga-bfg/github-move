@@ -30,9 +30,17 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         // Timer.StartTime = DateTime.Now;
         var secureTime = SecuredTimeService.Current;
         Timer.StartTime = secureTime.Now;
-        Timer.OnExecute += TimerStopCheck;
+        Timer.OnTimeChanged += TimerStopCheck;
         
         base.OnRegisterEntity(entity);
+    }
+
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {       
+        Timer.OnTimeChanged -= TimerStopCheck;
+        Timer.OnComplete -= StepComplete;
+        
+        base.OnUnRegisterEntity(entity);
     }
 
     private void TimerStopCheck()

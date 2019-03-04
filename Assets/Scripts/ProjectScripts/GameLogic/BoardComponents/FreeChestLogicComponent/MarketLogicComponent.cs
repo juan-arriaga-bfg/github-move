@@ -29,4 +29,12 @@
 		
 		if (save != null && string.IsNullOrEmpty(save.ResetEnergyStartTime) == false) ResetEnergyTimer.Start(long.Parse(save.ResetEnergyStartTime));
 	}
+
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {
+        ResetMarketTimer.OnComplete = null;
+        ResetEnergyTimer.OnComplete = null;
+        
+        base.OnUnRegisterEntity(entity);
+    }
 }

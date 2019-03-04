@@ -51,6 +51,8 @@ public class UIWindowType
     public const string QuestCheatSheetWindow = "QuestCheatSheetWindow";
     
     public const string EnergyShopWindow = "EnergyShopWindow";
+    
+    public const string ProfileCheatSheetWindow = "ProfileCheatSheetWindow";
 
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {

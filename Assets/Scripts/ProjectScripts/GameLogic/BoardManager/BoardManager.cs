@@ -8,13 +8,13 @@ public class BoardManager : ECSEntity
 
     public override int Guid { get { return ComponentGuid; } }
     
-    private Dictionary<int, BoardController> cachedBoardControllers = new Dictionary<int, BoardController>();
+    private readonly Dictionary<int, BoardController> cachedBoardControllers = new Dictionary<int, BoardController>();
     
     public virtual void RegisterBoard(BoardController boardController, int id)
     {
         if (cachedBoardControllers.ContainsKey(id))
         {
-            Debug.LogWarning(string.Format("[BoardManager]: board with tag:{0} already registered", id));
+            Debug.LogWarning($"[BoardManager]: board with tag:{id} already registered");
             return;
         }
         
@@ -37,7 +37,7 @@ public class BoardManager : ECSEntity
             cachedBoardControllers.Remove(targetTags[i]);
         }
         
-        CleanupRecursive(boardController);
+        boardController.UnregisterRecursive();
     }
 
     public virtual BoardController GetBoardById(int id)
@@ -52,41 +52,6 @@ public class BoardManager : ECSEntity
     }
     
     public virtual BoardController FirstBoard => GetBoardById(0);
-
-    private void CleanupRecursive(IECSComponent itemToCleanup, ECSEntity context = null)
-    {
-        Debug.Log("======== CleanupRecursive: " + itemToCleanup.GetType());
-        
-        switch (itemToCleanup)
-        {
-            case ECSEntity entity:
-                var ecsComponents = entity.ComponentsCache.Values.ToList();
-                for (var i = ecsComponents.Count - 1; i >= 0; i--)
-                {
-                    var item = ecsComponents.ToList()[i];
-                    CleanupRecursive(item, entity);
-                }
-
-                break;
-            
-            case ECSComponentCollection collection:
-                foreach (var item in collection.Components)
-                {
-                    CleanupRecursive(item);
-                }
-                break;
-        }
-        
-        // Debug.Log($"== Unregister: {itemToCleanup.GetType()} with context: {context?.GetType()}");
-        if (context != null)
-        {
-            context.UnRegisterComponent(itemToCleanup);
-        }
-        else
-        {
-            UnRegisterComponent(itemToCleanup);
-        }
-    }
     
     public void Cleanup()
     {

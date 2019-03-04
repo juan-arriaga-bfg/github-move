@@ -1,11 +1,34 @@
+using System.Collections.Generic;
+using UnityEngine;
+
 public class ClosePermanentWindowsInitComponent : AsyncInitComponentBase
 {
+    private int remainingWindows;
+    
+    private readonly List<string> windowsToClose = new List<string>
+    {
+        UIWindowType.MainWindow,
+        UIWindowType.ResourcePanelWindow
+    };
+    
     public override void Execute()
     {
-        UIService.Get.CloseWindow(UIWindowType.MainWindow);
-        UIService.Get.CloseWindow(UIWindowType.ResourcePanelWindow);
+        remainingWindows = windowsToClose.Count;
+        foreach (var windowName in windowsToClose)
+        {
+            var window = IWUIManager.Instance.GetShowedWindowByName(windowName);
+            window.WindowController.CloseCurrentWindow(controller => { OnWindowClosed(); });
+        }
+    }
 
-        isCompleted = true;
-        OnComplete(this);
+    private void OnWindowClosed()
+    {
+        remainingWindows--;
+        
+        if (remainingWindows == 0)
+        {
+            isCompleted = true;
+            OnComplete(this);
+        }
     }
 }

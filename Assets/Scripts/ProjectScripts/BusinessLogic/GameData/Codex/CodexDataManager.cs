@@ -21,6 +21,8 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
     
     public CodexState CodexState { get; private set; }= CodexState.Normal;
     
+    private ECSEntity context;
+    
     public readonly List<PieceTypeFilter> hidedPieceFilters = new List<PieceTypeFilter>
     {
         PieceTypeFilter.Fake,
@@ -40,11 +42,14 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
     
     public void OnRegisterEntity(ECSEntity entity)
     {
+        context = entity;
+        
         Reload();
     }
 
     public void OnUnRegisterEntity(ECSEntity entity)
     {
+        context = null;
     }
 
     public void Reload()
@@ -62,7 +67,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         {
             if (string.IsNullOrEmpty(error))
             {
-                var save = ProfileService.Current.GetComponent<CodexSaveComponent>(CodexSaveComponent.ComponentGuid);
+                var save = ((GameDataManager)context).UserProfile.GetComponent<CodexSaveComponent>(CodexSaveComponent.ComponentGuid);
                 if (save?.Data == null || save.Data.Count == 0)
                 {
                     Items = data;

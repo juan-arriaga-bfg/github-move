@@ -37,7 +37,7 @@ public class RestoredPurchasesProvider : MonoBehaviour
     
     private void OnPurchaseOk(string productId, string receipt, bool restore)
     {
-        ProfileService.Current.QueueComponent.RemoveAction(GetActionId(productId));// Avoid double provide
+        ProfileService.Current?.QueueComponent.RemoveAction(GetActionId(productId));// Avoid double provide
     }
 
     private void OnDestroy()
@@ -66,6 +66,12 @@ public class RestoredPurchasesProvider : MonoBehaviour
     
     private void ScheduleProvide()
     {
+        if (ProfileService.Current == null)
+        {
+            Debug.LogWarning($"[RestoredPurchasesProvider] => ScheduleProvide: ProfileService.Current == null");
+            return;
+        }
+        
         var iapService = IapService.Current;
 
         if (iapService == null)
@@ -91,9 +97,21 @@ public class RestoredPurchasesProvider : MonoBehaviour
 
             var action = DefaultSafeQueueBuilder.Build(actionId, true, () =>
             {
+                if (ProfileService.Current == null)
+                {
+                    Debug.LogError($"[RestoredPurchasesProvider] => Action: ProfileService.Current == null");
+                    return;
+                }
+                
                 if (SellForCashService.Current == null)
                 {
                     Debug.LogError($"[RestoredPurchasesProvider] => Action: SellForCashService.Current == null");
+                    return;
+                }
+                
+                if (!AsyncInitService.Current.IsAllComponentsInited())
+                {
+                    Debug.LogError($"[RestoredPurchasesProvider] => Action: AsyncInitService.IsAllComponentsInited() == false");
                     return;
                 }
                 

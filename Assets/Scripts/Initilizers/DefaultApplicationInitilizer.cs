@@ -37,21 +37,25 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
            .AddComponent(new BfgSdkGdprInitComponent())                             // Listener for BFG SDK's GDPR popup events
            .AddComponent(new BfgSdkAnalyticsInitComponent()) 
            .AddComponent(new ContentAndIconManagersInitComponent()) 
+           .AddComponent(new EcsSystemProcessorInitComponent()) 
+           .AddComponent(new AudioServiceInitComponent()) 
+           .AddComponent(new ShopServiceInitComponent()) 
+           .AddComponent(new LocalAssetBundlesCacheInitComponent())
             
-           .AddComponent(new LocalAssetBundlesCacheInitComponent()
-               .SetDependency(typeof(ContentAndIconManagersInitComponent)))
+           .AddComponent(new ProfileInitComponent())
 
-           .AddComponent(new ConfigsAndManagersInitComponent()
-               .SetDependency(typeof(LocalAssetBundlesCacheInitComponent)))
-            
-           .AddComponent(new ProfileInitComponent()  
-                .SetDependency(typeof(ConfigsAndManagersInitComponent)))
-            
+           .AddComponent(new UIServiceInitComponent()
+               .SetDependency(typeof(LocalAssetBundlesCacheInitComponent)))  
+
            .AddComponent(new GameDataInitComponent()  
-               .SetDependency(typeof(ProfileInitComponent)))
+            .SetDependency(typeof(ProfileInitComponent)))
             
            .AddComponent(new LocalizationInitComponent()
-               .SetDependency(typeof(GameDataInitComponent)))
+               .SetDependency(typeof(ProfileInitComponent)))
+
+           .AddComponent(new NotificationServiceInitComponent()
+               .SetDependency(typeof(LocalizationInitComponent))
+               .SetDependency(typeof(ProfileInitComponent)))
             
            .AddComponent(new IapInitComponent()                                     // In-app purchases implementation
                 .SetDependency(typeof(BfgSdkUnityMessageHandlerInitComponent))
@@ -71,6 +75,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             asyncInitManager.AddComponent(new MainSceneLoaderComponent()
                 .SetDependency(typeof(LocalAssetBundlesCacheInitComponent))
                 .SetDependency(typeof(LocalizationInitComponent))
+                .SetDependency(typeof(ProfileInitComponent))
                 .SetDependency(typeof(SecuredTimeServiceInitComponent)));
         }
 
@@ -84,7 +89,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         var energyLogic = BoardService.Current?.FirstBoard?.GetComponent<EnergyCurrencyLogicComponent>(EnergyCurrencyLogicComponent.ComponentGuid);
         if (pauseStatus)
         {
-            if (ProfileService.Instance != null)
+            if (ProfileService.Instance != null && ProfileService.Instance.Manager != null)
             {
                 ProfileService.Instance.Manager.UploadCurrentProfile();
 
@@ -112,11 +117,9 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         ProfileService.Instance.Manager.UploadCurrentProfile();
 
         LocalNotificationsService.Current.ScheduleNotifications();
+        
 #if UNITY_EDITOR
-        
-        
         ProfileService.Instance.Manager.SaveLocalProfile();
-        AssetDatabase.Refresh();
 #endif
     }
 }

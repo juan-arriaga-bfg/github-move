@@ -44,40 +44,9 @@ public class DevTools : UIContainerElementViewController
         panel.SetActive(!isChecked);
     }
     
-    public static void ReloadScene(bool resetProgress)
+    public void OnProfilesClick()
     {
-        var manager = GameDataService.Current.QuestsManager;
-        manager.DisconnectFromBoard();
-            
-        BoardService.Instance.SetManager(null);
-
-        if (resetProgress)
-        {
-            var profileBuilder = new DefaultProfileBuilder();
-            ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
-        }
-
-        GameDataService.Current.Reload();
-                   
-        var ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);
-            
-        foreach (var system in ecsSystems)
-        {
-            ECSService.Current.SystemProcessor.UnRegisterSystem(system);
-        }
-        
-        SceneManager.LoadScene("Main", LoadSceneMode.Single);
-    }
-    
-    public void OnResetProgressClick()
-    {
-        UIMessageWindowController.CreateMessageWithTwoButtons(
-            "Reset the progress",
-            "Do you want to reset the progress and start playing from the beginning?",
-            "<size=30>Reset progress!</size>",
-            "No!",
-            () => { ReloadScene(true); },
-            () => {});
+        UIService.Get.ShowWindow(UIWindowType.ProfileCheatSheetWindow);
     }
 
     public void OnCurrencyCheatSheetClick()
@@ -447,6 +416,17 @@ public class DevTools : UIContainerElementViewController
     [UsedImplicitly]
     public void OnReloadSceneClick()
     {
+        ProfileService.Instance.Manager.UploadCurrentProfile();
+        
+#if UNITY_EDITOR
+        ProfileService.Instance.Manager.SaveLocalProfile();
+#endif
+
+        ReloadScene();
+    }
+
+    public static void ReloadScene()
+    {
         AsyncInitService.Current
             .AddComponent(new ShowLoadingWindowInitComponent())
             .AddComponent(new ClosePermanentWindowsInitComponent())
@@ -456,14 +436,23 @@ public class DevTools : UIContainerElementViewController
                 .SetDependency(typeof(ClosePermanentWindowsInitComponent)))
 
             .AddComponent(new CleanupForReloadInitComponent()
-                .SetDependency(typeof(ReloadSceneLoaderComponent)))            
-                        
+                .SetDependency(typeof(ReloadSceneLoaderComponent)))     
+                         
+            .AddComponent(new InternetMonitorInitComponent()
+                .SetDependency(typeof(CleanupForReloadInitComponent)))
+             
+            .AddComponent(new ShopServiceInitComponent()
+                .SetDependency(typeof(CleanupForReloadInitComponent)))
+            
             .AddComponent(new ProfileInitComponent()
                 .SetDependency(typeof(CleanupForReloadInitComponent)))
-
+            
             .AddComponent(new GameDataInitComponent()
                 .SetDependency(typeof(ProfileInitComponent)))
-
+         
+            .AddComponent(new NotificationServiceInitComponent()
+                .SetDependency(typeof(ProfileInitComponent)))
+            
             .AddComponent(new MainSceneLoaderComponent()
                 .SetDependency(typeof(GameDataInitComponent)))
 
