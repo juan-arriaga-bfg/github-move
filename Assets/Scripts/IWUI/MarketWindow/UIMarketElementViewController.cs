@@ -168,7 +168,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		model.ProductAmountText = $"x{contentEntity.Def.Reward.Amount}";
 		model.ProductNameText = LocalizationService.Get($"piece.name.{contentEntity.Def.Reward.Currency}", $"piece.name.{contentEntity.Def.Reward.Currency}");
 		
-		model.OnAccept = Paid;
+		model.OnAccept = anchorAccept => Paid();
 		model.OnCancel = () => { isClick = false; };
         
 		UIService.Get.ShowWindow(UIWindowType.ConfirmationWindow);

@@ -98,7 +98,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 		    return;
 	    }
 
-	    OnPurchase();
+	    OnPurchase(null);
     }
 
     private void OnBuyUsingCash()
@@ -113,7 +113,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 		    model.Title = "[DEBUG]";
 		    model.Message = $"Product with id '{contentEntity.PurchaseKey}' not registered. Purchase will be processed using debug flow without real store.";
 		    model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
-		    model.OnAccept = OnPurchase;
+		    model.OnAccept = () => OnPurchase(null);
 		    model.OnClose = () => { isClick = false; };
 
 		    UIService.Get.ShowWindow(UIWindowType.MessageWindow);
@@ -140,16 +140,17 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 	    model.ProductAmountText = contentEntity.LabelText;
 	    model.ProductNameText = contentEntity.NameLabel;
 	    
-	    model.OnAcceptTap = OnPurchase;
+	    model.OnAccept = OnPurchase;
 	    model.OnCancel = () => { isClick = false; };
 
 	    UIService.Get.ShowWindow(UIWindowType.ConfirmationWindow);
     }
 
-    protected void OnPurchase()
+    protected void OnPurchase(Transform anchor)
     {
+	    var position = anchor == null ? btnBack.transform.position : anchor.position;
 	    var contentEntity = entity as UIShopElementEntity;
-	    var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(btnBack.transform.position);
+	    var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(position);
 	    var transaction = CurrencyHelper.PurchaseAsync(contentEntity.Products[0], contentEntity.Price, success =>
 	    {
 		    if (success == false ) return;

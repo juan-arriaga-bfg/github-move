@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class UIConfirmationWindowModel : IWWindowModel 
 {
@@ -10,9 +11,7 @@ public class UIConfirmationWindowModel : IWWindowModel
     public string ProductNameText;
     
     public string Icon;
-
-    public Action OnAcceptTap;
     
-    public Action OnAccept;
+    public Action<Transform> OnAccept;
     public Action OnCancel;
 }

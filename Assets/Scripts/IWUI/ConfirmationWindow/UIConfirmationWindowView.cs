@@ -2,20 +2,15 @@ using UnityEngine;
 
 public class UIConfirmationWindowView : UIGenericPopupWindowView 
 {
-    [IWUIBinding("#ElementMarket")] private GameObject elementMarket;
-    [IWUIBinding("#ElementShop")] private GameObject elementShop;
-    
-    [IWUIBinding("#AnchorMarket")] private Transform anchorMarket;
-    [IWUIBinding("#AnchorShop")] private Transform anchorShop;
+    [IWUIBinding("#Anchor")] private Transform anchor;
     
     [IWUIBinding("#ButtonBuy")] private UIBaseButtonViewController buttonBuy;
     
     [IWUIBinding("#ButtonBuyLabel")] private NSText buttonBuyLabel;
     
-    [IWUIBinding("#AmountMarket")] private NSText amountMarket;
-    [IWUIBinding("#AmountShop")] private NSText amountShop;
+    [IWUIBinding("#Amount")] private NSText amount;
 
-    [IWUIBinding("#NameLabel")] private NSText nameLabelMarket;
+    [IWUIBinding("#NameLabel")] private NSText nameLabel;
     
     private bool isClick;
     private Transform icon;
@@ -30,13 +25,10 @@ public class UIConfirmationWindowView : UIGenericPopupWindowView
         SetMessage(windowModel.Message);
 
         buttonBuyLabel.Text = windowModel.ButtonText;
-        amountMarket.Text = windowModel.ProductAmountText;
-        nameLabelMarket.Text = windowModel.ProductNameText;
+        amount.Text = windowModel.ProductAmountText;
+        nameLabel.Text = windowModel.ProductNameText;
         
-        elementMarket.SetActive(true);
-        elementShop.SetActive(false);
-        
-        CreateIcon(anchorMarket, windowModel.Icon);
+        CreateIcon(anchor, windowModel.Icon);
         
         isClick = false;
     }
@@ -58,26 +50,16 @@ public class UIConfirmationWindowView : UIGenericPopupWindowView
 
     public override void OnViewCloseCompleted()
     {
-        if(icon != null) UIService.Get.PoolContainer.Return(icon.gameObject);
+        if (icon != null) UIService.Get.PoolContainer.Return(icon.gameObject);
         
         base.OnViewCloseCompleted();
         
         var windowModel = Model as UIConfirmationWindowModel;
-        var action = isClick ? windowModel.OnAccept : windowModel.OnCancel;
-
+        
+        if (isClick == false) windowModel.OnCancel?.Invoke();
+        
         windowModel.OnAccept = null;
         windowModel.OnCancel = null;
-        windowModel.OnAcceptTap = null;
-        
-        action?.Invoke();
-    }
-
-    public override void OnViewClose()
-    {
-        base.OnViewClose();
-        
-        var windowModel = Model as UIConfirmationWindowModel;
-        if (isClick) windowModel.OnAcceptTap?.Invoke();
     }
 
     private void OnClick()
@@ -85,6 +67,10 @@ public class UIConfirmationWindowView : UIGenericPopupWindowView
         if(isClick) return;
 
         isClick = true;
+        
+        var windowModel = Model as UIConfirmationWindowModel;
+        windowModel.OnAccept?.Invoke(buttonBuy.transform);
+        
         Controller.CloseCurrentWindow();
     }
 }
