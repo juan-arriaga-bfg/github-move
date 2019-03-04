@@ -43,10 +43,10 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.NPC_SleepingBeautyPlaid.Id, R.NPC_SleepingBeautyPlaidPiece);
         dict.Add(PieceType.NPC_B.Id, R.NPC_BPiece);
         dict.Add(PieceType.NPC_C.Id, R.NPC_CPiece);
+        dict.Add(PieceType.NPC_D.Id, R.NPC_DPiece);
         dict.Add(PieceType.NPC_Gnome.Id, R.NPC_GnomePiece);
         dict.Add(PieceType.NPC_E.Id, R.NPC_EPiece);
         dict.Add(PieceType.NPC_F.Id, R.NPC_FPiece);
-        dict.Add(PieceType.NPC_D.Id, R.NPC_DPiece);
         dict.Add(PieceType.NPC_G.Id, R.NPC_GPiece);
         dict.Add(PieceType.NPC_H.Id, R.NPC_HPiece);
         dict.Add(PieceType.NPC_I.Id, R.NPC_IPiece);
