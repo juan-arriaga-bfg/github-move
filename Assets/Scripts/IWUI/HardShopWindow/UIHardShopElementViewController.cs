@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UIHardShopElementViewController : UISoftShopElementViewController
+public class UIHardShopElementViewController : UIShopElementViewController
 {
     [IWUIBinding] protected Image back;
     [IWUIBinding("#ClaimName")] protected NSText claimName;

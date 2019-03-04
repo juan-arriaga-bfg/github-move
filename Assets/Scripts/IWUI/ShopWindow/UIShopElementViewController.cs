@@ -4,7 +4,7 @@ using BfgAnalytics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UISoftShopElementViewController : UISimpleScrollElementViewController
+public class UIShopElementViewController : UISimpleScrollElementViewController
 {
     [IWUIBinding("#NameLabel")] protected NSText nameLabel;
     [IWUIBinding("#BuyButtonLabel")] protected NSText btnBuyLabel;
