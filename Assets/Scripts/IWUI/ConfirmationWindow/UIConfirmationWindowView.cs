@@ -31,20 +31,20 @@ public class UIConfirmationWindowView : UIGenericPopupWindowView
 
         buttonBuyLabel.Text = windowModel.Button;
         
-        elementMarket.SetActive(windowModel.IsMarket);
-        elementShop.SetActive(!windowModel.IsMarket);
+        elementMarket.SetActive(true);
+        elementShop.SetActive(false);
 
         if (windowModel.IsMarket)
         {
             amountMarket.Text = $"x{windowModel.Product.Amount}";
             nameLabelMarket.Text = LocalizationService.Get($"piece.name.{windowModel.Product.Currency}", $"piece.name.{windowModel.Product.Currency}");
-            CreateIcon(anchorMarket, windowModel.Icon);
         }
         else
         {
             amountShop.Text = windowModel.Product.ToStringIcon();
-            CreateIcon(anchorShop, windowModel.Icon);
         }
+        
+        CreateIcon(anchorMarket, windowModel.Icon);
         
         isClick = false;
     }
@@ -85,8 +85,7 @@ public class UIConfirmationWindowView : UIGenericPopupWindowView
         base.OnViewClose();
         
         var windowModel = Model as UIConfirmationWindowModel;
-        if (isClick)
-            windowModel.OnAcceptTap?.Invoke();
+        if (isClick) windowModel.OnAcceptTap?.Invoke();
     }
 
     private void OnClick()

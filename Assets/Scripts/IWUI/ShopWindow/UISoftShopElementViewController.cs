@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using BfgAnalytics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -68,23 +69,86 @@ public class UISoftShopElementViewController : UISimpleScrollElementViewControll
 		
 	    btnBuyLabel.Text = isFree
 		    ? LocalizationService.Get("common.button.claim", "common.button.claim")
-		    : string.Format(LocalizationService.Get("common.button.buy", "common.button.buy {0}"), contentEntity.Price.ToStringIcon());
+		    : contentEntity.ButtonLabel;
     }
     
-    protected void OnClick()
+    private void OnClick()
     {
 	    if (isClick) return;
 		
 	    isClick = true;
 	    
 	    var contentEntity = entity as UIShopElementEntity;
+	    
+	    if (contentEntity.Price.Currency == Currency.Cash.Name)
+	    {
+		    OnBuyUsingCash();
+		    return;
+	    }
 
 	    if (CurrencyHelper.IsCanPurchase(contentEntity.Price, true) == false)
 	    {
 		    isClick = false;
 		    return;
 	    }
-	    
+
+	    if (contentEntity.Price.Currency == Currency.Crystals.Name)
+	    {
+		    Confirmation();
+		    return;
+	    }
+
+	    OnPurchase();
+    }
+
+    private void OnBuyUsingCash()
+    {
+	    var contentEntity = entity as UIShopElementEntity;
+        
+	    // HACK to handle the case when we have a purchase but BFG still not add it to the Store
+	    if (IapService.Current.IapCollection.Defs.All(e => e.Id != contentEntity.PurchaseKey))
+	    {
+		    var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+
+		    model.Title = "[DEBUG]";
+		    model.Message = $"Product with id '{contentEntity.PurchaseKey}' not registered. Purchase will be processed using debug flow without real store.";
+		    model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
+		    model.OnAccept = OnPurchase;
+		    model.OnClose = () => { isClick = false; };
+
+		    UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+		    return;
+	    }
+	    // END
+
+	    SellForCashService.Current.Purchase(contentEntity.PurchaseKey, (isOk, productId) =>
+	    {
+		    isClick = false;
+		    
+		    if (isOk) SendAnalyticsEvent();
+	    });
+    }
+
+    private void Confirmation()
+    {
+	    var contentEntity = entity as UIShopElementEntity;
+	    var model = UIService.Get.GetCachedModel<UIConfirmationWindowModel>(UIWindowType.ConfirmationWindow);
+
+	    model.IsMarket = false;
+	    model.Icon = contentEntity.ContentId;
+
+	    model.Price = contentEntity.Price;
+	    model.Product = contentEntity.Products[0];
+
+	    model.OnAcceptTap = OnPurchase;
+	    model.OnCancel = () => { isClick = false; };
+
+	    UIService.Get.ShowWindow(UIWindowType.ConfirmationWindow);
+    }
+
+    protected void OnPurchase()
+    {
+	    var contentEntity = entity as UIShopElementEntity;
 	    var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(btnBack.transform.position);
 	    var transaction = CurrencyHelper.PurchaseAsync(contentEntity.Products[0], contentEntity.Price, success =>
 	    {
@@ -95,17 +159,33 @@ public class UISoftShopElementViewController : UISimpleScrollElementViewControll
 	    
 	    transaction.Complete();
 	    OnPurchaseComplete();
+	    PlaySoundOnPurchase(contentEntity.Products);
     }
 
     protected virtual void OnPurchaseComplete()
     {
 	    SendAnalyticsEvent();
     }
+    
+    private void PlaySoundOnPurchase(List<CurrencyPair> products)
+    {
+	    foreach (var product in products)
+	    {
+		    if(product.Currency == Currency.Energy.Name)
+			    NSAudioService.Current.Play(SoundId.BuyEnergy, false, 1);
+		    if(product.Currency == Currency.Coins.Name)
+			    NSAudioService.Current.Play(SoundId.BuySoftCurr, false, 1);    
+	    }
+    }
 
-    protected void SendAnalyticsEvent(bool isIap = false, bool isFree = false)
+    protected void SendAnalyticsEvent()
     {
 	    var shopModel = context.Model as UIShopWindowModel;
 	    var contentEntity = entity as UIShopElementEntity;
+
+	    var isFree = contentEntity.Price != null && contentEntity.Price.Currency != Currency.Cash.Name && contentEntity.Price.Amount == 0;
+	    var isIap = contentEntity.Price != null && contentEntity.Price.Currency == Currency.Cash.Name;
+		    
 	    
 	    Analytics.SendPurchase(shopModel.AnalyticLocation, $"item{CachedTransform.GetSiblingIndex()}", new List<CurrencyPair>{contentEntity.Price}, new List<CurrencyPair>(contentEntity.Products), isIap, isFree);
     }

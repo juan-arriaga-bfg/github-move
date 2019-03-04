@@ -137,6 +137,8 @@ namespace BfgAnalytics
 
             foreach (var pair in currencies)
             {
+                if (pair == null) continue;
+                
                 if (pair.Currency == Currency.Crystals.Name)
                 {
                     premium.Add(CreateCurrencyNode(pair));

@@ -13,15 +13,16 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
     public override void Init()
     {
 	    var contentEntity = entity as UIShopElementEntity;
-	    
-	    isClaimed = contentEntity.Price != null && contentEntity.Price.Amount == 0 && BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.IsExecuteable();
+
+	    isFree = contentEntity.Price != null && contentEntity.Price.Amount == 0;
+	    isClaimed = isFree && BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.IsExecuteable();
 	    
 	    base.Init();
 	    
 	    freeLabel.Text = LocalizationService.Get("common.button.free", "common.button.free");
 	    freeObj.SetActive(isFree);
-	    
-	    if(isFree == false) return;
+
+	    if (isFree == false) return;
 	    
 	    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnExecute += UpdateLabel;
 	    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnComplete += CompleteTimer;
