@@ -14,6 +14,8 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
         BoardService.Current.Cleanup();
         BoardService.Instance.SetManager(null);
 
+        Object.Destroy(ResourcesViewManager.Instance.gameObject);
+        
         ShopService.Current.Cleanup();
         ShopService.Instance.SetManager(null);
 
@@ -30,8 +32,6 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
         {
             ECSService.Current.SystemProcessor.UnRegisterSystem(system);
         }
-        
-        GameObject.Destroy(ResourcesViewManager.Instance.gameObject);
 
         InternetMonitorService.Current.Cleanup();
         InternetMonitorService.Instance.SetManager(null);
