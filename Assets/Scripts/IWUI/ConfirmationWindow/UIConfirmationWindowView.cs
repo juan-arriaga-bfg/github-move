@@ -29,20 +29,12 @@ public class UIConfirmationWindowView : UIGenericPopupWindowView
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
 
-        buttonBuyLabel.Text = windowModel.Button;
+        buttonBuyLabel.Text = windowModel.ButtonText;
+        amountMarket.Text = windowModel.ProductAmountText;
+        nameLabelMarket.Text = windowModel.ProductNameText;
         
         elementMarket.SetActive(true);
         elementShop.SetActive(false);
-
-        if (windowModel.IsMarket)
-        {
-            amountMarket.Text = $"x{windowModel.Product.Amount}";
-            nameLabelMarket.Text = LocalizationService.Get($"piece.name.{windowModel.Product.Currency}", $"piece.name.{windowModel.Product.Currency}");
-        }
-        else
-        {
-            amountShop.Text = windowModel.Product.ToStringIcon();
-        }
         
         CreateIcon(anchorMarket, windowModel.Icon);
         

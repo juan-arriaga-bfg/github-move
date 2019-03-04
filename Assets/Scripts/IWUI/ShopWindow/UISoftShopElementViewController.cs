@@ -133,13 +133,13 @@ public class UISoftShopElementViewController : UISimpleScrollElementViewControll
     {
 	    var contentEntity = entity as UIShopElementEntity;
 	    var model = UIService.Get.GetCachedModel<UIConfirmationWindowModel>(UIWindowType.ConfirmationWindow);
-
-	    model.IsMarket = false;
+	    
 	    model.Icon = contentEntity.ContentId;
-
-	    model.Price = contentEntity.Price;
-	    model.Product = contentEntity.Products[0];
-
+	    
+	    model.ButtonText = string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Price.ToStringIcon());
+	    model.ProductAmountText = contentEntity.LabelText;
+	    model.ProductNameText = contentEntity.NameLabel;
+	    
 	    model.OnAcceptTap = OnPurchase;
 	    model.OnCancel = () => { isClick = false; };
 

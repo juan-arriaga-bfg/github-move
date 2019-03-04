@@ -162,12 +162,12 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		var model = UIService.Get.GetCachedModel<UIConfirmationWindowModel>(UIWindowType.ConfirmationWindow);
 		
-		model.IsMarket = true;
 		model.Icon = contentEntity.Def.Reward.Currency;
 		
-		model.Price = price;
-		model.Product = contentEntity.Def.Reward;
-        
+		model.ButtonText = string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), price.ToStringIcon());
+		model.ProductAmountText = $"x{contentEntity.Def.Reward.Amount}";
+		model.ProductNameText = LocalizationService.Get($"piece.name.{contentEntity.Def.Reward.Currency}", $"piece.name.{contentEntity.Def.Reward.Currency}");
+		
 		model.OnAccept = Paid;
 		model.OnCancel = () => { isClick = false; };
         
