@@ -6,4 +6,6 @@ public interface IInternetMonitor
     Action<InternetConnectionState> OnStateChange { get; set; }
 
     bool IsInternetAvailable { get; }
+
+    void Cleanup();
 }

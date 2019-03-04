@@ -1,9 +1,13 @@
 using System.Collections.Generic;
+using DG.Tweening;
+using UnityEngine;
 
 public class CleanupForReloadInitComponent : AsyncInitComponentBase
 {
     public override void Execute()
     {
+        DOTween.KillAll();
+        
         var manager = GameDataService.Current.QuestsManager;
         manager.Cleanup();
             
@@ -26,7 +30,12 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
         {
             ECSService.Current.SystemProcessor.UnRegisterSystem(system);
         }
+        
+        GameObject.Destroy(ResourcesViewManager.Instance.gameObject);
 
+        InternetMonitorService.Current.Cleanup();
+        InternetMonitorService.Instance.SetManager(null);
+        
         isCompleted = true;
         OnComplete(this);
     }

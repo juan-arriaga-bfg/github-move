@@ -432,11 +432,14 @@ public class DevTools : UIContainerElementViewController
             .AddComponent(new ClosePermanentWindowsInitComponent())
 
             .AddComponent(new ReloadSceneLoaderComponent()
-                         .SetDependency(typeof(ShowLoadingWindowInitComponent))
-                         .SetDependency(typeof(ClosePermanentWindowsInitComponent)))
+                .SetDependency(typeof(ShowLoadingWindowInitComponent))
+                .SetDependency(typeof(ClosePermanentWindowsInitComponent)))
 
             .AddComponent(new CleanupForReloadInitComponent()
                 .SetDependency(typeof(ReloadSceneLoaderComponent)))     
+                         
+            .AddComponent(new InternetMonitorInitComponent()
+                .SetDependency(typeof(CleanupForReloadInitComponent)))
              
             .AddComponent(new ShopServiceInitComponent()
                 .SetDependency(typeof(CleanupForReloadInitComponent)))
