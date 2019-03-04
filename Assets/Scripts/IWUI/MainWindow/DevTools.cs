@@ -420,6 +420,7 @@ public class DevTools : UIContainerElementViewController
         ReloadScene();
     }
 
+    // todo: move this somewhere
     public static void ReloadScene()
     {
         AsyncInitService.Current
