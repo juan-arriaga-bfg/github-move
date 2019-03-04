@@ -104,7 +104,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         var canPath = CanBeReached();
         
-        if(LockView == null && (Def.IsActive && canPath ^ RequiredConditionReached()) || Def.IsActive == false && canPath)
+        if(LockView == null && (Def.IsActive && canPath ^ RequiredConditionReached() || Def.IsActive == false && canPath))
         {
             LockView =  Context.Context.RendererContext.CreateBoardElement<LockView>((int)ViewType.Lock);
             LockView.Init(Context.Context.RendererContext);
