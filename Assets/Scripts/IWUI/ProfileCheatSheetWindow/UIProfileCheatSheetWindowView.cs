@@ -21,11 +21,7 @@ public class UIProfileCheatSheetWindowView : UIGenericPopupWindowView
         base.OnViewShow();
         
         ProfileService.Instance.Manager.UploadCurrentProfile();
-        
-#if UNITY_EDITOR
-        ProfileService.Instance.Manager.SaveLocalProfile();
-#endif
-        
+
         UIProfileCheatSheetWindowModel windowModel = Model as UIProfileCheatSheetWindowModel;
         
         SetTitle(windowModel.Title);
