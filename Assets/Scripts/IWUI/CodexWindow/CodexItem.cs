@@ -73,7 +73,13 @@ public class CodexItem : IWUIWindowViewController
         {
             case CodexItemState.FullLock:
                 questionMark.SetActive(true);
-                CreateIcon(false);
+                CreateIcon(true);
+                
+                foreach (var sprite in IconSprites)
+                {
+                    sprite.material = lockedMaterial;
+                    sprite.color = lockedColor;
+                }
                                
                 break;
             

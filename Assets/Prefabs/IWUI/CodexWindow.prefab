@@ -3020,7 +3020,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 30
     m_Right: 30
-    m_Top: 15
+    m_Top: 30
     m_Bottom: 30
   m_ChildAlignment: 0
   m_Spacing: 10
@@ -3113,7 +3113,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 1}
-  m_SizeDelta: {x: -60, y: 20}
+  m_SizeDelta: {x: -60, y: 40}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &700667304775164436
 CanvasRenderer:
