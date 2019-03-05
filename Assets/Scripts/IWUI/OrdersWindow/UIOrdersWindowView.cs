@@ -73,6 +73,14 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         InitButtonBase(btnMaskBottom, Controller.CloseCurrentWindow);
         
         IsShowComplete = true;
+        
+        TackleBoxEvents.SendOrdersOpen();
+    }
+
+    public override void OnViewCloseCompleted()
+    {
+        base.OnViewCloseCompleted();
+        TackleBoxEvents.SendOrdersClosed();
     }
 
     public void UpdateOrders()

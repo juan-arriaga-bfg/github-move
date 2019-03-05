@@ -48,6 +48,8 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         InitButtonBase(btnMaskLeft, Controller.CloseCurrentWindow);
         InitButtonBase(btnMaskRight, Controller.CloseCurrentWindow);
+        
+        TackleBoxEvents.SendMarketOpen();
     }
 
     public override void OnViewClose()
@@ -59,7 +61,13 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnExecute -= UpdateLabel;
         BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnComplete -= UpdateSlots;
     }
-    
+
+    public override void OnViewCloseCompleted()
+    {
+        base.OnViewCloseCompleted();
+        TackleBoxEvents.SendMarketClosed();
+    }
+
     private void UpdateLabel()
     {
         var windowModel = Model as UIMarketWindowModel;

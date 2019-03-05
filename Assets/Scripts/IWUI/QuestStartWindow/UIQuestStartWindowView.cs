@@ -236,6 +236,8 @@ public class UIQuestStartWindowView : IWUIWindowView
 
         if (step == Step.QuestComplete)
         {
+            TackleBoxEvents.SendQuestComplete();
+            
             NSAudioService.Current.Play(SoundId.QuestCompleted);
         }
         
