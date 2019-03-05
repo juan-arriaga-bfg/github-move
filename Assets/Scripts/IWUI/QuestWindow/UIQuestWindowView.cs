@@ -124,7 +124,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         quest.Tasks[0].Highlight();
         
         Controller.CloseCurrentWindow();
-    }
+    } 
 
     private bool ShowChain(UIQuestWindowModel model)
     {
@@ -149,7 +149,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             return false;
         }
         
-        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH, true);
+        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH, true, false, true);
         if (itemDefs == null)
         {
             return false;

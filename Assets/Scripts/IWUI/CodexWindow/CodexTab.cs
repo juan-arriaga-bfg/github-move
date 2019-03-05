@@ -63,7 +63,7 @@ public class CodexTab : IWUIWindowViewController
 
         var def = defData.ChainDefs[0].ItemDefs[0];
         
-        SelectItem.SetItem(def.State > CodexItemState.PendingReward ? def.PieceDef : null);
+        SelectItem.SetItem(def.State > CodexItemState.PendingReward ? def.PieceDef : null, def.State);
     }
     
     public void ScrollToBottom()

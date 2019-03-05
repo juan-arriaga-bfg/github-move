@@ -220,7 +220,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         return Items.TryGetValue(firstId, out state);
     }
 
-    public List<CodexItemDef> GetCodexItemsForChainAndFocus(int targetId, int length, bool hideCaptions)
+    public List<CodexItemDef> GetCodexItemsForChainAndFocus(int targetId, int length, bool hideCaptions, bool allowRewards, bool allowHighlight)
     {
         var chain = GameDataService.Current.MatchDefinition.GetChain(targetId);
 
@@ -237,15 +237,19 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         for (var i = 0; i < list.Count; i++)
         {
             var def = list[i];
-            if (def.State == CodexItemState.PendingReward)
+            
+            if (!allowRewards && def.State == CodexItemState.PendingReward)
             {
                 def.State = CodexItemState.Unlocked;
             }
 
-            if (def.PieceTypeDef.Id == targetId)
+            if (allowHighlight && def.PieceTypeDef.Id == targetId)
             {
-                if(def.State == CodexItemState.Unlocked)
+                if (def.State == CodexItemState.Unlocked)
+                {
                     def.State = CodexItemState.Highlighted;
+                }
+                
                 highlightedIndex = i;
             }
 

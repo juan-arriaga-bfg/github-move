@@ -261,30 +261,36 @@ public class CodexItem : IWUIWindowViewController
     public void OnClick()
     {
         if(Context == null || Context.Context == null) return;
-        
-        switch (def.State)
+
+        if (Context.Context.IsHero)
         {
-            case CodexItemState.FullLock:
-                if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(null);
-                break;
-            
-            case CodexItemState.PartLock:
-                if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(null);
-                break;
-            
-            case CodexItemState.PendingReward:
-                if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(def.PieceDef);
-                ClaimReward();
-                break;
-            
-            case CodexItemState.Unlocked:
-                if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(def.PieceDef);
-                break;
-            
-            case CodexItemState.Highlighted:
-                if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(def.PieceDef);
-                break;
+            Context.Context.SelectItem.SetItem(def.PieceDef, def.State);
         }
+
+        //
+        // switch (def.State)
+        // {
+        //     case CodexItemState.FullLock:
+        //         if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(null);
+        //         break;
+        //     
+        //     case CodexItemState.PartLock:
+        //         if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(null);
+        //         break;
+        //     
+        //     case CodexItemState.PendingReward:
+        //         if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(def.PieceDef);
+        //         ClaimReward();
+        //         break;
+        //     
+        //     case CodexItemState.Unlocked:
+        //         if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(def.PieceDef);
+        //         break;
+        //     
+        //     case CodexItemState.Highlighted:
+        //         if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(def.PieceDef);
+        //         break;
+        // }
     }
     
     private void ClaimReward()
