@@ -33,27 +33,20 @@ public class FieldControllerComponent : IECSComponent
         
         if (fieldDef.Pieces == null)
         {
-            var pieces = new Dictionary<int, List<BoardPosition>>(GameDataService.Current.FieldManager.Pieces)
-            {
-                {PieceType.Fog.Id, CreateFog()}
-            };
-            
-            foreach (var piece in pieces)
-            {
-                context.ActionExecutor.AddAction(new FillBoardAction
-                {
-                    Piece = piece.Key,
-                    Positions = piece.Value
-                });
-            }
-            
-            AddLastAction();
-            
-            return;
+            CreateNewField();
         }
-        
+        else
+        {
+            LoadFieldFromSave(fieldDef);
+        }
+
+        AddLastAction();
+    }
+
+    private void LoadFieldFromSave(FieldDefComponent fieldDef)
+    {
         fieldDef.Pieces.Sort((a, b) => -a.Id.CompareTo(b.Id));
-        
+
         foreach (var item in fieldDef.Pieces)
         {
             context.ActionExecutor.PerformAction(new FillBoardAction
@@ -63,7 +56,30 @@ public class FieldControllerComponent : IECSComponent
             });
         }
 
-        AddLastAction();
+        List<BoardPosition> fogPos = CreateFog();
+
+        context.ActionExecutor.AddAction(new FillBoardAction
+        {
+            Piece = PieceType.Fog.Id,
+            Positions = fogPos
+        });
+    }
+
+    private void CreateNewField()
+    {
+        var pieces = new Dictionary<int, List<BoardPosition>>(GameDataService.Current.FieldManager.Pieces)
+        {
+            {PieceType.Fog.Id, CreateFog()}
+        };
+
+        foreach (var piece in pieces)
+        {
+            context.ActionExecutor.AddAction(new FillBoardAction
+            {
+                Piece = piece.Key,
+                Positions = piece.Value
+            });
+        }
     }
 
     public void OnUnRegisterEntity(ECSEntity entity)
@@ -130,11 +146,17 @@ public class FieldControllerComponent : IECSComponent
     
     private List<BoardPosition> CreateFog()
     {
-        var data = GameDataService.Current.FogsManager.Fogs;
+        var fogManager = GameDataService.Current.FogsManager;
+        var data = fogManager.Fogs;
         var positions = new List<BoardPosition>();
 
         foreach (var fog in data)
         {
+            if (fogManager.IsFogCleared(fog.Uid))
+            {
+                continue;
+            }
+            
             var pos = fog.GetCenter();
 
             pos.Z = BoardLayer.Piece.Layer;

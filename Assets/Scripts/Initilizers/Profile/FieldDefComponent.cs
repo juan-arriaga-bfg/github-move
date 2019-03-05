@@ -59,20 +59,24 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 		if(BoardService.Current == null) return;
 		
 		var board = BoardService.Current.FirstBoard;
-		var cash = board.BoardLogic.PositionsCache.Cache;
+		var cache = board.BoardLogic.PositionsCache.Cache;
 		
-		if(cash.Count == 0) return;
+		if(cache.Count == 0) return;
 		
 		pieces = new List<PieceSaveItem>();
 		rewards = new List<RewardsSaveItem>();
 		lives = new List<LifeSaveItem>();
 		buildings = new List<BuildingSaveItem>();
 		
-		foreach (var item in cash)
+		foreach (var item in cache)
 		{
 			if(item.Value.Count == 0) continue;
-			
-			pieces.Add(GetPieceSave(item.Key, item.Value));
+
+			// Exclude fog from save. Fog always will be reloaded from the configs.
+            if (item.Key != PieceType.Fog.Id)
+            {
+                pieces.Add(GetPieceSave(item.Key, item.Value));
+            }
 			rewards.AddRange(GetRewardsSave(board.BoardLogic, item.Value));
 			lives.AddRange(GetLifeSave(board.BoardLogic, item.Value));
 			buildings.AddRange(GetBuildingSave(board.BoardLogic, item.Value));
