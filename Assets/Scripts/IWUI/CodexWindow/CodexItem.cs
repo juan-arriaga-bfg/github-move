@@ -85,7 +85,7 @@ public class CodexItem : IWUIWindowViewController
             
             case CodexItemState.PartLock:
                 questionMark.SetActive(true);
-                CreateIcon(Context.Context == null || Context.Context.IsHero == false);
+                CreateIcon(true);
                 
                 foreach (var sprite in IconSprites)
                 {
