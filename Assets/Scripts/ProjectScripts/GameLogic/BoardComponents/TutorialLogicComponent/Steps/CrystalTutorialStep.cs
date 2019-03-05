@@ -1,4 +1,6 @@
-﻿public class CrystalTutorialStep : LoopFingerTutorialStep
+﻿using System;
+
+public class CrystalTutorialStep : LoopFingerTutorialStep
 {
     private readonly int crystal = PieceType.Boost_CR.Id;
     private readonly int target = PieceType.A6.Id;
@@ -30,17 +32,8 @@
         if (IsPerform) return;
 
         base.Perform();
-
-        Context.LockAll();
-
-        var unlock = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
-
-        unlock.Add(ignorePosition);
-        unlock.AddRange(Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(crystal));
-
-        Context.FadeAll(0.5f, unlock);
-
-        startTime = startTime.AddSeconds(-(Delay-0.5f));
+        
+        startTime = DateTime.UtcNow.AddMilliseconds(10);
 
         BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.Locker.Lock(this);
         BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.DestroyAll();
@@ -58,8 +51,16 @@
 
     private void FirstStep()
     {
+        var unlock = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
         var positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
+        
+        Context.LockAll();
+        
+        unlock.Add(ignorePosition);
+        unlock.AddRange(Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(crystal));
 
+        Context.FadeAll(0.5f, unlock);
+        
         positions.Remove(ignorePosition);
 
         Context.UnlockCell(targetPosition);
