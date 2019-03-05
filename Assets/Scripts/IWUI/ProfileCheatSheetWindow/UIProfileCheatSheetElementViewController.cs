@@ -16,6 +16,7 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
 
     [IWUIBinding("#BackNormal")] private GameObject backNormal;
     [IWUIBinding("#BackActive")] private GameObject backActive;
+    [IWUIBinding("#BackError")] private GameObject backError;
     
     [IWUIBinding("#BtnSave")] private UIButtonViewController btnDlgSave;
     [IWUIBinding("#BtnLoad")] private UIButtonViewController btnDlgLoad;
@@ -89,6 +90,16 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
 
     public void UpdateUi()
     {
+        ToggleBackColor();
+        
+        if (!string.IsNullOrEmpty(slotData.Error))
+        {
+            lblRev.Text = $"Can't load '{Colorize(slotData.SlotPath, COLOR_YELLOW)}'";
+            lblData.Text = $"{Colorize(slotData.Error, COLOR_WHITE)}";
+            lblTimestamp.Text = "";
+            return;
+        }
+        
         GameDataManager dm = new GameDataManager();
         dm.SetupComponents(userProfile);
         dm.Reload();
@@ -112,15 +123,15 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
         string resourcesStr = CurrencyHelper.RewardsToString("  ", null, listResources);
         
         lblData.Text = !string.IsNullOrEmpty(slotData.Error) ? slotData.Error : $"Level: {level}    {resourcesStr}";
-
-        ToggleBackColor();
     }
 
     private void ToggleBackColor()
     {
         bool active = slotData.SlotPath == ProfileSlots.ActiveSlot;
-        backNormal.SetActive(!active);
-        backActive.SetActive(active);
+        bool error = !string.IsNullOrEmpty(slotData.Error);
+        backNormal.SetActive(!active && !error);
+        backActive.SetActive(active  && !error);
+        backError.SetActive(error);
     }
 
     private string Colorize(string text, string color)
