@@ -117,7 +117,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		btnBack.sprite = IconService.Current.GetSpriteById($"button{(contentEntity.Def.State == MarketItemState.Saved ? "Green" : "Blue")}");
 		
 		btnLabel.Text = contentEntity.Def.State == MarketItemState.Normal
-			? string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Def.Current.Price.ToStringIcon())
+			? string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Def.Price.ToStringIcon())
 			: LocalizationService.Get("common.button.claim", "common.button.claim");
 	}
 
@@ -146,7 +146,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	private void OnClickPaid()
 	{
 		var contentEntity = entity as UIMarketElementEntity;
-		var price = contentEntity.Def.Current.Price;
+		var price = contentEntity.Def.Price;
 
 		if (CurrencyHelper.IsCanPurchase(price, true) == false)
 		{
@@ -178,8 +178,8 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	{
 		var contentEntity = entity as UIMarketElementEntity;
 		
-		Analytics.SendPurchase($"market{GetIndex()}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Current.Price}, null, false, false);
-		CurrencyHelper.Purchase(Currency.Market.Name, 1, contentEntity.Def.Current.Price, success =>
+		Analytics.SendPurchase($"market{GetIndex()}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Price}, null, false, false);
+		CurrencyHelper.Purchase(Currency.Market.Name, 1, contentEntity.Def.Price, success =>
 		{
 			if (success == false)
 			{
