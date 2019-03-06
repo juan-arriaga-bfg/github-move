@@ -103,6 +103,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             
             BoardService.Current?.FirstBoard?.TutorialLogic?.ResetStartTime();
             LocalNotificationsService.Current.CancelNotifications();
+            TackleBoxEvents.SendGameResumed();
         }
     }
 

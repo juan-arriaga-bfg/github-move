@@ -83,6 +83,8 @@ public class UINextLevelWindowView : UIGenericWindowView
         GameDataService.Current.LevelsManager.UpdateSequence();
         
         Analytics.SendLevelReachedEvent(GameDataService.Current.LevelsManager.Level);
+
+        TackleBoxEvents.SendLevelUp();
         
         base.OnViewCloseCompleted();
     }

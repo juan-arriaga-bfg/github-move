@@ -8,4 +8,16 @@ public class UISoftShopWindowView : UIShopWindowView
 
         content.GetScrollRect().enabled = windowModel.Products.Count > 3;
     }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        TackleBoxEvents.SendCoinsOpen();
+    }
+
+    public override void OnViewCloseCompleted()
+    {
+        base.OnViewCloseCompleted();
+        TackleBoxEvents.SendCoinsClosed();
+    }
 }

@@ -29,6 +29,8 @@ public class UIQuestStartWindowView : IWUIWindowView
     private bool isClickAllowed;
 
     private Step step;
+
+    private Step startStep;
     
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
@@ -46,6 +48,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         UIQuestStartWindowModel model = Model as UIQuestStartWindowModel;
         
         step = model.CompletedQuest != null ? Step.QuestComplete : Step.QuestStart;
+        startStep = step;
     }
 
     public override void OnViewShowCompleted()
@@ -82,6 +85,14 @@ public class UIQuestStartWindowView : IWUIWindowView
         UIQuestStartWindowModel windowModel = Model as UIQuestStartWindowModel;
     }
 
+    public override void OnViewCloseCompleted()
+    {
+        if (startStep == Step.QuestComplete)
+        {
+            TackleBoxEvents.SendQuestComplete();    
+        }
+    }
+    
     public override void AnimateShow()
     {
         UIQuestStartWindowModel model = Model as UIQuestStartWindowModel;

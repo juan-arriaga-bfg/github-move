@@ -88,6 +88,8 @@ public class UISettingsWindowView : UIGenericPopupWindowView
         
         InitButtonBase(btnTermsOfUse, OnTermsOfUseClick);
         InitButtonBase(btnPolicy, OnPolicyClick);
+        
+        TackleBoxEvents.SendSettingsOpen();
     }
 
     public override void OnViewClose()
@@ -96,6 +98,12 @@ public class UISettingsWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UISettingsWindowModel;
         
+    }
+
+    public override void OnViewCloseCompleted()
+    {
+        base.OnViewCloseCompleted();
+        TackleBoxEvents.SendSettingsClosed();
     }
 
     private bool EditorPlaceholderForBfgServices()

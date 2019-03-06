@@ -65,6 +65,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
 #if DEBUG && UNITY_EDITOR
         InitButtonBase(btnUnlockAll, OnUnlockAllClick);
 #endif
+        TackleBoxEvents.SendCollectionOpen();
         
     }
 
@@ -84,7 +85,13 @@ public class UICodexWindowView : UIGenericPopupWindowView
 
         model.OnClose?.Invoke();
     }
-    
+
+    public override void OnViewCloseCompleted()
+    {
+        base.OnViewCloseCompleted();
+        TackleBoxEvents.SendCollectionClosed();
+    }
+
     private void ReInit(UICodexWindowModel model)
     {
         UpdateExclamationMarks();
