@@ -99,9 +99,6 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
             
             if (typeDef.Filter.HasFlag(PieceTypeFilter.Mine))
             {
-                var particle = ParticleView.Show(R.MiningParticles, Context.CachedPosition);
-                particle.transform.SetParent(Context.ActorView.transform);
-                particle.SyncRendererLayers(Context.CachedPosition);
                 NSAudioService.Current.Play(SoundId.WorkerMine);
             }
             else if(typeDef.Filter.HasFlag(PieceTypeFilter.Obstacle))

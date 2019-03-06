@@ -134,6 +134,7 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 4724884443971438}
+  anchors: []
   bodySprites: []
   particles: []
   errorSelectionMaterial: {fileID: 2100000, guid: 1faf170e9acf1d64f86eefcd318ff557,
@@ -144,6 +145,7 @@ MonoBehaviour:
     type: 2}
   lockSkin: {fileID: 2487370538793729480}
   normalSkin: {fileID: 1549481043121792}
+  rootObject: {fileID: 4694530496969194}
 --- !u!114 &114585367472960794
 MonoBehaviour:
   m_ObjectHideFlags: 0
