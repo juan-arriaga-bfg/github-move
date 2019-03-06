@@ -84,7 +84,7 @@ public class CodexItem : IWUIWindowViewController
                 break;
             
             case CodexItemState.PartLock:
-                questionMark.SetActive(true);
+                questionMark.SetActive(false);
                 CreateIcon(true);
                 
                 foreach (var sprite in IconSprites)

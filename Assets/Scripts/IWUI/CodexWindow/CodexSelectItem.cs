@@ -29,7 +29,7 @@ public class CodexSelectItem : MonoBehaviour
 
         itemName.Text = locked ? LocalizationService.Get("piece.name.NPC_Locked", "piece.name.NPC_Locked") : def.Name;
                 
-        CreateIcon(anchor, def == null ? "NoneIcon" : $"{def.Uid}Icon");
+        CreateIcon(anchor, locked ? "NoneIcon" : $"{def.Uid}Icon");
 
         if (ShowChain(def, state))
         {
@@ -53,11 +53,6 @@ public class CodexSelectItem : MonoBehaviour
     {
         chain.ReturnContentToPool();
 
-        if (state == CodexItemState.FullLock)
-        {
-            return false;
-        }
-
         if (def == null)
         {
             return false;
@@ -69,13 +64,30 @@ public class CodexSelectItem : MonoBehaviour
         }
         
         int targetId = def.Id;
+        var piecesChain = GameDataService.Current.MatchDefinition.GetChain(targetId);
+        var codexManager = GameDataService.Current.CodexManager;
+        
+        bool anyItemUnlocked = false;
+        foreach (var id in piecesChain)
+        {
+            if (codexManager.IsPieceUnlocked(id))
+            {
+                anyItemUnlocked = true;
+                break;
+            }
+        }
 
+        if (!anyItemUnlocked)
+        {
+            return false;
+        }
+        
         var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainStartingFrom(targetId, 0, CHAIN_LENGTH, true, true, false);
         if (itemDefs == null)
         {
             return false;
         }
-        
+
         CodexChainDef chainDef = new CodexChainDef {ItemDefs = itemDefs};
         
         UICodexWindowView.CreateItems(chain, chainDef, CHAIN_LENGTH);
