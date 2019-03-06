@@ -78,7 +78,7 @@
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "9_CreatePiece_PR_C5",
     "PieceUid": "PR_C5",
-    "TargetValue": 6,
+    "TargetValue": 11,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.create.piece.title",
@@ -117,7 +117,7 @@
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "12_UseMine",
     "PieceUid": "MN_B",
-    "TargetValue": 2,
+    "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "MN_B",
@@ -192,7 +192,7 @@
   {
     "$type": "TaskHitTreeEntity, GameAssembly",
     "Id": "20_HitTree",
-    "TargetValue": 3,
+    "TargetValue": 7,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "OB3_A",
@@ -502,7 +502,7 @@
   {
     "$type": "TaskCollectIngredientEntity, GameAssembly",
     "Id": "45_CollectIngredient",
-    "TargetValue": 15,
+    "TargetValue": 20,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "collectIngredientDailyQuestIcon",
@@ -525,8 +525,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "47_CreatePiece_E3",
-    "PieceUid": "E3",
+    "Id": "47_CreatePiece_D3",
+    "PieceUid": "D3",
     "TargetValue": 4,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -537,8 +537,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "48_CreatePiece_E4",
-    "PieceUid": "E4",
+    "Id": "48_CreatePiece_D4",
+    "PieceUid": "D4",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -553,7 +553,7 @@
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "OB5_E",
+        "Ico": "OB5_D",
         "Title": "quest.hit.tree.title",
         "Message": "quest.hit.tree.message"
       }
@@ -561,8 +561,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "50_CreatePiece_E5",
-    "PieceUid": "E5",
+    "Id": "50_CreatePiece_D5",
+    "PieceUid": "D5",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -573,8 +573,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "51_CreatePiece_E6",
-    "PieceUid": "E6",
+    "Id": "51_CreatePiece_D6",
+    "PieceUid": "D6",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -613,7 +613,7 @@
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "CH1_E",
+        "Ico": "CH1_D",
         "Title": "quest.open.chest.title",
         "Message": "quest.open.chest.message"
       }
@@ -621,8 +621,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "55_CreatePiece_E3",
-    "PieceUid": "E3",
+    "Id": "55_CreatePiece_D3",
+    "PieceUid": "D3",
     "TargetValue": 10,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -646,8 +646,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "58_CreatePiece_E7",
-    "PieceUid": "E7",
+    "Id": "58_CreatePiece_D7",
+    "PieceUid": "D7",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -671,8 +671,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "60_CreatePiece_D3",
-    "PieceUid": "D3",
+    "Id": "60_CreatePiece_I3",
+    "PieceUid": "I3",
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -683,8 +683,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "61_CreatePiece_D4",
-    "PieceUid": "D4",
+    "Id": "61_CreatePiece_I4",
+    "PieceUid": "I4",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -695,8 +695,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "62_CreatePiece_D5",
-    "PieceUid": "D5",
+    "Id": "62_CreatePiece_I5",
+    "PieceUid": "I5",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -707,8 +707,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "63_CreatePiece_D6",
-    "PieceUid": "D6",
+    "Id": "63_CreatePiece_I6",
+    "PieceUid": "I6",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -719,8 +719,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "64_CreatePiece_D7",
-    "PieceUid": "D7",
+    "Id": "64_CreatePiece_I7",
+    "PieceUid": "I7",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -923,6 +923,66 @@
         "Ico": "NPC_EIcon",
         "Title": "quest.create.piece.title",
         "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskOpenChestEntity, GameAssembly",
+    "Id": "85_OpenChest_CH_A",
+    "PieceUid": "CH3_A",
+    "TargetValue": 5,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.open.chest.title",
+        "Message": "quest.open.chest.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskHitTreeEntity, GameAssembly",
+    "Id": "86_HitTree",
+    "TargetValue": 15,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "OB9_A",
+        "Title": "quest.hit.tree.title",
+        "Message": "quest.hit.tree.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskKillTreeEntity, GameAssembly",
+    "Id": "87_KillTree",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "OB9_A",
+        "Title": "quest.kill.tree.title",
+        "Message": "quest.kill.tree.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "88_CreatePiece_A3",
+    "PieceUid": "A3",
+    "TargetValue": 20,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskKillTreeEntity, GameAssembly",
+    "Id": "89_KillTree",
+    "TargetValue": 8,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "OB9_A",
+        "Title": "quest.kill.tree.title",
+        "Message": "quest.kill.tree.message"
       }
     }
   },

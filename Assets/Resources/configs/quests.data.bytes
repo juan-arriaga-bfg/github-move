@@ -1027,10 +1027,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "47_CreatePiece_E3",
+    "Id": "47_CreatePiece_D3",
     "TaskDefs": [
       {
-        "TaskId": "47_CreatePiece_E3"
+        "TaskId": "47_CreatePiece_D3"
       }
     ],
     "ComponentsCache": {
@@ -1050,10 +1050,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "48_CreatePiece_E4",
+    "Id": "48_CreatePiece_D4",
     "TaskDefs": [
       {
-        "TaskId": "48_CreatePiece_E4"
+        "TaskId": "48_CreatePiece_D4"
       }
     ],
     "ComponentsCache": {
@@ -1096,10 +1096,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "50_CreatePiece_E5",
+    "Id": "50_CreatePiece_D5",
     "TaskDefs": [
       {
-        "TaskId": "50_CreatePiece_E5"
+        "TaskId": "50_CreatePiece_D5"
       }
     ],
     "ComponentsCache": {
@@ -1123,10 +1123,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "51_CreatePiece_E6",
+    "Id": "51_CreatePiece_D6",
     "TaskDefs": [
       {
-        "TaskId": "51_CreatePiece_E6"
+        "TaskId": "51_CreatePiece_D6"
       }
     ],
     "ComponentsCache": {
@@ -1223,10 +1223,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "55_CreatePiece_E3",
+    "Id": "55_CreatePiece_D3",
     "TaskDefs": [
       {
-        "TaskId": "55_CreatePiece_E3"
+        "TaskId": "55_CreatePiece_D3"
       }
     ],
     "ComponentsCache": {
@@ -1269,10 +1269,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "58_CreatePiece_E7",
+    "Id": "58_CreatePiece_D7",
     "TaskDefs": [
       {
-        "TaskId": "58_CreatePiece_E7"
+        "TaskId": "58_CreatePiece_D7"
       }
     ],
     "ComponentsCache": {
@@ -1319,10 +1319,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "60_CreatePiece_D3",
+    "Id": "60_CreatePiece_I3",
     "TaskDefs": [
       {
-        "TaskId": "60_CreatePiece_D3"
+        "TaskId": "60_CreatePiece_I3"
       }
     ],
     "ComponentsCache": {
@@ -1342,10 +1342,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "61_CreatePiece_D4",
+    "Id": "61_CreatePiece_I4",
     "TaskDefs": [
       {
-        "TaskId": "61_CreatePiece_D4"
+        "TaskId": "61_CreatePiece_I4"
       }
     ],
     "ComponentsCache": {
@@ -1365,10 +1365,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "62_CreatePiece_D5",
+    "Id": "62_CreatePiece_I5",
     "TaskDefs": [
       {
-        "TaskId": "62_CreatePiece_D5"
+        "TaskId": "62_CreatePiece_I5"
       }
     ],
     "ComponentsCache": {
@@ -1392,10 +1392,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "63_CreatePiece_D6",
+    "Id": "63_CreatePiece_I6",
     "TaskDefs": [
       {
-        "TaskId": "63_CreatePiece_D6"
+        "TaskId": "63_CreatePiece_I6"
       }
     ],
     "ComponentsCache": {
@@ -1419,10 +1419,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "64_CreatePiece_D7",
+    "Id": "64_CreatePiece_I7",
     "TaskDefs": [
       {
-        "TaskId": "64_CreatePiece_D7"
+        "TaskId": "64_CreatePiece_I7"
       }
     ],
     "ComponentsCache": {
@@ -1811,6 +1811,121 @@
           {
             "Currency": "Experience",
             "Amount": 50
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "85_OpenChest_CH_A",
+    "TaskDefs": [
+      {
+        "TaskId": "85_OpenChest_CH_A"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 150
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "86_HitTree",
+    "TaskDefs": [
+      {
+        "TaskId": "86_HitTree"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 75
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "87_KillTree",
+    "TaskDefs": [
+      {
+        "TaskId": "87_KillTree"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 100
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "88_CreatePiece_A3",
+    "TaskDefs": [
+      {
+        "TaskId": "88_CreatePiece_A3"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 100
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "89_KillTree",
+    "TaskDefs": [
+      {
+        "TaskId": "89_KillTree"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 150
           }
         ]
       }

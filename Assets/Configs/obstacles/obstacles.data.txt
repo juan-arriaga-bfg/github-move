@@ -357,7 +357,7 @@
     "PieceAmount": 2,
     "PieceWeights": [
       {
-        "Uid": "A1",
+        "Uid": "D1",
         "Weight": 1
       }
     ]
@@ -386,7 +386,7 @@
     "PieceAmount": 2,
     "PieceWeights": [
       {
-        "Uid": "A1",
+        "Uid": "D1",
         "Weight": 1
       }
     ],
@@ -416,11 +416,11 @@
     "PieceAmount": 3,
     "PieceWeights": [
       {
-        "Uid": "A1",
+        "Uid": "D1",
         "Weight": 2
       },
       {
-        "Uid": "A2",
+        "Uid": "D2",
         "Weight": 1
       }
     ],
@@ -450,19 +450,15 @@
     "PieceAmount": 4,
     "PieceWeights": [
       {
-        "Uid": "A1",
+        "Uid": "D1",
         "Weight": 2
       },
       {
-        "Uid": "A2",
+        "Uid": "D2",
         "Weight": 2
       },
       {
         "Uid": "Boost_CR1",
-        "Weight": 1
-      },
-      {
-        "Uid": "Boost_CR2",
         "Weight": 1
       }
     ],
@@ -492,20 +488,16 @@
     "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": "A1",
+        "Uid": "D1",
         "Weight": 2
       },
       {
-        "Uid": "A2",
+        "Uid": "D2",
         "Weight": 4
       },
       {
         "Uid": "Boost_CR1",
         "Weight": 2
-      },
-      {
-        "Uid": "Boost_CR2",
-        "Weight": 1
       },
       {
         "Uid": "Soft1",
@@ -538,11 +530,11 @@
     "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": "A1",
+        "Uid": "D1",
         "Weight": 2
       },
       {
-        "Uid": "A2",
+        "Uid": "D2",
         "Weight": 3
       },
       {
@@ -584,11 +576,11 @@
     "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": "A1",
+        "Uid": "D1",
         "Weight": 1
       },
       {
-        "Uid": "A2",
+        "Uid": "D2",
         "Weight": 5
       },
       {
@@ -630,16 +622,16 @@
     "PieceAmount": 6,
     "PieceWeights": [
       {
-        "Uid": "A1",
+        "Uid": "D1",
         "Weight": 1
       },
       {
-        "Uid": "A2",
+        "Uid": "D2",
         "Weight": 6
       },
       {
-        "Uid": "Boost_CR1",
-        "Weight": 1
+        "Uid": "D3",
+        "Weight": 3
       },
       {
         "Uid": "Boost_CR2",
