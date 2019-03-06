@@ -46,7 +46,7 @@ public class CodexSelectItem : MonoBehaviour
 
         int targetId = def.Id;
 
-        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH, true, true, false);
+        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainStartingFrom(targetId, 0, CHAIN_LENGTH, true, true, false);
         if (itemDefs == null)
         {
             return false;

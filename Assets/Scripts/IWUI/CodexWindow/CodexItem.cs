@@ -260,11 +260,20 @@ public class CodexItem : IWUIWindowViewController
 
     public void OnClick()
     {
-        if(Context == null || Context.Context == null) return;
-
-        if (Context.Context.IsHero)
+        if (Context == null)
         {
-            Context.Context.SelectItem.SetItem(def.PieceDef, def.State);
+            return;
+        }
+
+        CodexTab codexTab = Context.Context;
+        if (codexTab != null && codexTab.IsHero)
+        {
+            codexTab.SelectItem.SetItem(def.PieceDef, def.State);
+        }
+        
+        if (def.State == CodexItemState.PendingReward)
+        {
+            ClaimReward();
         }
 
         //

@@ -230,31 +230,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
             return null;
         }
         
-        var list = GetCodexItemsForChain(chain);
-        
-        int highlightedIndex = -1;
-
-        for (var i = 0; i < list.Count; i++)
-        {
-            var def = list[i];
-            
-            if (!allowRewards && def.State == CodexItemState.PendingReward)
-            {
-                def.State = CodexItemState.Unlocked;
-            }
-
-            if (allowHighlight && def.PieceTypeDef.Id == targetId)
-            {
-                if (def.State == CodexItemState.Unlocked)
-                {
-                    def.State = CodexItemState.Highlighted;
-                }
-                
-                highlightedIndex = i;
-            }
-
-            def.HideCaption = hideCaptions;
-        }
+        var list = GetCustomChain(targetId, hideCaptions, allowRewards, allowHighlight, chain, out var highlightedIndex);
 
         // Put HL to almost end of the displayed part of a chain
         const int ITEMS_TO_SHOW_AFTER_HL = 1;
@@ -282,6 +258,69 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         
         List<CodexItemDef> ret = list.GetRange(rangeStart, rangeLength);
         return ret;
+    }
+
+    /// <summary>
+    /// targetId - to get chain and highlight
+    /// </summary>
+    public List<CodexItemDef> GetCodexItemsForChainStartingFrom(int targetId, int startId, int length, bool hideCaptions, bool allowRewards, bool allowHighlight)
+    {
+        var chain = GameDataService.Current.MatchDefinition.GetChain(targetId);
+
+        // Current piece is not a part of any chain
+        if (chain.Count == 0)
+        {
+            return null;
+        }
+        
+        var list = GetCustomChain(targetId, hideCaptions, allowRewards, allowHighlight, chain, out _);
+
+        int rangeStart;
+        int rangeLength;
+        if (list.Count - startId < length)
+        {
+            rangeStart = 0;
+            rangeLength = list.Count;
+        }
+        else
+        {
+            rangeStart  = startId;
+            rangeLength = length;
+        }
+        
+        List<CodexItemDef> ret = list.GetRange(rangeStart, rangeLength);
+        return ret;
+    }
+    
+    private List<CodexItemDef> GetCustomChain(int targetId, bool hideCaptions, bool allowRewards, bool allowHighlight, List<int> chain, out int highlightedIndex)
+    {
+        var list = GetCodexItemsForChain(chain);
+
+        highlightedIndex = -1;
+
+        for (var i = 0; i < list.Count; i++)
+        {
+            var def = list[i];
+
+            if (!allowRewards && def.State == CodexItemState.PendingReward)
+            {
+                def.State = CodexItemState.Unlocked;
+            }
+
+            if (allowHighlight && def.PieceTypeDef.Id == targetId)
+            {
+                if (def.State == CodexItemState.Unlocked)
+                {
+                    def.State = CodexItemState.Highlighted;
+                }
+
+                highlightedIndex = i;
+            }
+
+            def.HideCaption = hideCaptions;
+        }
+
+        return list;
     }
 
     public List<CodexItemDef> GetCodexItemsForChain(List<List<int>> chain)
