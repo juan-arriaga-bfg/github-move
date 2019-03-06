@@ -86,6 +86,8 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
 
         onComplete?.Invoke();
 
+        TackleBoxEvents.SendGameLaunched();
+        
         ProfileService.Current.QueueComponent.Run();
         BoardService.Current.FirstBoard.TutorialLogic.Run();
 
