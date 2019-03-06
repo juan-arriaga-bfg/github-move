@@ -144,6 +144,8 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
     private void UnlockPiece(int id)
     {
+        Debug.Log($"[CodexDataManager] => UnlockPiece: id: {id} - {PieceType.Parse(id)}");
+        
         int firstInChain = GameDataService.Current.MatchDefinition.GetFirst(id);
 
         // Debug.Log($"UnlockPiece: first in chain for {id} is {firstInChain}");

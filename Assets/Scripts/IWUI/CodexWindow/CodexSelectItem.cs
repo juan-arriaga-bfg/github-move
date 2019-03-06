@@ -13,13 +13,32 @@ public class CodexSelectItem : MonoBehaviour
     
     public void SetItem(PieceDef def, CodexItemState state)
     {
-        bool locked = state == CodexItemState.FullLock || state == CodexItemState.PartLock || def == null;
-        
+        bool locked;
+        if (def == null)
+        {
+            locked = true;
+        }
+        else if (state == CodexItemState.PendingReward || state == CodexItemState.Unlocked || GameDataService.Current.CodexManager.IsPieceUnlocked(def.Id))
+        {
+            locked = false;
+        }
+        else
+        {
+            locked = true;
+        }
+
         itemName.Text = locked ? LocalizationService.Get("piece.name.NPC_Locked", "piece.name.NPC_Locked") : def.Name;
-        message.Text  = locked ? LocalizationService.Get("piece.description.NPC_Locked", "piece.description.NPC_Locked") : LocalizationService.Get($"piece.description.{def.Uid}", $"piece.description.{def.Uid}");
-        
+                
         CreateIcon(anchor, def == null ? "NoneIcon" : $"{def.Uid}Icon");
-        ShowChain(def, state);
+
+        if (ShowChain(def, state))
+        {
+            message.Text = "";
+        }
+        else
+        {
+            message.Text = locked ? LocalizationService.Get("piece.description.NPC_Locked", "piece.description.NPC_Locked") : LocalizationService.Get($"piece.description.{def.Uid}", $"piece.description.{def.Uid}");
+        }
     }
     
     private void CreateIcon(Transform parent, string id)
@@ -44,6 +63,11 @@ public class CodexSelectItem : MonoBehaviour
             return false;
         }
 
+        if (GameDataService.Current.CodexManager.IsPieceUnlocked(def.Id) && PieceType.GetDefById(def.Id).Filter.Has(PieceTypeFilter.Character))
+        {
+            return false;
+        }
+        
         int targetId = def.Id;
 
         var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainStartingFrom(targetId, 0, CHAIN_LENGTH, true, true, false);
