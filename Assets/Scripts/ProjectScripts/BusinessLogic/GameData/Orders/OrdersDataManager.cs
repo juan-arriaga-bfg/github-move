@@ -65,7 +65,8 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
                 }
                 
                 Recipes.Sort((a, b) => a.Level.CompareTo(b.Level));
-                if(save?.Orders == null) return;
+
+                if (save?.Orders == null) return;
 
                 foreach (var order in save.Orders)
                 {
@@ -84,20 +85,39 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
         return Locker.IsLocked == false && Orders.Count < GameDataService.Current.ConstantsManager.MaxOrders;
     }
 
-    public Order GetOrder(int customer)
+    public bool GetOrder(int customer, out Order order)
     {
-        if (Orders.Count >= GameDataService.Current.ConstantsManager.MaxOrders) return null;
-
-        var item = GameDataService.Current.LevelsManager.GetSequence(Currency.Order.Name)?.GetNext();
+        order = null;
         
-        if (item == null) return null;
+        if (Orders.Count >= GameDataService.Current.ConstantsManager.MaxOrders) return false;
 
-        var recipe = Recipes.Find(def => def.Uid == item.Uid);
-        var order = new Order{Customer = customer, Def = recipe};
+        ItemWeight item;
+        OrderDef recipe = null;
+        
+        for (var i = 0; i < 5; i++)
+        {
+            item = GameDataService.Current.LevelsManager.GetSequence(Currency.Order.Name)?.GetNext();
+            
+            if (item == null) continue;
+            
+            recipe = Recipes.Find(def => def.Uid == item.Uid);
+
+            if (recipe.IsUnlocked() == false)
+            {
+                recipe = null;
+                continue;
+            }
+            
+            break;
+        }
+
+        if (recipe == null) return true;
+        
+        order = new Order{Customer = customer, Def = recipe};
         
         Orders.Add(order);
         
-        return order;
+        return false;
     }
 
     public void RemoveOrder(Order order, BoardLogicComponent logic)

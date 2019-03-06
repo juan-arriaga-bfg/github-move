@@ -22,7 +22,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         Timer.OnComplete += UpdateView;
         Timer.OnComplete += () => UpdateState(OrderState.Complete);
         
-        int delay = GameDataService.Current.LevelsManager.OrdersDelay;
+        var delay = GameDataService.Current.LevelsManager.OrdersDelay;
         
         Cooldown = new TimerComponent {Delay = delay};
         Cooldown.OnComplete += CreateOrder;
@@ -107,10 +107,9 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
     private void CreateOrder()
     {
         NSAudioService.Current.Play(SoundId.OrderAppear);
-        
-        Order = GameDataService.Current.OrdersManager.GetOrder(pieceContext.PieceType);
-        
-        if(Order == null) return;
+
+        if (GameDataService.Current.OrdersManager.GetOrder(pieceContext.PieceType, out Order)) RestartCooldown();
+        if (Order == null) return;
         
         Timer.Delay = Order.Def.Delay;
         UpdateView();
@@ -179,7 +178,8 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
 
     public void RestartCooldown()
     {
-        int delay = GameDataService.Current.LevelsManager.OrdersDelay;
+        var delay = GameDataService.Current.LevelsManager.OrdersDelay;
+        
         Cooldown.Delay = delay;
         Cooldown.Start();
         
