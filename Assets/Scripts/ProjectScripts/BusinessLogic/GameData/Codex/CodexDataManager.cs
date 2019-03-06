@@ -386,6 +386,29 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
         return anyItemUnlocked;
     }
+
+    public bool IsAnyPendingRewardInChain(List<int> chain)
+    {
+        GetChainState(chain[0], out var chainState);
+        foreach (var id in chain)
+        {
+            bool isPendingReward = chainState?.PendingReward.Contains(id) ?? false;
+            if (isPendingReward)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool IsAnyPendingRewardForCharChain(int charId)
+    {
+        var charChain = GameDataService.Current.MatchDefinition.GetChain(charId);
+        var isAnyPendingReward = IsAnyPendingRewardInChain(charChain);
+
+        return isAnyPendingReward;
+    }
     
     public List<CodexItemDef> GetCodexItemsForChain(List<int> chain)
     {
@@ -395,8 +418,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
         var pieceManager = GameDataService.Current.PiecesManager;
 
-        CodexChainState chainState;
-        GameDataService.Current.CodexManager.GetChainState(chain[0], out chainState);
+        GameDataService.Current.CodexManager.GetChainState(chain[0], out var chainState);
 
         bool isCharsOnlyChain = IsChainContainsOnlyChars(chain);
 

@@ -23,15 +23,15 @@ public class CodexItem : IWUIWindowViewController
     public const float MIN_ITEM_IMAGE_SIZE = 90;
     public const float MAX_ITEM_IMAGE_SIZE = 155;
 
-    [IWUIBindingNullable("#Caption")] private TextMeshProUGUI caption;
-    [IWUIBinding("#(?)")]     private GameObject questionMark;
-    [IWUIBindingNullable("#Arrow")]   private GameObject arrow;
-    [IWUIBinding("#Shine")]   private GameObject shine;
-    [IWUIBindingNullable("#Basket")]  private GameObject basket;
-    [IWUIBindingNullable("#Hand")]    private GameObject hand;
-    [IWUIBinding("#Piece")]   private RectTransform pieceImageRectTransform;
-    [IWUIBinding("#Gift")]    private GameObject gift;
-    [IWUIBinding("#Gift")]    private Animator giftAnimator;
+    [IWUIBindingNullable("#Caption")] protected TextMeshProUGUI caption;
+    [IWUIBinding("#(?)")]     protected GameObject questionMark;
+    [IWUIBindingNullable("#Arrow")]   protected GameObject arrow;
+    [IWUIBinding("#Shine")]   protected GameObject shine;
+    [IWUIBindingNullable("#Basket")]  protected GameObject basket;
+    [IWUIBindingNullable("#Hand")]    protected GameObject hand;
+    [IWUIBinding("#Piece")]   protected RectTransform pieceImageRectTransform;
+    [IWUIBinding("#Gift")]    protected GameObject gift;
+    [IWUIBinding("#Gift")]    protected Animator giftAnimator;
 
     public CodexChain Context;
     
@@ -39,7 +39,7 @@ public class CodexItem : IWUIWindowViewController
 
     private readonly Color COLOR_TRANSPARENT = new Color(1, 1, 1, 0);
     
-    private CodexItemDef def;
+    protected CodexItemDef def;
     
     private bool forceHideArrow;
     
@@ -56,7 +56,7 @@ public class CodexItem : IWUIWindowViewController
         Setup(def, forceHideArrow);
     }
     
-    public void Setup(CodexItemDef itemDef, bool forceHideArrow)
+    public virtual void Setup(CodexItemDef itemDef, bool forceHideArrow)
     {
         this.forceHideArrow = forceHideArrow;
         
@@ -258,48 +258,12 @@ public class CodexItem : IWUIWindowViewController
             .InsertCallback(animLen, StopGiftAnimation);
     }
 
-    public void OnClick()
-    {
-        if (Context == null)
-        {
-            return;
-        }
-
-        CodexTab codexTab = Context.Context;
-        if (codexTab != null && codexTab.IsHero)
-        {
-            codexTab.SelectItem.SetItem(def.PieceDef, def.State);
-        }
-        
+    public virtual void OnClick()
+    {        
         if (def.State == CodexItemState.PendingReward)
         {
             ClaimReward();
         }
-
-        //
-        // switch (def.State)
-        // {
-        //     case CodexItemState.FullLock:
-        //         if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(null);
-        //         break;
-        //     
-        //     case CodexItemState.PartLock:
-        //         if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(null);
-        //         break;
-        //     
-        //     case CodexItemState.PendingReward:
-        //         if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(def.PieceDef);
-        //         ClaimReward();
-        //         break;
-        //     
-        //     case CodexItemState.Unlocked:
-        //         if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(def.PieceDef);
-        //         break;
-        //     
-        //     case CodexItemState.Highlighted:
-        //         if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(def.PieceDef);
-        //         break;
-        // }
     }
     
     private void ClaimReward()

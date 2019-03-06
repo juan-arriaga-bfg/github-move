@@ -18,13 +18,14 @@ public class CodexTab : IWUIWindowViewController
 
     private readonly List<CodexChain> codexChains = new List<CodexChain>();
 
-    public bool IsHero;
+    public bool IsHero { get; private set; }
+    
     private CodexTabDef defData;
 
     public void Init(CodexTabDef def)
     {
         defData = def;
-        IsHero = defData.ChainDefs[0].ItemDefs[0].PieceTypeDef.Id == PieceType.NPC_A.Id;
+        IsHero = defData.ChainDefs[0].IsHero;
         
         ScrollToTop();
         

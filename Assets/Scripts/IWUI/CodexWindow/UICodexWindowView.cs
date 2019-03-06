@@ -132,7 +132,8 @@ public class UICodexWindowView : UIGenericPopupWindowView
         for (var i = 0; i < model.CodexContent.TabDefs.Count; i++)
         {
             var tabDef = model.CodexContent.TabDefs[i];
-            ((UISimpleTabContainerElementViewController) contentToggles.Tabs[i]).ToggleExclamationMark(tabDef.PendingReward);
+            var pendingReward = tabDef.PendingReward;
+            ((UISimpleTabContainerElementViewController) contentToggles.Tabs[i]).ToggleExclamationMark(pendingReward);
         }
     }
 
