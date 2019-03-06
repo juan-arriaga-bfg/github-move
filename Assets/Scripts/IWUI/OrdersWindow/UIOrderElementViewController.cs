@@ -24,7 +24,7 @@ public class UIOrderElementViewController : UISimpleScrollElementViewController
 
 	private void OnDisable()
 	{
-		var contentEntity = entity as UIOrderElementEntity;
+		if(!(entity is UIOrderElementEntity contentEntity)) return;
 		
 		contentEntity.Data.OnStateChange -= UpdateMark;
 	}
