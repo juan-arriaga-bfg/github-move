@@ -7,7 +7,7 @@ public class CodexChain : MonoBehaviour
     [SerializeField] private Transform itemsHost;
     [SerializeField] private TextMeshProUGUI caption;
    
-    private readonly List<CodexItem> codexItems = new List<CodexItem>();
+    public readonly List<CodexItem> codexItems = new List<CodexItem>();
 
     public int ChainId { get; private set; }
 

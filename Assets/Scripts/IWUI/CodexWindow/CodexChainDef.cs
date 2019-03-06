@@ -4,4 +4,5 @@ public class CodexChainDef
 {
     public string Name;
     public List<CodexItemDef> ItemDefs;
+    public bool IsHero;
 }
