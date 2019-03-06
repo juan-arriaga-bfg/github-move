@@ -81,10 +81,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
         base.OnViewClose();
         
         UICodexWindowModel model = Model as UICodexWindowModel;   
-        
-        // var codexManager = GameDataService.Current.CodexManager;
-        // codexManager.ClearCodexContentCache();
-        
+
         model.OnClose?.Invoke();
     }
     
@@ -110,13 +107,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
             tab.Init(tabDef);
             CreateChains(tab, tabDef);
         }
-        
-        //int activeTabIndex = CalculateActiveTabIndexFromDefs(model);
-        
-        //CreateChains(codexTabs[activeTabIndex], model.CodexContent.TabDefs[activeTabIndex]);
 
-        //StartCoroutine(CreateChainsCoroutine(activeTabIndex, model));
-        
         lastCodexContentId = model.CodexContent.InstanceId;
     }
 
@@ -129,30 +120,28 @@ public class UICodexWindowView : UIGenericPopupWindowView
             return;
         }
         
-        for (var i = 0; i < model.CodexContent.TabDefs.Count; i++)
+        for (var tabIndex = 0; tabIndex < model.CodexContent.TabDefs.Count; tabIndex++)
         {
-            var tabDef = model.CodexContent.TabDefs[i];
+            var tabDef = model.CodexContent.TabDefs[tabIndex];
             var pendingReward = tabDef.PendingReward;
-            ((UISimpleTabContainerElementViewController) contentToggles.Tabs[i]).ToggleExclamationMark(pendingReward);
+            ((UISimpleTabContainerElementViewController) contentToggles.Tabs[tabIndex]).ToggleExclamationMark(pendingReward);
+
+            // Update (!) on chars icons
+            var chains = codexTabs[tabIndex].GetChains();
+            foreach (var chain in chains)
+            {
+                if (chain.ChainId == PieceType.NPC_A.Id)
+                {
+                    foreach (var item in chain.codexItems)
+                    {
+                        bool isPendingReward = GameDataService.Current.CodexManager.IsAnyPendingRewardForCharChain(item.Def.PieceDef.Id);
+                        ((CodexCharItem) item).ToggleExclamationMark(isPendingReward);
+                    }
+                }
+            }
         }
     }
 
-    // private IEnumerator CreateChainsCoroutine(int ignoreIndex, UICodexWindowModel model)
-    // {
-    //     for (var i = 0; i < codexTabs.Count; i++)
-    //     {
-    //         if (i == ignoreIndex)
-    //         {
-    //             continue;
-    //         }
-    //         
-    //         var tab = codexTabs[i];
-    //         CreateChains(tab, model.CodexContent.TabDefs[i]);
-    //
-    //         yield return new WaitForEndOfFrame();
-    //     }
-    // }
-    
     private void CreateTabs(List<CodexTabDef> tabDefs)
     {
         codexTabs = new List<CodexTab>();
@@ -204,9 +193,10 @@ public class UICodexWindowView : UIGenericPopupWindowView
                 for (var itemIndex = 0; itemIndex < chainDef.ItemDefs.Count; itemIndex++)
                 {
                     var itemDef = chainDef.ItemDefs[itemIndex];
+                    
                     if (itemDef.PendingReward != null)
                     {
-                        contentToggles.Select(tabIndex);
+                        contentToggles.Select(tabIndex); 
 
                         // Scroll
                         var target = chainDef.ItemDefs[0].PieceTypeDef.Id;
@@ -228,6 +218,19 @@ public class UICodexWindowView : UIGenericPopupWindowView
                         }
 
                         return;
+                    }
+                    
+                    bool isTabWithHero = chainDef.IsHero;
+                    if (isTabWithHero)
+                    {
+                        bool isPendingReward = GameDataService.Current.CodexManager.IsAnyPendingRewardForCharChain(itemDef.PieceDef.Id);
+                        if (isPendingReward)
+                        {
+                            contentToggles.Select(tabIndex);
+                            codexTabs[tabIndex].ScrollToTop();
+                            codexTabs[tabIndex].SelectItem.SetItem(itemDef.PieceDef, itemDef.State);
+                            return;
+                        }
                     }
                 }
             }
@@ -292,7 +295,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
         for (var i = 0; i < chainDefs.Count; i++)
         {
             var codexChainDef = chainDefs[i];
-            var prefabName = codexChainDef.ItemDefs[0].PieceTypeDef.Id == PieceType.NPC_A.Id ? "CodexChainCharacter" : "CodexChain";
+            var prefabName = codexChainDef.IsHero ? "CodexChainCharacter" : "CodexChain";
 
             CodexChain chain = UIService.Get.PoolContainer.Create<CodexChain>((GameObject) ContentService.Current.GetObjectByName(prefabName));
             chain.Context = tab;

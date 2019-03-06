@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class CodexCharItem : CodexItem
 {
-    [IWUIBinding("#ExclamationMark")] protected GameObject exclamationMark;
+    [IWUIBinding("#ExclamationMark")] private GameObject exclamationMark;
 
     public override void Setup(CodexItemDef itemDef, bool forceHideArrow)
     {
         base.Setup(itemDef, forceHideArrow);
 
-        var isAnyPendingReward = GameDataService.Current.CodexManager.IsAnyPendingRewardForCharChain(itemDef.PieceDef.Id);
-        exclamationMark.SetActive(isAnyPendingReward);
+        var isPendingReward = GameDataService.Current.CodexManager.IsAnyPendingRewardForCharChain(itemDef.PieceDef.Id);
+        ToggleExclamationMark(isPendingReward);
     }
 
     public override void OnClick()
@@ -26,5 +26,10 @@ public class CodexCharItem : CodexItem
         }
         
         base.OnClick();
+    }
+
+    public void ToggleExclamationMark(bool isPendingReward)
+    {
+        exclamationMark.SetActive(isPendingReward);
     }
 }

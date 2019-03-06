@@ -22,6 +22,11 @@ public class CodexTab : IWUIWindowViewController
     
     private CodexTabDef defData;
 
+    public List<CodexChain> GetChains()
+    {
+        return codexChains;
+    }
+    
     public void Init(CodexTabDef def)
     {
         defData = def;

@@ -10,6 +10,11 @@ public class CodexSelectItem : MonoBehaviour
     private Transform icon;
     
     private const int CHAIN_LENGTH = 6;
+
+    public CodexChain GetChain()
+    {
+        return chain;
+    }
     
     public void SetItem(PieceDef def, CodexItemState state)
     {
