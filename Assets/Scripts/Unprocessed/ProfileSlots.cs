@@ -17,7 +17,7 @@ public static class ProfileSlots
 #if UNITY_EDITOR
     public const string DEFAULT_SLOT_PATH = "configs/profile.data";
 #else
-    public const string DEFAULT_PATH = "user.profile";
+    public const string DEFAULT_SLOT_PATH = "user.profile";
 #endif
 
     public static string ActiveSlot
