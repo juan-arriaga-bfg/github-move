@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BfgAnalytics;
 using UnityEngine;
 
@@ -144,6 +145,8 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
     private void UnlockPiece(int id)
     {
+        Debug.Log($"[CodexDataManager] => UnlockPiece: id: {id} - {PieceType.Parse(id)}");
+        
         int firstInChain = GameDataService.Current.MatchDefinition.GetFirst(id);
 
         // Debug.Log($"UnlockPiece: first in chain for {id} is {firstInChain}");
@@ -220,7 +223,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         return Items.TryGetValue(firstId, out state);
     }
 
-    public List<CodexItemDef> GetCodexItemsForChainAndFocus(int targetId, int length, bool hideCaptions)
+    public List<CodexItemDef> GetCodexItemsForChainAndFocus(int targetId, int length, bool hideCaptions, bool allowRewards, bool allowHighlight)
     {
         var chain = GameDataService.Current.MatchDefinition.GetChain(targetId);
 
@@ -230,27 +233,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
             return null;
         }
         
-        var list = GetCodexItemsForChain(chain);
-        
-        int highlightedIndex = -1;
-
-        for (var i = 0; i < list.Count; i++)
-        {
-            var def = list[i];
-            if (def.State == CodexItemState.PendingReward)
-            {
-                def.State = CodexItemState.Unlocked;
-            }
-
-            if (def.PieceTypeDef.Id == targetId)
-            {
-                if(def.State == CodexItemState.Unlocked)
-                    def.State = CodexItemState.Highlighted;
-                highlightedIndex = i;
-            }
-
-            def.HideCaption = hideCaptions;
-        }
+        var list = GetCustomChain(targetId, hideCaptions, allowRewards, allowHighlight, chain, out var highlightedIndex);
 
         // Put HL to almost end of the displayed part of a chain
         const int ITEMS_TO_SHOW_AFTER_HL = 1;
@@ -276,8 +259,89 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
         // Debug.Log($"GetCodexItemsForChainAndFocus: rangeStart: {rangeStart}, rangeLength: {rangeLength}, list.Count: {list.Count}, highlightedIndex: {highlightedIndex}");
         
+        EnsureThatNoLockedItemsBetweenUnlocked(ref list);
+        
         List<CodexItemDef> ret = list.GetRange(rangeStart, rangeLength);
         return ret;
+    }
+
+    /// <summary>
+    /// targetId - to get chain and highlight
+    /// </summary>
+    public List<CodexItemDef> GetCodexItemsForChainStartingFrom(int targetId, int startId, int length, bool hideCaptions, bool allowRewards, bool allowHighlight)
+    {
+        var chain = GameDataService.Current.MatchDefinition.GetChain(targetId);
+
+        // Current piece is not a part of any chain
+        if (chain.Count == 0)
+        {
+            return null;
+        }
+        
+        var list = GetCustomChain(targetId, hideCaptions, allowRewards, allowHighlight, chain, out _);
+
+        int rangeStart;
+        int rangeLength;
+        if (list.Count - startId < length)
+        {
+            rangeStart = 0;
+            rangeLength = list.Count;
+        }
+        else
+        {
+            rangeStart  = startId;
+            rangeLength = length;
+        }
+        
+        List<CodexItemDef> ret = list.GetRange(rangeStart, rangeLength);
+        return ret;
+    }
+    
+    private List<CodexItemDef> GetCustomChain(int targetId, bool hideCaptions, bool allowRewards, bool allowHighlight, List<int> chain, out int highlightedIndex)
+    {
+        var list = GetCodexItemsForChain(chain);
+
+        GameDataService.Current.CodexManager.GetChainState(chain[0], out var chainState);
+
+        highlightedIndex = -1;
+
+        bool isPreviousPieceUnlocked = false;
+        
+        for (var i = 0; i < list.Count; i++)
+        {
+            var def = list[i];
+
+            bool isUnlocked = chainState?.Unlocked.Contains(def.PieceDef.Id) ?? false;
+
+            if (!isUnlocked)
+            {
+                def.State = isPreviousPieceUnlocked
+                    ? CodexItemState.PartLock
+                    : CodexItemState.FullLock;
+            }
+
+            // To enable CodexItemState.PartLock for the next item
+            isPreviousPieceUnlocked = isUnlocked;
+            
+            if (!allowRewards && def.State == CodexItemState.PendingReward)
+            {
+                def.State = CodexItemState.Unlocked;
+            }
+
+            if (allowHighlight && def.PieceTypeDef.Id == targetId)
+            {
+                if (def.State == CodexItemState.Unlocked)
+                {
+                    def.State = CodexItemState.Highlighted;
+                }
+
+                highlightedIndex = i;
+            }
+
+            def.HideCaption = hideCaptions;
+        }
+
+        return list;
     }
 
     public List<CodexItemDef> GetCodexItemsForChain(List<List<int>> chain)
@@ -291,6 +355,60 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         
         return result;
     }
+
+
+    public static bool IsChainContainsOnlyChars(List<int> chain)
+    {
+        bool ret = true;
+        foreach (var id in chain)
+        {
+            if (!PieceType.GetDefById(id).Filter.Has(PieceTypeFilter.Character))
+            {
+                ret = false;
+                break;
+            }
+        }
+        
+        return ret; 
+    }
+    
+    public bool IsAnyPieceUnlockedInChain(List<int> chain)
+    {
+        bool anyItemUnlocked = false;
+        foreach (var id in chain)
+        {
+            if (IsPieceUnlocked(id))
+            {
+                anyItemUnlocked = true;
+                break;
+            }
+        }
+
+        return anyItemUnlocked;
+    }
+
+    public bool IsAnyPendingRewardInChain(List<int> chain)
+    {
+        GetChainState(chain[0], out var chainState);
+        foreach (var id in chain)
+        {
+            bool isPendingReward = chainState?.PendingReward.Contains(id) ?? false;
+            if (isPendingReward)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool IsAnyPendingRewardForCharChain(int charId)
+    {
+        var charChain = GameDataService.Current.MatchDefinition.GetChain(charId);
+        var isAnyPendingReward = IsAnyPendingRewardInChain(charChain);
+
+        return isAnyPendingReward;
+    }
     
     public List<CodexItemDef> GetCodexItemsForChain(List<int> chain)
     {
@@ -300,8 +418,9 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
         var pieceManager = GameDataService.Current.PiecesManager;
 
-        CodexChainState chainState;
-        GameDataService.Current.CodexManager.GetChainState(chain[0], out chainState);
+        GameDataService.Current.CodexManager.GetChainState(chain[0], out var chainState);
+
+        bool isCharsOnlyChain = IsChainContainsOnlyChars(chain);
 
         bool isPreviousPieceUnlocked = false;
         
@@ -342,13 +461,24 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
             {
                 itemDef.State = isPendingReward ? CodexItemState.PendingReward : CodexItemState.Unlocked;
             } 
-            else if (isPreviousPieceUnlocked || i == 0)
+            else if (isPreviousPieceUnlocked && !isCharsOnlyChain)
             {
                 itemDef.State = CodexItemState.PartLock; 
             } 
             else
             {
                 itemDef.State = CodexItemState.FullLock; 
+            }
+
+            // Hack for chars
+            if (isCharsOnlyChain && itemDef.State == CodexItemState.FullLock)
+            {
+                var charChain = GameDataService.Current.MatchDefinition.GetChain(pieceDef.Id);
+                var isAnyUnlocked = IsAnyPieceUnlockedInChain(charChain);
+                if (isAnyUnlocked)
+                {
+                    itemDef.State = CodexItemState.PartLock; 
+                }
             }
             
             if (itemDef.PendingReward != null)
@@ -365,11 +495,18 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
             ret.Add(itemDef);
         }                                                                    
         
+        EnsureThatNoLockedItemsBetweenUnlocked(ref ret);
+
+        return ret;
+    }
+
+    private static void EnsureThatNoLockedItemsBetweenUnlocked(ref List<CodexItemDef> items)
+    {
         // Ensure that no locked items between unlocked
         bool unlockedFound = false;
-        for (int i = ret.Count - 1; i >= 0; i--)
+        for (int i = items.Count - 1; i >= 0; i--)
         {
-            var item = ret[i];
+            var item = items[i];
             if (!unlockedFound && (item.State == CodexItemState.Unlocked || item.State == CodexItemState.PendingReward))
             {
                 unlockedFound = true;
@@ -384,10 +521,8 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
                 }
             }
         }
-
-        return ret;
     }
-    
+
     public CodexContent GetCodexContent()
     {
         if (codexContentCache != null)

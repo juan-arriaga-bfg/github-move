@@ -83,14 +83,6 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         TackleBoxEvents.SendOrdersClosed();
     }
 
-    public void UpdateOrders()
-    {
-        foreach (UIOrderElementViewController oder in contentOders.Tabs)
-        {
-            oder.UpdateMark();
-        }
-    }
-
     private void SelectOrders()
     {
         var windowModel = Model as UIOrdersWindowModel;

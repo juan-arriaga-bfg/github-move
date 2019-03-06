@@ -24,7 +24,17 @@ public class OrderBubbleView : UIBoardView
 		customer.Order.OnStateChange += UpdateIcon;
 		UpdateIcon();
 	}
-	
+
+	public override void ResetViewOnDestroy()
+	{
+		base.ResetViewOnDestroy();
+		
+		if(customer?.Order == null) return;
+		
+		customer.Order.OnStateChange -= UpdateIcon;
+		customer = null;
+	}
+
 	public void UpdateIcon()
 	{
 		if (customer == null) return;

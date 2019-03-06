@@ -14,11 +14,22 @@ public class UIOrderElementViewController : UISimpleScrollElementViewController
 		button
 			.SetActiveScale(1.2f)
 			.ToState(GenericButtonState.UnActive);
+		
+		var contentEntity = entity as UIOrderElementEntity;
+		
+		contentEntity.Data.OnStateChange += UpdateMark;
 
 		UpdateMark();
 	}
 
-	public void UpdateMark()
+	private void OnDisable()
+	{
+		if(!(entity is UIOrderElementEntity contentEntity)) return;
+		
+		contentEntity.Data.OnStateChange -= UpdateMark;
+	}
+
+	private void UpdateMark()
 	{
 		var contentEntity = entity as UIOrderElementEntity;
 		

@@ -65,8 +65,6 @@ public class PiecesDataManager : SequenceData, IDataLoader<List<PieceDef>>
 
     public PieceDef GetPieceDef(int id)
     {
-        PieceDef def;
-
-        return pieces.TryGetValue(id, out def) ? def : null;
+        return pieces.TryGetValue(id, out var def) ? def : null;
     }
 }

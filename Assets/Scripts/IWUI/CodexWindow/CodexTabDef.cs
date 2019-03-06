@@ -24,6 +24,14 @@ public class CodexTabDef
                     {
                         return true;
                     }
+                    
+                    if (chainDef.IsHero)
+                    {
+                        if (GameDataService.Current.CodexManager.IsAnyPendingRewardForCharChain(item.PieceDef.Id))
+                        {
+                            return true;
+                        }
+                    }
                 }
             }
 

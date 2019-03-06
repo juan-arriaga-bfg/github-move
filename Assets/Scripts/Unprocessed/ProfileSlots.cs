@@ -11,11 +11,13 @@ using UnityEngine;
 public static class ProfileSlots
 {
     private const string KEY = "ActiveSlot";
+
+    private const string ERROR_PROFILE_FROM_NEWER_GAME_VERSION = "Current profile is from the newer version of the game and can't be loaded. Please update client!";
     
 #if UNITY_EDITOR
     public const string DEFAULT_SLOT_PATH = "configs/profile.data";
 #else
-    public const string DEFAULT_PATH = "user.profile";
+    public const string DEFAULT_SLOT_PATH = "user.profile";
 #endif
 
     public static string ActiveSlot
@@ -80,6 +82,16 @@ public static class ProfileSlots
                 var profileBuilder = new DefaultProfileBuilder();
                 profileManager.ReplaceProfile(profileBuilder.Create());
 
+                onComplete(profileManager, dataExists, error);
+            }
+            else if (profileManager.SystemVersion < baseProfile.SystemVersion)
+            {
+                string error = ERROR_PROFILE_FROM_NEWER_GAME_VERSION;
+                
+#if DEBUG
+                Debug.LogWarning(error);
+                PrintProfileText(dataMapper);
+#endif
                 onComplete(profileManager, dataExists, error);
             }
             else

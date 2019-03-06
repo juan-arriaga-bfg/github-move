@@ -30,6 +30,7 @@ public class MarketItem
     }
     
     public CurrencyPair Reward;
+    public CurrencyPair Price;
     
     private readonly List<MarketDef> defs = new List<MarketDef>();
 
@@ -54,6 +55,7 @@ public class MarketItem
         
         current = defs[Index];
         Reward = new CurrencyPair{Currency = PieceType.Parse(piece), Amount = amount};
+        Price = current.Price ?? GetPrice(Reward.Currency);
     }
     
     public void AddDef(MarketDef def)
@@ -85,10 +87,10 @@ public class MarketItem
         
         Index = ItemWeight.GetRandomItemIndex(weights);
         current = Index == -1 ? null : SetPiece(defs[Index]);
+
+        if (Index == -1) Reward = new CurrencyPair {Currency = PieceType.Parse(PieceType.Empty.Id), Amount = defs[0].Amount};
         
-        if(Index == -1) Reward = new CurrencyPair{Currency = PieceType.Parse(PieceType.Empty.Id), Amount = defs[0].Amount};
-        
-        State = current != null && current.Price == null ? MarketItemState.Saved : MarketItemState.Normal;
+        State = current != null && Price == null ? MarketItemState.Saved : MarketItemState.Normal;
     }
     
     private MarketDef SetPiece(MarketDef def)
@@ -130,8 +132,16 @@ public class MarketItem
         }
         
         Reward = new CurrencyPair{Currency = piece, Amount = def.Amount};
+        Price = def.Price ?? GetPrice(piece);
         
         return def;
+    }
+
+    private CurrencyPair GetPrice(string name)
+    {
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(name));
+
+        return def?.ExchangePrice == null ? null : new CurrencyPair{Currency = def.ExchangePrice.Currency, Amount = def.ExchangePrice.Amount * Reward.Amount};
     }
     
     private string GetRandomPiece(int min, int max)

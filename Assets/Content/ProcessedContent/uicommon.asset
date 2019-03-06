@@ -67,9 +67,6 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 36938820236f30342b884da59eea7576, type: 3}
     - {fileID: 21300000, guid: 3aa0e5d11e5d52f4ab5a6b4ee69eb528, type: 3}
     - {fileID: 21300000, guid: 8ae190f17bfb953469ffda980e900302, type: 3}
-    - {fileID: 21300000, guid: a729e6f27ada99148831fda6836e79ef, type: 3}
-    - {fileID: 21300000, guid: 1226de0729e20734ca1f0f2a2c5655fd, type: 3}
-    - {fileID: 21300000, guid: c0e21c65e282f694b808efe899c13dfe, type: 3}
     - {fileID: 21300000, guid: 233e2a1b4279386478b27bde4380e8f8, type: 3}
     - {fileID: 21300000, guid: db4c600737f93d64485cb99d9d10adc4, type: 3}
     - {fileID: 21300000, guid: 3b2f6fc794a23d244b38bcbca4a2b05d, type: 3}
@@ -281,7 +278,7 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 45a67a70ff6a03c4ab8794b99682d8ac, type: 3}
     - {fileID: 21300000, guid: d88c51d99c1b28d4091573621c235a3a, type: 3}
     - {fileID: 21300000, guid: 4dbe30d396e6e354b8eb80842bbfc1dc, type: 3}
-    totalSpriteSurfaceArea: 3627090
+    totalSpriteSurfaceArea: 3449836
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -347,7 +344,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c11c62e29a042b849b2e97c4f2766537, type: 3}
   - {fileID: 21300000, guid: b15aa4e28bf268241960f0147797524e, type: 3}
   - {fileID: 21300000, guid: 86f333f2a978b8446a7502354f4a18dd, type: 3}
-  - {fileID: 21300000, guid: a729e6f27ada99148831fda6836e79ef, type: 3}
   - {fileID: 21300000, guid: 364169039cceddd47a14e595189b0625, type: 3}
   - {fileID: 21300000, guid: 40dab21344152de4ab3f8f6291d8b6bb, type: 3}
   - {fileID: 21300000, guid: 38cb8e13f339387479abd412f11f8552, type: 3}
@@ -387,7 +383,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a4096c554ceff1c4ea9a36ebd56fefeb, type: 3}
   - {fileID: 21300000, guid: 056e74655d294b94084c526ba1e6991a, type: 3}
   - {fileID: 21300000, guid: 4dda4b65fdf3ac040883f71489fd07f7, type: 3}
-  - {fileID: 21300000, guid: c0e21c65e282f694b808efe899c13dfe, type: 3}
   - {fileID: 21300000, guid: 3f780085b29854679aa0939edea1f5ce, type: 3}
   - {fileID: 21300000, guid: 4ff396954743dc44484406980b13e671, type: 3}
   - {fileID: 21300000, guid: 70cdda95635f4824ab051c994f84888e, type: 3}
@@ -409,7 +404,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: db4c600737f93d64485cb99d9d10adc4, type: 3}
   - {fileID: 21300000, guid: bb8ae707e6b76e140861517ec517eaeb, type: 3}
   - {fileID: 21300000, guid: 40591b07ebf9bdb4895de04c2231bd8d, type: 3}
-  - {fileID: 21300000, guid: 1226de0729e20734ca1f0f2a2c5655fd, type: 3}
   - {fileID: 21300000, guid: f98f2217ed23a44bbb39076eeef672dc, type: 3}
   - {fileID: 21300000, guid: 557a8517a693c9b41bd2eb77f0c89e96, type: 3}
   - {fileID: 21300000, guid: f52422274e97efe4683ba5429cc460fa, type: 3}
@@ -588,7 +582,6 @@ SpriteAtlas:
   - bookmarkPassive
   - codexNextArrow
   - cornerFrameWindow
-  - NPC_Simbad_Icon
   - icon_Alarm
   - killFieldDailyQuestIcon
   - orange_button
@@ -628,7 +621,6 @@ SpriteAtlas:
   - heroes_info
   - blue_button
   - icon_Energy1
-  - NPC_TigerLilly_Icon
   - icon_RemoverButton
   - pointEmptyProgressLine
   - bigProgressBarBlue
@@ -650,7 +642,6 @@ SpriteAtlas:
   - CompleateOrderDailyQuestIcon
   - bubbleArrow
   - quest_icon_kill_tree
-  - NPC_Snowwhite_Icon
   - icon_Remover
   - plashka
   - bigProgressbarDarkBlue

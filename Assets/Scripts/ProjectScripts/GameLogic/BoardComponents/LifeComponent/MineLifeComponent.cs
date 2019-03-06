@@ -57,7 +57,12 @@ public class MineLifeComponent : WorkplaceLifeComponent
     
     public override bool Damage(bool isExtra = false)
     {
-        if (TimerCooldown.IsExecuteable() == false) return base.Damage(isExtra);
+        if (TimerCooldown.IsExecuteable() == false)
+        {
+            var isDamage = base.Damage(isExtra);
+            if (isDamage) (Context.ActorView as MinePieceView)?.PlayWorkAnimation();
+            return isDamage;
+        }
         
         UIMessageWindowController.CreateTimerCompleteMessage(
             LocalizationService.Get("window.timerComplete.message.production", "window.timerComplete.message.production"),
@@ -104,7 +109,7 @@ public class MineLifeComponent : WorkplaceLifeComponent
     protected override void OnTimerComplete()
     {
         base.OnTimerComplete();
-        
+        (Context.ActorView as MinePieceView)?.CompleteWorkAnimation();
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny(); // To ensure that QuestStartConditionMineUsedComponent triggered
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.MineUsed, this);
     }

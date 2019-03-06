@@ -5,15 +5,45 @@ public class CodexSelectItem : MonoBehaviour
     [SerializeField] private Transform anchor;
     [SerializeField] private NSText itemName;
     [SerializeField] private NSText message;
+    [SerializeField] private CodexChain chain;
 
     private Transform icon;
     
-    public void SetItem(PieceDef def)
+    private const int CHAIN_LENGTH = 6;
+
+    public CodexChain GetChain()
     {
-        itemName.Text = def == null ? LocalizationService.Get("piece.name.NPC_Locked", "piece.name.NPC_Locked") : def.Name;
-        message.Text = def == null ?  LocalizationService.Get("piece.description.NPC_Locked", "piece.description.NPC_Locked") : LocalizationService.Get($"piece.description.{def.Uid}", $"piece.description.{def.Uid}");
-        
-        CreateIcon(anchor, def == null ? "NoneIcon" : $"{def.Uid}Icon");
+        return chain;
+    }
+    
+    public void SetItem(PieceDef def, CodexItemState state)
+    {
+        bool locked;
+        if (def == null)
+        {
+            locked = true;
+        }
+        else if (state == CodexItemState.PendingReward || state == CodexItemState.Unlocked || GameDataService.Current.CodexManager.IsPieceUnlocked(def.Id))
+        {
+            locked = false;
+        }
+        else
+        {
+            locked = true;
+        }
+
+        itemName.Text = locked ? LocalizationService.Get("piece.name.NPC_Locked", "piece.name.NPC_Locked") : def.Name;
+                
+        CreateIcon(anchor, locked ? "NoneIcon" : $"{def.Uid}Icon");
+
+        if (ShowChain(def, state))
+        {
+            message.Text = "";
+        }
+        else
+        {
+            message.Text = locked ? LocalizationService.Get("piece.description.NPC_Locked", "piece.description.NPC_Locked") : LocalizationService.Get($"piece.description.{def.Uid}", $"piece.description.{def.Uid}");
+        }
     }
     
     private void CreateIcon(Transform parent, string id)
@@ -22,5 +52,51 @@ public class CodexSelectItem : MonoBehaviour
         
         icon = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
         icon.SetParentAndReset(parent);
+    }
+    
+    private bool ShowChain(PieceDef def, CodexItemState state)
+    {
+        chain.ReturnContentToPool();
+
+        if (def == null)
+        {
+            return false;
+        }
+
+        if (GameDataService.Current.CodexManager.IsPieceUnlocked(def.Id) && PieceType.GetDefById(def.Id).Filter.Has(PieceTypeFilter.Character))
+        {
+            return false;
+        }
+        
+        int targetId = def.Id;
+        var piecesChain = GameDataService.Current.MatchDefinition.GetChain(targetId);
+        var codexManager = GameDataService.Current.CodexManager;
+        
+        bool anyItemUnlocked = false;
+        foreach (var id in piecesChain)
+        {
+            if (codexManager.IsPieceUnlocked(id))
+            {
+                anyItemUnlocked = true;
+                break;
+            }
+        }
+
+        if (!anyItemUnlocked)
+        {
+            return false;
+        }
+        
+        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainStartingFrom(targetId, 0, CHAIN_LENGTH, true, true, false);
+        if (itemDefs == null)
+        {
+            return false;
+        }
+
+        CodexChainDef chainDef = new CodexChainDef {ItemDefs = itemDefs};
+        
+        UICodexWindowView.CreateItems(chain, chainDef, CHAIN_LENGTH);
+
+        return true;
     }
 }

@@ -48,12 +48,11 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             customer.Timer.OnTimeChanged += UpdateTimer;
             customer.Timer.OnComplete += UpdateState;
             customer.Timer.OnComplete += PlaySound;
-            customer.Timer.OnComplete += UpdateOrders;
+            UpdateTimer();
         }
 
         order.OnStateChange += UpdateState;
         order.OnStateChange += ShowTutorArrow;
-        order.OnStateChange += UpdateOrders;
         
         UpdateState();
         
@@ -183,14 +182,12 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             customer.Timer.OnTimeChanged -= UpdateTimer;
             customer.Timer.OnComplete -= UpdateState;
             customer.Timer.OnComplete -= PlaySound;
-            customer.Timer.OnComplete -= UpdateOrders;
         }
 
         if (order != null)
         {
             order.OnStateChange -= UpdateState;
             order.OnStateChange -= ShowTutorArrow;
-            order.OnStateChange -= UpdateOrders;
         }
     }
 
@@ -215,11 +212,6 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         shine.SetActive(order.State == OrderState.Complete);
         
         Fill(order.Def.Prices);
-    }
-
-    private void UpdateOrders()
-    {
-        (context as UIOrdersWindowView).UpdateOrders();
     }
 
     private void OnClickBuy()

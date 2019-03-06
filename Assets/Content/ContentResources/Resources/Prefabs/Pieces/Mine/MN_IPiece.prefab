@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 114655468857081650}
   - component: {fileID: 114585367472960794}
   m_Layer: 0
-  m_Name: MN_DPiece
+  m_Name: MN_IPiece
   m_TagString: Untagged
   m_Icon: {fileID: 4660412927644837186, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -134,6 +134,7 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 4724884443971438}
+  anchors: []
   bodySprites: []
   particles: []
   errorSelectionMaterial: {fileID: 2100000, guid: 1faf170e9acf1d64f86eefcd318ff557,
@@ -144,7 +145,7 @@ MonoBehaviour:
     type: 2}
   lockSkin: {fileID: 2487370538793729480}
   normalSkin: {fileID: 1549481043121792}
-  imageSkin: {fileID: 0}
+  rootObject: {fileID: 4694530496969194}
 --- !u!114 &114585367472960794
 MonoBehaviour:
   m_ObjectHideFlags: 0

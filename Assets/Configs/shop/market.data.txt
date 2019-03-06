@@ -7,10 +7,6 @@
       "Uid": "Empty",
       "Weight": 1
     },
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 55
-    },
     "RandomType": "BasePiecesEasy"
   },
   {
@@ -20,10 +16,6 @@
     "Weight": {
       "Uid": "Empty",
       "Weight": 1
-    },
-    "Price": {
-      "Currency": "Coins",
-      "Amount": 25
     },
     "RandomType": "BaseChestsFirst"
   },
@@ -35,10 +27,6 @@
       "Uid": "Empty",
       "Weight": 1
     },
-    "Price": {
-      "Currency": "Coins",
-      "Amount": 50
-    },
     "RandomType": "BaseChestsSecond"
   },
   {
@@ -49,14 +37,10 @@
       "Uid": "Empty",
       "Weight": 1
     },
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 75
-    },
     "RandomType": "BaseChestsLast"
   },
   {
-    "Uid": "Boosts",
+    "Uid": "Boosts easy",
     "UnlockLevel": 3,
     "Amount": 2,
     "Weight": {
@@ -64,13 +48,13 @@
       "Weight": 10
     },
     "Price": {
-      "Currency": "Crystals",
-      "Amount": 20
+      "Currency": "Coins",
+      "Amount": 100
     },
     "RandomType": "Base"
   },
   {
-    "Uid": "Boosts",
+    "Uid": "Boosts easy",
     "UnlockLevel": 3,
     "Amount": 2,
     "Weight": {
@@ -78,13 +62,27 @@
       "Weight": 10
     },
     "Price": {
-      "Currency": "Crystals",
-      "Amount": 40
+      "Currency": "Coins",
+      "Amount": 250
     },
     "RandomType": "Base"
   },
   {
-    "Uid": "Boosts",
+    "Uid": "Boosts easy",
+    "UnlockLevel": 3,
+    "Amount": 2,
+    "Weight": {
+      "Uid": "Boost_CR2",
+      "Weight": 10
+    },
+    "Price": {
+      "Currency": "Coins",
+      "Amount": 300
+    },
+    "RandomType": "Base"
+  },
+  {
+    "Uid": "Boosts hard",
     "UnlockLevel": 3,
     "Amount": 1,
     "Weight": {
@@ -98,6 +96,20 @@
     "RandomType": "Base"
   },
   {
+    "Uid": "Boosts hard",
+    "UnlockLevel": 3,
+    "Amount": 5,
+    "Weight": {
+      "Uid": "Boost_CR",
+      "Weight": 10
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 449
+    },
+    "RandomType": "Base"
+  },
+  {
     "Uid": "Ingredients easy",
     "UnlockLevel": 5,
     "Amount": 3,
@@ -106,8 +118,8 @@
       "Weight": 10
     },
     "Price": {
-      "Currency": "Crystals",
-      "Amount": 3
+      "Currency": "Coins",
+      "Amount": 60
     },
     "RandomType": "Ingredients"
   },
@@ -120,8 +132,8 @@
       "Weight": 10
     },
     "Price": {
-      "Currency": "Crystals",
-      "Amount": 5
+      "Currency": "Coins",
+      "Amount": 100
     },
     "RandomType": "Ingredients"
   },
@@ -188,10 +200,6 @@
     "Weight": {
       "Uid": "Empty",
       "Weight": 1
-    },
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 99
     },
     "RandomType": "BasePiecesHard"
   },
