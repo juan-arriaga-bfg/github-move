@@ -48,6 +48,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             customer.Timer.OnTimeChanged += UpdateTimer;
             customer.Timer.OnComplete += UpdateState;
             customer.Timer.OnComplete += PlaySound;
+            UpdateTimer();
         }
 
         order.OnStateChange += UpdateState;

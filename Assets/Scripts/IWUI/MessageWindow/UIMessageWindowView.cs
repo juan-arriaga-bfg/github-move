@@ -84,6 +84,7 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         
         windowModel.Timer.OnTimeChanged += UpdateTimer;
         windowModel.Timer.OnComplete += CompleteTimer;
+        UpdateTimer();
     }
 
     public override void OnViewShowCompleted()
