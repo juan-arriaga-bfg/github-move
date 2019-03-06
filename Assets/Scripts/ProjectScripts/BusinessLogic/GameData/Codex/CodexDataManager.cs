@@ -461,7 +461,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
             {
                 itemDef.State = isPendingReward ? CodexItemState.PendingReward : CodexItemState.Unlocked;
             } 
-            else if (isPreviousPieceUnlocked)
+            else if (isPreviousPieceUnlocked && !isCharsOnlyChain)
             {
                 itemDef.State = CodexItemState.PartLock; 
             } 
