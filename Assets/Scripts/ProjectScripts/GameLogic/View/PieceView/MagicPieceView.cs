@@ -207,6 +207,8 @@ public class MagicPieceView : PieceBoardElementView
 
         NSAudioService.Current.Stop(SoundId.CrystalDrag);
         
+        if(bestMatchPieces == null) return;
+        
         foreach (var piece in bestMatchPieces)
         {
             if(piece.PieceType == PieceType.Boost_CR.Id)
