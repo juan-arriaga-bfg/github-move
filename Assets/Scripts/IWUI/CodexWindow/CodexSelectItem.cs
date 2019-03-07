@@ -17,8 +17,6 @@ public class CodexSelectItem : MonoBehaviour
     [SerializeField] protected Color lockedColor;
 
     private Transform icon;
-    
-    private const int CHAIN_LENGTH = 6;
 
     public CodexChain GetChain()
     {
@@ -42,8 +40,11 @@ public class CodexSelectItem : MonoBehaviour
         }
 
         itemName.Text = locked ? LocalizationService.Get("piece.name.NPC_Locked", "piece.name.NPC_Locked") : def.Name;
-                
-        CreateIcon(anchor, $"{def.Uid}Icon", def, locked);
+
+        if (def != null)
+        {
+            CreateIcon(anchor, $"{def.Uid}Icon", def, locked);
+        }
 
         if (ShowChain(def, state))
         {
@@ -111,9 +112,12 @@ public class CodexSelectItem : MonoBehaviour
         {
             return false;
         }
+
+        int startIndex = GameDataService.Current.CodexManager.GetCharChainStartIndex(def.Id);
         
         // Do not include the last one item (hide a char)
-        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainStartingFrom(targetId, 0, 1, CHAIN_LENGTH, true, true, false);
+        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainStartingFrom(targetId, startIndex, 1, 
+            CodexDataManager.CHAR_CHAIN_VISIBLE_COUNT, true, true, false);
         if (itemDefs == null)
         {
             return false;
@@ -121,8 +125,10 @@ public class CodexSelectItem : MonoBehaviour
 
         CodexChainDef chainDef = new CodexChainDef {ItemDefs = itemDefs};
         
-        UICodexWindowView.CreateItems(chain, chainDef, CHAIN_LENGTH);
+        UICodexWindowView.CreateItems(chain, chainDef, CodexDataManager.CHAR_CHAIN_VISIBLE_COUNT);
 
         return true;
     }
+
+
 }

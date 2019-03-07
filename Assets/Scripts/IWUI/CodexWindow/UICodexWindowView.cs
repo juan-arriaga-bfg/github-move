@@ -201,6 +201,21 @@ public class UICodexWindowView : UIGenericPopupWindowView
                 {
                     var itemDef = chainDef.ItemDefs[itemIndex];
                     
+                    bool isTabWithHero = chainDef.IsHero;
+                    if (isTabWithHero)
+                    {
+                        bool isPendingReward = GameDataService.Current.CodexManager.IsAnyPendingRewardForCharChain(itemDef.PieceDef.Id);
+                        if (isPendingReward)
+                        {
+                            contentToggles.Select(tabIndex);
+                            codexTabs[tabIndex].ScrollToTop();
+                            codexTabs[tabIndex].SelectItem.SetItem(itemDef.PieceDef, itemDef.State);
+                            return;
+                        }
+                        
+                        continue;
+                    }
+                    
                     if (itemDef.PendingReward != null)
                     {
                         contentToggles.Select(tabIndex); 
@@ -225,19 +240,6 @@ public class UICodexWindowView : UIGenericPopupWindowView
                         }
 
                         return;
-                    }
-                    
-                    bool isTabWithHero = chainDef.IsHero;
-                    if (isTabWithHero)
-                    {
-                        bool isPendingReward = GameDataService.Current.CodexManager.IsAnyPendingRewardForCharChain(itemDef.PieceDef.Id);
-                        if (isPendingReward)
-                        {
-                            contentToggles.Select(tabIndex);
-                            codexTabs[tabIndex].ScrollToTop();
-                            codexTabs[tabIndex].SelectItem.SetItem(itemDef.PieceDef, itemDef.State);
-                            return;
-                        }
                     }
                 }
             }
