@@ -286,7 +286,7 @@ public class R
      public const string J7Piece = "J7Piece";
      public const string J8Piece = "J8Piece";
      public const string J9Piece = "J9Piece";
-     public const string MN_FPiece = "MN_FPiece";
+     public const string MN_EPiece = "MN_EPiece";
      public const string CH1_FPiece = "CH1_FPiece";
      public const string CH2_FPiece = "CH2_FPiece";
      public const string CH3_FPiece = "CH3_FPiece";
