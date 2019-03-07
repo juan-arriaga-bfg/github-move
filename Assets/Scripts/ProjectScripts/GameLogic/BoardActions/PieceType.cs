@@ -356,7 +356,7 @@ public static partial class PieceType
     
     public static readonly PieceTypeDef MN_B = new PieceTypeDef{Id = 5001, Abbreviations = new List<string>{ "MN_B" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine | PieceTypeFilter.Workplace};
     public static readonly PieceTypeDef MN_C = new PieceTypeDef{Id = 5002, Abbreviations = new List<string>{ "MN_C" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef MN_F = new PieceTypeDef{Id = 5003, Abbreviations = new List<string>{ "MN_F" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine | PieceTypeFilter.Workplace};
+    public static readonly PieceTypeDef MN_E = new PieceTypeDef{Id = 5003, Abbreviations = new List<string>{ "MN_E" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine | PieceTypeFilter.Workplace};
     public static readonly PieceTypeDef MN_I = new PieceTypeDef{Id = 5004, Abbreviations = new List<string>{ "MN_I" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine | PieceTypeFilter.Workplace};
     
 #endregion
