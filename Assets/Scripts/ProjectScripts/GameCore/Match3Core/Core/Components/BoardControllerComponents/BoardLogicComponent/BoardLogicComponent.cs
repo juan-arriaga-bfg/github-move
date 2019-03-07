@@ -439,7 +439,7 @@ public partial class BoardLogicComponent : ECSEntity,
             if (boardEntities.Remove(pos))
             {
                 logicMatrix[pos.X, pos.Y, pos.Z] = -1;
-                piece?.UnregisterRecursive();
+//                piece?.UnregisterRecursive();
                 
                 return true;
             }
