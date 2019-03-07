@@ -170,6 +170,38 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
             );
             CodexState = CodexState.PendingReward;
         }
+
+        HandleCharPieceUnlock(id);
+    }
+
+    private void HandleCharPieceUnlock(int id)
+    {
+        if (!PieceType.GetDefById(id).Filter.Has(PieceTypeFilter.Character))
+        {
+            return;
+        }
+        
+        var charChain = GameDataService.Current.MatchDefinition.GetChain(id);
+        if (Items.TryGetValue(charChain[0], out var chainState))
+        {
+            bool isChanged = false;
+            foreach (var pieceId in charChain)
+            {
+                if (pieceId != id)
+                {
+                    if (chainState.PendingReward.Remove(pieceId))
+                    {
+                        isChanged = true;
+                    }
+                }
+            }
+
+            if (isChanged)
+            {
+                ValidateCodexState();
+                ClearCodexContentCache();
+            }
+        }
     }
 
     public bool IsHidedFromCodex(int id)
@@ -268,7 +300,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
     /// <summary>
     /// targetId - to get chain and highlight
     /// </summary>
-    public List<CodexItemDef> GetCodexItemsForChainStartingFrom(int targetId, int startId, int length, bool hideCaptions, bool allowRewards, bool allowHighlight)
+    public List<CodexItemDef> GetCodexItemsForChainStartingFrom(int targetId, int skipFromStart, int skipFromEnd, int length, bool hideCaptions, bool allowRewards, bool allowHighlight)
     {
         var chain = GameDataService.Current.MatchDefinition.GetChain(targetId);
 
@@ -282,14 +314,14 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
         int rangeStart;
         int rangeLength;
-        if (list.Count - startId < length)
+        if (list.Count - skipFromEnd - skipFromStart < length)
         {
             rangeStart = 0;
-            rangeLength = list.Count;
+            rangeLength = list.Count - skipFromEnd;
         }
         else
         {
-            rangeStart  = startId;
+            rangeStart  = skipFromStart;
             rangeLength = length;
         }
         
@@ -389,6 +421,11 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
     public bool IsAnyPendingRewardInChain(List<int> chain)
     {
+        if (chain.Count == 0)
+        {
+            return false;
+        }
+        
         GetChainState(chain[0], out var chainState);
         foreach (var id in chain)
         {
@@ -405,6 +442,10 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
     public bool IsAnyPendingRewardForCharChain(int charId)
     {
         var charChain = GameDataService.Current.MatchDefinition.GetChain(charId);
+        
+        // Do not count char's piece reward because we have dedicated slot for it
+        charChain.Remove(charId);
+        
         var isAnyPendingReward = IsAnyPendingRewardInChain(charChain);
 
         return isAnyPendingReward;

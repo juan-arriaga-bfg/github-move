@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class CodexSelectItem : MonoBehaviour
 {
@@ -6,6 +8,13 @@ public class CodexSelectItem : MonoBehaviour
     [SerializeField] private NSText itemName;
     [SerializeField] private NSText message;
     [SerializeField] private CodexChain chain;
+    [SerializeField] private GameObject questionMark;
+    
+    [Header("Materials")] 
+    [SerializeField] protected Material unlokedMaterial;
+    [SerializeField] protected Material lockedMaterial;
+    [SerializeField] protected Color unlockedColor;
+    [SerializeField] protected Color lockedColor;
 
     private Transform icon;
     
@@ -34,7 +43,7 @@ public class CodexSelectItem : MonoBehaviour
 
         itemName.Text = locked ? LocalizationService.Get("piece.name.NPC_Locked", "piece.name.NPC_Locked") : def.Name;
                 
-        CreateIcon(anchor, locked ? "NoneIcon" : $"{def.Uid}Icon");
+        CreateIcon(anchor, $"{def.Uid}Icon", def, locked);
 
         if (ShowChain(def, state))
         {
@@ -46,12 +55,28 @@ public class CodexSelectItem : MonoBehaviour
         }
     }
     
-    private void CreateIcon(Transform parent, string id)
-    {
-        if (icon != null) UIService.Get.PoolContainer.Return(icon.gameObject);
+    private void CreateIcon(Transform parent, string id, PieceDef pieceDef, bool locked)
+    {        
+        var charChain = GameDataService.Current.MatchDefinition.GetChain(pieceDef.Id);
+        var isAnyUnlocked = GameDataService.Current.CodexManager.IsAnyPieceUnlockedInChain(charChain);
+     
+        Debug.Log($"id: {pieceDef.Id} locked: {locked}, isAnyUnlocked: {isAnyUnlocked}");
+        questionMark.SetActive(!isAnyUnlocked);
+
+        if (icon != null)
+        {
+            UIService.Get.PoolContainer.Return(icon.gameObject);
+        }
         
         icon = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
         icon.SetParentAndReset(parent);
+
+        var iconSprites = icon.GetComponentsInChildren<Image>().ToList();
+        foreach (var sprite in iconSprites)
+        {
+            sprite.material = locked ? lockedMaterial : unlokedMaterial;
+            sprite.color    = locked ? lockedColor : unlockedColor;
+        }
     }
     
     private bool ShowChain(PieceDef def, CodexItemState state)
@@ -87,7 +112,8 @@ public class CodexSelectItem : MonoBehaviour
             return false;
         }
         
-        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainStartingFrom(targetId, 0, CHAIN_LENGTH, true, true, false);
+        // Do not include the last one item (hide a char)
+        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainStartingFrom(targetId, 0, 1, CHAIN_LENGTH, true, true, false);
         if (itemDefs == null)
         {
             return false;

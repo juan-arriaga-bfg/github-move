@@ -327,7 +327,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
             
             CodexItem item = UIService.Get.PoolContainer.Create<CodexItem>((GameObject) ContentService.Current.GetObjectByName(prefabName));
 
-            bool forceHideArrow = (i + 1) % rowLength == 0;
+            bool forceHideArrow = (i + 1) % rowLength == 0 || i == itemDefs.Count - 1;
             item.Context = chain;
             item.OnViewInit(null);
             item.Setup(codexItemDef, forceHideArrow);
