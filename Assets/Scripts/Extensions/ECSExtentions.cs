@@ -5,8 +5,6 @@ public static class ECSExtentions
 {
     public static void UnregisterRecursive(this IECSComponent itemToCleanup, ECSEntity parent = null)
     {
-        return;
-        
         // Debug.Log("======== UnregisterRecursive: " + itemToCleanup.GetType());
         switch (itemToCleanup)
         {
