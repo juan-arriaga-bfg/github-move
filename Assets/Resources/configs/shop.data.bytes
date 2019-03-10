@@ -216,5 +216,24 @@
     "Name": "window.shop.crystals.item8",
     "PurchaseKey": "iap6",
     "IsPermanent": true
+  },
+  {
+    "Uid": "Offer",
+    "Products": [
+      {
+        "Currency": "Crystals",
+        "Amount": 1000
+      },
+      {
+        "Currency": "Coins",
+        "Amount": 5000
+      }
+    ],
+    "Price": {
+      "Currency": "Cash",
+      "Amount": 100
+    },
+    "PurchaseKey": "iap7",
+    "Sale": 30
   }
 ]
