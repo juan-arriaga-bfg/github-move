@@ -67,10 +67,12 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     
     public void Start(DateTime start)
     {
-        IsStarted = true;
-        IsPaused = false;
         StartTime = start;
         CompleteTime = StartTime.AddSeconds(Delay);
+        
+        IsStarted = true;
+        IsPaused = false;
+        
         OnStart?.Invoke();
     }
     

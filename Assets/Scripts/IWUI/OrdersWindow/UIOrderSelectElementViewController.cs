@@ -48,7 +48,8 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             customer.Timer.OnTimeChanged += UpdateTimer;
             customer.Timer.OnComplete += UpdateState;
             customer.Timer.OnComplete += PlaySound;
-            UpdateTimer();
+            
+            if(customer.Timer.IsStarted) UpdateTimer();
         }
 
         order.OnStateChange += UpdateState;
@@ -194,7 +195,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
     private void UpdateTimer()
     {
         timerLabel.Text = customer.Timer.CompleteTime.GetTimeLeftText();
-
+        
         btnBuyLabel.Text = customer.Timer.IsFree() 
             ? LocalizationService.Get("common.button.free", "common.button.free") 
             : customer.Timer.GetPrice().ToStringIcon();
@@ -212,6 +213,8 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         shine.SetActive(order.State == OrderState.Complete);
         
         Fill(order.Def.Prices);
+        
+        if (customer?.Timer != null && order.State == OrderState.InProgress) UpdateTimer();
     }
 
     private void OnClickBuy()

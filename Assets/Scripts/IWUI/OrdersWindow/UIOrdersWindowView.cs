@@ -7,7 +7,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     [IWUIBinding("#MessageIngredients")] private NSText messageIngredients;
     [IWUIBinding("#MessageOrders")] private NSText messageOders;
     
-    [IWUIBinding("#TabOrders")] private GameObject tabOders;
+    [IWUIBinding("#TabOrders")] private GameObject tabOrders;
     [IWUIBinding("#TabRecipes")] private GameObject tabRecipes;
     [IWUIBinding("#TabIngredients")] private GameObject tabIngredients;
     
@@ -17,7 +17,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     
     [IWUIBinding("#Toggles")] private UIContainerViewController contentToggles;
     
-    [IWUIBinding("#ContentOrders")] private UIContainerViewController contentOders;
+    [IWUIBinding("#ContentOrders")] private UIContainerViewController contentOrders;
     [IWUIBinding("#ContentRecipes")] private UIContainerViewController contentRecipes;
     [IWUIBinding("#ContentIngredients")] private UIContainerViewController contentIngredients;
     
@@ -43,7 +43,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         
         Fill(UpdateEntitiesToggles(toggles), contentToggles);
         Fill(UpdateEntitiesSelect(null), contentSelect);
-        Fill(UpdateEntitiesOders(windowModel.Orders), contentOders);
+        Fill(UpdateEntitiesOrders(windowModel.Orders), contentOrders);
         Fill(UpdateEntitiesRecipes(windowModel.Recipes), contentRecipes);
         Fill(UpdateEntitiesIngredients(windowModel.Ingredients), contentIngredients);
     }
@@ -95,14 +95,14 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
             windowModel.Select = null;
         }
         
-        contentOders.Select(select);
+        contentOrders.Select(select);
     }
     
     private void OnSelectToggle(int index)
     {
         var windowModel = Model as UIOrdersWindowModel;
         
-        tabOders.SetActive(index == 0);
+        tabOrders.SetActive(index == 0);
         tabRecipes.SetActive(index == 1);
         tabIngredients.SetActive(index == 2);
         
@@ -117,8 +117,8 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
 
                 if (dataOrders.Count == 0) Fill(UpdateEntitiesSelect(null), contentSelect);
                 
-                Fill(UpdateEntitiesOders(dataOrders), contentOders);
-                contentOders.Select(0);
+                Fill(UpdateEntitiesOrders(dataOrders), contentOrders);
+                contentOrders.Select(0);
                 prices.HideHard();
                 break;
             case 1:
@@ -187,7 +187,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         return views;
     }
     
-    private List<IUIContainerElementEntity> UpdateEntitiesOders(List<Order> entities)
+    private List<IUIContainerElementEntity> UpdateEntitiesOrders(List<Order> entities)
     {
         var views = new List<IUIContainerElementEntity>(entities.Count);
         
