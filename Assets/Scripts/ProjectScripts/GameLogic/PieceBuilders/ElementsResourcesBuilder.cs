@@ -325,8 +325,10 @@ public class ElementsResourcesBuilder
         
         dict.Add(PieceType.MN_B.Id, R.MN_BPiece);
         dict.Add(PieceType.MN_C.Id, R.MN_CPiece);
-        dict.Add(PieceType.MN_I.Id, R.MN_IPiece);
         dict.Add(PieceType.MN_E.Id, R.MN_EPiece);
+        dict.Add(PieceType.MN_F.Id, R.MN_FPiece);
+        dict.Add(PieceType.MN_H.Id, R.MN_HPiece);
+        dict.Add(PieceType.MN_I.Id, R.MN_IPiece);
         
 #endregion
         

@@ -241,9 +241,13 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 384d3926d7cb354439529849e385d32b, type: 3}
     - {fileID: 21300000, guid: 2f4f180a87f03364ab2a35d57b7d5ffe, type: 3}
     - {fileID: 21300000, guid: 5e3fc8a2784fcdb41ab535084ed9db56, type: 3}
+    - {fileID: 21300000, guid: f9777d131d978704ca88c0d142e89ea1, type: 3}
+    - {fileID: 21300000, guid: ffabea1741780e2458295fd36b3468aa, type: 3}
+    - {fileID: 21300000, guid: 0ac1a8026b5654a459d4c220a737f3ee, type: 3}
+    - {fileID: 21300000, guid: 74c0b95e444debd4f8b08cc2b10fb376, type: 3}
     - {fileID: 21300000, guid: f7b6013d43481ba48aa2e5e84908e089, type: 3}
     - {fileID: 21300000, guid: 9d5ffeb20fe3cbc4aad085f1b3cf04c4, type: 3}
-    totalSpriteSurfaceArea: 2359225
+    totalSpriteSurfaceArea: 2579317
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -272,6 +276,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a19f91d15037c24498e509de11a56037, type: 3}
   - {fileID: 21300000, guid: c1cdbfd1e083e24479d456f2e32b9d93, type: 3}
   - {fileID: 21300000, guid: bba050022c94d60409a287ccb8957404, type: 3}
+  - {fileID: 21300000, guid: 0ac1a8026b5654a459d4c220a737f3ee, type: 3}
   - {fileID: 21300000, guid: b6b9e902f8103874f845e5195be7737c, type: 3}
   - {fileID: 21300000, guid: b7562112ab410314ebd16bc03d44b4bd, type: 3}
   - {fileID: 21300000, guid: 84577922d3693e84ba154da5b8808229, type: 3}
@@ -284,6 +289,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f23b6be2721bc1a4da87e4385ff6672b, type: 3}
   - {fileID: 21300000, guid: dfbbf713d729ed14e82c1f9aff31a86d, type: 3}
   - {fileID: 21300000, guid: 0fe73a1314808d74aa9f1910d8387aef, type: 3}
+  - {fileID: 21300000, guid: f9777d131d978704ca88c0d142e89ea1, type: 3}
   - {fileID: 21300000, guid: 815414431242f7c4eb29ccc5cccb966b, type: 3}
   - {fileID: 21300000, guid: e699694344d143b49bce340df25f73e0, type: 3}
   - {fileID: 21300000, guid: 1a03c1534bf231c4c8c6c65409ddf3c9, type: 3}
@@ -339,6 +345,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 403b58f6c29a0914186c872a371cb482, type: 3}
   - {fileID: 21300000, guid: 34a1e407a2448944a9efdc25e7bae5e7, type: 3}
   - {fileID: 21300000, guid: ed910c07f182c4a47beaffb599b3ff33, type: 3}
+  - {fileID: 21300000, guid: ffabea1741780e2458295fd36b3468aa, type: 3}
   - {fileID: 21300000, guid: 8eac2c371b2980d49b73b008dc51001e, type: 3}
   - {fileID: 21300000, guid: 2e2f6c37f37548341b407dc0b5118b67, type: 3}
   - {fileID: 21300000, guid: c6ffa54737e6bd14f9aeb455e6566729, type: 3}
@@ -433,6 +440,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 3e3b1b3e15723c14c87e149aa39699ae, type: 3}
   - {fileID: 21300000, guid: b964074e76df01d438140fa468cbaad3, type: 3}
   - {fileID: 21300000, guid: d4b38e4e8cd72514e9201cc32abc3889, type: 3}
+  - {fileID: 21300000, guid: 74c0b95e444debd4f8b08cc2b10fb376, type: 3}
   - {fileID: 21300000, guid: a4c4ca5e9d7ccd2498e82f4afc3859ae, type: 3}
   - {fileID: 21300000, guid: 83db9f5e242cb9640990792067992948, type: 3}
   - {fileID: 21300000, guid: 59d9166eac9bdf145828e3ac68a35fea, type: 3}
@@ -475,6 +483,7 @@ SpriteAtlas:
   - NPC_C
   - l_hand4
   - hand1RightSleepingBeauty
+  - MN_H
   - RightFootCat
   - bodyExtra
   - CH1_D
@@ -487,6 +496,7 @@ SpriteAtlas:
   - tail5Mermaid
   - pink_l_hand1
   - NPC_D
+  - MN_F
   - bangMermaid
   - hand3LeftRedHood
   - Enemy1
@@ -542,6 +552,7 @@ SpriteAtlas:
   - allMermaid
   - shadowRedHood
   - CH3_C
+  - MN_F_lock
   - shoulderRedHood
   - SK2_PR
   - skirtSleepingBeauty
@@ -636,6 +647,7 @@ SpriteAtlas:
   - eyesCameraRedHood
   - Tail1Cat
   - eyesClosedRedHood
+  - MN_H_lock
   - hand2LeftSleepingBeauty
   - CH3_I
   - hearMermaid

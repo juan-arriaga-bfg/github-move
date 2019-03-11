@@ -114,7 +114,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
         if (LockView != null)
         {
-            LockView.SetCondition(Def.IsActive ? (IsLevelReached ? null : Def.Level.ToString()) : "?", IsHeroReached ? null : Def.Hero);
+            LockView.SetCondition(Def.IsActive ? Def.Level.ToString() : "?", Def.Hero, IsLevelReached, IsHeroReached, IsTwoLock);
             LockView.SetGrayscale(canPath == false || Def.IsActive == false);
         }
         
@@ -193,6 +193,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     public bool IsLevelReached => storageItem.Amount >= Def.Level;
     
     public bool IsHeroReached => Def.HeroId == PieceType.None.Id || GameDataService.Current.CodexManager.IsPieceUnlocked(Def.HeroId);
+
+    public bool IsTwoLock => Def.HeroId != PieceType.None.Id;
 
     public bool IsActive => CanBeReached() || (RequiredConditionReached() && Def.IsActive);
 

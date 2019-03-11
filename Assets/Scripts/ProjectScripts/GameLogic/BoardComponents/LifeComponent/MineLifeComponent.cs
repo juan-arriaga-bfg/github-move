@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class MineLifeComponent : WorkplaceLifeComponent
 {
@@ -14,7 +15,6 @@ public class MineLifeComponent : WorkplaceLifeComponent
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
-        
         def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).MineDef;
         
         TimerWork.Delay = WorkerCurrencyLogicComponent.MinDelay;

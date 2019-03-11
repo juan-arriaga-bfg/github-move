@@ -442,4 +442,6 @@ public class R
      public const string CH2_IPiece = "CH2_IPiece";
      public const string CH3_IPiece = "CH3_IPiece";
      public const string MiningParticles = "MiningParticles";
+     public const string MN_FPiece = "MN_FPiece";
+     public const string MN_HPiece = "MN_HPiece";
 }

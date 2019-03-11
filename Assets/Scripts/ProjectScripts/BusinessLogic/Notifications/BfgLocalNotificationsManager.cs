@@ -1,49 +1,9 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BfgLocalNotificationsManagerBase : LocalNotificationsManagerBase
 {
-#if DEBUG
-    private bool isDebugSchedule = false;
-    
-    public override void ScheduleNotifications()
-    {
-        if(isDebugSchedule == false)
-            base.ScheduleNotifications();
-    }
-    public override void CancelNotifications()
-    {
-        base.CancelNotifications();
-        isDebugSchedule = false;
-    }
-
-    public void DebugSchedule()
-    {
-    #if UNITY_EDITOR
-        notifyItems.Clear();
-        base.ScheduleNotifications();
-        notifyItems.Clear();
-        #else
-        notifyItems.Clear();
-        CancelAllOnDevice();
-        GenerateNotifications();
-
-        TimeSpan timeShift = new TimeSpan(0, 0, 5);
-        foreach (var notify in notifyItems)
-        {
-            notify.NotifyTime = DateTime.UtcNow + timeShift;
-            timeShift = timeShift.Add(new TimeSpan(0, 0, 5));
-        }
-        
-        ScheduleAllOnDevice();
-        notifyItems.Clear();
-        #endif
-        isDebugSchedule = true;
-    }
-#endif
-
-
     public BfgLocalNotificationsManagerBase()
     {
         RegisterNotifier(new Notifier(new NowTimer(), NotifyType.ComeBackToGame));

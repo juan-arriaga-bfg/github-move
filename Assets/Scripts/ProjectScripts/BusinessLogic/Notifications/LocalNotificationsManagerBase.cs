@@ -11,6 +11,34 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
     public readonly TimeSpan NightBeginTime = new TimeSpan(22, 0, 0);
     public readonly TimeSpan NightEndTime   = new TimeSpan(10, 0, 0);
     public readonly TimeSpan MinimalTimeout = new TimeSpan(0,  30,0);
+
+#if DEBUG
+    private bool isDebugSchedule = false;
+#endif
+    
+    public void DebugSchedule()
+    {
+#if UNITY_EDITOR
+        notifyItems.Clear();
+        ScheduleNotifications();
+        notifyItems.Clear();
+#else
+        notifyItems.Clear();
+        CancelAllOnDevice();
+        GenerateNotifications();
+
+        TimeSpan timeShift = new TimeSpan(0, 0, 5);
+        foreach (var notify in notifyItems)
+        {
+            notify.NotifyTime = DateTime.UtcNow + timeShift;
+            timeShift = timeShift.Add(new TimeSpan(0, 0, 5));
+        }
+        
+        ScheduleAllOnDevice();
+        notifyItems.Clear();
+#endif
+        isDebugSchedule = true;
+    }
     
     public void RegisterNotifier(Notifier notifier)
     {
@@ -49,11 +77,23 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
         notifyItems.Clear();
         
         CancelAllOnDevice();
+        
+#if DEBUG        
+        isDebugSchedule = false;
+#endif
     }
 
     public virtual void ScheduleNotifications()
     {
         Debug.Log($"[LocalNotificationService] => ScheduleNotifications (CurrentTime: {DateTime.Now})");
+
+#if DEBUG
+        if (isDebugSchedule)
+        {
+            Debug.Log($"[LocalNotificationService] => ScheduleNotification: Cancelled by isDebugSchedule == true");
+            return;
+        }
+#endif
         
         GenerateNotifications();
 
