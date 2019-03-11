@@ -21,6 +21,7 @@ namespace UTRuntime
         // A UnityTest behaves like a coroutine in PlayMode
         // and allows you to yield null to skip a frame in EditMode
         [UnityTest]
+        [Timeout(100000000)]
         public IEnumerator UTDragAndDropCheatsheetWithEnumeratorPasses()
         {
             // Use the Assert class to test conditions.
