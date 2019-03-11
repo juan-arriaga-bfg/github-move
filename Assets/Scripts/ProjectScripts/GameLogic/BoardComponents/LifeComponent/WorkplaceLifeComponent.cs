@@ -173,7 +173,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	
 	protected virtual void OnSpawnCurrencyRewards(bool isComplete)
 	{
-		if(isComplete) Locker.Unlock(this);
+		if (isComplete && IsDead == false) Locker.Unlock(this);
 	}
 	
 	private void UpdateView(bool isShow)
