@@ -18,7 +18,7 @@ namespace Assets.SimpleAndroidNotifications
 		/// <summary>
 		/// Should be the same as declared in the main AndroidManifest.xml!
 		/// </summary>
-		public const string UnityActivityClassName = "com.unity3d.player.UnityPlayerActivity";
+		public const string UnityActivityClassName = "com.bigfishgames.bfgunityandroid.BFGUnityPlayerNativeActivity";
 
 		/// <summary>
 		/// This name is declared inside AAR in AndroidManifest.xml (not main).
