@@ -30,7 +30,7 @@ namespace UTIgnored
         
         private string searchFilter = "t:Script";
 
-        [Test]
+        // [Test]
         public void UICheckHardcodeTextsSimplePasses()
         {
 
