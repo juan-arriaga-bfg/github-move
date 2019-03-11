@@ -140,14 +140,13 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
             success =>
             {
                 GameDataService.Current.OrdersManager.UpdateOrders();
-                Order.State = OrderState.InProgress;
                 Timer?.Start();
+                Order.State = OrderState.InProgress;
             });
     }
     
     public void Exchange()
     {
-        
         CurrencyPair price = null;
         List<CurrencyPair> diff;
         
@@ -156,8 +155,8 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         foreach (var pair in diff)
         {
             var def = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(pair.Currency));
-            
-            if(def?.ExchangePrice == null) continue;
+
+            if (def?.ExchangePrice == null) continue;
             if (price == null) price = new CurrencyPair {Currency = def.ExchangePrice.Currency};
 
             price.Amount += pair.Amount * def.ExchangePrice.Amount;

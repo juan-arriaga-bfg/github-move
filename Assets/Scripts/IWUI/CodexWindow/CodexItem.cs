@@ -11,10 +11,10 @@ using Random = UnityEngine.Random;
 public class CodexItem : IWUIWindowViewController
 {
     [Header("Materials")] 
-    [SerializeField] private Material unlokedMaterial;
-    [SerializeField] private Material lockedMaterial;
-    [SerializeField] private Color unlockedColor;
-    [SerializeField] private Color lockedColor;
+    [SerializeField] protected Material unlokedMaterial;
+    [SerializeField] protected Material lockedMaterial;
+    [SerializeField] protected Color unlockedColor;
+    [SerializeField] protected Color lockedColor;
     
     [Header("Image params")]
     [SerializeField] private Vector3 defaultScale;
@@ -72,49 +72,28 @@ public class CodexItem : IWUIWindowViewController
         switch (def.State)
         {
             case CodexItemState.FullLock:
-                questionMark.SetActive(true);
-                CreateIcon(true);
-                
-                foreach (var sprite in IconSprites)
-                {
-                    sprite.material = lockedMaterial;
-                    sprite.color = lockedColor;
-                }
-                               
+                SetStateFullLock();
+
                 break;
             
             case CodexItemState.PartLock:
-                questionMark.SetActive(false);
-                CreateIcon(true);
-                
-                foreach (var sprite in IconSprites)
-                {
-                    sprite.material = lockedMaterial;
-                    sprite.color = lockedColor;
-                }
-                
+                SetStatePartLock();
+
                 break;
             
             case CodexItemState.PendingReward:
-                CreateIcon(false);
-                shine.SetActive(true);
-                PlayGiftIdleAnimation();
-                
+                SetStatePendingReward();
+
                 break;
             
             case CodexItemState.Unlocked:
-                CreateIcon(true);
-                shine.SetActive(false);
-                if (hand != null) hand.SetActive(def.PieceTypeDef.Filter.Has(PieceTypeFilter.Ingredient));
+                SetStateUnlocked();
 
                 break;
             
             case CodexItemState.Highlighted:
-                CreateIcon(true);
-                shine.SetActive(true);
+                SetStateHighlighted();
 
-                icon.transform.localScale = rewardScale;
-                
                 break;
             
             default:
@@ -131,6 +110,52 @@ public class CodexItem : IWUIWindowViewController
         // pieceImage.rectTransform.sizeDelta = size;
 
         // Debug.Log($"[CodexItem] => Init {itemDef.PieceTypeDef.Abbreviations[0]} as {def.State}, arrow: {def.ShowArrow}");
+    }
+
+    protected virtual void SetStateHighlighted()
+    {
+        CreateIcon(true);
+        shine.SetActive(true);
+
+        icon.transform.localScale = rewardScale;
+    }
+
+    protected virtual void SetStateUnlocked()
+    {
+        CreateIcon(true);
+        shine.SetActive(false);
+        if (hand != null) hand.SetActive(def.PieceTypeDef.Filter.Has(PieceTypeFilter.Ingredient));
+    }
+
+    protected virtual void SetStatePendingReward()
+    {
+        CreateIcon(false);
+        shine.SetActive(true);
+        PlayGiftIdleAnimation();
+    }
+
+    protected virtual void SetStatePartLock()
+    {
+        questionMark.SetActive(false);
+        CreateIcon(true);
+
+        foreach (var sprite in IconSprites)
+        {
+            sprite.material = lockedMaterial;
+            sprite.color = lockedColor;
+        }
+    }
+
+    protected virtual void SetStateFullLock()
+    {
+        questionMark.SetActive(true);
+        CreateIcon(true);
+
+        foreach (var sprite in IconSprites)
+        {
+            sprite.material = lockedMaterial;
+            sprite.color = lockedColor;
+        }
     }
 
     private void Reset()

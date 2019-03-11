@@ -5,12 +5,10 @@ public static class TackleBoxEvents
 {
     private static void Send(string id)
     {
-        Debug.Log("TackleBoxEvents: Send: " + id);
+        Debug.Log($"[TackleBoxEvents] => Send: {id}");
         
-#if UNITY_EDITOR
-        // Nothing here
-#else
-        bfgGameReporting.logCustomPlacement(id);
+#if !UNITY_EDITOR
+        bfgGameReporting.logCustomPlacement(id);  
 #endif  
     }
 

@@ -41,6 +41,9 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         PieceType.NPC_Gnome.Id,
     }; 
     
+    public const int CHAR_CHAIN_VISIBLE_COUNT = 6; // Size of char parts' chain in the codex dialog
+    public const int CHAR_CHAIN_VISIBLE_ITEMS_AFTER_LAST_UNLOCKED = 2;
+    
     public void OnRegisterEntity(ECSEntity entity)
     {
         context = entity;
@@ -170,6 +173,73 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
             );
             CodexState = CodexState.PendingReward;
         }
+
+        HandleCharPieceUnlock(id);
+        HandleCharPartUnlock(id);
+    }
+
+    /// <summary>
+    /// We should remove reward from all char parts pieces which doesn't fit into codex window
+    /// </summary>
+    /// <param name="id"></param>
+    private void HandleCharPartUnlock(int id)
+    {
+        List<int> chain = GameDataService.Current.MatchDefinition.GetChain(id);
+        if (chain == null || chain.Count < 2)
+        {
+            return;
+        }
+        
+        var lastId = chain[chain.Count - 1];
+        if (!PieceType.GetDefById(lastId).Filter.Has(PieceTypeFilter.Character))
+        {
+            return;
+        }
+        
+        int startIndex = GameDataService.Current.CodexManager.GetCharChainStartIndex(lastId);
+        if (Items.TryGetValue(chain[0], out var chainState))
+        {                                                                               // -2 here to handle char piece removed from the end of chain
+            for (int i = 0; i < startIndex && i + CHAR_CHAIN_VISIBLE_COUNT <= chain.Count - 2; i++)
+            {
+                int idToClear = chain[i];
+                if (chainState.PendingReward.Contains(idToClear))
+                {
+                    Debug.Log($"[CodexDataManager] => HandleCharPartUnlock({PieceType.Parse(id)}: StartIndex: {startIndex}: Clear reward for {PieceType.Parse(idToClear)})");
+                    
+                    chainState.PendingReward.Remove(idToClear);
+                }
+            }
+        }
+    }
+
+    private void HandleCharPieceUnlock(int id)
+    {
+        if (!PieceType.GetDefById(id).Filter.Has(PieceTypeFilter.Character))
+        {
+            return;
+        }
+        
+        var charChain = GameDataService.Current.MatchDefinition.GetChain(id);
+        if (Items.TryGetValue(charChain[0], out var chainState))
+        {
+            bool isChanged = false;
+            foreach (var pieceId in charChain)
+            {
+                if (pieceId != id)
+                {
+                    if (chainState.PendingReward.Remove(pieceId))
+                    {
+                        isChanged = true;
+                    }
+                }
+            }
+
+            if (isChanged)
+            {
+                ValidateCodexState();
+                ClearCodexContentCache();
+            }
+        }
     }
 
     public bool IsHidedFromCodex(int id)
@@ -268,7 +338,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
     /// <summary>
     /// targetId - to get chain and highlight
     /// </summary>
-    public List<CodexItemDef> GetCodexItemsForChainStartingFrom(int targetId, int startId, int length, bool hideCaptions, bool allowRewards, bool allowHighlight)
+    public List<CodexItemDef> GetCodexItemsForChainStartingFrom(int targetId, int skipFromStart, int skipFromEnd, int length, bool hideCaptions, bool allowRewards, bool allowHighlight)
     {
         var chain = GameDataService.Current.MatchDefinition.GetChain(targetId);
 
@@ -279,17 +349,26 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         }
         
         var list = GetCustomChain(targetId, hideCaptions, allowRewards, allowHighlight, chain, out _);
+        for (int i = 1; i <= skipFromEnd; i++)
+        {
+            list.RemoveAt(list.Count - 1);
+        }
 
+        if (list.Count < length)
+        {
+            return list;
+        }
+        
         int rangeStart;
         int rangeLength;
-        if (list.Count - startId < length)
+        if (list.Count - skipFromStart >= length)
         {
-            rangeStart = 0;
-            rangeLength = list.Count;
+            rangeStart = skipFromStart;
+            rangeLength = length;
         }
         else
         {
-            rangeStart  = startId;
+            rangeStart  = list.Count - length;
             rangeLength = length;
         }
         
@@ -389,6 +468,11 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
     public bool IsAnyPendingRewardInChain(List<int> chain)
     {
+        if (chain.Count == 0)
+        {
+            return false;
+        }
+        
         GetChainState(chain[0], out var chainState);
         foreach (var id in chain)
         {
@@ -405,6 +489,10 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
     public bool IsAnyPendingRewardForCharChain(int charId)
     {
         var charChain = GameDataService.Current.MatchDefinition.GetChain(charId);
+        
+        // Do not count char's piece reward because we have dedicated slot for it
+        //charChain.Remove(charId);
+        
         var isAnyPendingReward = IsAnyPendingRewardInChain(charChain);
 
         return isAnyPendingReward;
@@ -417,10 +505,16 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         List<CodexItemDef> ret = new List<CodexItemDef>();
 
         var pieceManager = GameDataService.Current.PiecesManager;
-
-        GameDataService.Current.CodexManager.GetChainState(chain[0], out var chainState);
-
+        var matchDef = GameDataService.Current.MatchDefinition;
+        
         bool isCharsOnlyChain = IsChainContainsOnlyChars(chain);
+
+        CodexChainState chainState = null;
+        
+        if (!isCharsOnlyChain)
+        {
+            GameDataService.Current.CodexManager.GetChainState(chain[0], out chainState);
+        }
 
         bool isPreviousPieceUnlocked = false;
         
@@ -428,6 +522,12 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         {
             int pieceId = chain[i];
 
+            if (isCharsOnlyChain)
+            {
+                int pieceToFindChainState = matchDef.GetFirst(pieceId);
+                GameDataService.Current.CodexManager.GetChainState(pieceToFindChainState, out chainState);
+            }
+            
             // Debug.Log($"Get items: {pieceId}");
             
             bool isUnlocked = chainState?.Unlocked.Contains(pieceId) ?? false;
@@ -569,7 +669,12 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
                 // Skip chains hidden from player
                 if (GetCodexContent().GetChainDefByFirstItemId(item.Key) == null)
                 {
-                    continue;
+                    // But char pieces are always allowed
+                    var lastItemInChain = GameDataService.Current.MatchDefinition.GetLast(item.Key);
+                    if (!PieceType.GetDefById(lastItemInChain).Filter.Has(PieceTypeFilter.Character))
+                    {
+                        continue;
+                    }
                 }
                 
                 if (item.Value.PendingReward.Count > 0)
@@ -586,5 +691,39 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
                 Debug.Log($"[CodexDataManager] => ClaimRewardForPiece: All reward claimed, set CodexState.Normal");
             }
         }
+    }
+    
+    public int GetCharChainStartIndex(int id)
+    {
+        var chain = GameDataService.Current.MatchDefinition.GetChain(id);
+        chain.RemoveAt(chain.Count - 1); // Do not count char piece
+        
+        int chainLen = chain.Count;
+        if (chainLen <= CHAR_CHAIN_VISIBLE_COUNT)
+        {
+            return 0;
+        }
+
+        var codexManager = GameDataService.Current.CodexManager;
+
+        int lastUnlocked = 0;
+        for (int i = chain.Count - 1; i >= 0; i--)
+        {
+            int item = chain[i];
+            if (codexManager.IsPieceUnlocked(item))
+            {
+                lastUnlocked = i;
+                break;
+            }
+        }
+
+        int ret = lastUnlocked + CHAR_CHAIN_VISIBLE_ITEMS_AFTER_LAST_UNLOCKED - CHAR_CHAIN_VISIBLE_COUNT + 1;
+
+        if (ret < 0)
+        {
+            ret = 0;
+        }
+        
+        return ret;
     }
 }

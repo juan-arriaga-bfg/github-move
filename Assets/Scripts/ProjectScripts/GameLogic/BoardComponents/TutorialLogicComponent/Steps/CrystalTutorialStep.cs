@@ -54,6 +54,7 @@ public class CrystalTutorialStep : LoopFingerTutorialStep
         var unlock = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
         var positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
         
+        Context.UnlockAll();
         Context.LockAll();
         
         unlock.Add(ignorePosition);

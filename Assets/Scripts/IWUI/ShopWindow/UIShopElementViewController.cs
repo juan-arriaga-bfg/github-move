@@ -151,6 +151,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 	    var position = anchor == null ? btnBack.transform.position : anchor.position;
 	    var contentEntity = entity as UIShopElementEntity;
 	    var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(position);
+	    
 	    var transaction = CurrencyHelper.PurchaseAsync(contentEntity.Products[0], contentEntity.Price, success =>
 	    {
 		    if (success == false ) return;

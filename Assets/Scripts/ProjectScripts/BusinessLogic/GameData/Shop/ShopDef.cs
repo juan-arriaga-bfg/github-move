@@ -9,6 +9,7 @@ public class ShopDef
     public List<CurrencyPair> Products;
     public CurrencyPair Price;
     public bool IsPermanent;
+    public int Sale;
     
     
     public ShopDef Copy()
