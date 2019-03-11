@@ -69,6 +69,14 @@
     android:name="io.fabric.ApiKey"
     android:value="dee0ee259672b079f84d729aee2a320bd7b450d3"
     tools:replace="android:value"/>
+    
+    <!-- Local notifications -->
+    <receiver android:name="com.hippogames.simpeleandroidnotifications.Controller"/>
+    <receiver android:name="com.hippogames.simpeleandroidnotifications.RebootManager">
+        <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        </intent-filter>
+    </receiver>
 
 </application>
 
