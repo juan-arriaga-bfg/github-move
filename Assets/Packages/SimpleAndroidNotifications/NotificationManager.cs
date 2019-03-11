@@ -226,7 +226,7 @@ namespace Assets.SimpleAndroidNotifications
 
         private static string GetSmallIconName(NotificationIcon icon)
         {
-            return "anp_" + icon.ToString().ToLower();
+            return icon.ToString().ToLower();
         }
     }
 }
