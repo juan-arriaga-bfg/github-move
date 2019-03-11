@@ -26,6 +26,8 @@ public class UIMainWindowView : UIBaseWindowView
     [IWUIBinding("#QuestListDelimiters")] private GameObject questListDelimiters;
     
     [IWUIBinding("#DebugButtonsAnchor")] private Transform debugButtonsAnchor;
+    
+    [IWUIBinding("#TestIcon")] private Image testIcon;
 
     [Header("Hint anchors")] 
     [SerializeField] private Transform hintAnchorOrdersButton;
@@ -66,6 +68,8 @@ public class UIMainWindowView : UIBaseWindowView
         OnActiveQuestsListChanged();
         
         UpdateCodexButton();
+
+        testIcon.sprite = IconService.Current.GetSpriteById("test_icon");
     }
 
     public override void OnViewClose()
