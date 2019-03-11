@@ -15,4 +15,6 @@ public interface ILocalNotificationsManager
     void UnRegisterNotifier(TimerComponent timer);
 
     void Cleanup();
+
+    void DebugSchedule();
 }
