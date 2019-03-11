@@ -168,8 +168,16 @@ public class DevTools : UIContainerElementViewController
     public void OnScheduleNotificationsClick()
     {
 #if DEBUG
-        var notificationManager = LocalNotificationsService.Current as BfgLocalNotificationsManagerBase;
+        var notificationManager = LocalNotificationsService.Current as LocalNotificationsManagerBase;
         notificationManager?.DebugSchedule();        
+#endif
+    }
+    
+    public void OnScheduleAllNotificationsClick()
+    {
+#if DEBUG
+        var notificationManager = LocalNotificationsService.Current as LocalNotificationsManagerBase;
+        notificationManager?.DebugScheduleAll();        
 #endif
     }
     
