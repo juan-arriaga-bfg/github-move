@@ -33,6 +33,7 @@ public class ProjectBuilderAndroid
         }
         
         builder
+            .AddBuildAction(new BuildActionRebuildSpriteSheets())    
             .AddBuildAction(new BuildActionCleanupPreviousGradleExport())
             .AddBuildAction(new BuildActionPrepare())
             .AddBuildAction(new BuildActionEncryptConfigs())

@@ -10,38 +10,18 @@ namespace UT
         [Test]
         public void UTCheckSpriteSheetsSettings()
         {
-            var maxDimension = 2048;
-    
+            
             var scmanager = SpriteSheetsEditorUtils.LoadCurrentSpriteSheetManager();
     
             var isValid = true;
             for (var i = 0; i < scmanager.SpriteSheetsData.Count; i++)
             {
                 var scdata = scmanager.SpriteSheetsData[i];
-                var spriteSheetTexture = SpriteSheetsEditorUtils.LoadSpriteSheetTexture(scdata);
-    
-                if (spriteSheetTexture == null)
+
+                bool isValidSpriteSheet = SpriteSheetsEditorUtils.IsValidSpriteSheetsContent(scdata);
+                if (isValidSpriteSheet == false)
                 {
-                    isValid = false;
-                    Debug.LogWarning(string.Format("[UT]: missing texture in SC -> {0}", scdata.SpriteSheetName));
-                }
-                else if (spriteSheetTexture.width > maxDimension || spriteSheetTexture.height > maxDimension)
-                {
-                    isValid = false;
-                    Debug.LogWarning(string.Format("[UT]: excess size limit ({0}) for -> {1} ({2}x{3})", maxDimension, scdata.SpriteSheetName, spriteSheetTexture.width, spriteSheetTexture.height));
-                }
-                else if (spriteSheetTexture.width != spriteSheetTexture.height && scdata.IsAllowAlphaSplitting)
-                {
-                    isValid = false;
-                    Debug.LogWarning(string.Format("[UT]: texture size not square for alphasplit mode -> {0} ({1}x{2})", scdata.SpriteSheetName, spriteSheetTexture.width, spriteSheetTexture.height));
-                }
-    
-                var changedSprites = SpriteSheetsEditorUtils.CheckSpritesHashes(scdata);
-    
-                if (changedSprites.Count > 0)
-                {
-                    isValid = false;
-                    Debug.LogWarning(string.Format("[UT]: spritesheet's ({0}) source textures changed. Need to rebuild", scdata.SpriteSheetName));
+                    isValid = isValidSpriteSheet;
                 }
             }
     
@@ -57,11 +37,11 @@ namespace UT
             for (var i = 0; i < scmanager.SpriteSheetsData.Count; i++)
             {
                 var scdata = scmanager.SpriteSheetsData[i];
-                var spriteSheetTexture = SpriteSheetsEditorUtils.LoadSpriteSheetTexture(scdata);
+                // var spriteSheetTexture = SpriteSheetsEditorUtils.LoadSpriteSheetTexture(scdata);
     
-                var importer = (TextureImporter) AssetImporter.GetAtPath(AssetDatabase.GetAssetPath(spriteSheetTexture));
-                var textureImporterSettings = new TextureImporterSettings();
-                importer.ReadTextureSettings(textureImporterSettings);
+                // var importer = (TextureImporter) AssetImporter.GetAtPath(AssetDatabase.GetAssetPath(spriteSheetTexture));
+                // var textureImporterSettings = new TextureImporterSettings();
+                // importer.ReadTextureSettings(textureImporterSettings);
     
                 // if (textureImporterSettings.spritePixelsPerUnit != 2)
                 // {
@@ -69,11 +49,11 @@ namespace UT
                 //     isValid = false;
                 // }
     
-                if (textureImporterSettings.mipmapEnabled)
-                {
-                    Debug.LogWarning(string.Format("TextureSettings for: {0} -> wrong mipmapEnabled", spriteSheetTexture.name));
-                    isValid = false;
-                }
+                // if (textureImporterSettings.mipmapEnabled)
+                // {
+                //     Debug.LogWarning(string.Format("TextureSettings for: {0} -> wrong mipmapEnabled", spriteSheetTexture.name));
+                //     isValid = false;
+                // }
     
                 // if (textureImporterSettings.filterMode != FilterMode.Bilinear)
                 // {
