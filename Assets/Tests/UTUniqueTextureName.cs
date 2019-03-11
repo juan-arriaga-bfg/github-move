@@ -6,7 +6,7 @@ namespace UT
 {
     public class UTUniqueTextureName
     {
-        private List<string> pathToCheck = new List<string> {"Assets/Content/SourceContent"};
+        private List<string> pathToCheck = new List<string> {"Assets/Content/SourceContent", "Assets/Content/ProcessedContent"};
         private List<string> ignoredFileNames = new List<string> { };
         private string searchFilter = "t:Texture";
 
