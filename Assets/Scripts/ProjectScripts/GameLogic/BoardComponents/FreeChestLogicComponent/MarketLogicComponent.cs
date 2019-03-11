@@ -12,6 +12,7 @@
 		RegisterComponent(ResetEnergyTimer, true);
 		
 		LocalNotificationsService.Current.RegisterNotifier(new Notifier(ResetMarketTimer, NotifyType.MarketRefresh));
+		LocalNotificationsService.Current.RegisterNotifier(new Notifier(ResetEnergyTimer, NotifyType.FreeEnergyRefill));
 		
 		ResetMarketTimer.Delay = GameDataService.Current.ConstantsManager.MarketUpdateDelay;
 		ResetEnergyTimer.Delay = GameDataService.Current.ConstantsManager.FreeEnergyDelay;

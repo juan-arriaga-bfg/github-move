@@ -103,4 +103,12 @@ public class NotifyType
         NotifySelector = null,
         TimeCorrector = notifyDate => notifyDate.Add(new TimeSpan(5, 0, 0, 0))
     };
+    
+    public static readonly NotifyType FreeEnergyRefill = new NotifyType
+    {
+        Id = 6, 
+        TitleKey = "notifications.free.energy.title", 
+        MessageKey = "notifications.free.energy.message",  
+        NotifySelector = null,
+    };
 }
