@@ -60,7 +60,7 @@
     ]
   },
   {
-    "Uid": "MN_I",
+    "Uid": "MN_E",
     "Cooldown": 4800,
     "Delay": 2,
     "Size": 20,
@@ -69,7 +69,7 @@
       "Amount": 20
     },
     "Reward": {
-      "Currency": "CH1_I",
+      "Currency": "CH1_E",
       "Amount": 1
     },
     "StepRewards": [
@@ -90,7 +90,7 @@
     ]
   },
   {
-    "Uid": "MN_E",
+    "Uid": "MN_F",
     "Cooldown": 4800,
     "Delay": 2,
     "Size": 20,
@@ -99,7 +99,67 @@
       "Amount": 20
     },
     "Reward": {
-      "Currency": "CH1_E",
+      "Currency": "CH1_F",
+      "Amount": 1
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 20
+      }
+    ],
+    "LastRewards": [
+      {
+        "Currency": "Soft1",
+        "Amount": 5
+      },
+      {
+        "Currency": "Hard1",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "MN_H",
+    "Cooldown": 4800,
+    "Delay": 2,
+    "Size": 20,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "Reward": {
+      "Currency": "CH1_H",
+      "Amount": 1
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "LastRewards": [
+      {
+        "Currency": "Soft1",
+        "Amount": 5
+      },
+      {
+        "Currency": "Hard1",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "MN_I",
+    "Cooldown": 4800,
+    "Delay": 2,
+    "Size": 20,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "Reward": {
+      "Currency": "CH1_I",
       "Amount": 1
     },
     "StepRewards": [
