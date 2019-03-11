@@ -37,7 +37,10 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
         ScheduleAllOnDevice();
         notifyItems.Clear();
 #endif
+        
+#if DEBUG
         isDebugSchedule = true;
+#endif
     }
     
     public void RegisterNotifier(Notifier notifier)
