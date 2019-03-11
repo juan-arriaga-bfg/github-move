@@ -1,5 +1,3 @@
-#if SOME_NOT_EXISTING_DEFINE
-
 using System;
 using Assets.SimpleAndroidNotifications;
 using Assets.SimpleAndroidNotifications.Data;
@@ -30,5 +28,3 @@ public class SimpleAndroidNotificationsLocalNotificationsManager : LocalNotifica
         }
     }
 }
-
-#endif
