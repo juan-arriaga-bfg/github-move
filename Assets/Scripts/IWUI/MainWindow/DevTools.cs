@@ -172,6 +172,13 @@ public class DevTools : UIContainerElementViewController
 #endif
     }
     
+    public void OnScheduleAllNotificationsClick()
+    {
+#if DEBUG
+        LocalNotificationsService.Current.DebugScheduleAll();        
+#endif
+    }
+    
     public void OnDebug1Click()
     {
         Debug.Log("OnDebug1Click");

@@ -1,10 +1,31 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
+using System.Reflection;
 
 public class NotifyType
 {
+    private static List<NotifyType> notifyTypes = new List<NotifyType>();
+    public static List<NotifyType> NotifyTypes => notifyTypes;
+    
+    static NotifyType()
+    {
+#if DEBUG
+        var t = typeof(NotifyType);
+        var fieldInfos = t.GetFields(BindingFlags.Public | BindingFlags.Static);
+        
+        for (int i = 0; i < fieldInfos.Length; i++)
+        {
+            var fieldInfo = fieldInfos[i];
+            if (fieldInfo.FieldType != t) continue;
+            
+            var fieldValue = (NotifyType)fieldInfo.GetValue(null);
+            
+            notifyTypes.Add(fieldValue);
+        }
+#endif
+    }
+    
     public int Id;
     public string TitleKey;
     public string MessageKey;
