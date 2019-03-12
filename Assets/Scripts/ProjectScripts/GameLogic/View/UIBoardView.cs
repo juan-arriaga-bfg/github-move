@@ -163,6 +163,12 @@ public class UIBoardView : BoardElementView
     
     public virtual void UpdateVisibility(bool isVisible)
     {
+        if (isVisible && Context.Context.PathfindLocker.HasPath(Context) == false)
+        {
+            UpdateVisibility(false);
+            return;
+        }
+        
         DOTween.Kill(viewTransform);
         
         var sequence = DOTween.Sequence().SetId(viewTransform);

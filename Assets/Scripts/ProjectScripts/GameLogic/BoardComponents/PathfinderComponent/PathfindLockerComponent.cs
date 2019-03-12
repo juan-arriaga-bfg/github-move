@@ -167,6 +167,8 @@ public class PathfindLockerComponent : ECSEntity
         UnlockPathfinding(piece);
         blockPathPieces.Remove(piece);
         freePieces.Add(piece);
+        
+        piece.GetComponent<PathfindLockListenerComponent>(PathfindLockListenerComponent.ComponentGuid)?.UpdatePathState(true);
     }
 
     private void ClosePiece(Piece piece, List<BoardPosition> pieceBlockers)
@@ -174,6 +176,8 @@ public class PathfindLockerComponent : ECSEntity
         LockPathfinding(piece);
         freePieces.Remove(piece);
         blockPathPieces[piece] = pieceBlockers;
+        
+        piece.GetComponent<PathfindLockListenerComponent>(PathfindLockListenerComponent.ComponentGuid)?.UpdatePathState(false);
     }
     
     
