@@ -246,6 +246,7 @@ public class CodexItem : IWUIWindowViewController
         foreach (var sprite in IconSprites)
         {
             sprite.color = COLOR_TRANSPARENT;
+            sprite.material = unlokedMaterial;
         }
         
         icon.transform.localScale = Vector3.one * 0.15f;
