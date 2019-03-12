@@ -5,8 +5,13 @@ public class LockView : BoardElementView
 {
     [SerializeField] private NSText label;
     
-    [SerializeField] private SpriteRenderer levelLock;
-    [SerializeField] private SpriteRenderer heroLock;
+    [SerializeField] private Transform levelLock;
+    [SerializeField] private Transform heroLock;
+    
+    [SerializeField] private SpriteRenderer levelLockBack;
+    [SerializeField] private SpriteRenderer heroLockBack;
+    [SerializeField] private SpriteRenderer levelLockUp;
+    [SerializeField] private SpriteRenderer heroLockUp;
     
     [SerializeField] private SpriteRenderer heroBack;
     [SerializeField] private SpriteRenderer icon;
@@ -16,6 +21,9 @@ public class LockView : BoardElementView
     
     [SerializeField] private GameObject levelCheck;
     [SerializeField] private GameObject heroCheck;
+    
+    [SerializeField] private Transform levelCheckEar;
+    [SerializeField] private Transform heroCheckEar;
     
     private Material defaultMaterial;
 
@@ -27,7 +35,7 @@ public class LockView : BoardElementView
     public override void Init(BoardRenderer context)
     {
         base.Init(context);
-        defaultMaterial = levelLock.material;
+        defaultMaterial = levelLockBack.material;
     }
 
     public void SetCondition(string level, string hero, bool isLevelUnlock, bool isHeroUnlock, bool isTwo)
@@ -39,6 +47,9 @@ public class LockView : BoardElementView
         
         levelCheck.SetActive(isLevelUnlock);
         heroCheck.SetActive(isHeroUnlock);
+
+        levelCheckEar.rotation = Quaternion.Euler(0, 0, isLevelUnlock ? 17f : 0);
+        heroCheckEar.rotation = Quaternion.Euler(0, 0, isHeroUnlock ? 17f : 0);
         
         levelLock.transform.localPosition = isTwo ? Vector3.right * 0.55f : Vector3.zero;
         heroLock.transform.localPosition = Vector3.left * 0.55f;
@@ -48,16 +59,20 @@ public class LockView : BoardElementView
     {
         if (enabled)
         {
-            levelLock.material = grayscaleMaterial;
-            heroLock.material = grayscaleMaterial;
+            levelLockBack.material = grayscaleMaterial;
+            heroLockBack.material = grayscaleMaterial;
+            levelLockUp.material = grayscaleMaterial;
+            heroLockUp.material = grayscaleMaterial;
             
             heroBack.material = grayscaleMaterial;
             icon.material = grayscaleMaterial;
             return;
         }
         
-        levelLock.material = defaultMaterial;
-        heroLock.material = defaultMaterial;
+        levelLockBack.material = defaultMaterial;
+        heroLockBack.material = defaultMaterial;
+        levelLockUp.material = defaultMaterial;
+        heroLockUp.material = defaultMaterial;
         
         heroBack.material = defaultMaterial;
         icon.material = defaultMaterial;
