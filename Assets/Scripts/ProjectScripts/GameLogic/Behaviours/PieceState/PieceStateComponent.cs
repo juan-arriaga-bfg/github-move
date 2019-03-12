@@ -154,7 +154,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         
         var view = thisContext.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
         
-        var title = string.Format(LocalizationService.Get("gameboard.bubble.message.piece", "gameboard.bubble.message.piece\n{0}?"), DateTimeExtension.GetDelayText(Timer.Delay));
+        var title = string.Format(LocalizationService.Get("gameboard.bubble.message.piece", "gameboard.bubble.message.piece\n{0}?"), DateTimeExtension.GetDelayText(Timer.Delay, true));
         var button = string.Format(LocalizationService.Get("gameboard.bubble.button.send", "gameboard.bubble.button.send {0}"), $"<sprite name={Currency.Worker.Icon}>");
         
         view.OnHide = () => { State = BuildingState.Warning; };
