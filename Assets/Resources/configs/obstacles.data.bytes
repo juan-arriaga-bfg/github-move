@@ -106,8 +106,8 @@
       }
     ],
     "ProductionAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
     "CharactersAmount": {
       "Min": 0,
@@ -125,10 +125,6 @@
       },
       {
         "Uid": "Boost_CR1",
-        "Weight": 1
-      },
-      {
-        "Uid": "Boost_CR2",
         "Weight": 1
       }
     ],
@@ -148,12 +144,12 @@
       }
     ],
     "ProductionAmount": {
-      "Min": 1,
-      "Max": 3
+      "Min": 0,
+      "Max": 1
     },
     "CharactersAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -168,10 +164,6 @@
       {
         "Uid": "Boost_CR1",
         "Weight": 2
-      },
-      {
-        "Uid": "Boost_CR2",
-        "Weight": 1
       },
       {
         "Uid": "Soft1",
@@ -194,12 +186,12 @@
       }
     ],
     "ProductionAmount": {
-      "Min": 2,
-      "Max": 3
+      "Min": 0,
+      "Max": 1
     },
     "CharactersAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -213,10 +205,6 @@
       },
       {
         "Uid": "Boost_CR1",
-        "Weight": 1
-      },
-      {
-        "Uid": "Boost_CR2",
         "Weight": 1
       },
       {
@@ -240,12 +228,12 @@
       }
     ],
     "ProductionAmount": {
-      "Min": 2,
-      "Max": 3
+      "Min": 1,
+      "Max": 2
     },
     "CharactersAmount": {
       "Min": 1,
-      "Max": 2
+      "Max": 1
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -259,10 +247,6 @@
       },
       {
         "Uid": "Boost_CR1",
-        "Weight": 1
-      },
-      {
-        "Uid": "Boost_CR2",
         "Weight": 1
       },
       {
@@ -286,8 +270,8 @@
       }
     ],
     "ProductionAmount": {
-      "Min": 2,
-      "Max": 3
+      "Min": 1,
+      "Max": 2
     },
     "CharactersAmount": {
       "Min": 1,
@@ -305,10 +289,6 @@
       },
       {
         "Uid": "Boost_CR1",
-        "Weight": 1
-      },
-      {
-        "Uid": "Boost_CR2",
         "Weight": 1
       },
       {
@@ -440,8 +420,8 @@
       }
     ],
     "ProductionAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
     "CharactersAmount": {
       "Min": 0,
@@ -456,10 +436,6 @@
       {
         "Uid": "D2",
         "Weight": 2
-      },
-      {
-        "Uid": "Boost_CR1",
-        "Weight": 1
       }
     ],
     "ChestId": "CH2_D"
@@ -478,8 +454,8 @@
       }
     ],
     "ProductionAmount": {
-      "Min": 1,
-      "Max": 3
+      "Min": 0,
+      "Max": 1
     },
     "CharactersAmount": {
       "Min": 1,
@@ -520,8 +496,8 @@
       }
     ],
     "ProductionAmount": {
-      "Min": 2,
-      "Max": 3
+      "Min": 0,
+      "Max": 1
     },
     "CharactersAmount": {
       "Min": 1,
@@ -539,10 +515,6 @@
       },
       {
         "Uid": "Boost_CR1",
-        "Weight": 1
-      },
-      {
-        "Uid": "Boost_CR2",
         "Weight": 1
       },
       {
@@ -566,8 +538,8 @@
       }
     ],
     "ProductionAmount": {
-      "Min": 2,
-      "Max": 3
+      "Min": 1,
+      "Max": 2
     },
     "CharactersAmount": {
       "Min": 1,
@@ -585,10 +557,6 @@
       },
       {
         "Uid": "Boost_CR1",
-        "Weight": 1
-      },
-      {
-        "Uid": "Boost_CR2",
         "Weight": 1
       },
       {
@@ -612,8 +580,8 @@
       }
     ],
     "ProductionAmount": {
-      "Min": 2,
-      "Max": 3
+      "Min": 1,
+      "Max": 2
     },
     "CharactersAmount": {
       "Min": 1,
@@ -632,10 +600,6 @@
       {
         "Uid": "D3",
         "Weight": 3
-      },
-      {
-        "Uid": "Boost_CR2",
-        "Weight": 1
       },
       {
         "Uid": "Soft1",

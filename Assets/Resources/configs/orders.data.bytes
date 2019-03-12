@@ -15,7 +15,7 @@
       },
       {
         "Currency": "Soft1",
-        "Amount": 2
+        "Amount": 1
       }
     ]
   },
@@ -35,25 +35,25 @@
     "Rewards": [
       {
         "Currency": "Mana1",
-        "Amount": 2
+        "Amount": 1
       },
       {
         "Currency": "Soft2",
-        "Amount": 2
+        "Amount": 1
       }
     ]
   },
   {
     "Uid": "Order3",
-    "Delay": 120,
+    "Delay": 1500,
     "Prices": [
       {
         "Currency": "PR_D5",
-        "Amount": 3
+        "Amount": 5
       },
       {
         "Currency": "PR_A5",
-        "Amount": 3
+        "Amount": 5
       }
     ],
     "Rewards": [
@@ -67,13 +67,13 @@
       },
       {
         "Currency": "Soft2",
-        "Amount": 1
+        "Amount": 2
       }
     ]
   },
   {
     "Uid": "Order4",
-    "Delay": 300,
+    "Delay": 600,
     "Prices": [
       {
         "Currency": "PR_A5",
@@ -81,7 +81,7 @@
       },
       {
         "Currency": "PR_C5",
-        "Amount": 3
+        "Amount": 6
       }
     ],
     "Rewards": [
@@ -91,7 +91,7 @@
       },
       {
         "Currency": "Soft2",
-        "Amount": 3
+        "Amount": 2
       }
     ]
   },
@@ -115,21 +115,17 @@
       },
       {
         "Currency": "Soft1",
-        "Amount": 1
-      },
-      {
-        "Currency": "Soft2",
-        "Amount": 1
+        "Amount": 2
       }
     ]
   },
   {
     "Uid": "Order6",
-    "Delay": 180,
+    "Delay": 1800,
     "Prices": [
       {
         "Currency": "PR_D5",
-        "Amount": 2
+        "Amount": 4
       },
       {
         "Currency": "PR_E5",
@@ -143,17 +139,17 @@
       },
       {
         "Currency": "Soft1",
-        "Amount": 1
+        "Amount": 2
       },
       {
         "Currency": "Soft2",
-        "Amount": 2
+        "Amount": 1
       }
     ]
   },
   {
     "Uid": "Order7",
-    "Delay": 300,
+    "Delay": 1020,
     "Prices": [
       {
         "Currency": "PR_B5",
@@ -161,13 +157,13 @@
       },
       {
         "Currency": "PR_C5",
-        "Amount": 3
+        "Amount": 5
       }
     ],
     "Rewards": [
       {
-        "Currency": "Mana3",
-        "Amount": 1
+        "Currency": "Mana2",
+        "Amount": 2
       },
       {
         "Currency": "Soft1",
@@ -181,11 +177,11 @@
   },
   {
     "Uid": "Order8",
-    "Delay": 420,
+    "Delay": 900,
     "Prices": [
       {
         "Currency": "PR_C5",
-        "Amount": 5
+        "Amount": 7
       },
       {
         "Currency": "PR_A5",
@@ -198,16 +194,16 @@
         "Amount": 1
       },
       {
-        "Currency": "Mana3",
+        "Currency": "Mana2",
         "Amount": 1
       },
       {
         "Currency": "Soft1",
-        "Amount": 3
+        "Amount": 2
       },
       {
         "Currency": "Soft2",
-        "Amount": 2
+        "Amount": 1
       }
     ]
   },
@@ -241,7 +237,7 @@
       },
       {
         "Currency": "PR_C5",
-        "Amount": 3
+        "Amount": 4
       }
     ],
     "Rewards": [
@@ -373,7 +369,7 @@
   },
   {
     "Uid": "Order15",
-    "Delay": 540,
+    "Delay": 1800,
     "Prices": [
       {
         "Currency": "PR_A5",
@@ -381,13 +377,13 @@
       },
       {
         "Currency": "PR_E5",
-        "Amount": 2
+        "Amount": 5
       }
     ],
     "Rewards": [
       {
         "Currency": "Mana2",
-        "Amount": 1
+        "Amount": 2
       },
       {
         "Currency": "Mana1",
@@ -395,21 +391,21 @@
       },
       {
         "Currency": "Soft2",
-        "Amount": 3
+        "Amount": 2
       }
     ]
   },
   {
     "Uid": "Order16",
-    "Delay": 420,
+    "Delay": 1200,
     "Prices": [
       {
         "Currency": "PR_A5",
-        "Amount": 3
+        "Amount": 4
       },
       {
         "Currency": "PR_D5",
-        "Amount": 3
+        "Amount": 4
       }
     ],
     "Rewards": [

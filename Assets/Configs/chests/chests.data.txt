@@ -52,10 +52,10 @@
       "Max": 0
     },
     "CharactersAmount": {
-      "Min": 4,
-      "Max": 5
+      "Min": 7,
+      "Max": 8
     },
-    "PieceAmount": 3,
+    "PieceAmount": 2,
     "PieceWeights": [
       {
         "Uid": "Soft1",
@@ -126,10 +126,6 @@
       {
         "Uid": "Boost_CR1",
         "Weight": 1
-      },
-      {
-        "Uid": "Boost_CR2",
-        "Weight": 1
       }
     ]
   },
@@ -144,10 +140,10 @@
       "Max": 2
     },
     "CharactersAmount": {
-      "Min": 2,
-      "Max": 3
+      "Min": 1,
+      "Max": 2
     },
-    "PieceAmount": 10,
+    "PieceAmount": 12,
     "PieceWeights": [
       {
         "Uid": "A1",
@@ -160,26 +156,17 @@
         "Override": true
       },
       {
-        "Uid": "Boost_CR1",
-        "Weight": 2,
+        "Uid": "A3",
+        "Weight": 5,
         "Override": true
-      },
-      {
-        "Uid": "Boost_CR2",
-        "Weight": 1
       },
       {
         "Uid": "Hard1",
-        "Weight": 2,
-        "Override": true
+        "Weight": 2
       },
       {
         "Uid": "Soft1",
         "Weight": 2
-      },
-      {
-        "Uid": "Soft2",
-        "Weight": 1
       }
     ]
   },
@@ -224,8 +211,8 @@
       "Max": 1
     },
     "CharactersAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
     "PieceAmount": 7,
     "PieceWeights": [
@@ -244,10 +231,6 @@
         "Override": true
       },
       {
-        "Uid": "Boost_CR2",
-        "Weight": 1
-      },
-      {
         "Uid": "Hard1",
         "Weight": 1
       }
@@ -256,22 +239,22 @@
   {
     "Uid": "CH3_B",
     "ProductionAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
     "ResourcesAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
     "CharactersAmount": {
-      "Min": 2,
-      "Max": 3
+      "Min": 1,
+      "Max": 2
     },
     "PieceAmount": 12,
     "PieceWeights": [
       {
         "Uid": "B1",
-        "Weight": 1,
+        "Weight": 3,
         "Override": true
       },
       {
@@ -286,12 +269,12 @@
       },
       {
         "Uid": "Boost_CR1",
-        "Weight": 2,
+        "Weight": 1,
         "Override": true
       },
       {
         "Uid": "Boost_CR2",
-        "Weight": 3,
+        "Weight": 1,
         "Override": true
       },
       {
@@ -359,7 +342,7 @@
       },
       {
         "Uid": "Boost_CR1",
-        "Weight": 2
+        "Weight": 1
       },
       {
         "Uid": "Hard1",
@@ -880,8 +863,8 @@
   {
     "Uid": "CH1_D",
     "ProductionAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
     "ResourcesAmount": {
       "Min": 0,
@@ -889,12 +872,16 @@
     },
     "CharactersAmount": {
       "Min": 0,
-      "Max": 0
+      "Max": 1
     },
-    "PieceAmount": 3,
+    "PieceAmount": 5,
     "PieceWeights": [
       {
         "Uid": "D1",
+        "Weight": 3
+      },
+      {
+        "Uid": "D2",
         "Weight": 1
       }
     ]
@@ -902,50 +889,66 @@
   {
     "Uid": "CH2_D",
     "ProductionAmount": {
-      "Min": 1,
-      "Max": 3
+      "Min": 0,
+      "Max": 1
     },
     "ResourcesAmount": {
       "Min": 0,
-      "Max": 0
+      "Max": 1
     },
     "CharactersAmount": {
       "Min": 0,
-      "Max": 0
+      "Max": 1
     },
-    "PieceAmount": 4,
+    "PieceAmount": 7,
     "PieceWeights": [
       {
         "Uid": "D1",
-        "Weight": 4,
+        "Weight": 3,
         "Override": true
       },
       {
         "Uid": "D2",
-        "Weight": 3,
+        "Weight": 2
+      },
+      {
+        "Uid": "D3",
+        "Weight": 2
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 2,
         "Override": true
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 1
       }
     ]
   },
   {
     "Uid": "CH3_D",
     "ProductionAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
     "ResourcesAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
     "CharactersAmount": {
       "Min": 1,
       "Max": 2
     },
-    "PieceAmount": 10,
+    "PieceAmount": 12,
     "PieceWeights": [
       {
         "Uid": "D1",
-        "Weight": 2,
+        "Weight": 1,
         "Override": true
       },
       {
@@ -954,7 +957,16 @@
         "Override": true
       },
       {
-        "Uid": "Soft1",
+        "Uid": "D3",
+        "Weight": 5,
+        "Override": true
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
+      },
+      {
+        "Uid": "Hard1",
         "Weight": 1
       }
     ]
