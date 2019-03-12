@@ -6,15 +6,37 @@ using UnityEngine;
 public class UIOfferWindowView : UIGenericPopupWindowView 
 {
     [IWUIBinding("#ButtonBuyLabel")] private NSText buyLabel;
+    [IWUIBinding("#SaleLabel")] private NSText sale;
+    
     [IWUIBinding("#FakePrice")] private NSText priceFake;
     [IWUIBinding("#RealPrice")] private NSText priceReal;
-    [IWUIBinding("#Product")] private NSText product;
-    [IWUIBinding("#SaleLabel")] private NSText sale;
+    
+    [IWUIBinding("#Product1")] private NSText product1;
+    [IWUIBinding("#Product2")] private NSText product2;
+    [IWUIBinding("#Product3")] private NSText product3;
+    [IWUIBinding("#Product4")] private NSText product4;
+    
+    [IWUIBinding("#Line")] private GameObject line;
     
     [IWUIBinding("#ButtonBuy")] private UIButtonViewController btnBuy;
 
+    private List<NSText> products;
+
     private bool isClick;
-    
+
+    public override void InitView(IWWindowModel model, IWWindowController controller)
+    {
+        base.InitView(model, controller);
+        
+        products = new List<NSText>
+        {
+            product1,
+            product2,
+            product3,
+            product4,
+        };
+    }
+
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -25,11 +47,27 @@ public class UIOfferWindowView : UIGenericPopupWindowView
         
         SetTitle(windowModel.Title);
         buyLabel.Text = windowModel.Button;
-
+        
+        priceFake.TextLabel.color = new Color(1, 1, 1, 0.5f);
+        
         priceFake.Text = (windowModel.Product.Price.Amount + windowModel.Product.Price.Amount * windowModel.Product.Sale * 0.01f).ToString();
         priceReal.Text = windowModel.Product.Price.Amount.ToString();
         
         sale.Text = $"-{windowModel.Product.Sale}%";
+        
+        line.SetActive(windowModel.Product.Products.Count > 2);
+
+        for (var i = 0; i < products.Count; i++)
+        {
+            var label = products[i];
+            var isActive = i < windowModel.Product.Products.Count;
+
+            label.gameObject.SetActive(isActive);
+
+            if (isActive == false) break;
+
+            label.Text = windowModel.Product.Products[i].ToStringIcon();
+        }
     }
     
     public override void OnViewShowCompleted()
