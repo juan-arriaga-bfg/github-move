@@ -153,6 +153,8 @@ public class BoardManipulatorComponent : ECSEntity,
             cachedDragDownPos = pos + Vector2.up * 0.5f;
             cameraManipulator.CameraMove.Lock(this);
             isDrag = true;
+            
+            
         }
     }
 
@@ -266,7 +268,7 @@ public class BoardManipulatorComponent : ECSEntity,
                 var fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
                 
                 pieceView.OnDragEnd(boardPos, pos);
-                
+
                 if ((cachedDragDownPos - pos).sqrMagnitude > 0.01f && !isTouch)
                 {
                     var targetPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
@@ -314,10 +316,12 @@ public class BoardManipulatorComponent : ECSEntity,
                     cachedViewForDrag.CachedTransform.DOLocalMove(targetPos, duration).OnComplete(() =>
                         {
                             pieceView.Piece?.ViewDefinition?.OnDrag(true);
-                            cachedViewForDrag = null;
+                            // cachedViewForDrag = null;
                             cameraManipulator.CameraMove.UnLock(this);
                         })
                         .SetId(dragAnimationId);
+                    
+                    cachedViewForDrag = null;
                 }
             }
             

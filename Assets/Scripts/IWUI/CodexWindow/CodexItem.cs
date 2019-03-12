@@ -246,6 +246,7 @@ public class CodexItem : IWUIWindowViewController
         foreach (var sprite in IconSprites)
         {
             sprite.color = COLOR_TRANSPARENT;
+            sprite.material = unlokedMaterial;
         }
         
         icon.transform.localScale = Vector3.one * 0.15f;
@@ -261,6 +262,7 @@ public class CodexItem : IWUIWindowViewController
         Vector3 shineScale = shine.transform.localScale;
 
         DOTween.Sequence()
+            .SetId(icon)
             .Insert(tweenStartTime, shine.transform.DOScale(Vector3.zero, tweenTime).SetEase(Ease.InOutBack).SetId(icon))
             .InsertCallback(tweenStartTime, () =>
             {
