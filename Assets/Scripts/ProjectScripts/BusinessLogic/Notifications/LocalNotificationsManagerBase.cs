@@ -37,7 +37,41 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
         ScheduleAllOnDevice();
         notifyItems.Clear();
 #endif
+        
+#if DEBUG
         isDebugSchedule = true;
+#endif
+    }
+    
+    public void DebugScheduleAll()
+    {
+        var notifyTypes = NotifyType.NotifyTypes;
+        notifyItems.Clear();
+#if UNITY_EDITOR
+        foreach (var notifyType in notifyTypes)
+        {
+            var notify = GenerateNotify(new Notifier(null, notifyType));
+            notifyItems.Add(notify);
+        }
+        Print();
+#else
+        CancelAllOnDevice();
+        TimeSpan timeShift = new TimeSpan(0, 0, 5);
+        foreach (var notifyType in notifyTypes)
+        {
+            var notify = GenerateNotify(new Notifier(null, notifyType));
+            notify.NotifyTime = DateTime.UtcNow + timeShift;
+            timeShift = timeShift.Add(new TimeSpan(0, 0, 5));
+            notifyItems.Add(notify);
+        }
+        ScheduleAllOnDevice();
+#endif
+        
+        notifyItems.Clear();
+        
+#if DEBUG        
+        isDebugSchedule = true;
+#endif
     }
     
     public void RegisterNotifier(Notifier notifier)
@@ -133,11 +167,17 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
 
         var title = LocalizationService.Current.GetTextByUid(titleKey, titleKey);
         var message = LocalizationService.Current.GetTextByUid(messageKey, messageKey);
+
+        DateTime notifyDate = new DateTime(0);
         
-        var notifyDate = notifier.Timer.UseUTC ? notifier.Timer.CompleteTime.ToLocalTime() : notifier.Timer.CompleteTime;
-        if (notifier.NotifyType.TimeCorrector != null)
-            notifyDate = notifier.NotifyType.TimeCorrector(notifyDate);
-        notifyDate = CorrectTime(notifyDate);
+        if (notifier.Timer != null)
+        {
+            notifyDate = notifier.Timer.UseUTC ? notifier.Timer.CompleteTime.ToLocalTime() : notifier.Timer.CompleteTime;
+            if (notifier.NotifyType.TimeCorrector != null)
+                notifyDate = notifier.NotifyType.TimeCorrector(notifyDate);
+            notifyDate = CorrectTime(notifyDate);    
+        }
+        
         return new Notification(id, title, message, notifyDate);
     }
 

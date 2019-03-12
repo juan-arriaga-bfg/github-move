@@ -15,4 +15,11 @@ public interface ILocalNotificationsManager
     void UnRegisterNotifier(TimerComponent timer);
 
     void Cleanup();
+    
+    // Schedule actual notifications - list is the same as if we are going to background right now
+    // But with "fixed" timing
+    void DebugSchedule();
+
+    // Schedule ALL notifications, no matter have conditions met or not
+    void DebugScheduleAll();
 }

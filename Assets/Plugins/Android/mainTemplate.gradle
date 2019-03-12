@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:15.0.2'
     implementation (name: 'UnityAds', ext: 'aar')
     implementation project(':bfgunityandroid')
+	implementation (name: 'simple-android-notifications', ext:'aar')
 }
 
 android {

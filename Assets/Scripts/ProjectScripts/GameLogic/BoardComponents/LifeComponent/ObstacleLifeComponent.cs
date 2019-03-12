@@ -13,7 +13,7 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
             var message = LocalizationService.Get("gameboard.bubble.message.obstacle", "gameboard.bubble.message.obstacle\n{0}?");
 
             return isLast
-                ? string.Format(message, DateTimeExtension.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current)))
+                ? string.Format(message, DateTimeExtension.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current), true))
                 : message.Replace("\n{0}", "");
         }
     }

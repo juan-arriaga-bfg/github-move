@@ -3,7 +3,7 @@ public class NotificationServiceInitComponent : AsyncInitComponentBase
     public override void Execute()
     {
         //init notificationmanager
-        BfgLocalNotificationsManagerBase notifyManager = new BfgLocalNotificationsManagerBase();
+        SimpleAndroidNotificationsLocalNotificationsManager notifyManager = new SimpleAndroidNotificationsLocalNotificationsManager();
         notifyManager.CancelNotifications();
         LocalNotificationsService.Instance.SetManager(notifyManager);
 
