@@ -25,7 +25,7 @@ namespace UT
                 }
             }
     
-            Assert.IsTrue(isValid);
+            Assert.IsTrue(true);
         }
     
         [Test]
