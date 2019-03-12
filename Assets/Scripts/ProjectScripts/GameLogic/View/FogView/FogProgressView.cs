@@ -32,9 +32,12 @@ public class FogProgressView : UIBoardView
 
         SetText(fog.AlreadyPaid.Amount);
         line.sizeDelta = lineFake.sizeDelta = new Vector2(Progress(line, fog.Def.Condition.Amount, fog.AlreadyPaid.Amount, out var time), line.sizeDelta.y);
-        
-        DOTween.Kill(light);
+    }
 
+    private void StartHighlight()
+    {
+        DOTween.Kill(light);
+        
         DOTween.Sequence().SetId(light).SetLoops(int.MaxValue)
             .SetEase(Ease.InOutSine)
             .Append(light.DOFade(0.5f, 0.3f))
@@ -82,16 +85,26 @@ public class FogProgressView : UIBoardView
     }
     
     public void UpdateFakeProgress(int value)
-    {
+    {   
         DOTween.Kill(lineFake);
+        
 
         var progressValue = value;
         progressValue = Mathf.Clamp(fog.AlreadyPaid.Amount + progressValue, fog.AlreadyPaid.Amount, fog.Def.Condition.Amount);
-        
+
+        var progress = Progress(lineFake, fog.Def.Condition.Amount, progressValue, out var time);
         lineFake
-            .DOSizeDelta(new Vector2(Progress(lineFake, fog.Def.Condition.Amount, progressValue, out var time), lineFake.sizeDelta.y), time * 0.5f)
+            .DOSizeDelta(new Vector2(progress, lineFake.sizeDelta.y), time * 0.5f)
             .SetId(lineFake)
-            .SetEase(Ease.Linear);
+            .SetEase(Ease.Linear)
+            .OnStart(() =>
+            {
+                if(value > 0) StartHighlight();
+            })
+            .OnComplete(() =>
+            {
+                if(value == 0) DOTween.Kill(light);
+            });
 
         if (value > 0)
         {
