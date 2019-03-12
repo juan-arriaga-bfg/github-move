@@ -381,6 +381,25 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "14_CreatePiece_B3", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Hard}, true);
                 break;
             }
+            case 25: // offer 1
+            {
+                step = new OfferStep{Target = 1, IsIgnoreUi = true};
+                
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "21_OpenChest", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckTimerCompleteTutorialCondition {Target = BoardService.Current.FirstBoard.MarketLogic.OfferTimer, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = 1, Currency = new List<string>{Currency.Offer.Name}, ConditionType = TutorialConditionType.Hard}, true);
+                break;
+            }
+            case 26: // offer 2
+            {
+                step = new OfferStep{Target = 2, IsIgnoreUi = true};
+                
+                step.RegisterComponent(new CheckStepTutorialCondition {Target = 25, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition {Target = 10, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckTimerCompleteTutorialCondition {Target = BoardService.Current.FirstBoard.MarketLogic.OfferTimer, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = 2, Currency = new List<string>{Currency.Offer.Name}, ConditionType = TutorialConditionType.Hard}, true);
+                break;
+            }
             default:
                 return null;
         }

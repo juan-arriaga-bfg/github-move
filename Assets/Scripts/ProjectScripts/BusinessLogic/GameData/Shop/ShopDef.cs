@@ -10,6 +10,7 @@ public class ShopDef
     public CurrencyPair Price;
     public bool IsPermanent;
     public int Sale;
+    public int Delay;
     
     
     public ShopDef Copy()
@@ -29,7 +30,9 @@ public class ShopDef
             PurchaseKey = this.PurchaseKey,
             Price = new CurrencyPair{Currency = this.Price.Currency, Amount = this.Price.Amount},
             Products = products,
-            IsPermanent = this.IsPermanent
+            IsPermanent = this.IsPermanent,
+            Sale = this.Sale,
+            Delay = this.Delay
         };
     }
 }

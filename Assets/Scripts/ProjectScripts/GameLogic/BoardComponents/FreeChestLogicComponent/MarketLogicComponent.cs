@@ -5,11 +5,13 @@
 
 	public TimerComponent ResetMarketTimer { get; } = new TimerComponent();
 	public TimerComponent ResetEnergyTimer { get; } = new TimerComponent();
+	public TimerComponent OfferTimer { get; } = new TimerComponent();
 
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		RegisterComponent(ResetMarketTimer, true);
 		RegisterComponent(ResetEnergyTimer, true);
+		RegisterComponent(OfferTimer, true);
 		
 		LocalNotificationsService.Current.RegisterNotifier(new Notifier(ResetMarketTimer, NotifyType.MarketRefresh));
 		LocalNotificationsService.Current.RegisterNotifier(new Notifier(ResetEnergyTimer, NotifyType.FreeEnergyRefill));
@@ -27,8 +29,9 @@
 
 		if (save != null && string.IsNullOrEmpty(save.ResetMarketStartTime) == false) ResetMarketTimer.Start(long.Parse(save.ResetMarketStartTime));
 		else ResetMarketTimer.Start();
-		
-		if (save != null && string.IsNullOrEmpty(save.ResetEnergyStartTime) == false) ResetEnergyTimer.Start(long.Parse(save.ResetEnergyStartTime));
+
+		if (save == null) return;
+		if (string.IsNullOrEmpty(save.ResetEnergyStartTime) == false) ResetEnergyTimer.Start(long.Parse(save.ResetEnergyStartTime));
 	}
 
     public override void OnUnRegisterEntity(ECSEntity entity)

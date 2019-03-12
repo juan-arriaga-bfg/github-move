@@ -78,8 +78,7 @@ public class UIOfferWindowView : UIGenericPopupWindowView
 		    
             if (isOk == false) return;
             
-            Analytics.SendPurchase("shop_offer", "item1", new List<CurrencyPair>{windowModel.Product.Price}, new List<CurrencyPair>(windowModel.Product.Products), true, false);
-            Controller.CloseCurrentWindow();
+            PurchaseComplete();
         });
     }
 
@@ -87,7 +86,7 @@ public class UIOfferWindowView : UIGenericPopupWindowView
     {
         var windowModel = Model as UIOfferWindowModel;
         var flyPosition = GetComponentInChildren<Canvas>().worldCamera.WorldToScreenPoint(btnBuy.transform.position);
-	    
+        
         var transactions = CurrencyHelper.PurchaseAsync(windowModel.Product.Products, success =>
         {
             if (success == false ) return;
@@ -99,8 +98,16 @@ public class UIOfferWindowView : UIGenericPopupWindowView
         {
             transaction.Complete();
         }
-	    
-        Analytics.SendPurchase("shop_offer", "item1", new List<CurrencyPair>{windowModel.Product.Price}, new List<CurrencyPair>(windowModel.Product.Products), true, false);
+
+        PurchaseComplete();
+    }
+
+    private void PurchaseComplete()
+    {
+        var windowModel = Model as UIOfferWindowModel;
+        
+        CurrencyHelper.Purchase(Currency.Offer.Name, 1);
+        Analytics.SendPurchase($"shop_{Currency.Offer.Name.ToLower()}", "item1", new List<CurrencyPair>{windowModel.Product.Price}, new List<CurrencyPair>(windowModel.Product.Products), true, false);
         Controller.CloseCurrentWindow();
     }
 }

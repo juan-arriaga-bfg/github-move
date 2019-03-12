@@ -10,6 +10,7 @@ public class MarketSaveComponent : ECSEntity, IECSSerializeable
     
     [JsonProperty] public string ResetMarketStartTime;
     [JsonProperty] public string ResetEnergyStartTime;
+    [JsonProperty] public string OfferTimerStartTime;
     
     private List<MarketSaveItem> slots;
 
@@ -30,6 +31,8 @@ public class MarketSaveComponent : ECSEntity, IECSSerializeable
         
         ResetMarketStartTime = board.MarketLogic.ResetMarketTimer.StartTimeLong.ToString();
         ResetEnergyStartTime = board.MarketLogic.ResetEnergyTimer.StartTimeLong.ToString();
+
+        if (board.MarketLogic.OfferTimer.IsExecuteable()) OfferTimerStartTime = board.MarketLogic.OfferTimer.StartTimeLong.ToString();
         
         slots = new List<MarketSaveItem>();
 

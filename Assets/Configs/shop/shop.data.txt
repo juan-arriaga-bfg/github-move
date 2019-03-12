@@ -236,6 +236,29 @@
     "Icon": "OfferShopIcon1",
     "Name": "window.shop.offer.item1",
     "PurchaseKey": "iap7",
-    "Sale": 30
+    "Sale": 30,
+    "Delay": 60
+  },
+  {
+    "Uid": "Offer",
+    "Products": [
+      {
+        "Currency": "Crystals",
+        "Amount": 2000
+      },
+      {
+        "Currency": "Coins",
+        "Amount": 10000
+      }
+    ],
+    "Price": {
+      "Currency": "Cash",
+      "Amount": 100
+    },
+    "Icon": "OfferShopIcon2",
+    "Name": "window.shop.offer.item2",
+    "PurchaseKey": "iap8",
+    "Sale": 30,
+    "Delay": 60
   }
 ]

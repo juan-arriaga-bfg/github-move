@@ -9,6 +9,7 @@ public enum UiLockTutorialItem
 	Orders,
 	Remove,
 	Daily,
+	Offer
 }
 
 public class UiLockTutorialStep : BaseTutorialStep

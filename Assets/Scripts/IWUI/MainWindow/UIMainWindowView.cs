@@ -19,6 +19,7 @@ public class UIMainWindowView : UIBaseWindowView
     [SerializeField] private CanvasGroup ordersCanvasGroup;
     [SerializeField] private CanvasGroup removeCanvasGroup;
     [SerializeField] private CanvasGroup dailyCanvasGroup;
+    [SerializeField] private CanvasGroup offerCanvasGroup;
     
     [IWUIBinding("#QuestsList")] private ScrollRect questListScroll;
     [IWUIBinding("#QuestListViewport")] private RectTransform questListViewport;
@@ -104,6 +105,9 @@ public class UIMainWindowView : UIBaseWindowView
                 break;
             case UiLockTutorialItem.Daily:
                 target = dailyCanvasGroup;
+                break;
+            case UiLockTutorialItem.Offer:
+                target = offerCanvasGroup;
                 break;
             default:
                 return;
@@ -206,6 +210,11 @@ public class UIMainWindowView : UIBaseWindowView
     private void UpdateCodexButton()
     {
         codexButton.UpdateState();
+    }
+
+    public void OnClickOffer()
+    {
+        UIService.Get.ShowWindow(UIWindowType.OfferWindow);
     }
     
     public void OnClickCodex()
