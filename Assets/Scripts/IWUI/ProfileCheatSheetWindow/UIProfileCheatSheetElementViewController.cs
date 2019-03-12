@@ -21,6 +21,7 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
     [IWUIBinding("#BtnSave")] private UIButtonViewController btnDlgSave;
     [IWUIBinding("#BtnLoad")] private UIButtonViewController btnDlgLoad;
     [IWUIBinding("#BtnDel")]  private UIButtonViewController btnDel;
+    [IWUIBinding("#BtnSend")]  private UIButtonViewController btnSend;
 
     private UIProfileCheatSheetElementEntity targetEntity;
     private UIProfileCheatSheetSlotData slotData;
@@ -77,9 +78,32 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
             ProfileSlots.Delete(slotData.SlotPath);
             RefreshAfterChange();
         });
+        
+        btnSend.OnClick(() =>
+        {
+            SendProfile();
+        });
 
         bool active = slotData.SlotPath == ProfileSlots.ActiveSlot;
         btnDel.gameObject.SetActive(!active);
+    }
+
+    private void SendProfile()
+    {
+        var dataMapper = ProfileSlots.GetDataMapper(slotData.SlotPath);
+        var text = dataMapper.GetJsonDataAsString();
+        
+        TextEditor te = new TextEditor();
+        te.text = text;
+        te.SelectAll();
+        te.Copy();
+        
+        Debug.LogWarning("[UIProfileCheatSheetElementViewController] => SendProfile: Profile text copied to clipboard");
+        
+#if !UNITY_EDITOR
+        string fileName = Application.persistentDataPath + "/profile.json";
+        NativeShare.Share(null, fileName, null, "Share profile json", "text/plain", true);
+#endif
     }
 
 
