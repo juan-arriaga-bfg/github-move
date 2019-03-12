@@ -100,9 +100,9 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
         
         Debug.LogWarning("[UIProfileCheatSheetElementViewController] => SendProfile: Profile text copied to clipboard");
         
-#if !UNITY_EDITOR
-        string fileName = Application.persistentDataPath + "/profile.json";
-        NativeShare.Share(null, fileName, null, "Share profile json", "text/plain", true);
+#if !UNITY_EDITOR 
+        // string fileName = Application.persistentDataPath + "/profile.json";
+        NativeShare.Share(text, null, null,  "Share profile json", "text/plain", true);
 #endif
     }
 
