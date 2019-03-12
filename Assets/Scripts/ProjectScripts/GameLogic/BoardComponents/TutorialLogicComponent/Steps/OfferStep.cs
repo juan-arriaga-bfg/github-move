@@ -1,4 +1,6 @@
-﻿public class OfferStep : BaseTutorialStep
+﻿using UnityEngine;
+
+public class OfferStep : BaseTutorialStep
 {
     public int Target;
     
@@ -30,6 +32,8 @@
         
         if (save != null && string.IsNullOrEmpty(save.OfferTimerStartTime) == false) timer.Start(long.Parse(save.OfferTimerStartTime));
         else timer.Start();
+        
+        if (timer.GetProgress() >= 1) return;
         
         window.ChangeVisibility(UiLockTutorialItem.Offer, false, true);
         
