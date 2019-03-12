@@ -262,6 +262,7 @@ public class CodexItem : IWUIWindowViewController
         Vector3 shineScale = shine.transform.localScale;
 
         DOTween.Sequence()
+            .SetId(icon)
             .Insert(tweenStartTime, shine.transform.DOScale(Vector3.zero, tweenTime).SetEase(Ease.InOutBack).SetId(icon))
             .InsertCallback(tweenStartTime, () =>
             {
