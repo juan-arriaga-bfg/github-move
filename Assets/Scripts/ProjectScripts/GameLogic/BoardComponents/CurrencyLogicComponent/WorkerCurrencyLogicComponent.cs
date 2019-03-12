@@ -76,6 +76,13 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     
     public bool Get(BoardPosition id, TimerComponent timer)
     {
+        foreach (var pair in completeTimesList)
+        {
+            if (pair.Key.Equals(id) == false) continue;
+
+            return false;
+        }
+        
         if (CurrencyHelper.IsCanPurchase(targetItem.Currency, 1) == false)
         {
             completeTimesList.Sort((a, b) => a.Value.CompleteTime.CompareTo(b.Value.CompleteTime));
