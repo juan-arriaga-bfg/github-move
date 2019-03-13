@@ -785,7 +785,7 @@
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "NPC_BIcon",
+        "Ico": "NPC_DIcon",
         "Title": "quest.complete.orders.title",
         "Message": "quest.complete.orders.message"
       }
@@ -977,7 +977,7 @@
   {
     "$type": "TaskKillTreeEntity, GameAssembly",
     "Id": "89_KillTree",
-    "TargetValue": 8,
+    "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "OB9_A",
@@ -1024,44 +1024,130 @@
     }
   },
   {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "93_CreatePiece_B4",
+    "PieceUid": "B4",
+    "TargetValue": 4,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "94_CreatePiece_C3",
+    "PieceUid": "C3",
+    "TargetValue": 15,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskUseMineEntity, GameAssembly",
+    "Id": "95_UseMine",
+    "PieceUid": "MN_C",
+    "TargetValue": 12,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "MN_C",
+        "Title": "quest.use.mine.title",
+        "Message": "quest.use.mine.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskUseMineEntity, GameAssembly",
+    "Id": "96_UseMine",
+    "PieceUid": "MN_B",
+    "TargetValue": 10,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "MN_B",
+        "Title": "quest.use.mine.title",
+        "Message": "quest.use.mine.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "97_CreatePiece_D3",
+    "PieceUid": "D3",
+    "TargetValue": 10,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCompleteOrderEntity, GameAssembly",
+    "Id": "98_CompleteOrder",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "NPC_EIcon",
+        "Title": "quest.complete.orders.title",
+        "Message": "quest.complete.orders.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCompleteOrderEntity, GameAssembly",
+    "Id": "99_CompleteOrder",
+    "TargetValue": 5,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "NPC_FIcon",
+        "Title": "quest.complete.orders.title",
+        "Message": "quest.complete.orders.message"
+      }
+    }
+  },
+  {
     "$type": "TaskCompleteDailyTaskEntity, GameAssembly",
     "Id": "Daily_ClearAll",
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 1
-          },
-          {
-            "Currency": "Boost_CR1",
-            "Amount": 2
-          },
-          {
-            "Currency": "Hard2",
-            "Amount": 1
-          },
-          {
             "Currency": "Soft4",
             "Amount": 1
           },
           {
-            "Currency": "Boost_CR2",
-            "Amount": 2
+            "Currency": "SK3_PR",
+            "Amount": 1
           },
           {
             "Currency": "Hard3",
-            "Amount": 2
+            "Amount": 1
           },
           {
-            "Currency": "Hard3",
+            "Currency": "Soft5",
+            "Amount": 1
+          },
+          {
+            "Currency": "Boost_CR",
+            "Amount": 1
+          },
+          {
+            "Currency": "Hard4",
+            "Amount": 1
+          },
+          {
+            "Currency": "Hard5",
             "Amount": 1
           }
         ]
       },
       "QuestDescriptionComponent": {
         "Ico": "icon_daily_objectives",
-        "Message": "Clear all objectives"
+        "Message": "quest.daily.message"
       }
     }
   },
@@ -1182,7 +1268,7 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Message": "quest.сurrency.сollect.soft.message"
+        "Message": "quest.currency.collect.soft.message"
       }
     }
   },

@@ -60,14 +60,27 @@
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
       "7_CreatePiece_PR_A5",
-      "9_CreatePiece_PR_C5",
-      "16_CompleteOrder"
+      "9_CreatePiece_PR_C5"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
         "Id": "FogCleared",
         "Value": "Fog 3"
+      }
+    ]
+  },
+  {
+    "Id": 6,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "16_CompleteOrder"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
+        "Id": "PieceUnlocked",
+        "Value": "NPC_B"
       }
     ]
   },
@@ -607,9 +620,9 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
-        "Id": "QuestCompleted",
-        "Value": "52_KillField"
+        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
+        "Id": "PieceUnlocked",
+        "Value": "NPC_C"
       }
     ]
   },
@@ -792,12 +805,7 @@
       {
         "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
         "Id": "PieceUnlocked",
-        "Value": "NPC_C"
-      },
-      {
-        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
-        "Id": "QuestCompleted",
-        "Value": "30_CreatePiece_A8"
+        "Value": "NPC_D"
       }
     ]
   },
@@ -977,9 +985,9 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
-        "Id": "QuestCompleted",
-        "Value": "77_CreatePiece_A4"
+        "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
+        "Id": "FogCleared",
+        "Value": "Fog 7"
       }
     ]
   },
@@ -1064,6 +1072,104 @@
         "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
         "Id": "QuestCompleted",
         "Value": "41_UseWorker"
+      }
+    ]
+  },
+  {
+    "Id": 82,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "93_CreatePiece_B4"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "47_CreatePiece_D3"
+      }
+    ]
+  },
+  {
+    "Id": 83,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "94_CreatePiece_C3"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "93_CreatePiece_B4"
+      }
+    ]
+  },
+  {
+    "Id": 84,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "96_UseMine"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "94_CreatePiece_C3"
+      }
+    ]
+  },
+  {
+    "Id": 85,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "97_CreatePiece_D3"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "96_UseMine"
+      }
+    ]
+  },
+  {
+    "Id": 86,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "95_UseMine"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "97_CreatePiece_D3"
+      }
+    ]
+  },
+  {
+    "Id": 87,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "98_CompleteOrder"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
+        "Id": "PieceUnlocked",
+        "Value": "NPC_E"
+      }
+    ]
+  },
+  {
+    "Id": 88,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "99_CompleteOrder"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
+        "Id": "PieceUnlocked",
+        "Value": "NPC_F"
       }
     ]
   }
