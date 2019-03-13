@@ -90,18 +90,34 @@ public class UIQuestCheatSheetElementViewController : UIContainerElementViewCont
             stateController.SetStarted();
             targetQuest.ForceComplete();
 
-            var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
-            model.Init(targetQuest, null, null);
-            model.TestMode = true;
+            QueueActionComponent queueItem;
+            
+            if (UiQuestButton.ShowCharUnlockedWindow(targetQuest))
+            {
+                queueItem = new QueueActionComponent()
+                           .AddCondition(new WindowClosedQueueConditionComponent
+                            {
+                                Windows = new HashSet<string> {UIWindowType.CharacterUnlockedWindow}
+                            })
+                           .SetAction(() => { stateController.SetDone(); });
+            }
+            else
+            {
+                var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
+                model.Init(targetQuest, null, null);
+                model.TestMode = true;
 
-            UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
+                UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
 
-            var queueItem = new QueueActionComponent()
+                queueItem = new QueueActionComponent()
                            .AddCondition(new WindowClosedQueueConditionComponent
                             {
                                 Windows = new HashSet<string> {UIWindowType.QuestStartWindow}
                             })
                            .SetAction(() => { stateController.SetDone(); });
+            }
+            
+
             ProfileService.Current.QueueComponent.AddAction(queueItem, false);
         });
     }

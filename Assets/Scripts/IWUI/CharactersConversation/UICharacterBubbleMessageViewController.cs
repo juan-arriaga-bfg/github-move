@@ -89,7 +89,7 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView, ITe
 
     private void SetCharRelatedData(ConversationActionBubbleEntity data)
     {
-        UICharacterDef charDef = UiCharacterData.GetDef(data.CharacterId);
+        UICharacterDef charDef = UiCharacterData.GetDefByCharId(data.CharacterId);
         headerBack.color = charDef.Color;
         header.Text = LocalizationService.Get(charDef.Name, charDef.Name);
     }

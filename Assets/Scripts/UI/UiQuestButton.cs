@@ -284,10 +284,36 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             return;
         }
 
-        var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
-        model.Init(Quest, null, null);
+        if (!ShowCharUnlockedWindow(Quest))
+        {
+            var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
+            model.Init(Quest, null, null);
         
-        UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
+            UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
+        }
+    }
+
+    public static bool ShowCharUnlockedWindow(QuestEntity quest)
+    {
+        var task = quest.Tasks[0];
+        var createPieceTask = task as IHavePieceId;
+        if (createPieceTask == null)
+        {
+            return false;
+        }
+
+        var pieceId = createPieceTask.PieceId;
+        if (!PieceType.GetDefById(pieceId).Filter.Has(PieceTypeFilter.Character))
+        {
+            return false;
+        }
+        
+        var model = UIService.Get.GetCachedModel<UICharacterUnlockedWindowModel>(UIWindowType.CharacterUnlockedWindow);
+        model.Quest = quest;
+        model.TestMode = false;
+        UIService.Get.ShowWindow(UIWindowType.CharacterUnlockedWindow);
+
+        return true;
     }
     
     private void ShowQuestWindow()

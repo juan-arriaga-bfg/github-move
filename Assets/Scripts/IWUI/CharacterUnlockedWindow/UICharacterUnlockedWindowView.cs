@@ -1,5 +1,8 @@
+using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using BfgAnalytics;
 
 public class UICharacterUnlockedWindowView : UIGenericWindowView
 {
@@ -20,7 +23,7 @@ public class UICharacterUnlockedWindowView : UIGenericWindowView
     protected UICharacterViewController cachedCharacter = null;
     
     private int tapAnimationId = Animator.StringToHash("Tap");
-    
+
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -34,7 +37,7 @@ public class UICharacterUnlockedWindowView : UIGenericWindowView
         rewardsLabel.Text = windowModel.RewardsString;
 
         // set character name
-        UICharacterDef charDef = UiCharacterData.GetDef(windowModel.CharacterId);
+        UICharacterDef charDef = UiCharacterData.GetDefByCharId(windowModel.CharacterId);
         characterNameLabel.Text = LocalizationService.Get(charDef.Name, charDef.Name);
         
         isClick = true;
@@ -67,7 +70,26 @@ public class UICharacterUnlockedWindowView : UIGenericWindowView
             cachedCharacter = null;
         }
     }
-    
+
+    private void CompleteQuestAndProvideReward(Action onComplete)
+    {
+        UICharacterUnlockedWindowModel model = Model as UICharacterUnlockedWindowModel;
+
+        if (!model.TestMode)
+        {
+            model.Quest.SetClaimedState();
+            GameDataService.Current.QuestsManager.FinishQuest(model.Quest.Id);
+        }
+        
+        var reward = model.Rewards;
+        CurrencyHelper.Purchase(reward, success =>
+        {
+            Analytics.SendPurchase("screen_quest", "item1", null, new List<CurrencyPair>(reward), false, false);
+            TackleBoxEvents.SendQuestComplete();
+            onComplete();
+        }, new Vector2(Screen.width / 2f, Screen.height / 2f));
+    }
+
     public override void AnimateShow()
     {
         base.AnimateShow();
@@ -126,7 +148,10 @@ public class UICharacterUnlockedWindowView : UIGenericWindowView
         {
             viewAnimators[i].SetTrigger(tapAnimationId);
         }
-                
-        Controller.CloseCurrentWindow();
+
+        CompleteQuestAndProvideReward(() =>
+        {
+            Controller.CloseCurrentWindow();
+        });
     }
 }
