@@ -1269,7 +1269,7 @@
       "Level": "10",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 350
+        "Amount": 300
       },
       "Reward": {
         "Currency": "Experience",
@@ -1398,7 +1398,7 @@
       "Level": "11",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 500
+        "Amount": 350
       },
       "Reward": {
         "Currency": "Experience",
@@ -1501,7 +1501,7 @@
       "Level": "12",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 600
+        "Amount": 350
       },
       "Reward": {
         "Currency": "Experience",
@@ -1729,12 +1729,8 @@
             "Y": 12
           },
           {
-            "X": 28,
+            "X": 30,
             "Y": 11
-          },
-          {
-            "X": 29,
-            "Y": 12
           }
         ],
         "Boost_CR1": [
@@ -1757,10 +1753,6 @@
           {
             "X": 25,
             "Y": 13
-          },
-          {
-            "X": 30,
-            "Y": 11
           }
         ],
         "CH_NPC": [
@@ -1781,15 +1773,9 @@
             "Y": 13
           }
         ],
-        "Hard1": [
+        "MN_E": [
           {
             "X": 28,
-            "Y": 12
-          }
-        ],
-        "Boost_WR": [
-          {
-            "X": 29,
             "Y": 11
           }
         ]

@@ -679,7 +679,7 @@
       {
         "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
         "Id": "FogCleared",
-        "Value": "Fog 11"
+        "Value": "Fog 12"
       }
     ]
   },
@@ -1125,9 +1125,9 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
-        "Id": "QuestCompleted",
-        "Value": "96_UseMine"
+        "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
+        "Id": "FogCleared",
+        "Value": "Fog 11"
       }
     ]
   },
@@ -1141,7 +1141,7 @@
       {
         "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
         "Id": "QuestCompleted",
-        "Value": "97_CreatePiece_D3"
+        "Value": "96_UseMine"
       }
     ]
   },
