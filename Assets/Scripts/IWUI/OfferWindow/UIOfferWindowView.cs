@@ -167,7 +167,7 @@ public class UIOfferWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIOfferWindowModel;
         
         CurrencyHelper.Purchase(Currency.Offer.Name, 1);
-        Analytics.SendPurchase($"shop_{Currency.Offer.Name.ToLower()}", "item1", new List<CurrencyPair>{windowModel.Product.Price}, new List<CurrencyPair>(windowModel.Product.Products), true, false);
+        Analytics.SendPurchase($"shop_{Currency.Offer.Name.ToLower()}", $"item{windowModel.ProductIndex}", new List<CurrencyPair>{windowModel.Product.Price}, new List<CurrencyPair>(windowModel.Product.Products), true, false);
         Controller.CloseCurrentWindow();
     }
 }

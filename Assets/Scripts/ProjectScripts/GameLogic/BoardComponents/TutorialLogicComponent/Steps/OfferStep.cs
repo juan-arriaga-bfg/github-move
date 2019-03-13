@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class OfferStep : BaseTutorialStep
+﻿public class OfferStep : BaseTutorialStep
 {
     public int Target;
     
@@ -42,6 +40,7 @@ public class OfferStep : BaseTutorialStep
             var model = UIService.Get.GetCachedModel<UIOfferWindowModel>(UIWindowType.OfferWindow);
 
             model.Product = def;
+            model.ProductIndex = Target;
             
             UIService.Get.ShowWindow(UIWindowType.OfferWindow);
         });

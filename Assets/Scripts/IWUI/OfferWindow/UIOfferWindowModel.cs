@@ -4,16 +4,18 @@ public class UIOfferWindowModel : IWWindowModel
     public string Button => LocalizationService.Get("common.button.buyNow", "common.button.buyNow");
     
     public ShopDef Product;
+    public int ProductIndex;
     
     public string PriceFake
     {
         get
         {
-            var ret = IapService.Current.GetLocalizedPriceStr(Product.PurchaseKey);
-            
-            if (string.IsNullOrEmpty(ret)) ret = $"${Product.Price.Amount}";
+            var price = (IapService.Current.GetPriceAsNumber(Product.PurchaseKey) * 1000000 * (1 + Product.Sale * 0.01f)) / 1000000;
 
-            return ret;
+            if (price > 0) return IapService.Current.GetLocalizedPriceStr(Product.PurchaseKey).Replace(IapService.Current.GetPriceAsNumber(Product.PurchaseKey).ToString(), price.ToString());
+            
+            price = Product.Price.Amount * (1 + Product.Sale * 0.01f);
+            return $"${price}";
         }
     }
 
