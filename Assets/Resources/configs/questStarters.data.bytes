@@ -1052,5 +1052,19 @@
         "Value": "75_CreatePiece_NPC_C3"
       }
     ]
+  },
+  {
+    "Id": 81,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "42_UseMine"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "41_UseWorker"
+      }
+    ]
   }
 ]
