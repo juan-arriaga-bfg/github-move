@@ -71,8 +71,8 @@
     tools:replace="android:value"/>
     
     <!-- Local notifications -->
-    <receiver android:name="com.hippogames.simpeleandroidnotifications.Controller"/>
-    <receiver android:name="com.hippogames.simpeleandroidnotifications.RebootManager">
+    <receiver android:name="com.hippogames.simpleandroidnotifications.Controller"/>
+    <receiver android:name="com.hippogames.simpleandroidnotifications.RebootManager">
         <intent-filter>
             <action android:name="android.intent.action.BOOT_COMPLETED"/>
         </intent-filter>
