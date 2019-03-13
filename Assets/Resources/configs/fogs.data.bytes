@@ -1601,7 +1601,7 @@
       "Level": "13",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 1000
+        "Amount": 400
       },
       "Reward": {
         "Currency": "Experience",
@@ -1786,13 +1786,14 @@
       "Level": "14",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 100000
+        "Amount": 500
       },
       "Reward": {
         "Currency": "Experience",
         "Amount": 10
       },
       "IsActive": true,
+      "Hero": "NPC_E",
       "Positions": [
         {
           "X": 21,
