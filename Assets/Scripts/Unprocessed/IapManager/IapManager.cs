@@ -425,6 +425,18 @@ public class IapManager : ECSEntity, IIapManager
 
         return ret;
     }
+    
+    public long GetPriceAsNumber(string productId)
+    {
+        // todo: add to cache
+        // Directly from store
+        if (IsInitialized)
+        {
+            return iapProvider.GetPriceAsNumber(productId);
+        }
+
+        return -1;
+    }
 
     /// <summary>
     /// Remove iap from pending iaps list
