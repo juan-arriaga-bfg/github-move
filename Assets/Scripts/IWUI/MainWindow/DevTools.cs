@@ -184,12 +184,7 @@ public class DevTools : UIContainerElementViewController
 
         Debug.Log("OnDebug1Click");
         var model = UIService.Get.GetCachedModel<UICharacterUnlockedWindowModel>(UIWindowType.CharacterUnlockedWindow);
-        model.CharacterId = UiCharacterData.CharSleepingBeauty;
-        model.Rewards = new List<CurrencyPair>
-        {
-            new CurrencyPair {Currency = Currency.Coins.Name, Amount = 123},
-            new CurrencyPair {Currency = Currency.Crystals.Name, Amount = 23}
-        };
+        model.TestMode = true;
         UIService.Get.ShowWindow(UIWindowType.CharacterUnlockedWindow);
         return;
 
