@@ -48,8 +48,6 @@ dependencies {
     api(name: 'RaveUtils', ext: 'aar')
     api(name: 'XMLScene', ext: 'aar')
 
-    api (name: 'simple-android-notifications', ext:'aar')
-
     api files('../libs/unity-classes.jar')
 
     api('io.fabric.sdk.android:fabric:1.3.17@aar') {
