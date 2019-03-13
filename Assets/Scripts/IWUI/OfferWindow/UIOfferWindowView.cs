@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BfgAnalytics;
+using TMPro;
 using UnityEngine;
 
 public class UIOfferWindowView : UIGenericPopupWindowView 
@@ -21,12 +22,32 @@ public class UIOfferWindowView : UIGenericPopupWindowView
     [IWUIBinding("#ButtonBuy")] private UIButtonViewController btnBuy;
 
     private List<NSText> products;
-
+    
+    private VertexGradient hardGradient;
+    private VertexGradient otherGradient;
+    
     private bool isClick;
 
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
+        ColorUtility.TryParseHtmlString("#FF5FEF", out var hardTop);
+        ColorUtility.TryParseHtmlString("#E17AFF", out var hardBottom);
+        
+        ColorUtility.TryParseHtmlString("#FFD45F", out var otherTop);
+        ColorUtility.TryParseHtmlString("#FF9241", out var otherBottom);
+        
+        hardGradient = new VertexGradient(hardTop, hardTop, hardBottom, hardBottom);
+        otherGradient = new VertexGradient(otherTop, otherTop, otherBottom, otherBottom);
+        
         base.InitView(model, controller);
+    }
+
+    public override void OnViewShow()
+    {
+        base.OnViewShow();
+        
+        var windowModel = Model as UIOfferWindowModel;
+        var count = windowModel.Product.Products.Count;
         
         products = new List<NSText>
         {
@@ -35,14 +56,9 @@ public class UIOfferWindowView : UIGenericPopupWindowView
             product3,
             product4,
         };
-    }
-
-    public override void OnViewShow()
-    {
-        base.OnViewShow();
         
-        var windowModel = Model as UIOfferWindowModel;
-
+        if (count == 3) products.RemoveAt(1);
+        
         isClick = false;
         
         SetTitle(windowModel.Title);
@@ -55,18 +71,24 @@ public class UIOfferWindowView : UIGenericPopupWindowView
         
         sale.Text = $"-{windowModel.Product.Sale}%";
         
-        line.SetActive(windowModel.Product.Products.Count > 2);
+        line.SetActive(count > 2);
 
         for (var i = 0; i < products.Count; i++)
         {
             var label = products[i];
-            var isActive = i < windowModel.Product.Products.Count;
+            var isActive = i < count;
 
             label.gameObject.SetActive(isActive);
 
             if (isActive == false) break;
 
-            label.Text = windowModel.Product.Products[i].ToStringIcon();
+            var product = windowModel.Product.Products[i];
+            var isCrystals = product.Currency == Currency.Crystals.Name;
+
+            label.Text = product.ToStringIcon();
+            label.TextLabel.colorGradient = isCrystals ? hardGradient : otherGradient;
+            label.StyleId = isCrystals ? 23 : 24;
+            label.ApplyStyle();
         }
     }
     
