@@ -18,6 +18,8 @@ public class CreateGroupPieces:IBoardAction
         var pieces = new Dictionary<BoardPosition, Piece>();
 
         var positionsForLock = new List<BoardPosition>();
+        
+        gameBoardController.BoardLogic.PieceFlyer.Locker.Lock(this);
 		
         foreach (var pair in Pieces)
         {
@@ -32,7 +34,15 @@ public class CreateGroupPieces:IBoardAction
             positionsForLock.Add(pos);
         }
         
+        gameBoardController.BoardLogic.PieceFlyer.Locker.Unlock(this);
+        
         LogicCallback?.Invoke(pieces);
+
+        foreach (var pair in pieces)
+        {
+            gameBoardController.BoardLogic.PieceFlyer.FlyToQuest(pair.Value);
+            gameBoardController.BoardLogic.PieceFlyer.FlyToCodex(pair.Value, pair.Key.X, pair.Key.Y, Currency.Codex.Name);
+        }
         
         if (pieces.Count == 0)
         {

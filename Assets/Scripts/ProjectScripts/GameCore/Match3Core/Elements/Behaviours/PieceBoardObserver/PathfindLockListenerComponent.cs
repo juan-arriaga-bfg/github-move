@@ -29,6 +29,12 @@ public class PathfindLockListenerComponent : IECSComponent
 
     public virtual void UpdatePathState(bool isHasPath)
     {
+        if (cachedIsHasPath == false && isHasPath == true)
+        {
+            board.BoardLogic.PieceFlyer.FlyToQuest(piece);
+            board.BoardLogic.PieceFlyer.FlyToCodex(piece, piece.CachedPosition.X, piece.CachedPosition.Y, Currency.Codex.Name);
+        }
+        
         cachedIsHasPath = isHasPath;
 
         if (isHasPath == false)

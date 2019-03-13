@@ -40,6 +40,8 @@
     {
         if (Locker.IsLocked || IsAnyActiveQuestAboutPiece(piece) == false) return;
         
+        if (context.Context.PathfindLocker.HasPath(piece) == false) return;
+        
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.PieceBuilded, piece.PieceType);
         
         // var flay = ResourcesViewManager.Instance.GetFirstViewById(PieceType.Parse(piece.PieceType));
@@ -48,9 +50,11 @@
     
     public void FlyToCodex(Piece piece, int x, int y, string target)
     {
-        if (Locker.IsLocked || GameDataService.Current.CodexManager.OnPieceBuilded(piece.PieceType) == false) return;
+        if (Locker.IsLocked) return;
 
         if (context.Context.PathfindLocker.HasPath(piece) == false) return;
+        
+        if (GameDataService.Current.CodexManager.OnPieceBuilded(piece.PieceType) == false) return;
 
         FlyToTarget(piece, x, y, target);
         GameDataService.Current.CharactersManager.UnlockNewCharacter(piece.PieceType);
