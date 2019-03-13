@@ -49,9 +49,9 @@ public class UIOfferWindowView : UIGenericPopupWindowView
         buyLabel.Text = windowModel.Button;
         
         priceFake.TextLabel.color = new Color(1, 1, 1, 0.5f);
-        
-        priceFake.Text = (windowModel.Product.Price.Amount + windowModel.Product.Price.Amount * windowModel.Product.Sale * 0.01f).ToString();
-        priceReal.Text = windowModel.Product.Price.Amount.ToString();
+
+        priceFake.Text = windowModel.PriceFake;
+        priceReal.Text = windowModel.PriceReal;
         
         sale.Text = $"-{windowModel.Product.Sale}%";
         
