@@ -15,11 +15,19 @@ public class UINextLevelWindowView : UIGenericWindowView
     
     [SerializeField] private Transform tapToContinueAnchor;
     
+    [IWUIBinding("#UnlockedCharacterContainerLeft")] protected RectTransform unlockedCharacterContainerLeft;
+    
+    [IWUIBinding("#UnlockedCharacterContainerRight")] protected RectTransform unlockedCharacterContainerRight;
+    
     private int tapAnimationId = Animator.StringToHash("Tap");
     
     [IWUIBinding("#Content")] private UIContainerViewController content;
     
     private TapToContinueTextViewController tapToContinue;
+    
+    protected UICharacterViewController cachedCharacterLeft = null;
+    
+    protected UICharacterViewController cachedCharacterRight = null;
     
     private int tapCount;
     private bool isClick;
@@ -45,6 +53,43 @@ public class UINextLevelWindowView : UIGenericWindowView
         isClick = true;
         
         Fill(null, content);
+        
+        // create character
+        if (cachedCharacterLeft != null)
+        {
+            UIService.Get.PoolContainer.Return(cachedCharacterLeft.gameObject);
+            cachedCharacterLeft = null;
+        }
+        
+        if (cachedCharacterRight != null)
+        {
+            UIService.Get.PoolContainer.Return(cachedCharacterRight.gameObject);
+            cachedCharacterRight = null;
+        }
+        
+        cachedCharacterLeft = CreateCharacter(UiCharacterData.CharGnomeWorker, CharacterEmotion.Happy, CharacterSide.Left, unlockedCharacterContainerLeft);
+        
+        cachedCharacterRight = CreateCharacter(UiCharacterData.CharGnomeWorker, CharacterEmotion.Normal, CharacterSide.Right, unlockedCharacterContainerRight);
+    }
+    
+    protected virtual UICharacterViewController CreateCharacter(string characterId, CharacterEmotion emotion, CharacterSide side, RectTransform container)
+    {
+        string viewName = $"UICharacter{characterId}View";
+        
+        UICharacterViewController character = UIService.Get.PoolContainer.Create<UICharacterViewController>(viewName);
+        character.CharacterId = characterId;
+
+        Transform anchor = container;
+
+        character.transform.SetParentAndReset(anchor);
+        
+        character.Side = side;
+        
+        character.ToggleActive(true, emotion, false);
+        
+        character.ResetPivotAndSizeToCenter();
+        
+        return character;
     }
     
     public override void AnimateShow()
@@ -87,6 +132,18 @@ public class UINextLevelWindowView : UIGenericWindowView
         TackleBoxEvents.SendLevelUp();
         
         base.OnViewCloseCompleted();
+        
+        if (cachedCharacterLeft != null)
+        {
+            UIService.Get.PoolContainer.Return(cachedCharacterLeft.gameObject);
+            cachedCharacterLeft = null;
+        }
+        
+        if (cachedCharacterRight != null)
+        {
+            UIService.Get.PoolContainer.Return(cachedCharacterRight.gameObject);
+            cachedCharacterRight = null;
+        }
     }
     
     private void InitTapToContinue(float delay)

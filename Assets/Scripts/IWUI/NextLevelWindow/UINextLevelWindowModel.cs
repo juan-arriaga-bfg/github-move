@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -20,7 +21,9 @@ public class UINextLevelWindowModel : IWWindowModel
                 rewards.Append(pair.ToStringIcon());
             }
             
-            return string.Format(LocalizationService.Get("common.message.reward", "common.message.reward:{0}"), rewards);
+            string resultString = string.Format(LocalizationService.Get("common.message.reward", "common.message.reward:{0}"), "");
+            resultString = resultString + Environment.NewLine + rewards.Remove(0, 1);
+            return resultString;
         }
     }
 
