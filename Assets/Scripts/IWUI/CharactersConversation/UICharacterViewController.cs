@@ -141,6 +141,16 @@ public class UICharacterViewController : IWBaseMonoBehaviour
         rectTransform.pivot = percentPivot;
     }
 
+    public virtual void ResetPivotAndSizeToCenter()
+    {
+        currentCharImage.SetNativeSize();
+
+        RectTransform rectTransform = currentCharImage.GetComponent<RectTransform>();
+        rectTransform.pivot = new Vector2(0.5f, 0f);
+        
+        rectTransform.anchoredPosition = new Vector2(0f, 0f);
+    }
+
     public void ToggleActive(bool active, CharacterEmotion emotion, bool animated, Action onComplete = null)
     {
         Debug.Log($"[UICharacterViewController] => ToggleActive(active: {active}, animated: {animated})");

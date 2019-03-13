@@ -181,10 +181,16 @@ public class DevTools : UIContainerElementViewController
     
     public void OnDebug1Click()
     {
+
         Debug.Log("OnDebug1Click");
-        var model = UIService.Get.GetCachedModel<UIQuestCheatSheetWindowModel>(UIWindowType.QuestCheatSheetWindow);
-        model.Refresh();
-        UIService.Get.ShowWindow(UIWindowType.QuestCheatSheetWindow);
+        var model = UIService.Get.GetCachedModel<UICharacterUnlockedWindowModel>(UIWindowType.CharacterUnlockedWindow);
+        model.CharacterId = UiCharacterData.CharSleepingBeauty;
+        model.Rewards = new List<CurrencyPair>
+        {
+            new CurrencyPair {Currency = Currency.Coins.Name, Amount = 123},
+            new CurrencyPair {Currency = Currency.Crystals.Name, Amount = 23}
+        };
+        UIService.Get.ShowWindow(UIWindowType.CharacterUnlockedWindow);
         return;
 
 #if UNITY_EDITOR

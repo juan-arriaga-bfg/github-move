@@ -56,6 +56,8 @@ public class UIWindowType
     
     public const string OfferWindow = "OfferWindow";
 
+    public const string CharacterUnlockedWindow = "CharacterUnlockedWindow";
+
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {
         MainWindow,
