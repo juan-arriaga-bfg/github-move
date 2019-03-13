@@ -36,6 +36,8 @@ public class BoardManipulatorComponent : ECSEntity,
     
     private Vector2 cachedDragDownPos = Vector2.zero;
 
+    private CallbackAction cachedTutorialStateUpdateAction = null;
+
     public CameraManipulator CameraManipulator => cameraManipulator;
 
     public override int Guid => ComponentGuid;
@@ -231,6 +233,13 @@ public class BoardManipulatorComponent : ECSEntity,
     
     public bool OnDown(Vector2 startPos, Vector2 pos)
     {
+        // cancel tutorial pause (false) delayed action
+        if (cachedTutorialStateUpdateAction != null)
+        {
+            cachedTutorialStateUpdateAction.CancelAction();
+            cachedTutorialStateUpdateAction = null;
+        }
+        
         context.TutorialLogic.Pause(true);
         
         if (cachedViewForDrag == null)
@@ -324,8 +333,8 @@ public class BoardManipulatorComponent : ECSEntity,
                     cachedViewForDrag = null;
                 }
             }
-            
-            context.ActionExecutor.AddAction(new CallbackAction
+
+            cachedTutorialStateUpdateAction = new CallbackAction
             {
                 Delay = 0.5f,
                 Callback = controller =>
@@ -333,7 +342,8 @@ public class BoardManipulatorComponent : ECSEntity,
                     context.TutorialLogic.Pause(false);
                     context.TutorialLogic.Update();
                 }
-            });
+            };
+            context.ActionExecutor.AddAction(cachedTutorialStateUpdateAction);
             
             return true;
         }
