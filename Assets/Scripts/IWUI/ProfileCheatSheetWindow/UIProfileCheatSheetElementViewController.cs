@@ -114,27 +114,43 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
 
     public void UpdateUi()
     {
-        ToggleBackColor();
+        GameDataManager dm = null;
         
-        if (!string.IsNullOrEmpty(slotData.Error))
+        ToggleBackColor();
+
+        bool isLoadedCorrectly = string.IsNullOrEmpty(slotData.Error);
+
+        if (isLoadedCorrectly)
+        {
+            dm = new GameDataManager();
+            try
+            {
+                dm.SetupComponents(userProfile);
+                dm.Reload();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"[UIProfileCheatSheetElementViewController] => GameDataManager parsing error: {e.Message} - {e.StackTrace}");
+                slotData.Error = $"GameDataManager SetupComponents failed: {e.Message}";
+                isLoadedCorrectly = false;
+            }
+        }
+        
+        if (!isLoadedCorrectly)
         {
             lblRev.Text = $"Can't load '{Colorize(slotData.SlotPath, COLOR_YELLOW)}'";
             lblData.Text = $"{Colorize(slotData.Error, COLOR_WHITE)}";
             lblTimestamp.Text = "";
             return;
         }
-        
-        GameDataManager dm = new GameDataManager();
-        dm.SetupComponents(userProfile);
-        dm.Reload();
-        
+
         lblRev.Text = $"Rev {userProfile.Version.ToString()} '{Colorize(slotData.SlotPath, COLOR_YELLOW)}'";
         if (slotData.SlotPath == ProfileSlots.DEFAULT_SLOT_PATH)
         {
             lblRev.Text += $" {Colorize("[Default]", COLOR_WHITE)}";
         }
 
-        string timestamp = $"{DateTime.Parse(userProfile.Timestamp).ToLocalTime() :u}";
+        string timestamp = ParseTimestamp();
         lblTimestamp.Text = $"{timestamp.Replace("Z", "")}";
 
         int level = dm.LevelsManager.Level;
@@ -145,8 +161,39 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
             new CurrencyPair {Currency = Currency.Crystals.Name, Amount = userProfile.GetStorageItem(Currency.Crystals.Name).Amount},
         };
         string resourcesStr = CurrencyHelper.RewardsToString("  ", null, listResources);
-        
+
         lblData.Text = !string.IsNullOrEmpty(slotData.Error) ? slotData.Error : $"Level: {level}    {resourcesStr}";
+    }
+
+    private string ParseTimestamp()
+    {
+        string timestamp;
+        try
+        {
+            if (string.IsNullOrEmpty(userProfile.Timestamp))
+            {
+                timestamp = "No timestamp specified";
+            }
+            else if (DateTime.TryParse(userProfile.Timestamp, out DateTime parsedDate))
+            {
+                timestamp = $"{parsedDate.ToLocalTime():u}";
+            }
+            else if (long.TryParse(userProfile.Timestamp, out long parsedUnixTimestamp))
+            {
+                var dateTime = UnixTimeHelper.UnixTimestampToDateTime(parsedUnixTimestamp);
+                timestamp = $"{dateTime:u}";
+            }
+            else
+            {
+                timestamp = "Timestamp parsing error";
+            }
+        }
+        catch (Exception e)
+        {
+            timestamp = e.GetType().ToString();
+        }
+
+        return timestamp;
     }
 
     private void ToggleBackColor()
