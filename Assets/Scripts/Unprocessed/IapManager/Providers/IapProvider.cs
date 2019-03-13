@@ -27,6 +27,8 @@ public abstract class IapProvider
     
     public abstract string GetLocalizedPriceStr(string productId);
     
+    public abstract long GetPriceAsNumber(string productId);
+    
     public void Purchase(string id)
     {
         if (string.IsNullOrEmpty(id) || !IapCollection.InapIds.Contains(id))

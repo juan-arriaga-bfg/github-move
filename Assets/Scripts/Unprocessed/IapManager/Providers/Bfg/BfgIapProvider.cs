@@ -189,6 +189,37 @@ public class BfgIapProvider : IapProvider
         
         return product?.price;
     }
+    
+    /// <summary>
+    /// For android returns price in micro-units, where 1,000,000 micro-units equal one unit of the currency. 
+    /// </summary>
+    public override long GetPriceAsNumber(string productId)
+    {
+#if UNITY_EDITOR
+        return -1;
+#endif
+        
+        string storeId = IapCollection.GetStoreId(productId);
+        var product = PurchaseController.Instance.GetProductInfo(storeId);
+        
+        // Bfg sdk may return hardcoded english text when have no price
+        if (product?.priceMicros == "Price Unavailable")
+        {
+            return -1;
+        }
+
+        if (product == null)
+        {
+            return -1;
+        }
+
+        if (long.TryParse(product.priceMicros, out long ret))
+        {
+            return ret;
+        }
+        
+        return -1;
+    }
 
     public override void CleanUp()
     {
