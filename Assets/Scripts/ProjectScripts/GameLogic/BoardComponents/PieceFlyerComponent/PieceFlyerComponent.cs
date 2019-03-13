@@ -50,6 +50,8 @@
     {
         if (Locker.IsLocked || GameDataService.Current.CodexManager.OnPieceBuilded(piece.PieceType) == false) return;
 
+        if (context.Context.PathfindLocker.HasPath(piece) == false) return;
+
         FlyToTarget(piece, x, y, target);
         GameDataService.Current.CharactersManager.UnlockNewCharacter(piece.PieceType);
     }
