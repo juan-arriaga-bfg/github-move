@@ -30,9 +30,9 @@ public class MarketSaveComponent : ECSEntity, IECSSerializeable
         var defs = GameDataService.Current.MarketManager.Defs;
         
         ResetMarketStartTime = board.MarketLogic.ResetMarketTimer.StartTimeLong.ToString();
-        ResetEnergyStartTime = board.MarketLogic.ResetEnergyTimer.StartTimeLong.ToString();
 
         if (board.MarketLogic.OfferTimer.IsExecuteable()) OfferTimerStartTime = board.MarketLogic.OfferTimer.StartTimeLong.ToString();
+        if (board.MarketLogic.ResetEnergyTimer.IsExecuteable()) ResetEnergyStartTime = board.MarketLogic.ResetEnergyTimer.StartTimeLong.ToString();
         
         slots = new List<MarketSaveItem>();
 
