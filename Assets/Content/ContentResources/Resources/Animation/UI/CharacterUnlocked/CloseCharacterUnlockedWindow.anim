@@ -49,7 +49,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: 
+    path:  BodyAnchor
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -65,7 +65,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: '#UnlockedCharacterContainer'
+    path:  BodyAnchor/#UnlockedCharacterContainer
   m_FloatCurves:
   - curve:
       serializedVersion: 2
@@ -83,7 +83,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: konfetti (1)
+    path:  BodyAnchor/konfetti (1)
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -102,7 +102,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: konfetti
+    path:  BodyAnchor/konfetti
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -139,7 +139,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: 
+    path:  BodyAnchor
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -176,7 +176,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: 
+    path:  BodyAnchor
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -204,7 +204,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: Rewards/Front
+    path:  BodyAnchor/Rewards/Front
     classID: 114
     script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -232,7 +232,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: Rewards/Front (2)
+    path:  BodyAnchor/Rewards/Front (2)
     classID: 114
     script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -269,7 +269,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: 
+    path:  BodyAnchor
     classID: 225
     script: {fileID: 0}
   - curve:
@@ -297,7 +297,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Header
+    path:  BodyAnchor/Header
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -325,7 +325,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Header
+    path:  BodyAnchor/Header
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -362,7 +362,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_fontColor.a
-    path: MegaHeader
+    path:  MegaHeader
     classID: 114
     script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_PPtrCurves: []
@@ -495,7 +495,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: konfetti (1)
+    path:  BodyAnchor/konfetti (1)
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -514,7 +514,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: konfetti
+    path:  BodyAnchor/konfetti
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -551,7 +551,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: 
+    path:  BodyAnchor
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -588,7 +588,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: 
+    path:  BodyAnchor
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -625,7 +625,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: 
+    path:  BodyAnchor
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -662,7 +662,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: 
+    path:  BodyAnchor
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -699,7 +699,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: 
+    path:  BodyAnchor
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -727,7 +727,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: Rewards/Front
+    path:  BodyAnchor/Rewards/Front
     classID: 114
     script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -755,7 +755,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: Rewards/Front (2)
+    path:  BodyAnchor/Rewards/Front (2)
     classID: 114
     script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -792,7 +792,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: 
+    path:  BodyAnchor
     classID: 225
     script: {fileID: 0}
   - curve:
@@ -820,7 +820,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Header
+    path:  BodyAnchor/Header
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -848,7 +848,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Header
+    path:  BodyAnchor/Header
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -867,7 +867,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: '#UnlockedCharacterContainer'
+    path:  BodyAnchor/#UnlockedCharacterContainer
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -886,7 +886,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: '#UnlockedCharacterContainer'
+    path:  BodyAnchor/#UnlockedCharacterContainer
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -905,7 +905,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: '#UnlockedCharacterContainer'
+    path:  BodyAnchor/#UnlockedCharacterContainer
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -942,7 +942,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_fontColor.a
-    path: MegaHeader
+    path:  MegaHeader
     classID: 114
     script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_EulerEditorCurves: []

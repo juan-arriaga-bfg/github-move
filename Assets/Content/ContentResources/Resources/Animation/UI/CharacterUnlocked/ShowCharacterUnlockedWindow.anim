@@ -40,7 +40,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: 
+    path:  BodyAnchor
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -65,7 +65,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Header/Back
+    path:  BodyAnchor/Header/Back
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -99,7 +99,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Shine
+    path:  BodyAnchor/Shine
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -151,7 +151,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Rewards/Front
+    path:  BodyAnchor/Rewards/Front
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -185,7 +185,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Rewards/Front (2)
+    path:  BodyAnchor/Rewards/Front (2)
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -246,7 +246,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: '#UnlockedCharacterContainer'
+    path:  BodyAnchor/#UnlockedCharacterContainer
   m_FloatCurves:
   - curve:
       serializedVersion: 2
@@ -264,7 +264,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Shine
+    path:  BodyAnchor/Shine
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -292,7 +292,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: Header/Back
+    path:  BodyAnchor/Header/Back
     classID: 114
     script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -320,7 +320,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: Shine/Image
+    path:  BodyAnchor/Shine/Image
     classID: 114
     script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -348,7 +348,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Shine/Image
+    path:  BodyAnchor/Shine/Image
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -376,7 +376,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: Shine
+    path:  BodyAnchor/Shine
     classID: 114
     script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -422,7 +422,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: Rewards/Front
+    path:  BodyAnchor/Rewards/Front
     classID: 114
     script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -459,7 +459,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: Rewards/Front (2)
+    path:  BodyAnchor/Rewards/Front (2)
     classID: 114
     script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -478,7 +478,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: 
+    path:  BodyAnchor
     classID: 225
     script: {fileID: 0}
   - curve:
@@ -524,7 +524,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: konfetti
+    path:  BodyAnchor/konfetti
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -579,7 +579,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: konfetti (1)
+    path:  BodyAnchor/konfetti (1)
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -607,7 +607,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: 
+    path:  BodyAnchor
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -635,7 +635,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: 
+    path:  BodyAnchor
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -663,7 +663,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Rewards
+    path:  BodyAnchor/Rewards
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -691,7 +691,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Rewards
+    path:  BodyAnchor/Rewards
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -737,7 +737,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: sparklingNextLevel
+    path:  BodyAnchor/sparklingNextLevel
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -774,7 +774,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: MegaHeader
+    path:  MegaHeader
     classID: 225
     script: {fileID: 0}
   - curve:
@@ -802,7 +802,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: '#UnlockedCharacterContainer'
+    path:  BodyAnchor/#UnlockedCharacterContainer
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -830,7 +830,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: '#UnlockedCharacterContainer'
+    path:  BodyAnchor/#UnlockedCharacterContainer
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -867,7 +867,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: explosionCharacter
+    path:  BodyAnchor/explosionCharacter
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -886,7 +886,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: RotationModule.enabled
-    path: explosionCharacter/explosion_stars/Particle System/center
+    path:  BodyAnchor/explosionCharacter/explosion_stars/Particle System/center
     classID: 198
     script: {fileID: 0}
   - curve:
@@ -905,7 +905,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: InitialModule.startLifetime.scalar
-    path: explosionCharacter/explosion_stars/Particle System/center
+    path:  BodyAnchor/explosionCharacter/explosion_stars/Particle System/center
     classID: 198
     script: {fileID: 0}
   - curve:
@@ -933,7 +933,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: salutParticle
+    path:  BodyAnchor/salutParticle
     classID: 1
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -1178,7 +1178,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Shine
+    path:  BodyAnchor/Shine
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -1206,7 +1206,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: 
+    path:  BodyAnchor
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1234,7 +1234,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: 
+    path:  BodyAnchor
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1262,7 +1262,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: 
+    path:  BodyAnchor
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1290,7 +1290,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: Header/Back
+    path:  BodyAnchor/Header/Back
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1318,7 +1318,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: Header/Back
+    path:  BodyAnchor/Header/Back
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1346,7 +1346,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: Header/Back
+    path:  BodyAnchor/Header/Back
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1374,7 +1374,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: Header/Back
+    path:  BodyAnchor/Header/Back
     classID: 114
     script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1402,7 +1402,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: Shine/Image
+    path:  BodyAnchor/Shine/Image
     classID: 114
     script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1430,7 +1430,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Shine/Image
+    path:  BodyAnchor/Shine/Image
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -1458,7 +1458,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: Shine
+    path:  BodyAnchor/Shine
     classID: 114
     script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1495,7 +1495,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: Shine
+    path:  BodyAnchor/Shine
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1532,7 +1532,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: Shine
+    path:  BodyAnchor/Shine
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1569,7 +1569,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: Shine
+    path:  BodyAnchor/Shine
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1615,7 +1615,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: Rewards/Front
+    path:  BodyAnchor/Rewards/Front
     classID: 114
     script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1670,7 +1670,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: Rewards/Front
+    path:  BodyAnchor/Rewards/Front
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1725,7 +1725,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: Rewards/Front
+    path:  BodyAnchor/Rewards/Front
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1780,7 +1780,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: Rewards/Front
+    path:  BodyAnchor/Rewards/Front
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1817,7 +1817,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: Rewards/Front (2)
+    path:  BodyAnchor/Rewards/Front (2)
     classID: 114
     script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1854,7 +1854,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: Rewards/Front (2)
+    path:  BodyAnchor/Rewards/Front (2)
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1891,7 +1891,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: Rewards/Front (2)
+    path:  BodyAnchor/Rewards/Front (2)
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1928,7 +1928,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: Rewards/Front (2)
+    path:  BodyAnchor/Rewards/Front (2)
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1947,7 +1947,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: 
+    path:  BodyAnchor
     classID: 225
     script: {fileID: 0}
   - curve:
@@ -1993,7 +1993,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: konfetti
+    path:  BodyAnchor/konfetti
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -2048,7 +2048,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: konfetti (1)
+    path:  BodyAnchor/konfetti (1)
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -2076,7 +2076,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: 
+    path:  BodyAnchor
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -2104,7 +2104,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: 
+    path:  BodyAnchor
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -2132,7 +2132,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Rewards
+    path:  BodyAnchor/Rewards
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -2160,7 +2160,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Rewards
+    path:  BodyAnchor/Rewards
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -2206,7 +2206,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: sparklingNextLevel
+    path:  BodyAnchor/sparklingNextLevel
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -2243,7 +2243,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: MegaHeader
+    path:  MegaHeader
     classID: 225
     script: {fileID: 0}
   - curve:
@@ -2271,7 +2271,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: '#UnlockedCharacterContainer'
+    path:  BodyAnchor/#UnlockedCharacterContainer
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -2299,7 +2299,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: '#UnlockedCharacterContainer'
+    path:  BodyAnchor/#UnlockedCharacterContainer
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -2336,7 +2336,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: explosionCharacter
+    path:  BodyAnchor/explosionCharacter
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -2355,7 +2355,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: RotationModule.enabled
-    path: explosionCharacter/explosion_stars/Particle System/center
+    path:  BodyAnchor/explosionCharacter/explosion_stars/Particle System/center
     classID: 198
     script: {fileID: 0}
   - curve:
@@ -2374,7 +2374,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: InitialModule.startLifetime.scalar
-    path: explosionCharacter/explosion_stars/Particle System/center
+    path:  BodyAnchor/explosionCharacter/explosion_stars/Particle System/center
     classID: 198
     script: {fileID: 0}
   - curve:
@@ -2438,7 +2438,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: '#UnlockedCharacterContainer'
+    path:  BodyAnchor/#UnlockedCharacterContainer
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -2502,7 +2502,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: '#UnlockedCharacterContainer'
+    path:  BodyAnchor/#UnlockedCharacterContainer
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -2566,7 +2566,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: '#UnlockedCharacterContainer'
+    path:  BodyAnchor/#UnlockedCharacterContainer
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -2594,7 +2594,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: salutParticle
+    path:  BodyAnchor/salutParticle
     classID: 1
     script: {fileID: 0}
   m_EulerEditorCurves: []
