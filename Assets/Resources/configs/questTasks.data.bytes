@@ -1110,6 +1110,30 @@
     }
   },
   {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "100_CreatePiece_A7",
+    "PieceUid": "A7",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "101_CreatePiece_A6",
+    "PieceUid": "A6",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
     "$type": "TaskCompleteDailyTaskEntity, GameAssembly",
     "Id": "Daily_ClearAll",
     "ComponentsCache": {

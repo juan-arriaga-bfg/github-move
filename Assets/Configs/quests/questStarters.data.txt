@@ -172,7 +172,6 @@
     "Id": 14,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "30_CreatePiece_A8",
       "21_OpenChest"
     ],
     "Conditions": [
@@ -1170,6 +1169,48 @@
         "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
         "Id": "PieceUnlocked",
         "Value": "NPC_F"
+      }
+    ]
+  },
+  {
+    "Id": 89,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "100_CreatePiece_A7"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
+        "Id": "PieceUnlocked",
+        "Value": "A5"
+      }
+    ]
+  },
+  {
+    "Id": 90,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "30_CreatePiece_A8"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "100_CreatePiece_A7"
+      }
+    ]
+  },
+  {
+    "Id": 91,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "101_CreatePiece_A6"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "21_OpenChest"
       }
     ]
   }

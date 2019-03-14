@@ -2162,6 +2162,56 @@
     }
   },
   {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "100_CreatePiece_A7",
+    "TaskDefs": [
+      {
+        "TaskId": "100_CreatePiece_A7"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 75
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 1
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "101_CreatePiece_A6",
+    "TaskDefs": [
+      {
+        "TaskId": "101_CreatePiece_A6"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 30
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 75
+          }
+        ]
+      }
+    }
+  },
+  {
     "$type": "DailyQuestEntity, GameAssembly",
     "Id": "Daily",
     "TaskDefs": [
