@@ -101,13 +101,13 @@ namespace UT
 
                     if (finishScenario == null)
                     {
-                        errors.AppendLine($"No complete dialog for quest '{dependencyId}' defined");
+                        //errors.AppendLine($"No complete dialog for quest '{dependencyId}' defined");
                         continue;
                     }
                     
                     if (startScenario == null)
                     {
-                        errors.AppendLine($"No start dialog for starter' {starter.Id}' defined");
+                        //errors.AppendLine($"No start dialog for starter' {starter.Id}' defined");
                         continue;
                     }
                     
