@@ -152,6 +152,9 @@ public class MarketItem
     
     private string GetRandomPiece(int min, int max)
     {
+        min -= 1;
+        max -= 1;
+        
         var board = BoardService.Current.FirstBoard;
         var definition = board.BoardLogic.MatchDefinition;
         
@@ -185,7 +188,7 @@ public class MarketItem
         var maxId = ids[Random.Range(0, ids.Count)];
         var chain = definition.GetChain(maxId);
         var find = Mathf.Min(max, chain.IndexOf(maxId) - 1);
-
+        
         return PieceType.Parse(chain[find]);
     }
     
