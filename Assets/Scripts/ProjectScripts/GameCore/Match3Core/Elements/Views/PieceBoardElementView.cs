@@ -34,6 +34,8 @@ public class PieceBoardElementView : BoardElementView
 
     private readonly ViewAnimationUid selectedAnimationId = new ViewAnimationUid();
     
+    public ViewAnimationUid SelectedAnimationId { get { return selectedAnimationId; } }
+    
     private SpriteRenderer selectionSprite;
     
     private readonly Color baseColor = new Color(0.6f, 0.4f, 0.2f);

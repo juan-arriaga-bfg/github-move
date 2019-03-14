@@ -16,9 +16,12 @@ public class ScalePieceAnimationView : AnimationView
     {
         base.Play(pieceView);
         
+        DOTween.Kill(pieceView.SelectedAnimationId);
+        
         if(startFromCurrentScale == false)
             pieceView.transform.localScale = from;
 
+        DOTween.Kill(pieceView);
         var sequence = DOTween.Sequence();
         sequence.SetId(animationUid);
         if (scaleOnlyView)
