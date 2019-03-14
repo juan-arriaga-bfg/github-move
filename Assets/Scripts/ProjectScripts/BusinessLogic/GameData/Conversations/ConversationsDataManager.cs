@@ -20,7 +20,7 @@ public class ConversationsDataManager : IECSComponent, IDataManager
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
 
-    private Dictionary<string, JToken> cache;
+    public Dictionary<string, JToken> Cache;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -41,7 +41,7 @@ public class ConversationsDataManager : IECSComponent, IDataManager
         var dataMapper = new ResourceConfigDataMapper<object>(path, NSConfigsSettings.Instance.IsUseEncryption);
         var json = dataMapper.GetJsonDataAsString();
         
-        cache = Parse(json);
+        Cache = Parse(json);
     }
     
     private Dictionary<string, JToken> Parse(string json)
@@ -70,7 +70,7 @@ public class ConversationsDataManager : IECSComponent, IDataManager
     public ConversationScenarioEntity BuildScenario(string id)
     {
         JToken json;
-        if (!cache.TryGetValue(id, out json))
+        if (!Cache.TryGetValue(id, out json))
         {
             Debug.LogError($"[ConversationsDataManager] => BuildScenario: config for id '{id}' not found");
             return null;
@@ -209,6 +209,6 @@ public class ConversationsDataManager : IECSComponent, IDataManager
 
     public List<string> GetAvailableScenarioIds()
     {
-        return cache.Keys.ToList();
+        return Cache.Keys.ToList();
     }
 }

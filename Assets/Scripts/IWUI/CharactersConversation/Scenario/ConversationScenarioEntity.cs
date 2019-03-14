@@ -9,8 +9,10 @@ public class ConversationScenarioEntity : ECSEntity, IECSSerializeable
     
     private readonly List<ConversationActionEntity> actions = new List<ConversationActionEntity>();
 
+    public List<ConversationActionEntity> Actions => actions; 
+    
     private int index;
-
+    
     public override ECSEntity RegisterComponent(IECSComponent component, bool isCollection = false)
     {       
         ConversationActionEntity action = component as ConversationActionEntity;
