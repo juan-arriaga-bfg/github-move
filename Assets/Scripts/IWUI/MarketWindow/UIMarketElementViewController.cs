@@ -156,7 +156,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		if (price.Currency != Currency.Crystals.Name)
 		{
-			Paid();
+			Paid(null);
 			return;
 		}
 		
@@ -168,19 +168,20 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		model.ProductAmountText = $"x{contentEntity.Def.Reward.Amount}";
 		model.ProductNameText = LocalizationService.Get(contentEntity.Def.Name, contentEntity.Def.Name);
 		
-		model.OnAccept = anchorAccept => Paid();
+		model.OnAccept = Paid;
 		model.OnCancel = () => { isClick = false; };
         
 		UIService.Get.ShowWindow(UIWindowType.ConfirmationWindow);
 	}
 	
-	private void Paid()
+	private void Paid(Transform anchorPaid)
 	{
 		var contentEntity = entity as UIMarketElementEntity;
 		
 		if (contentEntity.Def.IsPiece == false)
 		{
-			var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(btnBack.transform.position);
+			var position = anchorPaid == null ? btnBack.transform.position : anchorPaid.position;
+			var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(position);
 			
 			CurrencyHelper.PurchaseAsyncOnlyCurrency(contentEntity.Def.Reward, contentEntity.Def.Price, flyPosition, null);
 			

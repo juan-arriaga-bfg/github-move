@@ -151,14 +151,11 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 	    var position = anchor == null ? btnBack.transform.position : anchor.position;
 	    var contentEntity = entity as UIShopElementEntity;
 	    var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(position);
+
+	    CurrencyHelper.PurchaseAsyncOnlyCurrency(contentEntity.Products[0], contentEntity.Price, flyPosition, null);
 	    
-	    CurrencyHelper.PurchaseAsyncOnlyCurrency(contentEntity.Products[0], contentEntity.Price, flyPosition, success =>
-	    {
-		    if (success == false ) return;
-		    
-		    isClick = false;
-		    OnPurchaseComplete();
-	    });
+	    isClick = false;
+	    OnPurchaseComplete();
     }
 
     protected virtual void OnPurchaseComplete()
