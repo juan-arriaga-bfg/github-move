@@ -24,15 +24,18 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
 
 	    if (isFree == false) return;
 	    
-	    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnExecute += UpdateLabel;
+	    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnStart += UpdateLabel;
+	    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnTimeChanged += UpdateLabel;
 	    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnComplete += CompleteTimer;
+	    UpdateLabel();
     }
     
     public override void OnViewClose(IWUIWindowView context)
     {
 	    if (isFree)
 	    {
-		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnExecute -= UpdateLabel;
+		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnStart -= UpdateLabel;
+		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnTimeChanged -= UpdateLabel;
 		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnComplete -= CompleteTimer;
 	    }
 	    

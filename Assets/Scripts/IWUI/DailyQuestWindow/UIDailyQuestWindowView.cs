@@ -228,7 +228,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     {
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
         
-        string time = model.Timer.CompleteTime.GetTimeLeftText(model.Timer.UseUTC, true, null, 2.5f);
+        string time = model.Timer.CompleteTime.GetTimeLeftText(model.Timer.UseUTC, true, null, true, 2.5f);
         
         if (comeBackPanel.activeSelf)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Text;
 
 public static class DateTimeExtension
 {
@@ -70,9 +71,9 @@ public static class DateTimeExtension
         return TimeFormat(new TimeSpan(0, 0, delay - 1), icon, format);
     }
 
-    public static string GetTimeLeftText(this DateTime datetime, bool useUTC, bool icon, string format, float mspace = 3f)
+    public static string GetTimeLeftText(this DateTime datetime, bool useUTC, bool icon, string format, bool isColon = true, float mspace = 3f)
     {
-        return TimeFormat(datetime.GetTimeLeft(useUTC), icon, format, mspace);
+        return TimeFormat(datetime.GetTimeLeft(useUTC), icon, format, isColon, mspace);
     }
     
     public static string GetTimeLeftText(this DateTime datetime, bool useUTC = true)
@@ -82,25 +83,29 @@ public static class DateTimeExtension
     
     public static string GetTimeLeftText(this DateTime datetime, bool useUTC, float mspace)
     {
-        return TimeFormat(datetime.GetTimeLeft(useUTC), false, null, mspace);
+        return TimeFormat(datetime.GetTimeLeft(useUTC), false, null, true, mspace);
     }
     
-    private static string TimeFormat(TimeSpan time, bool icon, string format, float mspace = 3f)
+    private static string TimeFormat(TimeSpan time, bool icon, string format, bool isColon = true, float mspace = 3f)
     {
-        string mspaceStr = mspace.ToString(CultureInfo.InvariantCulture);
+        var iconStr = icon ? $"<sprite name={Currency.Timer.Icon}> " : "";
+        var mspaceStr = mspace.ToString(CultureInfo.InvariantCulture);
         
         var temp = time.Add(new TimeSpan(0, 0, 1));
+        string value;
+
+        var d = isColon ? ":" : $"{LocalizationService.Get("common.abbreviation.day")} ";
+        var h = isColon ? ":" : $"{LocalizationService.Get("common.abbreviation.hour")} ";
+        var m = isColon ? (temp.Days > 0 ? "" : ":") : $"{LocalizationService.Get("common.abbreviation.minute")} ";
+        var s = isColon ? "" : $"{LocalizationService.Get("common.abbreviation.second")} ";
         
-        if (string.IsNullOrEmpty(format))
-        {
-            var str = icon ? $"<sprite name={Currency.Timer.Icon}> " : "";
-            
-            return (int) temp.TotalHours > 0
-                ? $"{str}<mspace={mspaceStr}em>{temp.Hours:00}:{temp.Minutes:00}:{temp.Seconds:00}</mspace>"
-                : $"{str}<mspace={mspaceStr}em>{temp.Minutes:00}:{temp.Seconds:00}</mspace>";
-        }
+        if (string.IsNullOrEmpty(format)) format = "{0}<mspace={1}em>{2}</mspace>";
+
+        if (temp.Days > 0) value = $"{temp.Days:0}{d}{temp.Hours:00}{h}{temp.Minutes:00}{m}";
+        else if ((int) temp.TotalHours > 0) value = $"{temp.Hours:0}{h}{temp.Minutes:00}{m}{temp.Seconds:00}{s}";
+        else value = $"{temp.Minutes:00}{m}{temp.Seconds:00}{s}";
         
-        return string.Format(format, temp.Hours, temp.Minutes, temp.Seconds);
+        return string.Format(format, iconStr, mspaceStr, value);
     }
     
     /// <summary>

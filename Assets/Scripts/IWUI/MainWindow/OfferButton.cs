@@ -8,16 +8,17 @@ public class OfferButton : MonoBehaviour
     
     private void OnEnable()
     {
-        BoardService.Current.FirstBoard.MarketLogic.OfferTimer.OnExecute += UpdateTimer;
+        BoardService.Current.FirstBoard.MarketLogic.OfferTimer.OnTimeChanged += UpdateTimer;
+        UpdateTimer();
     }
 
     private void OnDisable()
     {
-        BoardService.Current.FirstBoard.MarketLogic.OfferTimer.OnExecute -= UpdateTimer;
+        BoardService.Current.FirstBoard.MarketLogic.OfferTimer.OnTimeChanged -= UpdateTimer;
     }
 
     private void UpdateTimer()
     {
-        timer.Text = BoardService.Current.FirstBoard.MarketLogic.OfferTimer.CompleteTime.GetTimeLeftText();
+        timer.Text = BoardService.Current.FirstBoard.MarketLogic.OfferTimer.CompleteTime.GetTimeLeftText(true, false, null, false);
     }
 }

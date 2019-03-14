@@ -31,8 +31,10 @@ public class UIMarketWindowView : UIGenericPopupWindowView
 
         Scroll(windowModel.IsTutorial ? content.Tabs.size : 0);
         
-        BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnExecute += UpdateLabel;
+        BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnTimeChanged += UpdateLabel;
         BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnComplete += UpdateSlots;
+
+        UpdateLabel();
     }
 
     public void Scroll(int index)
@@ -66,7 +68,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         DOTween.Kill(content);
         
-        BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnExecute -= UpdateLabel;
+        BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnTimeChanged -= UpdateLabel;
         BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnComplete -= UpdateSlots;
     }
 
