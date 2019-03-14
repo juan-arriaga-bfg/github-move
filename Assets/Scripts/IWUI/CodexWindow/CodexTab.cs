@@ -117,7 +117,7 @@ public class CodexTab : IWUIWindowViewController
        // yield return new WaitForEndOfFrame();
         
         // Respect space between top size of the viewport and chain
-        const float PADDING = 15f;
+        const float PADDING = 30f;
 
         RectTransform chainRect = target.GetComponent<RectTransform>();
         float chainY   = chainRect.localPosition.y;
@@ -160,16 +160,23 @@ public class CodexTab : IWUIWindowViewController
     private void OnEnable()
     {
         // Hack to fix Layout problems
+        StartCoroutine(FixVerticalLayoutBug());
+    }
+
+    private IEnumerator FixVerticalLayoutBug()
+    {
         if (verticalLayout == null)
         {
-            return;
+            yield break;
         }
         
-        Canvas.ForceUpdateCanvases();
-
+        yield return new WaitForEndOfFrame();
+        
+        //Canvas.ForceUpdateCanvases();
+        //
         verticalLayout.enabled = false;
         verticalLayout.enabled = true;
-
+        //
         // contentSizeFitter.enabled = false;
         // contentSizeFitter.enabled = true;
     }
