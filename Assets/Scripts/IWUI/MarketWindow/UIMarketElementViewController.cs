@@ -151,7 +151,16 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		if (CurrencyHelper.IsCanPurchase(price, true) == false)
 		{
 			isClick = false;
-			return;
+
+			if (price.Currency != Currency.Coins.Name) return;
+			
+			foreach (var tab in panel.Tabs)
+			{
+				if((tab.Entity as UIMarketElementEntity).Def.Reward.Currency != Currency.Coins.Name) continue;
+					
+				(context as UIMarketWindowView).Scroll(tab.Index);
+				return;
+			}
 		}
 		
 		if (price.Currency != Currency.Crystals.Name)

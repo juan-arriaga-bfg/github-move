@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BfgAnalytics;
 using DG.Tweening;
+using UnityEngine;
 
 public class UIMarketWindowView : UIGenericPopupWindowView 
 {
@@ -27,17 +28,24 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         Fill(UpdateEntities(), content);
         
         content.GetScrollRect().horizontalNormalizedPosition = windowModel.IsTutorial ? 0 : 1;
-        content.GetScrollRect().enabled = false;
-        
-        DOTween.Kill(content);
-        
-        content.CachedRectTransform.DOAnchorPosX(windowModel.IsTutorial ? -content.CachedRectTransform.sizeDelta.x : 0, 1.5f)
-            .SetEase(Ease.InOutBack)
-            .SetId(content)
-            .OnComplete(() => { content.GetScrollRect().enabled = true; });
+
+        Scroll(windowModel.IsTutorial ? content.Tabs.size : 0);
         
         BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnExecute += UpdateLabel;
         BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnComplete += UpdateSlots;
+    }
+
+    public void Scroll(int index)
+    {
+        DOTween.Kill(content);
+
+        var posX = Mathf.Clamp((-content.CachedRectTransform.sizeDelta.x / content.Tabs.size) * index, -content.CachedRectTransform.sizeDelta.x, 0);
+        
+        content.GetScrollRect().enabled = false;
+        content.CachedRectTransform.DOAnchorPosX(posX, 1.5f)
+            .SetEase(Ease.InOutBack)
+            .SetId(content)
+            .OnComplete(() => { content.GetScrollRect().enabled = true; });
     }
 
     public override void OnViewShowCompleted()
