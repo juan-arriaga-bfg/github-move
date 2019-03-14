@@ -99,6 +99,143 @@
     ]
   },
   {
+    "Id": 5,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.6.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Thinking",
+        "Message": "conversation.6.message2"
+      }
+    ]
+  },
+  {
+    "Id": 60,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty",
+      "RightInner": "GnomeWorker"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.24.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Thinking",
+        "Message": "conversation.24.message2"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.24.message3"
+      }
+    ]
+  },
+  {
+    "Id": 61,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty",
+      "RightInner": "GnomeWorker"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Happy",
+        "Message": "conversation.25.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.25.message2"
+      }
+    ]
+  },
+  {
+    "Id": 6,
+    "ConversationCharacters": {
+      "RightInner": "PussInBoots",
+      "LeftInner": "SleepingBeauty"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
+        "Message": "conversation.26.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Thinking",
+        "Message": "conversation.26.message2"
+      },
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
+        "Message": "conversation.26.message3"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.26.message4"
+      },
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
+        "Message": "conversation.26.message5"
+      }
+    ]
+  },
+  {
+    "Id": 7,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty",
+      "RightInner": "PussInBoots"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.11.message1"
+      },
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
+        "Message": "conversation.11.message2"
+      },
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
+        "Message": "conversation.11.message3"
+      }
+    ]
+  },
+  {
+    "Id": 9,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.8.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.8.message2"
+      }
+    ]
+  },
+  {
     "Id": 10,
     "ConversationCharacters": {
       "LeftInner": "GnomeWorker"
@@ -131,97 +268,6 @@
         "CharacterId": "GnomeWorker",
         "Emotion": "Normal",
         "Message": "conversation.5.message2"
-      }
-    ]
-  },
-  {
-    "Id": 5,
-    "ConversationCharacters": {
-      "LeftInner": "SleepingBeauty"
-    },
-    "Bubbles": [
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Happy",
-        "Message": "conversation.6.message1"
-      },
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Thinking",
-        "Message": "conversation.6.message2"
-      }
-    ]
-  },
-  {
-    "Id": 14,
-    "ConversationCharacters": {
-      "LeftInner": "SleepingBeauty"
-    },
-    "Bubbles": [
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Happy",
-        "Message": "conversation.17.message1"
-      },
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Normal",
-        "Message": "conversation.17.message2"
-      }
-    ]
-  },
-  {
-    "Id": 9,
-    "ConversationCharacters": {
-      "LeftInner": "SleepingBeauty"
-    },
-    "Bubbles": [
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Normal",
-        "Message": "conversation.8.message1"
-      },
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Happy",
-        "Message": "conversation.8.message2"
-      }
-    ]
-  },
-  {
-    "Id": 16,
-    "ConversationCharacters": {
-      "LeftInner": "GnomeWorker"
-    },
-    "Bubbles": [
-      {
-        "CharacterId": "GnomeWorker",
-        "Emotion": "Normal",
-        "Message": "conversation.10.message1"
-      }
-    ]
-  },
-  {
-    "Id": 7,
-    "ConversationCharacters": {
-      "LeftInner": "SleepingBeauty",
-      "RightInner": "PussInBoots"
-    },
-    "Bubbles": [
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Happy",
-        "Message": "conversation.11.message1"
-      },
-      {
-        "CharacterId": "PussInBoots",
-        "Emotion": "Normal",
-        "Message": "conversation.11.message2"
-      },
-      {
-        "CharacterId": "PussInBoots",
-        "Emotion": "Normal",
-        "Message": "conversation.11.message3"
       }
     ]
   },
@@ -259,6 +305,37 @@
         "CharacterId": "PussInBoots",
         "Emotion": "Normal",
         "Message": "conversation.13.message2"
+      }
+    ]
+  },
+  {
+    "Id": 14,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.17.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.17.message2"
+      }
+    ]
+  },
+  {
+    "Id": 16,
+    "ConversationCharacters": {
+      "LeftInner": "GnomeWorker"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.10.message1"
       }
     ]
   },
@@ -440,6 +517,90 @@
         "CharacterId": "PussInBoots",
         "Emotion": "Normal",
         "Message": "conversation.23.message4"
+      }
+    ]
+  },
+  {
+    "Id": 64,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.27.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.27.message2"
+      }
+    ]
+  },
+  {
+    "Id": 80,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty",
+      "RightInner": "GnomeWorker"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Happy",
+        "Message": "conversation.28.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.28.message2"
+      }
+    ]
+  },
+  {
+    "Id": 65,
+    "ConversationCharacters": {
+      "LeftInner": "GnomeWorker"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.29.message1"
+      },
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.29.message2"
+      }
+    ]
+  },
+  {
+    "Id": 48,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty",
+      "RightInner": "Rapunzel"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "Rapunzel",
+        "Emotion": "Normal",
+        "Message": "conversation.30.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.30.message2"
+      },
+      {
+        "CharacterId": "Rapunzel",
+        "Emotion": "Normal",
+        "Message": "conversation.30.message3"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.30.message4"
       }
     ]
   },
@@ -673,6 +834,36 @@
         "CharacterId": "Rapunzel",
         "Emotion": "Normal",
         "Message": "conversation.quest.complete25"
+      }
+    ]
+  },
+  {
+    "Id": "66_CreatePiece_NPC_B3",
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.quest.complete26"
+      }
+    ]
+  },
+  {
+    "Id": "75_CreatePiece_NPC_C3",
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.quest.complete27"
+      }
+    ]
+  },
+  {
+    "Id": "92_CreatePiece_NPC_C4",
+    "Bubbles": [
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.quest.complete28"
       }
     ]
   },
