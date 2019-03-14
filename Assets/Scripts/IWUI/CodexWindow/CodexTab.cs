@@ -145,7 +145,8 @@ public class CodexTab : IWUIWindowViewController
         if (scrollToY + chainH + PADDING * 3 >= scroll.content.rect.height)
         {
             DOTween.To(() => scroll.normalizedPosition, (pos) => { scroll.normalizedPosition = pos; }, new Vector2(0.5f, 0), 1.5f)
-                   .SetEase(Ease.InOutBack);
+                   .SetEase(Ease.InOutBack)
+                   .OnComplete(() => { scroll.enabled = true; });
             
             yield break;
         }
