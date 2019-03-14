@@ -1,4 +1,4 @@
-﻿public class WorkerTutorialStep : LoopFingerTutorialStep
+﻿public class WorkerTutorialStep2 : LoopFingerTutorialStep
 {
     public override void OnRegisterEntity(ECSEntity entity)
     {

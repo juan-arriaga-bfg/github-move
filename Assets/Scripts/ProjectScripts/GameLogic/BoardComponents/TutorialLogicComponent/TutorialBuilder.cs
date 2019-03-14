@@ -197,7 +197,7 @@ public static class TutorialBuilder
             }
             case 10: // tutorial 9 - worker
             {
-                step = new WorkerTutorialStep
+                step = new WorkerTutorialStep2
                 {
                     Delay = 5,
                     OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("instantworker"),
@@ -207,7 +207,7 @@ public static class TutorialBuilder
             }
             case 11: // remove worker
             {
-                step = new BaseTutorialStep {IsIgnoreDebug = false, IsIgnoreUi = true, IsAnyCompleteCondition = true};
+                step = new WorkerTutorialStep1 {IsIgnoreDebug = false, IsIgnoreUi = true, IsAnyCompleteCondition = true};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCounterTutorialCondition {Target = 1, ConditionType = TutorialConditionType.Complete}, true);
