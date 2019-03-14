@@ -686,13 +686,13 @@
     "Id": 54,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "60_CreatePiece_I3"
+      "60_CreatePiece_E3"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
         "Id": "PieceUnlocked",
-        "Value": "I2"
+        "Value": "E3"
       }
     ]
   },
@@ -700,13 +700,13 @@
     "Id": 55,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "61_CreatePiece_I4"
+      "61_CreatePiece_E4"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
         "Id": "QuestCompleted",
-        "Value": "60_CreatePiece_I3"
+        "Value": "60_CreatePiece_E3"
       }
     ]
   },
@@ -714,13 +714,13 @@
     "Id": 56,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "62_CreatePiece_I5"
+      "62_CreatePiece_E5"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
         "Id": "QuestCompleted",
-        "Value": "61_CreatePiece_I4"
+        "Value": "61_CreatePiece_E4"
       }
     ]
   },
@@ -728,13 +728,13 @@
     "Id": 57,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "63_CreatePiece_I6"
+      "63_CreatePiece_E6"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
         "Id": "QuestCompleted",
-        "Value": "62_CreatePiece_I5"
+        "Value": "62_CreatePiece_E5"
       }
     ]
   },
@@ -742,13 +742,13 @@
     "Id": 58,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "64_CreatePiece_I7"
+      "64_CreatePiece_E7"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
         "Id": "QuestCompleted",
-        "Value": "63_CreatePiece_I6"
+        "Value": "63_CreatePiece_E6"
       }
     ]
   },

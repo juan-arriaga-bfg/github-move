@@ -62,27 +62,27 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "$type": "TaskCollectIngredientEntity, GameAssembly",
     "Id": "7_CreatePiece_PR_A5",
     "PieceUid": "PR_A5",
     "TargetValue": 6,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message",
+        "Title": "quest.collect.ingredient.title",
+        "Message": "quest.collect.ingredient.message",
         "Hint": "task.collect.ingredient.hint"
       }
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "$type": "TaskCollectIngredientEntity, GameAssembly",
     "Id": "9_CreatePiece_PR_C5",
     "PieceUid": "PR_C5",
     "TargetValue": 11,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message",
+        "Title": "quest.collect.ingredient.title",
+        "Message": "quest.collect.ingredient.message",
         "Hint": "task.collect.ingredient.hint"
       }
     }
@@ -241,14 +241,14 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "$type": "TaskCollectIngredientEntity, GameAssembly",
     "Id": "24_CreatePiece_PR_D5",
     "PieceUid": "PR_D5",
     "TargetValue": 6,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message",
+        "Title": "quest.collect.ingredient.title",
+        "Message": "quest.collect.ingredient.message",
         "Hint": "task.collect.ingredient.hint"
       }
     }
@@ -365,14 +365,14 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "$type": "TaskCollectIngredientEntity, GameAssembly",
     "Id": "34_CreatePiece_PR_B5",
     "PieceUid": "PR_B5",
     "TargetValue": 6,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message",
+        "Title": "quest.collect.ingredient.title",
+        "Message": "quest.collect.ingredient.message",
         "Hint": "task.collect.ingredient.hint"
       }
     }
@@ -488,14 +488,14 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "$type": "TaskCollectIngredientEntity, GameAssembly",
     "Id": "44_CreatePiece_PR_D5",
     "PieceUid": "PR_D5",
     "TargetValue": 6,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message"
+        "Title": "quest.collect.ingredient.title",
+        "Message": "quest.collect.ingredient.message"
       }
     }
   },
@@ -512,14 +512,14 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "$type": "TaskCollectIngredientEntity, GameAssembly",
     "Id": "46_CreatePiece_PR_E5",
     "PieceUid": "PR_E5",
     "TargetValue": 10,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message"
+        "Title": "quest.collect.ingredient.title",
+        "Message": "quest.collect.ingredient.message"
       }
     }
   },
@@ -671,8 +671,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "60_CreatePiece_I3",
-    "PieceUid": "I3",
+    "Id": "60_CreatePiece_E3",
+    "PieceUid": "E3",
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -683,8 +683,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "61_CreatePiece_I4",
-    "PieceUid": "I4",
+    "Id": "61_CreatePiece_E4",
+    "PieceUid": "E4",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -695,8 +695,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "62_CreatePiece_I5",
-    "PieceUid": "I5",
+    "Id": "62_CreatePiece_E5",
+    "PieceUid": "E5",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -707,8 +707,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "63_CreatePiece_I6",
-    "PieceUid": "I6",
+    "Id": "63_CreatePiece_E6",
+    "PieceUid": "E6",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -719,8 +719,8 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "64_CreatePiece_I7",
-    "PieceUid": "I7",
+    "Id": "64_CreatePiece_E7",
+    "PieceUid": "E7",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {

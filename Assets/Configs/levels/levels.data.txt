@@ -372,6 +372,12 @@
         "Amount": 120
       }
     ],
+    "OrdersWeights": [
+      {
+        "Uid": "Order16",
+        "Weight": 4
+      }
+    ],
     "PieceWeights": [
       {
         "Uid": "PR_A1",
@@ -428,11 +434,6 @@
       }
     ],
     "OrdersWeights": [
-      {
-        "Uid": "Order16",
-        "Weight": 5,
-        "Override": true
-      },
       {
         "Uid": "Order7",
         "Weight": 3,
