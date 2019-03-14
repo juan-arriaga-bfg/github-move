@@ -21,7 +21,6 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.DailyQuestWindow,
             UIWindowType.ResourcePanelWindow,
             UIWindowType.SettingsWindow,
-            UIWindowType.SoftShopWindow,
             UIWindowType.HardShopWindow,
             UIWindowType.MarketWindow,
             UIWindowType.ConfirmationWindow,
