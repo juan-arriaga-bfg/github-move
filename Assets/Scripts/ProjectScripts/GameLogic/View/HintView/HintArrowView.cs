@@ -8,6 +8,8 @@ public class HintArrowView : BoardElementView, IHintArrow
     
     [SerializeField] private SpriteRenderer icon;
     [SerializeField] private Animation animation;
+
+    [SerializeField] private BoardElementView linkedContext;
     
     public const float FADE_DURATION = 0.5f;
 
@@ -67,8 +69,13 @@ public class HintArrowView : BoardElementView, IHintArrow
         
         DestroyOnBoard(delay + FADE_DURATION * 1.1f);
     }
-    
-    public static HintArrowView Show(BoardPosition position, float offsetX = 0, float offsetY = 0, bool focus = true, bool loop = false, float delayBeforeShow = 0)
+
+    public void SetLinkedContext(BoardElementView linkedContext)
+    {
+        this.linkedContext = linkedContext;
+    }
+
+    public static HintArrowView Show(BoardPosition position, float offsetX = 0, float offsetY = 0, bool focus = true, bool loop = false, float delayBeforeShow = 0, BoardElementView linkedContext = null)
     {  
         var board = BoardService.Current.FirstBoard;
         var target = board.BoardLogic.GetPieceAt(position);
@@ -86,6 +93,8 @@ public class HintArrowView : BoardElementView, IHintArrow
 
         arrowView.CachedTransform.localPosition = arrowView.CachedTransform.localPosition + (Vector3.up * 2) + new Vector3(offsetX, offsetY);
         arrowView.CachedPosition = cachedPosition;
+        
+        arrowView.SetLinkedContext(linkedContext);
         
         var targetPiece = boardLogic.GetPieceAt(position);
 

@@ -505,7 +505,9 @@ public class PieceBoardElementView : BoardElementView
     {
         if (arrow != null) return;
         
-        arrow = HintArrowView.Show(Piece.CachedPosition, 0, -0.5f, false, true);
+        Debug.LogWarning($"AddArrow => {Piece.CachedPosition}");
+        
+        arrow = HintArrowView.Show(Piece.CachedPosition, 0, -0.5f, false, true, 0f, this);
     }
 
     public void SetArrow(HintArrowView arrow)

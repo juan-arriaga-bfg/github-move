@@ -64,6 +64,8 @@ public class BoardArrowTutorialStep : BaseTutorialStep, IBoardEventListener
 
     private void UpdateArrow(List<int> targets)
     {
+        UnityEngine.Debug.LogWarning($"BoardArrowTutorialStep => UpdateArrow");
+        
         var positions = GetPositions(targets);
 
         if (positions.Count > 0 && IsFirstStartEvent())
