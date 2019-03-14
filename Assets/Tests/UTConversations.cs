@@ -119,6 +119,11 @@ namespace UT
                     var startBubbleChar = startBubble.CharacterId;
                     var startBubbleSide = startBubble.Side;
 
+                    if (finishBubbleChar != startBubbleChar && finishBubbleSide != startBubbleSide)// Changed both char and side - it's OK
+                    {
+                        continue;
+                    }
+                    
                     if (finishBubbleChar != startBubbleChar)
                     {
                         errors.AppendLine($"Different chars detected for quest complete dialog [{dependencyId}] and depended starter [{starter.Id}]: '{finishBubbleChar}' <-> '{startBubbleChar}'");
