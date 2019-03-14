@@ -56,16 +56,28 @@ public class HintArrowView : BoardElementView, IHintArrow
         delay = Mathf.Max(0, delay);
         
         DOTween.Kill(animationUid);
-        
-        var sequence = DOTween.Sequence().SetId(animationUid);
-        
-        sequence.Insert(delay, icon.DOFade(0, FADE_DURATION));
 
-        sequence.InsertCallback(delay, () =>
+        if (delay <= 0f)
         {
             onRemove?.Invoke();
             onRemove = null;
-        });
+            
+            var sequence = DOTween.Sequence().SetId(animationUid);
+        
+            sequence.Insert(delay, icon.DOFade(0, FADE_DURATION));
+        }
+        else
+        {
+            var sequence = DOTween.Sequence().SetId(animationUid);
+        
+            sequence.Insert(delay, icon.DOFade(0, FADE_DURATION));
+
+            sequence.InsertCallback(delay, () =>
+            {
+                onRemove?.Invoke();
+                onRemove = null;
+            });
+        }
         
         DestroyOnBoard(delay + FADE_DURATION * 1.1f);
     }

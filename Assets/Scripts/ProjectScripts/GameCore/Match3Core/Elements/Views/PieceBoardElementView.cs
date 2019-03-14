@@ -75,7 +75,7 @@ public class PieceBoardElementView : BoardElementView
         return spriteRenderers;
     }
     
-    private HintArrowView arrow;
+    [SerializeField] private HintArrowView arrow;
     
     public virtual void Init(BoardRenderer context, Piece piece)
     {
@@ -505,8 +505,6 @@ public class PieceBoardElementView : BoardElementView
     {
         if (arrow != null) return;
         
-        Debug.LogWarning($"AddArrow => {Piece.CachedPosition}");
-        
         arrow = HintArrowView.Show(Piece.CachedPosition, 0, -0.5f, false, true, 0f, this);
     }
 
@@ -517,7 +515,10 @@ public class PieceBoardElementView : BoardElementView
             this.arrow = arrow;
             this.arrow.AddOnRemoveAction(() =>
             {
-                this.arrow = null;
+                if (this.arrow == arrow)
+                {
+                    this.arrow = null;
+                }
             });
         }
         else
