@@ -249,7 +249,7 @@ public static class TutorialBuilder
                  
                 break;
             }
-            case 15: // lock buttons Shop
+            case 15: // lock buttons Market
             {
                 if (LockMarketStepIndex != index) Debug.LogError("Tutorial Error: LockMarketStepIndex != index");
                 

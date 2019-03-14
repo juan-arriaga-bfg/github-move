@@ -56,7 +56,7 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
         Print();
 #else
         CancelAllOnDevice();
-        TimeSpan timeShift = new TimeSpan(0, 0, 5);
+        TimeSpan timeShift = new TimeSpan(0, 1, 0);
         foreach (var notifyType in notifyTypes)
         {
             var notify = GenerateNotify(new Notifier(null, notifyType));

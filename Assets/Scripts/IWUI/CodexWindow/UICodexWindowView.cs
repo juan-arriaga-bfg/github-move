@@ -223,20 +223,27 @@ public class UICodexWindowView : UIGenericPopupWindowView
                         // Scroll
                         var target = chainDef.ItemDefs[0].PieceTypeDef.Id;
 
-                        if (tabDef.ChainDefs.Count == 2)
+                        if (chainIndex == 0 && itemIndex < ITEMS_IN_ROW_COUNT * 2)// Do not focus for the first row
                         {
-                            if (chainIndex == 1)
-                            {
-                                codexTabs[tabIndex].ScrollToBottom();
-                            }
-                            else
-                            {
-                                codexTabs[tabIndex].ScrollToTop();
-                            }
+                            codexTabs[tabIndex].ScrollToTop();
                         }
                         else
                         {
-                            codexTabs[tabIndex].ScrollTo(target);
+                            if (tabDef.ChainDefs.Count == 2)
+                            {
+                                if (chainIndex == 1)
+                                {
+                                    codexTabs[tabIndex].ScrollToBottom();
+                                }
+                                else
+                                {
+                                    codexTabs[tabIndex].ScrollToTop();
+                                }
+                            }
+                            else
+                            {
+                                codexTabs[tabIndex].ScrollTo(target);
+                            }
                         }
 
                         return;

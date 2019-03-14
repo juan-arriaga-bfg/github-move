@@ -31,6 +31,11 @@ public class MarketItem
     
     public CurrencyPair Reward;
     public CurrencyPair Price;
+
+    public bool IsPiece => PieceType.Parse(Reward.Currency) != -1;
+    
+    public string Name => IsPiece ? $"piece.name.{Reward.Currency}" : current.Name;
+    public string Icon => IsPiece ? Reward.Currency : current.Icon;
     
     private readonly List<MarketDef> defs = new List<MarketDef>();
 
@@ -54,7 +59,8 @@ public class MarketItem
         if(Index == -1) return;
         
         current = defs[Index];
-        Reward = new CurrencyPair{Currency = PieceType.Parse(piece), Amount = amount};
+        
+        Reward = new CurrencyPair{Currency = piece == -1 ? current.Weight.Uid : PieceType.Parse(piece), Amount = amount};
         Price = current.Price ?? GetPrice(Reward.Currency);
     }
     

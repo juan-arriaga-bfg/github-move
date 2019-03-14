@@ -132,7 +132,16 @@ public static partial class CurrencyHelper
         
         if (currency == Currency.Coins.Name)
         {
-            UIService.Get.ShowWindow(UIWindowType.SoftShopWindow);
+            if (BoardService.Current.FirstBoard.TutorialLogic.CheckMarket() == false)
+            {
+                UIMessageWindowController.CreateMessage(
+                    LocalizationService.Get("common.title.forbidden", "common.title.forbidden"),
+                    LocalizationService.Get("common.message.forbidden.market", "common.message.forbidden.market"));
+            
+                return;
+            }
+            
+            UIService.Get.ShowWindow(UIWindowType.MarketWindow);
             return;
         }
         

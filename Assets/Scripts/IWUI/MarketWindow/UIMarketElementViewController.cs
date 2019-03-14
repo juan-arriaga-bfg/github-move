@@ -156,27 +156,41 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		if (price.Currency != Currency.Crystals.Name)
 		{
-			Paid();
+			Paid(null);
 			return;
 		}
 		
 		var model = UIService.Get.GetCachedModel<UIConfirmationWindowModel>(UIWindowType.ConfirmationWindow);
-		
-		model.Icon = contentEntity.Def.Reward.Currency;
+
+		model.Icon = contentEntity.Def.Icon;
 		
 		model.ButtonText = string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), price.ToStringIcon());
 		model.ProductAmountText = $"x{contentEntity.Def.Reward.Amount}";
-		model.ProductNameText = LocalizationService.Get($"piece.name.{contentEntity.Def.Reward.Currency}", $"piece.name.{contentEntity.Def.Reward.Currency}");
+		model.ProductNameText = LocalizationService.Get(contentEntity.Def.Name, contentEntity.Def.Name);
 		
-		model.OnAccept = anchorAccept => Paid();
+		model.OnAccept = Paid;
 		model.OnCancel = () => { isClick = false; };
         
 		UIService.Get.ShowWindow(UIWindowType.ConfirmationWindow);
 	}
 	
-	private void Paid()
+	private void Paid(Transform anchorPaid)
 	{
 		var contentEntity = entity as UIMarketElementEntity;
+		
+		if (contentEntity.Def.IsPiece == false)
+		{
+			var position = anchorPaid == null ? btnBack.transform.position : anchorPaid.position;
+			var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(position);
+			
+			CurrencyHelper.PurchaseAsyncOnlyCurrency(contentEntity.Def.Reward, contentEntity.Def.Price, flyPosition, null);
+			
+			contentEntity.Def.State = MarketItemState.Claimed;
+			Analytics.SendPurchase($"market{GetIndex()}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Price}, new List<CurrencyPair>{contentEntity.Def.Reward}, false, false);
+			Init();
+			
+			return;
+		}
 		
 		Analytics.SendPurchase($"market{GetIndex()}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Price}, null, false, false);
 		CurrencyHelper.Purchase(Currency.Market.Name, 1, contentEntity.Def.Price, success =>
@@ -197,7 +211,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	{
 		var contentEntity = entity as UIMarketElementEntity;
 		var board = BoardService.Current.FirstBoard;
-
+		
 		if (board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceReward(contentEntity.Def.Reward.Amount, true, out var position) == false)
 		{
 			isClick = false;

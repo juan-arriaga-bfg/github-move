@@ -75,6 +75,20 @@ public class IapInitComponent : AsyncInitComponentBase
                                      AppleAppStoreId  = "vi.tier60.com.bigfishgames.mergetalesios",
                                      Consumable = true
                                  })
+                                .Add(new IapDefinition
+                                 {
+                                     Id = "iap7",
+                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.tier120",
+                                     AppleAppStoreId  = "vi.tier120.com.bigfishgames.mergetalesios",
+                                     Consumable = true
+                                 })
+                                .Add(new IapDefinition
+                                 {
+                                     Id = "iap8",
+                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.tier600",
+                                     AppleAppStoreId  = "vi.tier600.com.bigfishgames.mergetalesios",
+                                     Consumable = true
+                                 })
                 ))
 #endregion
            .Init();

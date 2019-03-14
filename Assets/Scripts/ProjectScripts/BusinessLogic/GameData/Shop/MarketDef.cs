@@ -18,4 +18,6 @@ public class MarketDef
     public MarketRandomType RandomType;
     public CurrencyPair Price;
     public ItemWeight Weight;
+    public string Name;
+    public string Icon;
 }

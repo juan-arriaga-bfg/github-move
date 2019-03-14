@@ -76,7 +76,7 @@ public static class ProfileSlots
                 }
                 else
                 {
-                    Debug.LogWarning($"[Reset progress] profileManager.SystemVersion > baseProfile.SystemVersion:{profileManager.SystemVersion > baseProfile.SystemVersion}");
+                    Debug.LogWarning($"[Reset progress] profileManager.SystemVersion ({profileManager.SystemVersion}) > baseProfile.SystemVersion ({baseProfile.SystemVersion}): {profileManager.SystemVersion > baseProfile.SystemVersion}");
                 }
 
                 var profileBuilder = new DefaultProfileBuilder();

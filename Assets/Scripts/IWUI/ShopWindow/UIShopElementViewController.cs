@@ -120,7 +120,9 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 		    return;
 	    }
 	    // END
-
+	    
+	    CurrencyHelper.FlyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(btnBack.transform.position);
+	    
 	    SellForCashService.Current.Purchase(contentEntity.PurchaseKey, (isOk, productId) =>
 	    {
 		    isClick = false;
@@ -146,38 +148,21 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 	    UIService.Get.ShowWindow(UIWindowType.ConfirmationWindow);
     }
 
-    protected void OnPurchase(Transform anchor)
+    private void OnPurchase(Transform anchor)
     {
 	    var position = anchor == null ? btnBack.transform.position : anchor.position;
 	    var contentEntity = entity as UIShopElementEntity;
 	    var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(position);
+
+	    CurrencyHelper.PurchaseAsyncOnlyCurrency(contentEntity.Products[0], contentEntity.Price, flyPosition, null);
 	    
-	    var transaction = CurrencyHelper.PurchaseAsync(contentEntity.Products[0], contentEntity.Price, success =>
-	    {
-		    if (success == false ) return;
-		    
-		    isClick = false;
-	    }, flyPosition);
-	    
-	    transaction.Complete();
+	    isClick = false;
 	    OnPurchaseComplete();
-	    PlaySoundOnPurchase(contentEntity.Products);
     }
 
     protected virtual void OnPurchaseComplete()
     {
 	    SendAnalyticsEvent();
-    }
-    
-    private void PlaySoundOnPurchase(List<CurrencyPair> products)
-    {
-	    foreach (var product in products)
-	    {
-		    if(product.Currency == Currency.Energy.Name)
-			    NSAudioService.Current.Play(SoundId.BuyEnergy, false, 1);
-		    if(product.Currency == Currency.Coins.Name)
-			    NSAudioService.Current.Play(SoundId.BuySoftCurr, false, 1);    
-	    }
     }
 
     protected void SendAnalyticsEvent()

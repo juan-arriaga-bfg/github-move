@@ -70,8 +70,6 @@ public class UIMarketWindowView : UIGenericPopupWindowView
 
     private void UpdateLabel()
     {
-        var windowModel = Model as UIMarketWindowModel;
-        
         timerLabel.Text =  BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.CompleteTime.GetTimeLeftText();
     }
     
@@ -88,9 +86,9 @@ public class UIMarketWindowView : UIGenericPopupWindowView
             
             var entity = new UIMarketElementEntity
             {
-                ContentId = def.Reward.Currency,
+                ContentId = def.Icon,
                 LabelText = $"x{def.Reward.Amount}",
-                Name = LocalizationService.Get($"piece.name.{def.Reward.Currency}", $"piece.name.{def.Reward.Currency}"),
+                Name = LocalizationService.Get(def.Name, def.Name),
                 Def = def,
                 OnSelectEvent = null,
                 OnDeselectEvent = null

@@ -117,7 +117,7 @@ public class CodexTab : IWUIWindowViewController
        // yield return new WaitForEndOfFrame();
         
         // Respect space between top size of the viewport and chain
-        const float PADDING = 15f;
+        const float PADDING = 30f;
 
         RectTransform chainRect = target.GetComponent<RectTransform>();
         float chainY   = chainRect.localPosition.y;
@@ -141,15 +141,14 @@ public class CodexTab : IWUIWindowViewController
         DOTween.Kill(scroll.content);
 
         // Do not overscroll for last element
-        
-        if (scrollToY + chainH + PADDING >= scroll.content.rect.height)
+                                      // * 3 because -> Top + bottom + a little bit more to be sure
+        if (scrollToY + chainH + PADDING * 3 >= scroll.content.rect.height)
         {
+            DOTween.To(() => scroll.normalizedPosition, (pos) => { scroll.normalizedPosition = pos; }, new Vector2(0.5f, 0), 1.5f)
+                   .SetEase(Ease.InOutBack);
+            
             yield break;
-            // scrollToY = PADDING + 2;
-            // scroll.content.anchoredPosition = new Vector2(scroll.content.anchoredPosition.x, scrollToY);
         }
-        // var ease = scroll.content.rect.height - scrollToY > chainH / 2 ? Ease.InOutBack : Ease.Linear;
-        // ease = Ease.Linear;
         
         scroll.content.DOAnchorPosY(scrollToY, 1.0f)
               .SetEase(Ease.InOutBack)
@@ -160,16 +159,23 @@ public class CodexTab : IWUIWindowViewController
     private void OnEnable()
     {
         // Hack to fix Layout problems
+        StartCoroutine(FixVerticalLayoutBug());
+    }
+
+    private IEnumerator FixVerticalLayoutBug()
+    {
         if (verticalLayout == null)
         {
-            return;
+            yield break;
         }
         
-        Canvas.ForceUpdateCanvases();
-
+        yield return new WaitForEndOfFrame();
+        
+        //Canvas.ForceUpdateCanvases();
+        //
         verticalLayout.enabled = false;
         verticalLayout.enabled = true;
-
+        //
         // contentSizeFitter.enabled = false;
         // contentSizeFitter.enabled = true;
     }

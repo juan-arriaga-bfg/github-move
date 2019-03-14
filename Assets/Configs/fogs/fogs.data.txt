@@ -434,7 +434,7 @@
       "Level": "5",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 30
+        "Amount": 25
       },
       "Reward": {
         "Currency": "Experience",
@@ -571,7 +571,7 @@
       "Level": "6",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 40
+        "Amount": 50
       },
       "Reward": {
         "Currency": "Experience",
@@ -736,40 +736,32 @@
             "Y": 2
           }
         ],
-        "SK1_PR": [
-          {
-            "X": 18,
-            "Y": 4
-          }
-        ],
-        "Boost_CR3": [
-          {
-            "X": 18,
-            "Y": 5
-          },
-          {
-            "X": 20,
-            "Y": 5
-          },
-          {
-            "X": 21,
-            "Y": 3
-          }
-        ],
         "OB3_A": [
           {
             "X": 18,
-            "Y": 6
+            "Y": 4
           },
           {
-            "X": 20,
-            "Y": 3
+            "X": 18,
+            "Y": 6
           }
         ],
-        "MN_B": [
+        "SK1_PR": [
+          {
+            "X": 18,
+            "Y": 5
+          }
+        ],
+        "Soft2": [
           {
             "X": 19,
             "Y": 1
+          }
+        ],
+        "CH_NPC": [
+          {
+            "X": 19,
+            "Y": 2
           }
         ],
         "OB9_A": [
@@ -778,13 +770,21 @@
             "Y": 3
           }
         ],
-        "Soft2": [
+        "Boost_CR3": [
           {
             "X": 19,
             "Y": 4
+          },
+          {
+            "X": 20,
+            "Y": 2
+          },
+          {
+            "X": 20,
+            "Y": 5
           }
         ],
-        "CH_NPC": [
+        "A3": [
           {
             "X": 19,
             "Y": 5
@@ -793,17 +793,17 @@
         "OB6_A": [
           {
             "X": 20,
-            "Y": 4
+            "Y": 1
           },
           {
             "X": 21,
             "Y": 2
           }
         ],
-        "A3": [
+        "MN_B": [
           {
-            "X": 21,
-            "Y": 4
+            "X": 20,
+            "Y": 3
           }
         ],
         "A2": [
@@ -998,7 +998,7 @@
       "Level": "8",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 200
+        "Amount": 150
       },
       "Reward": {
         "Currency": "Experience",
@@ -1123,7 +1123,7 @@
       "Level": "9",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 250
+        "Amount": 200
       },
       "Reward": {
         "Currency": "Experience",
@@ -1269,7 +1269,7 @@
       "Level": "10",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 350
+        "Amount": 300
       },
       "Reward": {
         "Currency": "Experience",
@@ -1398,7 +1398,7 @@
       "Level": "11",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 500
+        "Amount": 350
       },
       "Reward": {
         "Currency": "Experience",
@@ -1501,7 +1501,7 @@
       "Level": "12",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 600
+        "Amount": 350
       },
       "Reward": {
         "Currency": "Experience",
@@ -1559,20 +1559,14 @@
           },
           {
             "X": 20,
-            "Y": 16
-          },
-          {
-            "X": 22,
             "Y": 15
           },
           {
-            "X": 22,
-            "Y": 16
-          }
-        ],
-        "OB9_A": [
-          {
             "X": 20,
+            "Y": 16
+          },
+          {
+            "X": 22,
             "Y": 15
           }
         ],
@@ -1585,6 +1579,12 @@
         "CH_NPC": [
           {
             "X": 21,
+            "Y": 16
+          }
+        ],
+        "OB9_A": [
+          {
+            "X": 22,
             "Y": 16
           }
         ],
@@ -1601,7 +1601,7 @@
       "Level": "13",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 1000
+        "Amount": 400
       },
       "Reward": {
         "Currency": "Experience",
@@ -1699,10 +1699,6 @@
           {
             "X": 24,
             "Y": 14
-          },
-          {
-            "X": 29,
-            "Y": 12
           }
         ],
         "Soft2": [
@@ -1733,7 +1729,7 @@
             "Y": 12
           },
           {
-            "X": 28,
+            "X": 30,
             "Y": 11
           }
         ],
@@ -1757,10 +1753,6 @@
           {
             "X": 25,
             "Y": 13
-          },
-          {
-            "X": 30,
-            "Y": 11
           }
         ],
         "CH_NPC": [
@@ -1781,15 +1773,9 @@
             "Y": 13
           }
         ],
-        "Hard1": [
+        "MN_E": [
           {
             "X": 28,
-            "Y": 12
-          }
-        ],
-        "Boost_WR": [
-          {
-            "X": 29,
             "Y": 11
           }
         ]
@@ -1800,13 +1786,14 @@
       "Level": "14",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 100000
+        "Amount": 500
       },
       "Reward": {
         "Currency": "Experience",
         "Amount": 10
       },
       "IsActive": true,
+      "Hero": "NPC_E",
       "Positions": [
         {
           "X": 21,
@@ -1961,6 +1948,10 @@
             "Y": 17
           },
           {
+            "X": 20,
+            "Y": 18
+          },
+          {
             "X": 21,
             "Y": 18
           },
@@ -1985,10 +1976,6 @@
           {
             "X": 19,
             "Y": 19
-          },
-          {
-            "X": 20,
-            "Y": 18
           }
         ],
         "CH_Free": [

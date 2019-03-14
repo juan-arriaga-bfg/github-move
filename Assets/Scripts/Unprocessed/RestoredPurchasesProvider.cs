@@ -123,6 +123,7 @@ public class RestoredPurchasesProvider : MonoBehaviour
 
                 model.OnClose = () =>
                 {
+                    CurrencyHelper.FlyPosition = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f);
                     SellForCashService.Current.ProvideReward(productId);
                     ProfileService.Current.QueueComponent.RemoveAction(actionId); // For case if we have scheduled the action once again while Restore window is in progress
                 };

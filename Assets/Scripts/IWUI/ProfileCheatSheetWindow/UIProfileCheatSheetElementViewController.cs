@@ -115,8 +115,6 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
     public void UpdateUi()
     {
         GameDataManager dm = null;
-        
-        ToggleBackColor();
 
         bool isLoadedCorrectly = string.IsNullOrEmpty(slotData.Error);
 
@@ -141,6 +139,7 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
             lblRev.Text = $"Can't load '{Colorize(slotData.SlotPath, COLOR_YELLOW)}'";
             lblData.Text = $"{Colorize(slotData.Error, COLOR_WHITE)}";
             lblTimestamp.Text = "";
+            ToggleBackColor();
             return;
         }
 
@@ -163,6 +162,8 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
         string resourcesStr = CurrencyHelper.RewardsToString("  ", null, listResources);
 
         lblData.Text = !string.IsNullOrEmpty(slotData.Error) ? slotData.Error : $"Level: {level}    {resourcesStr}";
+        
+        ToggleBackColor();
     }
 
     private string ParseTimestamp()
