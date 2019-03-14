@@ -146,19 +146,10 @@ public class UIOfferWindowView : UIGenericPopupWindowView
     {
         var windowModel = Model as UIOfferWindowModel;
         var flyPosition = GetComponentInChildren<Canvas>().worldCamera.WorldToScreenPoint(btnBuy.transform.position);
-        
-        var transactions = CurrencyHelper.PurchaseAsync(windowModel.Product.Products, success =>
-        {
-            if (success == false ) return;
-		    
-            isClick = false;
-        }, flyPosition);
 
-        foreach (var transaction in transactions)
-        {
-            transaction.Complete();
-        }
-
+        CurrencyHelper.PurchaseAsyncOnlyCurrency(windowModel.Product.Products, flyPosition, null);
+	    
+        isClick = false;
         PurchaseComplete();
     }
 

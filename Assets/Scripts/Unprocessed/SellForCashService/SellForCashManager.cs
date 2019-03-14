@@ -129,6 +129,9 @@ public class SellForCashManager: ECSEntity
         }
         
         var defs = GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name];
+        
+        defs.AddRange(GameDataService.Current.ShopManager.Defs[Currency.Offer.Name]);
+        
         var def = defs.FirstOrDefault(e => e.PurchaseKey == productId);
 
         if (def == null)
@@ -137,9 +140,11 @@ public class SellForCashManager: ECSEntity
             return;
         }
         
-        var products = def.Products;
+        var piecesReward = CurrencyHelper.FiltrationRewards(def.Products, out var currenciesReward);
+
+        if (piecesReward.Count == 0) CurrencyHelper.PurchaseAsyncOnlyCurrency(currenciesReward, CurrencyHelper.FlyPosition, null);
+        else CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, null, null, null, false, true);
         
-        CurrencyHelper.PurchaseAndProvideSpawn(products, null, null, null, false, true);
         IapService.Current.IapProvidedToPlayer(productId);
     }
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static partial class CurrencyHelper
 {
+    public static Vector3 FlyPosition;
+    
     public static void PurchaseAsyncOnlyCurrency(CurrencyPair product, CurrencyPair price, Vector3 flyPosition, Action<bool> onSuccess)
     {
         var transaction = PurchaseAsync(product, price, success =>
@@ -14,6 +16,21 @@ public static partial class CurrencyHelper
         }, flyPosition);
 
         transaction.Complete();
+    }
+    
+    public static void PurchaseAsyncOnlyCurrency(List<CurrencyPair> products, Vector3 flyPosition, Action<bool> onSuccess)
+    {
+        var transactions = PurchaseAsync(products, success =>
+        {
+            if (success) PlaySoundOnPurchase(products);
+            
+            onSuccess?.Invoke(success);
+        }, flyPosition);
+
+        foreach (var transaction in transactions)
+        {
+            transaction.Complete();
+        }
     }
     
     private static void PlaySoundOnPurchase(List<CurrencyPair> products)

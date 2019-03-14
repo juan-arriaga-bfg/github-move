@@ -120,7 +120,9 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 		    return;
 	    }
 	    // END
-
+	    
+	    CurrencyHelper.FlyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(btnBack.transform.position);
+	    
 	    SellForCashService.Current.Purchase(contentEntity.PurchaseKey, (isOk, productId) =>
 	    {
 		    isClick = false;
