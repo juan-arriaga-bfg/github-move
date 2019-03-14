@@ -15,9 +15,9 @@ public class UINextLevelWindowView : UIGenericWindowView
     
     [SerializeField] private Transform tapToContinueAnchor;
     
-    [IWUIBinding("#UnlockedCharacterContainerLeft")] protected RectTransform unlockedCharacterContainerLeft;
-    
-    [IWUIBinding("#UnlockedCharacterContainerRight")] protected RectTransform unlockedCharacterContainerRight;
+    // [IWUIBinding("#UnlockedCharacterContainerLeft")] protected RectTransform unlockedCharacterContainerLeft;
+    //
+    // [IWUIBinding("#UnlockedCharacterContainerRight")] protected RectTransform unlockedCharacterContainerRight;
     
     private int tapAnimationId = Animator.StringToHash("Tap");
     
@@ -67,9 +67,9 @@ public class UINextLevelWindowView : UIGenericWindowView
             cachedCharacterRight = null;
         }
         
-        cachedCharacterLeft = CreateCharacter(UiCharacterData.CharGnomeWorker, CharacterEmotion.Happy, CharacterSide.Left, unlockedCharacterContainerLeft);
-        
-        cachedCharacterRight = CreateCharacter(UiCharacterData.CharGnomeWorker, CharacterEmotion.Normal, CharacterSide.Right, unlockedCharacterContainerRight);
+        // cachedCharacterLeft = CreateCharacter(UiCharacterData.CharGnomeWorker, CharacterEmotion.Happy, CharacterSide.Left, unlockedCharacterContainerLeft);
+        //
+        // cachedCharacterRight = CreateCharacter(UiCharacterData.CharGnomeWorker, CharacterEmotion.Normal, CharacterSide.Right, unlockedCharacterContainerRight);
     }
     
     protected virtual UICharacterViewController CreateCharacter(string characterId, CharacterEmotion emotion, CharacterSide side, RectTransform container)
