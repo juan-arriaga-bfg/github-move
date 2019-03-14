@@ -1,5 +1,53 @@
 ﻿[
   {
+    "Uid": "Soft easy",
+    "UnlockLevel": 1,
+    "Amount": 150,
+    "Weight": {
+      "Uid": "Coins",
+      "Weight": 1
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 15
+    },
+    "RandomType": "Base",
+    "Icon": "CoinsShopIcon1",
+    "Name": "window.shop.coins.item1"
+  },
+  {
+    "Uid": "Soft normal",
+    "UnlockLevel": 1,
+    "Amount": 1100,
+    "Weight": {
+      "Uid": "Coins",
+      "Weight": 1
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 99
+    },
+    "RandomType": "Base",
+    "Icon": "CoinsShopIcon2",
+    "Name": "window.shop.coins.item2"
+  },
+  {
+    "Uid": "Soft hard",
+    "UnlockLevel": 1,
+    "Amount": 7000,
+    "Weight": {
+      "Uid": "Coins",
+      "Weight": 1
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 499
+    },
+    "RandomType": "Base",
+    "Icon": "CoinsShopIcon3",
+    "Name": "window.shop.coins.item3"
+  },
+  {
     "Uid": "Base easy",
     "UnlockLevel": 1,
     "Amount": 1,

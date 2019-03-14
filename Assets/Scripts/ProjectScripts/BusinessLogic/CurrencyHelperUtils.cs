@@ -132,7 +132,7 @@ public static partial class CurrencyHelper
         
         if (currency == Currency.Coins.Name)
         {
-            UIService.Get.ShowWindow(UIWindowType.SoftShopWindow);
+            UIService.Get.ShowWindow(UIWindowType.MarketWindow);
             return;
         }
         
