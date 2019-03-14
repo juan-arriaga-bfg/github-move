@@ -143,6 +143,8 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     
     public void OnClick()
     {
+        if (timer.IsStarted == false) return;
+        
         OffChopSound();
 
         var analyticsLocation = string.Empty;
