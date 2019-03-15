@@ -325,12 +325,11 @@ public class BoardManipulatorComponent : ECSEntity,
                     cachedViewForDrag.CachedTransform.DOLocalMove(targetPos, duration).OnComplete(() =>
                         {
                             pieceView.Piece?.ViewDefinition?.OnDrag(true);
-                            // cachedViewForDrag = null;
-                            cameraManipulator.CameraMove.UnLock(this);
                         })
                         .SetId(dragAnimationId);
                     
                     cachedViewForDrag = null;
+                    cameraManipulator.CameraMove.UnLock(this);
                 }
             }
 
