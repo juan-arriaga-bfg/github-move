@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 
@@ -215,6 +216,29 @@ public partial class BoardLogicComponent : ECSEntity,
     {
         if (IsPointValid(boardPosition) == false) return false;
 
+        return boardCells[boardPosition.X, boardPosition.Y, boardPosition.Z].IsLocked;
+    }
+    
+    public virtual bool IsLockedCell(BoardPosition boardPosition, List<Type> ignoredByTypes)
+    {
+        if (IsPointValid(boardPosition) == false) return false;
+
+        if (ignoredByTypes != null)
+        {
+            var lockers = boardCells[boardPosition.X, boardPosition.Y, boardPosition.Z].Lockers;
+            int lockersCount = lockers.Count;
+            for (int i = 0; i < lockers.Count; i++)
+            {
+                var locker = lockers[i];
+                if (ignoredByTypes.Contains(locker.GetType()))
+                {
+                    lockersCount--;
+                }
+            }
+
+            if (lockersCount <= 0) return false;
+        }
+        
         return boardCells[boardPosition.X, boardPosition.Y, boardPosition.Z].IsLocked;
     }
 
