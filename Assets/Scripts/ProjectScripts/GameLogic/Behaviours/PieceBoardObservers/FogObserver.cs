@@ -246,7 +246,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                 To = piece.CachedPosition,
                 Positions = new List<BoardPosition> {piece.CachedPosition},
                 FogObserver = this,
-                OnComplete = DevTools.UpdateFogSectorsDebug
+                OnComplete = () =>
+                {
+                    DevTools.UpdateFogSectorsDebug();
+                    ProfileService.Instance.Manager.UploadCurrentProfile();
+                }
             });
         };
             

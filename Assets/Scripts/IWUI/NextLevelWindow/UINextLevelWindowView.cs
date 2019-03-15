@@ -67,6 +67,8 @@ public class UINextLevelWindowView : UIGenericWindowView
             cachedCharacterRight = null;
         }
         
+        ProfileService.Instance.Manager.UploadCurrentProfile();
+        
         // cachedCharacterLeft = CreateCharacter(UiCharacterData.CharGnomeWorker, CharacterEmotion.Happy, CharacterSide.Left, unlockedCharacterContainerLeft);
         //
         // cachedCharacterRight = CreateCharacter(UiCharacterData.CharGnomeWorker, CharacterEmotion.Normal, CharacterSide.Right, unlockedCharacterContainerRight);
@@ -110,7 +112,6 @@ public class UINextLevelWindowView : UIGenericWindowView
     public override void OnViewClose()
     {
         base.OnViewClose();
-        
         UINextLevelWindowModel windowModel = Model as UINextLevelWindowModel;
     }
 
@@ -128,7 +129,6 @@ public class UINextLevelWindowView : UIGenericWindowView
         GameDataService.Current.LevelsManager.UpdateSequence();
         
         Analytics.SendLevelReachedEvent(GameDataService.Current.LevelsManager.Level);
-
         TackleBoxEvents.SendLevelUp();
         
         base.OnViewCloseCompleted();

@@ -142,6 +142,8 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
                 GameDataService.Current.OrdersManager.UpdateOrders();
                 Timer?.Start();
                 Order.State = OrderState.InProgress;
+                
+                ProfileService.Instance.Manager.UploadCurrentProfile();
             });
     }
     
