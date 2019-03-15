@@ -157,7 +157,7 @@
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "CompleateOrderDailyQuestIcon",
+        "Ico": "NPC_BIcon",
         "Title": "quest.complete.orders.title",
         "Message": "quest.complete.orders.message",
         "Hint": "task.complete.orders.hint"
@@ -1114,7 +1114,7 @@
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "100_CreatePiece_A7",
     "PieceUid": "A7",
-    "TargetValue": 2,
+    "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.create.piece.title",
@@ -1126,7 +1126,7 @@
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "101_CreatePiece_A6",
     "PieceUid": "A6",
-    "TargetValue": 1,
+    "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.create.piece.title",
