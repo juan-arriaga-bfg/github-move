@@ -115,7 +115,7 @@ public class CodexTab : IWUIWindowViewController
 
     private IEnumerator WaitForLayoutAndScroll(CodexChain target)
     {       
-       // yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
         
         // Respect space between top size of the viewport and chain
         const float PADDING = 30f;
