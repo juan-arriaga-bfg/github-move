@@ -385,7 +385,7 @@ public static class TutorialBuilder
             {
                 step = new OfferStep{Target = 1, IsIgnoreUi = true};
                 
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "100_CreatePiece_A7", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "71_CreatePiece_NPC_B", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckTimerCompleteTutorialCondition {Target = BoardService.Current.FirstBoard.MarketLogic.OfferTimer, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = 1, Currency = new List<string>{Currency.Offer.Name}, ConditionType = TutorialConditionType.Hard}, true);
                 break;
