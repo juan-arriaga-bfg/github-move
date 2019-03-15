@@ -1,4 +1,4 @@
-//#define REAL_IAP
+#define REAL_IAP
 
 public class IapInitComponent : AsyncInitComponentBase
 {
