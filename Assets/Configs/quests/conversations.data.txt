@@ -316,12 +316,12 @@
     "Bubbles": [
       {
         "CharacterId": "SleepingBeauty",
-        "Emotion": "Happy",
+        "Emotion": "Normal",
         "Message": "conversation.17.message1"
       },
       {
         "CharacterId": "SleepingBeauty",
-        "Emotion": "Normal",
+        "Emotion": "Happy",
         "Message": "conversation.17.message2"
       }
     ]
@@ -340,7 +340,7 @@
     ]
   },
   {
-    "Id": 18,
+    "Id": 91,
     "ConversationCharacters": {
       "LeftInner": "SleepingBeauty"
     },
@@ -348,20 +348,12 @@
       {
         "CharacterId": "SleepingBeauty",
         "Emotion": "Normal",
-        "Message": "conversation.14.message1"
-      }
-    ]
-  },
-  {
-    "Id": 19,
-    "ConversationCharacters": {
-      "LeftInner": "SleepingBeauty"
-    },
-    "Bubbles": [
+        "Message": "conversation.9.message1"
+      },
       {
         "CharacterId": "SleepingBeauty",
-        "Emotion": "Normal",
-        "Message": "conversation.14.message1"
+        "Emotion": "Happy",
+        "Message": "conversation.9.message2"
       }
     ]
   },
