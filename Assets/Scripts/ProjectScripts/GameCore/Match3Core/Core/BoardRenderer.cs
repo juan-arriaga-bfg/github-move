@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
+using Debug = IW.Logger;
 
 
 public partial class BoardRenderer : ECSEntity

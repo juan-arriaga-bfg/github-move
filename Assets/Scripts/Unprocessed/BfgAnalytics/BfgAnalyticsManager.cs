@@ -1,5 +1,5 @@
 #define DEBUG_PRINT_SETS
-
+using Debug = IW.Logger;
 using System;
 using IW.SimpleJSON;
 using JetBrains.Annotations;

@@ -1,5 +1,5 @@
 #if UNITY_EDITOR
-
+using Debug = IW.Logger;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;

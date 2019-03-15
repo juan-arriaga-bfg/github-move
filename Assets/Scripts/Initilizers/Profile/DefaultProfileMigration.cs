@@ -1,4 +1,5 @@
-﻿public class DefaultProfileMigration : IProfileMigration 
+using Debug = IW.Logger;
+public class DefaultProfileMigration : IProfileMigration 
 {
     public void Migrate(int clientVersion, UserProfile profile)
     {

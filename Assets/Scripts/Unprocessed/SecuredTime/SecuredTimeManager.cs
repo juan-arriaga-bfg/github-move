@@ -1,5 +1,5 @@
-﻿// #define DEBUG_USE_STANDARD_DATETIME // Uncomment to replace return values for Now and UTCNow with standard DateTime.Now and DateTime.UTCNow calls
-
+// #define DEBUG_USE_STANDARD_DATETIME // Uncomment to replace return values for Now and UTCNow with standard DateTime.Now and DateTime.UTCNow calls
+using Debug = IW.Logger;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;

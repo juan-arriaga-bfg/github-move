@@ -1,5 +1,5 @@
 #if UNITY_EDITOR
-
+using Debug = IW.Logger;
 using UnityEditor;
 using UnityEngine;
 

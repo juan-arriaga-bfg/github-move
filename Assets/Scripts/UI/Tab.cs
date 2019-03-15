@@ -1,4 +1,5 @@
-﻿using TMPro;
+using Debug = IW.Logger;
+using TMPro;
 using UnityEngine;
 
 public class Tab : MonoBehaviour

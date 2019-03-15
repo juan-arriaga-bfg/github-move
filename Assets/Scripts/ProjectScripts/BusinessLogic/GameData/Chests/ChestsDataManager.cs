@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using Debug = IW.Logger;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ChestsDataManager : SequenceData, IDataLoader<List<ChestDef>>

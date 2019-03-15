@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+using Debug = IW.Logger;
+using DG.Tweening;
 using Quests;
 using UnityEngine;
 using UnityEngine.UI;

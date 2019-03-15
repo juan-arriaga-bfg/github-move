@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
+using Debug = IW.Logger;
 
 public class ConfigsGoogleLoader
 {

@@ -1,3 +1,4 @@
+using Debug = IW.Logger;
 using System;
 using UnityEngine;
 using System.Collections;
