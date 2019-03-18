@@ -33,6 +33,7 @@ public static class UiCharacterData
             CharRapunzel, 
             new UICharacterDef
             {
+                Id = CharRapunzel,
                 Name = "conversation.character.Rapunzel",
                 ColorHex = "#F5BE03",
                 PieceId = PieceType.NPC_C.Id
