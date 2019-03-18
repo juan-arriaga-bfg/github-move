@@ -21,8 +21,19 @@ public class ActionHistoryComponent : IECSComponent, IECSSystem
     }
     
     public List<ActionHistoryStep> actionsHistory = new List<ActionHistoryStep>();
+    
+    public Dictionary<IBoardAction, string> stackTraceActions = new Dictionary<IBoardAction, string>();
 
     private int lastIndex = 0;
+
+    public void RegisterStackTrace(IBoardAction action)
+    {
+#if IW_FULL_ACTION_LOG
+        if (stackTraceActions.ContainsKey(action)) return;
+        
+        stackTraceActions.Add(action, StackTraceUtility.ExtractStackTrace());
+#endif
+    }
 
     public void RegisterAction(IBoardAction action, int stepIndex, long timeDuration)
     {
@@ -34,6 +45,18 @@ public class ActionHistoryComponent : IECSComponent, IECSSystem
             ActionType = action.GetType().ToString()
         };
         actionsHistory.Add(actionHistoryStep);
+        
+#if IW_FULL_ACTION_LOG
+        var actionLog = Newtonsoft.Json.JsonConvert.SerializeObject(actionHistoryStep, Formatting.None);
+        IW.Logger.LogWarning($" ==> {actionLog}");
+        string stackTrace;
+        if (stackTraceActions.TryGetValue(action, out stackTrace))
+        {
+            IW.Logger.LogWarning($" ===> {stackTrace}");
+
+            stackTraceActions.Remove(action);
+        }
+#endif
     }
 
 
