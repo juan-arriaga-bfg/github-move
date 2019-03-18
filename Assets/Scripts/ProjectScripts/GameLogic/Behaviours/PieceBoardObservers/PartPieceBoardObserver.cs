@@ -18,36 +18,33 @@ public class PartPieceBoardObserver : IECSComponent, IPieceBoardObserver
     
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        if(context == null) return;
+        if (context == null) return;
 
-        int next;
         var positions = new List<BoardPosition>();
-        
-        if(matchActionBuilder.CheckMatch(positions, context.PieceType, position, out next) == false) return;
+
+        if (matchActionBuilder.CheckMatch(positions, context.PieceType, position, out _) == false) return;
         
         context.Context.PartPiecesLogic.Add(positions);
     }
 
     public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
     {
-        if(context == null) return;
-        
-        int next;
+        if (context == null) return;
+
         var positions = new List<BoardPosition>();
 
-        if (matchActionBuilder.CheckMatch(positions, context.PieceType, @from, out next) == false) return;
+        if (matchActionBuilder.CheckMatch(positions, context.PieceType, @from, out _) == false) return;
         
         context.Context.PartPiecesLogic.Remove(positions);
     }
 
     public void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
     {
-        if(context == null) return;
-        
-        int next;
+        if (context == null) return;
+
         var positions = new List<BoardPosition>();
 
-        if (matchActionBuilder.CheckMatch(positions, context.PieceType, to, out next) == false) return;
+        if (matchActionBuilder.CheckMatch(positions, context.PieceType, to, out _) == false) return;
         
         context.Context.PartPiecesLogic.Add(positions);
     }
