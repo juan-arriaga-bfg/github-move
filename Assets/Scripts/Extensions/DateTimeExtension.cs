@@ -68,7 +68,7 @@ public static class DateTimeExtension
     
     public static string GetDelayText(int delay, bool icon = false, string format = null)
     {
-        return TimeFormat(new TimeSpan(0, 0, delay - 1), icon, format);
+        return TimeFormat(new TimeSpan(0, 0, delay), icon, format);
     }
 
     public static string GetTimeLeftText(this DateTime datetime, bool useUTC, bool icon, string format, bool isColon = true, float mspace = 3f)
@@ -91,7 +91,7 @@ public static class DateTimeExtension
         var iconStr = icon ? $"<sprite name={Currency.Timer.Icon}> " : "";
         var mspaceStr = mspace.ToString(CultureInfo.InvariantCulture);
         
-        var temp = time.Add(new TimeSpan(0, 0, 1));
+        var temp = time.Add(new TimeSpan(0, 0, 0, 0, 500));
         string value;
 
         var d = isColon ? ":" : $"{LocalizationService.Get("common.abbreviation.day")} ";
