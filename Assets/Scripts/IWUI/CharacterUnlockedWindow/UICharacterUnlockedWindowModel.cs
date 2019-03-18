@@ -16,7 +16,7 @@ public class UICharacterUnlockedWindowModel : IWWindowModel
         {
             if (TestMode)
             {
-                return UiCharacterData.CharSleepingBeauty;
+                return UiCharacterData.CharRedHood;
             }
             
             return UiCharacterData.GetDefByPieceId((Quest.Tasks[0] as IHavePieceId).PieceId).Id;
