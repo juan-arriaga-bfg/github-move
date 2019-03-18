@@ -63,7 +63,8 @@ public static class ProfileSlots
         profileManager.LoadBaseProfile((baseProfile, baseError) =>
         {
             // condition to reset profile
-            if (baseProfile == null || profileManager.SystemVersion > baseProfile.SystemVersion)
+            if (baseProfile == null)
+             //|| profileManager.SystemVersion > baseProfile.SystemVersion)
             {
                 var error = baseError ?? (baseProfile == null ? "Can't load base profile" : null);
                 
