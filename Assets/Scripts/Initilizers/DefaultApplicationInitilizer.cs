@@ -14,7 +14,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
     public override void Init(Action onComplete)
     {
 #if !DEBUG
-        Debug.unityLogger.logEnabled = false;
+    Debug.IsEnabled = false;
 #endif
         
         Application.targetFrameRate = 60;
