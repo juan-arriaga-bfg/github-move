@@ -16,40 +16,82 @@ public class CellHintsComponent : IECSComponent
 
     private const int OtherWeight = 10;
     private const int EmptyWeight = 100;
-    private const int CurrentWeight = 1000;
+    private const int BoosterWeight = 1000;
+    private const int CurrentWeight = 10000;
 
-    private int findId;
-    private BoardPosition target;
     private List<BoardElementView> selectCells;
+    
+    private readonly List<int> ids = new List<int>();
 
 	public void OnRegisterEntity(ECSEntity entity)
 	{
 		context = entity as BoardLogicComponent;
+		
+        var types = PieceType.GetIdsByFilter(PieceTypeFilter.Normal | PieceTypeFilter.Multicellular, PieceTypeFilter.Fake);
+        
+        foreach (var id in types)
+        {
+            ids.Add(context.MatchDefinition.GetPrevious(id));
+        }
 	}
 
 	public void OnUnRegisterEntity(ECSEntity entity)
 	{
 	}
-    
+
+    public void OnDragStartBoost(BoardPosition boardPos)
+    {
+        selectCells = new List<BoardElementView>();
+        
+        foreach (var id in ids)
+        {
+            if (GameDataService.Current.CodexManager.IsPieceUnlocked(id) == false) continue;
+            
+            FindVariants(boardPos, id, true);
+        }
+    }
+	
     public void OnDragStart(BoardPosition boardPos, int pieceId)
     {
-        target = boardPos;
-        findId = pieceId;
+        selectCells = new List<BoardElementView>();
         
-        var id = context.MatchDefinition.GetNext(findId, false);
+        FindVariants(boardPos, pieceId, false);
+    }
+    
+    public void OnDragEnd()
+    {
+        if (selectCells == null) return;
+        
+        foreach (var cell in selectCells)
+        {
+            cell.SetCustomMaterial(BoardElementMaterialType.PiecesLowHighlightMaterial, false);
+            context.Context.RendererContext.DestroyElement(cell);
+        }
+        
+        selectCells = null;
+    }
+    
+    public int GetLayerIndexBy(BoardPosition position)
+    {
+        return BoardLayer.GetDefaultLayerIndexBy(position, context.Context.BoardDef.Width, context.Context.BoardDef.Height);
+    }
+
+    private void FindVariants(BoardPosition boardPos, int pieceId, bool isMax)
+    {
+        var id = context.MatchDefinition.GetNext(pieceId, false);
         var pattern = context.MatchDefinition.GetPattern(id);
-        var positions = context.PositionsCache.GetPiecePositionsByType(findId);
+        var positions = context.PositionsCache.GetPiecePositionsByType(pieceId);
         
         var variants = new List<PartHint>();
         var hintCells = new List<BoardPosition>();
         var hintBigCells = new List<BoardPosition>();
         
-        selectCells = new List<BoardElementView>();
+        positions.Sort((a, b) => GetLayerIndexBy(a).CompareTo(GetLayerIndexBy(b)));
         
         // search all variants
         foreach (var position in positions)
         {
-            if (target.Equals(position)) continue;
+            if (boardPos.Equals(position)) continue;
 
             var hints = new List<PartHint>();
 
@@ -59,10 +101,10 @@ public class CellHintsComponent : IECSComponent
 
                 for (var j = 0; j < line.Count; j++)
                 {
-                    var list = GetHintList(pattern, context, new BoardPosition(position.X - i, position.Y - j, position.Z), out var weight);
+                    var list = GetHintList(pieceId, pattern, context, boardPos, new BoardPosition(position.X - i, position.Y - j, position.Z), out var weight);
 
-                    if (list == null) continue;
-
+                    if (list == null || isMax && weight < CurrentWeight * 3) continue;
+                    
                     hints.Add(new PartHint {Key = position, Weight = weight, Cells = list});
                 }
             }
@@ -111,12 +153,12 @@ public class CellHintsComponent : IECSComponent
         foreach (var position in positions)
         {
             var hints = variants.FindAll(hint => hint.Key.Equals(position));
-            
-            if(hints.Count == 0) continue;
+
+            if (hints.Count == 0) continue;
             
             hints.Sort((a, b) => -a.Weight.CompareTo(b.Weight));
-            
-            if(hints[0].Weight == CurrentWeight * 4 && hints[0].Cells.Contains(target) == false) continue;
+
+            if (hints[0].Weight >= (CurrentWeight * 3 + BoosterWeight) && hints[0].Cells.Contains(boardPos) == false) continue;
 
             var cells = hints[0].Cells;
             
@@ -134,19 +176,6 @@ public class CellHintsComponent : IECSComponent
         {
             InitCell(R.BigCell, new BoardPosition(point.X, point.Y, BoardLayer.MAX.Layer));
         }
-    }
-    
-    public void OnDragEnd()
-    {
-        if(selectCells == null) return;
-        
-        foreach (var cell in selectCells)
-        {
-            cell.SetCustomMaterial(BoardElementMaterialType.PiecesLowHighlightMaterial, false);
-            context.Context.RendererContext.DestroyElement(cell);
-        }
-        
-        selectCells = null;
     }
 
     private List<BoardPosition> AddBigCells(List<BoardPosition> cells, List<BoardPosition> hint)
@@ -168,7 +197,7 @@ public class CellHintsComponent : IECSComponent
         return cells;
     }
     
-    private List<BoardPosition> GetHintList(List<List<int>> pattern, BoardLogicComponent logic, BoardPosition start, out int weight)
+    private List<BoardPosition> GetHintList(int id, List<List<int>> pattern, BoardLogicComponent logic, BoardPosition target, BoardPosition start, out int weight)
     {
         weight = 0;
         
@@ -195,12 +224,18 @@ public class CellHintsComponent : IECSComponent
                     weight += EmptyWeight;
                     continue;
                 }
-
+                
                 if (piece.PieceType == PieceType.Fog.Id || PieceType.GetDefById(piece.PieceType).Filter.Has(PieceTypeFilter.Multicellular)) return null;
                 
                 if (piece.Draggable == null) continue;
 
-                if (piece.PieceType == findId)
+                if (piece.PieceType == PieceType.Boost_CR.Id)
+                {
+                    weight += BoosterWeight;
+                    continue;
+                }
+                
+                if (piece.PieceType == id)
                 {
                     weight += CurrentWeight;
 

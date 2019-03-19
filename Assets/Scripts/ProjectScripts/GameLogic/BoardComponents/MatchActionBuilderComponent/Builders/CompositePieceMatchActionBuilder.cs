@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBuilder
 {
@@ -35,14 +36,14 @@ public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatc
             for (var j = 0; j < line.Count; j++)
             {
                 var pos = new BoardPosition(position.X - i, position.Y - j, position.Z);
-                
-                if(definition.Context.IsPointValid(pos) == false) continue;
+
+                if (definition.Context.IsPointValid(pos) == false) continue;
                 
                 starts.Add(pos);
             }
         }
-        
-        if(starts.Count == 0) return false;
+
+        if (starts.Count == 0) return false;
         
         matchField.Clear();
 
@@ -53,10 +54,9 @@ public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatc
             if (positions == null) continue;
             
             matchField.AddRange(positions);
-            return true;
         }
         
-        return false;
+        return starts.Count > 0;
     }
 
     public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
@@ -81,8 +81,8 @@ public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatc
                 starts.Add(pos);
             }
         }
-        
-        if(starts.Count == 0) return null;
+
+        if (starts.Count == 0) return null;
         
         var at = BoardPosition.Default();
         List<BoardPosition> positions = null;
@@ -94,7 +94,7 @@ public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatc
             if(positions != null) break;
         }
 
-        if(positions == null) return null;
+        if (positions == null) return null;
         
         matchField.Clear();
         matchField.AddRange(positions);
@@ -104,6 +104,7 @@ public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatc
 
     private List<BoardPosition> CheckMatch(List<List<int>> pattern, BoardLogicComponent logic, BoardPosition start)
     {
+        var isBooster = false;
         var positions = new List<BoardPosition>();
             
         for (var i = 0; i < pattern.Count; i++)
@@ -115,7 +116,14 @@ public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatc
                 var pos = new BoardPosition(start.X + i, start.Y + j, start.Z);
                 var piece = logic.GetPieceAt(pos);
 
-                if (piece == null || piece.PieceType != line[j]) return null;
+                if (piece == null
+                    || piece.PieceType != line[j] && piece.PieceType != PieceType.Boost_CR.Id
+                    || piece.PieceType == PieceType.Boost_CR.Id && isBooster)
+                {
+                    return null;
+                }
+
+                if (piece.PieceType == PieceType.Boost_CR.Id) isBooster = true;
                 
                 positions.Add(pos);
             }

@@ -1,13 +1,11 @@
-﻿public class PartPieceBuilder : SimplePieceBuilder
+﻿public class CrystalPieceBuilder : SimplePieceBuilder
 {
     public override Piece Build(int pieceType, BoardController context)
     {
         var piece = base.Build(pieceType, context);
         
-        piece.Matchable?.Locker.Lock(piece);
-        
         CreateViewComponent(piece);
-        AddObserver(piece, new PartPieceBoardObserver());
+        AddObserver(piece, new CrystalPieceBoardObserver());
         
         return piece;
     }
