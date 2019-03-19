@@ -20,6 +20,10 @@ public class BoardManipulatorComponent : ECSEntity,
     
     private BoardPosition lastCachedDragPosition;
 
+    private BoardPosition lastResetPosition;
+
+    private PieceBoardElementView lastResetPieceView;
+
     private readonly ViewAnimationUid dragAnimationId = new ViewAnimationUid();
 
     private float dragDuration = 0.25f;
@@ -77,6 +81,27 @@ public class BoardManipulatorComponent : ECSEntity,
         {
             cameraManipulator.UnRegisterTouchListener(this);
         }
+    }
+
+    public virtual void StopDragAnimation(BoardPosition at)
+    {
+        if (at.Equals(lastResetPosition))
+        {
+            StopDragAnimationInternal();
+        }
+    }
+
+    protected void StopDragAnimationInternal()
+    {
+        DOTween.Kill(dragAnimationId);
+
+        if (lastResetPieceView != null)
+        {
+            context.RendererContext.ResetBoardElement(lastResetPieceView, lastResetPosition);
+        }
+
+        lastResetPosition = BoardPosition.Default();
+        lastResetPieceView = null;
     }
 
     public bool OnTap(Vector2 startPos, Vector2 pos, int tapCount)
@@ -197,7 +222,7 @@ public class BoardManipulatorComponent : ECSEntity,
             
             if ((prevDragPos - pos).sqrMagnitude > 0.01f || isFullPass)
             {
-                DOTween.Kill(dragAnimationId);
+                StopDragAnimationInternal();
                 cachedViewForDrag.CachedTransform.localPosition = pos;
                 
                 isDragLip = false;
@@ -220,7 +245,7 @@ public class BoardManipulatorComponent : ECSEntity,
             if (isPointValid && isDragLip == false && (targetCellPos - cachedViewForDrag.CachedTransform.localPosition).sqrMagnitude > 0.01f || isFullPass)
             {
                 isDragLip = true;
-                DOTween.Kill(dragAnimationId);
+                StopDragAnimationInternal();
                 var sequence = DOTween.Sequence().SetId(dragAnimationId);
                 sequence.Append(cachedViewForDrag.CachedTransform.DOLocalMove(targetCellPos, dragDuration).SetEase(Ease.Linear)); 
             }
@@ -259,7 +284,7 @@ public class BoardManipulatorComponent : ECSEntity,
         {
             pos = pos + Vector2.up * 0.5f;
 
-            DOTween.Kill(dragAnimationId);
+            StopDragAnimationInternal();
 
             if (context.BoardLogic.FireflyLogic.OnDragEnd(cachedViewForDrag))
             {
@@ -321,12 +346,18 @@ public class BoardManipulatorComponent : ECSEntity,
                     {
                        if (cachedViewForDrag != null) cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, BoardLayer.Piece.Layer));
                     }
+
+                    lastResetPosition = new BoardPosition(boardPos.X, boardPos.Y, BoardLayer.Piece.Layer);
+                    lastResetPieceView = pieceView;
                     
                     cachedViewForDrag.CachedTransform.DOLocalMove(targetPos, duration).OnComplete(() =>
-                        {
-                            pieceView.Piece?.ViewDefinition?.OnDrag(true);
-                        })
-                        .SetId(dragAnimationId);
+                    {
+                        lastResetPosition = BoardPosition.Default();
+                        lastResetPieceView = null;
+                        
+                        pieceView.Piece?.ViewDefinition?.OnDrag(true);
+                    })
+                    .SetId(dragAnimationId);
                     
                     cachedViewForDrag = null;
                     cameraManipulator.CameraMove.UnLock(this);

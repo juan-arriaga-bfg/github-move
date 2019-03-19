@@ -5,6 +5,8 @@ public class ResetPiecePositionAnimation : BoardAnimation
 {
 	public BoardPosition At { get; set; }
 
+    protected BoardElementView cachedPieceView;
+
 	public override void Animate(BoardRenderer context)
 	{
 		var pieceFromView = context.GetElementAt(At) as PieceBoardElementView;
@@ -15,11 +17,13 @@ public class ResetPiecePositionAnimation : BoardAnimation
 			return;
 		}
 
+	    cachedPieceView = pieceFromView;
+	    
+	    context.StopMoveAnimationsAt(context, At);
+
 		var pos = context.Context.BoardDef.GetPiecePosition(At.X, At.Y);
 		pos = new Vector3(pos.x, pos.y, 0f);
 		
-		// pieceFromView.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
-	    
 	    pieceFromView.SyncRendererLayers(At);
 		
 		var sequence = DOTween.Sequence().SetId(pieceFromView.AnimationUid);
@@ -43,4 +47,14 @@ public class ResetPiecePositionAnimation : BoardAnimation
 			CompleteAnimation(context);
 		});
 	}
+    
+    public override void StopAnimation(BoardRenderer context)
+    {
+        base.StopAnimation(context);
+
+        if (cachedPieceView != null)
+        {
+            DOTween.Kill(cachedPieceView.AnimationUid, true);
+        }
+    }
 }

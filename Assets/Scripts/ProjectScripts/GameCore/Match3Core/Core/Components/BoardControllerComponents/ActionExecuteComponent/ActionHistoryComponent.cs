@@ -48,13 +48,16 @@ public class ActionHistoryComponent : IECSComponent, IECSSystem
         
 #if IW_FULL_ACTION_LOG
         var actionLog = Newtonsoft.Json.JsonConvert.SerializeObject(actionHistoryStep, Formatting.None);
-        IW.Logger.LogWarning($" ==> {actionLog}");
+        
         string stackTrace;
         if (stackTraceActions.TryGetValue(action, out stackTrace))
         {
-            IW.Logger.LogWarning($" ===> {stackTrace}");
-
+            IW.Logger.LogWarning($" ==> {actionLog} \n ===> {stackTrace}");
             stackTraceActions.Remove(action);
+        }
+        else
+        {
+            IW.Logger.LogWarning($" ==> {actionLog}");
         }
 #endif
     }
