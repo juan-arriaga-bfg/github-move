@@ -396,6 +396,7 @@ MonoBehaviour:
   layers:
   - {fileID: 114286743462387552}
   windowName: SettingsWindow
+  ignoreBackButton: 0
   resourceDepenedencyDef: []
   resourceDepenedencyDefGroup: []
 --- !u!1 &1958989922100442
@@ -509,7 +510,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!114 &8840857758896678948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1271,7 +1272,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1763946026376116442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,7 +1682,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &3041093503384223166
 GameObject:
   m_ObjectHideFlags: 0
@@ -1755,7 +1756,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &3129001763135314973
 GameObject:
   m_ObjectHideFlags: 0
@@ -2263,7 +2264,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!225 &3985856437808594364
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2636,7 +2637,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!114 &3273763700050107225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5295,7 +5296,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!225 &906792589807186999
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -5381,7 +5382,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1001 &2633435065631657875
 PrefabInstance:
   m_ObjectHideFlags: 0
