@@ -9,8 +9,8 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
     private List<Notifier> notifiers = new List<Notifier>();
     protected List<Notification> notifyItems = new List<Notification>();
 
-    public readonly TimeSpan NightBeginTime = new TimeSpan(22, 0, 0);
-    public readonly TimeSpan NightEndTime   = new TimeSpan(10, 0, 0);
+    public readonly TimeSpan NightBeginTime = new TimeSpan(24, 00, 00);
+    public readonly TimeSpan NightEndTime   = new TimeSpan(8, 0, 0);
     public readonly TimeSpan MinimalTimeout = new TimeSpan(0,  30,0);
 
 #if DEBUG
@@ -143,16 +143,18 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
         foreach (var type in notifierTypes)
         {
             var selector = type.NotifySelector;
-            var notifiers = this.notifiers.Where(elem => elem.NotifyType == type && elem.Timer.IsExecuteable()).ToList();
+            var notifierList = this.notifiers.Where(elem => elem.NotifyType == type && elem.Timer.IsExecuteable()).ToList();
             if (selector != null)
             {
-                notifiers = selector(notifiers);
+                notifierList = selector(notifierList);
             }
             
-            foreach (var notifier in notifiers)
+            foreach (var notifier in notifierList)
             {
-                if(notifier.Timer.IsExecuteable())
+                if (notifier.Timer.IsExecuteable())
+                {
                     notifications.Add(GenerateNotify(notifier));
+                }
             }
         }
         
@@ -175,7 +177,9 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
         {
             notifyDate = notifier.Timer.UseUTC ? notifier.Timer.CompleteTime.ToLocalTime() : notifier.Timer.CompleteTime;
             if (notifier.NotifyType.TimeCorrector != null)
+            {
                 notifyDate = notifier.NotifyType.TimeCorrector(notifyDate);
+            }
             notifyDate = CorrectTime(notifyDate);    
         }
         
