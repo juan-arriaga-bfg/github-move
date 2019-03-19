@@ -54,10 +54,9 @@ public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatc
             if (positions == null) continue;
             
             matchField.AddRange(positions);
-            return true;
         }
         
-        return false;
+        return starts.Count > 0;
     }
 
     public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
@@ -123,8 +122,8 @@ public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatc
                 {
                     return null;
                 }
-                
-                if(piece.PieceType == PieceType.Boost_CR.Id) isBooster = true;
+
+                if (piece.PieceType == PieceType.Boost_CR.Id) isBooster = true;
                 
                 positions.Add(pos);
             }

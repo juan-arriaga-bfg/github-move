@@ -43,8 +43,14 @@ public class PartPieceBoardObserver : IECSComponent, IPieceBoardObserver
         var positions = new List<BoardPosition>();
 
         if (matchActionBuilder.CheckMatch(positions, pieceType, position, out _) == false) return;
-        
-        contextPiece.Context.PartPiecesLogic.Add(positions);
+
+        while (positions.Count >= 4)
+        {
+            var pattern = positions.GetRange(0, 4);
+            
+            positions.RemoveRange(0, 4);
+            contextPiece.Context.PartPiecesLogic.Add(pattern);
+        }
     }
 
     private void RemoveBubble(BoardPosition position)

@@ -30,7 +30,7 @@ public class PartPiecesLogicComponent : IECSComponent
     {
         var index = positions.Count / 2;
         var position = positions[index];
-
+        
         if (bubbles.ContainsKey(position)) return;
         
         var piece = context.BoardLogic.GetPieceAt(position);
@@ -87,7 +87,7 @@ public class PartPiecesLogicComponent : IECSComponent
     {
         var index = positions.Count / 2;
         var position = positions[index];
-
+        
         if (bubbles.TryGetValue(position, out var view) == false) return;
 
         foreach (var key in positions)
