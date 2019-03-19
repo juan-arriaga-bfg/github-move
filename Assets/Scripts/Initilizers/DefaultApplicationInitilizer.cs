@@ -34,14 +34,18 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         asyncInitManager
            .AddComponent(new InternetMonitorInitComponent())                        // Monitors current state of internet connection
            .AddComponent(new BfgSdkUnityMessageHandlerInitComponent())              // Used by BFG SDK to make calls to make calls to native code 
-           .AddComponent(new SecuredTimeServiceInitComponent())                     // Anti-cheat protection for timers
-           .AddComponent(new BfgSdkGdprInitComponent())                             // Listener for BFG SDK's GDPR popup events
            .AddComponent(new BfgSdkAnalyticsInitComponent()) 
            .AddComponent(new ContentAndIconManagersInitComponent()) 
            .AddComponent(new EcsSystemProcessorInitComponent()) 
            .AddComponent(new AudioServiceInitComponent()) 
            .AddComponent(new ShopServiceInitComponent()) 
            .AddComponent(new LocalAssetBundlesCacheInitComponent())
+            
+           .AddComponent(new BfgSdkGdprInitComponent()                             // Listener for BFG SDK's GDPR popup events
+               .SetDependency(typeof(BfgSdkUnityMessageHandlerInitComponent)))  
+            
+           .AddComponent(new SecuredTimeServiceInitComponent()                     // Anti-cheat protection for timers
+               .SetDependency(typeof(BfgSdkGdprInitComponent)))  
             
            .AddComponent(new ProfileInitComponent())
 
