@@ -5,6 +5,7 @@
         var piece = base.Build(pieceType, context);
         
         CreateViewComponent(piece);
+        AddObserver(piece, new CrystalPieceBoardObserver());
         
         return piece;
     }

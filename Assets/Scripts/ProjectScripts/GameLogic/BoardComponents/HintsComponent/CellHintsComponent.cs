@@ -20,10 +20,19 @@ public class CellHintsComponent : IECSComponent
     private const int CurrentWeight = 10000;
 
     private List<BoardElementView> selectCells;
+    
+    private readonly List<int> ids = new List<int>();
 
 	public void OnRegisterEntity(ECSEntity entity)
 	{
 		context = entity as BoardLogicComponent;
+		
+        var types = PieceType.GetIdsByFilter(PieceTypeFilter.Normal | PieceTypeFilter.Multicellular, PieceTypeFilter.Fake);
+        
+        foreach (var id in types)
+        {
+            ids.Add(context.MatchDefinition.GetPrevious(id));
+        }
 	}
 
 	public void OnUnRegisterEntity(ECSEntity entity)
@@ -33,16 +42,12 @@ public class CellHintsComponent : IECSComponent
     public void OnDragStartBoost(BoardPosition boardPos)
     {
         selectCells = new List<BoardElementView>();
-
-        var ids = PieceType.GetIdsByFilter(PieceTypeFilter.Normal | PieceTypeFilter.Multicellular, PieceTypeFilter.Fake);
-
+        
         foreach (var id in ids)
         {
-            var previous = context.MatchDefinition.GetPrevious(id);
+            if (GameDataService.Current.CodexManager.IsPieceUnlocked(id) == false) continue;
             
-            if (GameDataService.Current.CodexManager.IsPieceUnlocked(previous) == false) continue;
-            
-            FindVariants(boardPos, previous, true);
+            FindVariants(boardPos, id, true);
         }
     }
 	
@@ -141,12 +146,12 @@ public class CellHintsComponent : IECSComponent
         foreach (var position in positions)
         {
             var hints = variants.FindAll(hint => hint.Key.Equals(position));
-            
-            if(hints.Count == 0) continue;
+
+            if (hints.Count == 0) continue;
             
             hints.Sort((a, b) => -a.Weight.CompareTo(b.Weight));
-            
-            if(hints[0].Weight == CurrentWeight * 4 && hints[0].Cells.Contains(boardPos) == false) continue;
+
+            if (hints[0].Weight >= (CurrentWeight * 3 + BoosterWeight) && hints[0].Cells.Contains(boardPos) == false) continue;
 
             var cells = hints[0].Cells;
             

@@ -105,6 +105,7 @@ public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatc
 
     private List<BoardPosition> CheckMatch(List<List<int>> pattern, BoardLogicComponent logic, BoardPosition start)
     {
+        var isBooster = false;
         var positions = new List<BoardPosition>();
             
         for (var i = 0; i < pattern.Count; i++)
@@ -115,8 +116,15 @@ public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatc
             {
                 var pos = new BoardPosition(start.X + i, start.Y + j, start.Z);
                 var piece = logic.GetPieceAt(pos);
+
+                if (piece == null
+                    || piece.PieceType != line[j] && piece.PieceType != PieceType.Boost_CR.Id
+                    || piece.PieceType == PieceType.Boost_CR.Id && isBooster)
+                {
+                    return null;
+                }
                 
-                if (piece == null || piece.PieceType != line[j] && piece.PieceType != PieceType.Boost_CR.Id) return null;
+                if(piece.PieceType == PieceType.Boost_CR.Id) isBooster = true;
                 
                 positions.Add(pos);
             }
