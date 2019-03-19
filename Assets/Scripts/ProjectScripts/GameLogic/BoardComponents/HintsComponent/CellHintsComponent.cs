@@ -70,6 +70,11 @@ public class CellHintsComponent : IECSComponent
         
         selectCells = null;
     }
+    
+    public int GetLayerIndexBy(BoardPosition position)
+    {
+        return BoardLayer.GetDefaultLayerIndexBy(position, context.Context.BoardDef.Width, context.Context.BoardDef.Height);
+    }
 
     private void FindVariants(BoardPosition boardPos, int pieceId, bool isMax)
     {
@@ -80,6 +85,8 @@ public class CellHintsComponent : IECSComponent
         var variants = new List<PartHint>();
         var hintCells = new List<BoardPosition>();
         var hintBigCells = new List<BoardPosition>();
+        
+        positions.Sort((a, b) => GetLayerIndexBy(a).CompareTo(GetLayerIndexBy(b)));
         
         // search all variants
         foreach (var position in positions)
