@@ -99,7 +99,10 @@ public class QuestEntity : ECSEntity, IECSSerializeable
             string id = node.SelectToken("Id").Value<string>();
             TaskEntity task = GetTaskById(id);
 
-            Debug.LogError($"[QuestEntity] => Load: Quest '{Id}': No task with id '{id}' defined");
+            if (task == null)
+            {
+                Debug.LogError($"[QuestEntity] => Load: Quest '{Id}': No task with id '{id}' defined");
+            }
             
             node.PopulateObject(task);
             
