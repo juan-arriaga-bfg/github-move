@@ -538,15 +538,15 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     private void OnQuestsStateChangedEvent(QuestEntity quest, TaskEntity task)
     {
         OnQuestStateChanged?.Invoke(quest, task);
-
-        if (quest == DailyQuest && task.IsClaimed())
-        {
-            ProfileService.Instance.Manager.UploadCurrentProfile();
-        }
         
         if (task is TaskCompleteDailyTaskEntity && task.IsClaimed())
         {
             DailyQuestCompletedCount++;
+        }
+        
+        if (quest == DailyQuest && task.IsClaimed())
+        {
+            ProfileService.Instance.Manager.UploadCurrentProfile();
         }
     }
 

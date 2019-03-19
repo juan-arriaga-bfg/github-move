@@ -107,8 +107,8 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			rewardPosition,
 			() =>
 			{
-				BoardService.Current.FirstBoard.TutorialLogic.Update();
 				ProfileService.Instance.Manager.UploadCurrentProfile();
+				BoardService.Current.FirstBoard.TutorialLogic.Update();
 			},
 			false,
 			true);
@@ -199,7 +199,10 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			CurrencyHelper.PurchaseAsyncOnlyCurrency(contentEntity.Def.Reward, contentEntity.Def.Price, flyPosition,
 				(success) =>
 				{
-					if(success) ProfileService.Instance.Manager.UploadCurrentProfile();
+					if (success)
+					{
+						ProfileService.Instance.Manager.UploadCurrentProfile();
+					}
 				});
 			
 			contentEntity.Def.State = MarketItemState.Claimed;

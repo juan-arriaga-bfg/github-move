@@ -129,8 +129,8 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
 		    if (isOk)
 		    {
-			    SendAnalyticsEvent();
 			    ProfileService.Instance.Manager.UploadCurrentProfile();
+			    SendAnalyticsEvent();
 		    }
 	    });
     }
@@ -166,8 +166,8 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
     protected virtual void OnPurchaseComplete()
     {
-	    SendAnalyticsEvent();
 	    ProfileService.Instance.Manager.UploadCurrentProfile();
+	    SendAnalyticsEvent();
     }
 
     
