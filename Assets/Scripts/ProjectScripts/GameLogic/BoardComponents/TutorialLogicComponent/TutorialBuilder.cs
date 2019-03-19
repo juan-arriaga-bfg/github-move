@@ -207,10 +207,10 @@ public static class TutorialBuilder
             }
             case 11: // remove worker
             {
-                step = new WorkerTutorialStep1 {IsIgnoreDebug = false, IsIgnoreUi = true, IsAnyCompleteCondition = true};
+                step = new WorkerTutorialStep1 {IsIgnoreDebug = false, IsIgnoreUi = true};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckCounterTutorialCondition {Target = 1, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
                 
                 step.RegisterComponent(new RemoveTutorialAnimation {PieceId = PieceType.NPC_Gnome.Id, AnimationType = TutorialAnimationType.Perform}, true);
                 step.RegisterComponent(new RemoveTutorialAnimation {PieceId = PieceType.NPC_Gnome.Id, AnimationType = TutorialAnimationType.Complete}, true);
