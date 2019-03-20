@@ -430,7 +430,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 150
+        "Amount": 120
       }
     ],
     "OrdersWeights": [
@@ -488,6 +488,10 @@
       {
         "Currency": "Crystals",
         "Amount": 5
+      },
+      {
+        "Currency": "Energy",
+        "Amount": 120
       }
     ],
     "OrdersWeights": [
@@ -524,7 +528,7 @@
     "PieceWeights": [
       {
         "Uid": "PR_A1",
-        "Weight": 3,
+        "Weight": 2,
         "Override": true
       },
       {
@@ -559,6 +563,10 @@
       {
         "Currency": "Crystals",
         "Amount": 5
+      },
+      {
+        "Currency": "Energy",
+        "Amount": 150
       }
     ],
     "OrdersWeights": [
@@ -581,7 +589,7 @@
     "PieceWeights": [
       {
         "Uid": "PR_A1",
-        "Weight": 2,
+        "Weight": 1,
         "Override": true
       },
       {
@@ -621,6 +629,10 @@
       {
         "Currency": "Crystals",
         "Amount": 5
+      },
+      {
+        "Currency": "Energy",
+        "Amount": 150
       }
     ],
     "OrdersWeights": [
@@ -636,12 +648,22 @@
         "Uid": "Order7",
         "Weight": 0,
         "Override": true
+      },
+      {
+        "Uid": "Order3",
+        "Weight": 2,
+        "Override": true
+      },
+      {
+        "Uid": "Order16",
+        "Weight": 2,
+        "Override": true
       }
     ],
     "PieceWeights": [
       {
         "Uid": "PR_A1",
-        "Weight": 2,
+        "Weight": 1,
         "Override": true
       },
       {
@@ -661,7 +683,7 @@
       },
       {
         "Uid": "PR_B1",
-        "Weight": 1,
+        "Weight": 0,
         "Override": true
       }
     ],
@@ -681,6 +703,17 @@
       {
         "Currency": "Crystals",
         "Amount": 5
+      },
+      {
+        "Currency": "Energy",
+        "Amount": 150
+      }
+    ],
+    "PieceWeights": [
+      {
+        "Uid": "PR_A1",
+        "Weight": 1,
+        "Override": true
       }
     ],
     "OrdersDelay": 30
