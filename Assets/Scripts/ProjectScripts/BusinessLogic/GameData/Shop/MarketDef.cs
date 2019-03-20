@@ -12,7 +12,7 @@
 
 public class MarketDef
 {
-    public string Uid;
+    public int Uid;
     public int UnlockLevel;
     public int Amount;
     public MarketRandomType RandomType;

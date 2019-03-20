@@ -5,7 +5,7 @@ using Debug = IW.Logger;
 
 public class DefaultProfileMigration : IProfileMigration
 {
-    public Dictionary<int, Action<int, UserProfile>> migrationDef = new Dictionary<int, Action<int, UserProfile>>
+    public readonly Dictionary<int, Action<int, UserProfile>> migrationDef = new Dictionary<int, Action<int, UserProfile>>
     {
         {490, Migrate484}
     };
@@ -20,6 +20,12 @@ public class DefaultProfileMigration : IProfileMigration
             {2004, 1000004}, // CR
             {2100, 1000100}, // WR
         });
+        
+        // add slot Uid
+        foreach (var slot in profile.MarketSave.Slots)
+        {
+            slot.Index += 1;
+        }
     }
     
     public void Migrate(int clientVersion, UserProfile profile)
@@ -36,11 +42,9 @@ public class DefaultProfileMigration : IProfileMigration
 
     private void MigrateIteration(int clientVersion, UserProfile profile)
     {
-        Action<int, UserProfile> migrationDelegate = null;
-        
-        if (migrationDef.TryGetValue(profile.SystemVersion, out migrationDelegate))
+        if (migrationDef.TryGetValue(profile.SystemVersion, out var migrationDelegate))
         {
-            Debug.LogWarning(string.Format("[Profile]: migrate {0} => {1}", profile.SystemVersion, clientVersion));
+            Debug.LogWarning($"[Profile]: migrate {profile.SystemVersion} => {clientVersion}");
             
             migrationDelegate(clientVersion, profile);
         }

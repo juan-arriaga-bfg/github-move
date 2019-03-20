@@ -1,6 +1,6 @@
 [
   {
-    "Uid": "Soft easy",
+    "Uid": 1,
     "UnlockLevel": 1,
     "Amount": 150,
     "Weight": {
@@ -16,7 +16,7 @@
     "Name": "window.shop.coins.item1"
   },
   {
-    "Uid": "Soft normal",
+    "Uid": 2,
     "UnlockLevel": 1,
     "Amount": 1000,
     "Weight": {
@@ -32,7 +32,7 @@
     "Name": "window.shop.coins.item2"
   },
   {
-    "Uid": "Soft hard",
+    "Uid": 3,
     "UnlockLevel": 1,
     "Amount": 2500,
     "Weight": {
@@ -48,7 +48,7 @@
     "Name": "window.shop.coins.item3"
   },
   {
-    "Uid": "Base easy",
+    "Uid": 4,
     "UnlockLevel": 1,
     "Amount": 1,
     "Weight": {
@@ -58,7 +58,17 @@
     "RandomType": "BasePiecesEasy"
   },
   {
-    "Uid": "Base Chests First",
+    "Uid": 5,
+    "UnlockLevel": 7,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "Empty",
+      "Weight": 1
+    },
+    "RandomType": "BasePiecesEasy"
+  },
+  {
+    "Uid": 6,
     "UnlockLevel": 1,
     "Amount": 1,
     "Weight": {
@@ -68,7 +78,7 @@
     "RandomType": "BaseChestsFirst"
   },
   {
-    "Uid": "Base Chests Second",
+    "Uid": 7,
     "UnlockLevel": 1,
     "Amount": 1,
     "Weight": {
@@ -78,7 +88,7 @@
     "RandomType": "BaseChestsSecond"
   },
   {
-    "Uid": "Base Chests Last",
+    "Uid": 8,
     "UnlockLevel": 1,
     "Amount": 1,
     "Weight": {
@@ -88,7 +98,7 @@
     "RandomType": "BaseChestsLast"
   },
   {
-    "Uid": "Boosts easy",
+    "Uid": 9,
     "UnlockLevel": 4,
     "Amount": 2,
     "Weight": {
@@ -102,7 +112,7 @@
     "RandomType": "Base"
   },
   {
-    "Uid": "Boosts easy",
+    "Uid": 9,
     "UnlockLevel": 4,
     "Amount": 2,
     "Weight": {
@@ -116,7 +126,7 @@
     "RandomType": "Base"
   },
   {
-    "Uid": "Boosts easy",
+    "Uid": 9,
     "UnlockLevel": 6,
     "Amount": 2,
     "Weight": {
@@ -130,7 +140,7 @@
     "RandomType": "Base"
   },
   {
-    "Uid": "Boosts normal",
+    "Uid": 10,
     "UnlockLevel": 6,
     "Amount": 1,
     "Weight": {
@@ -144,7 +154,7 @@
     "RandomType": "Base"
   },
   {
-    "Uid": "Boosts hard",
+    "Uid": 11,
     "UnlockLevel": 6,
     "Amount": 5,
     "Weight": {
@@ -158,7 +168,7 @@
     "RandomType": "Base"
   },
   {
-    "Uid": "Ingredients easy",
+    "Uid": 12,
     "UnlockLevel": 5,
     "Amount": 3,
     "Weight": {
@@ -172,7 +182,7 @@
     "RandomType": "Ingredients"
   },
   {
-    "Uid": "Ingredients easy",
+    "Uid": 12,
     "UnlockLevel": 5,
     "Amount": 5,
     "Weight": {
@@ -186,7 +196,7 @@
     "RandomType": "Ingredients"
   },
   {
-    "Uid": "Ingredients hard",
+    "Uid": 13,
     "UnlockLevel": 7,
     "Amount": 10,
     "Weight": {
@@ -200,7 +210,7 @@
     "RandomType": "Ingredients"
   },
   {
-    "Uid": "Worker",
+    "Uid": 14,
     "UnlockLevel": 8,
     "Amount": 1,
     "Weight": {
@@ -214,7 +224,7 @@
     "RandomType": "Base"
   },
   {
-    "Uid": "Worker",
+    "Uid": 14,
     "UnlockLevel": 8,
     "Amount": 2,
     "Weight": {
@@ -228,7 +238,7 @@
     "RandomType": "Base"
   },
   {
-    "Uid": "Worker",
+    "Uid": 14,
     "UnlockLevel": 9,
     "Amount": 3,
     "Weight": {
@@ -242,7 +252,7 @@
     "RandomType": "Base"
   },
   {
-    "Uid": "Base hard",
+    "Uid": 15,
     "UnlockLevel": 10,
     "Amount": 1,
     "Weight": {
@@ -252,7 +262,7 @@
     "RandomType": "BasePiecesHard"
   },
   {
-    "Uid": " NPC Chests",
+    "Uid": 16,
     "UnlockLevel": 1,
     "Amount": 1,
     "Weight": {
@@ -266,7 +276,7 @@
     "RandomType": "NPCChests"
   },
   {
-    "Uid": "Free Chests",
+    "Uid": 17,
     "UnlockLevel": 1,
     "Amount": 1,
     "Weight": {
