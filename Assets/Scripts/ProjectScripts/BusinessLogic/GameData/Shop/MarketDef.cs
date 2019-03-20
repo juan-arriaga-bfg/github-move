@@ -18,6 +18,7 @@ public class MarketDef
     public MarketRandomType RandomType;
     public CurrencyPair Price;
     public ItemWeight Weight;
+    public bool IsPermanent;
     public string Name;
     public string Icon;
 }

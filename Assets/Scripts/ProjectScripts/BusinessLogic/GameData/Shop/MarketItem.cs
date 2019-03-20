@@ -24,7 +24,7 @@ public class MarketItem
         get { return state; }
         set
         {
-            state = value;
+            if (current?.IsPermanent == false || value < MarketItemState.Purchased) state = value;
             GameDataService.Current.MarketManager.UpdateState?.Invoke();
         }
     }

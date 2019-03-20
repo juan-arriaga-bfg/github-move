@@ -20,6 +20,8 @@ public class DefaultProfileMigration : IProfileMigration
             {2004, 1000004}, // CR
             {2100, 1000100}, // WR
         });
+
+        if (profile.MarketSave.Slots == null) return;
         
         // add slot Uid
         foreach (var slot in profile.MarketSave.Slots)

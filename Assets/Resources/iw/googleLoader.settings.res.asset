@@ -68,7 +68,7 @@ MonoBehaviour:
   - Key: market
     Link: 1sQoVUyJQqGwJDGcmg4NDllPEgWygwrh8Qgeih1TwYaE
     Route: parse
-    Pattern: '[{"Uid":0,"":"","UnlockLevel":0,"Amount":0,"Weight":{"Uid":"","Weight":0},"Price":{"Currency":"","Amount":0},"RandomType":"","Icon":"","Name":""}]'
+    Pattern: '[{"Uid":0,"":"","UnlockLevel":0,"Amount":0,"Weight":{"Uid":"","Weight":0},"Price":{"Currency":"","Amount":0},"RandomType":"","IsPermanent":false,"Icon":"","Name":""}]'
   - Key: orders
     Link: 1MakAUEhU8pxDDasINjyEBIXVEZ3oPr3PMrisNbH650I
     Route: parse
