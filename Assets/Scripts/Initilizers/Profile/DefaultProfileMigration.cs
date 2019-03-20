@@ -23,7 +23,7 @@ public class DefaultProfileMigration : IProfileMigration
         
         if (currentVersion != clientVersion)
         {
-            OnCompleteMigration();
+            OnCompleteMigration(profile);
         }
     }
 
@@ -47,7 +47,7 @@ public class DefaultProfileMigration : IProfileMigration
         }
     }
 
-    public void OnCompleteMigration()
+    public void OnCompleteMigration(UserProfile profile)
     {
         
     }
