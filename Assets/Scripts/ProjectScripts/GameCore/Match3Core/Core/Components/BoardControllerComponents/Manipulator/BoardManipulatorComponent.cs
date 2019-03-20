@@ -282,6 +282,8 @@ public class BoardManipulatorComponent : ECSEntity,
     {
         if (cachedViewForDrag != null)
         {
+            LeanTouch.Instance.Center = Camera.main.WorldToScreenPoint(pos);
+            
             pos = pos + Vector2.up * 0.5f;
 
             StopDragAnimationInternal();
