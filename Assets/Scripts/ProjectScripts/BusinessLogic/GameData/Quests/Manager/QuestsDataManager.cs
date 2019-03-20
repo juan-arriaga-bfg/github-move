@@ -596,6 +596,8 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     private void StartDailyTimer(DateTime startTime)
     {    
         Debug.Log($"[QuestsDataManager] => StartDailyTimer: startTime: {startTime}, delay: {DAILY_TIMER_DELAY}");
+
+        StopDailyTimer();
         
         DailyTimer = new TimerComponent
         {
