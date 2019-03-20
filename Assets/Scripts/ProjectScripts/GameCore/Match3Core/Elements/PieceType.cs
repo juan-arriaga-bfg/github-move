@@ -2,13 +2,7 @@
 
 public partial class PieceTypeDef
 {
-    private int id;
-    
-    public int Id
-    {
-        get { return id; }
-        set { id = value; }
-    }
+    public int Id { get; set; }
 
     public List<string> Abbreviations { get; set; }
 }
