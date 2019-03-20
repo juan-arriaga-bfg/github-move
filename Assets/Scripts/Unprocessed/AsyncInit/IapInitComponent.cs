@@ -1,4 +1,4 @@
-using UnityEngine;
+#define REAL_IAP
 
 public class IapInitComponent : AsyncInitComponentBase
 {
@@ -33,6 +33,7 @@ public class IapInitComponent : AsyncInitComponentBase
            .SetIapProvider(new BfgIapProvider()
                .SetIapCollection(new IapCollection()
 #region IAPS
+#if REAL_IAP
                                 .Add(new IapDefinition
                                  {
                                      Id = "iap1",
@@ -78,17 +79,32 @@ public class IapInitComponent : AsyncInitComponentBase
                                 .Add(new IapDefinition
                                  {
                                      Id = "iap7",
-                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.tier120",
-                                     AppleAppStoreId  = "vi.tier120.com.bigfishgames.mergetalesios",
+                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.bundletier2",
+                                     AppleAppStoreId  = "vi.bundletier2.com.bigfishgames.mergetalesios",
                                      Consumable = true
                                  })
                                 .Add(new IapDefinition
                                  {
                                      Id = "iap8",
-                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.tier600",
-                                     AppleAppStoreId  = "vi.tier600.com.bigfishgames.mergetalesios",
+                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.bundletier5",
+                                     AppleAppStoreId  = "vi.bundletier5.com.bigfishgames.mergetalesios",
                                      Consumable = true
                                  })
+                                .Add(new IapDefinition
+                                 {
+                                     Id = "iap9",
+                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.bundletier10",
+                                     AppleAppStoreId  = "vi.bundletier10.com.bigfishgames.mergetalesios",
+                                     Consumable = true
+                                 })
+                                .Add(new IapDefinition
+                                 {
+                                     Id = "iap10",
+                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.bundletier20",
+                                     AppleAppStoreId  = "vi.bundletier20.com.bigfishgames.mergetalesios",
+                                     Consumable = true
+                                 })
+#endif
                 ))
 #endregion
            .Init();

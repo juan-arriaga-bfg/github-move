@@ -1,4 +1,5 @@
-﻿using System.Collections;
+using Debug = IW.Logger;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,6 +34,8 @@ public partial class BoardElementMaterialType
     public const string PiecesLockedMaterial = R.PiecesLockedMaterial;
 
     public const string PiecesFogHighlightMaterial = R.PiecesFogHighlightMaterial;
+
+    public const string PiecesSepiaDefaultMaterial = R.PiecesSepiaDefaultMaterial;
 }
 
 public class RendererCachedMaterialsComponent : ECSEntity 

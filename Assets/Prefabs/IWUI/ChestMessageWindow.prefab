@@ -148,7 +148,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!111 &111116673845489138
 Animation:
   m_ObjectHideFlags: 0
@@ -505,7 +505,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1294601024404852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1128,7 +1128,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1536368574747470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,6 +1372,7 @@ MonoBehaviour:
   layers:
   - {fileID: 114711883112216822}
   windowName: ChestMessageWindow
+  ignoreBackButton: 0
   resourceDepenedencyDef: []
   resourceDepenedencyDefGroup: []
 --- !u!1 &1617728696436822
@@ -1447,7 +1448,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1666362495480586
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
-﻿#if UNITY_IOS
-using System.Runtime.InteropServices;
+#if UNITY_IOS
+using Debug = IW.Logger;
 using System;
 #else
 using UnityEngine;

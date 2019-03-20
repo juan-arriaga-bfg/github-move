@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using Debug = IW.Logger;
+using System.Collections.Generic;
 
 public class LevelsDataManager : SequenceData, IDataLoader<List<LevelsDef>>
 {

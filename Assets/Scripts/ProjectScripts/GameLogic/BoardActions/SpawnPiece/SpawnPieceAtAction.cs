@@ -1,4 +1,5 @@
-﻿using System;
+using Debug = IW.Logger;
+using System;
 using UnityEngine;
 
 public class SpawnPieceAtAction : IBoardAction

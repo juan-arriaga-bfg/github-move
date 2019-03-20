@@ -56,7 +56,7 @@ public class FieldControllerComponent : IECSComponent
             });
         }
 
-        List<BoardPosition> fogPos = CreateFog();
+        var fogPos = CreateFog();
 
         context.ActionExecutor.AddAction(new FillBoardAction
         {

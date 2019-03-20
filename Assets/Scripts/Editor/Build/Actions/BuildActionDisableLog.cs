@@ -12,8 +12,8 @@ public class BuildActionDisableLogger : IProjectBuildAction
     {
         // Lets collect all defines
         HashSet<string> resultDefines = new HashSet<string>();
-
-
+        
+        
         BuildTargetGroup buildTarget;
         switch (context.CurrentBuildPlatform)
         {

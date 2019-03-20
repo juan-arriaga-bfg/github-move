@@ -6,6 +6,8 @@ public static class UiCharacterData
     public const string CharPussInBoots = "PussInBoots";
     public const string CharRapunzel = "Rapunzel";
     public const string CharGnomeWorker = "GnomeWorker";
+    public const string CharRedHood = "RedHood";
+    public const string Mermaid = "Mermaid";
     
     private static readonly Dictionary<string, UICharacterDef> charDefs = new Dictionary<string, UICharacterDef>
     {
@@ -33,9 +35,30 @@ public static class UiCharacterData
             CharRapunzel, 
             new UICharacterDef
             {
+                Id = CharRapunzel,
                 Name = "conversation.character.Rapunzel",
-                ColorHex = "#F5BE03",
+                ColorHex = "#ffd12f",
                 PieceId = PieceType.NPC_C.Id
+            }
+        },
+        { 
+            CharRedHood, 
+            new UICharacterDef
+            {
+                Id = CharRedHood,
+                Name = "conversation.character.RedHood",
+                ColorHex = "#ff5936",
+                PieceId = PieceType.NPC_D.Id
+            }
+        },
+        { 
+            Mermaid, 
+            new UICharacterDef
+            {
+                Id = Mermaid,
+                Name = "conversation.character.Mermaid",
+                ColorHex = "#7afff6",
+                PieceId = PieceType.NPC_E.Id
             }
         },
         { 

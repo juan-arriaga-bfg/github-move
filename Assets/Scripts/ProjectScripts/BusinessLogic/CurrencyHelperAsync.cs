@@ -11,7 +11,7 @@ public static partial class CurrencyHelper
     
     public static ShopItemTransaction PurchaseAsync(CurrencyPair product, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
-        return PurchaseAsync(product, new CurrencyPair{Currency = Currency.Cash.Name, Amount = 0}, onSuccess, flyPosition);
+        return PurchaseAsync(product.Currency, product.Amount, Currency.Cash.Name, 0, onSuccess, flyPosition);
     }
     
     public static List<ShopItemTransaction> PurchaseAsync(List<CurrencyPair> products, Action<bool> onSuccess = null, Vector3? flyPosition = null)

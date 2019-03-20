@@ -470,6 +470,7 @@ public class DragAndCheckMatchAction : IBoardAction
 			OnCompleteEvent = animation =>
 			{
 				context.ViewDefinition?.OnDrag(true);
+				context.GetComponent<PartPieceBoardObserver>(PartPieceBoardObserver.ComponentGuid)?.AddBubble(context.CachedPosition, context.PieceType);
 			}
 		};
 		

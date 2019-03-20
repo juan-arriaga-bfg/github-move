@@ -94,7 +94,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         if (bubble != null && bubble.IsShow) return;
 
-        if (AlreadyPaid.Amount == Def.Condition.Amount)
+        if (AlreadyPaid.Amount >= Def.Condition.Amount)
         {
             OpenBubble();
             return;

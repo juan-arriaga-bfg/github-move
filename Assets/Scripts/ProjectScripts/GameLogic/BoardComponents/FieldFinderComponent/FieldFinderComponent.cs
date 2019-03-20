@@ -56,7 +56,7 @@ public class FieldFinderComponent : IECSComponent
 
 	private List<BoardPosition> FindField(int type, BoardPosition point, List<BoardPosition> field, bool ignoreLock = false)
 	{
-		if(field.Contains(point) || (context.IsLockedCell(point) && !ignoreLock)) return field;
+		if(field.Contains(point) || (context.IsLockedCell(point, new List<Type>{typeof(DragAndCheckMatchAction)}) && !ignoreLock)) return field;
 		
 		field.Add(point);
 		

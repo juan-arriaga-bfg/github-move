@@ -2,9 +2,9 @@
 
 public class DefaultMatchActionBuilder
 {
-    protected IBoardAction CreateAction(List<int> pieces, List<BoardPosition> positions, BoardPosition to, int ignoreType)
+    protected IBoardAction CreateAction(List<int> pieces, List<BoardPosition> positions, BoardPosition to, int ignoreType, bool ignoreBoost = false)
     {
-        var rewardTransactions = CreateTransaction(pieces, ignoreType);
+        var rewardTransactions = CreateTransaction(pieces, ignoreType, ignoreBoost);
         
         return new ModificationPiecesAction
         {
@@ -15,7 +15,7 @@ public class DefaultMatchActionBuilder
             {
                 for (var i = 0; i < list.Count; i++)
                 {
-                    if (pieces[i] == ignoreType || rewardTransactions.TryGetValue(i, out var targetTransactions) == false) continue;
+                    if (rewardTransactions.TryGetValue(i, out var targetTransactions) == false) continue;
 
                     for (var j = 0; j < targetTransactions.Count; j++)
                     {
@@ -27,19 +27,20 @@ public class DefaultMatchActionBuilder
         };
     }
     
-    private Dictionary<int, List<ShopItemTransaction>> CreateTransaction(List<int> nextPieces, int ignoreType)
+    private Dictionary<int, List<ShopItemTransaction>> CreateTransaction(List<int> nextPieces, int ignoreType, bool ignoreBoost)
     {
+        var ignore = ignoreBoost ? nextPieces.FindLastIndex(id => id == PieceType.Boost_CR.Id) : -1;
         var rewardTransactions = new Dictionary<int, List<ShopItemTransaction>>();
         
         for (var i = 0; i < nextPieces.Count; i++)
         {
             var targetPieceType = nextPieces[i];
             
-            if (targetPieceType == ignoreType) continue;
+            if (targetPieceType == ignoreType || i == ignore) continue;
             
             var def = GameDataService.Current.PiecesManager.GetPieceDef(targetPieceType);
-            
-            if(def?.CreateRewards == null) continue;
+
+            if (def?.CreateRewards == null) continue;
             
             foreach (var reward in def.CreateRewards)
             {
@@ -50,7 +51,7 @@ public class DefaultMatchActionBuilder
                 rewardTransactions[i].Add(transaction);
             }
         }
-
+        
         return rewardTransactions;
     }
     

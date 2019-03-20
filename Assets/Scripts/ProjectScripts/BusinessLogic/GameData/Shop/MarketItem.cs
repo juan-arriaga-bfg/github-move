@@ -58,6 +58,8 @@ public class MarketItem
         
         if(Index == -1) return;
         
+        if (defs.Count <= Index) return;
+        
         current = defs[Index];
         
         Reward = new CurrencyPair{Currency = piece == -1 ? current.Weight.Uid : PieceType.Parse(piece), Amount = amount};
@@ -152,6 +154,8 @@ public class MarketItem
     
     private string GetRandomPiece(int min, int max)
     {
+        max -= 1;
+        
         var board = BoardService.Current.FirstBoard;
         var definition = board.BoardLogic.MatchDefinition;
         
@@ -185,7 +189,7 @@ public class MarketItem
         var maxId = ids[Random.Range(0, ids.Count)];
         var chain = definition.GetChain(maxId);
         var find = Mathf.Min(max, chain.IndexOf(maxId) - 1);
-
+        
         return PieceType.Parse(chain[find]);
     }
     

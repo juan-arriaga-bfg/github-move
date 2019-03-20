@@ -1,4 +1,4 @@
-﻿//#define USE_COROUTINE // Enable to wait for end of frame after every item
+//#define USE_COROUTINE // Enable to wait for end of frame after every item
 
 using System;
 using System.Collections;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
+using Debug = IW.Logger;
 
 public class AsyncInitManager :  IAsyncInitManager
 {

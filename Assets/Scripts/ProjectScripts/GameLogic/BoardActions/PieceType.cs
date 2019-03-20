@@ -1,4 +1,5 @@
-﻿using System;
+using Debug = IW.Logger;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -60,16 +61,15 @@ public static partial class PieceType
         return defs.ContainsKey(id) == false ? defs[PieceType.None.Id] : defs[id];
     }
 
-    public static List<int> GetIdsByFilter(PieceTypeFilter filter)
+    public static List<int> GetIdsByFilter(PieceTypeFilter include)
     {
         var result = new List<int>();
 
         foreach (var def in defs.Values)
         {
-            if(def.Filter.Has(filter) == false) continue;
-            
             // ignore empty piece
-            if (def.Id == PieceType.Empty.Id) continue;
+            if (def.Id == Empty.Id) continue;
+            if ((int) (def.Filter & include) != (int) include) continue;
             
             result.Add(def.Id);
         }
@@ -80,38 +80,32 @@ public static partial class PieceType
     }
     
     /// <summary>
-    /// Return List of ids for pieces that has specified *filter* and not has ANY of *exclude*
+    /// Return List of ids for pieces that have ALL of *include* and have no ANY of *exclude*
     /// </summary>
-    /// <param name="filter">Select pieces that has specified flag. Multiply flags are not supported, provide only one:
-    /// GetIdsByFilter(PieceTypeFilter.Obstacle | PieceTypeFilter.Bag, [exclude]) - incorrect
-    /// GetIdsByFilter(PieceTypeFilter.Obstacle, [exclude]) - Correct
+    /// <param name="include">Select pieces that have one of specified flags.
+    /// Let Piece X1 has PieceTypeFilters: Simple, Obstacle, Tree 
+    /// Let Piece X2 has PieceTypeFilters: Simple, Tree 
+    /// Let Piece X3 has PieceTypeFilters: Simple
+    /// GetIdsByFilter(Simple, Workplace) => X1, X2, X3
+    /// GetIdsByFilter(Simple | Obstacle, Workplace) => X1
     /// </param>
     /// <param name="exclude">Pieces that has ANY of flag from this param will be excluded</param>
     /// Let Piece X1 has PieceTypeFilters: Simple, Obstacle, Tree 
     /// Let Piece X2 has PieceTypeFilters: Simple, Tree 
-    /// Let Piece X3 has PieceTypeFilters: Simple 
+    /// Let Piece X3 has PieceTypeFilters: Simple
     /// GetIdsByFilter(Simple, Obstacle | Tree) => X3
     /// GetIdsByFilter(Simple, Obstacle) => X2, X3
     /// GetIdsByFilter(Simple, Tree) => X3
-    public static List<int> GetIdsByFilter(PieceTypeFilter filter, PieceTypeFilter exclude)
+    public static List<int> GetIdsByFilter(PieceTypeFilter include, PieceTypeFilter exclude)
     {
-#if DEBUG
-        int count = BitsHelper.CountOfSetBits((int) filter);
-        if (count > 1)
-        {
-            Debug.LogError($"[PieceType] => GetIdsByFilter: filter param contains more then one flag set ({filter.PrettyPrint()}. It will not work correctly!)");
-        }
-#endif
-        
         var result = new List<int>();
 
         foreach (var def in defs.Values)
         {
             // ignore empty piece
-            if (def.Id == PieceType.Empty.Id) continue;
-            
-            if(def.Filter.Has(filter) == false) continue;
-            if ((int)(def.Filter & exclude) != 0) continue;// Exclude pieces with ANY of flags from 'exclude' param
+            if (def.Id == Empty.Id) continue;
+            if ((int) (def.Filter & include) != (int) include) continue;
+            if ((int) (def.Filter & exclude) != 0) continue; // Exclude pieces with ANY of flags from 'exclude' param
             
             result.Add(def.Id);
         }
@@ -144,7 +138,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef NPC_Gnome = new PieceTypeDef{Id = 104, Abbreviations = new List<string>{ "NPC_Gnome" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Fake};
     public static readonly PieceTypeDef NPC_D = new PieceTypeDef{Id = 105, Abbreviations = new List<string>{ "NPC_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef NPC_E = new PieceTypeDef{Id = 106, Abbreviations = new List<string>{ "NPC_E" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_F = new PieceTypeDef{Id = 107, Abbreviations = new List<string>{ "NPC_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef NPC_F = new PieceTypeDef{Id = 107, Abbreviations = new List<string>{ "NPC_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
     public static readonly PieceTypeDef NPC_G = new PieceTypeDef{Id = 108, Abbreviations = new List<string>{ "NPC_G" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
     public static readonly PieceTypeDef NPC_H = new PieceTypeDef{Id = 109, Abbreviations = new List<string>{ "NPC_H" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
     public static readonly PieceTypeDef NPC_I = new PieceTypeDef{Id = 110, Abbreviations = new List<string>{ "NPC_I" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
@@ -318,12 +312,12 @@ public static partial class PieceType
     
 #region Boosters
     
-    public static readonly PieceTypeDef Boost_CR1 = new PieceTypeDef{Id = 2001, Abbreviations = new List<string>{ "Boost_CR1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef Boost_CR2 = new PieceTypeDef{Id = 2002, Abbreviations = new List<string>{ "Boost_CR2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef Boost_CR3 = new PieceTypeDef{Id = 2003, Abbreviations = new List<string>{ "Boost_CR3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef Boost_CR  = new PieceTypeDef{Id = 2004, Abbreviations = new List<string>{ "Boost_CR"  }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Booster};
+    public static readonly PieceTypeDef Boost_CR1 = new PieceTypeDef{Id = 1000001, Abbreviations = new List<string>{ "Boost_CR1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef Boost_CR2 = new PieceTypeDef{Id = 1000002, Abbreviations = new List<string>{ "Boost_CR2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef Boost_CR3 = new PieceTypeDef{Id = 1000003, Abbreviations = new List<string>{ "Boost_CR3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef Boost_CR  = new PieceTypeDef{Id = 1000004, Abbreviations = new List<string>{ "Boost_CR"  }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Booster};
     
-    public static readonly PieceTypeDef Boost_WR = new PieceTypeDef{Id = 2100, Abbreviations = new List<string>{ "Boost_WR" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Boost_WR = new PieceTypeDef{Id = 1000100, Abbreviations = new List<string>{ "Boost_WR" }, Filter = PieceTypeFilter.Simple};
     
 #endregion
     

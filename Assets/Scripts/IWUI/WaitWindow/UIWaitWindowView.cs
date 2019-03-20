@@ -1,3 +1,4 @@
+using Debug = IW.Logger;
 using UnityEngine;
 using System.Collections;
 using DG.Tweening;

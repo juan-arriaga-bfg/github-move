@@ -6,7 +6,7 @@ public class MovePieceFromToAnimation : BoardAnimation
     public BoardPosition From { get; set; }
 	
     public BoardPosition To { get; set; }
-
+    
     public override void Animate(BoardRenderer context)
     {
         var pieceFromView = context.GetElementAt(From);
@@ -27,5 +27,12 @@ public class MovePieceFromToAnimation : BoardAnimation
             context.ResetBoardElement(pieceFromView, To);
             CompleteAnimation(context);
         });
+    }
+
+    public override void StopAnimation(BoardRenderer context)
+    {
+        base.StopAnimation(context);
+
+        DOTween.Kill(animationUid, true);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using Debug = IW.Logger;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PiecesMakingDataManager : IECSComponent, IDataManager, IDataLoader<List<PieceMakingDef>>

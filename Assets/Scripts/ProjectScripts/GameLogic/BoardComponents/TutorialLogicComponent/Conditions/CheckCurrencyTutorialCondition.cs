@@ -5,6 +5,7 @@ public class CheckCurrencyTutorialCondition : BaseTutorialCondition
 {
     public List<string> Currency;
     public int Target;
+    public bool IsPermanentCheck;
     
     private int current;
 
@@ -34,8 +35,8 @@ public class CheckCurrencyTutorialCondition : BaseTutorialCondition
             Increment(shopItem);
             return;
         }
-        
-        if(context.IsPerform == false) return;
+
+        if (IsPermanentCheck == false && context.IsPerform == false) return;
         
         Increment(shopItem);
     }
@@ -46,15 +47,15 @@ public class CheckCurrencyTutorialCondition : BaseTutorialCondition
         {
             foreach (var price in shopItem.CurrentPrices)
             {
-                if(Currency.Contains(price.Currency) == false) continue;
+                if (Currency.Contains(price.Currency) == false) continue;
                 
                 current -= price.DefaultPriceAmount;
             } 
             
             return;
         }
-        
-        if(Currency.Contains(shopItem.ItemUid) == false) return;
+
+        if (Currency.Contains(shopItem.ItemUid) == false) return;
         
         current += shopItem.Amount;
     }

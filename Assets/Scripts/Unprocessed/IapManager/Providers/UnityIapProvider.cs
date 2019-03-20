@@ -1,5 +1,5 @@
 #if UNITY_PURCHASES
-
+using Debug = IW.Logger;
 using System;
 using UnityEngine;
 using UnityEngine.Purchasing;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using Debug = IW.Logger;
+using UnityEngine;
 
 public class BfgSdkGdprInitComponent : AsyncInitComponentBase
 {

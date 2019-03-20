@@ -1,4 +1,5 @@
-﻿using System;
+using Debug = IW.Logger;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,6 +21,8 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     // private const int SECONDS_IN_MIN = 60;
     // private const int SECONDS_IN_HOUR = SECONDS_IN_MIN * 60;
     // private const int DAILY_TIMER_START_OFFSET = SECONDS_IN_HOUR * 17 + SECONDS_IN_MIN * 1;
+    
+    public const string DAILY_QUEST_ID = "Daily"; 
     
     public TimerComponent DailyTimer { get; private set; }
 
@@ -129,7 +132,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
             JToken questNode = saveData["Quest"];
             string id        = questNode["Id"].Value<string>();
         
-           StartQuestById(id, saveData);
+            StartQuestById(id, saveData);
         }
 
         if (DailyQuest != null)
@@ -453,6 +456,13 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         }
         
         quest = InstantiateQuest(id);
+
+        if (quest == null)
+        {
+            Debug.LogWarning($"[QuestDataManager] => StartQuestById: No quest with id '{id}' defined");
+            return null;
+        }
+        
         ActiveQuests.Add(quest);
 
         // Cache in appropriate store
@@ -477,6 +487,12 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
             quest.Start(saveData);
             quest.OnChanged += OnQuestsStateChangedEvent;
             OnActiveQuestsListChanged?.Invoke();
+        }
+
+        // Recreate daily quest if we lost all the tasks due to migration
+        if (DailyQuest != null && DailyQuest.ActiveTasks.Count == 1)
+        {
+            StartNewDailyQuest();
         }
 
         return quest;
@@ -526,8 +542,13 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
                 quest.OnChanged -= OnQuestsStateChangedEvent;
                 
                 OnActiveQuestsListChanged?.Invoke();
-                
-                StartNewQuestsIfAny();
+
+                // Do not trigger conditions check if we have complete DailyQuest (cause issues on DailyQuest restart due to migration)
+                if (!(quest is DailyQuestEntity))
+                {
+                    StartNewQuestsIfAny();
+                }
+
                 return;
             }
         }
@@ -558,18 +579,16 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     public void StartNewDailyQuest()
     {
         Debug.Log($"[QuestsDataManager] => StartDailyQuest");
-        
-        const string ID = "Daily";
-        
-        QuestEntity quest = GetActiveQuestById(ID);
+
+        QuestEntity quest = GetActiveQuestById(DAILY_QUEST_ID);
         
         if (quest != null)
         {
             quest.ForceComplete();
-            FinishQuest(ID);
+            FinishQuest(DAILY_QUEST_ID);
         }
         
-        quest = StartQuestById(ID, null);
+        quest = StartQuestById(DAILY_QUEST_ID, null);
 
         if (ConnectedToBoard)
         {
@@ -582,6 +601,8 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     private void StartDailyTimer(DateTime startTime)
     {    
         Debug.Log($"[QuestsDataManager] => StartDailyTimer: startTime: {startTime}, delay: {DAILY_TIMER_DELAY}");
+
+        StopDailyTimer();
         
         DailyTimer = new TimerComponent
         {

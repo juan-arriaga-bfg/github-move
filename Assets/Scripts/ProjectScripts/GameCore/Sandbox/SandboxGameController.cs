@@ -44,6 +44,7 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.RegisterComponent(new BoardLogicComponent() // core logic
             .RegisterComponent(new PiecePositionsCacheComponent())
+            .RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()))
             .RegisterComponent(new FieldFinderComponent())
             .RegisterComponent(new FireflyLogicComponent())
             .RegisterComponent(new PieceRemoverComponent())
@@ -56,8 +57,7 @@ public class SandboxGameController : MonoBehaviour
                 .RegisterDefaultBuilder(new SimpleMatchActionBuilder()) // creates default match action
                 .RegisterBuilder(new MulticellularPieceMatchActionBuilder())
                 .RegisterBuilder(new CompositePieceMatchActionBuilder())
-                .RegisterBuilder(new CharacterMatchActionBuilder()))
-            .RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build())));
+                .RegisterBuilder(new CharacterMatchActionBuilder())));
 
         boardController.RegisterComponent(new AreaAccessControllerComponent());
         boardController.RegisterComponent(new PathfindLockerComponent());

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
+using Debug = IW.Logger;
 
 
 public partial class BoardRenderer : ECSEntity
@@ -55,6 +55,7 @@ public partial class BoardRenderer : ECSEntity
     {
         if (gameBoardResourcesDef.ElementsResourcesDef.ContainsKey(pieceType) == false)
         {
+            Debug.LogWarning($"[BoardRenderer:GetResourceNameForType] No resource for piece type: {pieceType}");
             return null;
         }
 
@@ -978,6 +979,10 @@ public partial class BoardRenderer : ECSEntity
             if (performingAnimationsQueue.Contains(animationsQueue[i]) == false)
             {
                 performingAnimationsQueue.Add(animationsQueue[i]);
+                
+#if IW_FULL_ACTION_LOG
+                Debug.LogWarning($"--> Anim Started: {animationsQueue[i].GetType()}");
+#endif
                 animationsQueue[i].Animate(this);
             }
         }
@@ -1021,7 +1026,35 @@ public partial class BoardRenderer : ECSEntity
         }
         return animations;
     }
+    
+    public virtual void StopMoveAnimationsAt(BoardRenderer context, BoardPosition at)
+    {
+        var performingAnimations = context.GetPerformingAnimations();
 
+        context.context.Manipulator.StopDragAnimation(at);
+    
+        for (int i = 0; i < performingAnimations.Count; i++)
+        {
+            var movePieceFromToAnimation = performingAnimations[i] as MovePieceFromToAnimation;
+            if (movePieceFromToAnimation != null)
+            {
+                if (movePieceFromToAnimation.To.Equals(at))
+                {
+                    movePieceFromToAnimation.StopAnimation(context);
+                }
+            }
+            
+            var resetPiecePositionAnimation = performingAnimations[i] as ResetPiecePositionAnimation;
+            if (resetPiecePositionAnimation != null)
+            {
+                if (resetPiecePositionAnimation.At.Equals(at))
+                {
+                    resetPiecePositionAnimation.StopAnimation(context);
+                }
+            }
+        }
+    }
+    
     public virtual List<BoardAnimation> GetPerformingAnimations()
     {
         return performingAnimationsQueue;
@@ -1036,6 +1069,10 @@ public partial class BoardRenderer : ECSEntity
     {
         performingAnimationsQueue.Remove(animation);
         animationsQueue.Remove(animation);
+        
+#if IW_FULL_ACTION_LOG
+                Debug.LogWarning($"--> Anim Completed: {animation.GetType()}");
+#endif
     }
 
     public virtual BoardPosition GetEmptyPointUp(BoardPosition point, BoardLogicComponent matrix)

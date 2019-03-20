@@ -1,3 +1,4 @@
+using Debug = IW.Logger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -97,6 +98,13 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         {
             string id = node.SelectToken("Id").Value<string>();
             TaskEntity task = GetTaskById(id);
+
+            if (task == null)
+            {
+                Debug.LogWarning($"[QuestEntity] => Load: Quest '{Id}': No task with id '{id}' defined");
+                continue;
+            }
+            
             node.PopulateObject(task);
             
             tasksLoadedFromSave.Add(task);

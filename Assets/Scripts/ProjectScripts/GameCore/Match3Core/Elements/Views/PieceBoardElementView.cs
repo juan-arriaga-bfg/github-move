@@ -1,4 +1,5 @@
-﻿using System;
+using Debug = IW.Logger;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -33,6 +34,8 @@ public class PieceBoardElementView : BoardElementView
     private Animation cachedSelectionAnimation;
 
     private readonly ViewAnimationUid selectedAnimationId = new ViewAnimationUid();
+    
+    public ViewAnimationUid SelectedAnimationId { get { return selectedAnimationId; } }
     
     private SpriteRenderer selectionSprite;
     

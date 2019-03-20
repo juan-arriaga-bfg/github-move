@@ -33,10 +33,10 @@ public class SequenceComponent : IECSComponent
         
         seed = save?.Seed ?? Random.Range(0, Range);
         sequence = ItemWeight.GetRandomSequence(weights, seed);
+
+        if (save == null) return;
         
-        if(save == null) return;
-        
-        sequence.RemoveRange(0, sequence.Count - save.Count);
+        sequence.RemoveRange(0, Mathf.Max(sequence.Count - save.Count, 0));
     }
 
     public void Reinit(List<ItemWeight> value)

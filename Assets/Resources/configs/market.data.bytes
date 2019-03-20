@@ -9,7 +9,7 @@
     },
     "Price": {
       "Currency": "Crystals",
-      "Amount": 15
+      "Amount": 30
     },
     "RandomType": "Base",
     "Icon": "CoinsShopIcon1",
@@ -18,14 +18,14 @@
   {
     "Uid": "Soft normal",
     "UnlockLevel": 1,
-    "Amount": 1100,
+    "Amount": 1000,
     "Weight": {
       "Uid": "Coins",
       "Weight": 1
     },
     "Price": {
       "Currency": "Crystals",
-      "Amount": 99
+      "Amount": 190
     },
     "RandomType": "Base",
     "Icon": "CoinsShopIcon2",
@@ -34,14 +34,14 @@
   {
     "Uid": "Soft hard",
     "UnlockLevel": 1,
-    "Amount": 7000,
+    "Amount": 2500,
     "Weight": {
       "Uid": "Coins",
       "Weight": 1
     },
     "Price": {
       "Currency": "Crystals",
-      "Amount": 499
+      "Amount": 450
     },
     "RandomType": "Base",
     "Icon": "CoinsShopIcon3",
@@ -50,6 +50,16 @@
   {
     "Uid": "Base easy",
     "UnlockLevel": 1,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "Empty",
+      "Weight": 1
+    },
+    "RandomType": "BasePiecesEasy"
+  },
+  {
+    "Uid": "Base normal",
+    "UnlockLevel": 7,
     "Amount": 1,
     "Weight": {
       "Uid": "Empty",
@@ -89,7 +99,7 @@
   },
   {
     "Uid": "Boosts easy",
-    "UnlockLevel": 3,
+    "UnlockLevel": 4,
     "Amount": 2,
     "Weight": {
       "Uid": "SK2_PR",
@@ -103,7 +113,7 @@
   },
   {
     "Uid": "Boosts easy",
-    "UnlockLevel": 3,
+    "UnlockLevel": 4,
     "Amount": 2,
     "Weight": {
       "Uid": "SK3_PR",
@@ -117,7 +127,7 @@
   },
   {
     "Uid": "Boosts easy",
-    "UnlockLevel": 3,
+    "UnlockLevel": 6,
     "Amount": 2,
     "Weight": {
       "Uid": "Boost_CR2",
@@ -131,7 +141,7 @@
   },
   {
     "Uid": "Boosts normal",
-    "UnlockLevel": 3,
+    "UnlockLevel": 6,
     "Amount": 1,
     "Weight": {
       "Uid": "Boost_CR",
@@ -145,7 +155,7 @@
   },
   {
     "Uid": "Boosts hard",
-    "UnlockLevel": 3,
+    "UnlockLevel": 6,
     "Amount": 5,
     "Weight": {
       "Uid": "Boost_CR",
@@ -167,7 +177,7 @@
     },
     "Price": {
       "Currency": "Coins",
-      "Amount": 80
+      "Amount": 55
     },
     "RandomType": "Ingredients"
   },
@@ -181,7 +191,7 @@
     },
     "Price": {
       "Currency": "Coins",
-      "Amount": 150
+      "Amount": 90
     },
     "RandomType": "Ingredients"
   },

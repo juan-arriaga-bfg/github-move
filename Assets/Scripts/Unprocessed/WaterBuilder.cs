@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 //using UnityEditor;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
+using Debug = IW.Logger;
 
 public class WaterBuilder : MonoBehaviour
 {

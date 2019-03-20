@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using Debug = IW.Logger;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ActionExecuteComponent : ECSEntity, IECSSystem, IActionHistoryComponent
@@ -108,6 +109,10 @@ public class ActionExecuteComponent : ECSEntity, IECSSystem, IActionHistoryCompo
         actionsQueueTypes[action.Guid].Add(action);
 
         actionsQueue[threadIndex].Add(action);
+        
+#if UNITY_EDITOR  
+        ActionHistory.RegisterStackTrace(action);
+#endif
     }
 
     public virtual void AddActionOnTop(IBoardAction action, BoardActionMode mode = BoardActionMode.MultiMode, int threadIndex = 0)

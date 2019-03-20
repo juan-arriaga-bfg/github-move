@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Runtime;
 using System.Text;
 using System.Text.RegularExpressions;
-using Debug = UnityEngine.Debug;
+using Debug = IW.Logger;
 
 class LeakWatcherEntry
 {

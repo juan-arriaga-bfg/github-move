@@ -4792,7 +4792,7 @@ ParticleSystem:
 --- !u!199 &199707116492203632
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9495,7 +9495,7 @@ ParticleSystem:
 --- !u!199 &199671787455312586
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9629,7 +9629,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!111 &111786525040512240
 Animation:
   m_ObjectHideFlags: 0
@@ -14290,7 +14290,7 @@ ParticleSystem:
 --- !u!199 &199864645966349630
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -14441,6 +14441,8 @@ RectTransform:
   - {fileID: 224409618777596456}
   - {fileID: 224666332858355466}
   - {fileID: 224114942894150422}
+  - {fileID: 566532817132042903}
+  - {fileID: 2871626145592440327}
   m_Father: {fileID: 224621335393833958}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19326,7 +19328,7 @@ ParticleSystem:
 --- !u!199 &199972914554980570
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -19458,7 +19460,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1351121616560564
 GameObject:
   m_ObjectHideFlags: 0
@@ -24103,7 +24105,7 @@ ParticleSystem:
 --- !u!199 &199731204711653554
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -24410,7 +24412,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1451424649563818
 GameObject:
   m_ObjectHideFlags: 0
@@ -24484,7 +24486,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1508610402182208
 GameObject:
   m_ObjectHideFlags: 0
@@ -24558,7 +24560,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1509961185223896
 GameObject:
   m_ObjectHideFlags: 0
@@ -24591,7 +24593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 22}
+  m_AnchoredPosition: {x: 1, y: 40}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1523774659235434
@@ -24743,7 +24745,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!111 &111736529536378758
 Animation:
   m_ObjectHideFlags: 0
@@ -24792,7 +24794,7 @@ RectTransform:
   - {fileID: 224039044945113226}
   - {fileID: 224128972013859860}
   m_Father: {fileID: 224621335393833958}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -24869,8 +24871,6 @@ RectTransform:
   m_Children:
   - {fileID: 1986828784563820867}
   - {fileID: 224002377294266482}
-  - {fileID: 566532817132042903}
-  - {fileID: 2871626145592440327}
   - {fileID: 224423528136343082}
   m_Father: {fileID: 4059084429717306}
   m_RootOrder: 0
@@ -25089,7 +25089,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1691997105087464
 GameObject:
   m_ObjectHideFlags: 0
@@ -29770,7 +29770,7 @@ ParticleSystem:
 --- !u!199 &199485501684946740
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -29903,7 +29903,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1728003197648882
 GameObject:
   m_ObjectHideFlags: 0
@@ -30072,7 +30072,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1755397386488860
 GameObject:
   m_ObjectHideFlags: 0
@@ -34825,7 +34825,7 @@ ParticleSystem:
 --- !u!199 &199559070756045798
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -35289,7 +35289,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1811376345922196
 GameObject:
   m_ObjectHideFlags: 0
@@ -36429,7 +36429,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1969383264118156
 GameObject:
   m_ObjectHideFlags: 0
@@ -41201,7 +41201,7 @@ ParticleSystem:
 --- !u!199 &199555177883349256
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -41333,7 +41333,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &2244598308544060820
 GameObject:
   m_ObjectHideFlags: 0
@@ -41360,15 +41360,15 @@ RectTransform:
   m_GameObject: {fileID: 2244598308544060820}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 185298959560346292}
-  m_Father: {fileID: 224621335393833958}
-  m_RootOrder: 3
+  m_Father: {fileID: 224002377294266482}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 500, y: -0.020019531}
+  m_AnchoredPosition: {x: 500, y: -53.000042}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &5624440712910850688
@@ -41456,7 +41456,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &6025678229384363805
 GameObject:
   m_ObjectHideFlags: 0
@@ -41483,15 +41483,15 @@ RectTransform:
   m_GameObject: {fileID: 6025678229384363805}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 8335559975336173761}
-  m_Father: {fileID: 224621335393833958}
-  m_RootOrder: 2
+  m_Father: {fileID: 224002377294266482}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -500, y: -0.020019531}
+  m_AnchoredPosition: {x: -500, y: -53.000042}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &5421487014513414882
@@ -41502,7 +41502,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6025678229384363805}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -41627,6 +41627,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.a
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 442463819372656932, guid: 474ad589c41831b4a95d01947b52125b,
+        type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 474ad589c41831b4a95d01947b52125b, type: 3}

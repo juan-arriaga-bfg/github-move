@@ -26,7 +26,8 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
 
         if (nextType == PieceType.None.Id) return null;
 
-        var nextPieces = Calculation(pieceType, nextType, definition.GetPieceCountForMatch(pieceType), matchField.Count);
+        var index = matchField.FindIndex(boardPosition => definition.Context.GetPieceAt(boardPosition).PieceType == PieceType.Boost_CR.Id);
+        var nextPieces = Calculation(pieceType, nextType, definition.GetPieceCountForMatch(pieceType), matchField.Count, index != -1, out var ignoreBoost);
 
         if (nextPieces.Count == 0) return null;
         
@@ -42,11 +43,13 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, matchDescription);
         
         // collect and purchase rewards before action
-        return CreateAction(nextPieces, matchField, position, pieceType);
+        return CreateAction(nextPieces, matchField, position, pieceType, ignoreBoost);
     }
 
-    private List<int> Calculation(int currentType, int nextType, int amountDefault, int amountCurrent)
+    private List<int> Calculation(int currentType, int nextType, int amountDefault, int amountCurrent, bool useBoost, out bool ignoreBoost)
     {
+        ignoreBoost = false;
+        
         var nextPieces = new List<int>();
         
         if (amountDefault == -1 || amountCurrent < amountDefault) return nextPieces;
@@ -54,7 +57,12 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         if (amountCurrent < amountBonus)
         {
             nextPieces = Add(1, nextType, nextPieces);
-            if (amountCurrent == amountBonus - 1) nextPieces = Add(1, currentType, nextPieces);
+
+            if (amountCurrent == amountBonus - 1)
+            {
+                nextPieces = Add(1, useBoost ? PieceType.Boost_CR.Id : currentType, nextPieces);
+                ignoreBoost = useBoost;
+            }
             
             return nextPieces;
         }
@@ -70,7 +78,8 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
                 break;
             case 2:
                 nextPieces = Add(amount, nextType, nextPieces);
-                nextPieces = Add(1, currentType, nextPieces);
+                nextPieces = Add(1, useBoost ? PieceType.Boost_CR.Id : currentType, nextPieces);
+                ignoreBoost = useBoost;
                 break;
             case 3:
             case 4:

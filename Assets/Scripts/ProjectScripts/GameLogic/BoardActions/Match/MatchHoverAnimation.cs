@@ -11,6 +11,8 @@ public class MatchHoverAnimation : BoardAnimation
     public BoardPosition From;
 
     private bool isRevert;
+
+
     public override void Animate(BoardRenderer context)
     {
         HoverPosition = HoverPosition.SetZ(BoardLayer.Piece.Layer);
@@ -25,8 +27,12 @@ public class MatchHoverAnimation : BoardAnimation
         
         foreach (var piecePos in PiecePositions)
         {
+            context.StopMoveAnimationsAt(context, piecePos);
+                
             var pos = piecePos.SetZ(BoardLayer.Piece.Layer);
             var pieceView = context.GetElementAt(pos) as PieceBoardElementView;
+            
+            // context.ResetBoardElement(pieceView, piecePos);
 
             var startPos = context.Context.BoardDef.GetPiecePosition(pieceView.Piece.CachedPosition.X, pieceView.Piece.CachedPosition.Y);
             var alreadyHighlight = pieceView.IsHighlighted;

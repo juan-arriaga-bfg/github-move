@@ -1,5 +1,5 @@
-﻿#if UNITY_EDITOR
-
+#if UNITY_EDITOR
+using Debug = IW.Logger;
 using System;
 using System.Collections;
 using System.Collections.Generic;

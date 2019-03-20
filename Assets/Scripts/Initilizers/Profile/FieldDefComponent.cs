@@ -2,6 +2,30 @@
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
+public interface IFieldDefComponent
+{
+    FieldDefComponent FieldDef { get; }
+}
+
+public partial class UserProfile : IFieldDefComponent
+{
+    protected FieldDefComponent fieldDefComponent;
+
+    [JsonIgnore]
+    public FieldDefComponent FieldDef
+    {
+        get
+        {
+            if (fieldDefComponent == null)
+            {
+                fieldDefComponent = GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+            }
+
+            return fieldDefComponent;
+        }
+    }
+}
+
 [JsonObject(MemberSerialization.OptIn)]
 public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 {
@@ -12,7 +36,6 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 	private List<RewardsSaveItem> rewards;
 	private List<LifeSaveItem> lives;
 	private List<BuildingSaveItem> buildings;
-	private AreaAccessSaveItem areaAccess;
 	
 	[JsonProperty]
 	public List<PieceSaveItem> Pieces
@@ -40,13 +63,6 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 	{
 		get { return buildings; }
 		set { buildings = value; }
-	}
-
-	[JsonProperty]
-	public AreaAccessSaveItem AreaAccess
-	{
-		get { return areaAccess; }
-		set { areaAccess = value; }
 	}
 	
 	private Dictionary<BoardPosition, RewardsSaveItem> rewardsSave;
@@ -83,7 +99,6 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 		}
 		
 		pieces.Sort((a, b) => -a.Id.CompareTo(b.Id));
-		AreaAccess = board.AreaAccessController.GetSaveItem();
 	}
 
 	[OnDeserialized]
