@@ -5,18 +5,85 @@ public static class MigrationUtils
 {
     public static void ReplacePieceIdFromTo(UserProfile profile, Dictionary<int, int> fromToDef)
     {
-        if (profile.FieldDef == null) return;
-        
-        for (int i = 0; i < profile.FieldDef.Pieces.Count; i++)
+        if (profile.FieldDef != null)
         {
-            var pieceSaveItem = profile.FieldDef.Pieces[i];
-
-            int targetId = -1;
-            if (fromToDef.TryGetValue(pieceSaveItem.Id, out targetId))
+            if (profile.FieldDef.Pieces != null)
             {
-                Debug.LogWarning(string.Format("[MigrationUtils]: replace piece id {0} => {1}", pieceSaveItem.Id, targetId));
-                pieceSaveItem.Id = targetId;
+                for (int i = 0; i < profile.FieldDef.Pieces.Count; i++)
+                {
+                    var pieceSaveItem = profile.FieldDef.Pieces[i];
+
+                    int targetId = -1;
+                    if (fromToDef.TryGetValue(pieceSaveItem.Id, out targetId))
+                    {
+                        Debug.LogWarning(string.Format("[MigrationUtils]: replaced PieceType.ID int FieldDef.Pieces {0} => {1}", pieceSaveItem.Id, targetId));
+                        pieceSaveItem.Id = targetId;
+                    }
+                }
+            }
+
+            if (profile.FieldDef.Rewards != null)
+            {
+                for (int i = 0; i < profile.FieldDef.Rewards.Count; i++)
+                {
+                    var rewardsSaveItem = profile.FieldDef.Rewards[i];
+
+                    foreach (var fromToDefPair in fromToDef)
+                    {
+                        var fromId = fromToDefPair.Key;
+                        var toId = fromToDefPair.Value;
+
+                        if (rewardsSaveItem.Reward.ContainsKey(fromId))
+                        {
+                            var val = rewardsSaveItem.Reward[fromId];
+                            rewardsSaveItem.Reward.Remove(fromId);
+                            rewardsSaveItem.Reward.Add(toId, val);
+                            
+                            Debug.LogWarning(string.Format("[MigrationUtils]: replaced PieceType.ID in FieldDef.Rewards {0} => {1}", fromId, toId));
+                        }
+                    }
+                }
             }
         }
+
+        if (profile.CodexSave != null && profile.CodexSave.Data != null)
+        {
+            foreach (var fromToDefPair in fromToDef)
+            {
+                var fromId = fromToDefPair.Key;
+                var toId = fromToDefPair.Value;
+
+                if (profile.CodexSave.Data.ContainsKey(fromId))
+                {
+                    var codexChainState = profile.CodexSave.Data[fromId];
+                    ReplaceCodexChainStateFromTo(codexChainState, fromId, toId);
+
+                    profile.CodexSave.Data.Remove(fromId);
+                    profile.CodexSave.Data.Add(toId, codexChainState);
+                }
+                
+            }
+            
+        }
     }
+
+    public static void ReplaceCodexChainStateFromTo(CodexChainState codexChainState, int fromId, int toId)
+    {
+        if (codexChainState.Unlocked.Contains(fromId))
+        {
+            codexChainState.Unlocked.Remove(fromId);
+            codexChainState.Unlocked.Add(toId);
+            
+            Debug.LogWarning(string.Format("[MigrationUtils]: replaced PieceType.ID in CodexChainState.Unlocked {0} => {1}", fromId, toId));
+        }
+        
+        if (codexChainState.PendingReward.Contains(fromId))
+        {
+            codexChainState.PendingReward.Remove(fromId);
+            codexChainState.PendingReward.Add(toId);
+            
+            Debug.LogWarning(string.Format("[MigrationUtils]: replaced PieceType.ID in CodexChainState.PendingReward {0} => {1}", fromId, toId));
+        }
+    }
+
 }

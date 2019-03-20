@@ -2,6 +2,30 @@
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
+public interface ICodexSaveComponent
+{
+    CodexSaveComponent CodexSave { get; }
+}
+
+public partial class UserProfile : ICodexSaveComponent
+{
+    protected CodexSaveComponent codexSaveComponent;
+
+    [JsonIgnore]
+    public CodexSaveComponent CodexSave
+    {
+        get
+        {
+            if (codexSaveComponent == null)
+            {
+                codexSaveComponent = GetComponent<CodexSaveComponent>(CodexSaveComponent.ComponentGuid);
+            }
+
+            return codexSaveComponent;
+        }
+    }
+}
+
 [JsonObject(MemberSerialization.OptIn)]
 public class CodexSaveComponent : ECSEntity, IECSSerializeable
 {
