@@ -445,4 +445,5 @@ public class R
      public const string MN_FPiece = "MN_FPiece";
      public const string MN_HPiece = "MN_HPiece";
      public const string MonumentCooldownParticle = "MonumentCooldownParticle";
+     public const string PiecesSepiaDefaultMaterial = "PiecesSepiaDefaultMaterial";
 }

@@ -41,7 +41,7 @@
         
         if (isCooldown)
         {
-            SetCustomMaterial(BoardElementMaterialType.PiecesLockedMaterial, true);
+            SetCustomMaterial(BoardElementMaterialType.PiecesSepiaDefaultMaterial, true);
             SaveCurrentMaterialAsDefault();
             cooldownParticles?.DestroyOnBoard();
             cooldownParticles = ParticleView.Show(R.MonumentCooldownParticle, Piece.CachedPosition);
