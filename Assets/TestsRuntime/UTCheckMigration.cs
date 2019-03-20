@@ -45,7 +45,7 @@ namespace UTRuntime
 
                 var filePath = AssetDatabase.GUIDToAssetPath(fileGuid);
                 var dataPath = FixWinSlash(Application.dataPath);
-                var finalPath = FixWinSlash(Path.Combine(dataPath, filePath));
+                var finalPath = FixWinSlash(Path.Combine(Application.dataPath, filePath.Remove(filePath.IndexOf("Assets/"), 7)));
                 
                 filteredScriptAbsolutePath.Add(finalPath);
                 
@@ -64,7 +64,7 @@ namespace UTRuntime
 #if UNITY_EDITOR
                 var progressPath = Application.dataPath + "/Resources/configs/profile.data.txt";
 
-                File.Replace(filePath, progressPath, filePath + "_backup");
+                File.Replace(filePath, progressPath, Application.dataPath + "/Backup.txt");
                 
                 AssetDatabase.Refresh();
 #endif
