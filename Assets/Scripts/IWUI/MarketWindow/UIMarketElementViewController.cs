@@ -246,6 +246,6 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	protected virtual int GetIndex()
 	{
 		var contentEntity = entity as UIMarketElementEntity;
-		return GameDataService.Current.MarketManager.Defs.IndexOf(contentEntity.Def) + 1;
+		return contentEntity.Def.Uid;
 	}
 }
