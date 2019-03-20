@@ -396,7 +396,7 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckStepTutorialCondition {Target = 25, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 10, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckTimerCompleteTutorialCondition {Target = BoardService.Current.FirstBoard.MarketLogic.OfferTimer, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = 1, Currency = new List<string>{Currency.Offer.Name}, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = 2, Currency = new List<string>{Currency.Offer.Name}, IsPermanentCheck = true, ConditionType = TutorialConditionType.Hard}, true);
                 break;
             }
             default:
