@@ -31,7 +31,7 @@ namespace UTRuntime
             yield return null;
             
             var filesGuids = AssetDatabase.FindAssets(searchFilter, pathToFolderSaves.ToArray());
-            var filteredScriptAbsolutePath = new Dictionary<string, string>();
+            var filteredScriptAbsolutePath = new List<string>();
             var fileNamesCache = new Dictionary<string, string>();
             var processedGuids = new Dictionary<string, string>();
 
@@ -47,28 +47,39 @@ namespace UTRuntime
                 var dataPath = FixWinSlash(Application.dataPath);
                 var finalPath = FixWinSlash(Path.Combine(dataPath, filePath));
                 
+                filteredScriptAbsolutePath.Add(finalPath);
+                
                 Debug.LogWarning(filePath);
             }
 
-            // reset progress in editor
-            #if UNITY_EDITOR
-            var progressPath = Application.dataPath + "/Resources/configs/profile.data.txt";
-            File.Delete(progressPath);
-            File.Delete(progressPath + ".meta");
-            
-            // File.Replace(progressPath, );
-            AssetDatabase.Refresh();
-            #endif
+            int index = 0;
 
-            SceneManager.LoadScene("Assets/Scenes/Launcher.unity", LoadSceneMode.Single);
-
-            while (BoardService.Current == null || BoardService.Current.FirstBoard == null || UIService.Get.IsComplete == false)
+            while (filteredScriptAbsolutePath.Count > index)
             {
-                yield return null;
+                var filePath = filteredScriptAbsolutePath[index];
+                
+                Debug.LogWarning($"[UTCheckMigration] {filePath}");
+                
+                // reset progress in editor
+#if UNITY_EDITOR
+                var progressPath = Application.dataPath + "/Resources/configs/profile.data.txt";
+
+                File.Replace(filePath, progressPath, filePath + "_backup");
+                
+                AssetDatabase.Refresh();
+#endif
+
+                SceneManager.LoadScene("Assets/Scenes/Launcher.unity", LoadSceneMode.Single);
+
+                while (BoardService.Current == null || BoardService.Current.FirstBoard == null || UIService.Get.IsComplete == false)
+                {
+                    yield return null;
+                }
+            
+                yield return new WaitForSeconds(1f);
+                
             }
             
-            yield return new WaitForSeconds(1f);
-
             Assert.Pass();
         }
     }
