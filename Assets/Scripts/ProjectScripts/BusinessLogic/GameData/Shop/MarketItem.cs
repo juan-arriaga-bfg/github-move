@@ -58,6 +58,8 @@ public class MarketItem
         
         if(Index == -1) return;
         
+        if (defs.Count <= Index) return;
+        
         current = defs[Index];
         
         Reward = new CurrencyPair{Currency = piece == -1 ? current.Weight.Uid : PieceType.Parse(piece), Amount = amount};

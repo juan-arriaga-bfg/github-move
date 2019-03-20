@@ -102,6 +102,8 @@ public class QuestEntity : ECSEntity, IECSSerializeable
             if (task == null)
             {
                 Debug.LogError($"[QuestEntity] => Load: Quest '{Id}': No task with id '{id}' defined");
+                
+                continue;
             }
             
             node.PopulateObject(task);
