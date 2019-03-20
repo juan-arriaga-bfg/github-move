@@ -63,7 +63,27 @@ public static class MigrationUtils
                 }
                 
             }
-            
+        }
+
+        if (profile.MarketSave != null && profile.MarketSave.Slots != null)
+        {
+            for (int i = 0; i < profile.MarketSave.Slots.Count; i++)
+            {
+                var marketSaveItem = profile.MarketSave.Slots[i];
+                
+                foreach (var fromToDefPair in fromToDef)
+                {
+                    var fromId = fromToDefPair.Key;
+                    var toId = fromToDefPair.Value;
+
+                    if (marketSaveItem.Piece == fromId)
+                    {
+                        marketSaveItem.Piece = toId;
+                            
+                        Debug.LogWarning(string.Format("[MigrationUtils]: replaced PieceType.ID in MarketSave.Slots {0} => {1}", fromId, toId));
+                    }
+                }
+            }
         }
     }
 

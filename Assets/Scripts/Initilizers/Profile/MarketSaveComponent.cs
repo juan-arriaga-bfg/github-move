@@ -2,6 +2,19 @@
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
+public interface IMarketSaveComponent
+{
+    MarketSaveComponent MarketSave { get; }
+}
+
+public partial class UserProfile : IMarketSaveComponent
+{
+    protected MarketSaveComponent marketSaveComponent;
+
+    [JsonIgnore]
+    public MarketSaveComponent MarketSave => marketSaveComponent ?? (marketSaveComponent = GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid));
+}
+
 [JsonObject(MemberSerialization.OptIn)]
 public class MarketSaveComponent : ECSEntity, IECSSerializeable
 {
