@@ -103,7 +103,11 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		CurrencyHelper.PurchaseAndProvideSpawn(new List<CurrencyPair> {contentEntity.Def.Reward},
 			null,
 			rewardPosition,
-			() => { BoardService.Current.FirstBoard.TutorialLogic.Update(); },
+			() =>
+			{
+				ProfileService.Instance.Manager.UploadCurrentProfile();
+				BoardService.Current.FirstBoard.TutorialLogic.Update();
+			},
 			false,
 			true);
 	}
@@ -190,7 +194,14 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			var position = anchorPaid == null ? btnBack.transform.position : anchorPaid.position;
 			var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(position);
 			
-			CurrencyHelper.PurchaseAsyncOnlyCurrency(contentEntity.Def.Reward, contentEntity.Def.Price, flyPosition, null);
+			CurrencyHelper.PurchaseAsyncOnlyCurrency(contentEntity.Def.Reward, contentEntity.Def.Price, flyPosition,
+				(success) =>
+				{
+					if (success)
+					{
+						ProfileService.Instance.Manager.UploadCurrentProfile();
+					}
+				});
 			
 			contentEntity.Def.State = MarketItemState.Claimed;
 			Analytics.SendPurchase($"market{GetIndex()}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Price}, new List<CurrencyPair>{contentEntity.Def.Reward}, false, false);
