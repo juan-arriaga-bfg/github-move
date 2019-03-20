@@ -285,10 +285,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "16_CompleteOrder",
+    "Id": "16_СompleteOrder",
     "TaskDefs": [
       {
-        "TaskId": "16_CompleteOrder"
+        "TaskId": "16_СompleteOrder"
       }
     ],
     "ComponentsCache": {
@@ -1538,10 +1538,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "73_CompleteOrder",
+    "Id": "73_CollectIngredient",
     "TaskDefs": [
       {
-        "TaskId": "73_CompleteOrder"
+        "TaskId": "73_CollectIngredient"
       }
     ],
     "ComponentsCache": {
@@ -2133,29 +2133,6 @@
           {
             "Currency": "Experience",
             "Amount": 50
-          }
-        ]
-      }
-    }
-  },
-  {
-    "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "99_CompleteOrder",
-    "TaskDefs": [
-      {
-        "TaskId": "99_CompleteOrder"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 30
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 75
           }
         ]
       }

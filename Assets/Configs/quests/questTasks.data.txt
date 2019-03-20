@@ -153,8 +153,8 @@
   },
   {
     "$type": "TaskCompleteOrderEntity, GameAssembly",
-    "Id": "16_CompleteOrder",
-    "TargetValue": 2,
+    "Id": "16_СompleteOrder",
+    "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "CompleateOrderDailyQuestIcon",
@@ -781,12 +781,12 @@
     }
   },
   {
-    "$type": "TaskCompleteOrderEntity, GameAssembly",
-    "Id": "73_CompleteOrder",
-    "TargetValue": 5,
+    "$type": "TaskCollectIngredientEntity, GameAssembly",
+    "Id": "73_CollectIngredient",
+    "TargetValue": 7,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "CompleateOrderDailyQuestIcon",
+        "Ico": "collectIngredientDailyQuestIcon",
         "Title": "quest.complete.orders.title",
         "Message": "quest.complete.orders.message"
       }
@@ -1090,18 +1090,6 @@
     "$type": "TaskCompleteOrderEntity, GameAssembly",
     "Id": "98_CompleteOrder",
     "TargetValue": 3,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "CompleateOrderDailyQuestIcon",
-        "Title": "quest.complete.orders.title",
-        "Message": "quest.complete.orders.message"
-      }
-    }
-  },
-  {
-    "$type": "TaskCompleteOrderEntity, GameAssembly",
-    "Id": "99_CompleteOrder",
-    "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "CompleateOrderDailyQuestIcon",
