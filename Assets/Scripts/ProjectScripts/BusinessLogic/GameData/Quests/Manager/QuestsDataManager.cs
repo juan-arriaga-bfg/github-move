@@ -130,7 +130,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
             JToken questNode = saveData["Quest"];
             string id        = questNode["Id"].Value<string>();
         
-           StartQuestById(id, saveData);
+            StartQuestById(id, saveData);
         }
 
         if (DailyQuest != null)
@@ -454,6 +454,13 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         }
         
         quest = InstantiateQuest(id);
+
+        if (quest == null)
+        {
+            Debug.LogWarning($"[QuestDataManager] => StartQuestById: No quest with id '{id}' defined");
+            return null;
+        }
+        
         ActiveQuests.Add(quest);
 
         // Cache in appropriate store

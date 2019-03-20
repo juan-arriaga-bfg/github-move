@@ -53737,7 +53737,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!111 &8504308465521624677
 Animation:
   m_ObjectHideFlags: 0
@@ -58720,7 +58720,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &7395327719663616633
 GameObject:
   m_ObjectHideFlags: 0
@@ -78624,6 +78624,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.a
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 442463819372656932, guid: 474ad589c41831b4a95d01947b52125b,
+        type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 474ad589c41831b4a95d01947b52125b, type: 3}

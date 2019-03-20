@@ -8,7 +8,7 @@ public class MatchActionBuilderComponent : ECSEntity
     private BoardLogicComponent context;
     private IMatchActionBuilder defaultBuilder;
     
-    private Dictionary<int, IMatchActionBuilder> builders = new Dictionary<int, IMatchActionBuilder>();
+    private readonly Dictionary<int, IMatchActionBuilder> builders = new Dictionary<int, IMatchActionBuilder>();
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -37,9 +37,7 @@ public class MatchActionBuilderComponent : ECSEntity
 
     public bool CheckMatch(List<BoardPosition> matchField, int pieceType, BoardPosition position, out int nextType)
     {
-        IMatchActionBuilder builder;
-
-        if (builders.TryGetValue(pieceType, out builder) == false)
+        if (builders.TryGetValue(pieceType, out var builder) == false)
         {
             builder = defaultBuilder;
         }
@@ -49,9 +47,7 @@ public class MatchActionBuilderComponent : ECSEntity
     
     public IBoardAction GetMatchAction(List<BoardPosition> matchField, int pieceType, BoardPosition position)
     {
-        IMatchActionBuilder builder;
-
-        if (builders.TryGetValue(pieceType, out builder) == false)
+        if (builders.TryGetValue(pieceType, out var builder) == false)
         {
             builder = defaultBuilder;
         }

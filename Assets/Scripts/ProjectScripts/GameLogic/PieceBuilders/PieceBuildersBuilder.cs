@@ -70,7 +70,8 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_H.Id, PieceType.CH3_H.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_I.Id, PieceType.CH3_I.Id, dict);
         
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id, dict);
+        dict.Add(PieceType.Boost_CR.Id, new CrystalPieceBuilder());
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Boost_CR1.Id, PieceType.Boost_CR3.Id, dict);
         
         return dict;
     }

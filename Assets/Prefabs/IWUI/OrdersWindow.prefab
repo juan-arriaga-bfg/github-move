@@ -149,7 +149,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1048850147230022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1862,7 +1862,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1401225452275962
 GameObject:
   m_ObjectHideFlags: 0
@@ -2136,7 +2136,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!114 &114985383029396248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3294,7 +3294,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1584551434885998
 GameObject:
   m_ObjectHideFlags: 0
@@ -3543,7 +3543,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1612512477575226
 GameObject:
   m_ObjectHideFlags: 0
@@ -4620,7 +4620,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!111 &111801915887164310
 Animation:
   m_ObjectHideFlags: 0
@@ -6224,7 +6224,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1963423201200488
 GameObject:
   m_ObjectHideFlags: 0
@@ -6298,7 +6298,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &1986557786230050
 GameObject:
   m_ObjectHideFlags: 0
@@ -7090,7 +7090,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!114 &2972443247489621246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7182,7 +7182,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &2765578002296980180
 GameObject:
   m_ObjectHideFlags: 0
@@ -7291,7 +7291,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
 --- !u!1 &4444902070145710809
 GameObject:
   m_ObjectHideFlags: 0
@@ -7593,6 +7593,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 442463819372656932, guid: 474ad589c41831b4a95d01947b52125b,
+        type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 474ad589c41831b4a95d01947b52125b, type: 3}
 --- !u!224 &5709915836098271407 stripped
@@ -7717,6 +7722,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 177133069479807589, guid: 3c831165dbd12a246ba6a5ba8fc76161,
+        type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 178520806909819295, guid: 3c831165dbd12a246ba6a5ba8fc76161,
+        type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 178122629893557155, guid: 3c831165dbd12a246ba6a5ba8fc76161,
+        type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 177122728708207675, guid: 3c831165dbd12a246ba6a5ba8fc76161,
+        type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 178068787874582427, guid: 3c831165dbd12a246ba6a5ba8fc76161,
+        type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c831165dbd12a246ba6a5ba8fc76161, type: 3}

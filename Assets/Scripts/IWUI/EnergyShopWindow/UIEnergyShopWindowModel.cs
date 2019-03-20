@@ -16,14 +16,10 @@ public class UIEnergyShopWindowModel : UIShopWindowModel
             
             defs.RemoveAt(index);
             
-            if (amount == 0) return defs;
-
-            var price = amount * allin.Price.Amount;
-
-            if (price >= defs[index].Price.Amount) return defs;
+            if (amount == 0 || coins >= defs[index].Price.Amount) return defs;
 
             allin.Products[0].Amount = amount;
-            allin.Price.Amount = price;
+            allin.Price.Amount = amount * allin.Price.Amount;
             
             defs.Insert(index, allin);
             

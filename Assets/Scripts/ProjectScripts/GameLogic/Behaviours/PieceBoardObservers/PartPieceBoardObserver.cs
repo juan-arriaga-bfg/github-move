@@ -5,54 +5,56 @@ public class PartPieceBoardObserver : IECSComponent, IPieceBoardObserver
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
 
+    protected Piece contextPiece;
     private MatchActionBuilderComponent matchActionBuilder;
     
-    public void OnRegisterEntity(ECSEntity entity)
+    public virtual void OnRegisterEntity(ECSEntity entity)
     {
-        matchActionBuilder = (entity as Piece)?.Context.BoardLogic.MatchActionBuilder;
+        contextPiece = entity as Piece;
+        matchActionBuilder = contextPiece.Context.BoardLogic.MatchActionBuilder;
     }
 
     public void OnUnRegisterEntity(ECSEntity entity)
     {
     }
     
-    public void OnAddToBoard(BoardPosition position, Piece context = null)
+    public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        if(context == null) return;
-
-        int next;
-        var positions = new List<BoardPosition>();
-        
-        if(matchActionBuilder.CheckMatch(positions, context.PieceType, position, out next) == false) return;
-        
-        context.Context.PartPiecesLogic.Add(positions);
+        AddBubble(position, contextPiece.PieceType);
     }
 
-    public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
+    public void OnMovedFromToStart(BoardPosition from, BoardPosition to, Piece context = null)
     {
-        if(context == null) return;
-        
-        int next;
-        var positions = new List<BoardPosition>();
-
-        if (matchActionBuilder.CheckMatch(positions, context.PieceType, @from, out next) == false) return;
-        
-        context.Context.PartPiecesLogic.Remove(positions);
+        RemoveBubble(from);
     }
 
-    public void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
+    public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
-        if(context == null) return;
-        
-        int next;
-        var positions = new List<BoardPosition>();
-
-        if (matchActionBuilder.CheckMatch(positions, context.PieceType, to, out next) == false) return;
-        
-        context.Context.PartPiecesLogic.Add(positions);
+        AddBubble(to, contextPiece.PieceType);
     }
-
+    
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
+        RemoveBubble(position);
+    }
+
+    public virtual void AddBubble(BoardPosition position, int pieceType)
+    {
+        var positions = new List<BoardPosition>();
+
+        if (matchActionBuilder.CheckMatch(positions, pieceType, position, out _) == false) return;
+
+        while (positions.Count >= 4)
+        {
+            var pattern = positions.GetRange(0, 4);
+            
+            positions.RemoveRange(0, 4);
+            contextPiece.Context.PartPiecesLogic.Add(pattern);
+        }
+    }
+
+    private void RemoveBubble(BoardPosition position)
+    {
+        contextPiece.Context.PartPiecesLogic.Remove(position);
     }
 }

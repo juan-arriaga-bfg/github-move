@@ -1,18 +1,25 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
-public class MagicPieceView : PieceBoardElementView
+public class CrystalPieceView : PieceBoardElementView
 {   
     private readonly ViewAnimationUid AnimationId = new ViewAnimationUid();
+    
+    private CrystalPieceBoardObserver observer;
+    
+    public override void Init(BoardRenderer context, Piece piece)
+    {
+        base.Init(context, piece);
+        
+        observer = Piece.GetComponent<CrystalPieceBoardObserver>(CrystalPieceBoardObserver.ComponentGuid);
+    }
     
     protected override void OnEnable()
     {
         base.OnEnable();
         
         DOTween.Kill(AnimationId);
-       
     }
 
     private void OnDisable()
@@ -28,18 +35,16 @@ public class MagicPieceView : PieceBoardElementView
 
         NSAudioService.Current.Play(SoundId.CrystalDrag, true);
         
-        var board = Context.Context;        
-        bestMatchPieces = FindBestMatches(board);
+        bestMatchPieces = FindBestMatches(Context.Context);
+        
         foreach (var piece in bestMatchPieces)
         {
-            if(piece.PieceType == PieceType.Boost_CR.Id)
-                continue;
-  
-            var view = piece.ActorView;
-            if(view == null)
-                continue;
+            if (piece.PieceType == PieceType.Boost_CR.Id || piece.ActorView == null) continue;
             HighlightMatchable(piece.ActorView);
         }
+        
+        Piece.Context.BoardLogic.CellHints.OnDragStartBoost(Piece.CachedPosition);
+        Piece.Context.PartPiecesLogic.Remove(Piece.CachedPosition);
     }
 
     private void HighlightMatchable(PieceBoardElementView view)
@@ -87,10 +92,8 @@ public class MagicPieceView : PieceBoardElementView
             
             if (isMatchable != true || matchCheckedPositions.ContainsKey(piece.CachedPosition)) continue;
 
-            var canCreateMatch = false;
             var positions = new List<BoardPosition>();
-            
-            canCreateMatch = CheckMatch(board, Piece.CachedPosition, piece.CachedPosition, positions);
+            var canCreateMatch = CheckMatch(board, Piece.CachedPosition, piece.CachedPosition, positions);
 
             positions.Remove(Piece.CachedPosition);
 
@@ -107,12 +110,10 @@ public class MagicPieceView : PieceBoardElementView
             
             if (bestScore < score) bestScore = score;
             
-
             options.Add(new KeyValuePair<int, List<BoardPosition>>(score, positions));
         }
-        
-        
-        if(options.Count == 0) return currentBestPieces;
+
+        if (options.Count == 0) return currentBestPieces;
 
         options = options.FindAll(pair => pair.Key == bestScore);
         
@@ -154,11 +155,9 @@ public class MagicPieceView : PieceBoardElementView
         positions.Add(from);
         
         var logic = board.BoardLogic;
-		
-        int currentId;
-        int nextId;
-        var positionsFounded = FindPositions(to, positions, out currentId);
-        var validMatch = logic.MatchActionBuilder.CheckMatch(positions, currentId, to, out nextId);
+        var positionsFounded = FindPositions(to, positions, out var currentId);
+        var validMatch = logic.MatchActionBuilder.CheckMatch(positions, currentId, to, out _);
+        
         return positionsFounded && validMatch;
     }
 
@@ -185,17 +184,14 @@ public class MagicPieceView : PieceBoardElementView
     private bool IsValidPosition(BoardPosition position)
     {
         var logic = Context.Context.BoardLogic;
-        if (logic.IsLockedCell(position) == false)
-            return true;
+        
+        if (logic.IsLockedCell(position) == false) return true;
+        
         var boardCell = logic.BoardCells[position.X, position.Y, position.Z];
+        
         foreach (var locker in boardCell.Lockers)
         {
-            
-            if (locker is DragAndCheckMatchAction == false)
-            {
-                return false;
-            }
-                
+            if (locker is DragAndCheckMatchAction == false) return false;
         }
 
         return true;
@@ -203,23 +199,36 @@ public class MagicPieceView : PieceBoardElementView
 
     public override void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)
     {
+        Piece.Context.BoardLogic.CellHints.OnDragEnd();
+        
         base.OnDragEnd(boardPos, worldPos);
 
         NSAudioService.Current.Stop(SoundId.CrystalDrag);
         
+        EndBestMatch();
+        CheckPartPieceMatch(boardPos);
+    }
+
+    private void EndBestMatch()
+    {
         if(bestMatchPieces == null) return;
         
         foreach (var piece in bestMatchPieces)
         {
-            if(piece.PieceType == PieceType.Boost_CR.Id)
-                continue;
+            if(piece.PieceType == PieceType.Boost_CR.Id || piece.ActorView == null) continue;
             
-            var view = piece.ActorView;
-            if(view == null)
-                continue;
-            OffHighlightMatchable(view);
+            OffHighlightMatchable(piece.ActorView);
         }
 
         bestMatchPieces = null;
+    }
+
+    private void CheckPartPieceMatch(BoardPosition boardPos)
+    {
+        var position = new BoardPosition(boardPos.X, boardPos.Y, BoardLayer.Piece.Layer);
+
+        if (Piece.CachedPosition.Equals(position) == false) return;
+
+        observer?.AddBubble(position, Piece.PieceType);
     }
 }

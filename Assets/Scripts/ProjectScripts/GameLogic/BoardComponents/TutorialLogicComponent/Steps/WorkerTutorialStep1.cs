@@ -9,6 +9,11 @@ public class WorkerTutorialStep1 : BaseTutorialStep
         if (IsPerform) return;
         
         positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(PieceType.NPC_Gnome.Id);
+
+        if (positions.Count == 0 && ProfileService.Current.GetStorageItem(Currency.Worker.Name).Amount == 0)
+        {
+            CurrencyHelper.PurchaseAsync(Currency.Worker.Name, 2).Complete();
+        }
         
         base.Perform();
     }
