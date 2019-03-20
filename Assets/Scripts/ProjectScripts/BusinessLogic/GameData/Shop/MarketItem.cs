@@ -154,7 +154,6 @@ public class MarketItem
     
     private string GetRandomPiece(int min, int max)
     {
-        min -= 1;
         max -= 1;
         
         var board = BoardService.Current.FirstBoard;
