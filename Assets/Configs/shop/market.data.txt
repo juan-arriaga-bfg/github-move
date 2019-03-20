@@ -58,6 +58,16 @@
     "RandomType": "BasePiecesEasy"
   },
   {
+    "Uid": "Base normal",
+    "UnlockLevel": 7,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "Empty",
+      "Weight": 1
+    },
+    "RandomType": "BasePiecesEasy"
+  },
+  {
     "Uid": "Base Chests First",
     "UnlockLevel": 1,
     "Amount": 1,
@@ -167,7 +177,7 @@
     },
     "Price": {
       "Currency": "Coins",
-      "Amount": 80
+      "Amount": 55
     },
     "RandomType": "Ingredients"
   },
@@ -181,7 +191,7 @@
     },
     "Price": {
       "Currency": "Coins",
-      "Amount": 150
+      "Amount": 90
     },
     "RandomType": "Ingredients"
   },
