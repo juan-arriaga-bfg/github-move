@@ -1,7 +1,7 @@
 ﻿public class MakingBuildingPieceView : BuildingPieceView
 {
     private TimerComponent timer;
-    
+    private ParticleView cooldownParticles;
     public override void Init(BoardRenderer context, Piece piece)
     {
         base.Init(context, piece);
@@ -32,6 +32,27 @@
     {
         if(timer == null || bodySprites == null) return;
 
-        ToggleLockedState(timer.IsStarted);
+        ToggleCooldownState(timer.IsStarted);
+    }
+
+    private void ToggleCooldownState(bool isCooldown)
+    {
+        if (isLockVisual) return;
+        
+        if (isCooldown)
+        {
+            SetCustomMaterial(BoardElementMaterialType.PiecesLockedMaterial, true);
+            SaveCurrentMaterialAsDefault();
+            cooldownParticles?.DestroyOnBoard();
+            cooldownParticles = ParticleView.Show(R.MonumentCooldownParticle, Piece.CachedPosition);
+            cooldownParticles.transform.SetParentAndReset(transform);
+            cooldownParticles.SyncRendererLayers(Piece.CachedPosition.SetZ(BoardLayer.FX.Layer));
+        }
+        else
+        {
+            ClearCurrentMaterialAsDefault();
+            ResetDefaultMaterial();
+            cooldownParticles?.DestroyOnBoard();
+        }
     }
 }

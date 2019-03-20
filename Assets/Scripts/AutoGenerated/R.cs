@@ -444,4 +444,5 @@ public class R
      public const string MiningParticles = "MiningParticles";
      public const string MN_FPiece = "MN_FPiece";
      public const string MN_HPiece = "MN_HPiece";
+     public const string MonumentCooldownParticle = "MonumentCooldownParticle";
 }
