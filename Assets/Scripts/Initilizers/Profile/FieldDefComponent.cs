@@ -2,6 +2,30 @@
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
+public interface IFieldDefComponent
+{
+    FieldDefComponent FieldDef { get; }
+}
+
+public partial class UserProfile : IFieldDefComponent
+{
+    protected FieldDefComponent fieldDefComponent;
+
+    [JsonIgnore]
+    public FieldDefComponent FieldDef
+    {
+        get
+        {
+            if (fieldDefComponent == null)
+            {
+                fieldDefComponent = GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+            }
+
+            return fieldDefComponent;
+        }
+    }
+}
+
 [JsonObject(MemberSerialization.OptIn)]
 public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 {
