@@ -564,11 +564,6 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         {
             DailyQuestCompletedCount++;
         }
-        
-        if (quest == DailyQuest && task.IsClaimed())
-        {
-            ProfileService.Instance.Manager.UploadCurrentProfile();
-        }
     }
 
     public bool IsQuestDefined(string id)
