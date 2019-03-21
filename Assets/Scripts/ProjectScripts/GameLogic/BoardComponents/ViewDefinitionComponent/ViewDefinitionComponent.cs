@@ -38,6 +38,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         if(isSwap == !isEnd) return;
 
         isSwap = !isEnd;
+        isDrag = false;
         
         foreach (var view in views.Values)
         {
