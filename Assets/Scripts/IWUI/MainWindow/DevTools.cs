@@ -239,7 +239,7 @@ public class DevTools : UIContainerElementViewController
         //var quest = GameDataService.Current.QuestsManager.StartQuestById("Daily", null);
 
         new HighlightTaskPointToOrdersButton().Highlight(null);
-        new HighlightTaskPointToShopButton().Highlight(null);
+        new HighlightTaskPointToMarketButton().Highlight(null);
         new HighlightTaskPointToEnergyPlusButton().Highlight(null);
     }
 

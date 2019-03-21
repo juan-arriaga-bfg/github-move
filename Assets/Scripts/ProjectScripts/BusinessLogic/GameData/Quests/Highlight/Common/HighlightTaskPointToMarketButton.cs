@@ -1,4 +1,4 @@
-public class HighlightTaskPointToShopButton : TaskHighlightUsingArrow
+public class HighlightTaskPointToMarketButton : TaskHighlightUsingArrow
 {
     protected override bool ShowArrow(TaskEntity task, float delay)
     {

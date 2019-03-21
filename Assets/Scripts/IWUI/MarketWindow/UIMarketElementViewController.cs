@@ -202,6 +202,8 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 					if (success)
 					{
 						ProfileService.Instance.Manager.UploadCurrentProfile();
+						
+                        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.PurchaseInMarket, contentEntity.Def);
 					}
 				});
 			
@@ -224,6 +226,8 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			contentEntity.Def.State = MarketItemState.Purchased;
 			NSAudioService.Current.Play(SoundId.BuyMarket);
 			AddReward();
+			
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.PurchaseInMarket, contentEntity.Def);
 		});
 	}
 
