@@ -21,28 +21,42 @@ public class DevTools : UIContainerElementViewController
     [IWUIBinding("#TutorialToggle")] private Toggle tutorialToggle;
     [IWUIBinding("#RemoverToggle")] private Toggle removerToggle;
 
+    [IWUIBinding("#CommonButtons")] private GameObject commonPanel;
+    [IWUIBinding("#ExtendedButtons")] private GameObject extendedPanel;
+
 #if !UNITY_EDITOR
     private static bool isQuestDialogsDisabled = true;
     private static bool isTutorialDisabled = true;
     private static bool isRemoverDebugDisabled = true;
 #endif
+    private bool isEnabled = false;
     
     public override void OnViewInit(IWUIWindowView context)
     {
         base.OnViewInit(context);
         
-        panel.SetActive(false);
+        panel.SetActive(isEnabled);
         
         questDialogsToggle.isOn = IsQuestDialogsEnabled();
         tutorialToggle.isOn = IsTutorialEnabled();
         removerToggle.isOn = IsRemoverDebugEnabled();
         
         UpdateFpsMeter();
+        
+        commonPanel?.SetActive(true);
+        extendedPanel?.SetActive(false);
     }
     
     public void OnToggleValueChanged(bool isChecked)
     {
-        panel.SetActive(!isChecked);
+        isEnabled = !isChecked;
+        panel.SetActive(isEnabled);
+    }
+
+    public void OnExtendValueChanged(bool isChecked)
+    {
+        commonPanel?.SetActive(isChecked);
+        extendedPanel?.SetActive(!isChecked);
     }
     
     public void OnProfilesClick()
@@ -290,8 +304,30 @@ public class DevTools : UIContainerElementViewController
 
     public void OnAddExpClick()
     {
-        int exp = Input.GetKey(KeyCode.LeftShift) ? 100 : 1000;
-        CurrencyHelper.Purchase(Currency.Experience.Name, exp);
+        var currentExperience = ProfileService.Current.Purchases.GetStorageItem(Currency.Experience.Name).Amount;
+        var priceExperience = GameDataService.Current.LevelsManager.Price;
+        var currentLevel = GameDataService.Current.LevelsManager.Level;
+        var levelDefs = GameDataService.Current.LevelsManager.Levels;
+        
+        if (levelDefs.Count == currentLevel)
+        {
+            UIErrorWindowController.AddError("Reached max level");
+            return;
+        }
+        
+        if (priceExperience - currentExperience == 1)
+        {
+            priceExperience = levelDefs[currentLevel].Price.Amount + priceExperience;
+        }
+
+        int expDiff = priceExperience - currentExperience - 1;
+
+        if (expDiff < 0)
+        {
+            return;
+        }
+        
+        CurrencyHelper.Purchase(Currency.Experience.Name, expDiff);
     }
 
     /// <summary>
