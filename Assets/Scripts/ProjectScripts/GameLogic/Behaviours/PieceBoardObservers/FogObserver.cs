@@ -40,7 +40,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
         if (Def == null) return;
         
-        var save = ProfileService.Current.GetComponent<FogSaveComponent>(FogSaveComponent.ComponentGuid)?.GetRewardsSave(Key);
+        var save = ProfileService.Current.GetComponent<FogSaveComponent>(FogSaveComponent.ComponentGuid)?.GetRewardsSave(Def.Uid);
 
         AlreadyPaid = new CurrencyPair {Currency = Def.Condition.Currency, Amount = save?.AlreadyPaid ?? 0};
         

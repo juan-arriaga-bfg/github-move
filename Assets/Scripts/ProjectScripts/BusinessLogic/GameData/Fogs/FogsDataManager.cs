@@ -59,19 +59,19 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
                 Fogs = data.Fogs;
 
                 var save = ((GameDataManager)context).UserProfile.GetComponent<FogSaveComponent>(FogSaveComponent.ComponentGuid);
-                var completeFogPositions = save?.CompleteFogPositions ?? new List<BoardPosition>();
+                var completeFogIds = save?.CompleteFogIds ?? new List<string>();
                 
-                BoardPosition lastCompleteFogPosition = BoardPosition.Default();
-                if (completeFogPositions.Count > 0)
+                string lastCompleteFogUid = "";
+                if (completeFogIds.Count > 0)
                 {
-                    lastCompleteFogPosition = completeFogPositions[completeFogPositions.Count - 1];
+                    lastCompleteFogUid = completeFogIds[completeFogIds.Count - 1];
                 }
                 
                 foreach (var def in data.Fogs)
                 {
                     var pos = def.GetCenter();
                     
-                    if (completeFogPositions.Contains(pos))
+                    if (completeFogIds.Contains(def.Uid))
                     {
                         ClearedFogPositions.Add(pos, def);
                     }
@@ -80,7 +80,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
                         VisibleFogPositions.Add(pos, def);
                     }
 
-                    if (pos.Equals(lastCompleteFogPosition))
+                    if (def.Uid == lastCompleteFogUid)
                     {
                         LastOpenFog = def;
                     }
