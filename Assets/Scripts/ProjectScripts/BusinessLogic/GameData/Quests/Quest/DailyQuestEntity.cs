@@ -17,6 +17,27 @@ public class DailyQuestEntity : QuestEntity
 
     // Set this to prevent QuestManager from replacing this instance on timer completion
     [JsonIgnore] public bool Immortal;
+
+    private TaskCompleteDailyTaskEntity allClearTask;
+
+    private TaskCompleteDailyTaskEntity GetAllClearTask()
+    {
+        if (allClearTask != null)
+        {
+            return allClearTask;
+        }
+
+        foreach (var task in Tasks)
+        {
+            if (task is TaskCompleteDailyTaskEntity clearTask)
+            {
+                allClearTask = clearTask;
+                break;
+            }
+        }
+
+        return allClearTask;
+    }
     
     protected override void SelectActiveTasks()
     {
@@ -31,7 +52,7 @@ public class DailyQuestEntity : QuestEntity
             return;
         }
 
-        TaskCompleteDailyTaskEntity allClearTask = null;
+        var clearTask = GetAllClearTask();
         
         // Sort tasks by groups
         Dictionary<TaskGroup,List<TaskEntity>> tasksDict = new Dictionary<TaskGroup, List<TaskEntity>>();
@@ -47,8 +68,8 @@ public class DailyQuestEntity : QuestEntity
             List<TaskEntity> tasks;
             if (!tasksDict.TryGetValue(task.Group, out tasks))
             {
-                allClearTask = task as TaskCompleteDailyTaskEntity;
-                if (allClearTask != null)
+                clearTask = task as TaskCompleteDailyTaskEntity;
+                if (clearTask != null)
                 {
                     continue;
                 }
@@ -80,10 +101,10 @@ public class DailyQuestEntity : QuestEntity
             }
         }
 
-        if (allClearTask != null)
+        if (clearTask != null)
         {
-            allClearTask.SetTarget(ActiveTasks.Count);
-            ActiveTasks.Add(allClearTask);
+            clearTask.SetTarget(ActiveTasks.Count);
+            ActiveTasks.Add(clearTask);
         }
         else
         {
@@ -173,5 +194,12 @@ public class DailyQuestEntity : QuestEntity
         }
 
         return true;
+    }
+
+    public override void ForceCheckActiveTasks()
+    {
+        base.ForceCheckActiveTasks();
+        
+        GetAllClearTask().CalculateCurrentValue();
     }
 }

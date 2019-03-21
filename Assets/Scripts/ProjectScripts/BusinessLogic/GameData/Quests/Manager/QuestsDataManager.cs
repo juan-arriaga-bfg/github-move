@@ -126,18 +126,30 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
             return;
         }
 
+
+        List<QuestEntity> startedQuests = new List<QuestEntity>();
         foreach (var activeQuest in questSave.ActiveQuests)
         {
             JToken saveData  = activeQuest.Data; 
             JToken questNode = saveData["Quest"];
             string id        = questNode["Id"].Value<string>();
         
-            StartQuestById(id, saveData);
+            var quest = StartQuestById(id, saveData);
+            if (quest != null)
+            {
+                startedQuests.Add(quest);
+            }
         }
 
         if (DailyQuest != null)
         {
             StartDailyTimer(DateTimeExtension.UnixTimeToDateTime(questSave.DailyTimerStart));
+        }
+
+        // Handle migration - case when target is changed
+        foreach (var quest in startedQuests)
+        {
+            quest.ForceCheckActiveTasks();
         }
     }
 
@@ -303,6 +315,11 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
             }
         }
 
+        if (DailyQuest != null)
+        {
+            LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
+        }
+        
         ConnectedToBoard = true;
     }
 
@@ -318,6 +335,11 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         foreach (var quest in ActiveQuests)
         {
             quest.DisconnectFromBoard();
+        }
+        
+        if (DailyQuest != null)
+        {
+            LocalNotificationsService.Current.UnRegisterNotifier(DailyTimer);
         }
     }
     
@@ -594,18 +616,18 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     }
 
     private void StartDailyTimer(DateTime startTime)
-    {    
-        Debug.Log($"[QuestsDataManager] => StartDailyTimer: startTime: {startTime}, delay: {DAILY_TIMER_DELAY}");
-
+    {   
         StopDailyTimer();
         
+        Debug.Log($"[QuestsDataManager] => StartDailyTimer: startTime: {startTime}, delay: {DAILY_TIMER_DELAY}");
+
         DailyTimer = new TimerComponent
         {
             UseUTC = false,
             Delay = DAILY_TIMER_DELAY,
             Tag = "daily"
         };
-        LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
+        
         DailyTimer.OnComplete += OnCompleteDailyTimer;
                                                                                                                 
         RegisterComponent(DailyTimer);
@@ -625,7 +647,9 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         
         DailyTimer.OnComplete -= OnCompleteDailyTimer;
         DailyTimer.Stop();
+        
         LocalNotificationsService.Current.UnRegisterNotifier(DailyTimer);
+        
         DailyTimer = null;        
     }
 

@@ -281,6 +281,9 @@ public class UIMainWindowView : UIBaseWindowView
         {
 #if UNITY_EDITOR
             GameDataService.Current.QuestsManager.StartNewDailyQuest();
+            var btn = FindObjectOfType<DailyQuestButton>();
+            btn.gameObject.SetActive(false);
+            btn.gameObject.SetActive(true);
 #else
             return;
 #endif

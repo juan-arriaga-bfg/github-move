@@ -2,6 +2,7 @@ using Debug = IW.Logger;
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Quests;
 using UnityEngine;
 
@@ -90,7 +91,10 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     /// </summary>
     public Action<TaskEntity> OnChanged;
 
-    protected abstract bool Check();
+    /// <summary>
+    /// WARNING! Do not call until ALL quests and tasks are loaded
+    /// </summary>
+    public abstract bool Check();
 
     /// <summary>
     /// Until we call this, Task will not react to any events in the game 
@@ -246,5 +250,10 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     {
         DisconnectFromBoard();
         OnChanged = null;
+    }
+
+    public void Load(JToken data)
+    {
+        data.PopulateObject(this);
     }
 }
