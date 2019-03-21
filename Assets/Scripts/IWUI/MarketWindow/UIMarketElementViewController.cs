@@ -21,6 +21,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	
 	[IWUIBinding("#Unlock")] private GameObject unlockObj;
 	[IWUIBinding("#Lock")] private GameObject lockObj;
+	[IWUIBinding("#Permanent")] private GameObject permanentBack;
 	
 	private bool isClick;
 	private bool isReward;
@@ -46,6 +47,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		unlockObj.SetActive(!isLock);
 		lockObj.SetActive(isLock);
+		permanentBack.SetActive(isLock == false && contentEntity.Def.Current.IsPermanent);
 		
 		if (isLock)
 		{
