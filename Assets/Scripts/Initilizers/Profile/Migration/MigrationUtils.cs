@@ -56,12 +56,11 @@ public static class MigrationUtils
                 if (profile.CodexSave.Data.ContainsKey(fromId))
                 {
                     var codexChainState = profile.CodexSave.Data[fromId];
-                    ReplaceCodexChainStateFromTo(codexChainState, fromId, toId);
+                    ReplaceCodexChainStateFromTo(codexChainState, new Dictionary<int, int>(fromToDef));
 
                     profile.CodexSave.Data.Remove(fromId);
                     profile.CodexSave.Data.Add(toId, codexChainState);
                 }
-                
             }
         }
 
@@ -87,22 +86,28 @@ public static class MigrationUtils
         }
     }
 
-    public static void ReplaceCodexChainStateFromTo(CodexChainState codexChainState, int fromId, int toId)
+    public static void ReplaceCodexChainStateFromTo(CodexChainState codexChainState, Dictionary<int, int> fromToDef)
     {
-        if (codexChainState.Unlocked.Contains(fromId))
+        foreach (var fromToDefPair in fromToDef)
         {
-            codexChainState.Unlocked.Remove(fromId);
-            codexChainState.Unlocked.Add(toId);
+            var fromId = fromToDefPair.Key;
+            var toId = fromToDefPair.Value;
             
-            Debug.LogWarning(string.Format("[MigrationUtils]: replaced PieceType.ID in CodexChainState.Unlocked {0} => {1}", fromId, toId));
-        }
-        
-        if (codexChainState.PendingReward.Contains(fromId))
-        {
-            codexChainState.PendingReward.Remove(fromId);
-            codexChainState.PendingReward.Add(toId);
-            
-            Debug.LogWarning(string.Format("[MigrationUtils]: replaced PieceType.ID in CodexChainState.PendingReward {0} => {1}", fromId, toId));
+            if (codexChainState.Unlocked.Contains(fromId))
+            {
+                codexChainState.Unlocked.Remove(fromId);
+                codexChainState.Unlocked.Add(toId);
+
+                Debug.LogWarning(string.Format("[MigrationUtils]: replaced PieceType.ID in CodexChainState.Unlocked {0} => {1}", fromId, toId));
+            }
+
+            if (codexChainState.PendingReward.Contains(fromId))
+            {
+                codexChainState.PendingReward.Remove(fromId);
+                codexChainState.PendingReward.Add(toId);
+
+                Debug.LogWarning(string.Format("[MigrationUtils]: replaced PieceType.ID in CodexChainState.PendingReward {0} => {1}", fromId, toId));
+            }
         }
     }
 
