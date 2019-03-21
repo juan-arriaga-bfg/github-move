@@ -39,7 +39,7 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
         targetEntity = entity as UIProfileCheatSheetElementEntity;
         slotData = targetEntity.SlotData;
         profile = slotData.Profile;
-        userProfile = profile.CurrentProfile;
+        userProfile = profile?.CurrentProfile;
         
         InitButtons();
         
@@ -117,7 +117,7 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
     {
         GameDataManager dm = null;
 
-        bool isLoadedCorrectly = string.IsNullOrEmpty(slotData.Error);
+        bool isLoadedCorrectly = string.IsNullOrEmpty(slotData.Error) && userProfile != null;
 
         if (isLoadedCorrectly)
         {
@@ -144,7 +144,7 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
             return;
         }
 
-        lblRev.Text = $"Rev {userProfile.Version.ToString()} '{Colorize(slotData.SlotPath, COLOR_YELLOW)}'";
+        lblRev.Text = $"v{userProfile.SystemVersion.ToString()} r{userProfile.Version.ToString()} '{Colorize(slotData.SlotPath, COLOR_YELLOW)}'";
         if (slotData.SlotPath == ProfileSlots.DEFAULT_SLOT_PATH)
         {
             lblRev.Text += $" {Colorize("[Default]", COLOR_WHITE)}";

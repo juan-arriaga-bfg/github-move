@@ -56,17 +56,27 @@ public class UIProfileCheatSheetWindowModel : IWWindowModel
 
     private void Load(string path, Action<UIProfileCheatSheetSlotData> onComplete)
     {
-        ProfileSlots.Load(path, (manager, dataExistsOnPath, error) =>
+        UIProfileCheatSheetSlotData data = new UIProfileCheatSheetSlotData();
+        data.SlotIndex = 0;
+        data.SlotPath = path;
+        data.IsDefault = false;
+
+        try
         {
-            UIProfileCheatSheetSlotData data = new UIProfileCheatSheetSlotData();
-            data.SlotIndex = 0;
-            data.Profile = manager;
-            data.SlotPath = path;
-            data.IsDefault = false;
-            data.Error = error;
-            
+            ProfileSlots.Load(path, (manager, dataExistsOnPath, error) =>
+            {
+                data.Profile = manager;
+                data.Error = error;
+                onComplete(data);
+            });
+        }
+        catch (Exception e)
+        {
+            data.Error = e.Message;
+            Debug.LogError($"ProfileSlots.Load: Exception: {e.Message}\n{e.StackTrace}");
             onComplete(data);
-        });
+        }
+
     }
 
     public static string GetFreeSlotPath()
