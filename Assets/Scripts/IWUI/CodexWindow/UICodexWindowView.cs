@@ -210,6 +210,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
                             contentToggles.Select(tabIndex);
                             codexTabs[tabIndex].ScrollToTop();
                             codexTabs[tabIndex].SelectItem.SetItem(itemDef.PieceDef, itemDef.State);
+                            codexTabs[tabIndex].SelectCodexItem(codexTabs[tabIndex].GetCodexItemByDef(itemDef));
                             return;
                         }
                         

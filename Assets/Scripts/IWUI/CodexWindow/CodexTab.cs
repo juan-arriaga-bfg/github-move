@@ -27,6 +27,20 @@ public class CodexTab : IWUIWindowViewController
     {
         return codexChains;
     }
+
+    public virtual void SelectCodexItem(CodexItem selectedItem)
+    {
+        var codexChains = GetChains();
+        for (int i = 0; i < codexChains.Count; i++)
+        {
+            var codexChain = codexChains[i];
+            for (int j = 0; j < codexChain.codexItems.Count; j++)
+            {
+                var codexItem = codexChain.codexItems[j];
+                codexItem.OnSelect(selectedItem);
+            }
+        }
+    }
     
     public void Init(CodexTabDef def)
     {
@@ -71,6 +85,26 @@ public class CodexTab : IWUIWindowViewController
         var def = defData.ChainDefs[0].ItemDefs[0];
         
         SelectItem.SetItem(def.State > CodexItemState.PendingReward ? def.PieceDef : null, def.State);
+        SelectCodexItem(GetCodexItemByDef(def));
+    }
+
+    public CodexItem GetCodexItemByDef(CodexItemDef def)
+    {
+        var codexChains = GetChains();
+        for (int i = 0; i < codexChains.Count; i++)
+        {
+            var codexChain = codexChains[i];
+            for (int j = 0; j < codexChain.codexItems.Count; j++)
+            {
+                var codexItem = codexChain.codexItems[j];
+                if (codexItem.Def == def)
+                {
+                    return codexItem;
+                }
+            }
+        }
+
+        return null;
     }
     
     public void ScrollToBottom()

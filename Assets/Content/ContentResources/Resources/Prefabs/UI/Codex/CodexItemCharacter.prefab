@@ -4906,7 +4906,7 @@ ParticleSystem:
 --- !u!199 &199430910472662568
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -5019,6 +5019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlokedMaterial: {fileID: 0}
   lockedMaterial: {fileID: 2100000, guid: 663a56ae543401d419dcc60b1ed229ec, type: 2}
+  selectedMaterial: {fileID: 2100000, guid: cf40779c19e8e45c98dde7968db64796, type: 2}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   lockedColor: {r: 1, g: 1, b: 1, a: 0.49803922}
   defaultScale: {x: 1, y: 1, z: 1}
@@ -9911,7 +9912,7 @@ ParticleSystem:
 --- !u!199 &199344049172889652
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -10130,7 +10131,7 @@ GameObject:
   - component: {fileID: 222633067846044070}
   - component: {fileID: 114863145047466010}
   m_Layer: 31
-  m_Name: Back
+  m_Name: '#RoundBack'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
