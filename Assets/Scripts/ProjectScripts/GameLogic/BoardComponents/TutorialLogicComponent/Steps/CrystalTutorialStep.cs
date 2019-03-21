@@ -81,9 +81,13 @@ public class CrystalTutorialStep : LoopFingerTutorialStep
 
         Context.UnlockCells(posCrystals);
         Context.UnlockCells(posTargets);
-
+        
         from = posCrystals[0];
         to = posTargets[0];
+        
+        posCrystals.AddRange(posTargets);
+        
+        Context.FadeAll(0.5f, posCrystals);
     }
 
     protected override void Complete()
