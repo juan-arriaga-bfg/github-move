@@ -4,8 +4,10 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
 {
     [IWUIBinding("#FreeLabel")] private NSText freeLabel;
     [IWUIBinding("#TimerLabel")] private NSText timerLabel;
+    [IWUIBinding("#ExtraLabel")] private NSText extraLabel;
 	
     [IWUIBinding("#Free")] private GameObject freeObj;
+    [IWUIBinding("#Extra")] private GameObject extraObj;
     [IWUIBinding("#Free")] private CanvasGroup freeCanvas;
     
     private bool isFree;
@@ -20,7 +22,10 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
 	    base.Init();
 	    
 	    freeLabel.Text = LocalizationService.Get("common.button.free", "common.button.free");
+	    extraLabel.Text = contentEntity.ExtraLabel;
+	    
 	    freeObj.SetActive(isFree);
+	    extraObj.SetActive(string.IsNullOrEmpty(contentEntity.ExtraLabel) == false);
 
 	    if (isFree == false) return;
 	    
