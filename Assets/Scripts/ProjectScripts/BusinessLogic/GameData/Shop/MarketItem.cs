@@ -106,10 +106,10 @@ public class MarketItem
         switch (def.RandomType)
         {
             case MarketRandomType.BasePiecesEasy:
-                piece = GetRandomPiece(3, 4);
+                piece = GetRandomPiece(2, 4);
                 break;
             case MarketRandomType.BasePiecesHard:
-                piece = GetRandomPiece(4, 6);
+                piece = GetRandomPiece(5, 6);
                 break;
             case MarketRandomType.Ingredients:
                 piece = GetRandomIngredient();
