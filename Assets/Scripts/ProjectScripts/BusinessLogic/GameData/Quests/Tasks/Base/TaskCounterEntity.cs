@@ -105,8 +105,8 @@ public abstract class TaskCounterEntity : TaskEntity
 
         return result;
     }
-    
-    protected override bool Check()
+
+    public override bool Check()
     {       
         if (IsCompletedOrClaimed())
         {

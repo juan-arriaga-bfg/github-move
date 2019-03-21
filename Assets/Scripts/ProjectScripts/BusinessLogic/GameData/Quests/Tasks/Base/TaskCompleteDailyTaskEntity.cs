@@ -34,8 +34,14 @@ public class TaskCompleteDailyTaskEntity : TaskCounterEntity
             return;
         }
 
+        CalculateCurrentValue();
+    }
+
+    public void CalculateCurrentValue()
+    {
+        var questManager = GameDataService.Current.QuestsManager;
         var activeTasks = questManager.DailyQuest.ActiveTasks;
-        
+
         int current = CurrentValue;
         int completedCount = 0;
         foreach (var taskEntity in activeTasks)

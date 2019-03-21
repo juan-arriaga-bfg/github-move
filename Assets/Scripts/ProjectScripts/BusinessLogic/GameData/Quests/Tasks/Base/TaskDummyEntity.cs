@@ -9,7 +9,7 @@ public class TaskDummyEntity : TaskEntity
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    protected override bool Check()
+    public override bool Check()
     {
         return false;
     }

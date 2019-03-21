@@ -91,7 +91,10 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     /// </summary>
     public Action<TaskEntity> OnChanged;
 
-    protected abstract bool Check();
+    /// <summary>
+    /// WARNING! Do not call until ALL quests and tasks are loaded
+    /// </summary>
+    public abstract bool Check();
 
     /// <summary>
     /// Until we call this, Task will not react to any events in the game 
@@ -252,10 +255,5 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     public void Load(JToken data)
     {
         data.PopulateObject(this);
-        
-        if (Check())
-        {
-            OnChanged?.Invoke(this);
-        }
     }
 }

@@ -83,17 +83,23 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
 
     public void UnRegisterNotifier(Notifier notifier)
     {
-        Debug.Log($"[LocalNotificationService] => UnRegister(NotifyType.Id:{notifier.NotifyType.Id})");
+        Debug.Log($"[LocalNotificationService] => UnRegisterNotifier(NotifyType.Id:{notifier.NotifyType.Id})");
         notifiers.Remove(notifier);
     }
 
     public void UnRegisterNotifier(TimerComponent timer)
     {
+        if (timer == null)
+        {
+            Debug.LogWarning($"[LocalNotificationService] => UnRegisterNotifier: timer == null");
+            return;
+        }
+        
         foreach (var notifier in notifiers)
         {
             if (notifier.Timer == timer)
             {
-                Debug.Log($"[LocalNotificationService] => UnRegister(NotifyType.Id:{notifier.NotifyType.Id})");
+                Debug.Log($"[LocalNotificationService] => UnRegisterNotifier(NotifyType.Id:{notifier.NotifyType.Id})");
                 notifiers.Remove(notifier);
                 return;
             }

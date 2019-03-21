@@ -109,8 +109,6 @@ public class QuestEntity : ECSEntity, IECSSerializeable
             
             tasksLoadedFromSave.Add(task);
         }
-        
-        UpdateState();
     }
     
 #endregion
@@ -155,6 +153,17 @@ public class QuestEntity : ECSEntity, IECSSerializeable
             {
                 State = TaskState.Completed;
             }
+        }
+    }
+
+    /// <summary>
+    /// Recheck state of all task to handle target change due to migration
+    /// </summary>
+    public virtual void ForceCheckActiveTasks()
+    {
+        foreach (var task in ActiveTasks)
+        {
+            task.Check();
         }
     }
     
