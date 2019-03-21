@@ -29,12 +29,13 @@ public class DevTools : UIContainerElementViewController
     private static bool isTutorialDisabled = true;
     private static bool isRemoverDebugDisabled = true;
 #endif
+    private bool isEnabled = false;
     
     public override void OnViewInit(IWUIWindowView context)
     {
         base.OnViewInit(context);
         
-        panel.SetActive(false);
+        panel.SetActive(isEnabled);
         
         questDialogsToggle.isOn = IsQuestDialogsEnabled();
         tutorialToggle.isOn = IsTutorialEnabled();
@@ -48,7 +49,8 @@ public class DevTools : UIContainerElementViewController
     
     public void OnToggleValueChanged(bool isChecked)
     {
-        panel.SetActive(!isChecked);
+        isEnabled = !isChecked;
+        panel.SetActive(isEnabled);
     }
 
     public void OnExtendValueChanged(bool isChecked)
