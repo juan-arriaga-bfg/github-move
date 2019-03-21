@@ -700,7 +700,8 @@
     "Id": 57,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "63_CreatePiece_E6"
+      "63_CreatePiece_E6",
+      "123_CreatePiece_E3"
     ],
     "Conditions": [
       {
@@ -1290,13 +1291,170 @@
     "Id": 101,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "112_HitTree"
+      "112_HitTree",
+      "113_OpenChest"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
         "Id": "QuestCompleted",
         "Value": "111_CreatePiece_B5"
+      }
+    ]
+  },
+  {
+    "Id": 102,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "114_UseMine",
+      "115_CreatePiece"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "113_OpenChest"
+      }
+    ]
+  },
+  {
+    "Id": 103,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "116_CreatePiece"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "55_CreatePiece_D3"
+      }
+    ]
+  },
+  {
+    "Id": 104,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "117_HitTree"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "115_CreatePiece"
+      }
+    ]
+  },
+  {
+    "Id": 105,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "118_CreatePiece"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "117_HitTree"
+      }
+    ]
+  },
+  {
+    "Id": 106,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "119_OpenChest",
+      "120_CollectIngredient"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "118_CreatePiece"
+      }
+    ]
+  },
+  {
+    "Id": 107,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "121_KillField"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "116_CreatePiece"
+      }
+    ]
+  },
+  {
+    "Id": 108,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "122_CreatePiece_B3"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "120_CollectIngredient"
+      }
+    ]
+  },
+  {
+    "Id": 109,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "126_CreatePiece"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "123_CreatePiece_E3"
+      }
+    ]
+  },
+  {
+    "Id": 110,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "124_UseMine"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "126_CreatePiece"
+      }
+    ]
+  },
+  {
+    "Id": 111,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "125_OpenChest"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "124_UseMine"
+      }
+    ]
+  },
+  {
+    "Id": 112,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "127_UseWorker"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "125_OpenChest"
       }
     ]
   }

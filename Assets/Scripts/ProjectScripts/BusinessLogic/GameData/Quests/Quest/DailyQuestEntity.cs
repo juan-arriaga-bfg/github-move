@@ -9,8 +9,8 @@ public class DailyQuestEntity : QuestEntity
 {   
     private readonly Dictionary<TaskGroup, int> tasksCount = new Dictionary<TaskGroup, int>
     {
-        {TaskGroup.Permanent, 2},
-        {TaskGroup.Easy,      2},
+        {TaskGroup.Permanent, 3},
+        {TaskGroup.Easy,      1},
         {TaskGroup.Normal,    2},
         {TaskGroup.Hard,      1},
     };
