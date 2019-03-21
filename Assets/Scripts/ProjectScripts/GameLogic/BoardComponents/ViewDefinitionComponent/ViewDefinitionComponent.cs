@@ -100,14 +100,14 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
     {
-        
+        Position = to;
     }
 
     public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
         var f = from;
-        var t = Position = to;
-        
+        var t = to;
+                
         if (container != null)
         {
             f.Z = t.Z = BoardLayer.UI.Layer;
@@ -190,13 +190,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     public UIBoardView GetView(ViewType viewType)
     {
-        UIBoardView targetView = null;
-        if (views.TryGetValue(viewType, out targetView))
-        {
-            return targetView;
-        }
-
-        return null;
+        return views.TryGetValue(viewType, out var targetView) ? targetView : null;
     }
 
     public List<UIBoardView> GetViews()
