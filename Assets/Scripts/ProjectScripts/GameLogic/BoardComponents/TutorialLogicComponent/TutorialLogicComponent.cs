@@ -209,8 +209,8 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             if (pieceEntity == null || pieceEntity.PieceType == PieceType.Fog.Id) continue;
                 
             var pieceView = Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
-            
-            pieceEntity.ViewDefinition?.OnDrag(alpha >= 1);
+
+            if (pieceEntity.ViewDefinition != null) pieceEntity.ViewDefinition.Visible = alpha >= 1;
             
             if (pieceView != null) pieceView.SetFade(alpha, 1f);
         }

@@ -16,7 +16,6 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     private Piece thisContext;
     
-    private const int Layer = 10;
     private bool isDrag;
     private bool isSwap;
 
@@ -31,6 +30,15 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     public void OnUnRegisterEntity(ECSEntity entity)
     {
         OnRemoveFromBoard(Position, thisContext);
+    }
+
+    public bool Visible
+    {
+        get => container != null && container.GetCanvasGroup().alpha > 0;
+        set
+        {
+            if (container != null) container.GetCanvasGroup().alpha = value ? 1 : 0;
+        }
     }
 
     public void OnSwap(bool isEnd)
