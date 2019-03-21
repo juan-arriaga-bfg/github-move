@@ -63,12 +63,22 @@
   {
     "Uid": 5,
     "UnlockLevel": 7,
-    "Amount": 1,
+    "Amount": 3,
     "Weight": {
       "Uid": "Empty",
       "Weight": 1
     },
     "RandomType": "BasePiecesEasy"
+  },
+  {
+    "Uid": 15,
+    "UnlockLevel": 10,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "Empty",
+      "Weight": 1
+    },
+    "RandomType": "BasePiecesHard"
   },
   {
     "Uid": 6,
@@ -102,7 +112,7 @@
   },
   {
     "Uid": 9,
-    "UnlockLevel": 4,
+    "UnlockLevel": 1,
     "Amount": 2,
     "Weight": {
       "Uid": "SK2_PR",
@@ -116,7 +126,7 @@
   },
   {
     "Uid": 9,
-    "UnlockLevel": 4,
+    "UnlockLevel": 1,
     "Amount": 2,
     "Weight": {
       "Uid": "SK3_PR",
@@ -169,6 +179,30 @@
       "Amount": 449
     },
     "RandomType": "Base"
+  },
+  {
+    "Uid": 17,
+    "UnlockLevel": 1,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "CH_Free",
+      "Weight": 1
+    },
+    "RandomType": "Base"
+  },
+  {
+    "Uid": 16,
+    "UnlockLevel": 1,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "CH_NPC",
+      "Weight": 1
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 75
+    },
+    "RandomType": "NPCChests"
   },
   {
     "Uid": 12,
@@ -251,40 +285,6 @@
     "Price": {
       "Currency": "Crystals",
       "Amount": 35
-    },
-    "RandomType": "Base"
-  },
-  {
-    "Uid": 15,
-    "UnlockLevel": 10,
-    "Amount": 1,
-    "Weight": {
-      "Uid": "Empty",
-      "Weight": 1
-    },
-    "RandomType": "BasePiecesHard"
-  },
-  {
-    "Uid": 16,
-    "UnlockLevel": 1,
-    "Amount": 1,
-    "Weight": {
-      "Uid": "CH_NPC",
-      "Weight": 1
-    },
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 75
-    },
-    "RandomType": "NPCChests"
-  },
-  {
-    "Uid": 17,
-    "UnlockLevel": 1,
-    "Amount": 1,
-    "Weight": {
-      "Uid": "CH_Free",
-      "Weight": 1
     },
     "RandomType": "Base"
   }
