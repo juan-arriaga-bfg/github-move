@@ -49,6 +49,9 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         ToggleComebackPanel(isQuestClaimed);
 
+        // Refresh time label
+        OnTimeChanged();
+
         SetupSequence();
 
         ScrollToTop();

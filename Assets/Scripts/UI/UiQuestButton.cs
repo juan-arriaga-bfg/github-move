@@ -188,6 +188,12 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         bool isCompleted = task.IsCompletedOrClaimed();
         int  target      = counterTask.TargetValue;
         int  current     = Mathf.Min(counterTask.CurrentValue, target);
+        
+        if (isCompleted && current != target)
+        {
+            current = target;
+            Debug.LogWarning($"[UiQuestButton] => GetTaskProgress: task '{task.Id} current value is hacked {counterTask.CurrentValue} => {target} due to 'completed' state of quest.\nIf it happens not after migration, consider to take a look.");
+        }
                 
         return $"<color=#{( isCompleted ? "FFFFFF" : currentValueColor)}><size={currentValueFontSize}>{current}</size></color>/{target}";
     }
@@ -281,6 +287,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     {
         if (!DevTools.IsQuestDialogsEnabled())
         {
+            Debug.Log($"Quest completed in FAST mode: '{Quest.Id}'. Consider to enable dialogs in the Dev Tools to see a conversation");
             DevTools.FastCompleteQuest(Quest);
             return;
         }

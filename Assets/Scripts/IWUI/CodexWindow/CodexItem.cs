@@ -14,6 +14,8 @@ public class CodexItem : IWUIWindowViewController
     [Header("Materials")] 
     [SerializeField] protected Material unlokedMaterial;
     [SerializeField] protected Material lockedMaterial;
+    [SerializeField] protected Material selectedMaterial;
+    
     [SerializeField] protected Color unlockedColor;
     [SerializeField] protected Color lockedColor;
     
@@ -33,6 +35,8 @@ public class CodexItem : IWUIWindowViewController
     [IWUIBinding("#Piece")]   protected RectTransform pieceImageRectTransform;
     [IWUIBinding("#Gift")]    protected GameObject gift;
     [IWUIBinding("#Gift")]    protected Animator giftAnimator;
+    
+    [IWUIBinding("#RoundBack")]    protected Image roundBackIcon;
 
     public CodexChain Context;
     
@@ -64,6 +68,11 @@ public class CodexItem : IWUIWindowViewController
         def = itemDef;
 
         Reset();
+
+        if (selectedMaterial != null)
+        {
+            selectedMaterial = new Material(selectedMaterial);
+        }
 
         if(arrow != null) arrow.SetActive(def.ShowArrow && !this.forceHideArrow && !def.PieceTypeDef.Filter.Has(PieceTypeFilter.ProductionField));
         if(basket != null) basket.SetActive(def.ShowArrow && !this.forceHideArrow &&  def.PieceTypeDef.Filter.Has(PieceTypeFilter.ProductionField));
@@ -145,6 +154,19 @@ public class CodexItem : IWUIWindowViewController
             sprite.material = lockedMaterial;
             sprite.color = lockedColor;
         }
+    }
+    
+    protected virtual void SetStateSelected()
+    {
+        if (def.State == CodexItemState.Unlocked)
+        {
+            foreach (var sprite in IconSprites)
+            {
+                sprite.material = selectedMaterial;
+            }
+        }
+
+        roundBackIcon.material = selectedMaterial;
     }
 
     protected virtual void SetStateFullLock()
@@ -336,5 +358,15 @@ public class CodexItem : IWUIWindowViewController
         {
             PlayGiftIdleAnimation();
         }
+    }
+    
+    public virtual void OnSelect(CodexItem selectedItem)
+    {
+
+    }
+
+    public virtual void OnDeselect(CodexItem selectedItem)
+    {
+
     }
 }

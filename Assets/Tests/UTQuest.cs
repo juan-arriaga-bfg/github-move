@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 
 namespace UT
 {
@@ -160,6 +161,80 @@ namespace UT
             }
 
             return true;
+        }
+
+        [Test]
+        public void UTQuestStartersConflictsPasses()
+        {
+            LogAssert.ignoreFailingMessages = true;
+            
+            QuestsDataManager questsDataManager = new QuestsDataManager();
+            questsDataManager.Reload();
+
+            questsDataManager.CreateStarters();
+
+            var starters = questsDataManager.QuestStarters;
+
+            HashSet<string> idsInMultiplyStarters = new HashSet<string>();
+            
+            StringBuilder sb = new StringBuilder();
+            
+            foreach (var starterToCheck in starters)
+            {
+                var idsToCheck = starterToCheck.QuestToStartIds;
+                foreach (var id in idsToCheck)
+                {
+                    foreach (var starterToCompare in starters)
+                    {
+                        if (starterToCheck.Id == starterToCompare.Id)
+                        {
+                            continue;
+                        }
+
+                        var idsToCompare = starterToCompare.QuestToStartIds;
+                        if (idsToCompare.Contains(id))
+                        {
+                            if (!idsInMultiplyStarters.Add(id))
+                            {
+                                continue;
+                            }
+                            
+                            if (idsToCheck.Count > 1 || idsToCompare.Count > 1)
+                            {
+                                sb.Append($"Quest '{id}' listed in two starters '{starterToCheck.Id}' and '{starterToCompare.Id}' ");
+                                if (idsToCheck.Count > 1 && idsToCompare.Count > 1)
+                                {
+                                    sb.Append($"but both starters contains more than one id.");
+                                }
+                                else if (idsToCheck.Count > 1)
+                                {
+                                    sb.Append($"but starter '{starterToCheck.Id}' contains more than one id.");
+                                }
+                                else
+                                {
+                                    sb.Append($"but starter '{starterToCompare.Id}' contains more than one id.");
+                                }
+
+                                sb.AppendLine(" It may cause a case when all other quests in pack will never be started");
+                            }
+                        }
+                    }
+                }
+            }
+            
+            LogAssert.ignoreFailingMessages = false;
+            
+            Debug.Log($"Ids listed in multiply starters:\n{string.Join("\n", idsInMultiplyStarters)}\n");
+            
+            var message = sb.ToString();
+            if (string.IsNullOrEmpty(message))
+            {
+                Assert.Pass();
+            }
+            else
+            {
+                Assert.Fail(message);
+            }
         }
     }
 }

@@ -21,6 +21,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	
 	[IWUIBinding("#Unlock")] private GameObject unlockObj;
 	[IWUIBinding("#Lock")] private GameObject lockObj;
+	[IWUIBinding("#Permanent")] private GameObject permanentBack;
 	
 	private bool isClick;
 	private bool isReward;
@@ -46,6 +47,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		unlockObj.SetActive(!isLock);
 		lockObj.SetActive(isLock);
+		permanentBack.SetActive(isLock == false && contentEntity.Def.Current.IsPermanent);
 		
 		if (isLock)
 		{
@@ -103,7 +105,11 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		CurrencyHelper.PurchaseAndProvideSpawn(new List<CurrencyPair> {contentEntity.Def.Reward},
 			null,
 			rewardPosition,
-			() => { BoardService.Current.FirstBoard.TutorialLogic.Update(); },
+			() =>
+			{
+				ProfileService.Instance.Manager.UploadCurrentProfile();
+				BoardService.Current.FirstBoard.TutorialLogic.Update();
+			},
 			false,
 			true);
 	}
@@ -190,7 +196,16 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			var position = anchorPaid == null ? btnBack.transform.position : anchorPaid.position;
 			var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(position);
 			
-			CurrencyHelper.PurchaseAsyncOnlyCurrency(contentEntity.Def.Reward, contentEntity.Def.Price, flyPosition, null);
+			CurrencyHelper.PurchaseAsyncOnlyCurrency(contentEntity.Def.Reward, contentEntity.Def.Price, flyPosition,
+				(success) =>
+				{
+					if (success)
+					{
+						ProfileService.Instance.Manager.UploadCurrentProfile();
+						
+                        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.PurchaseInMarket, contentEntity.Def);
+					}
+				});
 			
 			contentEntity.Def.State = MarketItemState.Claimed;
 			Analytics.SendPurchase($"market{GetIndex()}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Price}, new List<CurrencyPair>{contentEntity.Def.Reward}, false, false);
@@ -211,6 +226,8 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			contentEntity.Def.State = MarketItemState.Purchased;
 			NSAudioService.Current.Play(SoundId.BuyMarket);
 			AddReward();
+			
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.PurchaseInMarket, contentEntity.Def);
 		});
 	}
 
@@ -235,6 +252,6 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	protected virtual int GetIndex()
 	{
 		var contentEntity = entity as UIMarketElementEntity;
-		return GameDataService.Current.MarketManager.Defs.IndexOf(contentEntity.Def) + 1;
+		return contentEntity.Def.Uid;
 	}
 }

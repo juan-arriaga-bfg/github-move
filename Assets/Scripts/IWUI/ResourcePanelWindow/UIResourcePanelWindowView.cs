@@ -6,12 +6,20 @@ using DG.Tweening;
 
 public class ResourcePanelUtils
 {
-    public static void ToggleFadePanel(string currency, bool state)
+    public static void ToggleLockFadePanelFor(string currency, bool state, object context)
     {
         var resourcePanelWindow = UIService.Get.GetShowedView<UIResourcePanelWindowView>(UIWindowType.ResourcePanelWindow);
         if (resourcePanelWindow == null) return;
         
-        resourcePanelWindow.ToggleFadePanel(currency, state);
+        resourcePanelWindow.ToggleLockFadePanelFor(currency, state, context);
+    }
+
+    public static void ToggleFadePanel(string currency, bool state, bool isCheckLock = false)
+    {
+        var resourcePanelWindow = UIService.Get.GetShowedView<UIResourcePanelWindowView>(UIWindowType.ResourcePanelWindow);
+        if (resourcePanelWindow == null) return;
+        
+        resourcePanelWindow.ToggleFadePanel(currency, state, isCheckLock);
     }
 
     public static void TogglePanel(string currency, bool state, bool isAnimate = false)
@@ -46,7 +54,9 @@ public class UIResourcePanelWindowView : UIBaseWindowView
     [IWUIBinding("#ResourceContainerDown")] protected CanvasGroup resourceContainerDown;
     
     [IWUIBinding("#HintAnchorEnergyPlusButton")] public Transform HintAnchorEnergyPlusButton;
-
+    
+    private Dictionary<string, LockerComponent> panelFadeLockers = new Dictionary<string, LockerComponent>();
+    
     private readonly Dictionary<string, Transform> cachedResourcePanels = new Dictionary<string, Transform>();
     
     private readonly Dictionary<string, CanvasGroup> cachedResourcePanelContainerUp = new Dictionary<string, CanvasGroup>();
@@ -80,11 +90,37 @@ public class UIResourcePanelWindowView : UIBaseWindowView
             cachedResourcePanelContainerUp.Add(itemUid, resourcePanelContainerUp.GetComponent<CanvasGroup>());
             
             cachedResourcePanelContainerDown.Add(itemUid, resourcePanelContainerDown.GetComponent<CanvasGroup>());
+            
+            panelFadeLockers.Add(itemUid, new LockerComponent());
+            
+        }
+    }
+
+    public virtual void ToggleLockFadePanelFor(string currency, bool state, object context)
+    {
+        if (panelFadeLockers.TryGetValue(currency, out var locker))
+        {
+            if (state)
+            {
+                locker.Lock(context);
+            }
+            else
+            {
+                locker.Unlock(context);
+            }
         }
     }
     
-    public virtual void ToggleFadePanel(string currency, bool state)
+    public virtual void ToggleFadePanel(string currency, bool state, bool isCheckLock = false)
     {
+        if (isCheckLock && panelFadeLockers.TryGetValue(currency, out var locker))
+        {
+            if (locker.IsLocked)
+            {
+                return;
+            }
+        }
+        
         Transform targetPanel;
         CanvasGroup targetContainer;
         if (state)

@@ -650,7 +650,7 @@
       {
         "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
         "Id": "FogCleared",
-        "Value": "Fog 12"
+        "Value": "Fog 13"
       }
     ]
   },
@@ -770,7 +770,7 @@
     "Id": 62,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "73_CompleteOrder"
+      "73_CollectIngredient"
     ],
     "Conditions": [
       {
@@ -1114,20 +1114,6 @@
         "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
         "Id": "PieceUnlocked",
         "Value": "NPC_E"
-      }
-    ]
-  },
-  {
-    "Id": 88,
-    "$type": "QuestStarterEntity, GameAssembly",
-    "QuestToStartIds": [
-      "99_CompleteOrder"
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
-        "Id": "PieceUnlocked",
-        "Value": "NPC_F"
       }
     ]
   },

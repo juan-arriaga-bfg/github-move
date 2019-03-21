@@ -1,13 +1,9 @@
 using Debug = IW.Logger;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-using IW.Content.ContentModule;
-using UnityEditor;
 using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
 
 public class DefaultApplicationInitilizer : ApplicationInitializer 
 {
@@ -21,9 +17,17 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
 
         DOTween.SetTweensCapacity(200, 125);
 
+        // wait for Editor version update
+#if UNITY_EDITOR
+        IWProjectVerisonsEditor.GetCurrentVersionEditor(false, () =>
+        {
+            StartCoroutine(InitCoroutine(onComplete));
+        });
+        return;
+#endif
         StartCoroutine(InitCoroutine(onComplete));
     }
-    
+
     private IEnumerator InitCoroutine(Action onComplete)
     {
         // Wait at least for one frame to render loading screen

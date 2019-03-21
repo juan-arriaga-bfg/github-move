@@ -52,16 +52,15 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
                 }
                 
                 var save = ((GameDataManager)context).UserProfile.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
-                
-                if(save?.Slots == null || save.Slots.Count == 0) return;
-                
-                for (var i = 0; i < Defs.Count; i++)
+
+                if (save?.Slots == null || save.Slots.Count == 0) return;
+
+                foreach (var item in Defs)
                 {
-                    var item = Defs[i];
-                    var slot = save.Slots.Find(saveItem => saveItem.Index == i);
+                    var slot = save.Slots.Find(saveItem => saveItem.Index == item.Uid);
 
                     if (slot == null) continue;
-
+                    
                     item.Init(slot.ItemIndex, slot.Piece, slot.Amount, slot.State);
                 }
             }

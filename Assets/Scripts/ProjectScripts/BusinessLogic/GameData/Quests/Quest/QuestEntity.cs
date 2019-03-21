@@ -101,10 +101,11 @@ public class QuestEntity : ECSEntity, IECSSerializeable
 
             if (task == null)
             {
-                Debug.LogError($"[QuestEntity] => Load: Quest '{Id}': No task with id '{id}' defined");
+                Debug.LogWarning($"[QuestEntity] => Load: Quest '{Id}': No task with id '{id}' defined");
+                continue;
             }
             
-            node.PopulateObject(task);
+            task.Load(node);
             
             tasksLoadedFromSave.Add(task);
         }
@@ -152,6 +153,17 @@ public class QuestEntity : ECSEntity, IECSSerializeable
             {
                 State = TaskState.Completed;
             }
+        }
+    }
+
+    /// <summary>
+    /// Recheck state of all task to handle target change due to migration
+    /// </summary>
+    public virtual void ForceCheckActiveTasks()
+    {
+        foreach (var task in ActiveTasks)
+        {
+            task.Check();
         }
     }
     

@@ -13,7 +13,7 @@ public enum MarketItemState
 
 public class MarketItem
 {
-    public string Uid;
+    public int Uid;
     public int Index;
     public int Level = int.MaxValue;
     
@@ -24,7 +24,7 @@ public class MarketItem
         get { return state; }
         set
         {
-            state = value;
+            if (current?.IsPermanent == false || value < MarketItemState.Purchased) state = value;
             GameDataService.Current.MarketManager.UpdateState?.Invoke();
         }
     }
@@ -32,7 +32,7 @@ public class MarketItem
     public CurrencyPair Reward;
     public CurrencyPair Price;
 
-    public bool IsPiece => PieceType.Parse(Reward.Currency) != -1;
+    public bool IsPiece => string.IsNullOrEmpty(Reward.Currency) == false && PieceType.Parse(Reward.Currency) != -1;
     
     public string Name => IsPiece ? $"piece.name.{Reward.Currency}" : current.Name;
     public string Icon => IsPiece ? Reward.Currency : current.Icon;
@@ -54,12 +54,12 @@ public class MarketItem
     public void Init(int index, int piece, int amount, MarketItemState state)
     {
         State = state;
-        Index = index;
-        
-        if(Index == -1) return;
+        Index = Mathf.Clamp(index, -1, defs.Count - 1);
+
+        if (Index == -1) return;
         
         current = defs[Index];
-        
+
         Reward = new CurrencyPair{Currency = piece == -1 ? current.Weight.Uid : PieceType.Parse(piece), Amount = amount};
         Price = current.Price ?? GetPrice(Reward.Currency);
     }
@@ -67,8 +67,8 @@ public class MarketItem
     public void AddDef(MarketDef def)
     {
         defs.Add(def);
-        
-        if(Level > def.UnlockLevel) Level = def.UnlockLevel;
+
+        if (Level > def.UnlockLevel) Level = def.UnlockLevel;
     }
 
     public void Update(bool isTimer = false)
@@ -86,7 +86,7 @@ public class MarketItem
         
         foreach (var def in defs)
         {
-            if(def.UnlockLevel > GameDataService.Current.LevelsManager.Level) continue;
+            if (def.UnlockLevel > GameDataService.Current.LevelsManager.Level) continue;
             
             weights.Add(def.Weight);
         }
@@ -106,10 +106,10 @@ public class MarketItem
         switch (def.RandomType)
         {
             case MarketRandomType.BasePiecesEasy:
-                piece = GetRandomPiece(3, 4);
+                piece = GetRandomPiece(2, 4);
                 break;
             case MarketRandomType.BasePiecesHard:
-                piece = GetRandomPiece(4, 6);
+                piece = GetRandomPiece(5, 6);
                 break;
             case MarketRandomType.Ingredients:
                 piece = GetRandomIngredient();
@@ -152,7 +152,6 @@ public class MarketItem
     
     private string GetRandomPiece(int min, int max)
     {
-        min -= 1;
         max -= 1;
         
         var board = BoardService.Current.FirstBoard;

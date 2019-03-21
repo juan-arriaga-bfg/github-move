@@ -126,8 +126,12 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 	    SellForCashService.Current.Purchase(contentEntity.PurchaseKey, (isOk, productId) =>
 	    {
 		    isClick = false;
-		    
-		    if (isOk) SendAnalyticsEvent();
+
+		    if (isOk)
+		    {
+			    ProfileService.Instance.Manager.UploadCurrentProfile();
+			    SendAnalyticsEvent();
+		    }
 	    });
     }
 
@@ -162,9 +166,11 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
     protected virtual void OnPurchaseComplete()
     {
+	    ProfileService.Instance.Manager.UploadCurrentProfile();
 	    SendAnalyticsEvent();
     }
 
+    
     protected void SendAnalyticsEvent()
     {
 	    var shopModel = context.Model as UIShopWindowModel;

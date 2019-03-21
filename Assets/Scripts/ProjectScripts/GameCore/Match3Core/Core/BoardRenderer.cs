@@ -55,6 +55,7 @@ public partial class BoardRenderer : ECSEntity
     {
         if (gameBoardResourcesDef.ElementsResourcesDef.ContainsKey(pieceType) == false)
         {
+            Debug.LogWarning($"[BoardRenderer:GetResourceNameForType] No resource for piece type: {pieceType}");
             return null;
         }
 

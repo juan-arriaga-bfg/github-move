@@ -1121,7 +1121,7 @@
       "Level": "9",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 300
+        "Amount": 400
       },
       "Reward": {
         "Currency": "Experience",
@@ -1267,7 +1267,7 @@
       "Level": "10",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 550
+        "Amount": 600
       },
       "Reward": {
         "Currency": "Experience",
@@ -1499,7 +1499,7 @@
       "Level": "12",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 1000
+        "Amount": 1100
       },
       "Reward": {
         "Currency": "Experience",
@@ -1743,6 +1743,10 @@
             "Y": 12
           },
           {
+            "X": 28,
+            "Y": 11
+          },
+          {
             "X": 30,
             "Y": 11
           }
@@ -1787,10 +1791,22 @@
             "Y": 13
           }
         ],
-        "MN_E": [
+        "D4": [
           {
             "X": 28,
+            "Y": 12
+          }
+        ],
+        "OB6_D": [
+          {
+            "X": 29,
             "Y": 11
+          }
+        ],
+        "Boost_WR": [
+          {
+            "X": 29,
+            "Y": 12
           }
         ]
       }
@@ -1814,12 +1830,20 @@
           "Y": 17
         },
         {
+          "X": 22,
+          "Y": 18
+        },
+        {
           "X": 23,
           "Y": 16
         },
         {
           "X": 23,
           "Y": 17
+        },
+        {
+          "X": 23,
+          "Y": 18
         },
         {
           "X": 24,
@@ -1843,7 +1867,7 @@
         }
       ],
       "Pieces": {
-        "Soft2": [
+        "MN_E": [
           {
             "X": 22,
             "Y": 17
@@ -1855,8 +1879,8 @@
             "Y": 16
           },
           {
-            "X": 23,
-            "Y": 17
+            "X": 24,
+            "Y": 15
           },
           {
             "X": 25,
@@ -1870,14 +1894,10 @@
         "D4": [
           {
             "X": 24,
-            "Y": 15
+            "Y": 16
           }
         ],
         "CH_NPC": [
-          {
-            "X": 24,
-            "Y": 16
-          },
           {
             "X": 26,
             "Y": 14
@@ -1896,7 +1916,6 @@
         "Currency": "Experience",
         "Amount": 10
       },
-      "IsActive": true,
       "Positions": [
         {
           "X": 17,
@@ -4776,29 +4795,6 @@
         {
           "X": 24,
           "Y": 23
-        }
-      ],
-      "Pieces": {}
-    },
-    {
-      "Uid": "Fog 118",
-      "Level": "15",
-      "Condition": {
-        "Currency": "Mana",
-        "Amount": 100000
-      },
-      "Reward": {
-        "Currency": "Experience",
-        "Amount": 10
-      },
-      "Positions": [
-        {
-          "X": 22,
-          "Y": 18
-        },
-        {
-          "X": 23,
-          "Y": 18
         }
       ],
       "Pieces": {}

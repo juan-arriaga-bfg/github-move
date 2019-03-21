@@ -24,7 +24,7 @@ public class HighlightTaskCurrencySpend : ITaskHighlight
 
         if (currencyTask.CurrencyName == Currency.Crystals.Name)
         {
-            return new HighlightTaskPointToShopButton().Highlight(task);
+            return new HighlightTaskPointToMarketButton().Highlight(task);
         }
 
 

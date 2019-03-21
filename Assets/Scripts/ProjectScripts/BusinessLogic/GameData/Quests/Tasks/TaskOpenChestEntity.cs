@@ -2,7 +2,7 @@ using Debug = IW.Logger;
 using UnityEngine;
 
 [TaskHighlight(typeof(HighlightTaskOpenChest))]
-[TaskHighlight(typeof(HighlightTaskPointToShopButton))]
+[TaskHighlight(typeof(HighlightTaskPointToMarketButton))]
 public class TaskOpenChestEntity : TaskCounterAboutPiece, IBoardEventListener, IHavePieceId
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();

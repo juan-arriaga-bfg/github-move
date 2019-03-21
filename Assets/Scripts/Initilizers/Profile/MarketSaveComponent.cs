@@ -2,6 +2,19 @@
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
+public interface IMarketSaveComponent
+{
+    MarketSaveComponent MarketSave { get; }
+}
+
+public partial class UserProfile : IMarketSaveComponent
+{
+    protected MarketSaveComponent marketSaveComponent;
+
+    [JsonIgnore]
+    public MarketSaveComponent MarketSave => marketSaveComponent ?? (marketSaveComponent = GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid));
+}
+
 [JsonObject(MemberSerialization.OptIn)]
 public class MarketSaveComponent : ECSEntity, IECSSerializeable
 {
@@ -36,15 +49,13 @@ public class MarketSaveComponent : ECSEntity, IECSSerializeable
         
         slots = new List<MarketSaveItem>();
 
-        for (var i = 0; i < defs.Count; i++)
+        foreach (var def in defs)
         {
-            var def = defs[i];
-            
             if(def.Reward == null) continue;
             
             slots.Add(new MarketSaveItem
             {
-                Index = i,
+                Index = def.Uid,
                 ItemIndex = def.Index,
                 State = def.State,
                 Piece = PieceType.Parse(def.Reward.Currency),

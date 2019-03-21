@@ -47,7 +47,7 @@ public class UIHardShopElementViewController : UIShopElementViewController
         base.OnPurchaseComplete();
         
         var contentEntity = entity as UIShopElementEntity;
-        
+
         if (contentEntity.IsPermanent == false)
         {
             isClaimed = true;

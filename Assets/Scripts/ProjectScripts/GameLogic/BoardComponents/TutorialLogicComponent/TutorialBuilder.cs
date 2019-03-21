@@ -377,8 +377,7 @@ public static class TutorialBuilder
                 };
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "14_CreatePiece_B3", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "14_CreatePiece_B3", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "14_CreatePiece_B3", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.B4.Id, ConditionType = TutorialConditionType.Complete}, true);
                 break;
             }
             case 25: // offer 1
@@ -397,7 +396,7 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckStepTutorialCondition {Target = 25, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 10, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckTimerCompleteTutorialCondition {Target = BoardService.Current.FirstBoard.MarketLogic.OfferTimer, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = 1, Currency = new List<string>{Currency.Offer.Name}, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = 2, Currency = new List<string>{Currency.Offer.Name}, IsPermanentCheck = true, ConditionType = TutorialConditionType.Hard}, true);
                 break;
             }
             default:

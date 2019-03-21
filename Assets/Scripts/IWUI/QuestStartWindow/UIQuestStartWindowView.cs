@@ -43,9 +43,11 @@ public class UIQuestStartWindowView : IWUIWindowView
     {
         base.OnViewShow();
 
+        ProfileService.Instance.Manager.UploadCurrentProfile();
+        
         CleanUp();
         
-        UIQuestStartWindowModel model = Model as UIQuestStartWindowModel;
+        var model = Model as UIQuestStartWindowModel;
         
         step = model.CompletedQuest != null ? Step.QuestComplete : Step.QuestStart;
         startStep = step;

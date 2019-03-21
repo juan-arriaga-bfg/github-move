@@ -228,9 +228,15 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         ToggleActive(false, true);
         
         CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, null, position, null, true, true);
+        
+        ProfileService.Instance.Manager.UploadCurrentProfile();
+        
         Analytics.SendPurchase("screen_daily", "item1", null, new List<CurrencyPair>(currenciesReward), false, false);
 
-        if (isCurrentTaskClearAll) targetEntity.WindowController.CloseCurrentWindow();
+        if (isCurrentTaskClearAll)
+        {
+            targetEntity.WindowController.CloseCurrentWindow();
+        }
     }
     
     private void ToggleActive(bool enabled, bool animated)

@@ -14,4 +14,5 @@
     public const int MineUsed = 1006;
     public const int StorageDamage = 1007;
     public const int OrderCompleted = 1008;
+    public const int PurchaseInMarket = 1009;
 }

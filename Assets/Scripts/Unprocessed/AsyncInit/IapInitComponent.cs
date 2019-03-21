@@ -1,4 +1,4 @@
-#define REAL_IAP
+//#define REAL_IAP
 
 public class IapInitComponent : AsyncInitComponentBase
 {
@@ -79,15 +79,29 @@ public class IapInitComponent : AsyncInitComponentBase
                                 .Add(new IapDefinition
                                  {
                                      Id = "iap7",
-                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.tier70",
-                                     AppleAppStoreId  = "vi.tier70.com.bigfishgames.mergetalesios",
+                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.bundletier2",
+                                     AppleAppStoreId  = "vi.bundletier2.com.bigfishgames.mergetalesios",
                                      Consumable = true
                                  })
                                 .Add(new IapDefinition
                                  {
                                      Id = "iap8",
-                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.tier80",
-                                     AppleAppStoreId  = "vi.tier80.com.bigfishgames.mergetalesios",
+                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.bundletier5",
+                                     AppleAppStoreId  = "vi.bundletier5.com.bigfishgames.mergetalesios",
+                                     Consumable = true
+                                 })
+                                .Add(new IapDefinition
+                                 {
+                                     Id = "iap9",
+                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.bundletier10",
+                                     AppleAppStoreId  = "vi.bundletier10.com.bigfishgames.mergetalesios",
+                                     Consumable = true
+                                 })
+                                .Add(new IapDefinition
+                                 {
+                                     Id = "iap10",
+                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.bundletier20",
+                                     AppleAppStoreId  = "vi.bundletier20.com.bigfishgames.mergetalesios",
                                      Consumable = true
                                  })
 #endif

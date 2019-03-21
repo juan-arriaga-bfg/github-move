@@ -113,14 +113,25 @@ public class UIMarketWindowView : UIGenericPopupWindowView
     private void OnClickReset()
     {
         var windowModel = Model as UIMarketWindowModel;
+
+        if (CurrencyHelper.IsCanPurchase(windowModel.Price, true) == false) return;
         
-        CurrencyHelper.Purchase(Currency.Timer.Name, 1, windowModel.Price, success =>
-        {
-            if(success == false) return;
+        UIMessageWindowController.CreateMessage(
+            LocalizationService.Get("window.market.confirmation.title", "window.market.confirmation.title"),
+            LocalizationService.Get("window.market.confirmation.message", "window.market.confirmation.message"),
+            null,
+            () =>
+            {
+                CurrencyHelper.Purchase(Currency.Timer.Name, 1, windowModel.Price, success =>
+                {
+                    if(success == false) return;
             
-            BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.Complete();
-            Analytics.SendPurchase("skip_market", "item1", new List<CurrencyPair>{windowModel.Price}, null, false, false);
-        });
+                    BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.Complete();
+                    Analytics.SendPurchase("skip_market", "item1", new List<CurrencyPair>{windowModel.Price}, null, false, false);
+                });
+            },
+            () => { }
+        );
     }
 
     private void UpdateSlots()
