@@ -105,10 +105,12 @@ public class QuestEntity : ECSEntity, IECSSerializeable
                 continue;
             }
             
-            node.PopulateObject(task);
+            task.Load(node);
             
             tasksLoadedFromSave.Add(task);
         }
+        
+        UpdateState();
     }
     
 #endregion

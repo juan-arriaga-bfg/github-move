@@ -281,6 +281,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     {
         if (!DevTools.IsQuestDialogsEnabled())
         {
+            Debug.Log($"Quest completed in FAST mode: '{Quest.Id}'. Consider to enable dialogs in the Dev Tools to see a conversation");
             DevTools.FastCompleteQuest(Quest);
             return;
         }

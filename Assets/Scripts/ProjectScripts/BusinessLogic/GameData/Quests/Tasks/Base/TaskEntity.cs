@@ -2,6 +2,7 @@ using Debug = IW.Logger;
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Quests;
 using UnityEngine;
 
@@ -246,5 +247,15 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     {
         DisconnectFromBoard();
         OnChanged = null;
+    }
+
+    public void Load(JToken data)
+    {
+        data.PopulateObject(this);
+        
+        if (Check())
+        {
+            OnChanged?.Invoke(this);
+        }
     }
 }
