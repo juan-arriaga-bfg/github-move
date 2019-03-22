@@ -784,6 +784,23 @@
         "Amount": 150
       }
     ],
+    "OrdersWeights": [
+      {
+        "Uid": "Order21",
+        "Weight": 8,
+        "Override": true
+      },
+      {
+        "Uid": "Order14",
+        "Weight": 5,
+        "Override": true
+      },
+      {
+        "Uid": "Order6",
+        "Weight": 3,
+        "Override": true
+      }
+    ],
     "OrdersDelay": 30
   },
   {
