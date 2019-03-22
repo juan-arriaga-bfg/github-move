@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class FogDef
@@ -25,10 +26,18 @@ public class FogDef
     public CurrencyPair Condition { get; set; }
     public CurrencyPair Reward { get; set; }
     public Dictionary<string, List<BoardPosition>> Pieces { get; set; }
+
+    [JsonProperty]
+    private BoardPosition Center = BoardPosition.Default();
     
     public BoardPosition GetCenter()
     {
-        return BoardPosition.GetCenter(Positions);
+        if (!IsActive && Center.Equals(BoardPosition.Default()))
+        {
+            return BoardPosition.GetCenter(Positions); 
+        }
+
+        return Center;
     }
     
     public Vector3 GetCenter(BoardController board)
