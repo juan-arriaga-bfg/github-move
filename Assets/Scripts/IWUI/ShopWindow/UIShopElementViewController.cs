@@ -158,8 +158,11 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 	    var position = anchor == null ? btnBack.transform.position : anchor.position;
 	    var contentEntity = entity as UIShopElementEntity;
 	    var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(position);
-
-	    CurrencyHelper.PurchaseAsyncOnlyCurrency(contentEntity.Products[0], contentEntity.Price, flyPosition, null);
+	    
+	    var products = new List<CurrencyPair>(contentEntity.Products);
+	    if (contentEntity.Extras != null) products.AddRange(contentEntity.Extras);
+	    
+	    CurrencyHelper.PurchaseAsyncOnlyCurrency(products, contentEntity.Price, flyPosition, null);
 	    
 	    isClick = false;
 	    OnPurchaseComplete();
@@ -170,7 +173,6 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 	    ProfileService.Instance.Manager.UploadCurrentProfile();
 	    SendAnalyticsEvent();
     }
-
     
     protected void SendAnalyticsEvent()
     {
@@ -179,8 +181,10 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
 	    var isFree = contentEntity.Price != null && contentEntity.Price.Currency != Currency.Cash.Name && contentEntity.Price.Amount == 0;
 	    var isIap = contentEntity.Price != null && contentEntity.Price.Currency == Currency.Cash.Name;
-		    
+
+	    var products = new List<CurrencyPair>(contentEntity.Products);
+	    if (contentEntity.Extras != null) products.AddRange(contentEntity.Extras);
 	    
-	    Analytics.SendPurchase(shopModel.AnalyticLocation, $"item{CachedTransform.GetSiblingIndex()}", new List<CurrencyPair>{contentEntity.Price}, new List<CurrencyPair>(contentEntity.Products), isIap, isFree);
+	    Analytics.SendPurchase(shopModel.AnalyticLocation, $"item{CachedTransform.GetSiblingIndex()}", new List<CurrencyPair>{contentEntity.Price}, products, isIap, isFree);
     }
 }

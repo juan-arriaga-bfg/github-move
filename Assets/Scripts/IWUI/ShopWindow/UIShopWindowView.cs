@@ -41,7 +41,7 @@ public class UIShopWindowView : UIGenericPopupWindowView
                 ContentId = def.Icon,
                 PurchaseKey = def.PurchaseKey,
                 Products = def.Products,
-                ExtraLabel = def.Extra == 0 ? string.Empty : def.Extra.ToString(),
+                Extras = def.Extras,
                 Price = def.Price,
                 NameLabel = LocalizationService.Get(def.Name),
                 IsPermanent = def.IsPermanent,

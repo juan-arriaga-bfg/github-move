@@ -17,6 +17,22 @@ public class UIShopElementEntity : UISimpleScrollElementEntity
             return str.ToString().TrimEnd();
         }
     }
+    public string ExtraText
+    {
+        get
+        {
+            if (Extras == null) return string.Empty;
+            
+            var str = new StringBuilder();
+            
+            foreach (var pair in Extras)
+            {
+                str.Append($"+{pair.ToStringIcon(false, MessageIconSize)}\n");
+            }
+            
+            return str.ToString().TrimEnd();
+        }
+    }
 
     public string ButtonLabel
     {
@@ -39,13 +55,6 @@ public class UIShopElementEntity : UISimpleScrollElementEntity
         }
     }
 
-    private string extraLabel;
-    public string ExtraLabel
-    {
-        get => string.IsNullOrEmpty(extraLabel) ? "" : $"+<sprite name={Products[0].GetIcon()}>{extraLabel}";
-        set => extraLabel = value;
-    }
-
     public int MessageIconSize = -1;
 
     public string PurchaseKey;
@@ -55,5 +64,6 @@ public class UIShopElementEntity : UISimpleScrollElementEntity
     public bool IsPermanent;
     
     public List<CurrencyPair> Products;
+    public List<CurrencyPair> Extras;
     public CurrencyPair Price;
 }
