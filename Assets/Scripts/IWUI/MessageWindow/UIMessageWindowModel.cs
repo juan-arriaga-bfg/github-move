@@ -6,7 +6,8 @@ public class UIMessageWindowModel : IWWindowModel
     {
         Red,
         Green,
-        Blue
+        Blue,
+        Sepia
     }
     
     public enum HintType
