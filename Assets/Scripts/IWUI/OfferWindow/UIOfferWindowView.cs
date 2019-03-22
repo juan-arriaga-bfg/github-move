@@ -117,7 +117,8 @@ public class UIOfferWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIOfferWindowModel;
 	    
         // HACK to handle the case when we have a purchase but BFG still not add it to the Store
-        if (IapService.Current.IapCollection.Defs.All(e => e.Id != windowModel.Product.PurchaseKey))
+        var isDefRegister = IapService.Current.IapCollection.Defs.All(e => e.Id != windowModel.Product.PurchaseKey);
+        if (isDefRegister || DevTools.IsIapEnabled() == false)
         {
             var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
