@@ -7,6 +7,7 @@ public class ShopDef
     public string Name;
     public string PurchaseKey;
     public List<CurrencyPair> Products;
+    public int Extra;
     public CurrencyPair Price;
     public bool IsPermanent;
     public int Sale;

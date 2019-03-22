@@ -174,6 +174,28 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         return TryCollapsePieceAt(boardPosition);
     }
 
+    private bool TryOpenFog(BoardPosition pos)
+    {
+#if  DEBUG
+        var fogObserver = GameDataService.Current.FogsManager.GetFogObserver(pos.SetZ(0));
+        var fogPiece = BoardService.Current.FirstBoard.BoardLogic.GetPieceAt(pos);
+        if (fogObserver?.Context == null && fogPiece?.PieceType != PieceType.Fog.Id)
+        {
+            return false;
+        }
+
+        if (fogPiece.CachedPosition.Equals(pos) == false)
+        {
+            return true;
+        }
+        
+        fogObserver?.DebugOpenFog();
+        return true;
+#else
+        return false;
+#endif
+    }
+    
     protected virtual bool TryCollapsePieceAt(BoardPosition boardPosition)
     {
         if (IsActive == false)
@@ -192,7 +214,10 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
             {
                 EndRemover();
                 ToggleFilterPieces(false);
-                CollapsePieceAt(boardPosition);
+                if (TryOpenFog(boardPosition) == false)
+                {
+                    CollapsePieceAt(boardPosition);    
+                }                
                 return true;
             }
             

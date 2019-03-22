@@ -16,7 +16,6 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     private Piece thisContext;
     
-    private const int Layer = 10;
     private bool isDrag;
     private bool isSwap;
 
@@ -31,6 +30,15 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     public void OnUnRegisterEntity(ECSEntity entity)
     {
         OnRemoveFromBoard(Position, thisContext);
+    }
+
+    public bool Visible
+    {
+        get => container != null && container.GetCanvasGroup().alpha > 0;
+        set
+        {
+            if (container != null) container.GetCanvasGroup().alpha = value ? 1 : 0;
+        }
     }
 
     public void OnSwap(bool isEnd)
@@ -92,14 +100,14 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
     {
-        
+        Position = to;
     }
 
     public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
         var f = from;
-        var t = Position = to;
-        
+        var t = to;
+                
         if (container != null)
         {
             f.Z = t.Z = BoardLayer.UI.Layer;
@@ -182,13 +190,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     public UIBoardView GetView(ViewType viewType)
     {
-        UIBoardView targetView = null;
-        if (views.TryGetValue(viewType, out targetView))
-        {
-            return targetView;
-        }
-
-        return null;
+        return views.TryGetValue(viewType, out var targetView) ? targetView : null;
     }
 
     public List<UIBoardView> GetViews()

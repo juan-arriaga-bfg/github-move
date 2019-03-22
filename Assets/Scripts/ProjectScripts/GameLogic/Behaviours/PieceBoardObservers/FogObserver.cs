@@ -268,4 +268,13 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         bubble.Priority = -2;
         bubble.Change(true);
     }
+    
+    #if DEBUG
+    public void DebugOpenFog()
+    {
+        OpenBubble();
+        LockView?.DestroyOnBoard();
+        LockView = null;
+    }
+    #endif
 }
