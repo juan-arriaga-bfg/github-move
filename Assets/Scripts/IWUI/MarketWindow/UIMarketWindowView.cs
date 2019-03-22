@@ -29,7 +29,22 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         content.GetScrollRect().horizontalNormalizedPosition = windowModel.IsTutorial ? 0 : 1;
 
-        Scroll(windowModel.IsTutorial ? content.Tabs.size : 0);
+        var index = 0;
+        
+        if (windowModel.IsTutorial)
+        {
+            foreach (var tab in content.Tabs)
+            {
+                var def = (tab.Entity as UIMarketElementEntity).Def.Current;
+                
+                if(def == null || def.Weight.Piece != PieceType.CH_Free.Id) continue;
+					
+                index = tab.Index;
+                break;
+            }
+        }
+        
+        Scroll(index);
         
         BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnTimeChanged += UpdateLabel;
         BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnComplete += UpdateSlots;
