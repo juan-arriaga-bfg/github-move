@@ -1,5 +1,3 @@
-//#define REAL_IAP
-
 public class IapInitComponent : AsyncInitComponentBase
 {
     public override void Execute()
@@ -33,7 +31,6 @@ public class IapInitComponent : AsyncInitComponentBase
            .SetIapProvider(new BfgIapProvider()
                .SetIapCollection(new IapCollection()
 #region IAPS
-#if REAL_IAP
                                 .Add(new IapDefinition
                                  {
                                      Id = "iap1",
@@ -104,7 +101,6 @@ public class IapInitComponent : AsyncInitComponentBase
                                      AppleAppStoreId  = "vi.bundletier20.com.bigfishgames.mergetalesios",
                                      Consumable = true
                                  })
-#endif
                 ))
 #endregion
            .Init();
