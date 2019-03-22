@@ -36,4 +36,29 @@ public class BaseSaveComponent : ECSEntity
 		
         return positions;
     }
+    
+    protected string IdsToString(List<string> ids)
+    {
+        return string.Join(";", ids);
+    }
+
+    protected List<string> StringToIds(string value)
+    {
+        var ret = new List<string>();
+
+        if (string.IsNullOrEmpty(value))
+        {
+            return ret;
+        }
+		
+        var data = value.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries);
+
+        for (var i = 0; i < data.Length; i++)
+        {
+            var str = data[i];
+            ret.Add(str);
+        }
+
+        return ret; 
+    }
 }

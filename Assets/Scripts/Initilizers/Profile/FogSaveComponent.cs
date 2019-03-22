@@ -8,68 +8,63 @@ public class FogSaveComponent : BaseSaveComponent, IECSSerializeable
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
-    
-    private string completeFogs;
-    private List<FogSaveItem> inprogressFogs;
-    
-    private Dictionary<BoardPosition, FogSaveItem> fogSave;
-    
-    [JsonProperty]
-    public string CompleteFogs
-    {
-        get { return completeFogs; }
-        set { completeFogs = value; }
-    }
-    
-    [JsonProperty]
-    public List<FogSaveItem> InprogressFogs
-    {
-        get { return inprogressFogs; }
-        set { inprogressFogs = value; }
-    }
-    
-    public List<BoardPosition> CompleteFogPositions;
+
+    private Dictionary<string, FogSaveItem> cache;
+
+    [JsonProperty] public string CompleteFogs;
+
+    [JsonProperty] public List<FogSaveItem> InprogressFogs;
+
+    public List<string> CompleteFogIds;
     
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
         var data = GameDataService.Current.FogsManager;
         
-        inprogressFogs = new List<FogSaveItem>();
-        completeFogs = PositionsToString(data.ClearedFogPositions.Keys.ToList());
+        InprogressFogs = new List<FogSaveItem>();
+        List<string> idsList = data.ClearedFogPositions.Values.Select(e => e.Uid).ToList();
+        CompleteFogs = IdsToString(idsList);
 
-        foreach (var key in data.VisibleFogPositions.Keys)
+        foreach (var pair in data.VisibleFogPositions)
         {
+            BoardPosition key = pair.Key;
+            FogDef def = pair.Value;
+            
             if (data.FogObservers.TryGetValue(key, out var observer) == false
                 || observer.IsRemoved
                 || observer.RequiredConditionReached() == false
                 || observer.AlreadyPaid.Amount == 0) continue;
             
-            inprogressFogs.Add(new FogSaveItem {Position = key, AlreadyPaid = observer.AlreadyPaid.Amount});
+            InprogressFogs.Add(new FogSaveItem {Uid = def.Uid, AlreadyPaid = observer.AlreadyPaid.Amount});
         }
     }
 
     [OnDeserialized]
     internal void OnDeserialized(StreamingContext context)
     {
-        CompleteFogPositions = StringToPositions(completeFogs);
+        CompleteFogIds = StringToIds(CompleteFogs);
+        UpdateCache();
+    }
+
+    public void UpdateCache()
+    {
+        cache = new Dictionary<string, FogSaveItem>();
         
-        fogSave = new Dictionary<BoardPosition, FogSaveItem>();
-        
-        if (inprogressFogs != null)
+        if (InprogressFogs != null)
         {
-            foreach (var fog in inprogressFogs)
+            foreach (var fog in InprogressFogs)
             {
-                fogSave.Add(fog.Position, fog);
+                cache.Add(fog.Uid, fog);
             }
         }
     }
     
-    public FogSaveItem GetRewardsSave(BoardPosition position)
+    public FogSaveItem GetRewardsSave(string uid)
     {
-        if (fogSave == null || fogSave.TryGetValue(position, out var item) == false) return null;
+        if (cache == null || cache.TryGetValue(uid, out var item) == false) return null;
 
-        fogSave.Remove(position);
+        cache.Remove(uid);
 		
         return item;
     }
