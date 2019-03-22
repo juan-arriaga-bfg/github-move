@@ -20,6 +20,8 @@ public class DevTools : UIContainerElementViewController
     [IWUIBinding("#QuestDialogsToggle")] private Toggle questDialogsToggle;
     [IWUIBinding("#TutorialToggle")] private Toggle tutorialToggle;
     [IWUIBinding("#RemoverToggle")] private Toggle removerToggle;
+    [IWUIBinding("#LoggerToggle")] private Toggle loggerToggle;
+    [IWUIBinding("#IapToggle")] private Toggle iapToggle;
 
     [IWUIBinding("#CommonButtons")] private GameObject commonPanel;
     [IWUIBinding("#ExtendedButtons")] private GameObject extendedPanel;
@@ -28,6 +30,8 @@ public class DevTools : UIContainerElementViewController
     private static bool isQuestDialogsDisabled = true;
     private static bool isTutorialDisabled = true;
     private static bool isRemoverDebugDisabled = true;
+    private static bool isRealIapDisabled = true;
+    private static bool isLoggerEnabled = true;
 #endif
     private bool isEnabled = false;
     
@@ -40,11 +44,13 @@ public class DevTools : UIContainerElementViewController
         questDialogsToggle.isOn = IsQuestDialogsEnabled();
         tutorialToggle.isOn = IsTutorialEnabled();
         removerToggle.isOn = IsRemoverDebugEnabled();
+        loggerToggle.isOn = IsLoggerEnabled();
+        iapToggle.isOn = IsIapEnabled();         
         
         UpdateFpsMeter();
         
-        commonPanel?.SetActive(true);
-        extendedPanel?.SetActive(false);
+        commonPanel.SetActive(true);
+        extendedPanel.SetActive(false);
     }
     
     public void OnToggleValueChanged(bool isChecked)
@@ -55,8 +61,8 @@ public class DevTools : UIContainerElementViewController
 
     public void OnExtendValueChanged(bool isChecked)
     {
-        commonPanel?.SetActive(isChecked);
-        extendedPanel?.SetActive(!isChecked);
+        commonPanel.SetActive(isChecked);
+        extendedPanel.SetActive(!isChecked);
     }
     
     public void OnProfilesClick()
@@ -416,6 +422,50 @@ public class DevTools : UIContainerElementViewController
         return EditorPrefs.GetBool("DEBUG_TUTORIAL_DISABLED", true);
 #else
         return isTutorialDisabled;
+#endif
+        
+    }
+    
+    public void OnIapValueChanged(bool isChecked)
+    {
+        
+#if UNITY_EDITOR
+        EditorPrefs.SetBool("DEBUG_IAP_DISABLED", isChecked);
+#else
+        isRealIapDisabled = isChecked;
+#endif
+        
+    }
+    
+    public static bool IsIapEnabled()
+    {
+        
+#if UNITY_EDITOR
+        return EditorPrefs.GetBool("DEBUG_IAP_DISABLED", true);
+#else
+        return isRealIapDisabled;
+#endif
+        
+    }
+    
+    public void OnLoggerValueChanged(bool isChecked)
+    {
+        
+#if UNITY_EDITOR
+        EditorPrefs.SetBool("DEBUG_LOGGER_DISABLED", isChecked);
+#else
+        isLoggerEnabled = isChecked;
+#endif
+        IW.Logger.IsEnabled = isChecked;
+    }
+    
+    public static bool IsLoggerEnabled()
+    {
+        
+#if UNITY_EDITOR
+        return EditorPrefs.GetBool("DEBUG_LOGGER_DISABLED", true);
+#else
+        return isLoggerEnabled;
 #endif
         
     }
