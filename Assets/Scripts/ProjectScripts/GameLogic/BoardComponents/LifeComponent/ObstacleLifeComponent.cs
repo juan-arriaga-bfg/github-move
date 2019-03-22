@@ -9,10 +9,9 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
     {
         get
         {
-            var isLast = HP != 1 && HP == current + 1;
             var message = LocalizationService.Get("gameboard.bubble.message.obstacle", "gameboard.bubble.message.obstacle\n{0}?");
 
-            return isLast
+            return GetDelay(current) > WorkerCurrencyLogicComponent.MinDelay
                 ? string.Format(message, DateTimeExtension.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current), true))
                 : message.Replace("\n{0}", "");
         }
