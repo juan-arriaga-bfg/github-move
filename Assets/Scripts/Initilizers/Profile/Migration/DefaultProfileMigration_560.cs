@@ -35,5 +35,7 @@ public partial class DefaultProfileMigration
             var uid = fogSave.InprogressFogs[i].Uid;
             fogSave.InprogressFogs[i].Uid = replacements[uid];
         }
+        
+        fogSave.UpdateCache();
     }
 }

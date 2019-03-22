@@ -9,7 +9,7 @@ public class FogSaveComponent : BaseSaveComponent, IECSSerializeable
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    private Dictionary<string, FogSaveItem> fogSave;
+    private Dictionary<string, FogSaveItem> cache;
 
     [JsonProperty] public string CompleteFogs;
 
@@ -44,23 +44,27 @@ public class FogSaveComponent : BaseSaveComponent, IECSSerializeable
     internal void OnDeserialized(StreamingContext context)
     {
         CompleteFogIds = StringToIds(CompleteFogs);
-        
-        fogSave = new Dictionary<string, FogSaveItem>();
+        UpdateCache();
+    }
+
+    public void UpdateCache()
+    {
+        cache = new Dictionary<string, FogSaveItem>();
         
         if (InprogressFogs != null)
         {
             foreach (var fog in InprogressFogs)
             {
-                fogSave.Add(fog.Uid, fog);
+                cache.Add(fog.Uid, fog);
             }
         }
     }
     
     public FogSaveItem GetRewardsSave(string uid)
     {
-        if (fogSave == null || fogSave.TryGetValue(uid, out var item) == false) return null;
+        if (cache == null || cache.TryGetValue(uid, out var item) == false) return null;
 
-        fogSave.Remove(uid);
+        cache.Remove(uid);
 		
         return item;
     }
