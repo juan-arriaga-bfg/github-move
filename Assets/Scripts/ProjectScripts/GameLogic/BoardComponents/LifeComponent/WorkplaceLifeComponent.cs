@@ -160,6 +160,15 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	protected virtual void Success()
 	{
 	}
+
+	public virtual void Cancel()
+	{
+		TimerWork.Stop();
+		Context.Context.WorkerLogic.Return(Context.CachedPosition);
+		UpdateView(false);
+		Locker.Unlock(this);
+		Heal(1);
+	}
 	
 	protected virtual void OnStep()
 	{

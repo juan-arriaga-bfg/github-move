@@ -40,6 +40,7 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         Context.Context.WorkerLogic.Init(Context.CachedPosition, TimerMain);
         
         TimerMain.Delay =  GetDelay(current - 1);
+        TimerMain.IsCanceled = TimerMain.Delay > WorkerCurrencyLogicComponent.MinDelay;
         
         if (item.IsStartTimer) TimerMain.Start(item.StartTimeTimer);
         else
@@ -61,6 +62,7 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
     protected override void Success()
     {
         TimerMain.Delay = GetDelay(current);
+        TimerMain.IsCanceled = TimerMain.Delay > WorkerCurrencyLogicComponent.MinDelay;
     }
     
     protected override void OnSpawnCurrencyRewards(bool isComplete)

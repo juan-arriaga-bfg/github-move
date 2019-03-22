@@ -33,6 +33,11 @@ public class LifeComponent : ECSEntity
         if (HP != -1) current = Mathf.Clamp(current + damage, 0, HP);
     }
 
+    public void Heal(int heal)
+    {
+        if (HP != -1) current = Mathf.Clamp(current - heal, 0, HP);
+    }
+
     protected BoardPosition StartPosition()
     {
         return Context.Multicellular?.GetTopPosition ?? Context.CachedPosition;

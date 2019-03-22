@@ -36,8 +36,8 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     public long StartTimeLong => StartTime.ConvertToUnixTime(UseUTC);
 
     public bool IsStarted;
-    
     public bool IsPaused;
+    public bool IsCanceled;
     
     private CurrencyPair price = new CurrencyPair{Currency = Currency.Crystals.Name};
 
