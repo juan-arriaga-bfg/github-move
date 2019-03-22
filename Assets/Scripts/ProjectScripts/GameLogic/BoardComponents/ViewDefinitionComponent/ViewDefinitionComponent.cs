@@ -100,25 +100,19 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
     {
-        Position = to;
+        var f = from;
+        var t = Position = to;
+
+        if (container == null) return;
+        
+        f.Z = t.Z = BoardLayer.UI.Layer;
+        thisContext.Context.RendererContext.MoveElement(f, t);
+        container.CachedTransform.localPosition = thisContext.Context.BoardDef.GetPiecePosition(Position.X, Position.Y);
     }
 
     public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
-        var f = from;
-        var t = to;
-                
-        if (container != null)
-        {
-            f.Z = t.Z = BoardLayer.UI.Layer;
-            thisContext.Context.RendererContext.MoveElement(f, t);
-            container.CachedTransform.localPosition = thisContext.Context.BoardDef.GetPiecePosition(Position.X, Position.Y);
-        }
-        
-        thisContext.Context.ActionExecutor.AddAction(new CallbackAction{Callback = controller =>
-        {
-            OnDrag(true);
-        }});
+        OnDrag(true);
     }
     
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
