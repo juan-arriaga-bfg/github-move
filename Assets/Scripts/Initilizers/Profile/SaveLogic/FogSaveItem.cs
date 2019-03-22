@@ -26,6 +26,15 @@ public class FogSaveItemJsonConverter : JsonConverter
             AlreadyPaid = int.Parse(dataArray[0]),
             Uid = dataArray[1]
         };
+
+        // Migration - load old version when we have positions instead uid here
+        if (dataArray.Length > 2)
+        {
+            for (int i = 2; i < dataArray.Length; i++)
+            {
+                targetValue.Uid += ("," + dataArray[i]);
+            }
+        }
         
         return targetValue;
     }
