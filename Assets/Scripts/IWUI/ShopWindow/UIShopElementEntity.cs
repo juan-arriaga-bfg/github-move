@@ -42,7 +42,7 @@ public class UIShopElementEntity : UISimpleScrollElementEntity
     private string extraLabel;
     public string ExtraLabel
     {
-        get => string.IsNullOrEmpty(extraLabel) ? "" : $"+ <sprite name={Products[0].GetIcon()}>{extraLabel} {LocalizationService.Get("common.button.free", "common.button.free").ToUpper()}";
+        get => string.IsNullOrEmpty(extraLabel) ? "" : $"+<sprite name={Products[0].GetIcon()}>{extraLabel}";
         set => extraLabel = value;
     }
 
