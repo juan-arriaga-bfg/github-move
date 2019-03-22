@@ -24,18 +24,24 @@ public partial class DefaultProfileMigration
         
         var fogSave = profile.GetComponent<FogSaveComponent>(FogSaveComponent.ComponentGuid);
 
-        for (var i = 0; i < fogSave.CompleteFogIds.Count; i++)
+        if (fogSave.CompleteFogIds != null)
         {
-            var id = fogSave.CompleteFogIds[i];
-            fogSave.CompleteFogIds[i] = replacements[id];
+            for (var i = 0; i < fogSave.CompleteFogIds.Count; i++)
+            {
+                var id = fogSave.CompleteFogIds[i];
+                fogSave.CompleteFogIds[i] = replacements[id];
+            }
         }
-        
-        for (var i = 0; i < fogSave.InprogressFogs.Count; i++)
+
+        if (fogSave.InprogressFogs != null)
         {
-            var uid = fogSave.InprogressFogs[i].Uid;
-            fogSave.InprogressFogs[i].Uid = replacements[uid];
+            for (var i = 0; i < fogSave.InprogressFogs.Count; i++)
+            {
+                var uid = fogSave.InprogressFogs[i].Uid;
+                fogSave.InprogressFogs[i].Uid = replacements[uid];
+            }
+
+            fogSave.UpdateCache();
         }
-        
-        fogSave.UpdateCache();
     }
 }
