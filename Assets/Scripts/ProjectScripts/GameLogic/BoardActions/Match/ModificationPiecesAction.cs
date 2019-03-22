@@ -48,6 +48,11 @@ public class ModificationPiecesAction : IBoardAction
 			}
 			
 			pieces.Add(piece);
+
+		    if (piece.Multicellular != null)
+		    {
+		        
+		    }
 		}
 		
 		gameBoardController.BoardLogic.LockCells(Positions, this);
@@ -70,7 +75,8 @@ public class ModificationPiecesAction : IBoardAction
 		var animationMatch = new MatchPieceToAnimation
 		{
 			To = To,
-			Positions = Positions
+			Positions = Positions,
+		    NextPieces = pieces
 		};
 		
 		animationMatch.OnCompleteEvent += (_) =>

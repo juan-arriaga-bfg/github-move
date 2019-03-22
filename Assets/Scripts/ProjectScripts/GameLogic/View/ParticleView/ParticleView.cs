@@ -37,6 +37,21 @@ public class ParticleView : BoardElementView
         return particleView;
     }
     
+    public static ParticleView Show(string particleResourceName, BoardPosition position, Vector3 worldPosition, Vector3 scale)
+    {
+        var board = BoardService.Current.FirstBoard;
+        var particleView = board.RendererContext.CreateBoardElementAt<ParticleView>(particleResourceName, position);
+
+        if (particleView.Particles == null)
+            particleView.Particles = particleView.GetComponentInChildren<ParticleSystem>();
+
+        particleView.CachedTransform.position = worldPosition;
+        particleView.CachedTransform.localScale = scale;
+        
+        particleView.Show();
+        return particleView;
+    }
+    
     public override void SyncRendererLayers(BoardPosition boardPosition)
     {
         base.SyncRendererLayers(boardPosition);
