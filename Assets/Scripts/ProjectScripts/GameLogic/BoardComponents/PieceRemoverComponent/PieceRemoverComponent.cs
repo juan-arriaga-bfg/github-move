@@ -177,18 +177,14 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
     private bool TryOpenFog(BoardPosition pos)
     {
 #if  DEBUG
-        var fogObserver = GameDataService.Current.FogsManager.GetFogObserver(pos.SetZ(0));
+        
         var fogPiece = BoardService.Current.FirstBoard.BoardLogic.GetPieceAt(pos);
-        if (fogObserver?.Context == null && fogPiece?.PieceType != PieceType.Fog.Id)
+        if (fogPiece?.PieceType != PieceType.Fog.Id)
         {
             return false;
         }
-
-        if (fogPiece.CachedPosition.Equals(pos) == false)
-        {
-            return true;
-        }
         
+        var fogObserver = GameDataService.Current.FogsManager.GetFogObserver(fogPiece.CachedPosition.SetZ(0));
         fogObserver?.DebugOpenFog();
         return true;
 #else
