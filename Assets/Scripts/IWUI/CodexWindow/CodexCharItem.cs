@@ -8,7 +8,9 @@ public class CodexCharItem : CodexItem
     private Vector3 selectedScale = new Vector3(1.2f, 1.2f, 1.2f);
     
     private Vector3 normalScale = new Vector3(1f, 1f, 1f);
-
+    
+    private const float ScaleDuration = 0.25f;
+    
     public override void Setup(CodexItemDef itemDef, bool forceHideArrow)
     {
         base.Setup(itemDef, forceHideArrow);
@@ -44,8 +46,8 @@ public class CodexCharItem : CodexItem
             
             DOTween.Kill(this);
             var sequence = DOTween.Sequence().SetId(this);
-            sequence.Insert(0f, CachedTransform.DOScale(selectedScale, 0.5f));
-            sequence.Insert(0f, selectedMaterial.DOFloat(0f, "_WhiteOverlayCoef", 0.5f));
+            sequence.Insert(0f, CachedTransform.DOScale(selectedScale, ScaleDuration));
+            sequence.Insert(0f, selectedMaterial.DOFloat(0f, "_WhiteOverlayCoef", ScaleDuration));
         }
         else
         {
@@ -63,8 +65,8 @@ public class CodexCharItem : CodexItem
         
         DOTween.Kill(this);
         var sequence = DOTween.Sequence().SetId(this);
-        sequence.Insert(0f, CachedTransform.DOScale(normalScale, 0.5f));
-        sequence.Insert(0f, selectedMaterial.DOFloat(0.2f, "_WhiteOverlayCoef", 0.5f));
+        sequence.Insert(0f, CachedTransform.DOScale(normalScale, ScaleDuration));
+        sequence.Insert(0f, selectedMaterial.DOFloat(0.2f, "_WhiteOverlayCoef", ScaleDuration));
     }
 
     public void ToggleExclamationMark(bool isPendingReward)
