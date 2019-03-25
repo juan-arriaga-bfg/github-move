@@ -42,6 +42,8 @@ public class UIHardShopElementViewController : UIShopElementViewController
 
         isOffer = contentEntity.Products.Count > 1;
         claimName.Text = contentEntity.NameLabel;
+
+        if (isOffer == false) return;
         
         productLabels = new List<NSText>
         {
@@ -68,8 +70,6 @@ public class UIHardShopElementViewController : UIShopElementViewController
             item.StyleId = isCrystals ? 23 : 24;
             item.ApplyStyle();
         }
-
-        if (isOffer == false) return;
         
         BoardService.Current.FirstBoard.MarketLogic.OfferTimer.OnTimeChanged += UpdateTimer;
         UpdateTimer();
