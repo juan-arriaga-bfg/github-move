@@ -1,6 +1,7 @@
 using Debug = IW.Logger;
 using UnityEngine;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine.UI;
 
 public class UIOrdersWindowView : UIGenericPopupWindowView
@@ -109,10 +110,16 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         
         back.SetActive(index != 0);
         
+        var dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
+        for (int i = 0; i < dataOrders.Count; i++)
+        {
+            DOTween.Kill(dataOrders[i], true);
+        }
+        
         switch (index)
         {
             case 0:
-                var dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
+                dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
                 
                 messageOders.gameObject.SetActive(dataOrders.Count == 0);
 
