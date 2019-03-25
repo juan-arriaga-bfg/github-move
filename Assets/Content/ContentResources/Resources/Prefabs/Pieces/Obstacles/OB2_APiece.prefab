@@ -384,11 +384,14 @@ MonoBehaviour:
   anchors:
   - Key: -1003
     Anchor: {fileID: 3898371524809859615}
+  - Key: -1015
+    Anchor: {fileID: 3139551216502368807}
   bodySprites: []
   particles: []
   errorSelectionMaterial: {fileID: 0}
   defaultSelectionMaterial: {fileID: 0}
   highlightPieceMaterial: {fileID: 0}
+  arrow: {fileID: 0}
   anchorWorker: {fileID: 4159651624628922}
 --- !u!114 &114607854138475680
 MonoBehaviour:
@@ -404,6 +407,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touchRegions:
   - {fileID: 224618157898909490}
+--- !u!1 &1362654089810215023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3139551216502368807}
+  m_Layer: 0
+  m_Name: RewardsBubbleAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3139551216502368807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362654089810215023}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.056000113, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7258468385737588668}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2160503826460205222
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,6 +495,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3898371524809859615}
+  - {fileID: 3139551216502368807}
   m_Father: {fileID: 4542807987214320}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
