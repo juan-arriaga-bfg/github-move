@@ -7,6 +7,8 @@ public class UIShopElementEntity : UISimpleScrollElementEntity
     {
         get
         {
+            if (Products.Count > 1) return LocalizationService.Get("common.message.sale", "common.message.sale");
+            
             var str = new StringBuilder();
             
             foreach (var pair in Products)

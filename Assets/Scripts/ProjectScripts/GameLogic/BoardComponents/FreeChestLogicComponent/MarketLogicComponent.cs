@@ -7,6 +7,8 @@
 	public TimerComponent ResetEnergyTimer { get; } = new TimerComponent();
 	public TimerComponent OfferTimer { get; } = new TimerComponent();
 
+	public ShopDef Offer;
+
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		RegisterComponent(ResetMarketTimer, true);

@@ -18,6 +18,8 @@
     public override void Perform()
     {
         if (IsPerform) return;
+
+        BoardService.Current.FirstBoard.MarketLogic.Offer = def;
         
         base.Perform();
         
@@ -52,6 +54,7 @@
         
         timer.OnComplete -= OnTimerComplete;
         timer.Stop();
+        BoardService.Current.FirstBoard.MarketLogic.Offer = null;
         
         base.Complete();
     }

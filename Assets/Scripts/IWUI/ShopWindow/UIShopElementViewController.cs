@@ -130,8 +130,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
 		    if (isOk)
 		    {
-			    ProfileService.Instance.Manager.UploadCurrentProfile();
-			    SendAnalyticsEvent();
+			    OnPurchaseComplete();
 		    }
 	    });
     }
