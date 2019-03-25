@@ -13,7 +13,7 @@ public class UINextLevelWindowView : UIGenericWindowView
     [SerializeField] private GameObject headerObj;
     [SerializeField] private CanvasGroup headerCanvas;
     
-    [SerializeField] private Transform tapToContinueAnchor;
+    [IWUIBinding("#TapToContinueAnchor")] private Transform tapToContinueAnchor;
     
     // [IWUIBinding("#UnlockedCharacterContainerLeft")] protected RectTransform unlockedCharacterContainerLeft;
     //
