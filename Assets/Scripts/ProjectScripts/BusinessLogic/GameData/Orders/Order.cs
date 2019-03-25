@@ -22,6 +22,8 @@ public class Order
     
     public Action OnStateChange;
 
+    public Action<Order, OrderState, OrderState> OnStageChangeFromTo;
+
     private Dictionary<int, int> piecesReward;
     public Dictionary<int, int> PiecesReward
     {
@@ -73,6 +75,7 @@ public class Order
         get { return state; }
         set
         {
+            var prevState = value;
             state = value;
             OnStateChange?.Invoke();
 

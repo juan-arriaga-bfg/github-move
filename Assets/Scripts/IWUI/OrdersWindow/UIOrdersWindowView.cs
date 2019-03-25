@@ -194,6 +194,8 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         for (var i = 0; i < entities.Count; i++)
         {
             var def = entities[i];
+            
+            def.OnStateChange += OnOrderStateChange;
 
             var entity = new UIOrderElementEntity
             {
@@ -214,7 +216,12 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         
         return views;
     }
-    
+
+    private void OnOrderStateChange(Order order)
+    {
+        
+    }
+
     private List<IUIContainerElementEntity> UpdateEntitiesRecipes(List<OrderDef> entities)
     {
         var views = new List<IUIContainerElementEntity>(entities.Count);
