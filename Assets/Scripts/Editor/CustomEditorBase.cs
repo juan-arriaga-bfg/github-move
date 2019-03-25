@@ -44,7 +44,7 @@ public class CustomEditorBase:EditorWindow
 
         if (toggleGroupValues.ContainsKey(id) == false)
         {
-            toggleGroupValues[id] = false;
+            toggleGroupValues[id] = true;
         }
 
         toggleGroupValues[id] = EditorGUILayout.BeginToggleGroup(label, toggleGroupValues[id]);
