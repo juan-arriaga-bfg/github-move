@@ -27,6 +27,7 @@ public class UIOfferWindowView : UIGenericPopupWindowView
     private VertexGradient otherGradient;
     
     private bool isClick;
+    private ShopDef offer;
 
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
@@ -45,9 +46,11 @@ public class UIOfferWindowView : UIGenericPopupWindowView
     public override void OnViewShow()
     {
         base.OnViewShow();
+
+        offer = BoardService.Current.FirstBoard.MarketLogic.Offer;
         
         var windowModel = Model as UIOfferWindowModel;
-        var count = windowModel.Product.Products.Count;
+        var count = offer.Products.Count;
         
         products = new List<NSText>
         {
@@ -69,7 +72,7 @@ public class UIOfferWindowView : UIGenericPopupWindowView
         priceFake.Text = windowModel.PriceFake;
         priceReal.Text = windowModel.PriceReal;
         
-        sale.Text = $"-{windowModel.Product.Sale}%";
+        sale.Text = $"-{offer.Sale}%";
         
         line.SetActive(count > 2);
 
@@ -82,7 +85,7 @@ public class UIOfferWindowView : UIGenericPopupWindowView
 
             if (isActive == false) break;
 
-            var product = windowModel.Product.Products[i];
+            var product = offer.Products[i];
             var isCrystals = product.Currency == Currency.Crystals.Name;
 
             label.Text = product.ToStringIcon();
@@ -101,29 +104,20 @@ public class UIOfferWindowView : UIGenericPopupWindowView
             .OnClick(OnClick);
     }
 
-    public override void OnViewClose()
-    {
-        base.OnViewClose();
-        
-        var windowModel = Model as UIOfferWindowModel;
-    }
-
     private void OnClick()
     {
         if (isClick) return;
 		
         isClick = true;
         
-        var windowModel = Model as UIOfferWindowModel;
-	    
         // HACK to handle the case when we have a purchase but BFG still not add it to the Store
-        var isDefRegister = IapService.Current.IapCollection.Defs.All(e => e.Id != windowModel.Product.PurchaseKey);
+        var isDefRegister = IapService.Current.IapCollection.Defs.All(e => e.Id != offer.PurchaseKey);
         if (isDefRegister || DevTools.IsIapEnabled() == false)
         {
             var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
             model.Title = "[DEBUG]";
-            model.Message = $"Product with id '{windowModel.Product.PurchaseKey}' not registered. Purchase will be processed using debug flow without real store.";
+            model.Message = $"Product with id '{offer.PurchaseKey}' not registered. Purchase will be processed using debug flow without real store.";
             model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
             model.OnAccept = OnPurchase;
             model.OnClose = () => { isClick = false; };
@@ -133,7 +127,7 @@ public class UIOfferWindowView : UIGenericPopupWindowView
         }
         // END
 
-        SellForCashService.Current.Purchase(windowModel.Product.PurchaseKey, (isOk, productId) =>
+        SellForCashService.Current.Purchase(offer.PurchaseKey, (isOk, productId) =>
         {
             isClick = false;
 		    
@@ -145,10 +139,9 @@ public class UIOfferWindowView : UIGenericPopupWindowView
 
     private void OnPurchase()
     {
-        var windowModel = Model as UIOfferWindowModel;
         var flyPosition = GetComponentInChildren<Canvas>().worldCamera.WorldToScreenPoint(btnBuy.transform.position);
 
-        CurrencyHelper.PurchaseAsyncOnlyCurrency(windowModel.Product.Products, flyPosition, null);
+        CurrencyHelper.PurchaseAsyncOnlyCurrency(offer.Products, flyPosition, null);
 	    
         isClick = false;
         PurchaseComplete();
@@ -156,10 +149,8 @@ public class UIOfferWindowView : UIGenericPopupWindowView
 
     private void PurchaseComplete()
     {
-        var windowModel = Model as UIOfferWindowModel;
-        
-        CurrencyHelper.Purchase(Currency.Offer.Name, 1);
-        Analytics.SendPurchase($"shop_{Currency.Offer.Name.ToLower()}", $"item{windowModel.ProductIndex}", new List<CurrencyPair>{windowModel.Product.Price}, new List<CurrencyPair>(windowModel.Product.Products), true, false);
+        BoardService.Current.FirstBoard.MarketLogic.CompleteOffer();
+        Analytics.SendPurchase($"shop_{Currency.Offer.Name.ToLower()}", $"item{BoardService.Current.FirstBoard.MarketLogic.OfferIndex}", new List<CurrencyPair>{offer.Price}, new List<CurrencyPair>(offer.Products), true, false);
         Controller.CloseCurrentWindow();
     }
 }

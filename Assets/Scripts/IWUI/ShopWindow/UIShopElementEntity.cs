@@ -58,14 +58,16 @@ public class UIShopElementEntity : UISimpleScrollElementEntity
     }
 
     public int MessageIconSize = -1;
-
-    public string PurchaseKey;
+    
+    public string PurchaseKey => Def.PurchaseKey;
 
     public string NameLabel;
 
-    public bool IsPermanent;
+    public bool IsPermanent => Def.IsPermanent;
     
-    public List<CurrencyPair> Products;
-    public List<CurrencyPair> Extras;
-    public CurrencyPair Price;
+    public List<CurrencyPair> Products => Def.Products;
+    public List<CurrencyPair> Extras => Def.Extras;
+    public CurrencyPair Price => Def.Price;
+
+    public ShopDef Def;
 }

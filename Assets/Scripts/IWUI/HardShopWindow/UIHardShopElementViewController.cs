@@ -85,12 +85,7 @@ public class UIHardShopElementViewController : UIShopElementViewController
         
         BoardService.Current.FirstBoard.MarketLogic.OfferTimer.OnTimeChanged -= UpdateTimer;
     }
-
-    private void UpdateTimer()
-    {
-        nameLabel.Text = BoardService.Current.FirstBoard.MarketLogic.OfferTimer.CompleteTime.GetTimeLeftText(true, false, null, false);
-    }
-
+    
     protected override void ChangeView()
     {
         var contentEntity = entity as UIShopElementEntity;
@@ -123,11 +118,17 @@ public class UIHardShopElementViewController : UIShopElementViewController
         {
             isClaimed = true;
             ChangeView();
-            Debug.LogError("!!!!!!");
         }
         
         if (isOffer == false) return;
         
+        BoardService.Current.FirstBoard.MarketLogic.CompleteOffer();
+        BoardService.Current.FirstBoard.TutorialLogic.UpdateHard();
         BoardService.Current.FirstBoard.MarketLogic.OfferTimer.OnTimeChanged -= UpdateTimer;
+    }
+    
+    private void UpdateTimer()
+    {
+        nameLabel.Text = BoardService.Current.FirstBoard.MarketLogic.OfferTimer.CompleteTime.GetTimeLeftText(true, false, null, false);
     }
 }

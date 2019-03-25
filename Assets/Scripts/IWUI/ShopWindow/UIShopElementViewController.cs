@@ -177,13 +177,19 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
     {
 	    var shopModel = context.Model as UIShopWindowModel;
 	    var contentEntity = entity as UIShopElementEntity;
-
+	    
+	    var products = new List<CurrencyPair>(contentEntity.Products);
+	    
 	    var isFree = contentEntity.Price != null && contentEntity.Price.Currency != Currency.Cash.Name && contentEntity.Price.Amount == 0;
 	    var isIap = contentEntity.Price != null && contentEntity.Price.Currency == Currency.Cash.Name;
-
-	    var products = new List<CurrencyPair>(contentEntity.Products);
+	    var isOffer = products.Count > 1;
+	    
 	    if (contentEntity.Extras != null) products.AddRange(contentEntity.Extras);
 	    
-	    Analytics.SendPurchase(shopModel.AnalyticLocation, $"item{CachedTransform.GetSiblingIndex()}", new List<CurrencyPair>{contentEntity.Price}, products, isIap, isFree);
+	    Analytics.SendPurchase(
+		    isOffer ? $"{shopModel.AnalyticLocation}_{Currency.Offer.Name.ToLower()}" : shopModel.AnalyticLocation,
+		    shopModel.AnalyticReason(contentEntity.Def),
+		    new List<CurrencyPair>{contentEntity.Price},
+		    products, isIap, isFree);
     }
 }

@@ -40,12 +40,8 @@ public class UIShopWindowView : UIGenericPopupWindowView
             var entity = new UIShopElementEntity
             {
                 ContentId = isPack ? string.Empty : def.Icon,
-                PurchaseKey = def.PurchaseKey,
-                Products = def.Products,
-                Extras = def.Extras,
-                Price = def.Price,
                 NameLabel = isPack ? string.Empty : LocalizationService.Get(def.Name),
-                IsPermanent = def.IsPermanent,
+                Def = def,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
             };
