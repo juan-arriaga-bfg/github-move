@@ -21,10 +21,17 @@ public class UISimpleScrollElementViewController : UIContainerElementViewControl
     {
         get
         {
-            group = anchor.GetComponent<CanvasGroup>();
-            if (group == null)
+            if (anchor != null)
             {
-                group = anchor.gameObject.AddComponent<CanvasGroup>();
+                group = anchor.GetComponent<CanvasGroup>();
+                if (group == null)
+                {
+                    group = anchor.gameObject.AddComponent<CanvasGroup>();
+                }
+            }
+            else
+            {
+                group = GetComponentInChildren<CanvasGroup>();
             }
 
             return group;
