@@ -9,10 +9,9 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
     {
         get
         {
-            var isLast = HP != 1 && HP == current + 1;
             var message = LocalizationService.Get("gameboard.bubble.message.obstacle", "gameboard.bubble.message.obstacle\n{0}?");
 
-            return isLast
+            return GetDelay(current) > WorkerCurrencyLogicComponent.MinDelay
                 ? string.Format(message, DateTimeExtension.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current), true))
                 : message.Replace("\n{0}", "");
         }
@@ -40,6 +39,7 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         Context.Context.WorkerLogic.Init(Context.CachedPosition, TimerMain);
         
         TimerMain.Delay =  GetDelay(current - 1);
+        TimerMain.IsCanceled = TimerMain.Delay > WorkerCurrencyLogicComponent.MinDelay;
         
         if (item.IsStartTimer) TimerMain.Start(item.StartTimeTimer);
         else
@@ -61,6 +61,7 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
     protected override void Success()
     {
         TimerMain.Delay = GetDelay(current);
+        TimerMain.IsCanceled = TimerMain.Delay > WorkerCurrencyLogicComponent.MinDelay;
     }
     
     protected override void OnSpawnCurrencyRewards(bool isComplete)

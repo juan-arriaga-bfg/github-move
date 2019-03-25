@@ -6,23 +6,73 @@ public class MatchPieceToAnimation : BoardAnimation
 {
 	public BoardPosition To;
 	public List<BoardPosition> Positions;
+    public List<Piece> NextPieces;
+
+    public Vector3 GetToWorldPosition(BoardRenderer context)
+    {
+        if (NextPieces != null)
+        {
+            for (int i = 0; i < NextPieces.Count; i++)
+            {
+                var nextPiece = NextPieces[i];
+                if (nextPiece.Multicellular != null)
+                {
+                    return nextPiece.Multicellular.GetWorldCenterPosition();
+                }
+            }
+        }
+
+        return context.Context.BoardDef.GetPiecePosition(To.X, To.Y);
+    }
+
+    public Vector3 GetTargetScale()
+    {
+        if (NextPieces != null)
+        {
+            for (int i = 0; i < NextPieces.Count; i++)
+            {
+                var nextPiece = NextPieces[i];
+                
+                if (nextPiece.Multicellular != null)
+                {
+                    return Vector3.one * nextPiece.Multicellular.GetWidth();
+                }
+            }
+        }
+        return Vector3.one;
+    }
+
+    public void ToggleView(bool state)
+    {
+        if (NextPieces != null)
+        {
+            for (int i = 0; i < NextPieces.Count; i++)
+            {
+                var nextPiece = NextPieces[i];
+
+                if (nextPiece?.ViewDefinition == null) continue;
+                
+                nextPiece.ViewDefinition.Visible = state;
+            }
+        }
+    }
 	
 	public override void Animate(BoardRenderer context)
 	{
 		var points = Positions;
-		var to = context.Context.BoardDef.GetPiecePosition(To.X, To.Y);
-		
-		
-		
-		
+	    var to = GetToWorldPosition(context);
+	    var targetScale = GetTargetScale();
+
+	    ToggleView(false);
+	    
 		var sequence = DOTween.Sequence().SetId(animationUid);
 		const float elementOffset = 0.00f;
 		
 		var particlePosition = new BoardPosition(To.X, To.Y, 2);
 		
 		sequence.timeScale = 1.2f;
-		sequence.InsertCallback(0.0f, () => ParticleView.Show(R.SmolderingParticles, particlePosition));
-		sequence.InsertCallback(0.0f, () => ParticleView.Show(R.MergeParticleSystem, particlePosition).SyncRendererLayers(new BoardPosition(To.X, To.Y, 4)));
+		sequence.InsertCallback(0.0f, () => ParticleView.Show(R.SmolderingParticles, particlePosition, to, Vector3.one));
+		sequence.InsertCallback(0.0f, () => ParticleView.Show(R.MergeParticleSystem, particlePosition, to, Vector3.one).SyncRendererLayers(new BoardPosition(To.X, To.Y, 4)));
 
 		var mergeElementTypeDef = GetMergeTypeDef(context);
 		PlaySoundByMergeType( mergeElementTypeDef );
@@ -33,6 +83,7 @@ public class MatchPieceToAnimation : BoardAnimation
 			
 			if (points[i].Equals(To))
 			{
+			    sequence.Insert(0 + elementOffset*i, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.25f));
 				sequence.Insert(0.25f, boardElement.CachedTransform.DOScale(Vector3.one * 1.2f, 0.10f));
 				sequence.Insert(0.35f, boardElement.CachedTransform.DOScale(Vector3.zero, 0.1f));
 				boardElement.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
@@ -44,10 +95,12 @@ public class MatchPieceToAnimation : BoardAnimation
 			sequence.Insert(0.15f + elementOffset*i, boardElement.CachedTransform.DOScale(Vector3.zero, 0.20f));
 		}
 
-		sequence.InsertCallback(0.35f, () => ParticleView.Show(R.ExplosionParticleSystem, particlePosition));
+		sequence.InsertCallback(0.35f, () => ParticleView.Show(R.ExplosionParticleSystem, particlePosition, to, targetScale));
 		
 		sequence.OnComplete(() =>
 		{
+		    ToggleView(true);
+		    
 			foreach (var point in points)
 			{
 				context.RemoveElementAt(point);

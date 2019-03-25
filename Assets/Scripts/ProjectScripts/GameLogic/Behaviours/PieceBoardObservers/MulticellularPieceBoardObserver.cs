@@ -8,6 +8,7 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 
 	public List<BoardPosition> Mask;
 
+    
 	public BoardPosition GetTopPosition
 	{
 		get
@@ -16,6 +17,56 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 			return realPosition.UpAtDistance(size - 1);
 		}
 	}
+
+    public virtual Vector3 GetWorldCenterPosition()
+    {
+        var center = Vector3.zero;
+        
+        for (int j = 0; j < Mask.Count; j++)
+        {
+            var maskPosition = Mask[j];
+            var realPosition = GetPointInMask(this.realPosition, maskPosition);
+            var maskLocalPosition = Context.Context.BoardDef.GetWorldPosition(realPosition.X, realPosition.Y);
+
+            center = center + maskLocalPosition;
+        }
+
+        center = center / Mask.Count;
+
+        return center;
+    }
+
+    public int GetWidth()
+    {
+        int defaultDimension = Mask[0].X;
+        int width = 0;
+            
+        for (int i = 0; i < Mask.Count; i++)
+        {
+            var maskPosition = Mask[i];
+            if (defaultDimension == maskPosition.X)
+            {
+                width = width + 1;
+            }
+        }
+        return width > 0 ? width : 1;
+    }
+
+    public int GetHeight()
+    {
+        int defaultDimension = Mask[0].Y;
+        int height = 0;
+            
+        for (int i = 0; i < Mask.Count; i++)
+        {
+            var maskPosition = Mask[i];
+            if (defaultDimension == maskPosition.Y)
+            {
+                height = height + 1;
+            }
+        }
+        return height > 0 ? height : 1;
+    }
     
     public BoardPosition GetRightPosition
     {

@@ -21,6 +21,13 @@ public partial class DefaultProfileMigration : IProfileMigration
     public void Migrate(int clientVersion, UserProfile profile)
     {
         var currentVersion = profile.SystemVersion;
+        
+        // Handle new profile
+        if (currentVersion == 0)
+        {
+            profile.SystemVersion = clientVersion;
+            return;
+        }
 
         MigrateIteration(clientVersion, profile);
         

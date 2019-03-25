@@ -22,10 +22,10 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
 	    base.Init();
 	    
 	    freeLabel.Text = LocalizationService.Get("common.button.free", "common.button.free");
-	    extraLabel.Text = contentEntity.ExtraLabel;
+	    extraLabel.Text = contentEntity.ExtraText;
 	    
 	    freeObj.SetActive(isFree);
-	    extraObj.SetActive(string.IsNullOrEmpty(contentEntity.ExtraLabel) == false);
+	    extraObj.SetActive(string.IsNullOrEmpty(contentEntity.ExtraText) == false);
 
 	    if (isFree == false) return;
 	    

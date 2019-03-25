@@ -1,4 +1,6 @@
-﻿public class TouchReactionConditionWorkplace : TouchReactionConditionComponent
+﻿using System;
+
+public class TouchReactionConditionWorkplace : TouchReactionConditionComponent
 {
 	public override bool Check(BoardPosition position, Piece piece)
 	{
@@ -29,7 +31,8 @@
 		UIMessageWindowController.CreateTimerCompleteMessage(
 			LocalizationService.Get("window.timerComplete.message.default", "window.timerComplete.message.default"),
 			life.AnalyticsLocation,
-			life.TimerWork);
+			life.TimerWork,
+			life.TimerWork.IsCanceled ? life.Cancel : default(Action));
 		
 		return false;
 	}

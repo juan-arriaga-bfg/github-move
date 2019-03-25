@@ -21,6 +21,7 @@ public class ObstaclePieceView : PieceBoardElementView
         if(life == null) return;
 
         life.TimerMain.OnStart += UpdateAnimation;
+        life.TimerMain.OnStop += UpdateAnimation;
         life.TimerMain.OnComplete += UpdateAnimation;
         
         UpdateAnimation();
@@ -40,6 +41,7 @@ public class ObstaclePieceView : PieceBoardElementView
         if(life?.TimerMain == null) return;
         
         life.TimerMain.OnStart -= UpdateAnimation;
+        life.TimerMain.OnStop -= UpdateAnimation;
         life.TimerMain.OnComplete -= UpdateAnimation;
         
         if(skin != null) life.TimerMain.OnComplete -= skin.UpdateView;

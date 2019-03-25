@@ -37,7 +37,12 @@
         "Amount": 80
       }
     ],
-    "Extra": 10,
+    "Extras": [
+      {
+        "Currency": "Energy",
+        "Amount": 10
+      }
+    ],
     "Price": {
       "Currency": "Coins",
       "Amount": 550

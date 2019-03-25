@@ -27,6 +27,8 @@ public class UIMessageWindowView : UIGenericPopupWindowView
     [IWUIBinding("#DelimiterTextAndButtons")] protected GameObject delimiterTextAndButtons;
     [IWUIBinding("#DelimiterTimerAndButtons")] protected GameObject delimiterTimerAndButtons;
     
+    [IWUIBinding("#ButtonCancel")] protected CanvasGroup btnCancelCanvas;
+    
     private bool isAccept;
     private bool isCancel;
 
@@ -154,6 +156,8 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         
         timerLabel.Text = windowModel.Timer.CompleteTime.GetTimeLeftText();
         buttonBuyLabel.Text = isFree ? LocalizationService.Get("common.button.free", "common.button.free") : windowModel.AcceptLabel + windowModel.Timer.GetPrice().ToStringIcon();
+        btnCancelBack.sprite = IconService.Current.GetSpriteById($"button{(isFree ? UIMessageWindowModel.ButtonColor.Sepia : windowModel.CancelColor)}");
+        btnCancelCanvas.interactable = !isFree;
     }
 
     private void CompleteTimer()

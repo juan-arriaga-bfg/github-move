@@ -65,9 +65,8 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         thisContext = entity as Piece;
         
         var def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType + 1);
-        
-        Timer = new TimerComponent{Delay = def.Delay};
-        
+
+        Timer = new TimerComponent {Delay = def.Delay, IsCanceled = thisContext.Multicellular == null};
         RegisterComponent(Timer);
     }
     
@@ -161,7 +160,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         view.SetData(title, button, piece => Work(), true, false);
         view.Change(true);
     }
-
+    
     public void OnChange()
     {
         switch (state)
@@ -238,5 +237,13 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
             
             return;
         }
+    }
+    
+    public void Cancel()
+    {
+        Timer.Stop();
+        thisContext.ViewDefinition.AddView(ViewType.BoardTimer).Change(false);
+        State = BuildingState.Warning;
+        thisContext.Context.WorkerLogic.Return(thisContext.CachedPosition);
     }
 }

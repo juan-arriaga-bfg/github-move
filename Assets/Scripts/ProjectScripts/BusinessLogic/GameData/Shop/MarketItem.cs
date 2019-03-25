@@ -24,7 +24,15 @@ public class MarketItem
         get { return state; }
         set
         {
-            if (current?.IsPermanent == false || value < MarketItemState.Purchased) state = value;
+            if (current != null && current.IsPermanent)
+            {
+                if (value < MarketItemState.Purchased) state = value;
+            }
+            else
+            {
+                state = value;
+            }
+            
             GameDataService.Current.MarketManager.UpdateState?.Invoke();
         }
     }
@@ -51,9 +59,9 @@ public class MarketItem
         }
     }
 
-    public void Init(int index, int piece, int amount, MarketItemState state)
+    public void Init(int index, int piece, int amount, MarketItemState initState)
     {
-        State = state;
+        State = initState;
         Index = Mathf.Clamp(index, -1, defs.Count - 1);
 
         if (Index == -1) return;

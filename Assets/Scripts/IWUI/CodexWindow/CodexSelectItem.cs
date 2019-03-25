@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Debug = IW.Logger;
 using System.Linq;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class CodexSelectItem : MonoBehaviour
     [SerializeField] protected Color lockedColor;
 
     private Transform icon;
+    private List<Image> IconSprites = new List<Image>();
 
     public CodexChain GetChain()
     {
@@ -67,14 +69,23 @@ public class CodexSelectItem : MonoBehaviour
 
         if (icon != null)
         {
+            foreach (var sprite in IconSprites)
+            {
+                sprite.material = unlokedMaterial;
+                sprite.color = unlockedColor;
+            }
+            
             UIService.Get.PoolContainer.Return(icon.gameObject);
+            IconSprites = new List<Image>();
+            icon = null;
         }
         
         icon = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
         icon.SetParentAndReset(parent);
 
-        var iconSprites = icon.GetComponentsInChildren<Image>().ToList();
-        foreach (var sprite in iconSprites)
+        IconSprites = icon.GetComponentsInChildren<Image>().ToList();
+        
+        foreach (var sprite in IconSprites)
         {
             sprite.material = locked ? lockedMaterial : unlokedMaterial;
             sprite.color    = locked ? lockedColor : unlockedColor;

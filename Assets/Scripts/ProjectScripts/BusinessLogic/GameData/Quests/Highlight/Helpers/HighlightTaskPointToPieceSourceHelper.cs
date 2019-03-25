@@ -5,10 +5,10 @@ using UnityEngine;
 public static class HighlightTaskPointToPieceSourceHelper
 {
     // Match: A1, B1, C9, returns: A, B, C
-    private static readonly Regex pieceBranchRegexSimple  = new Regex(@"(^)[A-Z]*", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+    public static readonly Regex PieceBranchRegexSimple  = new Regex(@"(^)[A-Z]*", RegexOptions.IgnoreCase | RegexOptions.Compiled);
     
     // Match: PR_A1, CH2_B, OB_PR_C, returns: A, B, C
-    private static readonly Regex pieceBranchRegexComplex = new Regex(@"(?<=_)([A-Z]*)($|(?=[0-9]+))", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+    public static readonly Regex PieceBranchRegexComplex = new Regex(@"(?<=_)([A-Z]*)($|(?=[0-9]+))", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
     public static bool PointToPieceSource(IHavePieceId pieceTask, PieceTypeFilter sourceFilter, PieceTypeFilter? excludeFilter = null, List<string> allowedSourceBranches = null)
     {        
@@ -22,10 +22,10 @@ public static class HighlightTaskPointToPieceSourceHelper
         PieceTypeDef def = PieceType.GetDefById(pieceId);
         string pieceIdStr = def.Abbreviations[0];
 
-        Regex pieceRegex = pieceIdStr.Contains("_") ? pieceBranchRegexComplex : pieceBranchRegexSimple;
+        Regex pieceRegex = pieceIdStr.Contains("_") ? PieceBranchRegexComplex : PieceBranchRegexSimple;
         string pieceBranch = pieceRegex.Match(pieceIdStr).Value;
 
-        Regex sourceBranchRegex = pieceBranchRegexComplex;
+        Regex sourceBranchRegex = PieceBranchRegexComplex;
         
         var board = BoardService.Current.FirstBoard;
         var boardLogic = board.BoardLogic;

@@ -7,20 +7,28 @@ public class ShopDef
     public string Name;
     public string PurchaseKey;
     public List<CurrencyPair> Products;
-    public int Extra;
+    public List<CurrencyPair> Extras;
     public CurrencyPair Price;
     public bool IsPermanent;
     public int Sale;
     public int Delay;
     
-    
     public ShopDef Copy()
     {
         var products = new List<CurrencyPair>();
+        var extras = new List<CurrencyPair>();
 
         foreach (var product in Products)
         {
             products.Add(new CurrencyPair{Currency = product.Currency, Amount = product.Amount});
+        }
+
+        if (Extras != null)
+        {
+            foreach (var extra in Extras)
+            {
+                extras.Add(new CurrencyPair{Currency = extra.Currency, Amount = extra.Amount});
+            }
         }
         
         return new ShopDef
@@ -31,6 +39,7 @@ public class ShopDef
             PurchaseKey = this.PurchaseKey,
             Price = new CurrencyPair{Currency = this.Price.Currency, Amount = this.Price.Amount},
             Products = products,
+            Extras = extras,
             IsPermanent = this.IsPermanent,
             Sale = this.Sale,
             Delay = this.Delay

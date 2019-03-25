@@ -121,7 +121,7 @@ public class UIMessageWindowController : IWWindowController {
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
 
-    public static void CreateTimerCompleteMessage(string message, string analyticsLocation, TimerComponent timer)
+    public static void CreateTimerCompleteMessage(string message, string analyticsLocation, TimerComponent timer, Action onCancel = null)
     {
         if(timer.Delay - timer.StartTime.GetTime().TotalSeconds < 1) return;
 
@@ -130,11 +130,13 @@ public class UIMessageWindowController : IWWindowController {
         model.Title = LocalizationService.Get("window.timerComplete.title", "window.timerComplete.title");
         model.Message = message;
         model.AcceptLabel = "";
+        model.CancelLabel = LocalizationService.Get("common.button.cancel", "common.button.cancel");
+        
         model.IsBuy = true;
 
         model.OnAccept = () => { timer.FastComplete(analyticsLocation); };
-        model.OnCancel = null;
-
+        model.OnCancel = onCancel;
+        
         model.Timer = timer;
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
