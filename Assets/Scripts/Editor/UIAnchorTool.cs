@@ -6,13 +6,20 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-public class UIAnchorTool: EditorWindow
+public class UIAnchorTool: CustomEditorBase
 {
     private ViewType targetView = ViewType.None;
-    private bool isRecursion;
-    private float offsetY = -1.8f;
     
-    [MenuItem("Window/Utils/UIAnchorToolWindow")]
+    private float offsetY = 0f;
+    private float ratioCoefficient = 0.8f;
+    
+    private bool isRecursion;
+    private bool useSpriteHeight;
+    private bool useProportionalOffset;
+    
+    private string targetSpriteObject = "sprite";
+    
+    [MenuItem("Window/Utils/UIAnchorTool")]
     public static void Create()
     {
         var anchorTool = GetWindow(typeof(UIAnchorTool)) as UIAnchorTool;
@@ -21,48 +28,80 @@ public class UIAnchorTool: EditorWindow
     
     protected virtual void OnGUI()
     {
-        DrawComponentCombobox();
-        DrawRecursionToggle();
-        DrawOffsetField();
-        DrawExecuteButton();
-    }
-    
-    private void DrawComponentCombobox()
-    {
-        string[] options = Enum.GetNames(typeof(ViewType));
+        ScrollArea(this, () =>
+        {
+            Header("Base");
+            ComboboxTargetViewType();
+            FieldOffsetY();
         
-        ViewType.TryParse(options[EditorGUILayout.Popup("ViewType", Array.IndexOf(options, Enum.GetName(typeof(ViewType), targetView)), options)], out targetView);
+            Header("Options");
+            ToggleRecursion();
+            ToggleGroup(this, out useSpriteHeight, "Use sprite height", () =>
+            {
+                ToggleProportionalOffset();
+                FieldTargetSpriteObject();
+                FieldProportionalRatio();
+            });
+
+            Separator();
+            Button("Execute", OnExecuteClick);
+        });
     }
 
-    private void DrawOffsetField()
+#region WindowUI
+    private void FieldTargetSpriteObject()
+    {
+        targetSpriteObject = EditorGUILayout.TextField("Target sprite object", targetSpriteObject);
+    }
+
+    private void ComboboxTargetViewType()
+    {
+        targetView = (ViewType)EditorGUILayout.EnumPopup("ViewType", targetView);
+    }
+
+    private void ToggleRecursion()
+    {
+        isRecursion = EditorGUILayout.ToggleLeft("Recursion", isRecursion);
+    }
+
+    private void ToggleProportionalOffset()
+    {
+        useProportionalOffset = EditorGUILayout.ToggleLeft("Use proportional offset", useProportionalOffset);
+    }
+    
+    private void FieldOffsetY()
     {
         offsetY = EditorGUILayout.FloatField("Offset Y", offsetY);
     }
-
-    private void DrawRecursionToggle()
+    
+    private void FieldProportionalRatio()
     {
-        isRecursion = GUILayout.Toggle(isRecursion, "Recursion");
+        ratioCoefficient = EditorGUILayout.FloatField("Ratio coefficient", ratioCoefficient);
     }
+#endregion
 
-    private void DrawExecuteButton()
+#region WindowLogic
+    private void OnExecuteClick()
     {
-        if (GUILayout.Button("Execute"))
+        if (targetView == ViewType.None)
         {
-            var obj = Selection.activeObject;
-            var path = AssetDatabase.GetAssetPath(obj.GetInstanceID());
-
-            if (Directory.Exists(path))
-            {
-                RecursionAddAnchor(path);    
-            }
-            else if(File.Exists(path))
-            {
-                ChangeAnchorForFile(path);
-            }
+            IW.Logger.LogError($"[UIAnchorTool] => Target view not selected");
+            return;
+        }
+        var obj = Selection.activeObject;
+        var path = AssetDatabase.GetAssetPath(obj.GetInstanceID());
+    
+        if (Directory.Exists(path))
+        {
+            RecursionAddAnchors(path);    
+        }
+        else if(File.Exists(path))
+        {
+            ChangeAnchorForFile(path);
         }
     }
-
-    private void RecursionAddAnchor(string folderPath)
+    
+    private void RecursionAddAnchors(string folderPath)
     {
         var files = Directory.GetFiles(folderPath);
         foreach (var file in files)
@@ -75,72 +114,35 @@ public class UIAnchorTool: EditorWindow
             var directories = Directory.GetDirectories(folderPath);
             foreach (var directory in directories)
             {
-                RecursionAddAnchor(directory);
+                RecursionAddAnchors(directory);
             }
         }
     }
 
     private void ChangeAnchorForFile(string filePath)
     {
-        
         if (Path.GetExtension(filePath) == ".prefab")
         {
             var asset = PrefabUtility.LoadPrefabContents(filePath);
-            try
-            {
-                ChangeAnchorForPrefab(asset, filePath);
-            }
-            catch (Exception e)
-            {
-                IW.Logger.LogError(e);
-            }
-            
+            ChangeAnchorForPrefab(asset, filePath);
         }
     }
-
+    
     private void ChangeAnchorForPrefab(GameObject prefab, string path)
     {
         string rootName = "Anchors";
-        var anchorRoot = prefab.transform.Find(rootName)?.gameObject;
-        if (anchorRoot == null)
-        {
-            anchorRoot = new GameObject();
-            anchorRoot.transform.SetParent(prefab.transform);
-            anchorRoot.transform.localPosition = Vector3.zero;
-            anchorRoot.name = rootName;
-        }
-
-        var sprite = FindDeepChild(prefab.transform, "sprite");
-        if (sprite == null)
-        {
-            return;
-        }
-
-        var anchorName = $"{Enum.GetName(typeof(ViewType), targetView)}Anchor";
-        GameObject anchor = anchorRoot.transform.Find(anchorName)?.gameObject;
-        if (anchor == null)
-        {
-            anchor = new GameObject();
-            anchor.transform.parent = anchorRoot.transform;
-            anchor.transform.localPosition = Vector3.zero;
-            anchor.name = anchorName;
-        }        
+        var anchorRoot = FindOrCreateAnchorRoot(prefab, rootName);
         
-        var renderer = sprite.GetComponent<Renderer>();
-        var size = renderer.bounds.size;
+        var anchorName = $"{Enum.GetName(typeof(ViewType), targetView)}Anchor";
+        var anchor = FindOrCreateAnchor(anchorRoot, anchorName);
 
-        var spriteOffset = size.y / 2;
-        if (size.y > size.x)
-        {
-            spriteOffset *= size.x / size.y * 0.8f;
-        }
+        var spriteOffset = GetSpriteOffset(prefab);
         var offsetBubble = offsetY;
         
-        var newPosition = anchor.transform.position;
-        newPosition = new Vector3(newPosition.x, sprite.position.y, newPosition.z);
-        newPosition.y += spriteOffset;
+        var newPosition = anchor.transform.localPosition;
+        newPosition = new Vector3(newPosition.x, spriteOffset, newPosition.z);
         newPosition.y += offsetBubble;
-        anchor.transform.position = newPosition;
+        anchor.transform.localPosition = newPosition;
 
         var pieceView = prefab.GetComponent<PieceBoardElementView>();
         ViewAnchorLink viewAnchorLink = pieceView.Anchors.Find(elem => elem.Key == targetView);
@@ -156,20 +158,58 @@ public class UIAnchorTool: EditorWindow
         
         PrefabUtility.SaveAsPrefabAsset(prefab, path);
     }
-    
-    public static Transform FindDeepChild(Transform aParent, string aName)
+
+    private GameObject FindOrCreateAnchorRoot(GameObject prefab, string anchorRootName)
     {
-        Queue<Transform> queue = new Queue<Transform>();
-        queue.Enqueue(aParent);
-        while (queue.Count > 0)
+        var anchorRoot = prefab.transform.Find(anchorRootName)?.gameObject;
+        if (anchorRoot == null)
         {
-            var c = queue.Dequeue();
-            if (c.name == aName)
-                return c;
-            foreach(Transform t in c)
-                queue.Enqueue(t);
+            anchorRoot = new GameObject(anchorRootName);
+            anchorRoot.transform.SetParent(prefab.transform);
+            anchorRoot.transform.localPosition = Vector3.zero;
         }
-        return null;
+
+        return anchorRoot;
     }
+
+    private GameObject FindOrCreateAnchor(GameObject anchorRoot, string anchorName)
+    {
+        GameObject anchor = anchorRoot.transform.Find(anchorName)?.gameObject;
+        if (anchor == null)
+        {
+            anchor = new GameObject(anchorName);
+            anchor.transform.parent = anchorRoot.transform;
+            anchor.transform.localPosition = Vector3.zero;
+        }
+
+        return anchor;
+    }
+
+    private float GetSpriteOffset(GameObject prefab)
+    {
+        if (useSpriteHeight == false)
+        {
+            return 0f;
+        }
+        
+        var sprite = FindDeepChild(prefab.transform, string.IsNullOrEmpty(targetSpriteObject) ? "sprite" : targetSpriteObject);
+        if (sprite == null)
+        {
+            return 0f;
+        }
+        
+        var renderer = sprite.GetComponent<Renderer>();
+        var size = renderer.bounds.size;
+
+        var spriteOffset = sprite.localPosition.y + size.y / 2;
+        if (useProportionalOffset && size.y > size.x)
+        {
+            spriteOffset *= size.x / size.y * ratioCoefficient;
+        }
+
+        return spriteOffset;
+    }
+#endregion
+    
 }
 #endif
