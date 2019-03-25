@@ -4,8 +4,7 @@ public class ConversationScenarioEntity : ECSEntity, IECSSerializeable
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
-
-    public bool Continuation { get; set; }
+    public ConversationScenarioEntity PreviousScenario { get; set; }
     
     private readonly List<ConversationActionEntity> actions = new List<ConversationActionEntity>();
 
@@ -40,5 +39,19 @@ public class ConversationScenarioEntity : ECSEntity, IECSSerializeable
     public ConversationActionEntity GetFirstAction()
     {
         return actions[0];
+    }
+
+    public ConversationActionBubbleEntity GetLastBubbleAction()
+    {
+        for (var i = actions.Count - 1; i >= 0; i--)
+        {
+            var action = actions[i];
+            if (action is ConversationActionBubbleEntity bubbleAction)
+            {
+                return bubbleAction;
+            }
+        }
+
+        return null;
     }
 }

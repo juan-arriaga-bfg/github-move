@@ -305,11 +305,13 @@ public class UIQuestStartWindowView : IWUIWindowView
             {
                 var questManager = GameDataService.Current.QuestsManager;
 
+                var currentScenario = model.QuestCompletedScenario;
+                
                 HashSet<string> questsToStart = questManager.CheckConditions(out string starterId);
                 if (questsToStart.Count > 0)
                 {
                     model.Init(null, questsToStart, starterId);
-                    model.QuestStartScenario.Continuation = true;
+                    model.QuestStartScenario.PreviousScenario = currentScenario;
                     step = Step.QuestStart;
                 }
                 else

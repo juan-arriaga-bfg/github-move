@@ -106,7 +106,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     {
         ConversationScenarioCharacterListComponent characterList = scenario.GetComponent<ConversationScenarioCharacterListComponent>(ConversationScenarioCharacterListComponent.ComponentGuid);
 
-        if (scenario.Continuation)
+        if (scenario.PreviousScenario != null)
         {
             // Remove chars that not a part of new scenario
             List<string> charsToRemove = characters.Keys.ToList();
@@ -125,47 +125,116 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             }
         }
 
-        foreach (var pair in characterList.ConversationCharacters)
+        // Order to spawn chars - valuable for z sorting
+        var order = new List<CharacterPosition>
         {
-            if (GetCharacterById(pair.Value) != null)
+            CharacterPosition.LeftOuter,
+            CharacterPosition.RightOuter,
+            CharacterPosition.LeftInner,
+            CharacterPosition.RightInner
+        };
+        
+        foreach (var position in order)
+        {
+            if (!characterList.ConversationCharacters.TryGetValue(position, out string charId))
+            {
+                continue;
+            }
+            
+            if (GetCharacterById(charId) != null)
             {
                 continue;
             }
 
-            InitCharacter(pair.Value, pair.Key, false);
-         }
+            var character = InitCharacter(charId, position, false);
+            character.transform.SetAsLastSibling();
+        }
 
-        if (!scenario.Continuation && characterList.ConversationCharacters.Count == 1)
-        {
-            SpawnCharacters(true, onComplete);
-        }
-        else
-        {
-            SpawnCharacters(false, onComplete);
-        }
+        SpawnCharacters(onComplete);
     }
 
-    private void SpawnCharacters(bool animated, Action onComplete)
+    private string GetIdOfCharInTheLastBubbleOfPreviousScenario()
     {
-        if (animated && (scenario.Continuation || characters.Count != 1))
+        if (scenario.PreviousScenario == null)
         {
-            Debug.LogError("[UICharactersConversationViewController] => SpawnCharactersAnimated: supported only for ONE char in scenario and not for chained scenario");
-            onComplete();
-            return;
+            return null;
         }
 
+        var action = scenario.PreviousScenario.GetLastBubbleAction();
+        return action?.CharacterId;
+    }
+    
+    private void SpawnCharacters(Action onComplete)
+    {
         ConversationActionEntity action = scenario.GetFirstAction();
         ConversationActionBubbleEntity bubbleAction = action as ConversationActionBubbleEntity;
 
-        var character = characters[bubbleAction.CharacterId];
-        character.ToForeground(false, bubbleAction.Emotion);
-
-        if (animated)
+        // Sort chars
+        var order = new List<CharacterPosition>
         {
-            float dx = 170;
-            float moveTime = 0.4f;
-            float fadeTime = 0.35f;
-            float totalTime = 0.1f;
+            CharacterPosition.LeftInner,
+            CharacterPosition.RightInner,
+            CharacterPosition.LeftOuter,
+            CharacterPosition.RightOuter,
+        };
+
+        var charsToSpawn = new List<UICharacterViewController>();
+        foreach (var position in order)
+        {
+            if (!characterPositions.TryGetValue(position, out UICharacterViewController characterView))
+            {
+                continue;
+            }
+            
+            charsToSpawn.Add(characterView);
+        }
+
+        var lastCharInPrevScenario = GetIdOfCharInTheLastBubbleOfPreviousScenario();
+        var firstCharacterId = bubbleAction.CharacterId;
+
+        if (lastCharInPrevScenario == null)
+        {
+            SendCharacterToForeground(firstCharacterId, bubbleAction.Emotion, false);
+        }
+        
+        // ReSharper disable once Unity.InefficientPropertyAccess
+        int charsCount = characters.Count;
+
+        const float FOREGROUND_MOVE_TIME = 0.35f;
+        const float BACKGROUND_MOVE_TIME = FOREGROUND_MOVE_TIME * 1.5f;
+        const float FADE_TIME = 0.25f;
+
+        float totalTime = 0.1f + charsCount > 2 ? 0.35f : 0;
+        
+        var seq = DOTween.Sequence();
+
+        for (var index = 0; index < charsToSpawn.Count; index++)
+        {
+            UICharacterViewController character = charsToSpawn[index];
+
+            if (lastCharInPrevScenario != null)
+            {
+                if (character.CharacterId == lastCharInPrevScenario)
+                {
+                    if (character.CharacterId == firstCharacterId)
+                    {
+                        SendCharacterToForeground(firstCharacterId, bubbleAction.Emotion, false);
+                    }
+                    else
+                    {
+                        character.ToBackground(true, character.Emotion);
+                    }
+
+                    continue;
+                }
+            }
+            
+            float moveTime = index > 1 ? BACKGROUND_MOVE_TIME : FOREGROUND_MOVE_TIME;
+            Ease ease = index > 1 ? Ease.OutCubic : Ease.OutBack;
+            float delay = index > 1 ? 0.15f : 0f;
+            
+            
+            float dx = 170 * (character.Side == CharacterSide.Left ? 1 : -1);
 
             var initialPos = character.transform.localPosition;
             var newPos = initialPos;
@@ -175,26 +244,23 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             var canvasGroup = character.GetCanvasGroup();
             canvasGroup.alpha = 0;
 
-            canvasGroup.DOFade(1, fadeTime);
+            seq.InsertCallback(delay, () =>
+            {
+                canvasGroup.DOFade(1, FADE_TIME);
 
-            character.transform.DOLocalMoveX(initialPos.x, moveTime)
-                      .SetEase(Ease.OutBack)
-                     // .SetEase(Ease.OutSine)
-                     ;
+                character.transform.DOLocalMoveX(initialPos.x, moveTime)
+                         .SetEase(ease);
+            });
+        }
 
-            DOTween.Sequence()
-                   .InsertCallback(totalTime, () =>
-                    {
-                        onComplete();
-                    });
-        }
-        else
-        {
-            onComplete();
-        }
+        DOTween.Sequence()
+               .InsertCallback(totalTime, () =>
+                {
+                    onComplete();
+                });
     }
 
-    public void InitCharacter(string characterId, CharacterPosition position, bool active)
+    public UICharacterViewController InitCharacter(string characterId, CharacterPosition position, bool active)
     {
         var pool = UIService.Get.PoolContainer;
 
@@ -215,6 +281,8 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         characterPositions.Add(position, character);
         
         character.ToggleActive(active, CharacterEmotion.Normal, false);
+
+        return character;
     }
 
     public void RemoveCharacter(string characterId, bool animated)
@@ -441,7 +509,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
                              Action<ConversationActionEntity> onActionEnded, 
                              Action onScenarioComplete)
     {
-        CleanUp(scenario.Continuation);
+        CleanUp(scenario.PreviousScenario != null);
         
         this.scenario = scenario;
         this.onScenarioComplete = onScenarioComplete;
