@@ -125,6 +125,7 @@ public class UIAnchorTool: CustomEditorBase
         {
             var asset = PrefabUtility.LoadPrefabContents(filePath);
             ChangeAnchorForPrefab(asset, filePath);
+            PrefabUtility.UnloadPrefabContents(asset);
         }
     }
     
