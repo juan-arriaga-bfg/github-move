@@ -20,7 +20,7 @@ public static partial class CurrencyHelper
 
     public static void PurchaseAsyncOnlyCurrency(List<CurrencyPair> products, CurrencyPair price, Vector3 flyPosition, Action<bool> onSuccess)
     {
-        PurchaseAsync(new CurrencyPair {Currency = Currency.Cash.Name, Amount = 0}, price);
+        Purchase(new CurrencyPair {Currency = Currency.Cash.Name, Amount = 0}, price);
         PurchaseAsyncOnlyCurrency(products, flyPosition, onSuccess);
     }
     
