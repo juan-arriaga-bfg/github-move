@@ -75,9 +75,10 @@ public class Order
         get { return state; }
         set
         {
-            var prevState = value;
+            var prevState = state;
             state = value;
             OnStateChange?.Invoke();
+            OnStageChangeFromTo?.Invoke(this, prevState, state);
 
             ResourcesViewManager.Instance.GetFirstViewById(Currency.Order.Name)?.UpdateResource(0);
         }

@@ -17,11 +17,15 @@ public class UISimpleScrollElementViewController : UIContainerElementViewControl
     
     private List<Image> IconSprites;
 
-    public CanvasGroup Group
+    private CanvasGroup Group
     {
         get
         {
-            if (group == null) group = GetComponentInChildren<CanvasGroup>(true);
+            group = anchor.GetComponent<CanvasGroup>();
+            if (group == null)
+            {
+                group = anchor.gameObject.AddComponent<CanvasGroup>();
+            }
 
             return group;
         }
@@ -41,6 +45,11 @@ public class UISimpleScrollElementViewController : UIContainerElementViewControl
                 sprite.material = value ? lockMaterial : unlockMaterial;
             }
         }
+    }
+
+    public Transform Anchor
+    {
+        get { return anchor; }
     }
 
     public override void Init()
