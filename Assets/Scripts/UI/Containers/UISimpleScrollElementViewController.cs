@@ -80,6 +80,8 @@ public class UISimpleScrollElementViewController : UIContainerElementViewControl
             Sepia = false;
             UIService.Get.PoolContainer.Return(content.gameObject);
         }
+
+        if (string.IsNullOrEmpty(id)) return;
         
         content = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
         content.SetParentAndReset(parent);

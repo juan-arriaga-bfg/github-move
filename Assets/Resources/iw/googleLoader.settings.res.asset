@@ -88,8 +88,7 @@ MonoBehaviour:
   - Key: conversations
     Link: 1oXEl5zGo7GJCRoXn9iktjma5pfNAYh83KU_pWhzGls0
     Route: parse
-    Pattern: '[{"Id":"","ConversationCharacters" : {}, "Bubbles":[{"CharacterId":"","Emotion":"","Message":""}]},{"Id":"","ConversationCharacters"
-      : {}, "Bubbles":[{"CharacterId":"","Emotion":"","Message":""}]}]'
+    Pattern: '[{"Id":"","ConversationCharacters" : {}, "Bubbles":[{"CharacterId":"","Emotion":"","Message":""}]}]'
   - Key: layout
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseLayout

@@ -18,6 +18,9 @@
     public override void Perform()
     {
         if (IsPerform) return;
+
+        BoardService.Current.FirstBoard.MarketLogic.Offer = def;
+        BoardService.Current.FirstBoard.MarketLogic.OfferIndex = Target;
         
         base.Perform();
         
@@ -37,11 +40,6 @@
         
         DefaultSafeQueueBuilder.BuildAndRun($"offerStep_{Target}", true, () =>
         {
-            var model = UIService.Get.GetCachedModel<UIOfferWindowModel>(UIWindowType.OfferWindow);
-
-            model.Product = def;
-            model.ProductIndex = Target;
-            
             UIService.Get.ShowWindow(UIWindowType.OfferWindow);
         });
     }
@@ -53,11 +51,15 @@
         timer.OnComplete -= OnTimerComplete;
         timer.Stop();
         
+        BoardService.Current.FirstBoard.MarketLogic.Offer = null;
+        BoardService.Current.FirstBoard.MarketLogic.OfferIndex = -1;
+        
         base.Complete();
     }
 
     private void OnTimerComplete()
     {
         Context.UpdateHard();
+        BoardService.Current.FirstBoard.MarketLogic.CompleteOffer();
     }
 }
