@@ -201,11 +201,13 @@ public class UIAnchorTool: CustomEditorBase
         var renderer = sprite.GetComponent<Renderer>();
         var size = renderer.bounds.size;
 
-        var spriteOffset = sprite.localPosition.y + size.y / 2;
+        var spriteOffset = size.y / 2;
         if (useProportionalOffset && size.y > size.x)
         {
             spriteOffset *= size.x / size.y * ratioCoefficient;
         }
+
+        spriteOffset += sprite.localPosition.y;
 
         return spriteOffset;
     }
