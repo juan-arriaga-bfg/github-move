@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class DefaultApplicationInitilizer : ApplicationInitializer 
