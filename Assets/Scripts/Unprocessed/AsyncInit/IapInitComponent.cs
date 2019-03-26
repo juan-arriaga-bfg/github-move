@@ -76,14 +76,14 @@ public class IapInitComponent : AsyncInitComponentBase
                                 .Add(new IapDefinition
                                  {
                                      Id = "iap7",
-                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.bundletier2",
+                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.bundletier5",
                                      AppleAppStoreId  = "vi.bundletier2.com.bigfishgames.mergetalesios",
                                      Consumable = true
                                  })
                                 .Add(new IapDefinition
                                  {
                                      Id = "iap8",
-                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.bundletier5",
+                                     GooglePlayId     = "com.bigfishgames.mergetalesgoog.bundletier10",
                                      AppleAppStoreId  = "vi.bundletier5.com.bigfishgames.mergetalesios",
                                      Consumable = true
                                  })
