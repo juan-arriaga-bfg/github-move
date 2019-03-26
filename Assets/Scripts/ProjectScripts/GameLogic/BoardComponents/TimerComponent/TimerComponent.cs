@@ -87,7 +87,7 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
         OnExecute?.Invoke();
 
         var elapsedTime = StartTime.GetTime(UseUTC);
-        int elapsedSeconds = (int) elapsedTime.TotalSeconds;
+        var elapsedSeconds = (int) elapsedTime.TotalSeconds;
 
         if (lastProcessedSecond < 0 || lastProcessedSecond != elapsedSeconds)
         {

@@ -179,11 +179,15 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         var view = thisContext.ViewDefinition.AddView(ViewType.Bubble);
         
         view.Change(false);
-        
-        if(isExtra == false && thisContext.Context.WorkerLogic.Get(thisContext.CachedPosition, Timer) == false) return;
+
+        if (isExtra == false && thisContext.Context.WorkerLogic.Get(thisContext.CachedPosition, Timer) == false) return;
         
         view.OnHide = null;
         State = BuildingState.InProgress;
+
+        if (!isExtra) return;
+        
+        Timer.StartTime = Timer.StartTime.AddSeconds(-Mathf.Min(Timer.Delay, GameDataService.Current.ConstantsManager.ExtraWorkerDelay));
     }
 
     private void OnStart()
