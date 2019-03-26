@@ -220,4 +220,23 @@ public class UIResourcePanelWindowView : UIBaseWindowView
         UIResourcePanelWindowModel windowModel = Model as UIResourcePanelWindowModel;
         
     }
+
+    /// <summary>
+    /// Data is calculated for orthoSize == 1. If you need to compare with another camera points, do not forget to convert them too.
+    /// </summary>
+    public float GetSafeZoneHeightInWorldSpace()
+    {
+        Vector3[] corners = new Vector3[4];
+        resourceContainerDown.GetComponent<RectTransform>().GetWorldCorners(corners);
+        Vector3 containerBottomLeft = corners[0];
+
+        Camera camera = Controller.Window.Layers[0].ViewCamera;
+        float orthoSize = camera.orthographicSize;
+        
+        Vector3 viewportTopLeft = camera.ScreenToWorldPoint(new Vector3(0, Screen.height, 0));
+
+        var delta = viewportTopLeft.y - containerBottomLeft.y;
+
+        return delta / orthoSize;
+    }
 }

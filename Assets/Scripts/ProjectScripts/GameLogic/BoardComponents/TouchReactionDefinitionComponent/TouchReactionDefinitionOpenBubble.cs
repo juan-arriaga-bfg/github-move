@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class TouchReactionDefinitionOpenBubble : TouchReactionDefinitionComponent
 {
@@ -18,7 +23,14 @@ public class TouchReactionDefinitionOpenBubble : TouchReactionDefinitionComponen
         
 		OnChange?.Invoke(!view.IsShow);
 		view.Change(!view.IsShow);
-		
+
+        if (view.IsShow)
+        {
+            view.FitToScreen();
+        }
+        
 		return true;
 	}
+
+
 }

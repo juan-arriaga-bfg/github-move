@@ -28,6 +28,11 @@ public class UIBoardView : BoardElementView
         return group;
     }
 
+    public RectTransform GetViewTransform()
+    {
+        return (RectTransform)viewTransform;
+    }
+
     public Action OnShow;
     public Action OnHide;
     
@@ -44,6 +49,12 @@ public class UIBoardView : BoardElementView
     
     public int Layer => defaultPriority;
 
+    // Used for camera focus
+    public virtual float GetHeight()
+    {
+        return 2.5f;
+    }
+    
     protected virtual ViewType Id { get; set; }
 
     protected virtual Vector3 offset => new Vector3(0, 0);
@@ -241,5 +252,47 @@ public class UIBoardView : BoardElementView
         
         content = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
         content.SetParentAndReset(anchor);
+    }
+    
+    public virtual void FitToScreen()
+    {
+        var viewTransform = GetViewTransform(); 
+        if (viewTransform == null)
+        {
+            Debug.LogWarning($"[TouchReactionDefinitionOpenBubble] => FitToScreen: viewTransform is null");
+            return;
+        }
+        
+        // Working code to get dialog size. BUT we need to wait for "show" animation end before calculations
+        // Image image = viewTransform.GetComponent<Image>();
+        // if (image == null)
+        // {
+        //     Debug.LogWarning($"[TouchReactionDefinitionOpenBubble] => FitToScreen: image is null");
+        //     return;
+        // }
+        // Vector3[] imageCorners = new Vector3[4];
+        // image.rectTransform.GetWorldCorners(imageCorners);
+        // var tl = imageCorners[1].y;
+        
+        Camera camera = Camera.main;
+
+        var resourcesView = UIService.Get.GetShowedView<UIResourcePanelWindowView>(UIWindowType.ResourcePanelWindow);
+        float safeZoneHeight = resourcesView.GetSafeZoneHeightInWorldSpace();
+        safeZoneHeight = safeZoneHeight * camera.orthographicSize; // Convert to main camera points
+
+        Vector3 cameraTop = camera.ScreenToWorldPoint(new Vector3(0, Screen.height, 0));
+        
+        var tl = viewTransform.transform.position.y + GetHeight();
+        
+        var cameraTopY = cameraTop.y;
+        var dialogTopY = tl;
+        
+        var delta = dialogTopY + safeZoneHeight - cameraTopY;
+        if (delta > 0)
+        {
+            Vector3 newPos = camera.transform.position;
+            newPos += new Vector3(0, delta);
+            BoardService.Current.FirstBoard.Manipulator.CameraManipulator.MoveTo(newPos, true, 0.4f, Ease.OutCubic);
+        }
     }
 }
