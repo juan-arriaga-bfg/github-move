@@ -226,13 +226,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
 
     private void OnOrderStageChangeFromTo(Order order, OrderState fromState, OrderState toState)
     {
-        Debug.LogWarning($"order:{order.Def.Uid} from:{fromState} to:{toState}");
         
-        if (fromState == OrderState.Enough && toState == OrderState.InProgress
-            || fromState == OrderState.Waiting && toState == OrderState.InProgress)
-        {
-            
-        }
     }
 
     private List<IUIContainerElementEntity> UpdateEntitiesRecipes(List<OrderDef> entities)
