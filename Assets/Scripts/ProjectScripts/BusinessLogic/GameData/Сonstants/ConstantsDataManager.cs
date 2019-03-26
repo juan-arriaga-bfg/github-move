@@ -41,6 +41,8 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     
     public int EnergyRefillDelay;
     public int FreeEnergyDelay;
+    
+    public int ExtraWorkerDelay;
 
     public override void OnRegisterEntity(ECSEntity entity)
     {

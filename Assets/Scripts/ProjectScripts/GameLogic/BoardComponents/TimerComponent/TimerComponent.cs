@@ -75,6 +75,14 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
         
         OnStart?.Invoke();
     }
+
+    public void Subtract(int value)
+    {
+        if (Delay == 0 || IsStarted == false) return;
+        
+        StartTime = StartTime.AddSeconds(-Mathf.Min(Delay, value));
+        CompleteTime = StartTime.AddSeconds(Delay);
+    }
     
     public void Stop()
     {
@@ -87,7 +95,7 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
         OnExecute?.Invoke();
 
         var elapsedTime = StartTime.GetTime(UseUTC);
-        int elapsedSeconds = (int) elapsedTime.TotalSeconds;
+        var elapsedSeconds = (int) elapsedTime.TotalSeconds;
 
         if (lastProcessedSecond < 0 || lastProcessedSecond != elapsedSeconds)
         {

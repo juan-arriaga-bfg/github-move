@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PartDef
@@ -109,10 +110,10 @@ public class PartPiecesLogicComponent : IECSComponent
     {
         if (context.WorkerLogic.Get(piece.CachedPosition, null) == false) return;
         
-        Work(piece);
+        Work(piece, false);
     }
 
-    public bool Work(Piece piece)
+    public bool Work(Piece piece, bool isExtra)
     {
         var positions = new List<BoardPosition>();
         var action = context.BoardLogic.MatchActionBuilder.GetMatchAction(positions, piece.PieceType, piece.CachedPosition);
@@ -120,8 +121,34 @@ public class PartPiecesLogicComponent : IECSComponent
         if (action == null) return false;
 
         Remove(positions);
-        context.ActionExecutor.AddAction(action);
+        context.ActionExecutor.PerformAction(action);
+
+        if (!isExtra) return true;
         
+        var result = context.BoardLogic.GetPieceAt(positions[0])?.PieceState;
+            
+        result?.Timer.Subtract(GameDataService.Current.ConstantsManager.ExtraWorkerDelay);
+
         return true;
+    }
+
+    public List<ViewDefinitionComponent> GetAllView()
+    {
+        return bubbles.Values.ToList();
+    }
+    
+    public List<BoardPosition> GetAllPositions()
+    {
+        var result = new List<BoardPosition>();
+
+        foreach (var value in links.Values)
+        {
+            foreach (var def in value)
+            {
+                result.AddRange(def.Pattern);
+            }
+        }
+
+        return result;
     }
 }

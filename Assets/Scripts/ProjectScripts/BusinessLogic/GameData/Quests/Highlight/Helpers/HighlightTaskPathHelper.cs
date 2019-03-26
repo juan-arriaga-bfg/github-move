@@ -4,7 +4,7 @@ public static class HighlightTaskPathHelper
 {
     public static List<BoardPosition> GetAccessiblePositions(List<BoardPosition> positionsToCheck)
     {
-        List<BoardPosition> ret = new List<BoardPosition>();
+        var ret = new List<BoardPosition>();
         
         foreach (var pos in positionsToCheck)
         {
@@ -23,6 +23,7 @@ public static class HighlightTaskPathHelper
         var boardLogic = board.BoardLogic;
         
         var piece = boardLogic.GetPieceAt(pos);
+        
         if (piece != null && board.PathfindLocker.HasPath(piece))
         {
             return true;
