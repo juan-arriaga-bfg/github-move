@@ -68,7 +68,7 @@ MonoBehaviour:
   - Key: market
     Link: 1sQoVUyJQqGwJDGcmg4NDllPEgWygwrh8Qgeih1TwYaE
     Route: parse
-    Pattern: '[{"Uid":0,"":"","UnlockLevel":0,"Amount":0,"Weight":{"Uid":"","Weight":0},"Price":{"Currency":"","Amount":0},"RandomType":"","IsPermanent":false,"Icon":"","Name":""}]'
+    Pattern: '[{"Uid":0,"":"","Bundle":"","UnlockLevel":0,"Amount":0,"Weight":{"Uid":"","Weight":0},"Price":{"Currency":"","Amount":0},"RandomType":"","IsPermanent":false,"Icon":"","Name":""}]'
   - Key: orders
     Link: 1MakAUEhU8pxDDasINjyEBIXVEZ3oPr3PMrisNbH650I
     Route: parse
@@ -88,8 +88,7 @@ MonoBehaviour:
   - Key: conversations
     Link: 1oXEl5zGo7GJCRoXn9iktjma5pfNAYh83KU_pWhzGls0
     Route: parse
-    Pattern: '[{"Id":"","ConversationCharacters" : {}, "Bubbles":[{"CharacterId":"","Emotion":"","Message":""}]},{"Id":"","ConversationCharacters"
-      : {}, "Bubbles":[{"CharacterId":"","Emotion":"","Message":""}]}]'
+    Pattern: '[{"Id":"","ConversationCharacters" : {}, "Bubbles":[{"CharacterId":"","Emotion":"","Message":""}]}]'
   - Key: layout
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseLayout

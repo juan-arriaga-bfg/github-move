@@ -57,6 +57,7 @@ public class MarketItem
             
             return current;
         }
+        set => current = value;
     }
 
     public void Init(int index, int piece, int amount, MarketItemState initState)
@@ -162,10 +163,9 @@ public class MarketItem
     {
         max -= 1;
         
-        var board = BoardService.Current.FirstBoard;
-        var definition = board.BoardLogic.MatchDefinition;
-        
+        var definition = BoardService.Current.FirstBoard.BoardLogic.MatchDefinition;
         var pieces = PieceType.GetIdsByFilter(PieceTypeFilter.Normal, PieceTypeFilter.Fake);
+        var used = GameDataService.Current.MarketManager.Defs.FindAll(def => def.current != null && def.current.Bundle == MarketItemBundle.Pieces);
         
         pieces = pieces.FindAll(id =>
         {
@@ -190,6 +190,14 @@ public class MarketItem
 
             if (value < id) chains[key] = id;
         }
+
+        if (chains.Count > used.Count)
+        {
+            foreach (var item in used)
+            {
+                chains.Remove(definition.GetFirst(PieceType.Parse(item.Reward.Currency)));
+            }
+        }
         
         var ids = chains.Values.ToList();
         var maxId = ids[Random.Range(0, ids.Count)];
@@ -201,25 +209,43 @@ public class MarketItem
     
     private string GetRandomIngredient()
     {
-        var item = ItemWeight.GetRandomItem(GameDataService.Current.LevelsManager.ResourcesWeights);
+        var definition = BoardService.Current.FirstBoard.BoardLogic.MatchDefinition;
+        var weights = new List<ItemWeight>(GameDataService.Current.LevelsManager.ResourcesWeights);
+        var used = GameDataService.Current.MarketManager.Defs.FindAll(def => def.current != null && def.current.Bundle == MarketItemBundle.Ingredients);
         
-        return item?.Uid;
+        weights = weights.FindAll(weight =>
+        {
+            var prev = definition.GetPrevious(weight.Piece);
+            return GameDataService.Current.CodexManager.IsPieceUnlocked(prev);
+        });
+        
+        if (weights.Count > used.Count)
+        {
+            weights = weights.FindAll(weight => used.Find(item => item.Reward.Currency == weight.Uid) == null);
+        }
+        
+        return ItemWeight.GetRandomItem(weights)?.Uid;
     }
     
     private string GetRandomChest(int index)
     {
+        var definition = BoardService.Current.FirstBoard.BoardLogic.MatchDefinition;
         var chests = PieceType.GetIdsByFilter(PieceTypeFilter.Chest, PieceTypeFilter.Bag);
+        var used = GameDataService.Current.MarketManager.Defs.FindAll(def => def.current != null && def.current.Bundle == MarketItemBundle.Chests);
 
         chests.Remove(PieceType.CH_Free.Id);
         chests.Remove(PieceType.CH_NPC.Id);
         
-        chests = chests.FindAll(id => GameDataService.Current.CodexManager.IsPieceUnlocked(id));
+        chests = chests.FindAll(id => definition.GetPrevious(id) == PieceType.None.Id && GameDataService.Current.CodexManager.IsPieceUnlocked(id));
 
+        if (chests.Count > used.Count)
+        {
+            chests = chests.FindAll(id => used.Find(item => definition.GetFirst(PieceType.Parse(item.Reward.Currency)) == id) == null);
+        }
+        
         if (chests.Count == 0) return null;
-
+        
         var chest = chests[Random.Range(0, chests.Count)];
-        var board = BoardService.Current.FirstBoard;
-        var definition = board.BoardLogic.MatchDefinition;
         var chain = definition.GetChain(chest);
         
         return PieceType.Parse(chain[index]);

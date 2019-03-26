@@ -17,11 +17,22 @@ public class UISimpleScrollElementViewController : UIContainerElementViewControl
     
     private List<Image> IconSprites;
 
-    public CanvasGroup Group
+    private CanvasGroup Group
     {
         get
         {
-            if (group == null) group = GetComponentInChildren<CanvasGroup>(true);
+            if (anchor != null)
+            {
+                group = anchor.GetComponent<CanvasGroup>();
+                if (group == null)
+                {
+                    group = anchor.gameObject.AddComponent<CanvasGroup>();
+                }
+            }
+            else
+            {
+                group = GetComponentInChildren<CanvasGroup>();
+            }
 
             return group;
         }
@@ -41,6 +52,11 @@ public class UISimpleScrollElementViewController : UIContainerElementViewControl
                 sprite.material = value ? lockMaterial : unlockMaterial;
             }
         }
+    }
+
+    public Transform Anchor
+    {
+        get { return anchor; }
     }
 
     public override void Init()
@@ -71,6 +87,8 @@ public class UISimpleScrollElementViewController : UIContainerElementViewControl
             Sepia = false;
             UIService.Get.PoolContainer.Return(content.gameObject);
         }
+
+        if (string.IsNullOrEmpty(id)) return;
         
         content = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
         content.SetParentAndReset(parent);

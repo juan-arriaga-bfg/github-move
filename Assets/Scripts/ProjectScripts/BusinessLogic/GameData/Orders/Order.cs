@@ -22,6 +22,8 @@ public class Order
     
     public Action OnStateChange;
 
+    public Action<Order, OrderState, OrderState> OnStageChangeFromTo;
+
     private Dictionary<int, int> piecesReward;
     public Dictionary<int, int> PiecesReward
     {
@@ -73,8 +75,10 @@ public class Order
         get { return state; }
         set
         {
+            var prevState = state;
             state = value;
             OnStateChange?.Invoke();
+            OnStageChangeFromTo?.Invoke(this, prevState, state);
 
             ResourcesViewManager.Instance.GetFirstViewById(Currency.Order.Name)?.UpdateResource(0);
         }

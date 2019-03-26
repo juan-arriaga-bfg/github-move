@@ -248,6 +248,10 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             tapToContinue.Hide(false);
             tapToContinue.Show(true, 1f);
         }
+        else
+        {
+            tapToContinue.Hide(false);  
+        }
     }
     
     private void InitTapToContinue()
@@ -504,13 +508,15 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     public void OnClick()
     {
         Debug.Log("[UICharactersConversationViewController] => OnClick");
-        
+
         var teletype = bubbleView as ITeleTypedText;
         if (teletype != null && teletype.IsPlayingTeleTypeEffect())
         {
             teletype.StopTeleTypeEffect();
             return;
         }   
+        
+        ToggleTapToContinue(false);
         
         NextScenarioAction();
     }

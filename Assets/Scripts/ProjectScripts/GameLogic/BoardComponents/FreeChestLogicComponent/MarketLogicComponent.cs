@@ -7,6 +7,9 @@
 	public TimerComponent ResetEnergyTimer { get; } = new TimerComponent();
 	public TimerComponent OfferTimer { get; } = new TimerComponent();
 
+	public int OfferIndex;
+	public ShopDef Offer;
+
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		RegisterComponent(ResetMarketTimer, true);
@@ -40,5 +43,12 @@
         ResetEnergyTimer.OnComplete = null;
         
         base.OnUnRegisterEntity(entity);
+    }
+
+    public void CompleteOffer()
+    {
+	    if (ProfileService.Current.GetStorageItem(Currency.Offer.Name).Amount >= OfferIndex) return;
+	    
+	    CurrencyHelper.Purchase(Currency.Offer.Name, 1);
     }
 }

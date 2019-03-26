@@ -1,5 +1,7 @@
+using Debug = IW.Logger;
 using UnityEngine;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine.UI;
 
 public class UIOrdersWindowView : UIGenericPopupWindowView
@@ -108,10 +110,16 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         
         back.SetActive(index != 0);
         
+        var dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
+        for (int i = 0; i < dataOrders.Count; i++)
+        {
+            DOTween.Kill(dataOrders[i], true);
+        }
+        
         switch (index)
         {
             case 0:
-                var dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
+                dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
                 
                 messageOders.gameObject.SetActive(dataOrders.Count == 0);
 
@@ -182,6 +190,8 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
             OnDeselectEvent = null
         };
         
+        entity.OnOrderStageChangeFromTo = OnOrderStageChangeFromTo;
+        
         views.Add(entity);
         
         return views;
@@ -194,7 +204,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         for (var i = 0; i < entities.Count; i++)
         {
             var def = entities[i];
-
+            
             var entity = new UIOrderElementEntity
             {
                 ContentId = def.Def.Uid,
@@ -208,13 +218,23 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
                 },
                 OnDeselectEvent = null
             };
-            
             views.Add(entity);
         }
         
         return views;
     }
-    
+
+    private void OnOrderStageChangeFromTo(Order order, OrderState fromState, OrderState toState)
+    {
+        Debug.LogWarning($"order:{order.Def.Uid} from:{fromState} to:{toState}");
+        
+        if (fromState == OrderState.Enough && toState == OrderState.InProgress
+            || fromState == OrderState.Waiting && toState == OrderState.InProgress)
+        {
+            
+        }
+    }
+
     private List<IUIContainerElementEntity> UpdateEntitiesRecipes(List<OrderDef> entities)
     {
         var views = new List<IUIContainerElementEntity>(entities.Count);

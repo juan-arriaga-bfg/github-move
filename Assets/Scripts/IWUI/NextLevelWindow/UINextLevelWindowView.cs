@@ -13,7 +13,7 @@ public class UINextLevelWindowView : UIGenericWindowView
     [SerializeField] private GameObject headerObj;
     [SerializeField] private CanvasGroup headerCanvas;
     
-    [SerializeField] private Transform tapToContinueAnchor;
+    [IWUIBinding("#TapToContinueAnchor")] private Transform tapToContinueAnchor;
     
     // [IWUIBinding("#UnlockedCharacterContainerLeft")] protected RectTransform unlockedCharacterContainerLeft;
     //
@@ -97,7 +97,7 @@ public class UINextLevelWindowView : UIGenericWindowView
     public override void AnimateShow()
     {
         base.AnimateShow();
-        InitTapToContinue(1f);
+        InitTapToContinue(2.5f);
     }
     
     public override void OnViewShowCompleted()
@@ -211,14 +211,17 @@ public class UINextLevelWindowView : UIGenericWindowView
                 
                 if (recipes.Count == 0)
                 {
+                    tapToContinue.Hide(true);
                     Controller.CloseCurrentWindow();
                     return;
                 }
                 
                 NSAudioService.Current.Play(SoundId.PopupNewRecipe);
                 CreateCards();
+                InitTapToContinue(2.5f);
                 break;
             case 1:
+                tapToContinue.Hide(true);
                 Controller.CloseCurrentWindow();
                 headerCanvas.DOFade(0, 0.2f).OnComplete(() => headerObj.SetActive(false));
                 break;
