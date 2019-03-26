@@ -384,11 +384,14 @@ MonoBehaviour:
   anchors:
   - Key: -1003
     Anchor: {fileID: 4907775153595497406}
+  - Key: -1015
+    Anchor: {fileID: 1352088876252465358}
   bodySprites: []
   particles: []
   errorSelectionMaterial: {fileID: 0}
   defaultSelectionMaterial: {fileID: 0}
   highlightPieceMaterial: {fileID: 0}
+  arrow: {fileID: 0}
   anchorWorker: {fileID: 4159651624628922}
 --- !u!114 &114607854138475680
 MonoBehaviour:
@@ -432,6 +435,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4907775153595497406}
+  - {fileID: 1352088876252465358}
   m_Father: {fileID: 4542807987214320}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -464,4 +468,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6171003581529448498}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8167718643219171095
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1352088876252465358}
+  m_Layer: 0
+  m_Name: RewardsBubbleAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1352088876252465358
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8167718643219171095}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.19599998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6171003581529448498}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
