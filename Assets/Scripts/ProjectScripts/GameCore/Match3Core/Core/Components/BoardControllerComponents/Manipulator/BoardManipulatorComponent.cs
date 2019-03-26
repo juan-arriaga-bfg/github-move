@@ -135,7 +135,7 @@ public class BoardManipulatorComponent : ECSEntity,
 
         if (lastResetPieceView != null)
         {
-            context.RendererContext.ResetBoardElement(lastResetPieceView, lastResetPosition);
+            context.RendererContext.ResetBoardElement(lastResetPieceView, lastResetPieceView.Piece.CachedPosition);
         }
 
         lastResetPosition = BoardPosition.Default();
