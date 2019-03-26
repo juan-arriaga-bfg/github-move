@@ -33,7 +33,45 @@ public class BoardManipulatorComponent : ECSEntity,
     private bool isDragLip = false;
 
     private bool isTouch = true;
-    private bool? isDrag = false;
+
+    private bool? isDragInternal;
+
+    private LayerMask cachedGUILayerMask;
+    private bool isCachedLayerMash = false;
+
+    private bool? isDrag
+    {
+        get { return isDragInternal; }
+        set
+        {
+            if (value.HasValue == false)
+            {
+                if (isCachedLayerMash)
+                {
+                    LeanTouch.Instance.GuiLayers = cachedGUILayerMask;
+                }
+            }
+            else
+            {
+                if ((isDragInternal.HasValue == false && value.Value == true) || (isDragInternal.HasValue && isDragInternal.Value != value.Value && value.Value == true))
+                {
+                    cachedGUILayerMask = LeanTouch.Instance.GuiLayers;
+                    LeanTouch.Instance.GuiLayers = LayerMask.GetMask("Nothing");
+                    isCachedLayerMash = true;
+                }
+                else
+                {
+                    if (isCachedLayerMash)
+                    {
+                        LeanTouch.Instance.GuiLayers = cachedGUILayerMask;
+                    }
+                }
+            }
+
+            isDragInternal = value;
+        }
+    }
+    
     private bool isFullPass = false;
     
     private BoardElementView cachedViewForDrag = null;
@@ -280,6 +318,8 @@ public class BoardManipulatorComponent : ECSEntity,
 
     public bool OnUp(Vector2 startPos, Vector2 pos)
     {
+        isDrag = false;
+        
         if (cachedViewForDrag != null)
         {
             pos = pos + Vector2.up * 0.5f;
@@ -377,6 +417,8 @@ public class BoardManipulatorComponent : ECSEntity,
             
             return true;
         }
+
+        
         
         context.TutorialLogic.Pause(false);
         context.TutorialLogic.Update();
