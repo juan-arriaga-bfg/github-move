@@ -106,7 +106,7 @@ public class CameraScroll : MonoBehaviour
         
         var finger = fingers[0];
         
-        if(LeanTouch.RaycastGui(finger.ScreenPosition, defaultMask).Count > 0) return;
+        if(LeanTouch.RaycastGui(finger.ScreenPosition, LeanTouch.Instance.GuiLayers).Count > 0) return;
         
         var speedFactorX = 1f;
         var speedFactorY = 1f;
