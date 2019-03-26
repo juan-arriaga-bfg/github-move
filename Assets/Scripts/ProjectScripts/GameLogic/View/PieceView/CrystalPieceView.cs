@@ -40,23 +40,17 @@ public class CrystalPieceView : PieceBoardElementView
         foreach (var piece in bestMatchPieces)
         {
             if (piece.PieceType == PieceType.Boost_CR.Id || piece.ActorView == null) continue;
-            HighlightMatchable(piece.ActorView);
+            HighlightMatchable(piece.ActorView, true);
         }
         
         Piece.Context.BoardLogic.CellHints.OnDragStartBoost(Piece.CachedPosition);
         Piece.Context.PartPiecesLogic.Remove(Piece.CachedPosition);
     }
 
-    private void HighlightMatchable(PieceBoardElementView view)
+    private void HighlightMatchable(PieceBoardElementView view, bool isOn)
     {
-        view.ToggleHighlight(true);
-        view.ToggleSelection(true);
-    }
-
-    private void OffHighlightMatchable(PieceBoardElementView view)
-    {
-        view.ToggleHighlight(false);
-        view.ToggleSelection(false);
+        view.ToggleHighlight(isOn);
+        view.ToggleSelection(isOn);
     }
 
     private List<Piece> FindBestMatches(BoardController board)
@@ -211,13 +205,13 @@ public class CrystalPieceView : PieceBoardElementView
 
     private void EndBestMatch()
     {
-        if(bestMatchPieces == null) return;
+        if (bestMatchPieces == null) return;
         
         foreach (var piece in bestMatchPieces)
         {
             if(piece.PieceType == PieceType.Boost_CR.Id || piece.ActorView == null) continue;
             
-            OffHighlightMatchable(piece.ActorView);
+            HighlightMatchable(piece.ActorView, false);
         }
 
         bestMatchPieces = null;

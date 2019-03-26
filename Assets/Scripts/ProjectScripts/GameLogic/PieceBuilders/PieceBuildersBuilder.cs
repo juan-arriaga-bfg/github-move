@@ -19,7 +19,7 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddSimplePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.Boost_WR.Id, new WorkerPieceBuilder());
+        dict.Add(PieceType.Boost_WR.Id, new SimplePieceBuilder());
         
         dict = AddSimplePiece<CharacterPieceBuilder>(PieceType.NPC_A.Id, PieceType.NPC_R.Id, dict);
         
