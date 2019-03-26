@@ -185,9 +185,9 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         view.OnHide = null;
         State = BuildingState.InProgress;
 
-        if (!isExtra) return;
+        if (isExtra == false) return;
         
-        Timer.StartTime = Timer.StartTime.AddSeconds(-Mathf.Min(Timer.Delay, GameDataService.Current.ConstantsManager.ExtraWorkerDelay));
+        Timer.Subtract(GameDataService.Current.ConstantsManager.ExtraWorkerDelay);
     }
 
     private void OnStart()

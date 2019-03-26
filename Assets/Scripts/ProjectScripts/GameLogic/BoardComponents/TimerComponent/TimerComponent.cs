@@ -75,6 +75,14 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
         
         OnStart?.Invoke();
     }
+
+    public void Subtract(int value)
+    {
+        if (Delay == 0 || IsStarted == false) return;
+        
+        StartTime = StartTime.AddSeconds(-Mathf.Min(Delay, value));
+        CompleteTime = StartTime.AddSeconds(Delay);
+    }
     
     public void Stop()
     {
