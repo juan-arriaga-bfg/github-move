@@ -177,14 +177,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         var def = PieceType.GetDefById(target.PieceType);
 
         if (def.Filter.Has(PieceTypeFilter.Workplace) == false || !CheckLock(target)) return false;
-        if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
-
-        if (def.Filter.HasFlag(PieceTypeFilter.Mine))
-        {
-            NSAudioService.Current.Play(SoundId.WorkerMine);
-        }
-        else if(def.Filter.HasFlag(PieceTypeFilter.Obstacle)) NSAudioService.Current.Play(SoundId.WorkerChop);
-        else if(def.Filter.HasFlag(PieceTypeFilter.ProductionField)) NSAudioService.Current.Play(SoundId.WorkerHarvest);
+        if (!CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
         
         return true;
     }
@@ -199,31 +192,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
         return true;
     }
-
-    private bool CheckLife(Piece target)
-    {
-        var life = target.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
-        
-        if (life == null) return false;
-        
-        if (life.Locker.IsLocked)
-        {
-            UIErrorWindowController.AddError(life.Rewards.IsComplete
-                ? LocalizationService.Get("message.error.action", "message.error.action")
-                : LocalizationService.Get("message.error.workingHere", "message.error.workingHere"));
-            
-            return false;
-        }
-
-        if (life.IsUseCooldown && life.TimerCooldown.IsExecuteable())
-        {
-            UIErrorWindowController.AddError(LocalizationService.Get("message.error.notReady", "message.error.notReady"));
-            return false;
-        }
-
-        return life.Damage(true);
-    }
-
+    
     private bool CheckPieceState(Piece target)
     {
         var state = target.GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid);

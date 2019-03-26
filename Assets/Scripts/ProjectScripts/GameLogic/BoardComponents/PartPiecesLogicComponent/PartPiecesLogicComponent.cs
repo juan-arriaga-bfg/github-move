@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PartDef
@@ -123,5 +124,25 @@ public class PartPiecesLogicComponent : IECSComponent
         context.ActionExecutor.AddAction(action);
         
         return true;
+    }
+
+    public List<ViewDefinitionComponent> GetAllView()
+    {
+        return bubbles.Values.ToList();
+    }
+    
+    public List<BoardPosition> GetAllPositions()
+    {
+        var result = new List<BoardPosition>();
+
+        foreach (var value in links.Values)
+        {
+            foreach (var def in value)
+            {
+                result.AddRange(def.Pattern);
+            }
+        }
+
+        return result;
     }
 }

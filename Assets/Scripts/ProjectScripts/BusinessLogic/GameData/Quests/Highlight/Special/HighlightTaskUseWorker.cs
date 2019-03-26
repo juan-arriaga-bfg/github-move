@@ -1,47 +1,119 @@
 using Debug = IW.Logger;
-using System;
 using System.Collections.Generic;
-using UnityEngine;
+using DG.Tweening;
 using Random = UnityEngine.Random;
 
 public class HighlightTaskUseWorker : TaskHighlightUsingArrow
 {
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
-        var boardLogic = BoardService.Current.FirstBoard.BoardLogic;
-        var workPlacesList = boardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Workplace);
+        var views = BoardService.Current.FirstBoard.PartPiecesLogic.GetAllView();
         
-        if (workPlacesList.Count == 0)
+        if (GetAllPositions(out var workPlacesFree, out var workPlacesLock, out var unfinishedFree) == false && views.Count == 0) return false;
+
+        if (CheckEnergy(workPlacesFree, out var selected, out var workPlacesBusy) || CheckUnfinished(unfinishedFree, out selected))
         {
-            return false;
+            HintArrowView.Show(selected);
+            return true;
+        }
+        
+        if (views.Count > 0)
+        {
+            var view = views[Random.Range(0, views.Count)].AddView(ViewType.Bubble);
+            
+            DOTween.Sequence()
+                .AppendInterval(delay)
+                .AppendCallback(() =>
+                {
+                    const float DURATION = 1f;
+
+                    if (BoardService.Current.FirstBoard.Manipulator.CameraManipulator.CameraMove.IsLocked == false)
+                    {
+                        BoardService.Current.FirstBoard.Manipulator.CameraManipulator.MoveTo(view.transform.position, true, DURATION);
+                    }
+                        
+                    DOTween.Sequence()
+                        .AppendInterval(DURATION - 0.15f)
+                        .AppendCallback(() => { view.Attention(); });
+                });
+            
+            return true;
         }
 
-        // If we have accessible pieces, use them as target
-        var accessiblePoints = HighlightTaskPathHelper.GetAccessiblePositions(workPlacesList);
-        List<BoardPosition> positions = accessiblePoints.Count > 0 ? accessiblePoints : workPlacesList;
+        if (CheckBusy(workPlacesBusy, out selected) || CheckEnergy(workPlacesLock, out selected, out workPlacesBusy))
+        {
+            HintArrowView.Show(selected);
+            return true;
+        }
+        
+        return false;
+    }
+
+    private bool GetAllPositions(out List<BoardPosition> workPlacesFree, out List<BoardPosition> workPlacesLock, out List<BoardPosition> unfinishedFree)
+    {
+        workPlacesFree = new List<BoardPosition>();
+        workPlacesLock = new List<BoardPosition>();
+        unfinishedFree = new List<BoardPosition>();
+
+        var board = BoardService.Current.FirstBoard;
+        var posCache = board.BoardLogic.PositionsCache;
+        var workPlacesList = posCache.GetPiecePositionsByFilter(PieceTypeFilter.Mine);
+        
+        workPlacesList.AddRange(posCache.GetPiecePositionsByFilter(PieceTypeFilter.Obstacle));
+        workPlacesList.AddRange(posCache.GetPiecePositionsByFilter(PieceTypeFilter.Multicellular | PieceTypeFilter.Progress, PieceTypeFilter.Fake));
+
+        if (workPlacesList.Count > 0)
+        {
+            workPlacesFree = HighlightTaskPathHelper.GetAccessiblePositions(workPlacesList);
+
+            if (workPlacesFree.Count == 0) workPlacesLock = workPlacesList;
+            if (workPlacesFree.Count > 0) return true;
+        }
+        
+        var unfinishedList = posCache.GetPiecePositionsByFilter(PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace);
+
+        if (unfinishedList.Count > 0) unfinishedFree = HighlightTaskPathHelper.GetAccessiblePositions(unfinishedList);
+        
+        return unfinishedFree.Count > 0;
+    }
+
+    private bool CheckEnergy(List<BoardPosition> positions, out BoardPosition selected, out List<Piece> busy)
+    {
+        selected = BoardPosition.Default();
+        busy = new List<Piece>();
+        
+        if (positions.Count == 0) return false;
 
         // Select pieces with low energy requirements
-        List<BoardPosition> selectedPositions = new List<BoardPosition>(); 
-        int lastEnergy = Int32.MaxValue;
+        var logic = BoardService.Current.FirstBoard.BoardLogic;
+        var selectedPositions = new List<BoardPosition>(); 
+        var lastEnergy = int.MaxValue;
 
         for (var i = 0; i < positions.Count; i++)
         {
             var position = positions[i];
-            var piece = boardLogic.GetPieceAt(position);
-            if (piece == null)
-            {
-                continue;
-            }
-
-            LifeComponent        lifeComponent        = piece.GetComponent<LifeComponent>(LifeComponent.ComponentGuid);
-            WorkplaceLifeComponent workplaceLifeComponent = lifeComponent as WorkplaceLifeComponent;
-            if (workplaceLifeComponent == null)
+            var life = logic.GetPieceAt(position)?.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
+            
+            if (life == null)
             {
                 Debug.LogError($"storageLifeComponent not found for pos {position}");
                 continue;
             }
 
-            int energyCost = workplaceLifeComponent.Energy.Amount;
+            if (life.IsDead)
+            {
+                Debug.LogError($"storageLifeComponent is dear for pos {position}");
+                continue;
+            }
+
+            if (life.TimerWork != null && life.TimerWork.IsExecuteable() || life.TimerCooldown != null && life.TimerCooldown.IsExecuteable())
+            {
+                busy.Add(life.Context);
+                continue;
+            }
+
+            var energyCost = life.Energy.Amount;
+            
             if (lastEnergy > energyCost)
             {
                 lastEnergy = energyCost;
@@ -54,15 +126,90 @@ public class HighlightTaskUseWorker : TaskHighlightUsingArrow
             }
         }
 
-        if (selectedPositions.Count == 0)
+        if (selectedPositions.Count == 0) return false;
+        
+        selected = selectedPositions[Random.Range(0, selectedPositions.Count)];
+        
+        return true;
+    }
+
+    private bool CheckBusy(List<Piece> pieces, out BoardPosition selected)
+    {
+        selected = BoardPosition.Default();
+
+        if (pieces.Count == 0) return false;
+        
+        var selectedPositions = new List<BoardPosition>(); 
+        var lastEnergy = int.MaxValue;
+
+        for (var i = 0; i < pieces.Count; i++)
         {
-            selectedPositions = positions;
+            var life = pieces[i].GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
+            var energyCost = life.Energy.Amount;
+            
+            if (lastEnergy > energyCost)
+            {
+                lastEnergy = energyCost;
+                selectedPositions.Clear();
+                selectedPositions.Add(pieces[i].CachedPosition);
+            }
+            else if (energyCost == lastEnergy)
+            {
+                selectedPositions.Add(pieces[i].CachedPosition);
+            }
+        }
+        
+        if (selectedPositions.Count == 0) return false;
+        
+        selected = selectedPositions[Random.Range(0, selectedPositions.Count)];
+        
+        return true;
+    }
+
+    private bool CheckUnfinished(List<BoardPosition> positions, out BoardPosition selected)
+    {
+        selected = BoardPosition.Default();
+        
+        if (positions.Count == 0) return false;
+        
+        var logic = BoardService.Current.FirstBoard.BoardLogic;
+        var selectedPositions = new List<BoardPosition>(); 
+        var lastDelay = int.MaxValue;
+
+        for (var i = 0; i < positions.Count; i++)
+        {
+            var position = positions[i];
+            var unfinished = logic.GetPieceAt(position)?.PieceState;
+
+            if (unfinished == null)
+            {
+                Debug.LogError($"PieceStateComponent not found for pos {position}");
+                continue;
+            }
+
+            if (unfinished.State == BuildingState.InProgress || unfinished.State == BuildingState.Complete)
+            {
+                Debug.LogError($"PieceStateComponent InProgress for pos {position}");
+                continue;
+            }
+            
+            var delay = unfinished.Timer.Delay;
+            
+            if (lastDelay > delay)
+            {
+                lastDelay = delay;
+                selectedPositions.Clear();
+                selectedPositions.Add(position);
+            }
+            else if (delay == lastDelay)
+            {
+                selectedPositions.Add(position);
+            }
         }
 
-        int index = Random.Range(0, selectedPositions.Count);
-        BoardPosition selectedPosition = selectedPositions[index];
-
-        HintArrowView.Show(selectedPosition);
+        if (selectedPositions.Count == 0) return false;
+        
+        selected = selectedPositions[Random.Range(0, selectedPositions.Count)];
         
         return true;
     }

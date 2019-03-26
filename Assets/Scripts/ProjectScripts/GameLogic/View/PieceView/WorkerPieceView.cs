@@ -34,14 +34,17 @@ public class WorkerPieceView : PieceBoardElementView
     private List<Piece> FindTargets()
     {
         var logic = Context.Context.BoardLogic;
-        var positions = logic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Workplace);
+        var positions = logic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace);
         var result = new List<Piece>();
+        
+        positions.AddRange(Context.Context.PartPiecesLogic.GetAllPositions());
 
         foreach (var position in positions)
         {
             var piece = logic.GetPieceAt(position);
 
-            if (piece.PieceState != null && piece.PieceState.State != BuildingState.Waiting && piece.PieceState.State != BuildingState.Warning) continue;
+            if (Context.Context.PathfindLocker.HasPath(piece) == false
+                || piece.PieceState != null && piece.PieceState.State != BuildingState.Waiting && piece.PieceState.State != BuildingState.Warning) continue;
             
             result.Add(piece);
         }
