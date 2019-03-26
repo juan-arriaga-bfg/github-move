@@ -58,7 +58,7 @@ public class PartPiecesLogicComponent : IECSComponent
         var view = piece.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
         var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType + 2);
 
-        var title = string.Format(LocalizationService.Get("gameboard.bubble.message.castle.build", "gameboard.bubble.message.castle.build\n{0}?"), DateTimeExtension.GetDelayText(def.Delay));
+        var title = string.Format(LocalizationService.Get("gameboard.bubble.message.castle.build", "gameboard.bubble.message.castle.build\n{0}?"), DateTimeExtension.GetDelayText(def.Delay, true));
         var button = string.Format(LocalizationService.Get("gameboard.bubble.button.send", "gameboard.bubble.button.send {0}"), $"<sprite name={Currency.Worker.Icon}>");
         
         view.SetData(title, button, OnClick);
