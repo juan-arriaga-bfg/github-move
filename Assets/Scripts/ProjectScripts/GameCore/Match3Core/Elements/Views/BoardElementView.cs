@@ -8,8 +8,6 @@ public class ViewAnimationUid { }
 
 public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
 {
-    [SerializeField] protected BoardPosition lastBoardPosition;
-
     private int cachedIdleAnimatorHash = Animator.StringToHash("Idle");
 
     private Animator animator;
@@ -377,8 +375,6 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
 
     public virtual void SyncRendererLayers(BoardPosition boardPosition)
     {
-        this.lastBoardPosition = boardPosition;
-
         if (BoardLayer.IsValidLayer(boardPosition.Z)){}
 
         if (cachedRenderers.size <= 0)
