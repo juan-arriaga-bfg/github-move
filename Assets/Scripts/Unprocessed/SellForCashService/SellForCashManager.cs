@@ -129,11 +129,8 @@ public class SellForCashManager: ECSEntity
             return;
         }
         
-        var defs = GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name];
-        
-        defs.AddRange(GameDataService.Current.ShopManager.Defs[Currency.Offer.Name]);
-        
-        var def = defs.FirstOrDefault(e => e.PurchaseKey == productId);
+        var def = GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name].FirstOrDefault(e => e.PurchaseKey == productId) ??
+                  GameDataService.Current.ShopManager.Defs[Currency.Offer.Name].FirstOrDefault(e => e.PurchaseKey == productId);
 
         if (def == null)
         {

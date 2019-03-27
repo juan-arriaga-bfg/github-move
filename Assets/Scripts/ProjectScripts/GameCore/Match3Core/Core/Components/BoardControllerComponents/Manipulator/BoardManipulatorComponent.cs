@@ -232,19 +232,19 @@ public class BoardManipulatorComponent : ECSEntity,
             isTouch = false;
             return false;
         }
+        
+        var start = context.BoardDef.GetSectorPosition(startPos);
+        var current = context.BoardDef.GetSectorPosition(pos);
+        if (!start.Equals(current)) isTouch = false;
 
         if (CheckDrag(startPos, pos, duration))
         {
-            var selectedView = GetSelectedBoardElementView();
-            if (selectedView != null && (startPos - pos).magnitude < 0.3f)
-            {
-                cameraManipulator.CameraMove.Lock(this, true);
-                return true;
-            }
-            
-            var start = context.BoardDef.GetSectorPosition(startPos);
-            var current = context.BoardDef.GetSectorPosition(pos);
-            if (!start.Equals(current)) isTouch = false;
+            // var selectedView = GetSelectedBoardElementView();
+            // if (selectedView != null && (startPos - pos).magnitude < 0.3f)
+            // {
+            //     cameraManipulator.CameraMove.Lock(this, true);
+            //     return true;
+            // }
             
             BeginDrag(startPos, pos);
         }
@@ -332,7 +332,7 @@ public class BoardManipulatorComponent : ECSEntity,
     {
         isDrag = false;
         
-        cameraManipulator.CameraMove.UnLock(this);
+        // cameraManipulator.CameraMove.UnLock(this);
         
         if (cachedViewForDrag != null)
         {
