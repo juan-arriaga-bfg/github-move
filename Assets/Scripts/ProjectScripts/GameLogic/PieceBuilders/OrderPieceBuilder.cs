@@ -10,7 +10,7 @@
         
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
-				// .RegisterDefinition(new TouchReactionDefinitionOpenChestWindow())
+				.RegisterDefinition(new TouchReactionDefinitionClaimOrderWindow())
 				.RegisterDefinition(new TouchReactionDefinitionSpawnRewards()))
 			.RegisterComponent(new TouchReactionConditionComponent()));
 		
