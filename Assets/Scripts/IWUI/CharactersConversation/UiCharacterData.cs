@@ -67,8 +67,8 @@ public static class UiCharacterData
             new UICharacterDef
             {
                 Id = TigerLilly,
-                Name = "conversation.character.TigerLilly",
-                ColorHex = "#7afff6",
+                Name = "conversation.character.TigerLily",
+                ColorHex = "#ff0033",
                 PieceId = PieceType.NPC_F.Id
             }
         },
