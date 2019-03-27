@@ -40,7 +40,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 50
+        "Amount": 25
       }
     ],
     "OrdersWeights": [
@@ -75,7 +75,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 50
+        "Amount": 25
       }
     ],
     "PieceWeights": [
@@ -108,7 +108,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 75
+        "Amount": 25
       }
     ],
     "OrdersWeights": [
@@ -154,7 +154,7 @@
     "Index": 5,
     "Price": {
       "Currency": "Experience",
-      "Amount": 650
+      "Amount": 850
     },
     "Rewards": [
       {
@@ -167,7 +167,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 80
+        "Amount": 30
       }
     ],
     "OrdersWeights": [
@@ -207,7 +207,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 80
+        "Amount": 50
       }
     ],
     "OrdersWeights": [
@@ -271,6 +271,10 @@
       {
         "Uid": "Order2",
         "Weight": 3
+      },
+      {
+        "Uid": "Order4",
+        "Weight": 1
       }
     ],
     "PieceWeights": [
