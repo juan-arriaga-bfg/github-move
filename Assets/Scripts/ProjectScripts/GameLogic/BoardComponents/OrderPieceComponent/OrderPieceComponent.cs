@@ -50,8 +50,11 @@ public class OrderPieceComponent : IECSComponent, IPieceBoardObserver
     {
         var reward = new Dictionary<int, int>();
         
-        reward.Add(PieceType.Soft1.Id, 2);
-
+        if(GameDataService.Current.OrdersManager.GetOrderDef(PieceType.Parse(contextPiece.PieceType), out var orderDef))
+        {
+            var piecesReward = CurrencyHelper.FiltrationRewards(orderDef.Rewards, out var currencysReward);
+            reward = new Dictionary<int, int>(piecesReward);
+        }
         
         return reward;
     }
