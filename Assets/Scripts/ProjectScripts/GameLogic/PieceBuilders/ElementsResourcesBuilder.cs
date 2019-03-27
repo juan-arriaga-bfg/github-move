@@ -715,6 +715,12 @@ public class ElementsResourcesBuilder
         #endregion
         
 #endregion
+
+#region Order Pieces
+        
+        dict.Add(PieceType.Order7.Id, R.OrderPiece7);
+
+#endregion
         
         return dict;
     }

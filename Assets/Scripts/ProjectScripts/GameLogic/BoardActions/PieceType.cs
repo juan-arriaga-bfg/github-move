@@ -738,4 +738,21 @@ public static partial class PieceType
     #endregion
     
 #endregion
+    
+#region Orders
+    
+    public static readonly PieceTypeDef Order1 = new PieceTypeDef{Id = 400001, Abbreviations = new List<string>{ "Order1" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order2 = new PieceTypeDef{Id = 400002, Abbreviations = new List<string>{ "Order2" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order3 = new PieceTypeDef{Id = 400003, Abbreviations = new List<string>{ "Order3" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order4 = new PieceTypeDef{Id = 400004, Abbreviations = new List<string>{ "Order4" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order5 = new PieceTypeDef{Id = 400005, Abbreviations = new List<string>{ "Order5" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order6 = new PieceTypeDef{Id = 400006, Abbreviations = new List<string>{ "Order6" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order7 = new PieceTypeDef{Id = 400007, Abbreviations = new List<string>{ "Order7" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order8 = new PieceTypeDef{Id = 400008, Abbreviations = new List<string>{ "Order8" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order9 = new PieceTypeDef{Id = 400009, Abbreviations = new List<string>{ "Order9" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order10 = new PieceTypeDef{Id = 400010, Abbreviations = new List<string>{ "Order10" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order11 = new PieceTypeDef{Id = 400011, Abbreviations = new List<string>{ "Order11" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order12 = new PieceTypeDef{Id = 400012, Abbreviations = new List<string>{ "Order12" }, Filter = PieceTypeFilter.Simple};
+
+#endregion
 }

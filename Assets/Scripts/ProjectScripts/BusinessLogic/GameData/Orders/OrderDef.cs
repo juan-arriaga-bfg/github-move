@@ -7,6 +7,7 @@ public class OrderDef
     public int Delay;
     public List<CurrencyPair> Prices;
     public List<CurrencyPair> Rewards;
+    public List<CurrencyPair> Result;
 
     private bool isUnlocked;
 
