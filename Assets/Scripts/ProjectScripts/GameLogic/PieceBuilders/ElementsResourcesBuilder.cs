@@ -133,6 +133,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.NPC_G4.Id, R.NPC_G4Piece);
         dict.Add(PieceType.NPC_G5.Id, R.NPC_G5Piece);
         dict.Add(PieceType.NPC_G6.Id, R.NPC_G6Piece);
+        dict.Add(PieceType.NPC_G7.Id, R.NPC_G7Piece);
+        dict.Add(PieceType.NPC_G8.Id, R.NPC_G8Piece);
 
         #endregion
         
@@ -144,6 +146,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.NPC_H4.Id, R.NPC_H4Piece);
         dict.Add(PieceType.NPC_H5.Id, R.NPC_H5Piece);
         dict.Add(PieceType.NPC_H6.Id, R.NPC_H6Piece);
+        dict.Add(PieceType.NPC_H7.Id, R.NPC_H7Piece);
+        dict.Add(PieceType.NPC_H8.Id, R.NPC_H8Piece);
 
         #endregion
         

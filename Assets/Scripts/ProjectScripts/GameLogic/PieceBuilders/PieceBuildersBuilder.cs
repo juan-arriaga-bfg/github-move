@@ -41,10 +41,10 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_B1.Id, PieceType.NPC_B3.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_C1.Id, PieceType.NPC_C5.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_D1.Id, PieceType.NPC_D6.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_E1.Id, PieceType.NPC_E6.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_F1.Id, PieceType.NPC_F6.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_G1.Id, PieceType.NPC_G6.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_H1.Id, PieceType.NPC_H6.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_E1.Id, PieceType.NPC_E8.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_F1.Id, PieceType.NPC_F8.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_G1.Id, PieceType.NPC_G8.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_H1.Id, PieceType.NPC_H8.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_I1.Id, PieceType.NPC_I8.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_J1.Id, PieceType.NPC_J8.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_K1.Id, PieceType.NPC_K8.Id, dict);
