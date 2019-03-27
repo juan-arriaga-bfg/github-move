@@ -28,7 +28,8 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
     {
         PieceTypeFilter.Fake,
         PieceTypeFilter.Obstacle,
-        PieceTypeFilter.Mine
+        PieceTypeFilter.Mine,
+        PieceTypeFilter.OrderPiece,
     }; 
         
     public readonly HashSet<int> hidedPieceIds = new HashSet<int>
