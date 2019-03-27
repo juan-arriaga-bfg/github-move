@@ -16,16 +16,22 @@ public partial class DefaultProfileMigration : IProfileMigration
         
         // Fog centers        
         {560, Migrate560},
+        
+        // Autocomplete quests 128, 129, 130 if piece NPC_F3+ already unlocked
+        {604, Migrate604}
     };
-    
+
     public void Migrate(int clientVersion, UserProfile profile)
     {
+        Debug.Log($"[Profile]: migration: Check for profile.SystemVersion: {profile.SystemVersion} and clientVersion {clientVersion}");
+        
         var currentVersion = profile.SystemVersion;
         
         // Handle new profile
         if (currentVersion == 0)
         {
             profile.SystemVersion = clientVersion;
+            Debug.Log($"[Profile]: migration: Profile is just created, no migration required");
             return;
         }
 
