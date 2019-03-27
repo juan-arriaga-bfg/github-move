@@ -79,7 +79,7 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
         {
             foreach (var def in Defs)
             {
-                if(def.State == MarketItemState.Purchased || def.State == MarketItemState.Saved) continue;
+                if (def.State == MarketItemState.Purchased || def.State == MarketItemState.Saved) continue;
 
                 def.Current = null;
             }

@@ -53,7 +53,7 @@ public class MarketItem
         get
         {
             if (current == null) Update(Reward == null);
-            if (Level > GameDataService.Current.LevelsManager.Level) State = MarketItemState.Lock;
+            if (state < MarketItemState.Purchased && Level > GameDataService.Current.LevelsManager.Level) State = MarketItemState.Lock;
             
             return current;
         }
