@@ -757,6 +757,18 @@ public static partial class PieceType
     public static readonly PieceTypeDef Order10 = new PieceTypeDef{Id = 400010, Abbreviations = new List<string>{ "Order10" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef Order11 = new PieceTypeDef{Id = 400011, Abbreviations = new List<string>{ "Order11" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef Order12 = new PieceTypeDef{Id = 400012, Abbreviations = new List<string>{ "Order12" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order13 = new PieceTypeDef{Id = 400013, Abbreviations = new List<string>{ "Order13" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order14 = new PieceTypeDef{Id = 400014, Abbreviations = new List<string>{ "Order14" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order15 = new PieceTypeDef{Id = 400015, Abbreviations = new List<string>{ "Order15" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order16 = new PieceTypeDef{Id = 400016, Abbreviations = new List<string>{ "Order16" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order17 = new PieceTypeDef{Id = 400017, Abbreviations = new List<string>{ "Order17" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order18 = new PieceTypeDef{Id = 400018, Abbreviations = new List<string>{ "Order18" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order19 = new PieceTypeDef{Id = 400019, Abbreviations = new List<string>{ "Order19" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order20 = new PieceTypeDef{Id = 400020, Abbreviations = new List<string>{ "Order20" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order21 = new PieceTypeDef{Id = 400021, Abbreviations = new List<string>{ "Order21" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order22 = new PieceTypeDef{Id = 400022, Abbreviations = new List<string>{ "Order22" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Order23 = new PieceTypeDef{Id = 400023, Abbreviations = new List<string>{ "Order23" }, Filter = PieceTypeFilter.Simple};
+    
 
 #endregion
 }
