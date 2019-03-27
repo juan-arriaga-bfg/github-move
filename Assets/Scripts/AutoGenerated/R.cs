@@ -450,4 +450,27 @@ public class R
      public const string NPC_G8Piece = "NPC_G8Piece";
      public const string NPC_H7Piece = "NPC_H7Piece";
      public const string NPC_H8Piece = "NPC_H8Piece";
+     public const string OrderPiece1 = "OrderPiece1";
+     public const string OrderPiece2 = "OrderPiece2";
+     public const string OrderPiece3 = "OrderPiece3";
+     public const string OrderPiece4 = "OrderPiece4";
+     public const string OrderPiece5 = "OrderPiece5";
+     public const string OrderPiece6 = "OrderPiece6";
+     public const string OrderPiece7 = "OrderPiece7";
+     public const string OrderPiece8 = "OrderPiece8";
+     public const string OrderPiece9 = "OrderPiece9";
+     public const string OrderPiece10 = "OrderPiece10";
+     public const string OrderPiece11 = "OrderPiece11";
+     public const string OrderPiece12 = "OrderPiece12";
+     public const string OrderPiece13 = "OrderPiece13";
+     public const string OrderPiece14 = "OrderPiece14";
+     public const string OrderPiece15 = "OrderPiece15";
+     public const string OrderPiece16 = "OrderPiece16";
+     public const string OrderPiece17 = "OrderPiece17";
+     public const string OrderPiece18 = "OrderPiece18";
+     public const string OrderPiece19 = "OrderPiece19";
+     public const string OrderPiece20 = "OrderPiece20";
+     public const string OrderPiece21 = "OrderPiece21";
+     public const string OrderPiece22 = "OrderPiece22";
+     public const string OrderPiece23 = "OrderPiece23";
 }
