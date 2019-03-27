@@ -43,7 +43,7 @@
         {
             SetCustomMaterial(BoardElementMaterialType.PiecesSepiaDefaultMaterial, true);
             SaveCurrentMaterialAsDefault();
-            cooldownParticles?.DestroyOnBoard();
+            if (cooldownParticles != null) cooldownParticles.DestroyOnBoard();
             cooldownParticles = ParticleView.Show(R.MonumentCooldownParticle, Piece.CachedPosition);
             cooldownParticles.transform.SetParentAndReset(transform);
             cooldownParticles.SyncRendererLayers(Piece.CachedPosition.SetZ(BoardLayer.FX.Layer));
@@ -52,7 +52,7 @@
         {
             ClearCurrentMaterialAsDefault();
             ResetDefaultMaterial();
-            cooldownParticles?.DestroyOnBoard();
+            if (cooldownParticles != null) cooldownParticles.DestroyOnBoard();
         }
     }
 }

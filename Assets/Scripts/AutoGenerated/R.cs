@@ -446,5 +446,8 @@ public class R
      public const string MN_HPiece = "MN_HPiece";
      public const string MonumentCooldownParticle = "MonumentCooldownParticle";
      public const string PiecesSepiaDefaultMaterial = "PiecesSepiaDefaultMaterial";
-     public const string OrderPiece7 = "OrderPiece7";
+     public const string NPC_G7Piece = "NPC_G7Piece";
+     public const string NPC_G8Piece = "NPC_G8Piece";
+     public const string NPC_H7Piece = "NPC_H7Piece";
+     public const string NPC_H8Piece = "NPC_H8Piece";
 }

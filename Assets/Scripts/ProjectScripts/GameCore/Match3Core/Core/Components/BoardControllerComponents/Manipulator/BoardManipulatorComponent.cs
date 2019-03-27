@@ -181,9 +181,11 @@ public class BoardManipulatorComponent : ECSEntity,
         return false;
     }
 
-    private bool CheckDrag(float duration)
+    private bool CheckDrag(Vector2 startPos, Vector2 pos, float duration)
     {
-        return cachedViewForDrag == null && isDrag == null;
+        bool state = cachedViewForDrag == null && isDrag == null;
+              
+        return state;
     }
 
     private void BeginDrag(Vector2 startPos, Vector2 pos)
@@ -194,7 +196,7 @@ public class BoardManipulatorComponent : ECSEntity,
         var current = context.BoardDef.GetSectorPosition(pos);
         
         if (!start.Equals(current)) return;
-           
+
         if (cachedViewForDrag == null)
         {
             var selectedView = GetSelectedBoardElementView();
@@ -231,11 +233,21 @@ public class BoardManipulatorComponent : ECSEntity,
             return false;
         }
 
-        var start = context.BoardDef.GetSectorPosition(startPos);
-        var current = context.BoardDef.GetSectorPosition(pos);
-        if (!start.Equals(current)) isTouch = false;
-        
-        if(CheckDrag(duration)) BeginDrag(startPos, pos);
+        if (CheckDrag(startPos, pos, duration))
+        {
+            var selectedView = GetSelectedBoardElementView();
+            if (selectedView != null && (startPos - pos).magnitude < 0.3f)
+            {
+                cameraManipulator.CameraMove.Lock(this, true);
+                return true;
+            }
+            
+            var start = context.BoardDef.GetSectorPosition(startPos);
+            var current = context.BoardDef.GetSectorPosition(pos);
+            if (!start.Equals(current)) isTouch = false;
+            
+            BeginDrag(startPos, pos);
+        }
         
         if ((pos - startPos).sqrMagnitude <= 0.01f || cachedViewForDrag == null) return false;
 
@@ -319,6 +331,8 @@ public class BoardManipulatorComponent : ECSEntity,
     public bool OnUp(Vector2 startPos, Vector2 pos)
     {
         isDrag = false;
+        
+        cameraManipulator.CameraMove.UnLock(this);
         
         if (cachedViewForDrag != null)
         {
@@ -424,7 +438,7 @@ public class BoardManipulatorComponent : ECSEntity,
         context.TutorialLogic.Update();
         return false;
     }
-
+    
     protected virtual BoardElementView GetSelectedBoardElementView()
     {
         var touchableObjects = cameraManipulator.GetTouchable();

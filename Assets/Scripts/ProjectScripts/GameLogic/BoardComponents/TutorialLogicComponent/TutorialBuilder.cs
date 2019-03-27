@@ -199,7 +199,7 @@ public static class TutorialBuilder
             {
                 step = new WorkerTutorialStep2
                 {
-                    Delay = 5,
+                    Delay = 0,
                     OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("instantworker"),
                     OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("instantworker", currentStep.StartTime)
                 };
