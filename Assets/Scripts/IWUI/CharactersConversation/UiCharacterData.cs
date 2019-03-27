@@ -8,6 +8,7 @@ public static class UiCharacterData
     public const string CharGnomeWorker = "GnomeWorker";
     public const string CharRedHood = "RedHood";
     public const string Mermaid = "Mermaid";
+    public const string TigerLilly = "TigerLilly";
     
     private static readonly Dictionary<string, UICharacterDef> charDefs = new Dictionary<string, UICharacterDef>
     {
@@ -59,6 +60,16 @@ public static class UiCharacterData
                 Name = "conversation.character.Mermaid",
                 ColorHex = "#7afff6",
                 PieceId = PieceType.NPC_E.Id
+            }
+        },
+        { 
+            TigerLilly, 
+            new UICharacterDef
+            {
+                Id = TigerLilly,
+                Name = "conversation.character.TigerLily",
+                ColorHex = "#ff0033",
+                PieceId = PieceType.NPC_F.Id
             }
         },
         { 

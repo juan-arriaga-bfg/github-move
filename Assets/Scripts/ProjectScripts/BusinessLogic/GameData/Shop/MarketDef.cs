@@ -2,6 +2,7 @@
 {
     Base,
     BasePiecesEasy,
+    BasePiecesNormal,
     BasePiecesHard,
     Ingredients,
     BaseChestsFirst,
