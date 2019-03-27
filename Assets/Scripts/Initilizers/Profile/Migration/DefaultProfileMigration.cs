@@ -16,8 +16,10 @@ public partial class DefaultProfileMigration : IProfileMigration
         
         // Fog centers        
         {560, Migrate560},
+        
+        {651, Migrate651}
     };
-    
+
     public void Migrate(int clientVersion, UserProfile profile)
     {
         var currentVersion = profile.SystemVersion;
