@@ -337,7 +337,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             var board = BoardService.Current.FirstBoard;
             var position = board.BoardLogic.PositionsCache.GetRandomPositions(order.Customer, 1)[0];
             
-            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, order.PiecesReward.Sum(e => e.Value)))
+            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, order.GetAmountOfResult()))
             {
                 UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
                 return;
