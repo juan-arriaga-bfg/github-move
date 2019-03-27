@@ -71,6 +71,8 @@ public class MarketItem
 
         Reward = new CurrencyPair{Currency = piece == -1 ? current.Weight.Uid : PieceType.Parse(piece), Amount = amount};
         Price = current.Price ?? GetPrice(Reward.Currency);
+
+        if (State == MarketItemState.Normal && Price == null) State = MarketItemState.Saved;
     }
     
     public void AddDef(MarketDef def)
