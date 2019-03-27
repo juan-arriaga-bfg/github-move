@@ -5,6 +5,7 @@ using Quests;
 
 public static class TutorialBuilder
 {
+    public const int WorkerStepIndex = 10;
     public const int LockPRStepIndex = 12;
     public const int LockMarketStepIndex = 15;
     public const int LockOrderStepIndex = 18;
@@ -197,6 +198,8 @@ public static class TutorialBuilder
             }
             case 10: // tutorial 9 - worker
             {
+                if (WorkerStepIndex != index) Debug.LogError("Tutorial Error: WorkerStepIndex != index");
+                
                 step = new WorkerTutorialStep2
                 {
                     Delay = 0,

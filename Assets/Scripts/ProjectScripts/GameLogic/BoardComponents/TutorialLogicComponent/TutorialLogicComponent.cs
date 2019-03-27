@@ -251,6 +251,11 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         orders.Locker.Unlock(orders);
     }
     
+    public bool CheckUnlockWorker()
+    {
+        return SaveCompleted.Contains(TutorialBuilder.WorkerStepIndex);
+    }
+    
     public bool CheckLockOrders()
     {
         return SaveCompleted.Contains(TutorialBuilder.LockOrderStepIndex);

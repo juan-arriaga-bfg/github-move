@@ -110,7 +110,7 @@ public class MarketItem
     
     private MarketDef SetPiece(MarketDef def)
     {
-        var piece = "";
+        string piece;
         
         switch (def.RandomType)
         {
@@ -136,7 +136,10 @@ public class MarketItem
                 piece = GetRandomChest(2);
                 break;
             case MarketRandomType.NPCChests:
-                piece = GameDataService.Current.CharactersManager.Characters.Count == 0 ? null : def.Weight.Uid;
+                piece = GameDataService.Current.CharactersManager.Characters.Count == 0 ? string.Empty : def.Weight.Uid;
+                break;
+            case MarketRandomType.Worker:
+                piece = BoardService.Current.FirstBoard.TutorialLogic.CheckUnlockWorker() == false ? string.Empty : def.Weight.Uid;
                 break;
             default :
                 piece = def.Weight.Uid;

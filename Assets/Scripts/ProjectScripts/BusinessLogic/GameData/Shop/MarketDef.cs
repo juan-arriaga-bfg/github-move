@@ -9,6 +9,7 @@
     BaseChestsSecond,
     BaseChestsLast,
     NPCChests,
+    Worker
 }
 
 public enum MarketItemBundle
