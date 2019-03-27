@@ -28,6 +28,8 @@ public class UISettingsWindowView : UIGenericPopupWindowView
     [IWUIBinding("#SoundButton")] private UIToggleViewController btnSound;
     [IWUIBinding("#MusicButton")] private UIToggleViewController btnMusic;
     
+    [IWUIBinding("#VersionButton")] private UIButtonViewController btnVersion;
+    
     [IWUIBinding("#LoginButton")] private UIButtonViewController btnLogin;
     
     [IWUIBinding("#CreditsButton")] private UIButtonViewController btnCredits;
@@ -83,6 +85,7 @@ public class UISettingsWindowView : UIGenericPopupWindowView
         
         InitButtonBase(btnLogin, OnLoginClick);
         
+        InitButtonBase(btnVersion, OnVersionClick);
         InitButtonBase(btnCredits, OnCreditsClick);
         InitButtonBase(btnSupport, OnSupportClick);
         InitButtonBase(btnRestore, OnRestoreClick);
@@ -93,6 +96,7 @@ public class UISettingsWindowView : UIGenericPopupWindowView
         TackleBoxEvents.SendSettingsOpen();
     }
 
+    
     public override void OnViewClose()
     {
         base.OnViewClose();
@@ -148,6 +152,12 @@ public class UISettingsWindowView : UIGenericPopupWindowView
         UIMessageWindowController.CreateNotImplementedMessage();
         Debug.LogWarning("OnRestoreClick");
     }
+    
+    private void OnVersionClick()
+    {
+        UIMessageWindowController.CreateVersionMessage();
+    }
+
     
     private void OnCreditsClick()
     {
