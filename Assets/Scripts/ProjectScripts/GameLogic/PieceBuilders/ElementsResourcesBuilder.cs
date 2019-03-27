@@ -722,7 +722,29 @@ public class ElementsResourcesBuilder
 
 #region Order Pieces
         
+        dict.Add(PieceType.Order1.Id, R.OrderPiece1);
+        dict.Add(PieceType.Order2.Id, R.OrderPiece2);
+        dict.Add(PieceType.Order3.Id, R.OrderPiece3);
+        dict.Add(PieceType.Order4.Id, R.OrderPiece4);
+        dict.Add(PieceType.Order5.Id, R.OrderPiece5);
+        dict.Add(PieceType.Order6.Id, R.OrderPiece6);
         dict.Add(PieceType.Order7.Id, R.OrderPiece7);
+        dict.Add(PieceType.Order8.Id, R.OrderPiece8);
+        dict.Add(PieceType.Order9.Id, R.OrderPiece9);
+        dict.Add(PieceType.Order10.Id, R.OrderPiece10);
+        dict.Add(PieceType.Order11.Id, R.OrderPiece11);
+        dict.Add(PieceType.Order12.Id, R.OrderPiece12);
+        dict.Add(PieceType.Order13.Id, R.OrderPiece13);
+        dict.Add(PieceType.Order14.Id, R.OrderPiece14);
+        dict.Add(PieceType.Order15.Id, R.OrderPiece15);
+        dict.Add(PieceType.Order16.Id, R.OrderPiece16);
+        dict.Add(PieceType.Order17.Id, R.OrderPiece17);
+        dict.Add(PieceType.Order18.Id, R.OrderPiece18);
+        dict.Add(PieceType.Order19.Id, R.OrderPiece19);
+        dict.Add(PieceType.Order20.Id, R.OrderPiece20);
+        dict.Add(PieceType.Order21.Id, R.OrderPiece21);
+        dict.Add(PieceType.Order22.Id, R.OrderPiece22);
+        dict.Add(PieceType.Order23.Id, R.OrderPiece23);
 
 #endregion
         
