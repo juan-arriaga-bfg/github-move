@@ -54,7 +54,7 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         TimerCooldown.OnComplete += TimerWork.Start;
         RegisterComponent(TimerCooldown);
         
-        var child = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(def.Reproduction.Currency));
+        var child = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(def.ReproductionId));
         childName = $"<sprite name={child.Uid}>";
     }
 
@@ -158,7 +158,7 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         
         if (IsDead) pieces.Add(def.ObstacleType, 1);
         
-        pieces.Add(PieceType.Parse(def.Reproduction.Currency), def.Reproduction.Amount);
+        pieces.Add(PieceType.Parse(def.ReproductionId), def.ReproductionRange.Range());
         
         return pieces;
     }
