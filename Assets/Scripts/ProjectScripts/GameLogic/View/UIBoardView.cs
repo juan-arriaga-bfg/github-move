@@ -50,9 +50,28 @@ public class UIBoardView : BoardElementView
     public int Layer => defaultPriority;
 
     // Used for camera focus
+    // Measured in World Space
     public virtual float GetHeight()
     {
+        // Working code to get dialog size. BUT we need to wait for "show" animation end before calculations
+        // Image image = viewTransform.GetComponent<Image>();
+        // if (image == null)
+        // {
+        //     Debug.LogWarning($"[TouchReactionDefinitionOpenBubble] => FitToScreen: image is null");
+        //     return;
+        // }
+        // Vector3[] imageCorners = new Vector3[4];
+        // image.rectTransform.GetWorldCorners(imageCorners);
+        // var tl = imageCorners[1].y;
+        
         return 2.5f;
+    }
+    
+    // Used for camera focus
+    // Measured in World Space
+    public virtual float GetWidth()
+    {
+        return 3.2f;
     }
     
     protected virtual ViewType Id { get; set; }
@@ -262,36 +281,54 @@ public class UIBoardView : BoardElementView
             Debug.LogWarning($"[TouchReactionDefinitionOpenBubble] => FitToScreen: viewTransform is null");
             return;
         }
-        
-        // Working code to get dialog size. BUT we need to wait for "show" animation end before calculations
-        // Image image = viewTransform.GetComponent<Image>();
-        // if (image == null)
-        // {
-        //     Debug.LogWarning($"[TouchReactionDefinitionOpenBubble] => FitToScreen: image is null");
-        //     return;
-        // }
-        // Vector3[] imageCorners = new Vector3[4];
-        // image.rectTransform.GetWorldCorners(imageCorners);
-        // var tl = imageCorners[1].y;
-        
+
         Camera camera = Camera.main;
 
         var resourcesView = UIService.Get.GetShowedView<UIResourcePanelWindowView>(UIWindowType.ResourcePanelWindow);
-        float safeZoneHeight = resourcesView.GetSafeZoneHeightInWorldSpace();
-        safeZoneHeight = safeZoneHeight * camera.orthographicSize; // Convert to main camera points
+        float safeZoneTop = resourcesView.GetSafeZoneHeightInWorldSpace();
+        safeZoneTop = safeZoneTop * camera.orthographicSize; // Convert to main camera points
 
-        Vector3 cameraTop = camera.ScreenToWorldPoint(new Vector3(0, Screen.height, 0));
+        float safeZoneLeft  = 3;
+        float safeZoneRight = 3;
         
-        var tl = viewTransform.transform.position.y + GetHeight();
+        float cameraTop   = camera.ScreenToWorldPoint(new Vector3(0, Screen.height, 0)).y;
+        float cameraLeft  = camera.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
+        float cameraRight = camera.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
+
+        Vector3 anchorPos = viewTransform.transform.position;
+        float halfWidth = GetWidth() / 2f;
+        float height = GetHeight();
         
-        var cameraTopY = cameraTop.y;
-        var dialogTopY = tl;
-        
-        var delta = dialogTopY + safeZoneHeight - cameraTopY;
-        if (delta > 0)
+        float dialogTop   = anchorPos.y + height;
+        float dialogLeft  = anchorPos.x - halfWidth;   
+        float dialogRight = anchorPos.x + halfWidth;   
+
+        bool needToMove = false;
+        Vector3 newPos = camera.transform.position;
+
+        var deltaTop = dialogTop + safeZoneTop - cameraTop;
+        if (deltaTop > 0)
         {
-            Vector3 newPos = camera.transform.position;
-            newPos += new Vector3(0, delta);
+            needToMove = true;
+            newPos += new Vector3(0, deltaTop);
+        }
+        
+        var deltaLeft = cameraLeft - (dialogLeft - safeZoneLeft);
+        if (deltaLeft > 0)
+        {
+            needToMove = true;
+            newPos += new Vector3(-deltaLeft, 0);
+        }
+
+        var deltaRight = cameraRight - (dialogRight + safeZoneRight);
+        if (deltaRight < 0)
+        {
+            needToMove = true;
+            newPos -= new Vector3(deltaRight, 0);
+        }
+
+        if (needToMove)
+        {
             BoardService.Current.FirstBoard.Manipulator.CameraManipulator.MoveTo(newPos, true, 0.4f, Ease.OutCubic);
         }
     }
