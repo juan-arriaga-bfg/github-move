@@ -88,12 +88,14 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
         var def = GetStep(piece, step);
         
         var hard = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name);
+        var extras = GameDataService.Current.LevelsManager.GetSequence(Currency.Extra.Name);
         var character = GameDataService.Current.CharactersManager.GetSequence(Currency.Character.Name);
         var sequence = GetSequence(def.Uid);
         
         var reward = hard.GetNextDict(def.ProductionAmount.Range());
         
         reward = character.GetNextDict(def.CharactersAmount.Range(), reward);
+        reward = extras.GetNextDict(def.ExtrasAmount.Range(), reward);
         reward = sequence.GetNextDict(def.PieceAmount, reward);
         
         return reward;

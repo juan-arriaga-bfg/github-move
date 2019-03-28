@@ -44,4 +44,6 @@ public static partial class Currency
     [IncludeToCheatSheet] public static readonly CurrencyDef PR_E5       = new CurrencyDef { Id = 1005, Name = "PR_E5",      IsConsumable = true, Icon = "PR_E5" };
     [IncludeToCheatSheet] public static readonly CurrencyDef PR_F5       = new CurrencyDef { Id = 1006, Name = "PR_F5",      IsConsumable = true, Icon = "PR_F5" };
     [IncludeToCheatSheet] public static readonly CurrencyDef PR_G5       = new CurrencyDef { Id = 1007, Name = "PR_G5",      IsConsumable = true, Icon = "PR_G5" };
+    
+                          public static readonly CurrencyDef Extra       = new CurrencyDef { Id = 1100, Name = "Extra",      IsConsumable = true };
 }
