@@ -1770,7 +1770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spacing: -50
-  globalOffset: {x: 400, y: 0}
+  globalOffset: {x: 0, y: 0}
   isUpdateSizeByChild: 1
 --- !u!1 &1739824944425868
 GameObject:
@@ -2488,15 +2488,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e1133361e00734ca9db89c6d9463e3, type: 3}
---- !u!1 &6682725398849392216 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4570172770642088417, guid: 00e1133361e00734ca9db89c6d9463e3,
-    type: 3}
-  m_PrefabInstance: {fileID: 7192614451125608377}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6892284431802721758 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4356982572343933543, guid: 00e1133361e00734ca9db89c6d9463e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 7192614451125608377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6682725398849392216 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4570172770642088417, guid: 00e1133361e00734ca9db89c6d9463e3,
     type: 3}
   m_PrefabInstance: {fileID: 7192614451125608377}
   m_PrefabAsset: {fileID: 0}
