@@ -8,12 +8,18 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
     {
         return new List<int>();
     }
+
+    private bool UseBoost(MatchDefinitionComponent definition, List<BoardPosition> matchField)
+    {
+        return matchField.FindIndex(boardPosition => definition.Context.GetPieceAt(boardPosition).PieceType == PieceType.Boost_CR.Id) != -1;
+    }
     
     public bool Check(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position, out int next)
     {
         next = definition.GetNext(pieceType, false);
         
-        if (next == PieceType.None.Id) return false;
+        if (next == PieceType.None.Id
+            || UseBoost(definition, matchField) && definition.GetLast(pieceType) == PieceType.Boost_CR.Id) return false;
         
         var countForMatchDefault = definition.GetPieceCountForMatch(pieceType);
         
@@ -26,8 +32,11 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
 
         if (nextType == PieceType.None.Id) return null;
 
-        var index = matchField.FindIndex(boardPosition => definition.Context.GetPieceAt(boardPosition).PieceType == PieceType.Boost_CR.Id);
-        var nextPieces = Calculation(pieceType, nextType, definition.GetPieceCountForMatch(pieceType), matchField.Count, index != -1, out var ignoreBoost);
+        var useBoost = UseBoost(definition, matchField);
+
+        if (useBoost && definition.GetLast(pieceType) == PieceType.Boost_CR.Id) return null;
+        
+        var nextPieces = Calculation(pieceType, nextType, definition.GetPieceCountForMatch(pieceType), matchField.Count, useBoost, out var ignoreBoost);
 
         if (nextPieces.Count == 0) return null;
         
