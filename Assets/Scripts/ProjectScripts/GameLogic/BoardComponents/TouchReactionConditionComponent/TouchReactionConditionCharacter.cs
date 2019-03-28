@@ -17,6 +17,8 @@ public class TouchReactionConditionCharacter : TouchReactionConditionComponent
 					true,
 					false
 				);
+				
+				view.FitToScreen();
 			}
 			
 			view.Change(!view.IsShow);

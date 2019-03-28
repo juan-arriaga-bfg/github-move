@@ -28,6 +28,11 @@ public class UIBoardView : BoardElementView
         return group;
     }
 
+    public RectTransform GetViewTransform()
+    {
+        return (RectTransform)viewTransform;
+    }
+
     public Action OnShow;
     public Action OnHide;
     
@@ -44,6 +49,31 @@ public class UIBoardView : BoardElementView
     
     public int Layer => defaultPriority;
 
+    // Used for camera focus
+    // Measured in World Space
+    public virtual float GetHeight()
+    {
+        // Working code to get dialog size. BUT we need to wait for "show" animation end before calculations
+        // Image image = viewTransform.GetComponent<Image>();
+        // if (image == null)
+        // {
+        //     Debug.LogWarning($"[TouchReactionDefinitionOpenBubble] => FitToScreen: image is null");
+        //     return;
+        // }
+        // Vector3[] imageCorners = new Vector3[4];
+        // image.rectTransform.GetWorldCorners(imageCorners);
+        // var tl = imageCorners[1].y;
+        
+        return 2.5f;
+    }
+    
+    // Used for camera focus
+    // Measured in World Space
+    public virtual float GetWidth()
+    {
+        return 3.2f;
+    }
+    
     protected virtual ViewType Id { get; set; }
 
     protected virtual Vector3 offset => new Vector3(0, 0);
@@ -241,5 +271,65 @@ public class UIBoardView : BoardElementView
         
         content = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
         content.SetParentAndReset(anchor);
+    }
+    
+    public virtual void FitToScreen()
+    {
+        var viewTransform = GetViewTransform(); 
+        if (viewTransform == null)
+        {
+            Debug.LogWarning($"[TouchReactionDefinitionOpenBubble] => FitToScreen: viewTransform is null");
+            return;
+        }
+
+        Camera camera = Camera.main;
+
+        var resourcesView = UIService.Get.GetShowedView<UIResourcePanelWindowView>(UIWindowType.ResourcePanelWindow);
+        var mainView = UIService.Get.GetShowedView<UIMainWindowView>(UIWindowType.MainWindow);
+
+        float safeZoneTop   = resourcesView.GetSafeZoneHeightInWorldSpace();
+        float safeZoneLeft  = mainView.GetSafeZoneWidthAtLeftSideInWorldSpace();
+        float safeZoneRight = mainView.GetSafeZoneWidthAtRightSideInWorldSpace();
+        
+        float cameraTop   = camera.ScreenToWorldPoint(new Vector3(0, Screen.height, 0)).y;
+        float cameraLeft  = camera.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
+        float cameraRight = camera.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
+
+        Vector3 anchorPos = viewTransform.transform.position;
+        float halfWidth = GetWidth() / 2f;
+        float height = GetHeight();
+        
+        float dialogTop   = anchorPos.y + height;
+        float dialogLeft  = anchorPos.x - halfWidth;   
+        float dialogRight = anchorPos.x + halfWidth;   
+
+        bool needToMove = false;
+        Vector3 newPos = camera.transform.position;
+
+        var deltaTop = dialogTop + safeZoneTop - cameraTop;
+        if (deltaTop > 0)
+        {
+            needToMove = true;
+            newPos += new Vector3(0, deltaTop);
+        }
+        
+        var deltaLeft = cameraLeft - (dialogLeft - safeZoneLeft);
+        if (deltaLeft > 0)
+        {
+            needToMove = true;
+            newPos += new Vector3(-deltaLeft, 0);
+        }
+
+        var deltaRight = cameraRight - (dialogRight + safeZoneRight);
+        if (deltaRight < 0)
+        {
+            needToMove = true;
+            newPos -= new Vector3(deltaRight, 0);
+        }
+
+        if (needToMove)
+        {
+            BoardService.Current.FirstBoard.Manipulator.CameraManipulator.MoveTo(newPos, true, 0.4f, Ease.OutCubic);
+        }
     }
 }

@@ -30,6 +30,11 @@ public class TouchReactionDefinitionOpenEnemyBubble : TouchReactionDefinitionCom
         OnChange?.Invoke(!view.IsShow);
         view.Change(!view.IsShow);
 
+        if (view.IsShow)
+        {
+            view.FitToScreen();
+        }
+        
         return true;
     }
     

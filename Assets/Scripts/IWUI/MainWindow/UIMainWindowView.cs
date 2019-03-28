@@ -337,4 +337,40 @@ public class UIMainWindowView : UIBaseWindowView
             image.DOFade(visible ? 1 : 0, time);
         }
     }
+    
+    public float GetSafeZoneWidthAtLeftSideInWorldSpace()
+    {
+        Camera mainCamera = Camera.main;
+        
+        Vector3[] corners = new Vector3[4];
+        leftButtonsCanvasGroups.GetComponent<RectTransform>().GetWorldCorners(corners);
+        Vector3 containerBottomRight = corners[3];
+
+        Camera camera = Controller.Window.Layers[0].ViewCamera;
+        float orthoSize = camera.orthographicSize;
+        
+        Vector3 viewportBottomLeft = camera.ScreenToWorldPoint(new Vector3(0, 0, 0));
+
+        var delta = containerBottomRight.x - viewportBottomLeft.x;
+
+        return (delta / orthoSize) * mainCamera.orthographicSize;
+    }
+    
+    public float GetSafeZoneWidthAtRightSideInWorldSpace()
+    {
+        Camera mainCamera = Camera.main;
+        
+        Vector3[] corners = new Vector3[4];
+        rightButtonsCanvasGroups.GetComponent<RectTransform>().GetWorldCorners(corners);
+        Vector3 containerBottomLeft = corners[0];
+
+        Camera camera = Controller.Window.Layers[0].ViewCamera;
+        float orthoSize = camera.orthographicSize;
+        
+        Vector3 viewportBottomRight = camera.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0));
+
+        var delta = viewportBottomRight.x - containerBottomLeft.x;
+
+        return (delta / orthoSize) * mainCamera.orthographicSize;
+    }
 }
