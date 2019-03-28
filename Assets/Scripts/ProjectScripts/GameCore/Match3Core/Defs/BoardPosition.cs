@@ -2,6 +2,7 @@
 using UnityEngine;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 
 [Serializable]
 public struct BoardPosition : IEquatable<BoardPosition>
@@ -286,7 +287,16 @@ public struct BoardPosition : IEquatable<BoardPosition>
         
         center = center / positions.Count;
         
-        return new BoardPosition(Mathf.RoundToInt(center.x), Mathf.RoundToInt(center.y), Mathf.RoundToInt(center.z));
+        var ret = new BoardPosition(Mathf.RoundToInt(center.x), Mathf.RoundToInt(center.y), Mathf.RoundToInt(center.z));
+
+#if DEBUG
+        if (!positions.Any(e => e.X == ret.X && e.Y == ret.Y))
+        {
+            Debug.LogError($"[BoardPositions] => GetCenter: Calculated value {ret} is not included to provided positions list");
+        }
+#endif
+
+        return ret;
     }
 
     public List<BoardPosition> GetImmediate(List<BoardPosition> positions, List<BoardPosition> ignore = null, int amount = 1)
