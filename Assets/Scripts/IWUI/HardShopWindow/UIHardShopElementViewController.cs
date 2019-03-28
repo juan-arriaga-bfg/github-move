@@ -42,7 +42,7 @@ public class UIHardShopElementViewController : UIShopElementViewController
 
         isOffer = contentEntity.Products.Count > 1;
         claimName.Text = contentEntity.NameLabel;
-
+        
         if (isOffer == false) return;
         
         productLabels = new List<NSText>
@@ -100,8 +100,8 @@ public class UIHardShopElementViewController : UIShopElementViewController
         btnLockLabel.Text = LocalizationService.Get(key, key);
 	    
         CreateIcon(isLock || isClaimed ? lockAnchor : anchor, isLock ? PieceType.Empty.Abbreviations[0] : contentEntity.ContentId);
-        
-        if (isClaimed){ Sepia = true;}
+
+        if (isClaimed) Sepia = true;
         if (offer != null) offer.SetActive(contentEntity.Products.Count > 1);
         if (offerBack != null) offerBack.enabled = !isClaimed;
 

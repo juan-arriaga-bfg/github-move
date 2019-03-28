@@ -91,7 +91,7 @@ public static class ProfileSlots
                 string error = ERROR_PROFILE_FROM_NEWER_GAME_VERSION;
                 
 #if DEBUG
-                Debug.LogWarning(error);
+                Debug.LogError(error);
                 PrintProfileText(dataMapper);
 #endif
                 onComplete(profileManager, dataExists, error);

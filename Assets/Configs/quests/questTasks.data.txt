@@ -192,6 +192,7 @@
   {
     "$type": "TaskHitTreeEntity, GameAssembly",
     "Id": "20_HitTree",
+    "PieceUid": "OB3_A",
     "TargetValue": 7,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -550,10 +551,11 @@
   {
     "$type": "TaskHitTreeEntity, GameAssembly",
     "Id": "49_HitTree",
+    "PieceUid": "OB9_D",
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "OB5_D",
+        "Ico": "OB9_D",
         "Title": "quest.hit.tree.title",
         "Message": "quest.hit.tree.message"
       }
@@ -943,6 +945,7 @@
   {
     "$type": "TaskHitTreeEntity, GameAssembly",
     "Id": "86_HitTree",
+    "PieceUid": "OB9_A",
     "TargetValue": 15,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -1248,6 +1251,7 @@
   {
     "$type": "TaskHitTreeEntity, GameAssembly",
     "Id": "112_HitTree",
+    "PieceUid": "OB9_D",
     "TargetValue": 15,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -1284,7 +1288,7 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "115_CreatePiece",
+    "Id": "115_CreatePiece_B6",
     "PieceUid": "B6",
     "TargetValue": 3,
     "ComponentsCache": {
@@ -1296,7 +1300,7 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "116_CreatePiece",
+    "Id": "116_CreatePiece_C3",
     "PieceUid": "C3",
     "TargetValue": 35,
     "ComponentsCache": {
@@ -1320,7 +1324,7 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "118_CreatePiece",
+    "Id": "118_CreatePiece_D5",
     "PieceUid": "D5",
     "TargetValue": 3,
     "ComponentsCache": {
@@ -1419,7 +1423,7 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "126_CreatePiece",
+    "Id": "126_CreatePiece_C4",
     "PieceUid": "C4",
     "TargetValue": 20,
     "ComponentsCache": {
@@ -1438,6 +1442,43 @@
         "Ico": "quest_icon_npc_gnome",
         "Title": "quest.use.worker.title",
         "Message": "quest.use.worker.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "128_CreatePiece_NPC_F3",
+    "PieceUid": "NPC_F3",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "129_CreatePiece_NPC_F4",
+    "PieceUid": "NPC_F4",
+    "TargetValue": 5,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "130_CreatePiece_NPC_F",
+    "PieceUid": "NPC_F",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "NPC_FIcon",
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
       }
     }
   },
@@ -1539,6 +1580,7 @@
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "MarketIcon",
         "Message": "quest.market.message"
       }
     }

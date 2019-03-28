@@ -30,8 +30,8 @@ public class TouchReactionConditionCharacter : TouchReactionConditionComponent
 		if (customer?.Order == null) return false;
 
 		if (customer.Order.State != OrderState.Complete) return true;
-		
-		var amount = customer.Order.PiecesReward.Sum(e => e.Value);
+
+	    var amount = customer.Order.GetAmountOfResult();
 			
 		if(piece.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, amount) == false)
 		{

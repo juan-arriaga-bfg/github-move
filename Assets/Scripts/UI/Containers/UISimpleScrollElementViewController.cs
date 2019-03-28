@@ -103,6 +103,7 @@ public class UISimpleScrollElementViewController : UIContainerElementViewControl
         if (content != null) UIService.Get.PoolContainer.Return(content.gameObject);
 
         content = null;
+        IconSprites = null;
         
         base.OnViewCloseCompleted();
     }

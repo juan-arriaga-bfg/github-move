@@ -165,4 +165,18 @@ public class UIMessageWindowController : IWWindowController {
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
+
+    public static void CreateVersionMessage()
+    {
+        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+        model.Title = LocalizationService.Get("window.version.title", "window.version.title");
+
+        model.Message += $"{LocalizationService.Get("window.version.game", "window.version.game")}: {IWProjectVersionSettings.Instance.CurrentVersion}\n";
+
+        model.OnAccept = null;
+        model.OnCancel = null;
+
+        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+    }
 }

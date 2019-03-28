@@ -11,11 +11,11 @@
     "Rewards": [
       {
         "Currency": "Mana1",
-        "Amount": 2
+        "Amount": 1
       },
       {
         "Currency": "Soft1",
-        "Amount": 1
+        "Amount": 2
       }
     ]
   },
@@ -34,12 +34,12 @@
     ],
     "Rewards": [
       {
-        "Currency": "Mana2",
+        "Currency": "Mana1",
         "Amount": 1
       },
       {
-        "Currency": "Soft2",
-        "Amount": 1
+        "Currency": "Soft1",
+        "Amount": 2
       }
     ]
   },
@@ -59,10 +59,6 @@
     "Rewards": [
       {
         "Currency": "Mana2",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana1",
         "Amount": 1
       },
       {
@@ -77,25 +73,21 @@
     "Prices": [
       {
         "Currency": "PR_A5",
-        "Amount": 5
+        "Amount": 2
       },
       {
         "Currency": "PR_C5",
-        "Amount": 6
+        "Amount": 2
       }
     ],
     "Rewards": [
-      {
-        "Currency": "Mana2",
-        "Amount": 1
-      },
       {
         "Currency": "Mana1",
         "Amount": 1
       },
       {
-        "Currency": "Soft2",
-        "Amount": 1
+        "Currency": "Soft1",
+        "Amount": 2
       }
     ]
   },
@@ -114,7 +106,7 @@
     ],
     "Rewards": [
       {
-        "Currency": "Mana2",
+        "Currency": "Mana1",
         "Amount": 1
       },
       {
@@ -129,7 +121,7 @@
     "Prices": [
       {
         "Currency": "PR_D5",
-        "Amount": 4
+        "Amount": 5
       },
       {
         "Currency": "PR_E5",
@@ -167,10 +159,6 @@
     "Rewards": [
       {
         "Currency": "Mana2",
-        "Amount": 2
-      },
-      {
-        "Currency": "Soft1",
         "Amount": 1
       },
       {
@@ -194,15 +182,7 @@
     ],
     "Rewards": [
       {
-        "Currency": "Mana1",
-        "Amount": 2
-      },
-      {
         "Currency": "Mana2",
-        "Amount": 1
-      },
-      {
-        "Currency": "Soft1",
         "Amount": 1
       },
       {
@@ -222,11 +202,11 @@
     ],
     "Rewards": [
       {
-        "Currency": "Mana1",
-        "Amount": 2
+        "Currency": "Mana2",
+        "Amount": 1
       },
       {
-        "Currency": "Soft1",
+        "Currency": "Soft2",
         "Amount": 1
       }
     ]
@@ -241,21 +221,17 @@
       },
       {
         "Currency": "PR_C5",
-        "Amount": 4
+        "Amount": 3
       }
     ],
     "Rewards": [
-      {
-        "Currency": "Mana2",
-        "Amount": 1
-      },
       {
         "Currency": "Mana1",
         "Amount": 1
       },
       {
-        "Currency": "Soft2",
-        "Amount": 1
+        "Currency": "Soft1",
+        "Amount": 2
       }
     ]
   },
@@ -354,10 +330,6 @@
     ],
     "Rewards": [
       {
-        "Currency": "Mana1",
-        "Amount": 1
-      },
-      {
         "Currency": "Mana2",
         "Amount": 2
       },
@@ -367,7 +339,7 @@
       },
       {
         "Currency": "Soft2",
-        "Amount": 2
+        "Amount": 1
       }
     ]
   },
@@ -390,12 +362,12 @@
         "Amount": 2
       },
       {
-        "Currency": "Mana1",
+        "Currency": "Soft1",
         "Amount": 1
       },
       {
         "Currency": "Soft2",
-        "Amount": 2
+        "Amount": 1
       }
     ]
   },
@@ -415,15 +387,15 @@
     "Rewards": [
       {
         "Currency": "Mana2",
+        "Amount": 2
+      },
+      {
+        "Currency": "Soft1",
         "Amount": 1
       },
       {
-        "Currency": "Mana1",
-        "Amount": 2
-      },
-      {
         "Currency": "Soft2",
-        "Amount": 2
+        "Amount": 1
       }
     ]
   },
@@ -438,22 +410,26 @@
     ],
     "Rewards": [
       {
-        "Currency": "Mana2",
+        "Currency": "Mana1",
         "Amount": 1
       },
       {
         "Currency": "Soft1",
-        "Amount": 3
+        "Amount": 2
       }
     ]
   },
   {
     "Uid": "Order18",
-    "Delay": 999,
+    "Delay": 900,
     "Prices": [
       {
-        "Currency": "PR_D5",
-        "Amount": 2
+        "Currency": "PR_A5",
+        "Amount": 4
+      },
+      {
+        "Currency": "PR_C5",
+        "Amount": 4
       }
     ],
     "Rewards": [
@@ -463,7 +439,7 @@
       },
       {
         "Currency": "Soft1",
-        "Amount": 3
+        "Amount": 2
       }
     ]
   },
@@ -527,11 +503,15 @@
     "Rewards": [
       {
         "Currency": "Mana2",
-        "Amount": 1
+        "Amount": 2
       },
       {
         "Currency": "Soft1",
-        "Amount": 3
+        "Amount": 1
+      },
+      {
+        "Currency": "Soft2",
+        "Amount": 1
       }
     ]
   },

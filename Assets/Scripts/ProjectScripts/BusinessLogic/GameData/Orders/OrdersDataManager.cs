@@ -86,6 +86,17 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
         return Locker.IsLocked == false && Orders.Count < GameDataService.Current.ConstantsManager.MaxOrders;
     }
 
+    public bool GetOrderDef(string recipeId, out OrderDef recipe)
+    {
+        recipe = null;
+        
+        recipe = Recipes.Find(def => def.Uid == recipeId);
+
+        if (recipe == null) return false;
+
+        return true;
+    }
+
     public bool GetOrder(int customer, out Order order)
     {
         order = null;

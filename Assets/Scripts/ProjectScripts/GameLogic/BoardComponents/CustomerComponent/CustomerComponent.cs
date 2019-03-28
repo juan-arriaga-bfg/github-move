@@ -118,7 +118,9 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
 
     public void GetReward()
     {
-        CurrencyHelper.PurchaseAndProvideEjection(Order.PiecesReward, Order.CurrenciesReward, null, pieceContext.CachedPosition, () => { Order = null; });
+        // CurrencyHelper.PurchaseAndProvideEjection(Order.PiecesReward, Order.CurrenciesReward, null, pieceContext.CachedPosition, () => { Order = null; });
+        
+        CurrencyHelper.PurchaseAndProvideEjection(Order.Result, new List<CurrencyPair>(), null, pieceContext.CachedPosition, () => { Order = null; });
         
         Order.State = OrderState.Reward;
         

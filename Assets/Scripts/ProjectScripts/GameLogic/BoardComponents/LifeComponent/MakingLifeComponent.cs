@@ -87,7 +87,12 @@ public class MakingLifeComponent : WorkplaceLifeComponent
     
     public override bool Damage(bool isExtra = false)
     {
-        if (TimerCooldown.IsExecuteable() == false) return base.Damage(isExtra);
+        if (TimerCooldown.IsExecuteable() == false)
+        {
+            var isDamage = base.Damage(isExtra);
+            if (isDamage) (Context.ActorView as MakingBuildingPieceView)?.PlayWorkAnimation();
+            return isDamage;
+        }
         
         UIMessageWindowController.CreateTimerCompleteMessage(
             LocalizationService.Get("window.timerComplete.message.castle", "window.timerComplete.message.castle"),
@@ -106,5 +111,11 @@ public class MakingLifeComponent : WorkplaceLifeComponent
         }
         
         base.OnSpawnCurrencyRewards(isComplete);
+    }
+    
+    protected override void OnTimerComplete()
+    {
+        base.OnTimerComplete();
+        (Context.ActorView as MakingBuildingPieceView)?.CompleteWorkAnimation();
     }
 }

@@ -103,10 +103,10 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         canBeReachedCached = null;
         
         var canPath = CanBeReached();
-        
-        if(LockView == null && (Def.IsActive && canPath ^ RequiredConditionReached() || Def.IsActive == false && canPath))
+
+        if (LockView == null && (Def.IsActive && canPath ^ RequiredConditionReached() || Def.IsActive == false && canPath))
         {
-            LockView =  Context.Context.RendererContext.CreateBoardElement<LockView>((int)ViewType.Lock);
+            LockView = Context.Context.RendererContext.CreateBoardElement<LockView>((int) ViewType.Lock);
             LockView.Init(Context.Context.RendererContext);
             LockView.SetSortingOrder(Def.GetCenter());
             LockView.transform.position = Def.GetCenter(Context.Context);
@@ -114,7 +114,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
         if (LockView != null)
         {
-            LockView.SetCondition(Def.IsActive ? Def.Level.ToString() : "?", Def.Hero, IsLevelReached, IsHeroReached, IsTwoLock);
+            LockView.SetCondition(Def.IsActive ? Def.Level.ToString() : "?", Def.Hero, Def.IsActive && IsLevelReached, Def.IsActive && IsHeroReached, IsTwoLock);
             LockView.SetGrayscale(canPath == false || Def.IsActive == false);
         }
         

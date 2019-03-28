@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer>
 {
@@ -45,6 +46,12 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         IWUISettings.Instance.SetResourceManager(new DefaultUIResourceManager());
         
         InitGameField();
+        
+        
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.pixelDragThreshold = 12;
+        }
 
         // Hot reload?
         if (IWUIManager.Instance.IsComplete)

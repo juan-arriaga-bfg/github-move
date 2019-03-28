@@ -40,7 +40,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 50
+        "Amount": 25
       }
     ],
     "OrdersWeights": [
@@ -75,7 +75,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 50
+        "Amount": 25
       }
     ],
     "PieceWeights": [
@@ -108,7 +108,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 75
+        "Amount": 25
       }
     ],
     "OrdersWeights": [
@@ -154,7 +154,7 @@
     "Index": 5,
     "Price": {
       "Currency": "Experience",
-      "Amount": 650
+      "Amount": 850
     },
     "Rewards": [
       {
@@ -167,13 +167,13 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 80
+        "Amount": 30
       }
     ],
     "OrdersWeights": [
       {
         "Uid": "Order10",
-        "Weight": 2
+        "Weight": 4
       }
     ],
     "PieceWeights": [
@@ -207,13 +207,21 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 80
+        "Amount": 50
       }
     ],
     "OrdersWeights": [
       {
         "Uid": "Order4",
-        "Weight": 2
+        "Weight": 4
+      },
+      {
+        "Uid": "Order18",
+        "Weight": 4
+      },
+      {
+        "Uid": "Order10",
+        "Weight": 1
       }
     ],
     "PieceWeights": [
@@ -263,6 +271,11 @@
       {
         "Uid": "Order2",
         "Weight": 3
+      },
+      {
+        "Uid": "Order4",
+        "Weight": 1,
+        "Override": true
       }
     ],
     "PieceWeights": [

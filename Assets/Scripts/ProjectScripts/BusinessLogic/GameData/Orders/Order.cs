@@ -24,6 +24,26 @@ public class Order
 
     public Action<Order, OrderState, OrderState> OnStageChangeFromTo;
 
+    public int GetAmountOfResult()
+    {
+        return 1;
+    }
+    
+    private Dictionary<int, int> result;
+    public Dictionary<int, int> Result
+    {
+        get
+        {
+            if (result == null)
+            {
+                result = new Dictionary<int, int>();
+                result.Add(PieceType.Parse(Def.Uid), 1);
+            }
+            
+            return result;
+        }
+    }
+
     private Dictionary<int, int> piecesReward;
     public Dictionary<int, int> PiecesReward
     {

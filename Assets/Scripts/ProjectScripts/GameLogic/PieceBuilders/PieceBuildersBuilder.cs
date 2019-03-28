@@ -19,7 +19,7 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddSimplePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.Boost_WR.Id, new WorkerPieceBuilder());
+        dict.Add(PieceType.Boost_WR.Id, new SimplePieceBuilder());
         
         dict = AddSimplePiece<CharacterPieceBuilder>(PieceType.NPC_A.Id, PieceType.NPC_R.Id, dict);
         
@@ -41,10 +41,10 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_B1.Id, PieceType.NPC_B3.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_C1.Id, PieceType.NPC_C5.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_D1.Id, PieceType.NPC_D6.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_E1.Id, PieceType.NPC_E6.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_F1.Id, PieceType.NPC_F6.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_G1.Id, PieceType.NPC_G6.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_H1.Id, PieceType.NPC_H6.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_E1.Id, PieceType.NPC_E8.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_F1.Id, PieceType.NPC_F8.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_G1.Id, PieceType.NPC_G8.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_H1.Id, PieceType.NPC_H8.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_I1.Id, PieceType.NPC_I8.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_J1.Id, PieceType.NPC_J8.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_K1.Id, PieceType.NPC_K8.Id, dict);
@@ -69,6 +69,30 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_G.Id, PieceType.CH3_G.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_H.Id, PieceType.CH3_H.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_I.Id, PieceType.CH3_I.Id, dict);
+        
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order1.Id, PieceType.Order1.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order2.Id, PieceType.Order2.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order3.Id, PieceType.Order3.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order4.Id, PieceType.Order4.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order5.Id, PieceType.Order5.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order6.Id, PieceType.Order6.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order7.Id, PieceType.Order7.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order8.Id, PieceType.Order8.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order9.Id, PieceType.Order9.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order10.Id, PieceType.Order10.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order11.Id, PieceType.Order11.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order12.Id, PieceType.Order12.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order13.Id, PieceType.Order13.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order14.Id, PieceType.Order14.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order15.Id, PieceType.Order15.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order16.Id, PieceType.Order16.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order17.Id, PieceType.Order17.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order18.Id, PieceType.Order18.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order19.Id, PieceType.Order19.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order20.Id, PieceType.Order20.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order21.Id, PieceType.Order21.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order22.Id, PieceType.Order22.Id, dict);
+        dict = AddSimplePiece<OrderPieceBuilder>(PieceType.Order23.Id, PieceType.Order23.Id, dict);
         
         dict.Add(PieceType.Boost_CR.Id, new CrystalPieceBuilder());
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Boost_CR1.Id, PieceType.Boost_CR3.Id, dict);

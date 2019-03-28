@@ -67,11 +67,6 @@ public abstract class SequenceData : ECSEntity, IDataManager
     public SequenceComponent GetSequence(string uid)
     {
         var collection = GetComponent<ECSComponentCollection>(SequenceComponent.ComponentGuid);
-        return (SequenceComponent) collection.Components.Find(component =>
-        {
-            var sequenceData = component as SequenceComponent;
-            
-            return sequenceData != null && sequenceData.Key == uid;
-        });
+        return (SequenceComponent) collection.Components.Find(component => component is SequenceComponent sequenceData && sequenceData.Key == uid);
     }
 }

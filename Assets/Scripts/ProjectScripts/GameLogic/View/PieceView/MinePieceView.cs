@@ -43,6 +43,5 @@ public class MinePieceView : CooldownPieceView
     public void CompleteWorkAnimation()
     {
         SetCustomMaterial(BoardElementMaterialType.PiecesHighlightMaterial, false);
-
     }
 }

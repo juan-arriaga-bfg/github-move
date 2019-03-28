@@ -74,6 +74,16 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
     public void UpdateSlots(bool isTimer = false)
     {
         if (BoardService.Current?.FirstBoard == null) return;
+
+        if (isTimer)
+        {
+            foreach (var def in Defs)
+            {
+                if (def.State == MarketItemState.Purchased || def.State == MarketItemState.Saved) continue;
+
+                def.Current = null;
+            }
+        }
         
         foreach (var def in Defs)
         {

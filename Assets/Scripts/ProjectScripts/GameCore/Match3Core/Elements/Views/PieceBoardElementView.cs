@@ -29,6 +29,8 @@ public class PieceBoardElementView : BoardElementView
     public Action OnDragEndCallback;
     public Action OnTapCallback;
     
+    private BoardPosition lastBoardPosition;
+    
     private List<BoardElementView> lockedSubtrates = new List<BoardElementView>();
 
     private Animation cachedSelectionAnimation;
@@ -36,7 +38,7 @@ public class PieceBoardElementView : BoardElementView
     private readonly ViewAnimationUid selectedAnimationId = new ViewAnimationUid();
     
     public ViewAnimationUid SelectedAnimationId { get { return selectedAnimationId; } }
-    
+    public List<ViewAnchorLink> Anchors => anchors;
     private SpriteRenderer selectionSprite;
     
     private readonly Color baseColor = new Color(0.6f, 0.4f, 0.2f);
@@ -158,8 +160,6 @@ public class PieceBoardElementView : BoardElementView
         
         selectionView.gameObject.SetActive(false);
     }
-
-    private BoardPosition lastBoardPosition;
     
     public void OnDrag(BoardPosition boardPos, Vector2 worldPos)
     {
