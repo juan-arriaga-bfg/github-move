@@ -30,8 +30,6 @@ public class DevTools : UIContainerElementViewController
     private static bool isQuestDialogsDisabled = true;
     private static bool isTutorialDisabled = true;
     private static bool isRemoverDebugDisabled = true;
-    private static bool isRealIapDisabled = true;
-    private static bool isLoggerEnabled = true;
 #endif
     private bool isEnabled = false;
     
@@ -45,7 +43,9 @@ public class DevTools : UIContainerElementViewController
         tutorialToggle.isOn = IsTutorialEnabled();
         removerToggle.isOn = IsRemoverDebugEnabled();
         loggerToggle.isOn = IsLoggerEnabled();
-        iapToggle.isOn = IsIapEnabled();         
+        iapToggle.isOn = IsIapEnabled();
+
+        IW.Logger.IsEnabled = IsLoggerEnabled();
         
         UpdateFpsMeter();
         
@@ -432,7 +432,7 @@ public class DevTools : UIContainerElementViewController
 #if UNITY_EDITOR
         EditorPrefs.SetBool("DEBUG_IAP_DISABLED", isChecked);
 #else
-        isRealIapDisabled = isChecked;
+        ObscuredPrefs.SetBool("DEBUG_IAP_DISABLED", isChecked);
 #endif
         
     }
@@ -443,7 +443,7 @@ public class DevTools : UIContainerElementViewController
 #if UNITY_EDITOR
         return EditorPrefs.GetBool("DEBUG_IAP_DISABLED", true);
 #else
-        return isRealIapDisabled;
+        return ObscuredPrefs.GetBool("DEBUG_IAP_DISABLED", true);
 #endif
         
     }
@@ -454,7 +454,7 @@ public class DevTools : UIContainerElementViewController
 #if UNITY_EDITOR
         EditorPrefs.SetBool("DEBUG_LOGGER_DISABLED", isChecked);
 #else
-        isLoggerEnabled = isChecked;
+        ObscuredPrefs.SetBool("DEBUG_LOGGER_DISABLED", isChecked);
 #endif
         IW.Logger.IsEnabled = isChecked;
     }
@@ -465,7 +465,7 @@ public class DevTools : UIContainerElementViewController
 #if UNITY_EDITOR
         return EditorPrefs.GetBool("DEBUG_LOGGER_DISABLED", true);
 #else
-        return isLoggerEnabled;
+        return ObscuredPrefs.GetBool("DEBUG_LOGGER_DISABLED", true);
 #endif
         
     }
