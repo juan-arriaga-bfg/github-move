@@ -39,6 +39,8 @@ public class UISystemDevParamsWindowWindowView : UIGenericPopupWindowView
             new UISystemDevParamsElementEntity{Name = "UI Drag Threshold", DefaultValue = EventSystem.current.pixelDragThreshold, OnChanged = (val) => { EventSystem.current.pixelDragThreshold = (int)val; }}
         };
         
+        SetTitle("System Info");
+        
         Fill(UpdateEntities(systemParams), content);
         
         btnAdd.ToState(GenericButtonState.Active).OnClick(() => { });
