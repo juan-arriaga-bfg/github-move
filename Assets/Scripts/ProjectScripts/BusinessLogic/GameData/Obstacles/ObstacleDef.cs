@@ -18,6 +18,7 @@ public class ObstacleDef
     
     public AmountRange ProductionAmount;
     public AmountRange CharactersAmount;
+    public AmountRange ExtrasAmount;
     
     public int Piece => pieceType == -1 ? (pieceType = PieceType.Parse(Uid)) : pieceType;
     public int Chest => chestType == -1 ? (chestType = PieceType.Parse(ChestId)) : chestType;
