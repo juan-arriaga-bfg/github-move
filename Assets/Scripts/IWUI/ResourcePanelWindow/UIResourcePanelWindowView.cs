@@ -221,11 +221,10 @@ public class UIResourcePanelWindowView : UIBaseWindowView
         
     }
 
-    /// <summary>
-    /// Data is calculated for orthoSize == 1. If you need to compare with another camera points, do not forget to convert them too.
-    /// </summary>
     public float GetSafeZoneHeightInWorldSpace()
     {
+        Camera mainCamera = Camera.main;
+        
         Vector3[] corners = new Vector3[4];
         resourceContainerDown.GetComponent<RectTransform>().GetWorldCorners(corners);
         Vector3 containerBottomLeft = corners[0];
@@ -237,6 +236,6 @@ public class UIResourcePanelWindowView : UIBaseWindowView
 
         var delta = viewportTopLeft.y - containerBottomLeft.y;
 
-        return delta / orthoSize;
+        return (delta / orthoSize) * mainCamera.orthographicSize;
     }
 }

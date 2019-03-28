@@ -285,11 +285,11 @@ public class UIBoardView : BoardElementView
         Camera camera = Camera.main;
 
         var resourcesView = UIService.Get.GetShowedView<UIResourcePanelWindowView>(UIWindowType.ResourcePanelWindow);
-        float safeZoneTop = resourcesView.GetSafeZoneHeightInWorldSpace();
-        safeZoneTop = safeZoneTop * camera.orthographicSize; // Convert to main camera points
+        var mainView = UIService.Get.GetShowedView<UIMainWindowView>(UIWindowType.MainWindow);
 
-        float safeZoneLeft  = 3;
-        float safeZoneRight = 3;
+        float safeZoneTop   = resourcesView.GetSafeZoneHeightInWorldSpace();
+        float safeZoneLeft  = mainView.GetSafeZoneWidthAtLeftSideInWorldSpace();
+        float safeZoneRight = mainView.GetSafeZoneWidthAtRightSideInWorldSpace();
         
         float cameraTop   = camera.ScreenToWorldPoint(new Vector3(0, Screen.height, 0)).y;
         float cameraLeft  = camera.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
