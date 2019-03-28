@@ -507,6 +507,12 @@ public class DevTools : UIContainerElementViewController
         }
     }
 
+    public void OpenSystemDevParams()
+    {
+        var model = UIService.Get.GetCachedModel<UISystemDevParamsWindowWindowModel>(UIWindowType.SystemDevParamsWindowWindow);
+        UIService.Get.ShowWindow(UIWindowType.SystemDevParamsWindowWindow);
+    }
+
     [UsedImplicitly]
     public void OnReloadSceneClick()
     {

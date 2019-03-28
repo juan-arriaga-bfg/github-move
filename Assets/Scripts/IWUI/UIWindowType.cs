@@ -56,6 +56,8 @@ public class UIWindowType
 
     public const string CharacterUnlockedWindow = "CharacterUnlockedWindow";
 
+    public const string SystemDevParamsWindowWindow = "SystemDevParamsWindowWindow";
+
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {
         MainWindow,

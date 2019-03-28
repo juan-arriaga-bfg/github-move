@@ -25,6 +25,8 @@ public class BoardManipulatorComponent : ECSEntity,
     private PieceBoardElementView lastResetPieceView;
 
     private readonly ViewAnimationUid dragAnimationId = new ViewAnimationUid();
+    
+    private readonly ViewAnimationUid dragTresholdId = new ViewAnimationUid();
 
     private float dragDuration = 0.25f;
 
@@ -37,7 +39,10 @@ public class BoardManipulatorComponent : ECSEntity,
     private bool? isDragInternal;
 
     private LayerMask cachedGUILayerMask;
+    
     private bool isCachedLayerMash = false;
+
+    public static float DragTreshold = 0.2f;
 
     private bool? isDrag
     {
@@ -239,12 +244,12 @@ public class BoardManipulatorComponent : ECSEntity,
 
         if (CheckDrag(startPos, pos, duration))
         {
-            // var selectedView = GetSelectedBoardElementView();
-            // if (selectedView != null && (startPos - pos).magnitude < 0.3f)
-            // {
-            //     cameraManipulator.CameraMove.Lock(this, true);
-            //     return true;
-            // }
+            var selectedView = GetSelectedBoardElementView();
+            if (selectedView != null && (startPos - pos).magnitude < DragTreshold)
+            {
+                cameraManipulator.CameraMove.Lock(dragTresholdId, true);
+                return true;
+            }
             
             BeginDrag(startPos, pos);
         }
@@ -332,7 +337,7 @@ public class BoardManipulatorComponent : ECSEntity,
     {
         isDrag = false;
         
-        // cameraManipulator.CameraMove.UnLock(this);
+        cameraManipulator.CameraMove.UnLock(dragTresholdId);
         
         if (cachedViewForDrag != null)
         {
