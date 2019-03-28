@@ -28,6 +28,8 @@ public class UIMainWindowView : UIBaseWindowView
     
     [IWUIBinding("#DebugButtonsAnchor")] private Transform debugButtonsAnchor;
 
+    [IWUIBinding("#VersionLabel")] private Transform versionLabel;
+
     [Header("Hint anchors")] 
     [SerializeField] private Transform hintAnchorOrdersButton;
     public Transform HintAnchorOrdersButton => hintAnchorOrdersButton;
@@ -56,6 +58,12 @@ public class UIMainWindowView : UIBaseWindowView
     public override void OnViewShow()
     {
         base.OnViewShow();
+        
+#if DEBUG
+        versionLabel.gameObject.SetActive(true);  
+#else
+        versionLabel.gameObject.SetActive(false);
+#endif
         
         var windowModel = Model as UIMainWindowModel;
         
