@@ -51,7 +51,7 @@ public class RewardsStoreComponent : IECSComponent
 
     private void UpdateSequence()
     {
-        if(rewards == null || rewards.Count == 0) return;
+        if (rewards == null || rewards.Count == 0) return;
         
         var definition = context.Context.BoardLogic.MatchDefinition;
         var replace = new List<int>();
@@ -69,12 +69,12 @@ public class RewardsStoreComponent : IECSComponent
 
         foreach (var key in replace)
         {
-            if (rewards.ContainsKey(PieceType.Hard1.Id) == false)
+            if (rewards.ContainsKey(CharactersDataManager.ReplacePiece.Id) == false)
             {
-                rewards.Add(PieceType.Hard1.Id, 0);
+                rewards.Add(CharactersDataManager.ReplacePiece.Id, 0);
             }
 
-            rewards[PieceType.Hard1.Id] += rewards[key];
+            rewards[CharactersDataManager.ReplacePiece.Id] += rewards[key];
             rewards.Remove(key);
         }
 
@@ -114,8 +114,8 @@ public class RewardsStoreComponent : IECSComponent
         foreach (var key in rewards.Keys)
         {
             var def = PieceType.GetDefById(key);
-            
-            if(def.Filter.Has(PieceTypeFilter.Obstacle)) continue;
+
+            if (def.Filter.Has(PieceTypeFilter.Obstacle)) continue;
             
             next = key;
             
