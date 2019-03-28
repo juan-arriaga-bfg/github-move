@@ -42,7 +42,7 @@ public class BoardManipulatorComponent : ECSEntity,
     
     private bool isCachedLayerMash = false;
 
-    public static float DragTreshold = 0.2f;
+    public static float DragTreshold = 0f;
 
     private bool? isDrag
     {
