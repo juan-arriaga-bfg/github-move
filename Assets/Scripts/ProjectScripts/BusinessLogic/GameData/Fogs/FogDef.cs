@@ -27,6 +27,10 @@ public class FogDef
     public CurrencyPair Reward { get; set; }
     public Dictionary<string, List<BoardPosition>> Pieces { get; set; }
 
+    /// <summary>
+    /// WARNING! Do not use directly, always use GetCenter() instead
+    /// This filed purpose is serialization only
+    /// </summary>
     [JsonProperty]
     private BoardPosition Center = BoardPosition.Default();
     
@@ -42,7 +46,7 @@ public class FogDef
     
     public Vector3 GetCenter(BoardController board)
     {
-        var center = BoardPosition.GetCenter(Positions);
+        var center = GetCenter();
         return board.BoardDef.GetSectorCenterWorldPosition(center.X, center.Y, 0);
     }
 }

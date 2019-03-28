@@ -110,6 +110,9 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             LockView.Init(Context.Context.RendererContext);
             LockView.SetSortingOrder(Def.GetCenter());
             LockView.transform.position = Def.GetCenter(Context.Context);
+
+            // Uncomment to get uid and pos in GO name
+            // LockView.gameObject.name = $"LockView {Def.Uid} - {Def.GetCenter()}";
         }
 
         if (LockView != null)
