@@ -27,12 +27,12 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         Fill(UpdateEntities(), content);
         
-        content.GetScrollRect().horizontalNormalizedPosition = windowModel.IsTutorial ? 0 : 1;
-
-        var index = 0;
-        
         if (windowModel.IsTutorial)
         {
+            var index = 0;
+            
+            content.GetScrollRect().horizontalNormalizedPosition = 0;
+            
             foreach (var tab in content.Tabs)
             {
                 var def = (tab.Entity as UIMarketElementEntity).Def.Current;
@@ -42,9 +42,9 @@ public class UIMarketWindowView : UIGenericPopupWindowView
                 index = tab.Index;
                 break;
             }
+            
+            Scroll(index);
         }
-        
-        Scroll(index);
         
         BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnTimeChanged += UpdateLabel;
         BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnComplete += UpdateSlots;
