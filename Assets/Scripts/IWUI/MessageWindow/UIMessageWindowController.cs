@@ -130,7 +130,7 @@ public class UIMessageWindowController : IWWindowController {
         model.Title = LocalizationService.Get("window.timerComplete.title", "window.timerComplete.title");
         model.Message = message;
         model.AcceptLabel = "";
-        model.CancelLabel = LocalizationService.Get("common.button.cancel", "common.button.cancel");
+        model.CancelLabel = LocalizationService.Get("common.button.stop", "common.button.stop");
         
         model.IsBuy = true;
 
