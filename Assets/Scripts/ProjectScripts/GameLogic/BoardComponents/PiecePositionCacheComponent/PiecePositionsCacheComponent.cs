@@ -32,9 +32,9 @@ public class PiecePositionsCacheComponent : IECSComponent
 		return list.Count == 0 ? null : from.GetImmediate(list, null, amount);
 	}
 	
-	public List<BoardPosition> GetNearestByFilter(PieceTypeFilter filter, BoardPosition from, int amount = 1)
+	public List<BoardPosition> GetUnlockedNearestByFilter(PieceTypeFilter filter, BoardPosition from, int amount = 1)
 	{
-		var list = GetPiecePositionsByFilter(filter);
+		var list = GetUnlockedPiecePositionsByFilter(filter);
 		
 		return list.Count == 0 ? null : from.GetImmediate(list, null, amount);
 	}
@@ -47,6 +47,21 @@ public class PiecePositionsCacheComponent : IECSComponent
 	public List<BoardPosition> GetUnlockedPiecePositionsByType(int pieceType)
 	{
 		var piecePositions = GetPiecePositionsByType(pieceType);
+		var i = 0;
+		while (i < piecePositions.Count)
+		{
+			if (context.Context.PathfindLocker.HasPath(context.GetPieceAt(piecePositions[i])))
+				i++;
+			else
+				piecePositions.RemoveAt(i);
+		}
+
+		return piecePositions;
+	}
+
+	public List<BoardPosition> GetUnlockedPiecePositionsByFilter(PieceTypeFilter filter)
+	{
+		var piecePositions = GetPiecePositionsByFilter(filter);
 		var i = 0;
 		while (i < piecePositions.Count)
 		{

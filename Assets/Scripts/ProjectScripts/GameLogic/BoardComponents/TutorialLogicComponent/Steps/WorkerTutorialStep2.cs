@@ -1,4 +1,6 @@
-﻿public class WorkerTutorialStep2 : LoopFingerTutorialStep
+﻿using System.Collections.Generic;
+
+public class WorkerTutorialStep2 : LoopFingerTutorialStep
 {
     private CheckPieceTutorialCondition completeCondition;
     
@@ -10,7 +12,8 @@
         {
             ConditionType = TutorialConditionType.Start,
             Target = PieceType.Boost_WR.Id,
-            Amount = 1
+            Amount = 0,
+            MoreThan = true
         }, true);
 
         completeCondition = new CheckPieceTutorialCondition
@@ -34,28 +37,48 @@
 
     public override void Execute()
     {
-        from = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(PieceType.Boost_WR.Id)[0];
+        var wrs = Context.Context.BoardLogic.PositionsCache.GetUnlockedPiecePositionsByType(PieceType.Boost_WR.Id);
+        var min = float.MaxValue;
 
-        var nearest = Context.Context.BoardLogic.PositionsCache.GetNearestByFilter(PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace, from, 50);
-
-        if (nearest == null)
+        foreach (var wrPosition in wrs)
         {
-            PauseOff();
-            return;
+            var positions = Context.Context.BoardLogic.PositionsCache.GetUnlockedNearestByFilter(PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace, wrPosition, 3);
+            var nearest = CheckNearestState(positions);
+
+            if (nearest == null) continue;
+
+            var distance = BoardPosition.SqrMagnitude(wrPosition, nearest.Value);
+
+            if (min <= distance) continue;
+
+            min = distance;
+
+            from = wrPosition;
+            to = nearest.Value;
         }
-        
-        foreach (var position in nearest)
-        {
-            var target = Context.Context.BoardLogic.GetPieceAt(position);
 
-            if (target.Context.PathfindLocker.HasPath(target) == false
-                || target.PieceState == null 
-                || target.PieceState.State == BuildingState.InProgress
-                || target.PieceState.State == BuildingState.Complete) continue;
-            
-            to = position;
+        if (min < float.MaxValue)
+        {
             base.Execute();
             return;
         }
+        
+        PauseOff();
+    }
+
+    private BoardPosition? CheckNearestState(List<BoardPosition> positions)
+    {
+        foreach (var position in positions)
+        {
+            var target = Context.Context.BoardLogic.GetPieceAt(position);
+
+            if (target.PieceState == null 
+                || target.PieceState.State == BuildingState.InProgress
+                || target.PieceState.State == BuildingState.Complete) continue;
+            
+            return position;
+        }
+        
+        return null;
     }
 }
