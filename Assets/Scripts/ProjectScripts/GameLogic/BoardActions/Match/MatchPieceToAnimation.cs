@@ -79,11 +79,19 @@ public class MatchPieceToAnimation : BoardAnimation
 		
 		for (var i = 0; i < points.Count; i++)
 		{
-			var boardElement = context.GetElementAt(points[i]);			
+			var boardElement = context.GetElementAt(points[i]);
+
+			var boardElementPiece = boardElement as PieceBoardElementView;
 			
 			if (points[i].Equals(To))
 			{
-			    sequence.Insert(0 + elementOffset*i, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.25f));
+				if (boardElementPiece == null || !boardElementPiece.IsMulticellularPiece)
+				{
+					sequence.Insert(0 + elementOffset * i,
+						boardElement.CachedTransform.DOMove(
+							new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.25f));
+				}
+//				sequence.Insert(0 + elementOffset*i, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.25f));
 				sequence.Insert(0.25f, boardElement.CachedTransform.DOScale(Vector3.one * 1.2f, 0.10f));
 				sequence.Insert(0.35f, boardElement.CachedTransform.DOScale(Vector3.zero, 0.1f));
 				boardElement.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
