@@ -53,7 +53,7 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
             "Simple A", "Simple B", "Simple C", "Simple D", "Simple E", "Simple F", "Simple G", "Simple H", "Simple I", "Simple J",
             "Ingredient A", "Ingredient B", "Ingredient C", "Ingredient D", "Ingredient E", "Ingredient F", "Ingredient G",
             "Extended A",
-            "Obstacles", "Mines",
+            "Obstacles", "Mines", "Orders",
             
         };
         

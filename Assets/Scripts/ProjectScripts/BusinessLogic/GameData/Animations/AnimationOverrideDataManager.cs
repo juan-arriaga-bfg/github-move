@@ -53,6 +53,11 @@ public class AnimationOverrideDataManager
         {
             OnDestroyFromBoard = R.DestroyChestAnimation
         });
+        
+        AddByFilter(defs, PieceTypeFilter.OrderPiece, new AnimationDef
+        {
+            OnDestroyFromBoard = R.DestroyOrderAnimation
+        });
 
         AddPiece(defs, PieceType.NPC_Gnome.Id, new AnimationDef
         {

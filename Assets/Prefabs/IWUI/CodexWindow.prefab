@@ -2792,9 +2792,9 @@ MonoBehaviour:
   chain: {fileID: 8240841217265996106}
   questionMark: {fileID: 8322840048518576724}
   unlokedMaterial: {fileID: 0}
-  lockedMaterial: {fileID: 2100000, guid: 663a56ae543401d419dcc60b1ed229ec, type: 2}
+  lockedMaterial: {fileID: 2100000, guid: 0db7d96aef3144c92822a5aed457f6a9, type: 2}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
-  lockedColor: {r: 1, g: 1, b: 1, a: 0.49803922}
+  lockedColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &7565832136660207515
 GameObject:
   m_ObjectHideFlags: 0
@@ -3396,11 +3396,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4539174632680277719, guid: 00e1133361e00734ca9db89c6d9463e3,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e1133361e00734ca9db89c6d9463e3, type: 3}
 --- !u!224 &4251789861652817979 stripped
@@ -3775,46 +3770,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561188670503301672, guid: 3627816cf9c35e440926e27582759e7f,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4928013482132415812, guid: 3627816cf9c35e440926e27582759e7f,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4928013482132415812, guid: 3627816cf9c35e440926e27582759e7f,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4928013482132415812, guid: 3627816cf9c35e440926e27582759e7f,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4928013482132415812, guid: 3627816cf9c35e440926e27582759e7f,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4928013482132415812, guid: 3627816cf9c35e440926e27582759e7f,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4928013482132415812, guid: 3627816cf9c35e440926e27582759e7f,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6175711012917053744, guid: 3627816cf9c35e440926e27582759e7f,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3627816cf9c35e440926e27582759e7f, type: 3}
