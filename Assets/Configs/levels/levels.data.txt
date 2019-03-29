@@ -20,7 +20,8 @@
         "Uid": "PR_C1",
         "Weight": 1
       }
-    ]
+    ],
+    "OrdersDelay": 15
   },
   {
     "Index": 2,
@@ -54,7 +55,8 @@
         "Weight": 1,
         "Override": true
       }
-    ]
+    ],
+    "OrdersDelay": 15
   },
   {
     "Index": 3,
@@ -86,7 +88,8 @@
         "Weight": 1,
         "Override": true
       }
-    ]
+    ],
+    "OrdersDelay": 15
   },
   {
     "Index": 4,
@@ -144,7 +147,8 @@
         "Uid": "PR_C5",
         "Weight": 1
       }
-    ]
+    ],
+    "OrdersDelay": 15
   },
   {
     "Index": 5,
@@ -183,7 +187,8 @@
         "Weight": 1,
         "Override": true
       }
-    ]
+    ],
+    "OrdersDelay": 15
   },
   {
     "Index": 6,
@@ -207,7 +212,7 @@
     ],
     "OrdersWeights": [
       {
-        "Uid": "Order18",
+        "Uid": "Order4",
         "Weight": 4
       },
       {
@@ -226,7 +231,8 @@
         "Weight": 1,
         "Override": true
       }
-    ]
+    ],
+    "OrdersDelay": 15
   },
   {
     "Index": 7,
@@ -298,7 +304,8 @@
         "Uid": "PR_B5",
         "Weight": 1
       }
-    ]
+    ],
+    "OrdersDelay": 30
   },
   {
     "Index": 8,
@@ -327,11 +334,11 @@
         "Override": true
       },
       {
-        "Uid": "Order4",
+        "Uid": "Order18",
         "Weight": 5
       },
       {
-        "Uid": "Order18",
+        "Uid": "Order4",
         "Weight": 1,
         "Override": true
       }
@@ -358,7 +365,8 @@
         "Uid": "PR_B5",
         "Weight": 1
       }
-    ]
+    ],
+    "OrdersDelay": 30
   },
   {
     "Index": 9,
@@ -423,7 +431,8 @@
         "Weight": 0,
         "Override": true
       }
-    ]
+    ],
+    "OrdersDelay": 30
   },
   {
     "Index": 10,
@@ -488,7 +497,8 @@
         "Weight": 1,
         "Override": true
       }
-    ]
+    ],
+    "OrdersDelay": 30
   },
   {
     "Index": 11,
@@ -562,7 +572,8 @@
         "Weight": 3,
         "Override": true
       }
-    ]
+    ],
+    "OrdersDelay": 30
   },
   {
     "Index": 12,
@@ -627,7 +638,8 @@
         "Weight": 1,
         "Override": true
       }
-    ]
+    ],
+    "OrdersDelay": 30
   },
   {
     "Index": 13,
@@ -700,7 +712,8 @@
         "Weight": 0,
         "Override": true
       }
-    ]
+    ],
+    "OrdersDelay": 30
   },
   {
     "Index": 14,
@@ -769,7 +782,8 @@
         "Weight": 1,
         "Override": true
       }
-    ]
+    ],
+    "OrdersDelay": 30
   },
   {
     "Index": 15,
@@ -807,7 +821,8 @@
         "Weight": 3,
         "Override": true
       }
-    ]
+    ],
+    "OrdersDelay": 30
   },
   {
     "Index": 16,
@@ -824,7 +839,8 @@
         "Currency": "Crystals",
         "Amount": 5
       }
-    ]
+    ],
+    "OrdersDelay": 30
   },
   {
     "Index": 17,
@@ -841,6 +857,7 @@
         "Currency": "Crystals",
         "Amount": 5
       }
-    ]
+    ],
+    "OrdersDelay": 30
   }
 ]
