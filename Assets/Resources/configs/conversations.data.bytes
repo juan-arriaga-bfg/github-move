@@ -19,6 +19,21 @@
         "CharacterId": "SleepingBeauty",
         "Emotion": "Sleep1",
         "Message": "conversation.1.message3"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Sleep2",
+        "Message": "conversation.1.message4"
+      }
+    ]
+  },
+  {
+    "Id": "1_CreatePiece_PR_C4",
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.quest.complete1"
       }
     ]
   },
@@ -167,29 +182,34 @@
     },
     "Bubbles": [
       {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.26.message1"
+      },
+      {
         "CharacterId": "PussInBoots",
         "Emotion": "Normal",
-        "Message": "conversation.26.message1"
+        "Message": "conversation.26.message2"
       },
       {
         "CharacterId": "SleepingBeauty",
         "Emotion": "Thinking",
-        "Message": "conversation.26.message2"
-      },
-      {
-        "CharacterId": "PussInBoots",
-        "Emotion": "Normal",
         "Message": "conversation.26.message3"
       },
       {
-        "CharacterId": "SleepingBeauty",
+        "CharacterId": "PussInBoots",
         "Emotion": "Normal",
         "Message": "conversation.26.message4"
       },
       {
-        "CharacterId": "PussInBoots",
+        "CharacterId": "SleepingBeauty",
         "Emotion": "Normal",
         "Message": "conversation.26.message5"
+      },
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
+        "Message": "conversation.26.message6"
       }
     ]
   },
@@ -211,7 +231,7 @@
         "Message": "conversation.11.message2"
       },
       {
-        "CharacterId": "PussInBoots",
+        "CharacterId": "SleepingBeauty",
         "Emotion": "Normal",
         "Message": "conversation.11.message3"
       }
@@ -398,7 +418,8 @@
     "Id": 22,
     "ConversationCharacters": {
       "RightInner": "PussInBoots",
-      "LeftInner": "SleepingBeauty"
+      "LeftInner": "SleepingBeauty",
+      "RightOuter": "GnomeWorker"
     },
     "Bubbles": [
       {
@@ -412,14 +433,19 @@
         "Message": "conversation.19.message2"
       },
       {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Thinking",
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
         "Message": "conversation.19.message3"
       },
       {
-        "CharacterId": "PussInBoots",
-        "Emotion": "Normal",
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
         "Message": "conversation.19.message4"
+      },
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.19.message5"
       }
     ]
   },
@@ -606,16 +632,6 @@
         "CharacterId": "SleepingBeauty",
         "Emotion": "Happy",
         "Message": "conversation.16.message1"
-      }
-    ]
-  },
-  {
-    "Id": "1_CreatePiece_PR_C4",
-    "Bubbles": [
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Happy",
-        "Message": "conversation.quest.complete1"
       }
     ]
   },

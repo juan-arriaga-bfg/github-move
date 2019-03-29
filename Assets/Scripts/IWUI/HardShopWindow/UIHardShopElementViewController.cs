@@ -129,6 +129,6 @@ public class UIHardShopElementViewController : UIShopElementViewController
     
     private void UpdateTimer()
     {
-        nameLabel.Text = BoardService.Current.FirstBoard.MarketLogic.OfferTimer.CompleteTime.GetTimeLeftText(true, false, null, false);
+        nameLabel.Text = BoardService.Current.FirstBoard.MarketLogic.OfferTimer.CompleteTime.GetTimeLeftText(true, false, null, false,  true);
     }
 }

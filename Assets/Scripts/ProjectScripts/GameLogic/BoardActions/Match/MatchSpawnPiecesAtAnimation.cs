@@ -17,7 +17,14 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 
                 if (nextPiece?.ViewDefinition == null) continue;
                 
-                nextPiece.ViewDefinition.Visible = state;
+//                nextPiece.ViewDefinition.Visible = state;
+                var views = nextPiece.ViewDefinition.GetViews();
+                for (int j = 0; j < views.Count; j++)
+                {
+	                var view = views[j];
+	                view.OnSwap(state);
+//	                view.UpdateVisibility(state);
+                }
             }
         }
     }

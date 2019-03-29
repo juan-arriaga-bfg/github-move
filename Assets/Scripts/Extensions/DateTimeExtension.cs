@@ -66,27 +66,32 @@ public static class DateTimeExtension
         return datetime - (useUTC ? secureTime.UtcNow : secureTime.Now);
     }
     
-    public static string GetDelayText(int delay, bool icon = false, string format = null)
+    public static string GetDelayText(int delay, bool icon = false, string format = null, bool daysConvert = false)
     {
-        return TimeFormat(new TimeSpan(0, 0, delay), icon, format);
+        return TimeFormat(new TimeSpan(0, 0, delay), icon, format, true, daysConvert: daysConvert);
+    }
+    
+    public static string GetTimeLeftText(this DateTime datetime, bool useUTC, bool icon, string format, bool isColon = true, bool daysConvert = false)
+    {
+        return TimeFormat(datetime.GetTimeLeft(useUTC), icon, format, isColon, daysConvert: daysConvert);
     }
 
-    public static string GetTimeLeftText(this DateTime datetime, bool useUTC, bool icon, string format, bool isColon = true, float mspace = 3f)
+    public static string GetTimeLeftText(this DateTime datetime, bool useUTC, bool icon, string format, bool isColon = true, float mspace = 3f, bool daysConvert = false)
     {
-        return TimeFormat(datetime.GetTimeLeft(useUTC), icon, format, isColon, mspace);
+        return TimeFormat(datetime.GetTimeLeft(useUTC), icon, format, isColon, mspace, daysConvert);
     }
     
-    public static string GetTimeLeftText(this DateTime datetime, bool useUTC = true)
+    public static string GetTimeLeftText(this DateTime datetime, bool useUTC = true, bool daysConvert = false)
     {
-        return TimeFormat(datetime.GetTimeLeft(useUTC), false, null);
+        return TimeFormat(datetime.GetTimeLeft(useUTC), false, null, true, 3f, daysConvert);
     }
     
-    public static string GetTimeLeftText(this DateTime datetime, bool useUTC, float mspace)
+    public static string GetTimeLeftText(this DateTime datetime, bool useUTC, float mspace, bool daysConvert = false)
     {
-        return TimeFormat(datetime.GetTimeLeft(useUTC), false, null, true, mspace);
+        return TimeFormat(datetime.GetTimeLeft(useUTC), false, null, true, mspace, daysConvert);
     }
     
-    private static string TimeFormat(TimeSpan time, bool icon, string format, bool isColon = true, float mspace = 3f)
+    private static string TimeFormat(TimeSpan time, bool icon, string format, bool isColon = true, float mspace = 3f, bool daysConvert = false)
     {
         var iconStr = icon ? $"<sprite name={Currency.Timer.Icon}> " : "";
         var mspaceStr = mspace.ToString(CultureInfo.InvariantCulture);
@@ -96,13 +101,13 @@ public static class DateTimeExtension
 
         var d = isColon ? ":" : $"{LocalizationService.Get("common.abbreviation.day")} ";
         var h = isColon ? ":" : $"{LocalizationService.Get("common.abbreviation.hour")} ";
-        var m = isColon ? (temp.Days > 0 ? "" : ":") : $"{LocalizationService.Get("common.abbreviation.minute")} ";
+        var m = isColon ? (daysConvert && temp.Days > 0 ? "" : ":") : $"{LocalizationService.Get("common.abbreviation.minute")} ";
         var s = isColon ? "" : $"{LocalizationService.Get("common.abbreviation.second")} ";
         
         if (string.IsNullOrEmpty(format)) format = "{0}<mspace={1}em>{2}</mspace>";
 
-        if (temp.Days > 0) value = $"{temp.Days:0}{d}{temp.Hours:00}{h}{temp.Minutes:00}{m}";
-        else if ((int) temp.TotalHours > 0) value = $"{temp.Hours:0}{h}{temp.Minutes:00}{m}{temp.Seconds:00}{s}";
+        if (daysConvert && temp.Days > 0) value = $"{temp.Days:0}{d}{temp.Hours:00}{h}{temp.Minutes:00}{m}";
+        else if ((int) temp.TotalHours > 0) value = $"{temp.Days * 24 + temp.Hours:0}{h}{temp.Minutes:00}{m}{temp.Seconds:00}{s}";
         else value = $"{temp.Minutes:00}{m}{temp.Seconds:00}{s}";
         
         return string.Format(format, iconStr, mspaceStr, value);

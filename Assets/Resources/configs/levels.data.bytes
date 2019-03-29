@@ -216,10 +216,6 @@
         "Weight": 4
       },
       {
-        "Uid": "Order18",
-        "Weight": 4
-      },
-      {
         "Uid": "Order10",
         "Weight": 1
       }
@@ -273,8 +269,6 @@
         "Weight": 3
       },
       {
-        "Uid": "Order4",
-        "Weight": 1,
         "Override": true
       }
     ],
@@ -337,6 +331,15 @@
       {
         "Uid": "Order7",
         "Weight": 5,
+        "Override": true
+      },
+      {
+        "Uid": "Order18",
+        "Weight": 5
+      },
+      {
+        "Uid": "Order4",
+        "Weight": 1,
         "Override": true
       }
     ],
@@ -466,6 +469,11 @@
         "Uid": "Order8",
         "Weight": 2,
         "Override": true
+      },
+      {
+        "Uid": "Order16",
+        "Weight": 8,
+        "Override": true
       }
     ],
     "PieceWeights": [
@@ -519,7 +527,7 @@
       },
       {
         "Uid": "Order16",
-        "Weight": 6,
+        "Weight": 5,
         "Override": true
       },
       {
