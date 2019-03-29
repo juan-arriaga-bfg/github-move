@@ -75,6 +75,7 @@ android {
 
     buildTypes {
         debug {
+			debuggable true
             jniDebuggable false
             minifyEnabled false
             manifestPlaceholders = ["bfglibEnviron": "test"]
