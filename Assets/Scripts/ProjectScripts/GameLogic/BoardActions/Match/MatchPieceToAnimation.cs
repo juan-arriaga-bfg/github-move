@@ -44,17 +44,24 @@ public class MatchPieceToAnimation : BoardAnimation
 
     public void ToggleView(bool state)
     {
-        if (NextPieces != null)
-        {
-            for (int i = 0; i < NextPieces.Count; i++)
-            {
-                var nextPiece = NextPieces[i];
+	    if (NextPieces != null)
+	    {
+		    for (int i = 0; i < NextPieces.Count; i++)
+		    {
+			    var nextPiece = NextPieces[i];
 
-                if (nextPiece?.ViewDefinition == null) continue;
+			    if (nextPiece?.ViewDefinition == null) continue;
                 
-                nextPiece.ViewDefinition.Visible = state;
-            }
-        }
+//                nextPiece.ViewDefinition.Visible = state;
+			    var views = nextPiece.ViewDefinition.GetViews();
+			    for (int j = 0; j < views.Count; j++)
+			    {
+				    var view = views[j];
+				    view.OnSwap(state);
+//	                view.UpdateVisibility(state);
+			    }
+		    }
+	    }
     }
 	
 	public override void Animate(BoardRenderer context)
