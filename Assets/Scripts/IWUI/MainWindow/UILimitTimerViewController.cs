@@ -36,7 +36,7 @@ public class UILimitTimerViewController : IWUIWindowViewController
 
     private void UpdateView()
     {
-        label.Text = energyLogic.Timer.CompleteTime.GetTimeLeftText(true, true, null);
+        label.Text = energyLogic.Timer.CompleteTime.GetTimeLeftText(true, true);
         Change(energyLogic.CheckIsNeed());
     }
 
