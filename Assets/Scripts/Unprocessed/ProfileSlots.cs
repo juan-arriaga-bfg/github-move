@@ -51,7 +51,7 @@ public static class ProfileSlots
     public static void Load(string path, LoadCallback onComplete)
     {
         //init profile 
-        ProfileManager<UserProfile> profileManager = new ProfileManager<UserProfile> {SystemVersion = IWVersion.Get.BuildNumber};
+        ProfileManager<UserProfile> profileManager = new SherwoodProfileManager<UserProfile> {SystemVersion = IWVersion.Get.BuildNumber};
 
         var dataMapper = GetDataMapper(path);
 
