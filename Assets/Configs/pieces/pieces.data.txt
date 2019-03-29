@@ -3047,6 +3047,194 @@
     ]
   },
   {
+    "Uid": "EXT_A1",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "EXT_A2",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 1
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ],
+    "ExchangePrice": {
+      "Currency": "Coins",
+      "Amount": 45
+    }
+  },
+  {
+    "Uid": "EXT_A3",
+    "Delay": 15,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 2
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      }
+    ],
+    "ExchangePrice": {
+      "Currency": "Coins",
+      "Amount": 130
+    }
+  },
+  {
+    "Uid": "EXT_A4",
+    "Delay": 60,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ],
+    "ExchangePrice": {
+      "Currency": "Coins",
+      "Amount": 400
+    }
+  },
+  {
+    "Uid": "EXT_A5",
+    "Delay": 180,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ],
+    "ExchangePrice": {
+      "Currency": "Coins",
+      "Amount": 1200
+    }
+  },
+  {
+    "Uid": "EXT_A6",
+    "Delay": 300,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      }
+    ],
+    "ExchangePrice": {
+      "Currency": "Crystals",
+      "Amount": 650
+    }
+  },
+  {
+    "Uid": "EXT_A7",
+    "Delay": 900,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
+  },
+  {
+    "Uid": "EXT_A8",
+    "Delay": 1800,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 75
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 20
+      }
+    ]
+  },
+  {
+    "Uid": "EXT_A9",
+    "Delay": 3600,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 50
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 100
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      }
+    ]
+  },
+  {
     "Uid": "NPC_B1",
     "UnlockBonus": [
       {
