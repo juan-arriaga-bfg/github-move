@@ -518,4 +518,5 @@ public class R
      public const string EXT_E8Piece = "EXT_E8Piece";
      public const string EXT_E9Piece = "EXT_E9Piece";
      public const string EXT_C3Piece = "EXT_C3Piece";
+     public const string DestroyOrderAnimation = "DestroyOrderAnimation";
 }
