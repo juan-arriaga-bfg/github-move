@@ -747,7 +747,116 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Order23.Id, R.OrderPiece23);
 
 #endregion
+     
+#region Extended Pieces
+
+        #region EXT_A
+                
+        dict.Add(PieceType.EXT_A1.Id, R.EXT_A1Piece);
+        dict.Add(PieceType.EXT_A2.Id, R.EXT_A2Piece);
+        dict.Add(PieceType.EXT_A3Fake.Id, R.EXT_A3Piece);
+        dict.Add(PieceType.EXT_A3.Id, R.EXT_A3Piece);
+        dict.Add(PieceType.EXT_A4Fake.Id, R.EXT_A4Piece);
+        dict.Add(PieceType.EXT_A4.Id, R.EXT_A4Piece);
+        dict.Add(PieceType.EXT_A5Fake.Id, R.EXT_A5Piece);
+        dict.Add(PieceType.EXT_A5.Id, R.EXT_A5Piece);
+        dict.Add(PieceType.EXT_A6Fake.Id, R.EXT_A6Piece);
+        dict.Add(PieceType.EXT_A6.Id, R.EXT_A6Piece);
+        dict.Add(PieceType.EXT_A7Fake.Id, R.EXT_A7Piece);
+        dict.Add(PieceType.EXT_A7.Id, R.EXT_A7Piece);
+        dict.Add(PieceType.EXT_A8Fake.Id, R.EXT_A8Piece);
+        dict.Add(PieceType.EXT_A8.Id, R.EXT_A8Piece);
+        dict.Add(PieceType.EXT_A9Fake.Id, R.EXT_A9Piece);
+        dict.Add(PieceType.EXT_A9.Id, R.EXT_A9Piece);
+                
+        #endregion
+
+        #region EXT_B
+                
+        dict.Add(PieceType.EXT_B1.Id, R.EXT_B1Piece);
+        dict.Add(PieceType.EXT_B2.Id, R.EXT_B2Piece);
+        dict.Add(PieceType.EXT_B3Fake.Id, R.EXT_B3Piece);
+        dict.Add(PieceType.EXT_B3.Id, R.EXT_B3Piece);
+        dict.Add(PieceType.EXT_B4Fake.Id, R.EXT_B4Piece);
+        dict.Add(PieceType.EXT_B4.Id, R.EXT_B4Piece);
+        dict.Add(PieceType.EXT_B5Fake.Id, R.EXT_B5Piece);
+        dict.Add(PieceType.EXT_B5.Id, R.EXT_B5Piece);
+        dict.Add(PieceType.EXT_B6Fake.Id, R.EXT_B6Piece);
+        dict.Add(PieceType.EXT_B6.Id, R.EXT_B6Piece);
+        dict.Add(PieceType.EXT_B7Fake.Id, R.EXT_B7Piece);
+        dict.Add(PieceType.EXT_B7.Id, R.EXT_B7Piece);
+        dict.Add(PieceType.EXT_B8Fake.Id, R.EXT_B8Piece);
+        dict.Add(PieceType.EXT_B8.Id, R.EXT_B8Piece);
+        dict.Add(PieceType.EXT_B9Fake.Id, R.EXT_B9Piece);
+        dict.Add(PieceType.EXT_B9.Id, R.EXT_B9Piece);
+                
+        #endregion
         
+        #region EXT_C
+                
+        dict.Add(PieceType.EXT_C1.Id, R.EXT_C1Piece);
+        dict.Add(PieceType.EXT_C2.Id, R.EXT_C2Piece);
+        dict.Add(PieceType.EXT_C3Fake.Id, R.EXT_C3Piece);
+        dict.Add(PieceType.EXT_C3.Id, R.EXT_C3Piece);
+        dict.Add(PieceType.EXT_C4Fake.Id, R.EXT_C4Piece);
+        dict.Add(PieceType.EXT_C4.Id, R.EXT_C4Piece);
+        dict.Add(PieceType.EXT_C5Fake.Id, R.EXT_C5Piece);
+        dict.Add(PieceType.EXT_C5.Id, R.EXT_C5Piece);
+        dict.Add(PieceType.EXT_C6Fake.Id, R.EXT_C6Piece);
+        dict.Add(PieceType.EXT_C6.Id, R.EXT_C6Piece);
+        dict.Add(PieceType.EXT_C7Fake.Id, R.EXT_C7Piece);
+        dict.Add(PieceType.EXT_C7.Id, R.EXT_C7Piece);
+        dict.Add(PieceType.EXT_C8Fake.Id, R.EXT_C8Piece);
+        dict.Add(PieceType.EXT_C8.Id, R.EXT_C8Piece);
+        dict.Add(PieceType.EXT_C9Fake.Id, R.EXT_C9Piece);
+        dict.Add(PieceType.EXT_C9.Id, R.EXT_C9Piece);
+                
+        #endregion
+        
+        #region EXT_D
+                
+        dict.Add(PieceType.EXT_D1.Id, R.EXT_D1Piece);
+        dict.Add(PieceType.EXT_D2.Id, R.EXT_D2Piece);
+        dict.Add(PieceType.EXT_D3Fake.Id, R.EXT_D3Piece);
+        dict.Add(PieceType.EXT_D3.Id, R.EXT_D3Piece);
+        dict.Add(PieceType.EXT_D4Fake.Id, R.EXT_D4Piece);
+        dict.Add(PieceType.EXT_D4.Id, R.EXT_D4Piece);
+        dict.Add(PieceType.EXT_D5Fake.Id, R.EXT_D5Piece);
+        dict.Add(PieceType.EXT_D5.Id, R.EXT_D5Piece);
+        dict.Add(PieceType.EXT_D6Fake.Id, R.EXT_D6Piece);
+        dict.Add(PieceType.EXT_D6.Id, R.EXT_D6Piece);
+        dict.Add(PieceType.EXT_D7Fake.Id, R.EXT_D7Piece);
+        dict.Add(PieceType.EXT_D7.Id, R.EXT_D7Piece);
+        dict.Add(PieceType.EXT_D8Fake.Id, R.EXT_D8Piece);
+        dict.Add(PieceType.EXT_D8.Id, R.EXT_D8Piece);
+        dict.Add(PieceType.EXT_D9Fake.Id, R.EXT_D9Piece);
+        dict.Add(PieceType.EXT_D9.Id, R.EXT_D9Piece);
+                
+        #endregion
+        
+        #region EXT_E
+                
+        dict.Add(PieceType.EXT_E1.Id, R.EXT_E1Piece);
+        dict.Add(PieceType.EXT_E2.Id, R.EXT_E2Piece);
+        dict.Add(PieceType.EXT_E3Fake.Id, R.EXT_E3Piece);
+        dict.Add(PieceType.EXT_E3.Id, R.EXT_E3Piece);
+        dict.Add(PieceType.EXT_E4Fake.Id, R.EXT_E4Piece);
+        dict.Add(PieceType.EXT_E4.Id, R.EXT_E4Piece);
+        dict.Add(PieceType.EXT_E5Fake.Id, R.EXT_E5Piece);
+        dict.Add(PieceType.EXT_E5.Id, R.EXT_E5Piece);
+        dict.Add(PieceType.EXT_E6Fake.Id, R.EXT_E6Piece);
+        dict.Add(PieceType.EXT_E6.Id, R.EXT_E6Piece);
+        dict.Add(PieceType.EXT_E7Fake.Id, R.EXT_E7Piece);
+        dict.Add(PieceType.EXT_E7.Id, R.EXT_E7Piece);
+        dict.Add(PieceType.EXT_E8Fake.Id, R.EXT_E8Piece);
+        dict.Add(PieceType.EXT_E8.Id, R.EXT_E8Piece);
+        dict.Add(PieceType.EXT_E9Fake.Id, R.EXT_E9Piece);
+        dict.Add(PieceType.EXT_E9.Id, R.EXT_E9Piece);
+                
+        #endregion
+
+#endregion
+
         return dict;
     }
 }

@@ -34,6 +34,12 @@ public class PieceBuildersBuilder
         dict = AddBuildingBranchPiece(dict, PieceType.I1.Id, PieceType.I9.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.J1.Id, PieceType.J9.Id);
         
+        dict = AddBuildingBranchPiece(dict, PieceType.EXT_A1.Id, PieceType.EXT_A9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.EXT_B1.Id, PieceType.EXT_B9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.EXT_C1.Id, PieceType.EXT_C9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.EXT_D1.Id, PieceType.EXT_D9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.EXT_E1.Id, PieceType.EXT_E9.Id);
+        
         dict = AddSimplePiece<ManaPieceBuilder>(PieceType.Mana1.Id, PieceType.Mana6.Id, dict);
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Soft1.Id, PieceType.Soft6.Id, dict);
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Hard1.Id, PieceType.Hard6.Id, dict);

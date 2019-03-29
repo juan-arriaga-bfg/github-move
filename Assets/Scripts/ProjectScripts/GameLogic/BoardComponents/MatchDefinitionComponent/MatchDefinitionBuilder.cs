@@ -664,7 +664,126 @@ public class MatchDefinitionBuilder
         #endregion
         
 #endregion
+  
+#region Extended Pieces
+
+        #region EXT_A
         
+        dict.Add(PieceType.EXT_A1.Id, new PieceMatchDef {Next = PieceType.EXT_A2.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.EXT_A2.Id, new PieceMatchDef {Next = PieceType.EXT_A3Fake.Id, Previous = PieceType.EXT_A1.Id, Amount = 3});
+        dict.Add(PieceType.EXT_A3Fake.Id, new PieceMatchDef {Next = PieceType.EXT_A3.Id, Previous = PieceType.EXT_A2.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_A3.Id, new PieceMatchDef {Next = PieceType.EXT_A4Fake.Id, Previous = PieceType.EXT_A2.Id, Amount = 3});
+        dict.Add(PieceType.EXT_A4Fake.Id, new PieceMatchDef {Next = PieceType.EXT_A4.Id, Previous = PieceType.EXT_A3.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_A4.Id, new PieceMatchDef {Next = PieceType.EXT_A5Fake.Id, Previous = PieceType.EXT_A3.Id, Amount = 3});
+        dict.Add(PieceType.EXT_A5Fake.Id, new PieceMatchDef {Next = PieceType.EXT_A5.Id, Previous = PieceType.EXT_A4.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_A5.Id, new PieceMatchDef {Next = PieceType.EXT_A6Fake.Id, Previous = PieceType.EXT_A4.Id, Amount = 3});
+        dict.Add(PieceType.EXT_A6Fake.Id, new PieceMatchDef {Next = PieceType.EXT_A6.Id, Previous = PieceType.EXT_A5.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_A6.Id, new PieceMatchDef {Next = PieceType.EXT_A7Fake.Id, Previous = PieceType.EXT_A5.Id, Amount = 3});
+        dict.Add(PieceType.EXT_A7Fake.Id, new PieceMatchDef {Next = PieceType.EXT_A7.Id, Previous = PieceType.EXT_A6.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_A7.Id, new PieceMatchDef {Next = PieceType.EXT_A8Fake.Id, Previous = PieceType.EXT_A6.Id, Amount = 3});
+        dict.Add(PieceType.EXT_A8Fake.Id, new PieceMatchDef {Next = PieceType.EXT_A8.Id, Previous = PieceType.EXT_A7.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_A8.Id, new PieceMatchDef {Next = PieceType.EXT_A9Fake.Id, Previous = PieceType.EXT_A7.Id, Amount = 3});
+        
+        dict = AddFakeMulticellularPiece(dict, PieceType.EXT_A9Fake.Id, PieceType.EXT_A9.Id, PieceType.EXT_A8.Id);
+        
+        dict.Add(PieceType.EXT_A9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.EXT_A8.Id});
+        
+        #endregion
+        
+        #region EXT_B
+        
+        dict.Add(PieceType.EXT_B1.Id, new PieceMatchDef {Next = PieceType.EXT_B2.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.EXT_B2.Id, new PieceMatchDef {Next = PieceType.EXT_B3Fake.Id, Previous = PieceType.EXT_B1.Id, Amount = 3});
+        dict.Add(PieceType.EXT_B3Fake.Id, new PieceMatchDef {Next = PieceType.EXT_B3.Id, Previous = PieceType.EXT_B2.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_B3.Id, new PieceMatchDef {Next = PieceType.EXT_B4Fake.Id, Previous = PieceType.EXT_B2.Id, Amount = 3});
+        dict.Add(PieceType.EXT_B4Fake.Id, new PieceMatchDef {Next = PieceType.EXT_B4.Id, Previous = PieceType.EXT_B3.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_B4.Id, new PieceMatchDef {Next = PieceType.EXT_B5Fake.Id, Previous = PieceType.EXT_B3.Id, Amount = 3});
+        dict.Add(PieceType.EXT_B5Fake.Id, new PieceMatchDef {Next = PieceType.EXT_B5.Id, Previous = PieceType.EXT_B4.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_B5.Id, new PieceMatchDef {Next = PieceType.EXT_B6Fake.Id, Previous = PieceType.EXT_B4.Id, Amount = 3});
+        dict.Add(PieceType.EXT_B6Fake.Id, new PieceMatchDef {Next = PieceType.EXT_B6.Id, Previous = PieceType.EXT_B5.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_B6.Id, new PieceMatchDef {Next = PieceType.EXT_B7Fake.Id, Previous = PieceType.EXT_B5.Id, Amount = 3});
+        dict.Add(PieceType.EXT_B7Fake.Id, new PieceMatchDef {Next = PieceType.EXT_B7.Id, Previous = PieceType.EXT_B6.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_B7.Id, new PieceMatchDef {Next = PieceType.EXT_B8Fake.Id, Previous = PieceType.EXT_B6.Id, Amount = 3});
+        dict.Add(PieceType.EXT_B8Fake.Id, new PieceMatchDef {Next = PieceType.EXT_B8.Id, Previous = PieceType.EXT_B7.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_B8.Id, new PieceMatchDef {Next = PieceType.EXT_B9Fake.Id, Previous = PieceType.EXT_B7.Id, Amount = 3});
+        
+        dict = AddFakeMulticellularPiece(dict, PieceType.EXT_B9Fake.Id, PieceType.EXT_B9.Id, PieceType.EXT_B8.Id);
+        
+        dict.Add(PieceType.EXT_B9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.EXT_B8.Id});
+        
+        #endregion
+        
+        #region EXT_C
+        
+        dict.Add(PieceType.EXT_C1.Id, new PieceMatchDef {Next = PieceType.EXT_C2.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.EXT_C2.Id, new PieceMatchDef {Next = PieceType.EXT_C3Fake.Id, Previous = PieceType.EXT_C1.Id, Amount = 3});
+        dict.Add(PieceType.EXT_C3Fake.Id, new PieceMatchDef {Next = PieceType.EXT_C3.Id, Previous = PieceType.EXT_C2.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_C3.Id, new PieceMatchDef {Next = PieceType.EXT_C4Fake.Id, Previous = PieceType.EXT_C2.Id, Amount = 3});
+        dict.Add(PieceType.EXT_C4Fake.Id, new PieceMatchDef {Next = PieceType.EXT_C4.Id, Previous = PieceType.EXT_C3.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_C4.Id, new PieceMatchDef {Next = PieceType.EXT_C5Fake.Id, Previous = PieceType.EXT_C3.Id, Amount = 3});
+        dict.Add(PieceType.EXT_C5Fake.Id, new PieceMatchDef {Next = PieceType.EXT_C5.Id, Previous = PieceType.EXT_C4.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_C5.Id, new PieceMatchDef {Next = PieceType.EXT_C6Fake.Id, Previous = PieceType.EXT_C4.Id, Amount = 3});
+        dict.Add(PieceType.EXT_C6Fake.Id, new PieceMatchDef {Next = PieceType.EXT_C6.Id, Previous = PieceType.EXT_C5.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_C6.Id, new PieceMatchDef {Next = PieceType.EXT_C7Fake.Id, Previous = PieceType.EXT_C5.Id, Amount = 3});
+        dict.Add(PieceType.EXT_C7Fake.Id, new PieceMatchDef {Next = PieceType.EXT_C7.Id, Previous = PieceType.EXT_C6.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_C7.Id, new PieceMatchDef {Next = PieceType.EXT_C8Fake.Id, Previous = PieceType.EXT_C6.Id, Amount = 3});
+        dict.Add(PieceType.EXT_C8Fake.Id, new PieceMatchDef {Next = PieceType.EXT_C8.Id, Previous = PieceType.EXT_C7.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_C8.Id, new PieceMatchDef {Next = PieceType.EXT_C9Fake.Id, Previous = PieceType.EXT_C7.Id, Amount = 3});
+        
+        dict = AddFakeMulticellularPiece(dict, PieceType.EXT_C9Fake.Id, PieceType.EXT_C9.Id, PieceType.EXT_C8.Id);
+        
+        dict.Add(PieceType.EXT_C9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.EXT_C8.Id});
+        
+        #endregion
+        
+        #region EXT_D
+        
+        dict.Add(PieceType.EXT_D1.Id, new PieceMatchDef {Next = PieceType.EXT_D2.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.EXT_D2.Id, new PieceMatchDef {Next = PieceType.EXT_D3Fake.Id, Previous = PieceType.EXT_D1.Id, Amount = 3});
+        dict.Add(PieceType.EXT_D3Fake.Id, new PieceMatchDef {Next = PieceType.EXT_D3.Id, Previous = PieceType.EXT_D2.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_D3.Id, new PieceMatchDef {Next = PieceType.EXT_D4Fake.Id, Previous = PieceType.EXT_D2.Id, Amount = 3});
+        dict.Add(PieceType.EXT_D4Fake.Id, new PieceMatchDef {Next = PieceType.EXT_D4.Id, Previous = PieceType.EXT_D3.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_D4.Id, new PieceMatchDef {Next = PieceType.EXT_D5Fake.Id, Previous = PieceType.EXT_D3.Id, Amount = 3});
+        dict.Add(PieceType.EXT_D5Fake.Id, new PieceMatchDef {Next = PieceType.EXT_D5.Id, Previous = PieceType.EXT_D4.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_D5.Id, new PieceMatchDef {Next = PieceType.EXT_D6Fake.Id, Previous = PieceType.EXT_D4.Id, Amount = 3});
+        dict.Add(PieceType.EXT_D6Fake.Id, new PieceMatchDef {Next = PieceType.EXT_D6.Id, Previous = PieceType.EXT_D5.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_D6.Id, new PieceMatchDef {Next = PieceType.EXT_D7Fake.Id, Previous = PieceType.EXT_D5.Id, Amount = 3});
+        dict.Add(PieceType.EXT_D7Fake.Id, new PieceMatchDef {Next = PieceType.EXT_D7.Id, Previous = PieceType.EXT_D6.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_D7.Id, new PieceMatchDef {Next = PieceType.EXT_D8Fake.Id, Previous = PieceType.EXT_D6.Id, Amount = 3});
+        dict.Add(PieceType.EXT_D8Fake.Id, new PieceMatchDef {Next = PieceType.EXT_D8.Id, Previous = PieceType.EXT_D7.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_D8.Id, new PieceMatchDef {Next = PieceType.EXT_D9Fake.Id, Previous = PieceType.EXT_D7.Id, Amount = 3});
+        
+        dict = AddFakeMulticellularPiece(dict, PieceType.EXT_D9Fake.Id, PieceType.EXT_D9.Id, PieceType.EXT_D8.Id);
+        
+        dict.Add(PieceType.EXT_D9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.EXT_D8.Id});
+        
+        #endregion
+        
+        #region EXT_E
+        
+        dict.Add(PieceType.EXT_E1.Id, new PieceMatchDef {Next = PieceType.EXT_E2.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.EXT_E2.Id, new PieceMatchDef {Next = PieceType.EXT_E3Fake.Id, Previous = PieceType.EXT_E1.Id, Amount = 3});
+        dict.Add(PieceType.EXT_E3Fake.Id, new PieceMatchDef {Next = PieceType.EXT_E3.Id, Previous = PieceType.EXT_E2.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_E3.Id, new PieceMatchDef {Next = PieceType.EXT_E4Fake.Id, Previous = PieceType.EXT_E2.Id, Amount = 3});
+        dict.Add(PieceType.EXT_E4Fake.Id, new PieceMatchDef {Next = PieceType.EXT_E4.Id, Previous = PieceType.EXT_E3.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_E4.Id, new PieceMatchDef {Next = PieceType.EXT_E5Fake.Id, Previous = PieceType.EXT_E3.Id, Amount = 3});
+        dict.Add(PieceType.EXT_E5Fake.Id, new PieceMatchDef {Next = PieceType.EXT_E5.Id, Previous = PieceType.EXT_E4.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_E5.Id, new PieceMatchDef {Next = PieceType.EXT_E6Fake.Id, Previous = PieceType.EXT_E4.Id, Amount = 3});
+        dict.Add(PieceType.EXT_E6Fake.Id, new PieceMatchDef {Next = PieceType.EXT_E6.Id, Previous = PieceType.EXT_E5.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_E6.Id, new PieceMatchDef {Next = PieceType.EXT_E7Fake.Id, Previous = PieceType.EXT_E5.Id, Amount = 3});
+        dict.Add(PieceType.EXT_E7Fake.Id, new PieceMatchDef {Next = PieceType.EXT_E7.Id, Previous = PieceType.EXT_E6.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_E7.Id, new PieceMatchDef {Next = PieceType.EXT_E8Fake.Id, Previous = PieceType.EXT_E6.Id, Amount = 3});
+        dict.Add(PieceType.EXT_E8Fake.Id, new PieceMatchDef {Next = PieceType.EXT_E8.Id, Previous = PieceType.EXT_E7.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.EXT_E8.Id, new PieceMatchDef {Next = PieceType.EXT_E9Fake.Id, Previous = PieceType.EXT_E7.Id, Amount = 3});
+        
+        dict = AddFakeMulticellularPiece(dict, PieceType.EXT_E9Fake.Id, PieceType.EXT_E9.Id, PieceType.EXT_E8.Id);
+        
+        dict.Add(PieceType.EXT_E9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.EXT_E8.Id});
+        
+        #endregion
+
+#endregion
+
         return dict;
     }
 
