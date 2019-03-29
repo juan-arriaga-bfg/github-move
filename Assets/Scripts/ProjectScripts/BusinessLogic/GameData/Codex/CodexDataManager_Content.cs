@@ -54,6 +54,11 @@ public partial class CodexDataManager
                         Name = LocalizationService.Get("window.codex.branch.E", "window.codex.branch.E"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.E1.Id))
                     },
+                    new CodexChainDef
+                    {
+                        Name = LocalizationService.Get("window.codex.branch.EXT_A", "window.codex.branch.EXT_A"),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.EXT_A1.Id))
+                    },
                 }
             },
             new CodexTabDef
