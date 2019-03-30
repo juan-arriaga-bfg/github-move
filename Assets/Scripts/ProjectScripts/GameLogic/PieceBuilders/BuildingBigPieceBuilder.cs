@@ -1,12 +1,14 @@
-﻿public class BuildingBigPieceBuilder : MulticellularPieceBuilder 
+﻿public class BuildingBigPieceBuilder : MulticellularPieceBuilder
 {
+	public BuildingState StartState = BuildingState.InProgress;
+	
 	public override Piece Build(int pieceType, BoardController context)
 	{
 		var piece = base.Build(pieceType, context);
         
 		CreateViewComponent(piece);
-		
-		AddObserver(piece, new PieceStateComponent {StartState = BuildingState.InProgress});
+
+		AddObserver(piece, new PieceStateComponent {StartState = StartState});
 		
 		piece.RegisterComponent(new DraggablePieceComponent());
 		

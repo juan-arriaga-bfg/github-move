@@ -91,9 +91,6 @@ public class R
      public const string OB_PR_CPiece = "OB_PR_CPiece";
      public const string OB_PR_DPiece = "OB_PR_DPiece";
      public const string OB_PR_EPiece = "OB_PR_EPiece";
-     public const string MN_BPiece = "MN_BPiece";
-     public const string MN_CPiece = "MN_CPiece";
-     public const string MN_IPiece = "MN_IPiece";
      public const string Hard1Piece = "Hard1Piece";
      public const string Hard2Piece = "Hard2Piece";
      public const string Hard3Piece = "Hard3Piece";
@@ -286,7 +283,6 @@ public class R
      public const string J7Piece = "J7Piece";
      public const string J8Piece = "J8Piece";
      public const string J9Piece = "J9Piece";
-     public const string MN_EPiece = "MN_EPiece";
      public const string CH1_FPiece = "CH1_FPiece";
      public const string CH2_FPiece = "CH2_FPiece";
      public const string CH3_FPiece = "CH3_FPiece";
@@ -442,8 +438,6 @@ public class R
      public const string CH2_IPiece = "CH2_IPiece";
      public const string CH3_IPiece = "CH3_IPiece";
      public const string MiningParticles = "MiningParticles";
-     public const string MN_FPiece = "MN_FPiece";
-     public const string MN_HPiece = "MN_HPiece";
      public const string MonumentCooldownParticle = "MonumentCooldownParticle";
      public const string PiecesSepiaDefaultMaterial = "PiecesSepiaDefaultMaterial";
      public const string NPC_G7Piece = "NPC_G7Piece";
@@ -519,4 +513,16 @@ public class R
      public const string EXT_E9Piece = "EXT_E9Piece";
      public const string EXT_C3Piece = "EXT_C3Piece";
      public const string DestroyOrderAnimation = "DestroyOrderAnimation";
+     public const string MN_BPiece = "MN_BPiece";
+     public const string MN_BFakePiece = "MN_BFakePiece";
+     public const string MN_CPiece = "MN_CPiece";
+     public const string MN_CFakePiece = "MN_CFakePiece";
+     public const string MN_EPiece = "MN_EPiece";
+     public const string MN_EFakePiece = "MN_EFakePiece";
+     public const string MN_FPiece = "MN_FPiece";
+     public const string MN_FFakePiece = "MN_FFakePiece";
+     public const string MN_HPiece = "MN_HPiece";
+     public const string MN_HFakePiece = "MN_HFakePiece";
+     public const string MN_IPiece = "MN_IPiece";
+     public const string MN_IFakePiece = "MN_IFakePiece";
 }

@@ -455,21 +455,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "MN_BPiece",
-    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_BPiece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "MN_CPiece",
-    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_CPiece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "MN_IPiece",
-    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_IPiece",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "Hard1Piece",
     "ResourcePath": "Prefabs\\Pieces\\Currencies/Hard1Piece",
     "IsGenerateAutoName": true
@@ -1517,21 +1502,6 @@
   {
     "Uid": "D9",
     "ResourcePath": "Prefabs\\UI\\Pieces\\D/D9",
-    "IsGenerateAutoName": false
-  },
-  {
-    "Uid": "MN_B",
-    "ResourcePath": "Prefabs\\UI\\Pieces\\Mine/MN_B",
-    "IsGenerateAutoName": false
-  },
-  {
-    "Uid": "MN_C",
-    "ResourcePath": "Prefabs\\UI\\Pieces\\Mine/MN_C",
-    "IsGenerateAutoName": false
-  },
-  {
-    "Uid": "MN_I",
-    "ResourcePath": "Prefabs\\UI\\Pieces\\Mine/MN_I",
     "IsGenerateAutoName": false
   },
   {
@@ -2882,16 +2852,6 @@
   {
     "Uid": "J9",
     "ResourcePath": "Prefabs\\UI\\Pieces\\J/J9",
-    "IsGenerateAutoName": false
-  },
-  {
-    "Uid": "MN_EPiece",
-    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_EPiece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "MN_E",
-    "ResourcePath": "Prefabs\\UI\\Pieces\\Mine/MN_E",
     "IsGenerateAutoName": false
   },
   {
@@ -4420,26 +4380,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "MN_FPiece",
-    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_FPiece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "MN_HPiece",
-    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_HPiece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "MN_F",
-    "ResourcePath": "Prefabs\\UI\\Pieces\\Mine/MN_F",
-    "IsGenerateAutoName": false
-  },
-  {
-    "Uid": "MN_H",
-    "ResourcePath": "Prefabs\\UI\\Pieces\\Mine/MN_H",
-    "IsGenerateAutoName": false
-  },
-  {
     "Uid": "UICharacterRedHoodView",
     "ResourcePath": "Prefabs/UI/CharactersConversation/UICharacterRedHoodView",
     "IsGenerateAutoName": false
@@ -5107,6 +5047,96 @@
   {
     "Uid": "DestroyOrderAnimation",
     "ResourcePath": "Prefabs\\Animations/DestroyOrderAnimation",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MN_B",
+    "ResourcePath": "Prefabs\\UI\\Pieces\\Mine/MN_B",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "MN_BPiece",
+    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_BPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MN_BFakePiece",
+    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_BFakePiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MN_C",
+    "ResourcePath": "Prefabs\\UI\\Pieces\\Mine/MN_C",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "MN_CPiece",
+    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_CPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MN_CFakePiece",
+    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_CFakePiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MN_E",
+    "ResourcePath": "Prefabs\\UI\\Pieces\\Mine/MN_E",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "MN_EPiece",
+    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_EPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MN_EFakePiece",
+    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_EFakePiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MN_F",
+    "ResourcePath": "Prefabs\\UI\\Pieces\\Mine/MN_F",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "MN_FPiece",
+    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_FPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MN_FFakePiece",
+    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_FFakePiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MN_H",
+    "ResourcePath": "Prefabs\\UI\\Pieces\\Mine/MN_H",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "MN_HPiece",
+    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_HPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MN_HFakePiece",
+    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_HFakePiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MN_I",
+    "ResourcePath": "Prefabs\\UI\\Pieces\\Mine/MN_I",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "MN_IPiece",
+    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_IPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MN_IFakePiece",
+    "ResourcePath": "Prefabs\\Pieces\\Mine/MN_IFakePiece",
     "IsGenerateAutoName": true
   }
 ]

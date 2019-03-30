@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 public class PieceBuildersBuilder
 {
     public Dictionary<int, IPieceBuilder> Build()
@@ -9,6 +10,7 @@ public class PieceBuildersBuilder
         dict = AddIngredientsBranchPiece(dict);
         dict = AddObstaclePiece(dict);
         dict = AddOtherPiece(dict);
+        dict = AddMinePiece(dict);
         
         dict = AddMulticellularPiece2x2(dict);
 
@@ -148,6 +150,18 @@ public class PieceBuildersBuilder
         return dict;
     }
 
+    private Dictionary<int, IPieceBuilder> AddMinePiece(Dictionary<int, IPieceBuilder> dict)
+    {
+        dict = AddMineBranchPiece(dict, PieceType.MN_B1.Id, PieceType.MN_B3.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_C1.Id, PieceType.MN_C3.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_E1.Id, PieceType.MN_E3.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_F1.Id, PieceType.MN_F3.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_H1.Id, PieceType.MN_H3.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_I1.Id, PieceType.MN_I3.Id);
+        
+        return dict;
+    }
+
     private Dictionary<int, IPieceBuilder> AddMulticellularPiece2x2(Dictionary<int, IPieceBuilder> dict)
     {
         var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
@@ -208,6 +222,22 @@ public class PieceBuildersBuilder
         dict.Add(idMax - 2, new PartPieceBuilder());
         dict.Add(idMax - 1, new BuildingBigPieceBuilder{Mask = mask});
         dict.Add(idMax, new MakingPieceBuilder{Mask = mask});
+        
+        return dict;
+    }
+
+    private Dictionary<int, IPieceBuilder> AddMineBranchPiece(Dictionary<int, IPieceBuilder> dict, int idMin, int idMax)
+    {
+        var flag = true;
+        var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
+
+        for (var i = idMin; i <= idMax; i++)
+        {
+            if (flag) dict.Add(i, new MinePieceBuilder());
+            else dict.Add(i, new BuildingBigPieceBuilder{Mask = mask, StartState = BuildingState.Default});
+            
+            flag = !flag;
+        }
         
         return dict;
     }

@@ -55,7 +55,6 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new EmptyCellsFinderComponent()) // finds empty cells
             .RegisterComponent(new MatchActionBuilderComponent() // creates match action
                 .RegisterDefaultBuilder(new SimpleMatchActionBuilder()) // creates default match action
-                .RegisterBuilder(new MulticellularPieceMatchActionBuilder())
                 .RegisterBuilder(new CompositePieceMatchActionBuilder())
                 .RegisterBuilder(new CharacterMatchActionBuilder())));
 
