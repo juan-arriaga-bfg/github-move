@@ -359,7 +359,7 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.MN_B2Fake.Id, new PieceMatchDef {Next = PieceType.MN_B2.Id,     Previous = PieceType.MN_B1.Id, Amount = 1, IsIgnore = true});
         dict.Add(PieceType.MN_B2.Id,     new PieceMatchDef {Next = PieceType.MN_B3Fake.Id, Previous = PieceType.MN_B1.Id, Amount = 1});
         dict.Add(PieceType.MN_B3Fake.Id, new PieceMatchDef {Next = PieceType.MN_B3.Id,     Previous = PieceType.MN_B2.Id, Amount = 1, IsIgnore = true});
-        dict.Add(PieceType.MN_B3.Id,     new PieceMatchDef {Next = PieceType.None.Id,      Previous = PieceType.MN_B2.Id, Amount = 1});
+        dict.Add(PieceType.MN_B3.Id,     new PieceMatchDef {Next = PieceType.None.Id,      Previous = PieceType.MN_B2.Id});
         
         #endregion
         
@@ -369,7 +369,7 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.MN_C2Fake.Id, new PieceMatchDef {Next = PieceType.MN_C2.Id,     Previous = PieceType.MN_C1.Id, Amount = 1, IsIgnore = true});
         dict.Add(PieceType.MN_C2.Id,     new PieceMatchDef {Next = PieceType.MN_C3Fake.Id, Previous = PieceType.MN_C1.Id, Amount = 1});
         dict.Add(PieceType.MN_C3Fake.Id, new PieceMatchDef {Next = PieceType.MN_C3.Id,     Previous = PieceType.MN_C2.Id, Amount = 1, IsIgnore = true});
-        dict.Add(PieceType.MN_C3.Id,     new PieceMatchDef {Next = PieceType.None.Id,      Previous = PieceType.MN_C2.Id, Amount = 1});
+        dict.Add(PieceType.MN_C3.Id,     new PieceMatchDef {Next = PieceType.None.Id,      Previous = PieceType.MN_C2.Id});
         
         #endregion
         
@@ -379,7 +379,7 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.MN_E2Fake.Id, new PieceMatchDef {Next = PieceType.MN_E2.Id,     Previous = PieceType.MN_E1.Id, Amount = 1, IsIgnore = true});
         dict.Add(PieceType.MN_E2.Id,     new PieceMatchDef {Next = PieceType.MN_E3Fake.Id, Previous = PieceType.MN_E1.Id, Amount = 1});
         dict.Add(PieceType.MN_E3Fake.Id, new PieceMatchDef {Next = PieceType.MN_E3.Id,     Previous = PieceType.MN_E2.Id, Amount = 1, IsIgnore = true});
-        dict.Add(PieceType.MN_E3.Id,     new PieceMatchDef {Next = PieceType.None.Id,      Previous = PieceType.MN_E2.Id, Amount = 1});
+        dict.Add(PieceType.MN_E3.Id,     new PieceMatchDef {Next = PieceType.None.Id,      Previous = PieceType.MN_E2.Id});
         
         #endregion
         
@@ -389,7 +389,7 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.MN_F2Fake.Id, new PieceMatchDef {Next = PieceType.MN_F2.Id,     Previous = PieceType.MN_F1.Id, Amount = 1, IsIgnore = true});
         dict.Add(PieceType.MN_F2.Id,     new PieceMatchDef {Next = PieceType.MN_F3Fake.Id, Previous = PieceType.MN_F1.Id, Amount = 1});
         dict.Add(PieceType.MN_F3Fake.Id, new PieceMatchDef {Next = PieceType.MN_F3.Id,     Previous = PieceType.MN_F2.Id, Amount = 1, IsIgnore = true});
-        dict.Add(PieceType.MN_F3.Id,     new PieceMatchDef {Next = PieceType.None.Id,      Previous = PieceType.MN_F2.Id, Amount = 1});
+        dict.Add(PieceType.MN_F3.Id,     new PieceMatchDef {Next = PieceType.None.Id,      Previous = PieceType.MN_F2.Id});
         
         #endregion
         
@@ -399,17 +399,17 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.MN_H2Fake.Id, new PieceMatchDef {Next = PieceType.MN_H2.Id,     Previous = PieceType.MN_H1.Id, Amount = 1, IsIgnore = true});
         dict.Add(PieceType.MN_H2.Id,     new PieceMatchDef {Next = PieceType.MN_H3Fake.Id, Previous = PieceType.MN_H1.Id, Amount = 1});
         dict.Add(PieceType.MN_H3Fake.Id, new PieceMatchDef {Next = PieceType.MN_H3.Id,     Previous = PieceType.MN_H2.Id, Amount = 1, IsIgnore = true});
-        dict.Add(PieceType.MN_H3.Id,     new PieceMatchDef {Next = PieceType.None.Id,      Previous = PieceType.MN_H2.Id, Amount = 1});
+        dict.Add(PieceType.MN_H3.Id,     new PieceMatchDef {Next = PieceType.None.Id,      Previous = PieceType.MN_H2.Id});
         
         #endregion
         
-        #region MN_I
+        #region MN_I1
         
         dict.Add(PieceType.MN_I1.Id,     new PieceMatchDef {Next = PieceType.MN_I2Fake.Id, Previous = PieceType.None.Id,  Amount = 1});
         dict.Add(PieceType.MN_I2Fake.Id, new PieceMatchDef {Next = PieceType.MN_I2.Id,     Previous = PieceType.MN_I1.Id, Amount = 1, IsIgnore = true});
         dict.Add(PieceType.MN_I2.Id,     new PieceMatchDef {Next = PieceType.MN_I3Fake.Id, Previous = PieceType.MN_I1.Id, Amount = 1});
         dict.Add(PieceType.MN_I3Fake.Id, new PieceMatchDef {Next = PieceType.MN_I3.Id,     Previous = PieceType.MN_I2.Id, Amount = 1, IsIgnore = true});
-        dict.Add(PieceType.MN_I3.Id,     new PieceMatchDef {Next = PieceType.None.Id,      Previous = PieceType.MN_I2.Id, Amount = 1});
+        dict.Add(PieceType.MN_I3.Id,     new PieceMatchDef {Next = PieceType.None.Id,      Previous = PieceType.MN_I2.Id});
         
         #endregion
         
