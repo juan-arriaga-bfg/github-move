@@ -220,8 +220,8 @@ public class PieceBuildersBuilder
         }
         
         dict.Add(idMax - 2, new PartPieceBuilder());
-        dict.Add(idMax - 1, new BuildingBigPieceBuilder{Mask = mask});
-        dict.Add(idMax, new MakingPieceBuilder{Mask = mask});
+        dict.Add(idMax - 1, new BuildingBigPieceBuilder {Mask = mask});
+        dict.Add(idMax, new MakingPieceBuilder {Mask = mask});
         
         return dict;
     }
@@ -233,8 +233,8 @@ public class PieceBuildersBuilder
 
         for (var i = idMin; i <= idMax; i++)
         {
-            if (flag) dict.Add(i, new MinePieceBuilder());
-            else dict.Add(i, new BuildingBigPieceBuilder{Mask = mask, StartState = BuildingState.Default});
+            if (flag) dict.Add(i, new MinePieceBuilder {Mask = mask});
+            else dict.Add(i, new BuildingBigPieceBuilder {Mask = mask, StartState = BuildingState.Waiting});
             
             flag = !flag;
         }
