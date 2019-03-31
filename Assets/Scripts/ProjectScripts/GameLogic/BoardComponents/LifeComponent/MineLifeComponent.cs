@@ -9,7 +9,7 @@ public class MineLifeComponent : WorkplaceLifeComponent
     public override string AnalyticsLocation => $"skip_mine";
     public override string Message => LocalizationService.Get("gameboard.bubble.message.mine", "gameboard.bubble.message.mine");
     public override string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.chop", "gameboard.bubble.button.chop {0}"), Energy.ToStringIcon());
-
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
@@ -25,7 +25,7 @@ public class MineLifeComponent : WorkplaceLifeComponent
 		
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
         var item = save?.GetLifeSave(position);
-
+        
         if (item == null) return null;
 		
         current = item.Step;
@@ -81,8 +81,11 @@ public class MineLifeComponent : WorkplaceLifeComponent
                 var action = Context.Context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>{Context.CachedPosition}, Context.PieceType, Context.CachedPosition);
 
                 if (action == null) return;
-        
+                
                 Context.Context.ActionExecutor.AddAction(action);
+                
+                var data = GameDataService.Current.PiecesManager.GetComponent<PiecesMineDataManager>(PiecesMineDataManager.ComponentGuid);
+                data.DecrementLoop(def.Id);
             }
         }
         

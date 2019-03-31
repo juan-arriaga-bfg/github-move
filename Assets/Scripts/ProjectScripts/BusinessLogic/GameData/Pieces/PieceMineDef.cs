@@ -2,7 +2,7 @@
 
 public class PieceMineDef : SimplePieceDef
 {
-    public int Loop;
+    public int Loop = -1;
     public int Size;
     
     public CurrencyPair Price;
