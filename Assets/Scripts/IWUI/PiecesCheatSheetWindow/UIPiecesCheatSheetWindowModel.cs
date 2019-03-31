@@ -150,7 +150,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
 
         for (var i = idMin; i < idMax + 1; i++)
         {
-            if(PieceType.GetDefById(i).Filter.Has(PieceTypeFilter.Fake)) continue;
+            if (PieceType.GetDefById(i).Filter.Has(PieceTypeFilter.Fake)) continue;
             
             ids.Add(i);
         }

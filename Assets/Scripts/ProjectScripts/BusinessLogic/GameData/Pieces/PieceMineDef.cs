@@ -2,8 +2,7 @@
 
 public class PieceMineDef : SimplePieceDef
 {
-    public int Cooldown;
-    
+    public int Loop;
     public int Size;
     
     public CurrencyPair Price;
