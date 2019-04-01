@@ -256,6 +256,10 @@ public class UIMainWindowView : UIBaseWindowView
             return;
         }
         
+        var model = UIService.Get.GetCachedModel<UIMarketWindowModel>(UIWindowType.MarketWindow);
+
+        model.IsSoft = false;
+        
         UIService.Get.ShowWindow(UIWindowType.MarketWindow);
         
         CachedHintArrowComponent.HideArrow(HintAnchorShopButton);

@@ -146,6 +146,10 @@ public static partial class CurrencyHelper
                 return;
             }
             
+            var model = UIService.Get.GetCachedModel<UIMarketWindowModel>(UIWindowType.MarketWindow);
+
+            model.IsSoft = true;
+            
             UIService.Get.ShowWindow(UIWindowType.MarketWindow);
             return;
         }
