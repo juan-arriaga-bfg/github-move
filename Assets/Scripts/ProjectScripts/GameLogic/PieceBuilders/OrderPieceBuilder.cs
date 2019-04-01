@@ -11,7 +11,8 @@
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
 				.RegisterDefinition(new TouchReactionDefinitionClaimOrderWindow())
-				.RegisterDefinition(new TouchReactionDefinitionSpawnRewards()))
+//				.RegisterDefinition(new TouchReactionDefinitionSpawnRewards())
+			)
 			.RegisterComponent(new TouchReactionConditionComponent()));
 		
 		return piece;

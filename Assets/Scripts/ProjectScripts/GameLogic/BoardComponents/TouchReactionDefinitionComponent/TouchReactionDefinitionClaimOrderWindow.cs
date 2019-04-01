@@ -9,8 +9,15 @@ public class TouchReactionDefinitionClaimOrderWindow : TouchReactionDefinitionCo
 		if (orderPieceComponent == null) orderPieceComponent = piece.GetComponent<OrderPieceComponent>(OrderPieceComponent.ComponentGuid);
 	    
 	    if (orderPieceComponent == null || orderPieceComponent.Rewards.IsHighlight) return false;
-		
-	    orderPieceComponent?.Rewards.GetInWindow();
+
+
+
+	    if (orderPieceComponent?.Rewards?.CheckOutOfCellsDropFullReward() == true)
+	    {
+		    return false;
+	    }
+
+	    orderPieceComponent?.Rewards.FullDrop();
 		
 		return true;
 	}
