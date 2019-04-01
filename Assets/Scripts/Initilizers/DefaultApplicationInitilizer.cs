@@ -64,6 +64,9 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             .SetDependency(typeof(ProfileInitComponent)))
             
            .AddComponent(new LocalizationInitComponent()
+               .SetDependency(typeof(ProfileInitComponent)))          
+           
+           .AddComponent(new AutoLoginInitComponent()
                .SetDependency(typeof(ProfileInitComponent)))
             
            .AddComponent(new IapInitComponent()                                     // In-app purchases implementation
@@ -100,9 +103,9 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         {
             if (ProfileService.Instance != null && ProfileService.Instance.Manager != null)
             {
-                ProfileService.Instance.Manager.UploadCurrentProfile();
+                // ProfileService.Instance.Manager.UploadCurrentProfile();
 
-                LocalNotificationsService.Current.ScheduleNotifications();
+                // LocalNotificationsService.Current.ScheduleNotifications();
             }
 
             energyLogic?.Timer.Stop();

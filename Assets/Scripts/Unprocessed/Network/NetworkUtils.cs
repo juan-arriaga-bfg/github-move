@@ -36,11 +36,6 @@ public class NetworkUtils
 
     public delegate void PostToBackendCallback(BackendResponse response);
 
-    public void PostToBackend(string endpoint, Dictionary<string, string> queryParams, PostToBackendCallback callback, int timeOut = 30)
-    {
-        RequestToBackend(endpoint, null, queryParams, callback, timeOut);
-    }
-
     /// <summary>
     /// Send request to ur backend
     ///  Warning! In case of file sending use HTTPFormUsage.Multipart
@@ -53,7 +48,28 @@ public class NetworkUtils
     /// <param name="method">POST/GET/etc</param>
     public void RequestToBackend(string endpoint, string body, Dictionary<string, string> queryParams, PostToBackendCallback callback, int timeOut = 30, HTTPMethods method = HTTPMethods.Post)
     {
-        string url = string.Format("{0}/{1}/{2}", m_backendSettings.Host, m_backendSettings.Protocol, endpoint.StartsWith("/") ? endpoint.Remove(0, 1) : endpoint);
+        RequestToBackend(endpoint, body, null, queryParams, callback, timeOut, method);
+    }
+    
+    public void RequestToBackend(string endpoint, byte[] rawData, Dictionary<string, string> queryParams, PostToBackendCallback callback, int timeOut = 30, HTTPMethods method = HTTPMethods.Post)
+    {
+        RequestToBackend(endpoint, null, rawData, queryParams, callback, timeOut, method);
+    }
+    
+    public void PostToBackend(string endpoint, Dictionary<string, string> queryParams, PostToBackendCallback callback, int timeOut = 30)
+    {
+        RequestToBackend(endpoint, null, null, queryParams, callback, timeOut);
+    }
+    
+    private void RequestToBackend(string endpoint, string body, byte[] rawData, Dictionary<string, string> queryParams, PostToBackendCallback callback, int timeOut = 30, HTTPMethods method = HTTPMethods.Post)
+    {
+        if (body != null && rawData != null)
+        {
+            Debug.LogError($"RequestToBackend: Do not specify both body and rawData");
+            return;
+        }
+
+        string url = $"{m_backendSettings.Host}/{m_backendSettings.Protocol}/{(endpoint.StartsWith("/") ? endpoint.Remove(0, 1) : endpoint)}";
         HTTPRequest request = new HTTPRequest(new Uri(url), method,
             (req, res) =>
             {
@@ -88,6 +104,10 @@ public class NetworkUtils
         {
             request.AddField("body", body);
             request.FormUsage = HTTPFormUsage.Multipart;
+        }
+        else if (rawData != null)
+        {
+            request.RawData = rawData;
         }
         else
         {
