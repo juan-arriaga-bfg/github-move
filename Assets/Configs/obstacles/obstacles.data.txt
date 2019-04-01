@@ -20,14 +20,17 @@
       "Min": 0,
       "Max": 0
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 2,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 2
+        "Uid": "A1",
+        "Weight": 1
       }
-    ],
-    "ChestId": "A1"
+    ]
   },
   {
     "Uid": "OB2_A",
@@ -50,14 +53,18 @@
       "Min": 0,
       "Max": 1
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 2,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 2
+        "Uid": "A1",
+        "Weight": 1
       }
     ],
-    "ChestId": "A1"
+    "ChestId": "CH1_A"
   },
   {
     "Uid": "OB3_A",
@@ -80,14 +87,22 @@
       "Min": 0,
       "Max": 1
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 3,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 3
+        "Uid": "A1",
+        "Weight": 2
+      },
+      {
+        "Uid": "A2",
+        "Weight": 1
       }
     ],
-    "ChestId": "A1"
+    "ChestId": "CH1_A"
   },
   {
     "Uid": "OB4_A",
@@ -110,14 +125,26 @@
       "Min": 0,
       "Max": 1
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 4,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 4
+        "Uid": "A1",
+        "Weight": 2
+      },
+      {
+        "Uid": "A2",
+        "Weight": 2
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
       }
     ],
-    "ChestId": "A1"
+    "ChestId": "CH2_A"
   },
   {
     "Uid": "OB5_A",
@@ -140,14 +167,30 @@
       "Min": 0,
       "Max": 1
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 5
+        "Uid": "A1",
+        "Weight": 2
+      },
+      {
+        "Uid": "A2",
+        "Weight": 4
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 2
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
       }
     ],
-    "ChestId": "A1"
+    "ChestId": "CH2_A"
   },
   {
     "Uid": "OB6_A",
@@ -170,14 +213,30 @@
       "Min": 0,
       "Max": 1
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 5
+        "Uid": "A1",
+        "Weight": 2
+      },
+      {
+        "Uid": "A2",
+        "Weight": 3
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
       }
     ],
-    "ChestId": "A1"
+    "ChestId": "CH2_A"
   },
   {
     "Uid": "OB7_A",
@@ -200,14 +259,30 @@
       "Min": 1,
       "Max": 1
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
+        "Uid": "A1",
+        "Weight": 1
+      },
+      {
+        "Uid": "A2",
         "Weight": 5
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 3
       }
     ],
-    "ChestId": "A1"
+    "ChestId": "CH2_A"
   },
   {
     "Uid": "OB8_A",
@@ -230,14 +305,30 @@
       "Min": 1,
       "Max": 2
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 6,
     "PieceWeights": [
       {
-        "Uid": 0,
+        "Uid": "A1",
+        "Weight": 1
+      },
+      {
+        "Uid": "A2",
         "Weight": 6
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 3
       }
     ],
-    "ChestId": "A1"
+    "ChestId": "CH2_A"
   },
   {
     "Uid": "OB9_A",
@@ -251,7 +342,8 @@
         "Currency": "Experience",
         "Amount": 45
       }
-    ]
+    ],
+    "ChestId": "CH3_A"
   },
   {
     "Uid": "OB1_D",
@@ -274,14 +366,17 @@
       "Min": 0,
       "Max": 0
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 2,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 2
+        "Uid": "D1",
+        "Weight": 1
       }
-    ],
-    "ChestId": "D1"
+    ]
   },
   {
     "Uid": "OB2_D",
@@ -304,14 +399,18 @@
       "Min": 0,
       "Max": 1
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 2,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 2
+        "Uid": "D1",
+        "Weight": 1
       }
     ],
-    "ChestId": "D1"
+    "ChestId": "CH1_D"
   },
   {
     "Uid": "OB3_D",
@@ -334,14 +433,22 @@
       "Min": 0,
       "Max": 1
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 3,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 3
+        "Uid": "D1",
+        "Weight": 2
+      },
+      {
+        "Uid": "D2",
+        "Weight": 1
       }
     ],
-    "ChestId": "D1"
+    "ChestId": "CH1_D"
   },
   {
     "Uid": "OB4_D",
@@ -364,14 +471,22 @@
       "Min": 0,
       "Max": 1
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 4,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 4
+        "Uid": "D1",
+        "Weight": 2
+      },
+      {
+        "Uid": "D2",
+        "Weight": 2
       }
     ],
-    "ChestId": "D1"
+    "ChestId": "CH2_D"
   },
   {
     "Uid": "OB5_D",
@@ -394,14 +509,30 @@
       "Min": 1,
       "Max": 2
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 5
+        "Uid": "D1",
+        "Weight": 2
+      },
+      {
+        "Uid": "D2",
+        "Weight": 4
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 2
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
       }
     ],
-    "ChestId": "D1"
+    "ChestId": "CH2_D"
   },
   {
     "Uid": "OB6_D",
@@ -424,14 +555,30 @@
       "Min": 1,
       "Max": 2
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 5
+        "Uid": "D1",
+        "Weight": 2
+      },
+      {
+        "Uid": "D2",
+        "Weight": 3
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
       }
     ],
-    "ChestId": "D1"
+    "ChestId": "CH2_D"
   },
   {
     "Uid": "OB7_D",
@@ -454,14 +601,30 @@
       "Min": 1,
       "Max": 2
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
+        "Uid": "D1",
+        "Weight": 1
+      },
+      {
+        "Uid": "D2",
         "Weight": 5
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 3
       }
     ],
-    "ChestId": "D1"
+    "ChestId": "CH2_D"
   },
   {
     "Uid": "OB8_D",
@@ -484,14 +647,30 @@
       "Min": 1,
       "Max": 2
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 6,
     "PieceWeights": [
       {
-        "Uid": 0,
+        "Uid": "D1",
+        "Weight": 1
+      },
+      {
+        "Uid": "D2",
         "Weight": 6
+      },
+      {
+        "Uid": "D3",
+        "Weight": 3
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 3
       }
     ],
-    "ChestId": "D1"
+    "ChestId": "CH2_D"
   },
   {
     "Uid": "OB9_D",
@@ -505,7 +684,8 @@
         "Currency": "Experience",
         "Amount": 45
       }
-    ]
+    ],
+    "ChestId": "CH3_D"
   },
   {
     "Uid": "OB_PR_A",
@@ -528,14 +708,25 @@
       "Min": 0,
       "Max": 0
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 5
+        "Uid": "PR_A1",
+        "Weight": 4
+      },
+      {
+        "Uid": "PR_A2",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
       }
-    ],
-    "ChestId": "PR_A1"
+    ]
   },
   {
     "Uid": "OB_PR_B",
@@ -558,14 +749,25 @@
       "Min": 0,
       "Max": 0
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 5
+        "Uid": "PR_B1",
+        "Weight": 4
+      },
+      {
+        "Uid": "PR_B2",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
       }
-    ],
-    "ChestId": "PR_B1"
+    ]
   },
   {
     "Uid": "OB_PR_C",
@@ -588,14 +790,25 @@
       "Min": 0,
       "Max": 0
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 5
+        "Uid": "PR_C1",
+        "Weight": 4
+      },
+      {
+        "Uid": "PR_C2",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
       }
-    ],
-    "ChestId": "PR_C1"
+    ]
   },
   {
     "Uid": "OB_PR_D",
@@ -618,14 +831,25 @@
       "Min": 0,
       "Max": 0
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 5
+        "Uid": "PR_D1",
+        "Weight": 4
+      },
+      {
+        "Uid": "PR_D2",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
       }
-    ],
-    "ChestId": "PR_D1"
+    ]
   },
   {
     "Uid": "OB_PR_E",
@@ -648,14 +872,25 @@
       "Min": 0,
       "Max": 0
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 5
+        "Uid": "PR_E1",
+        "Weight": 4
+      },
+      {
+        "Uid": "PR_E2",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
       }
-    ],
-    "ChestId": "PR_E1"
+    ]
   },
   {
     "Uid": "OB_PR_F",
@@ -678,14 +913,25 @@
       "Min": 0,
       "Max": 0
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 5
+        "Uid": "PR_F1",
+        "Weight": 4
+      },
+      {
+        "Uid": "PR_F2",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
       }
-    ],
-    "ChestId": "PR_F1"
+    ]
   },
   {
     "Uid": "OB_PR_G",
@@ -708,14 +954,25 @@
       "Min": 0,
       "Max": 0
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 5
+        "Uid": "PR_G1",
+        "Weight": 4
+      },
+      {
+        "Uid": "PR_G2",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
       }
-    ],
-    "ChestId": "PR_G1"
+    ]
   },
   {
     "Uid": "OB1_TT",
@@ -738,14 +995,17 @@
       "Min": 0,
       "Max": 0
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 2,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 2
+        "Uid": "A1",
+        "Weight": 1
       }
-    ],
-    "ChestId": "A1"
+    ]
   },
   {
     "Uid": "OB2_TT",
@@ -768,14 +1028,17 @@
       "Min": 0,
       "Max": 0
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 2,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 2
+        "Uid": "A1",
+        "Weight": 1
       }
-    ],
-    "ChestId": "A1"
+    ]
   },
   {
     "Uid": "OB1_G",
@@ -798,14 +1061,17 @@
       "Min": 0,
       "Max": 1
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 2,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 2
+        "Uid": "E1",
+        "Weight": 1
       }
-    ],
-    "ChestId": "E1"
+    ]
   },
   {
     "Uid": "OB2_G",
@@ -828,14 +1094,22 @@
       "Min": 1,
       "Max": 2
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 4,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 4
+        "Uid": "E1",
+        "Weight": 3
+      },
+      {
+        "Uid": "E2",
+        "Weight": 1
       }
     ],
-    "ChestId": "E1"
+    "ChestId": "CH1_G"
   },
   {
     "Uid": "OB3_G",
@@ -858,14 +1132,26 @@
       "Min": 2,
       "Max": 4
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 5
+        "Uid": "E1",
+        "Weight": 1
+      },
+      {
+        "Uid": "E2",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
       }
     ],
-    "ChestId": "E1"
+    "ChestId": "CH2_G"
   },
   {
     "Uid": "OB4_G",
@@ -888,14 +1174,26 @@
       "Min": 3,
       "Max": 4
     },
-    "PieceAmount": 0,
+    "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": 0,
-        "Weight": 5
+        "Uid": "E1",
+        "Weight": 1
+      },
+      {
+        "Uid": "E2",
+        "Weight": 2
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
       }
     ],
-    "ChestId": "E1"
+    "ChestId": "CH2_G"
   },
   {
     "Uid": "OB5_G",
@@ -909,6 +1207,7 @@
         "Currency": "Experience",
         "Amount": 45
       }
-    ]
+    ],
+    "ChestId": "CH3_G"
   }
 ]

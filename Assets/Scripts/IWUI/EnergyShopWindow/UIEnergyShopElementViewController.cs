@@ -57,7 +57,7 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
 
     private void UpdateLabel()
     {
-	    timerLabel.Text = BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.CompleteTime.GetTimeLeftText(true, true, null);
+	    timerLabel.Text = BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.CompleteTime.GetTimeLeftText(true, true);
     }
 
     private void CompleteTimer()
