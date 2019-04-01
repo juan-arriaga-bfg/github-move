@@ -525,4 +525,5 @@ public class R
      public const string MN_HFakePiece = "MN_HFakePiece";
      public const string MN_IPiece = "MN_IPiece";
      public const string MN_IFakePiece = "MN_IFakePiece";
+     public const string MineProgressView = "MineProgressView";
 }

@@ -27,6 +27,7 @@ public class ElementsResourcesBuilder
         dict.Add((int) ViewType.GodRay, R.GodRayView);
         dict.Add((int) ViewType.UIContainer, R.UIBoardViewContainer);
         dict.Add((int) ViewType.FogProgress, R.FogProgressView);
+        dict.Add((int) ViewType.MineProgress, R.MineProgressView);
         
 #endregion
         

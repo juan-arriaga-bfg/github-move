@@ -77,6 +77,6 @@ public class MineMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBui
         var data = GameDataService.Current.PiecesManager.GetComponent<PiecesMineDataManager>(PiecesMineDataManager.ComponentGuid);
         var previousType = definition.GetPrevious(currentType);
 
-        return data.GetLoop(previousType) == 0 ? result : new List<int> {previousType};
+        return data.GetCurrentLoop(previousType) == 0 ? result : new List<int> {previousType};
     }
 }

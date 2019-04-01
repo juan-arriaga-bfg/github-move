@@ -19,5 +19,6 @@
     RewardsBubble = -1015,
     GodRay = -1016,
     UIContainer = -1017,
-    FogProgress = -1018
+    FogProgress = -1018,
+    MineProgress = -1019
 }

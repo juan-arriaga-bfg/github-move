@@ -68,7 +68,7 @@ public class PiecesMineDataManager : IECSComponent, IDataManager, IDataLoader<Li
 		item.Value -= 1;
 	}
 
-	public int GetLoop(int uid)
+	public int GetCurrentLoop(int uid)
 	{
 		var item = loops.Find(save => save.Uid == uid);
 		

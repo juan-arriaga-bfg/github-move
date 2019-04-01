@@ -94,7 +94,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
         foreach (var id in ViewIds)
         {
-            AddView(id);
+            AddView(id).Change(true);
         }
     }
 
