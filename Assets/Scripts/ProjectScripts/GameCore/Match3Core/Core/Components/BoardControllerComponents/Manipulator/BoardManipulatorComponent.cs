@@ -42,7 +42,7 @@ public class BoardManipulatorComponent : ECSEntity,
     
     private bool isCachedLayerMash = false;
 
-    public static float DragTreshold = 0f;
+    public static float DragTreshold = 0.1f;
 
     private bool? isDrag
     {
@@ -245,9 +245,14 @@ public class BoardManipulatorComponent : ECSEntity,
         if (CheckDrag(startPos, pos, duration))
         {
             var selectedView = GetSelectedBoardElementView();
-            if (selectedView != null && (startPos - pos).magnitude < DragTreshold)
+            if (selectedView != null && selectedView is PieceBoardElementView && (startPos - pos).magnitude < DragTreshold)
             {
-                cameraManipulator.CameraMove.Lock(dragTresholdId, true);
+                var pieceView = cachedViewForDrag as PieceBoardElementView;
+                if (pieceView != null && pieceView.Piece?.Draggable != null)
+                {
+                    cameraManipulator.CameraMove.Lock(dragTresholdId, true);
+                }
+
                 return true;
             }
             
