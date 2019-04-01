@@ -322,8 +322,9 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
     {
         if (order.State == OrderState.Waiting)
         {
-            customer.Exchange();
-            return;
+            if (customer.Exchange()) return;
+            
+            order.State = OrderState.Enough;
         }
 
         if (order.State == OrderState.Enough)

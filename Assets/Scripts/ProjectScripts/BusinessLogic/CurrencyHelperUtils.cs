@@ -12,8 +12,8 @@ public static partial class CurrencyHelper
         foreach (var price in prices)
         {
             int diff = 0;
-            
-            if(IsCanPurchase(price, out diff)) continue;
+
+            if (IsCanPurchase(price, out diff)) continue;
             
             diffs.Add(new CurrencyPair{Currency = price.Currency, Amount = diff});
         }
