@@ -23,7 +23,7 @@ public class OrderSaveItemJsonConverter : JsonConverter
         
 		var targetValue = new OrderSaveItem
 		{
-			Id = int.Parse(dataArray[0]),
+			Id = dataArray[0],
 			Customer = int.Parse(dataArray[1]),
 			State = (OrderState) int.Parse(dataArray[2]),
 			IsStart = int.Parse(dataArray[3]) == 1,
@@ -39,7 +39,8 @@ public class OrderSaveItemJsonConverter : JsonConverter
 [JsonConverter(typeof(OrderSaveItemJsonConverter))]
 public class OrderSaveItem
 {
-	private int id;
+	private string id;
+	
 	private int customer;
 
 	private OrderState state;
@@ -50,7 +51,7 @@ public class OrderSaveItem
 	private long startTime;
 	private long cooldownTime;
 	
-	public int Id
+	public string Id
 	{
 		get { return id; }
 		set { id = value; }

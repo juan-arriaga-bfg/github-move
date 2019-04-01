@@ -71,7 +71,10 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
 
                 foreach (var order in save.Orders)
                 {
-                    Orders.Add(new Order{Customer = order.Customer, Def = Recipes[order.Id]});
+                    if (GetOrderDef(order.Id, out var orderDef))
+                    {
+                        Orders.Add(new Order{Customer = order.Customer, Def = orderDef});
+                    }
                 }
             }
             else

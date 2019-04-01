@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using UnityEngine;
 
 [JsonObject(MemberSerialization.OptIn)]
 public class OrdersSaveComponent : ECSEntity, IECSSerializeable
@@ -38,13 +39,13 @@ public class OrdersSaveComponent : ECSEntity, IECSSerializeable
 			
 			var item = new OrderSaveItem
 			{
-				Id = GameDataService.Current.OrdersManager.Recipes.IndexOf(component.Order.Def),
+				Id = component.Order.Def.Uid,//GameDataService.Current.OrdersManager.Recipes.IndexOf(component.Order.Def),
 				Customer = piece.PieceType,
 				State = component.Order.State,
 				IsStart = component.Timer.IsExecuteable(),
 				IsStartCooldown = component.Cooldown.IsExecuteable(),
 				StartTime = component.Timer.StartTimeLong,
-				CooldownTime = component.Cooldown.StartTimeLong
+				CooldownTime = component.Cooldown.StartTimeLong,
 			};
 			
 			orders.Add(item);
@@ -55,4 +56,5 @@ public class OrdersSaveComponent : ECSEntity, IECSSerializeable
 	internal void OnDeserialized(StreamingContext context)
 	{
 	}
+
 }
