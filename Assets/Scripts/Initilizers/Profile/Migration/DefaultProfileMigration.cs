@@ -18,7 +18,10 @@ public partial class DefaultProfileMigration : IProfileMigration
         {560, Migrate560},
         
         // Autocomplete quests 128, 129, 130 if piece NPC_F3+ already unlocked
-        {604, Migrate604}
+        {604, Migrate604},
+        
+        // new Mine logic
+        {713, Migrate713}
     };
 
     public void Migrate(int clientVersion, UserProfile profile)

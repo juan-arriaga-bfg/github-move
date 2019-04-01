@@ -110,32 +110,20 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 	[OnDeserialized]
 	internal void OnDeserialized(StreamingContext context)
 	{
+		ReplaceRewardsSave();
+		ReplaceLifeSave();
+		ReplaceBuildingSave();
+	}
+
+	public void ReplaceRewardsSave()
+	{
 		rewardsSave = new Dictionary<BoardPosition, RewardsSaveItem>();
-		lifeSave = new Dictionary<BoardPosition, LifeSaveItem>();
-		buildingSave = new Dictionary<BoardPosition, BuildingSaveItem>();
+
+		if (rewards == null) return;
 		
-		if (rewards != null)
+		foreach (var reward in rewards)
 		{
-			foreach (var reward in rewards)
-			{
-				rewardsSave.Add(reward.Position, reward);
-			}
-		}
-		
-		if (lives != null)
-		{
-			foreach (var life in lives)
-			{
-				lifeSave.Add(life.Position, life);
-			}
-		}
-		
-		if (buildings != null)
-		{
-			foreach (var building in buildings)
-			{
-				buildingSave.Add(building.Position, building);
-			}
+			rewardsSave.Add(reward.Position, reward);
 		}
 	}
 	
@@ -150,6 +138,18 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 		
 		return item;
 	}
+
+	public void ReplaceLifeSave()
+	{
+		lifeSave = new Dictionary<BoardPosition, LifeSaveItem>();
+		
+		if (lives == null) return;
+		
+		foreach (var life in lives)
+		{
+			lifeSave.Add(life.Position, life);
+		}
+	}
 	
 	public LifeSaveItem GetLifeSave(BoardPosition position)
 	{
@@ -161,6 +161,18 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 		lifeSave.Remove(position);
 		
 		return item;
+	}
+
+	public void ReplaceBuildingSave()
+	{
+		buildingSave = new Dictionary<BoardPosition, BuildingSaveItem>();
+		
+		if (buildings == null) return;
+		
+		foreach (var building in buildings)
+		{
+			buildingSave.Add(building.Position, building);
+		}
 	}
 	
 	public BuildingSaveItem GetBuildingSave(BoardPosition position)

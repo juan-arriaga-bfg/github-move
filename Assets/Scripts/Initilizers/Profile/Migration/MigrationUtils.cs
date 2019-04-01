@@ -111,4 +111,27 @@ public static class MigrationUtils
         }
     }
 
+    public static void ResetLife(UserProfile profile, List<int> ids)
+    {
+        if (profile.FieldDef?.Pieces == null) return;
+
+        foreach (var id in ids)
+        {
+            var piecesSave = profile.FieldDef?.Pieces.Find(item => item.Id == id);
+
+            if (piecesSave == null) continue;
+            
+            foreach (var position in piecesSave.Positions)
+            {
+                var lifeSave = profile.FieldDef.Lives?.Find(item => item.Position.Equals(position));
+                var rewardSave = profile.FieldDef.Rewards?.Find(item => item.Position.Equals(position));
+                
+                if (rewardSave != null) profile.FieldDef.Rewards.Remove(rewardSave);
+                if (lifeSave != null) profile.FieldDef.Lives.Remove(lifeSave);
+            }
+        }
+        
+        profile.FieldDef.ReplaceRewardsSave();
+        profile.FieldDef.ReplaceLifeSave();
+    }
 }
