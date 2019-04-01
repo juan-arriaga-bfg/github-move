@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public enum OrderState
 {
-    Init,
     Waiting,
     Enough,
     InProgress,

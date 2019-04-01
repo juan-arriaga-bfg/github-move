@@ -133,7 +133,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
     {
         if(Order == null) return;
         
-        if(Order.State == OrderState.Init && state == OrderState.Waiting) Order.State = CurrencyHelper.IsCanPurchase(Order.Def.Prices) ? OrderState.Enough : OrderState.Waiting;
+        if(Order.State == OrderState.Waiting && state == OrderState.Waiting) Order.State = CurrencyHelper.IsCanPurchase(Order.Def.Prices) ? OrderState.Enough : OrderState.Waiting;
         if(Order.State == OrderState.InProgress && state == OrderState.Complete) Order.State = state;
     }
     

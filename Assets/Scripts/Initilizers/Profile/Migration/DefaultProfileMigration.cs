@@ -21,7 +21,10 @@ public partial class DefaultProfileMigration : IProfileMigration
         {604, Migrate604},
         
         // Migrate OrderSave to new format
-        {716, Migrate716}
+        {716, Migrate716},
+        
+        // remove orders state
+        {724, Migrate724}
     };
 
     public void Migrate(int clientVersion, UserProfile profile)

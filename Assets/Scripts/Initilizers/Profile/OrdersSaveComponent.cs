@@ -3,6 +3,19 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using UnityEngine;
 
+public interface IOrdersSaveComponent
+{
+	OrdersSaveComponent OrdersSave { get; }
+}
+
+public partial class UserProfile : IOrdersSaveComponent
+{
+	protected OrdersSaveComponent ordersSaveComponent;
+
+	[JsonIgnore]
+	public OrdersSaveComponent OrdersSave => ordersSaveComponent ?? (ordersSaveComponent = GetComponent<OrdersSaveComponent>(OrdersSaveComponent.ComponentGuid));
+}
+
 [JsonObject(MemberSerialization.OptIn)]
 public class OrdersSaveComponent : ECSEntity, IECSSerializeable
 {

@@ -5,7 +5,6 @@ public class OrderBubbleView : UIBoardView
 {
 	[SerializeField] private Image mark;
 	[SerializeField] private GameObject clock;
-	[SerializeField] private GameObject question;
 
 	protected override ViewType Id => ViewType.OrderBubble;
 	public override bool IsTop => true;
@@ -41,10 +40,7 @@ public class OrderBubbleView : UIBoardView
 		
 		customer.Order.SetMark(mark, clock);
 
-		if (anchor != null) anchor.gameObject.SetActive(customer.Order.State != OrderState.Init && customer.Order.State != OrderState.InProgress);
-		
-		question.SetActive(customer.Order.State == OrderState.Init);
-		
+		if (anchor != null) anchor.gameObject.SetActive(customer.Order.State != OrderState.InProgress);
 		if (string.IsNullOrEmpty(customer.Order.Def.Uid) || customer.Order.Def.Uid == PieceType.Parse(PieceType.Empty.Id)) return;
 		
 		CreateIcon(customer.Order.Def.Uid);
