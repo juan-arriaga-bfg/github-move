@@ -249,7 +249,7 @@
     ]
   },
   {
-    "Uid": "MN_B",
+    "Uid": "MN_B1",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -258,7 +258,14 @@
     ]
   },
   {
-    "Uid": "MN_C",
+    "Uid": "MN_B2",
+    "Delay": 5,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -267,7 +274,14 @@
     ]
   },
   {
-    "Uid": "MN_E",
+    "Uid": "MN_B3",
+    "Delay": 10,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -276,7 +290,7 @@
     ]
   },
   {
-    "Uid": "MN_F",
+    "Uid": "MN_C1",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -285,7 +299,14 @@
     ]
   },
   {
-    "Uid": "MN_H",
+    "Uid": "MN_C2",
+    "Delay": 5,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -294,7 +315,178 @@
     ]
   },
   {
-    "Uid": "MN_I",
+    "Uid": "MN_C3",
+    "Delay": 10,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_E1",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_E2",
+    "Delay": 5,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_E3",
+    "Delay": 10,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_F1",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_F2",
+    "Delay": 5,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_F3",
+    "Delay": 10,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_H1",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_H2",
+    "Delay": 5,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_H3",
+    "Delay": 10,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_I1",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_I2",
+    "Delay": 5,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_I3",
+    "Delay": 10,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
     "UnlockBonus": [
       {
         "Currency": "Coins",
