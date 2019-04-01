@@ -11,8 +11,6 @@ public class PieceBuildersBuilder
         dict = AddObstaclePiece(dict);
         dict = AddOtherPiece(dict);
         dict = AddMinePiece(dict);
-        
-        dict = AddMulticellularPiece2x2(dict);
 
         dict = AddEnemyPiece(dict);
         
@@ -158,15 +156,6 @@ public class PieceBuildersBuilder
         dict = AddMineBranchPiece(dict, PieceType.MN_F1.Id, PieceType.MN_F3.Id);
         dict = AddMineBranchPiece(dict, PieceType.MN_H1.Id, PieceType.MN_H3.Id);
         dict = AddMineBranchPiece(dict, PieceType.MN_I1.Id, PieceType.MN_I3.Id);
-        
-        return dict;
-    }
-
-    private Dictionary<int, IPieceBuilder> AddMulticellularPiece2x2(Dictionary<int, IPieceBuilder> dict)
-    {
-        var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
-        
-        dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MN_B.Id, PieceType.MN_I.Id, mask, dict);
         
         return dict;
     }

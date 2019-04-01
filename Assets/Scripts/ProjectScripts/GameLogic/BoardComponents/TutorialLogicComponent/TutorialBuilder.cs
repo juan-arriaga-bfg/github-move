@@ -347,7 +347,7 @@ public static class TutorialBuilder
             {
                 step = new SelectStorageTutorialStep<ObstacleBubbleView>
                 {
-                    Delay = 2, IsFocusLock = true, IsFastStart = true, Targets = new List<int>{PieceType.MN_B.Id},
+                    Delay = 2, IsFocusLock = true, IsFastStart = true, Targets = new List<int>{PieceType.MN_B1.Id},
                     OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("mine"),
                     OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("mine", currentStep.StartTime)
                 };

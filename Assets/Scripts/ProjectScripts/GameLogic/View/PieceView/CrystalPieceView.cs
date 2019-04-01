@@ -81,11 +81,9 @@ public class CrystalPieceView : PieceBoardElementView
         var bestScore = 0;
         
         foreach (var piece in entities.Values)
-        {   
-            var isMatchable = piece.Matchable?.IsMatchable();
+        {
+            if (piece.Matchable == null || piece.Matchable.IsMatchable() == false || matchCheckedPositions.ContainsKey(piece.CachedPosition)) continue;
             
-            if (isMatchable != true || matchCheckedPositions.ContainsKey(piece.CachedPosition)) continue;
-
             var positions = new List<BoardPosition>();
             var canCreateMatch = CheckMatch(board, Piece.CachedPosition, piece.CachedPosition, positions);
 
@@ -97,9 +95,9 @@ public class CrystalPieceView : PieceBoardElementView
                 
                 matchCheckedPositions.Add(position, canCreateMatch);
             }
-            
-            if(canCreateMatch == false) continue;
-            
+
+            if (canCreateMatch == false) continue;
+
             var score = CalcScore(piece, positions);
             
             if (bestScore < score) bestScore = score;
