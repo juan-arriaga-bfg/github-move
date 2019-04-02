@@ -331,33 +331,6 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "19_CreatePiece_A7",
-    "TaskDefs": [
-      {
-        "TaskId": "19_CreatePiece_A7"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 25
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 200
-          },
-          {
-            "Currency": "Crystals",
-            "Amount": 5
-          }
-        ]
-      }
-    }
-  },
-  {
-    "$type": "StoryQuestEntity, GameAssembly",
     "Id": "20_HitTree",
     "TaskDefs": [
       {
@@ -397,33 +370,6 @@
           {
             "Currency": "Experience",
             "Amount": 50
-          }
-        ]
-      }
-    }
-  },
-  {
-    "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "22_CreatePiece_A6",
-    "TaskDefs": [
-      {
-        "TaskId": "22_CreatePiece_A6"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 20
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 150
-          },
-          {
-            "Currency": "Crystals",
-            "Amount": 3
           }
         ]
       }

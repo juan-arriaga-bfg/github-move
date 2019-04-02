@@ -116,14 +116,14 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "12_UseMine",
-    "PieceUid": "MN_B1",
+    "PieceUid": "MN_B",
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_B1",
+        "Ico": "MN_B",
         "Title": "quest.use.mine.title",
         "Message": "quest.use.mine.message",
-        "Hint": "task.use.mine.stone.hint"
+        "Hint": "task.use.mine.mn_b.hint"
       }
     }
   },
@@ -178,18 +178,6 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "19_CreatePiece_A7",
-    "PieceUid": "A7",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message"
-      }
-    }
-  },
-  {
     "$type": "TaskHitTreeEntity, GameAssembly",
     "Id": "20_HitTree",
     "PieceUid": "OB3_A",
@@ -214,18 +202,6 @@
         "Title": "quest.open.chest.title",
         "Message": "quest.open.chest.message",
         "Hint": "task.open.chest.hint"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "22_CreatePiece_A6",
-    "PieceUid": "A6",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message"
       }
     }
   },
@@ -269,14 +245,14 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "26_UseMine",
-    "PieceUid": "MN_C1",
+    "PieceUid": "MN_C",
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_C1",
+        "Ico": "MN_C",
         "Title": "quest.use.mine.title",
         "Message": "quest.use.mine.message",
-        "Hint": "task.use.mine.flower.hint"
+        "Hint": "task.use.mine.mn_c.hint"
       }
     }
   },
@@ -466,13 +442,14 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "42_UseMine",
-    "PieceUid": "MN_B1",
+    "PieceUid": "MN_B",
     "TargetValue": 10,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_B1",
+        "Ico": "MN_B",
         "Title": "quest.use.mine.title",
-        "Message": "quest.use.mine.message"
+        "Message": "quest.use.mine.message",
+        "Hint": "task.use.mine.mn_b.hint"
       }
     }
   },
@@ -496,7 +473,8 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.collect.ingredient.title",
-        "Message": "quest.collect.ingredient.message"
+        "Message": "quest.collect.ingredient.message",
+        "Hint": "task.collect.ingredient.hint"
       }
     }
   },
@@ -508,7 +486,8 @@
       "QuestDescriptionComponent": {
         "Ico": "collectIngredientDailyQuestIcon",
         "Title": "quest.collect.ingredient.title",
-        "Message": "quest.collect.ingredient.message"
+        "Message": "quest.collect.ingredient.message",
+        "Hint": "task.collect.ingredient.hint"
       }
     }
   },
@@ -520,7 +499,8 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.collect.ingredient.title",
-        "Message": "quest.collect.ingredient.message"
+        "Message": "quest.collect.ingredient.message",
+        "Hint": "task.collect.ingredient.hint"
       }
     }
   },
@@ -638,13 +618,14 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "57_UseMine",
-    "PieceUid": "MN_C1",
+    "PieceUid": "MN_C",
     "TargetValue": 15,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_C1",
+        "Ico": "MN_C",
         "Title": "quest.use.mine.title",
-        "Message": "quest.use.mine.message"
+        "Message": "quest.use.mine.message",
+        "Hint": "task.use.mine.mn_c.hint"
       }
     }
   },
@@ -663,13 +644,14 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "59_UseMine",
-    "PieceUid": "MN_E1",
+    "PieceUid": "MN_E",
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_E1",
+        "Ico": "MN_E",
         "Title": "quest.use.mine.title",
-        "Message": "quest.use.mine.message"
+        "Message": "quest.use.mine.message",
+        "Hint": "task.use.mine.mn_e.hint"
       }
     }
   },
@@ -791,7 +773,8 @@
       "QuestDescriptionComponent": {
         "Ico": "collectIngredientDailyQuestIcon",
         "Title": "quest.complete.orders.title",
-        "Message": "quest.complete.orders.message"
+        "Message": "quest.complete.orders.message",
+        "Hint": "task.collect.ingredient.hint"
       }
     }
   },
@@ -1055,26 +1038,28 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "95_UseMine",
-    "PieceUid": "MN_C1",
+    "PieceUid": "MN_C",
     "TargetValue": 12,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_C1",
+        "Ico": "MN_C",
         "Title": "quest.use.mine.title",
-        "Message": "quest.use.mine.message"
+        "Message": "quest.use.mine.message",
+        "Hint": "task.use.mine.mn_c.hint"
       }
     }
   },
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "96_UseMine",
-    "PieceUid": "MN_B1",
+    "PieceUid": "MN_B",
     "TargetValue": 10,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_B1",
+        "Ico": "MN_B",
         "Title": "quest.use.mine.title",
-        "Message": "quest.use.mine.message"
+        "Message": "quest.use.mine.message",
+        "Hint": "task.use.mine.mn_b.hint"
       }
     }
   },
@@ -1208,7 +1193,8 @@
       "QuestDescriptionComponent": {
         "Ico": "collectIngredientDailyQuestIcon",
         "Title": "quest.collect.ingredient.title",
-        "Message": "quest.collect.ingredient.message"
+        "Message": "quest.collect.ingredient.message",
+        "Hint": "task.collect.ingredient.hint"
       }
     }
   },
@@ -1276,13 +1262,14 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "114_UseMine",
-    "PieceUid": "MN_B1",
+    "PieceUid": "MN_B",
     "TargetValue": 20,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_B1",
+        "Ico": "MN_B",
         "Title": "quest.use.mine.title",
-        "Message": "quest.use.mine.message"
+        "Message": "quest.use.mine.message",
+        "Hint": "task.use.mine.mn_b.hint"
       }
     }
   },
@@ -1355,7 +1342,8 @@
       "QuestDescriptionComponent": {
         "Ico": "collectIngredientDailyQuestIcon",
         "Title": "quest.collect.ingredient.title",
-        "Message": "quest.collect.ingredient.message"
+        "Message": "quest.collect.ingredient.message",
+        "Hint": "task.collect.ingredient.hint"
       }
     }
   },
@@ -1398,13 +1386,14 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "124_UseMine",
-    "PieceUid": "MN_E1",
+    "PieceUid": "MN_E",
     "TargetValue": 20,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_E1",
+        "Ico": "MN_E",
         "Title": "quest.use.mine.title",
-        "Message": "quest.use.mine.message"
+        "Message": "quest.use.mine.message",
+        "Hint": "task.use.mine.mn_e.hint"
       }
     }
   },

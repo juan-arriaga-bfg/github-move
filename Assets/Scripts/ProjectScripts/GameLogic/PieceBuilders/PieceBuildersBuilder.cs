@@ -150,12 +150,12 @@ public class PieceBuildersBuilder
 
     private Dictionary<int, IPieceBuilder> AddMinePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict = AddMineBranchPiece(dict, PieceType.MN_B1.Id, PieceType.MN_B3.Id);
-        dict = AddMineBranchPiece(dict, PieceType.MN_C1.Id, PieceType.MN_C3.Id);
-        dict = AddMineBranchPiece(dict, PieceType.MN_E1.Id, PieceType.MN_E3.Id);
-        dict = AddMineBranchPiece(dict, PieceType.MN_F1.Id, PieceType.MN_F3.Id);
-        dict = AddMineBranchPiece(dict, PieceType.MN_H1.Id, PieceType.MN_H3.Id);
-        dict = AddMineBranchPiece(dict, PieceType.MN_I1.Id, PieceType.MN_I3.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_B.Id, PieceType.MN_B3.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_C.Id, PieceType.MN_C3.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_E.Id, PieceType.MN_E3.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_F.Id, PieceType.MN_F3.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_H.Id, PieceType.MN_H3.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_I.Id, PieceType.MN_I3.Id);
         
         return dict;
     }
@@ -217,7 +217,7 @@ public class PieceBuildersBuilder
 
     private Dictionary<int, IPieceBuilder> AddMineBranchPiece(Dictionary<int, IPieceBuilder> dict, int idMin, int idMax)
     {
-        var flag = true;
+        var flag = false;
         var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
 
         for (var i = idMin; i <= idMax; i++)

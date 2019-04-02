@@ -6,36 +6,42 @@ public class MineMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBui
     {
         return new List<int>
         {
+            PieceType.MN_B.Id,
             PieceType.MN_B1.Id,
             PieceType.MN_B2Fake.Id,
             PieceType.MN_B2.Id,
             PieceType.MN_B3Fake.Id,
             PieceType.MN_B3.Id,
             
+            PieceType.MN_C.Id,
             PieceType.MN_C1.Id,
             PieceType.MN_C2Fake.Id,
             PieceType.MN_C2.Id,
             PieceType.MN_C3Fake.Id,
             PieceType.MN_C3.Id,
             
+            PieceType.MN_E.Id,
             PieceType.MN_E1.Id,
             PieceType.MN_E2Fake.Id,
             PieceType.MN_E2.Id,
             PieceType.MN_E3Fake.Id,
             PieceType.MN_E3.Id,
             
+            PieceType.MN_F.Id,
             PieceType.MN_F1.Id,
             PieceType.MN_F2Fake.Id,
             PieceType.MN_F2.Id,
             PieceType.MN_F3Fake.Id,
             PieceType.MN_F3.Id,
             
+            PieceType.MN_H.Id,
             PieceType.MN_H1.Id,
             PieceType.MN_H2Fake.Id,
             PieceType.MN_H2.Id,
             PieceType.MN_H3Fake.Id,
             PieceType.MN_H3.Id,
             
+            PieceType.MN_I.Id,
             PieceType.MN_I1.Id,
             PieceType.MN_I2Fake.Id,
             PieceType.MN_I2.Id,
