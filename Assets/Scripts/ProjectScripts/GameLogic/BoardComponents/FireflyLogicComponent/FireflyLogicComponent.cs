@@ -31,7 +31,6 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	private Vector2 right;
 	
 	private bool isClick;
-	private bool isFirst = true;
 
 	private const int TUTORIAL_FIREFLY_COUNT = 3;
 	private bool isTutorialActive => ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount < TUTORIAL_FIREFLY_COUNT;
@@ -68,6 +67,9 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 				slots.Add(new Vector2(x2, y2));
 			}
 		}
+		
+		bottom = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, 0);
+		right = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, context.Context.BoardDef.Height + 5);
 		
 		delay = Random.Range(GameDataService.Current.ConstantsManager.MinDelayFirstSpawnFirefly, GameDataService.Current.ConstantsManager.MaxDelayFirstSpawnFirefly + 1);
 		startTime = DateTime.UtcNow;
@@ -254,19 +256,11 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	
 	public Vector2 Cross(Vector2 a, Vector2 b) //точки a и b концы первого отрезка
 	{
-		Vector2 T;
-
-		if (isFirst)
-		{
-			isFirst = false;
-			
-			bottom = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, 0);
-			right = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, context.Context.BoardDef.Height + 5);
-		}
+		IW.Logger.Log($"[Firefly] => a: {a}, b: {b}, right: {right}, bottom: {bottom}");
 		
-		T.x = -((a.x * b.y - b.x * a.y) * (right.x - bottom.x) - (bottom.x * right.y - right.x * bottom.y) * (b.x - a.x)) / ((a.y - b.y) * (right.x - bottom.x) - (bottom.y - right.y) * (b.x - a.x));
-		T.y = ((bottom.y - right.y) * (-T.x) - (bottom.x * right.y - right.x * bottom.y)) / (right.x - bottom.x);
-        
-		return T;
+		var x = -((a.x * b.y - b.x * a.y) * (right.x - bottom.x) - (bottom.x * right.y - right.x * bottom.y) * (b.x - a.x)) / ((a.y - b.y) * (right.x - bottom.x) - (bottom.y - right.y) * (b.x - a.x));
+		var y = ((bottom.y - right.y) * (-x) - (bottom.x * right.y - right.x * bottom.y)) / (right.x - bottom.x);
+		
+		return new Vector2(x, y);
 	}
 }
