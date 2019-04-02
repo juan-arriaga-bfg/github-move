@@ -21,7 +21,7 @@ public partial class DefaultProfileMigration : IProfileMigration
         {604, Migrate604},
         
         // new Mine logic
-        {713, Migrate713}
+        {731, Migrate731}
     };
 
     public void Migrate(int clientVersion, UserProfile profile)
