@@ -46,7 +46,6 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new PiecePositionsCacheComponent())
             .RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()))
             .RegisterComponent(new FieldFinderComponent())
-            .RegisterComponent(new FireflyLogicComponent())
             .RegisterComponent(new PieceRemoverComponent())
             .RegisterComponent(new DragAndDropPieceComponent())
             .RegisterComponent(new CellHintsComponent())
@@ -128,6 +127,7 @@ public class SandboxGameController : MonoBehaviour
             }
         );
         
+        boardController.BoardLogic.RegisterComponent(new FireflyLogicComponent());
         boardController.RendererContext.CreateBorders();
         
         // var widthShift = boardController.BoardDef.Width / 4;
