@@ -61,41 +61,6 @@ Transform:
   m_Father: {fileID: 4539638809535996}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1566490382318198
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 224215710882465216}
-  m_Layer: 0
-  m_Name: touchRegion (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &224215710882465216
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1566490382318198}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 224890086404246352}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: 0.22}
-  m_SizeDelta: {x: 0.65, y: 1.48}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1651919534569102
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,12 +89,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224890086404246352}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.01, y: -1.28}
-  m_SizeDelta: {x: 1.16, y: 0.6}
+  m_AnchoredPosition: {x: 0.0387, y: -1.28}
+  m_SizeDelta: {x: 1.8187, y: 0.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1663775288384568
 GameObject:
@@ -317,12 +282,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224890086404246352}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.02, y: 1.41}
-  m_SizeDelta: {x: 1.16, y: 0.78}
+  m_AnchoredPosition: {x: -0.48749986, y: 1.2305}
+  m_SizeDelta: {x: 1.6231, y: 0.4211}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1859999368154806
 GameObject:
@@ -351,8 +316,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 224567722310025126}
-  - {fileID: 224215710882465216}
   - {fileID: 224881486525305938}
   - {fileID: 224312401888713500}
   m_Father: {fileID: 4539638809535996}
@@ -360,43 +323,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.31, y: 0.44}
-  m_SizeDelta: {x: 3.45, y: 2}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1910301606597406
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 224567722310025126}
-  m_Layer: 0
-  m_Name: touchRegion (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &224567722310025126
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910301606597406}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 224890086404246352}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.95, y: 0.21}
-  m_SizeDelta: {x: 0.54, y: 1.48}
+  m_AnchoredPosition: {x: 1.432, y: 0.44}
+  m_SizeDelta: {x: 3.206, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1911769902832156
 GameObject:
@@ -480,8 +408,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touchRegions:
   - {fileID: 224890086404246352}
-  - {fileID: 224567722310025126}
-  - {fileID: 224215710882465216}
   - {fileID: 224881486525305938}
   - {fileID: 224312401888713500}
 --- !u!1 &596953950710516332
