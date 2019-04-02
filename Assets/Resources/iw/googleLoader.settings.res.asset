@@ -34,7 +34,7 @@ MonoBehaviour:
     Route: parseFogs
     Pattern: '{"Uid":"","Level":0,"Condition":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"IsActive":false,"Hero":""}'
   - Key: pieces
-    Link: 15C96r0vcgzzhJ6Fo_OQXBcCoIkSogZnTZg8Jc6MKDH8
+    Link: 1zd0TzqlnIrdPnbRBRu9PoCLzWHVVLakpKXzVk_WGbAg
     Route: parse
     Pattern: '[{"Uid":"","":"","Delay":0,"CreateRewards":[{"Currency":"","Amount":0}],"SpawnResources":{"Currency":"","Amount":0},"UnlockBonus":[{"Currency":"","Amount":0}],"ExchangePrice":{"Currency":"","Amount":0}}]'
   - Key: piecesReproduction
@@ -46,9 +46,9 @@ MonoBehaviour:
     Route: parse
     Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}]}]'
   - Key: piecesMine
-    Link: 17Ye0azQ3ZWoojGheuGxcDdg2FqO-5i5ie4s2j8HU294
+    Link: 1aY27puHWA1WBpmpnRFLWzzD8a7GsF3jvO7zgfNl3EbY
     Route: parse
-    Pattern: '[{"Uid":"","Cooldown":0,"Delay":0,"Size":0,"Price":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"LastRewards":[{"Currency":"","Amount":0}]}]'
+    Pattern: '[{"Uid":"","Loop":0,"Size":0,"Price":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"LastRewards":[{"Currency":"","Amount":0}]}]'
   - Key: characters
     Link: 14157BrSwktywhceGuIPnhtanwFOoRUf-TvsROijmyL8
     Route: parse

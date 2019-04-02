@@ -44,7 +44,12 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.AddRange(GetPieceIds(PieceType.Hard1.Id, PieceType.Hard6.Id));
                 break;
             case "Mines":
-                ids.AddRange(GetPieceIds(PieceType.MN_B.Id, PieceType.MN_I.Id));
+                ids.AddRange(GetPieceIds(PieceType.MN_B.Id, PieceType.MN_B3.Id));
+                ids.AddRange(GetPieceIds(PieceType.MN_C.Id, PieceType.MN_C3.Id));
+                ids.AddRange(GetPieceIds(PieceType.MN_E.Id, PieceType.MN_E3.Id));
+                ids.AddRange(GetPieceIds(PieceType.MN_F.Id, PieceType.MN_F3.Id));
+                ids.AddRange(GetPieceIds(PieceType.MN_H.Id, PieceType.MN_H3.Id));
+                ids.AddRange(GetPieceIds(PieceType.MN_I.Id, PieceType.MN_I3.Id));
                 break;
             case "Chests":
                 ids.Add(PieceType.CH_Free.Id);
@@ -157,7 +162,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
 
         for (var i = idMin; i < idMax + 1; i++)
         {
-            if(PieceType.GetDefById(i).Filter.Has(PieceTypeFilter.Fake)) continue;
+            if (PieceType.GetDefById(i).Filter.Has(PieceTypeFilter.Fake)) continue;
             
             ids.Add(i);
         }

@@ -8,6 +8,8 @@ public class PiecesMineDataManager : IECSComponent, IDataManager, IDataLoader<Li
 	public int Guid => ComponentGuid;
 	
 	private PiecesDataManager context;
+
+	private List<LoopSaveItem> loops;
     
 	public void OnRegisterEntity(ECSEntity entity)
 	{
@@ -28,15 +30,26 @@ public class PiecesMineDataManager : IECSComponent, IDataManager, IDataLoader<Li
 	{
 		dataMapper.LoadData((data, error)=> 
 		{
+			var save = ((GameDataManager)context.context).UserProfile.FieldDef;
+			if (save.Loops == null) save.Loops = new List<LoopSaveItem>();
+
+			loops = save.Loops;
+			
 			if (string.IsNullOrEmpty(error))
 			{
 				foreach (var def in data)
 				{
 					var baseDef = context.GetPieceDef(def.Id);
-                    
-					if(baseDef == null) continue;
+
+					if (baseDef == null) continue;
 
 					baseDef.MineDef = def;
+
+					var saveItem = loops.Find(item => item.Uid == def.Id);
+
+					if (saveItem != null) continue;
+
+					loops.Add(new LoopSaveItem {Uid = def.Id, Value = def.Loop});
 				}
 			}
 			else
@@ -45,4 +58,21 @@ public class PiecesMineDataManager : IECSComponent, IDataManager, IDataLoader<Li
 			}
 		});
 	}
+
+	public void DecrementLoop(int uid)
+	{
+		var item = loops.Find(save => save.Uid == uid);
+
+		if (item == null || item.Value <= 0) return;
+
+		item.Value -= 1;
+	}
+
+	public int GetCurrentLoop(int uid)
+	{
+		var item = loops.Find(save => save.Uid == uid);
+		
+		return item?.Value ?? 0;
+	}
+	
 }

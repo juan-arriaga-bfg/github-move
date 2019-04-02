@@ -24,7 +24,10 @@ public partial class DefaultProfileMigration : IProfileMigration
         {716, Migrate716},
         
         // remove orders state
-        {724, Migrate724}
+        {724, Migrate724},
+        
+        // new Mine logic
+        {731, Migrate731}
     };
 
     public void Migrate(int clientVersion, UserProfile profile)

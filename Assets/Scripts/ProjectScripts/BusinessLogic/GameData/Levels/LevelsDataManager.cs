@@ -37,10 +37,10 @@ public class LevelsDataManager : SequenceData, IDataLoader<List<LevelsDef>>
 					var previous = data[i - 1];
 					var next = data[i];
 					
-					next.OrdersWeights = ItemWeight.ReplaseWeights(previous.OrdersWeights, next.OrdersWeights);
-					next.PieceWeights = ItemWeight.ReplaseWeights(previous.PieceWeights, next.PieceWeights);
-					next.ResourcesWeights = ItemWeight.ReplaseWeights(previous.ResourcesWeights, next.ResourcesWeights);
-					next.ExtrasWeights = ItemWeight.ReplaseWeights(previous.ExtrasWeights, next.ExtrasWeights);
+					next.OrdersWeights = ItemWeight.ReplaceWeights(previous.OrdersWeights, next.OrdersWeights);
+					next.PieceWeights = ItemWeight.ReplaceWeights(previous.PieceWeights, next.PieceWeights);
+					next.ResourcesWeights = ItemWeight.ReplaceWeights(previous.ResourcesWeights, next.ResourcesWeights);
+					next.ExtrasWeights = ItemWeight.ReplaceWeights(previous.ExtrasWeights, next.ExtrasWeights);
 					
 					Levels.Add(next);
 				}
