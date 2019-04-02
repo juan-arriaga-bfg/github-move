@@ -68,7 +68,7 @@ public class MineMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBui
         if (nextType == PieceType.None.Id) return null;
         
         var nextPieces = Calculation(definition, pieceType, nextType);
-
+        
         // collect and purchase rewards before action
         return CreateAction(nextPieces, matchField, position, pieceType);
     }
@@ -77,12 +77,12 @@ public class MineMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBui
     {
         var result = new List<int> {nextType};
         var isFake = PieceType.GetDefById(currentType).Filter.Has(PieceTypeFilter.Fake);
-
-        if (isFake == false) return result;
-
-        var data = GameDataService.Current.PiecesManager.GetComponent<PiecesMineDataManager>(PiecesMineDataManager.ComponentGuid);
         var previousType = definition.GetPrevious(currentType);
 
+        if (isFake == false || previousType == PieceType.None.Id) return result;
+
+        var data = GameDataService.Current.PiecesManager.GetComponent<PiecesMineDataManager>(PiecesMineDataManager.ComponentGuid);
+        
         return data.GetCurrentLoop(previousType) == 0 ? result : new List<int> {previousType};
     }
 }

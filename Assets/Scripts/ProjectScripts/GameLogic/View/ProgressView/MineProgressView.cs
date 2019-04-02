@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Debug = IW.Logger;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,9 @@ public class MineProgressView : UIBoardView
         var def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).MineDef;
         var data = GameDataService.Current.PiecesManager.GetComponent<PiecesMineDataManager>(PiecesMineDataManager.ComponentGuid);
         var loop = data.GetCurrentLoop(Context.PieceType);
-        var index = Context.Context.BoardLogic.MatchDefinition.GetIndexInChain(Context.PieceType);
+        var index = Context.Context.BoardLogic.MatchDefinition.GetIndexInChain(Context.PieceType) - 1;
+        
+        Debug.LogFormat("[MineProgress] => id: '{0}', star: {1}, loop: {2}/{3}", PieceType.Parse(Context.PieceType), index, def.Loop - loop, def.Loop);
 
         for (var i = 0; i < stars.Count; i++)
         {
