@@ -9,6 +9,7 @@ public static class UiCharacterData
     public const string CharRedHood = "RedHood";
     public const string Mermaid = "Mermaid";
     public const string TigerLilly = "TigerLilly";
+    public const string PeterPan = "PeterPan";
     
     private static readonly Dictionary<string, UICharacterDef> charDefs = new Dictionary<string, UICharacterDef>
     {
@@ -79,6 +80,16 @@ public static class UiCharacterData
                 Id = CharGnomeWorker,
                 Name = "conversation.character.GnomeWorker",
                 ColorHex = "#00A0FF"
+            }
+        },
+        { 
+            PeterPan, 
+            new UICharacterDef
+            {
+                Id = PeterPan,
+                Name = "conversation.character.PeterPan",
+                ColorHex = "#FFFB00",
+                PieceId = PieceType.NPC_G.Id
             }
         },
     };
