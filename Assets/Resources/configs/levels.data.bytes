@@ -188,6 +188,16 @@
         "Override": true
       }
     ],
+    "ExtrasWeights": [
+      {
+        "Uid": "EXT_A1",
+        "Weight": 3
+      },
+      {
+        "Uid": "EXT_A2",
+        "Weight": 1
+      }
+    ],
     "OrdersDelay": 15
   },
   {
@@ -213,7 +223,8 @@
     "OrdersWeights": [
       {
         "Uid": "Order1",
-        "Weight": 0
+        "Weight": 0,
+        "Override": true
       },
       {
         "Uid": "Order4",
