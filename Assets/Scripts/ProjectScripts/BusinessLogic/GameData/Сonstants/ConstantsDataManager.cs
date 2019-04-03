@@ -35,6 +35,7 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     public float SpeedFirefly;
     
     public int StartLevelFirefly;
+    public int SleepDelayFirefly;
 
     public float HourBasePrice;
     public float DayBasePrice;

@@ -34,6 +34,8 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 
 	private const int TUTORIAL_FIREFLY_COUNT = 3;
 	private bool isTutorialActive => ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount < TUTORIAL_FIREFLY_COUNT;
+
+	private TimerComponent restartTimer;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
@@ -41,6 +43,17 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		
 		locker = new LockerComponent();
 		RegisterComponent(locker);
+
+		restartTimer = new TimerComponent {Delay = GameDataService.Current.ConstantsManager.SleepDelayFirefly, OnComplete = () =>
+		{
+			index = 1;
+			isClick = false;
+			OnMatch();
+			restartTimer.Start();
+			IW.Logger.Log($"[FireflyLogicComponent] => restart session!");
+		}};
+		
+		RegisterComponent(restartTimer);
 		
 		Locker.Lock(this);
 		
@@ -80,11 +93,18 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		tutorialStartTime = DateTime.UtcNow;
 	}
 
+	public void ResetSession()
+	{
+		restartTimer.Reset();
+	}
+
 	public override void OnUnRegisterEntity(ECSEntity entity)
 	{
 		UIService.Get.OnShowWindowEvent -= OnShowWindow;
 		UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
 		ShopService.Current.OnPurchasedEvent -= UpdateFirefly;
+
+		restartTimer.OnComplete = null;
 	}
 	
 	private void OnShowWindow(IWUIWindow window)
@@ -106,18 +126,21 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	
 	private void OnCloseWindow(IWUIWindow window)
 	{
-		if(UIWindowType.IsIgnore(window.WindowName)) return;
+		if (UIWindowType.IsIgnore(window.WindowName)) return;
 		
 		Locker.Unlock(this);
-		
-		if(Locker.IsLocked) return;
+
+		if (Locker.IsLocked) return;
 		
 		foreach (var view in views)
 		{
 			view.StartFly();
 		}
+
+		var seconds = (int)(DateTime.UtcNow - pauseTime).TotalSeconds;
 		
-		startTime = startTime.AddSeconds((DateTime.UtcNow - pauseTime).TotalSeconds);
+		restartTimer.Add(seconds);
+		startTime = startTime.AddSeconds(seconds);
 	}
 
 	private void UpdateFirefly(IPurchaseableItem purchaseableItem, IShopItem shopItem)
@@ -163,7 +186,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	
 	public bool IsExecuteable()
 	{
-		if(Locker.IsLocked || views.Count > 0 || startTime.GetTime().TotalSeconds < delay) return false;
+		if (Locker.IsLocked || views.Count > 0 || startTime.GetTime().TotalSeconds < delay) return false;
 		
 		isClick = false;
 		OnMatch();

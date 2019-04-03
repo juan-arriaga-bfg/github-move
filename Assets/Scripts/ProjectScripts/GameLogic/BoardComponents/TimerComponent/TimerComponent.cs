@@ -55,8 +55,8 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     
     public void Start()
     {
-        // Start(UseUTC ? DateTime.UtcNow : DateTime.Now);
         var secureTime = SecuredTimeService.Current;
+        
         Start(UseUTC ? secureTime.UtcNow : secureTime.Now);
     }
 
@@ -76,12 +76,28 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
         OnStart?.Invoke();
     }
 
-    public void Subtract(int value)
+    public void Add(int value)
     {
         if (Delay == 0 || IsStarted == false) return;
         
-        StartTime = StartTime.AddSeconds(-Mathf.Min(Delay, value));
+        StartTime = StartTime.AddSeconds(value);
         CompleteTime = StartTime.AddSeconds(Delay);
+    }
+
+    public void Subtract(int value)
+    {
+        Add(-Mathf.Min(Delay, value));
+    }
+
+    public void Reset()
+    {
+        var secureTime = SecuredTimeService.Current;
+        
+        StartTime = UseUTC ? secureTime.UtcNow : secureTime.Now;
+        CompleteTime = StartTime.AddSeconds(Delay);
+        
+        IsStarted = true;
+        IsPaused = false;
     }
     
     public void Stop()

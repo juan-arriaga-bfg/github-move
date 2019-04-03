@@ -318,6 +318,8 @@ public class BoardManipulatorComponent : ECSEntity,
     
     public bool OnDown(Vector2 startPos, Vector2 pos)
     {
+        context.BoardLogic.FireflyLogic.ResetSession();
+        
         // cancel tutorial pause (false) delayed action
         if (cachedTutorialStateUpdateAction != null)
         {
