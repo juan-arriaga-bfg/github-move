@@ -147,7 +147,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
                 Timer?.Start();
                 Order.State = OrderState.InProgress;
                 
-                ProfileService.Instance.Manager.UploadCurrentProfile();
+                ProfileService.Instance.Manager.UploadCurrentProfile(true);
             });
     }
     

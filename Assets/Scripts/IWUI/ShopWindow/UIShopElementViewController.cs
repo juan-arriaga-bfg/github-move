@@ -169,7 +169,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
     protected virtual void OnPurchaseComplete()
     {
-	    ProfileService.Instance.Manager.UploadCurrentProfile();
+	    ProfileService.Instance.Manager.UploadCurrentProfile(true);
 	    SendAnalyticsEvent();
     }
     

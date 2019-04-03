@@ -67,7 +67,7 @@ public class UINextLevelWindowView : UIGenericWindowView
             cachedCharacterRight = null;
         }
         
-        ProfileService.Instance.Manager.UploadCurrentProfile();
+        ProfileService.Instance.Manager.UploadCurrentProfile(true);
         
         // cachedCharacterLeft = CreateCharacter(UiCharacterData.CharGnomeWorker, CharacterEmotion.Happy, CharacterSide.Left, unlockedCharacterContainerLeft);
         //

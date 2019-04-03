@@ -124,7 +124,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
     {
         Debug.Log($"OnApplicationQuit");
         
-        ProfileService.Instance.Manager.UploadCurrentProfile();
+        ProfileService.Instance.Manager.UploadCurrentProfile(true);
 
         LocalNotificationsService.Current.ScheduleNotifications();
     }
