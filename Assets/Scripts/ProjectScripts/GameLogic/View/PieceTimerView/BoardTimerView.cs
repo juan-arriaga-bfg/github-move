@@ -71,6 +71,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         smallButton.SetActive(isShow);
         bigButton.SetActive(isShow);
         hourglass.SetActive(isActiveHourglass && state != TimerViewSate.Hide);
+        UpdateView();
     }
 
     public void SetHourglass(bool isActive)
@@ -99,8 +100,8 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     protected override void UpdateView()
     {
         if (timer == null) return;
+        if (progressBar != null) progressBar.SetProgress(timer.GetProgress());
         
-        if(progressBar != null) progressBar.SetProgress(timer.GetProgress());
         label.Text = timer.CompleteTime.GetTimeLeftText();
         
         if (timer.CompleteTime.GetTimeLeft().TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit)
@@ -108,7 +109,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
             SetState(TimerViewSate.Free);
         }
         
-        if(smallButton.activeSelf) price.Text = timerState == TimerViewSate.Free ? LocalizationService.Get("common.button.free", "common.button.free") : timer.GetPrice().ToStringIcon();
+        if (smallButton.activeSelf) price.Text = timerState == TimerViewSate.Free ? LocalizationService.Get("common.button.free", "common.button.free") : timer.GetPrice().ToStringIcon();
     }
     
     public void OnBoardEvent(int code, object context)

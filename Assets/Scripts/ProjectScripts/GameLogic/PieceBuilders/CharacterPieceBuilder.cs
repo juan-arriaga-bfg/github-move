@@ -21,8 +21,6 @@ public class CharacterPieceBuilder : GenericPieceBuilder
 					{
 						var model = UIService.Get.GetCachedModel<UIOrdersWindowModel>(UIWindowType.OrdersWindow);
 						model.Select = customer.Order;
-						
-						customer.UpdateState(OrderState.Waiting);
 					}
 				}
 				.RegisterDefinition(new TouchReactionDefinitionOpenWindow {WindowType = UIWindowType.OrdersWindow})

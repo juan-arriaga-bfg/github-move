@@ -118,6 +118,7 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 	public void OnRegisterEntity(ECSEntity entity)
 	{
 		Context = entity as Piece;
+		Context.Matchable?.Locker.Lock(this);
 	}
 
 	public void OnUnRegisterEntity(ECSEntity entity)

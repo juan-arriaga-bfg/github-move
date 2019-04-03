@@ -36,7 +36,7 @@ public class ChestsDataManager : SequenceData, IDataLoader<List<ChestDef>>
                     {
                         var previous = data.Find(def => def.Piece == previousType);
                         
-                        next.PieceWeights = ItemWeight.ReplaseWeights(previous.PieceWeights, next.PieceWeights);
+                        next.PieceWeights = ItemWeight.ReplaceWeights(previous.PieceWeights, next.PieceWeights);
                     }
                     
                     Chests.Add(next);

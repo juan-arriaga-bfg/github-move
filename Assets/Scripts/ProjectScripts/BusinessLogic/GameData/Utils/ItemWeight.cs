@@ -94,7 +94,7 @@ public class ItemWeight
         return result;
     }
     
-    public static List<ItemWeight> ReplaseWeights(List<ItemWeight> oldWeights, List<ItemWeight> nextWeights)
+    public static List<ItemWeight> ReplaceWeights(List<ItemWeight> oldWeights, List<ItemWeight> nextWeights)
     {
         if (oldWeights == null) return nextWeights == null ? new List<ItemWeight>() : new List<ItemWeight>(nextWeights);
         if (nextWeights == null) return new List<ItemWeight>(oldWeights);

@@ -202,7 +202,9 @@ public class DevTools : UIContainerElementViewController
     
     public void OnDebug1Click()
     {
-
+        UIService.Get.ShowWindow(UIWindowType.DailyRewardWindow);
+        return;
+        
         Debug.Log("OnDebug1Click");
         var model = UIService.Get.GetCachedModel<UICharacterUnlockedWindowModel>(UIWindowType.CharacterUnlockedWindow);
         model.TestMode = true;

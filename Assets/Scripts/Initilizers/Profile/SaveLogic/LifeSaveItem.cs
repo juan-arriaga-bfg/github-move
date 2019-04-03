@@ -35,6 +35,36 @@ public class LifeSaveItemJsonConverter : JsonConverter
     }
 }
 
+public class LoopSaveItemJsonConverter : JsonConverter
+{
+    public override bool CanConvert(Type objectType)
+    {
+        return objectType == typeof (LoopSaveItem);
+    }
+    
+    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    {
+        var targetValue = (LoopSaveItem) value;
+        
+        serializer.TypeNameHandling = TypeNameHandling.None;
+        serializer.Serialize(writer, $"{targetValue.Uid},{targetValue.Value}");
+    }
+
+    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    {
+        var data = serializer.Deserialize<string>(reader);
+        var dataArray = data.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
+        
+        var targetValue = new LoopSaveItem
+        {
+            Uid = int.Parse(dataArray[0]),
+            Value = int.Parse(dataArray[1]),
+        };
+        
+        return targetValue;
+    }
+}
+
 [JsonConverter(typeof(LifeSaveItemJsonConverter))]
 public class LifeSaveItem
 {
@@ -81,5 +111,24 @@ public class LifeSaveItem
     {
         get { return startTimeCooldown; }
         set { startTimeCooldown = value; }
+    }
+}
+
+[JsonConverter(typeof(LoopSaveItemJsonConverter))]
+public class LoopSaveItem
+{
+    private int uid;
+    private int value;
+
+    public int Uid
+    {
+        get => uid;
+        set => uid = value;
+    }
+
+    public int Value
+    {
+        get => value;
+        set => this.value = value;
     }
 }

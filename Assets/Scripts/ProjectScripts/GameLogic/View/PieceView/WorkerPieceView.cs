@@ -34,7 +34,7 @@ public class WorkerPieceView : PieceBoardElementView
     private List<Piece> FindTargets()
     {
         var logic = Context.Context.BoardLogic;
-        var positions = logic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace);
+        var positions = logic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Fake | PieceTypeFilter.Workplace);
         var result = new List<Piece>();
         
         positions.AddRange(Context.Context.PartPiecesLogic.GetAllPositions());

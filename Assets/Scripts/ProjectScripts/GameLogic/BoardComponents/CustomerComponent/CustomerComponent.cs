@@ -113,6 +113,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         if (Order == null) return;
         
         Timer.Delay = Order.Def.Delay;
+        UpdateState(OrderState.Waiting);
         UpdateView();
     }
 
@@ -133,7 +134,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
     {
         if(Order == null) return;
         
-        if(Order.State == OrderState.Init && state == OrderState.Waiting) Order.State = CurrencyHelper.IsCanPurchase(Order.Def.Prices) ? OrderState.Enough : OrderState.Waiting;
+        if(Order.State == OrderState.Waiting && state == OrderState.Waiting) Order.State = CurrencyHelper.IsCanPurchase(Order.Def.Prices) ? OrderState.Enough : OrderState.Waiting;
         if(Order.State == OrderState.InProgress && state == OrderState.Complete) Order.State = state;
     }
     
@@ -150,12 +151,12 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
             });
     }
     
-    public void Exchange()
+    public bool Exchange()
     {
         CurrencyPair price = null;
         List<CurrencyPair> diff;
         
-        CurrencyHelper.IsCanPurchase(Order.Def.Prices, out diff);
+        if (CurrencyHelper.IsCanPurchase(Order.Def.Prices, out diff)) return false;
         
         foreach (var pair in diff)
         {
@@ -178,6 +179,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         };
         
         UIService.Get.ShowWindow(UIWindowType.ExchangeWindow);
+        return true;
     }
 
     public void RestartCooldown()

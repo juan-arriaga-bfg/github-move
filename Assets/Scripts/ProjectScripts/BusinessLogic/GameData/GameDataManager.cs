@@ -1,7 +1,7 @@
 ﻿public class GameDataManager : ECSEntity,
     IChestsDataManager, IPiecesDataManager, IFogsDataManager, IObstaclesDataManager, ILevelsDataManager,
     IFieldDataManager, ICodexDataManager, IEnemiesDataManager, IConstantsDataManager, IQuestsDataManager, IShopDataManager,
-    IOrdersDataManager, IConversationsDataManager, IMarketDataManager, ICharactersDataManager
+    IOrdersDataManager, IConversationsDataManager, IMarketDataManager, ICharactersDataManager, IDailyRewardDataManager
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -54,6 +54,9 @@
     private CharactersDataManager charactersManager;
     public CharactersDataManager CharactersManager => charactersManager ?? (charactersManager = GetComponent<CharactersDataManager>(CharactersDataManager.ComponentGuid));
     
+    private DailyRewardDataManager dailyRewardManager;
+    public DailyRewardDataManager DailyRewardManager => dailyRewardManager ?? (dailyRewardManager = GetComponent<DailyRewardDataManager>(DailyRewardDataManager.ComponentGuid));
+    
     public UserProfile UserProfile { get; private set; } 
     
     public void SetupComponents(UserProfile userProfile)
@@ -77,6 +80,7 @@
         RegisterComponent(new OrdersDataManager());
         RegisterComponent(new MarketDataManager());
         RegisterComponent(new CharactersDataManager());
+        RegisterComponent(new DailyRewardDataManager());
     }
 
     public void Reload()

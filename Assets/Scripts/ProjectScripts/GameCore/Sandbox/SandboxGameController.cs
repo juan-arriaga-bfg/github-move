@@ -46,7 +46,6 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new PiecePositionsCacheComponent())
             .RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()))
             .RegisterComponent(new FieldFinderComponent())
-            .RegisterComponent(new FireflyLogicComponent())
             .RegisterComponent(new PieceRemoverComponent())
             .RegisterComponent(new DragAndDropPieceComponent())
             .RegisterComponent(new CellHintsComponent())
@@ -55,8 +54,8 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new EmptyCellsFinderComponent()) // finds empty cells
             .RegisterComponent(new MatchActionBuilderComponent() // creates match action
                 .RegisterDefaultBuilder(new SimpleMatchActionBuilder()) // creates default match action
-                .RegisterBuilder(new MulticellularPieceMatchActionBuilder())
                 .RegisterBuilder(new CompositePieceMatchActionBuilder())
+                .RegisterBuilder(new MineMatchActionBuilder())
                 .RegisterBuilder(new CharacterMatchActionBuilder())));
 
         boardController.RegisterComponent(new AreaAccessControllerComponent());
@@ -102,7 +101,6 @@ public class SandboxGameController : MonoBehaviour
             .RegisterState(new SessionBoardStateComponent(SessionBoardStateType.Processing))
         ); // states
         
-        boardController.RegisterComponent(new TutorialLogicComponent().RegisterComponent(new LockerComponent()));
         boardController.RegisterComponent(new QuestConnectorComponent());
 
         // GameBoardDebugComponent used for unit tests and debug operations with field
@@ -128,6 +126,8 @@ public class SandboxGameController : MonoBehaviour
             }
         );
         
+        boardController.BoardLogic.RegisterComponent(new FireflyLogicComponent());
+        boardController.RegisterComponent(new TutorialLogicComponent().RegisterComponent(new LockerComponent()));
         boardController.RendererContext.CreateBorders();
         
         // var widthShift = boardController.BoardDef.Width / 4;

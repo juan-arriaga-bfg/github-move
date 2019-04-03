@@ -30,6 +30,8 @@ public class UIWindowType
     
     public const string DailyQuestWindow = "DailyQuestWindow";
     
+    public const string DailyRewardWindow = "DailyRewardWindow";
+    
     public const string ResourcePanelWindow = "ResourcePanelWindow";
     
     public const string SettingsWindow = "SettingsWindow";

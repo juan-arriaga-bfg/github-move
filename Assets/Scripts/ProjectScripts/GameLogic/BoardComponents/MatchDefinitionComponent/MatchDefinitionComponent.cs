@@ -96,6 +96,8 @@ public class MatchDefinitionComponent : ECSEntity
         {
             chain.Add(unit);
             unit = GetNext(unit, checkIgnore);
+
+            if (chain.IndexOf(unit) != -1) break;
         }
         
         return chain;

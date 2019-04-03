@@ -5,6 +5,7 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 		var piece = base.Build(pieceType, context);
 		
 		CreateViewComponent(piece);
+		AddView(piece, ViewType.MineProgress);
 		
 		piece.RegisterComponent(new DraggablePieceComponent());
 		

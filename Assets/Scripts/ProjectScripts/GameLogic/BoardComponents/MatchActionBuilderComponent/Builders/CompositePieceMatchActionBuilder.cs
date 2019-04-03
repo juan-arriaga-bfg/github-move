@@ -17,6 +17,11 @@ public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatc
             PieceType.H8.Id,
             PieceType.I8.Id,
             PieceType.J8.Id,
+            PieceType.EXT_A8.Id,
+            PieceType.EXT_B8.Id,
+            PieceType.EXT_C8.Id,
+            PieceType.EXT_D8.Id,
+            PieceType.EXT_E8.Id,
         };
     }
 

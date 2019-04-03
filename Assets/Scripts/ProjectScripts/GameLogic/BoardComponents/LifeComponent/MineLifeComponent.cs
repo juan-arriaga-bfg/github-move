@@ -6,12 +6,10 @@ public class MineLifeComponent : WorkplaceLifeComponent
     private PieceMineDef def;
     
     public override CurrencyPair Energy => def.Price;
-    public override string AnalyticsLocation => $"skip_mine{(TimerCooldown.IsExecuteable() ? "_cooldown" : "")}";
+    public override string AnalyticsLocation => $"skip_mine";
     public override string Message => LocalizationService.Get("gameboard.bubble.message.mine", "gameboard.bubble.message.mine");
-    public override string Price => TimerCooldown.IsExecuteable()
-        ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), TimerCooldown.CompleteTime.GetTimeLeftText())
-        : string.Format(LocalizationService.Get("gameboard.bubble.button.clear", "gameboard.bubble.button.clear {0}"), Energy.ToStringIcon());
-
+    public override string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.chop", "gameboard.bubble.button.chop {0}"), Energy.ToStringIcon());
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
@@ -19,57 +17,39 @@ public class MineLifeComponent : WorkplaceLifeComponent
         
         TimerWork.Delay = WorkerCurrencyLogicComponent.MinDelay;
         HP = def.Size;
-        
-        TimerCooldown = new TimerComponent{Delay = def.Cooldown};
-        RegisterComponent(TimerCooldown);
     }
 
     protected override LifeSaveItem InitInSave(BoardPosition position)
     {
-        var item = base.InitInSave(position);
-
-        if (item == null) return null;
-
-        if (item.IsStartCooldown)
-        {
-            TimerCooldown.Start(item.StartTimeCooldown);
-            Locker.Unlock(this);
-        }
-        else if (item.IsStartTimer == false && Rewards.IsComplete == false) Locker.Unlock(this);
-
-        return item;
-    }
-    
-    public override LifeSaveItem Save()
-    {
-        var save =  new LifeSaveItem
-        {
-            Step = current,
-            Position = Context.CachedPosition,
-            IsStartTimer = TimerWork.IsExecuteable(),
-            StartTimeTimer = TimerWork.StartTimeLong,
-            IsStartCooldown = TimerCooldown.IsExecuteable(),
-            StartTimeCooldown = TimerCooldown.StartTimeLong
-        };
+        Rewards.InitInSave(position);
+		
+        var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+        var item = save?.GetLifeSave(position);
         
-        return save;
+        if (item == null) return null;
+		
+        current = item.Step;
+        Context.Context.WorkerLogic.Init(Context.CachedPosition, TimerWork);
+        
+        TimerWork.IsCanceled = TimerWork.Delay > WorkerCurrencyLogicComponent.MinDelay;
+        
+        if (item.IsStartTimer) TimerWork.Start(item.StartTimeTimer);
+        else
+        {
+            OnTimerStart();
+            if (Rewards.IsComplete == false) Locker.Unlock(this);
+        }
+        
+        return item;
     }
     
     public override bool Damage(bool isExtra = false)
     {
-        if (TimerCooldown.IsExecuteable() == false)
-        {
-            var isDamage = base.Damage(isExtra);
-            if (isDamage) (Context.ActorView as MinePieceView)?.PlayWorkAnimation();
-            return isDamage;
-        }
+        var isDamage = base.Damage(isExtra);
+
+        if (isDamage) (Context.ActorView as MinePieceView)?.PlayWorkAnimation();
         
-        UIMessageWindowController.CreateTimerCompleteMessage(
-            LocalizationService.Get("window.timerComplete.message.production", "window.timerComplete.message.production"),
-            AnalyticsLocation,
-            TimerCooldown);
-        
-        return false;
+        return isDamage;
     }
 
     protected override void OnComplete()
@@ -98,8 +78,14 @@ public class MineLifeComponent : WorkplaceLifeComponent
             
             if (IsDead)
             {
-                TimerCooldown.Start();
-                current = 0;
+                var action = Context.Context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>{Context.CachedPosition}, Context.PieceType, Context.CachedPosition);
+
+                if (action == null) return;
+                
+                Context.Context.ActionExecutor.AddAction(action);
+                
+                var data = GameDataService.Current.PiecesManager.GetComponent<PiecesMineDataManager>(PiecesMineDataManager.ComponentGuid);
+                data.DecrementLoop(def.Id);
             }
         }
         

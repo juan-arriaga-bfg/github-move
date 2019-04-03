@@ -13,6 +13,8 @@ public class UIMarketWindowView : UIGenericPopupWindowView
     
     [IWUIBinding("#CloseMaskLeft")] private UIButtonViewController btnMaskLeft;
     [IWUIBinding("#CloseMaskRight")] private UIButtonViewController btnMaskRight;
+
+    private bool isFirst = true;
     
     public override void OnViewShow()
     {
@@ -27,20 +29,29 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         Fill(UpdateEntities(), content);
         
-        if (windowModel.IsTutorial)
+        if (windowModel.IsTutorial || windowModel.IsSoft)
         {
             var index = 0;
-            
-            content.GetScrollRect().horizontalNormalizedPosition = 0;
-            
-            foreach (var tab in content.Tabs)
+
+            if (isFirst)
             {
-                var def = (tab.Entity as UIMarketElementEntity).Def.Current;
+                content.GetScrollRect().horizontalNormalizedPosition = 0;
+                isFirst = false;
+            }
+            
+            if (windowModel.IsTutorial)
+            {
+                content.GetScrollRect().horizontalNormalizedPosition = 0;
                 
-                if(def == null || def.Weight.Piece != PieceType.CH_Free.Id) continue;
+                foreach (var tab in content.Tabs)
+                {
+                    var def = (tab.Entity as UIMarketElementEntity).Def.Current;
+                
+                    if(def == null || def.Weight.Piece != PieceType.CH_Free.Id) continue;
 					
-                index = tab.Index;
-                break;
+                    index = tab.Index;
+                    break;
+                }
             }
             
             Scroll(index);

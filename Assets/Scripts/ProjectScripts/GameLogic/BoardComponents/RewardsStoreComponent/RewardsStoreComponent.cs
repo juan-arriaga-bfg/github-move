@@ -147,6 +147,44 @@ public class RewardsStoreComponent : IECSComponent
         Scatter();
     }
     
+    public void FullDrop()
+    {
+        InitRewards();
+        
+        if(CheckOutOfCellsDropFullReward()) return;
+        
+        if(PieceType.GetDefById(context.PieceType).Filter.HasFlag(PieceTypeFilter.Chest)) NSAudioService.Current.Play(SoundId.ChestOpen);
+        
+        Scatter(false);
+    }
+    
+    public bool CheckOutOfCellsDropFullReward()
+    {
+        InitRewards();
+        
+        if (IsScatter) return true;
+        
+        var current = rewards.Sum(pair => pair.Value);
+        
+        if (IsTargetReplace) current = Mathf.Max(0, current - (context.Multicellular?.Mask.Count ?? 1));
+        if (IsSingle && current > 0) current = 1;
+        
+        var cells = new List<BoardPosition>();
+
+        if (current == 0 ||
+            context.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(context.CachedPosition, cells,
+                current, 0.1f))
+        {
+            if (cells.Count >= current)
+            {
+                return false;
+            }
+        }
+        
+        UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
+        return true;
+    }
+    
     public bool CheckOutOfCells()
     {
         if (IsScatter) return true;
@@ -189,7 +227,7 @@ public class RewardsStoreComponent : IECSComponent
         return view;
     }
 
-    private void Scatter()
+    private void Scatter(bool isSetRewardToComplete = true)
     {
         var filter = PieceType.GetDefById(context.PieceType).Filter;
         context.Context.ActionExecutor.AddAction(new ScatterPiecesAction
@@ -198,6 +236,7 @@ public class RewardsStoreComponent : IECSComponent
             IsTargetReplace = IsTargetReplace,
             From = context.CachedPosition,
             Pieces = rewards,
+            IsSetRewardToComplete = isSetRewardToComplete,
             OnComplete = value =>
             {
                 IsScatter = false;

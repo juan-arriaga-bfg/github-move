@@ -35,6 +35,7 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 	private List<PieceSaveItem> pieces;
 	private List<RewardsSaveItem> rewards;
 	private List<LifeSaveItem> lives;
+	private List<LoopSaveItem> loops;
 	private List<BuildingSaveItem> buildings;
 	
 	[JsonProperty]
@@ -56,6 +57,13 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 	{
 		get { return lives; }
 		set { lives = value; }
+	}
+	
+	[JsonProperty]
+	public List<LoopSaveItem> Loops
+	{
+		get { return loops; }
+		set { loops = value; }
 	}
 	
 	[JsonProperty]
@@ -89,10 +97,8 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 			if(item.Value.Count == 0) continue;
 
 			// Exclude fog from save. Fog always will be reloaded from the configs.
-            if (item.Key != PieceType.Fog.Id)
-            {
-                pieces.Add(GetPieceSave(item.Key, item.Value));
-            }
+            if (item.Key != PieceType.Fog.Id) pieces.Add(GetPieceSave(item.Key, item.Value));
+            
 			rewards.AddRange(GetRewardsSave(board.BoardLogic, item.Value));
 			lives.AddRange(GetLifeSave(board.BoardLogic, item.Value));
 			buildings.AddRange(GetBuildingSave(board.BoardLogic, item.Value));
@@ -104,40 +110,26 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 	[OnDeserialized]
 	internal void OnDeserialized(StreamingContext context)
 	{
+		ReplaceRewardsSave();
+		ReplaceLifeSave();
+		ReplaceBuildingSave();
+	}
+
+	public void ReplaceRewardsSave()
+	{
 		rewardsSave = new Dictionary<BoardPosition, RewardsSaveItem>();
-		lifeSave = new Dictionary<BoardPosition, LifeSaveItem>();
-		buildingSave = new Dictionary<BoardPosition, BuildingSaveItem>();
+
+		if (rewards == null) return;
 		
-		if (rewards != null)
+		foreach (var reward in rewards)
 		{
-			foreach (var reward in rewards)
-			{
-				rewardsSave.Add(reward.Position, reward);
-			}
-		}
-		
-		if (lives != null)
-		{
-			foreach (var life in lives)
-			{
-				lifeSave.Add(life.Position, life);
-			}
-		}
-		
-		if (buildings != null)
-		{
-			foreach (var building in buildings)
-			{
-				buildingSave.Add(building.Position, building);
-			}
+			rewardsSave.Add(reward.Position, reward);
 		}
 	}
 	
 	public RewardsSaveItem GetRewardsSave(BoardPosition position)
 	{
-		RewardsSaveItem item;
-		
-		if (rewardsSave == null || rewardsSave.TryGetValue(position, out item) == false)
+		if (rewardsSave == null || rewardsSave.TryGetValue(position, out var item) == false)
 		{
 			return null;
 		}
@@ -146,12 +138,22 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 		
 		return item;
 	}
+
+	public void ReplaceLifeSave()
+	{
+		lifeSave = new Dictionary<BoardPosition, LifeSaveItem>();
+		
+		if (lives == null) return;
+		
+		foreach (var life in lives)
+		{
+			lifeSave.Add(life.Position, life);
+		}
+	}
 	
 	public LifeSaveItem GetLifeSave(BoardPosition position)
 	{
-		LifeSaveItem item;
-		
-		if (lifeSave == null || lifeSave.TryGetValue(position, out item) == false)
+		if (lifeSave == null || lifeSave.TryGetValue(position, out var item) == false)
 		{
 			return null;
 		}
@@ -160,12 +162,22 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 		
 		return item;
 	}
+
+	public void ReplaceBuildingSave()
+	{
+		buildingSave = new Dictionary<BoardPosition, BuildingSaveItem>();
+		
+		if (buildings == null) return;
+		
+		foreach (var building in buildings)
+		{
+			buildingSave.Add(building.Position, building);
+		}
+	}
 	
 	public BuildingSaveItem GetBuildingSave(BoardPosition position)
 	{
-		BuildingSaveItem item;
-		
-		if (buildingSave == null || buildingSave.TryGetValue(position, out item) == false)
+		if (buildingSave == null || buildingSave.TryGetValue(position, out var item) == false)
 		{
 			return null;
 		}

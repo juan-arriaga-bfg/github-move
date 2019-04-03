@@ -92,8 +92,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         
         if (windowModel.Select != null)
         {
-            var dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
-            select = Mathf.Max(0, dataOrders.FindIndex(order => order == windowModel.Select));
+            select = Mathf.Max(0, windowModel.Orders.FindIndex(order => order == windowModel.Select));
             windowModel.Select = null;
         }
         
@@ -110,22 +109,19 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         
         back.SetActive(index != 0);
         
-        var dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
-        for (int i = 0; i < dataOrders.Count; i++)
+        foreach (var order in windowModel.Orders)
         {
-            DOTween.Kill(dataOrders[i], true);
+            DOTween.Kill(order, true);
         }
         
         switch (index)
         {
             case 0:
-                dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
-                
-                messageOders.gameObject.SetActive(dataOrders.Count == 0);
+                messageOders.gameObject.SetActive(windowModel.Orders.Count == 0);
 
-                if (dataOrders.Count == 0) Fill(UpdateEntitiesSelect(null), contentSelect);
+                if (windowModel.Orders.Count == 0) Fill(UpdateEntitiesSelect(null), contentSelect);
                 
-                Fill(UpdateEntitiesOrders(dataOrders), contentOrders);
+                Fill(UpdateEntitiesOrders(windowModel.Orders), contentOrders);
                 contentOrders.Select(0);
                 prices.HideHard();
                 break;

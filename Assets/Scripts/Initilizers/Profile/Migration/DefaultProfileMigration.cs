@@ -18,7 +18,16 @@ public partial class DefaultProfileMigration : IProfileMigration
         {560, Migrate560},
         
         // Autocomplete quests 128, 129, 130 if piece NPC_F3+ already unlocked
-        {604, Migrate604}
+        {604, Migrate604},
+        
+        // Migrate OrderSave to new format
+        {716, Migrate716},
+        
+        // remove orders state
+        {724, Migrate724},
+        
+        // new Mine logic
+        {731, Migrate731}
     };
 
     public void Migrate(int clientVersion, UserProfile profile)

@@ -44,7 +44,12 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.AddRange(GetPieceIds(PieceType.Hard1.Id, PieceType.Hard6.Id));
                 break;
             case "Mines":
-                ids.AddRange(GetPieceIds(PieceType.MN_B.Id, PieceType.MN_I.Id));
+                ids.AddRange(GetPieceIds(PieceType.MN_B.Id, PieceType.MN_B3.Id));
+                ids.AddRange(GetPieceIds(PieceType.MN_C.Id, PieceType.MN_C3.Id));
+                ids.AddRange(GetPieceIds(PieceType.MN_E.Id, PieceType.MN_E3.Id));
+                ids.AddRange(GetPieceIds(PieceType.MN_F.Id, PieceType.MN_F3.Id));
+                ids.AddRange(GetPieceIds(PieceType.MN_H.Id, PieceType.MN_H3.Id));
+                ids.AddRange(GetPieceIds(PieceType.MN_I.Id, PieceType.MN_I3.Id));
                 break;
             case "Chests":
                 ids.Add(PieceType.CH_Free.Id);
@@ -103,6 +108,18 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
             case "Extended A":
                 ids.AddRange(GetPieceIds(PieceType.EXT_A1.Id, PieceType.EXT_A9.Id));
                 break;
+            case "Extended B":
+                ids.AddRange(GetPieceIds(PieceType.EXT_B1.Id, PieceType.EXT_B9.Id));
+                break;
+            case "Extended C":
+                ids.AddRange(GetPieceIds(PieceType.EXT_C1.Id, PieceType.EXT_C9.Id));
+                break;
+            case "Extended D":
+                ids.AddRange(GetPieceIds(PieceType.EXT_D1.Id, PieceType.EXT_D9.Id));
+                break;
+            case "Extended E":
+                ids.AddRange(GetPieceIds(PieceType.EXT_E1.Id, PieceType.EXT_E9.Id));
+                break;
             case "Ingredient A":
                 ids.AddRange(GetPieceIds(PieceType.PR_A1.Id, PieceType.PR_A5.Id));
                 break;
@@ -145,7 +162,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
 
         for (var i = idMin; i < idMax + 1; i++)
         {
-            if(PieceType.GetDefById(i).Filter.Has(PieceTypeFilter.Fake)) continue;
+            if (PieceType.GetDefById(i).Filter.Has(PieceTypeFilter.Fake)) continue;
             
             ids.Add(i);
         }

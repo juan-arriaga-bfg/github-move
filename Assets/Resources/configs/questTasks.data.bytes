@@ -123,7 +123,7 @@
         "Ico": "MN_B",
         "Title": "quest.use.mine.title",
         "Message": "quest.use.mine.message",
-        "Hint": "task.use.mine.stone.hint"
+        "Hint": "task.use.mine.mn_b.hint"
       }
     }
   },
@@ -178,18 +178,6 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "19_CreatePiece_A7",
-    "PieceUid": "A7",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message"
-      }
-    }
-  },
-  {
     "$type": "TaskHitTreeEntity, GameAssembly",
     "Id": "20_HitTree",
     "PieceUid": "OB3_A",
@@ -214,18 +202,6 @@
         "Title": "quest.open.chest.title",
         "Message": "quest.open.chest.message",
         "Hint": "task.open.chest.hint"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "22_CreatePiece_A6",
-    "PieceUid": "A6",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message"
       }
     }
   },
@@ -276,7 +252,7 @@
         "Ico": "MN_C",
         "Title": "quest.use.mine.title",
         "Message": "quest.use.mine.message",
-        "Hint": "task.use.mine.flower.hint"
+        "Hint": "task.use.mine.mn_c.hint"
       }
     }
   },
@@ -472,7 +448,8 @@
       "QuestDescriptionComponent": {
         "Ico": "MN_B",
         "Title": "quest.use.mine.title",
-        "Message": "quest.use.mine.message"
+        "Message": "quest.use.mine.message",
+        "Hint": "task.use.mine.mn_b.hint"
       }
     }
   },
@@ -496,7 +473,8 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.collect.ingredient.title",
-        "Message": "quest.collect.ingredient.message"
+        "Message": "quest.collect.ingredient.message",
+        "Hint": "task.collect.ingredient.hint"
       }
     }
   },
@@ -508,7 +486,8 @@
       "QuestDescriptionComponent": {
         "Ico": "collectIngredientDailyQuestIcon",
         "Title": "quest.collect.ingredient.title",
-        "Message": "quest.collect.ingredient.message"
+        "Message": "quest.collect.ingredient.message",
+        "Hint": "task.collect.ingredient.hint"
       }
     }
   },
@@ -520,7 +499,8 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.collect.ingredient.title",
-        "Message": "quest.collect.ingredient.message"
+        "Message": "quest.collect.ingredient.message",
+        "Hint": "task.collect.ingredient.hint"
       }
     }
   },
@@ -644,7 +624,8 @@
       "QuestDescriptionComponent": {
         "Ico": "MN_C",
         "Title": "quest.use.mine.title",
-        "Message": "quest.use.mine.message"
+        "Message": "quest.use.mine.message",
+        "Hint": "task.use.mine.mn_c.hint"
       }
     }
   },
@@ -669,7 +650,8 @@
       "QuestDescriptionComponent": {
         "Ico": "MN_E",
         "Title": "quest.use.mine.title",
-        "Message": "quest.use.mine.message"
+        "Message": "quest.use.mine.message",
+        "Hint": "task.use.mine.mn_e.hint"
       }
     }
   },
@@ -791,7 +773,8 @@
       "QuestDescriptionComponent": {
         "Ico": "collectIngredientDailyQuestIcon",
         "Title": "quest.complete.orders.title",
-        "Message": "quest.complete.orders.message"
+        "Message": "quest.complete.orders.message",
+        "Hint": "task.collect.ingredient.hint"
       }
     }
   },
@@ -1061,7 +1044,8 @@
       "QuestDescriptionComponent": {
         "Ico": "MN_C",
         "Title": "quest.use.mine.title",
-        "Message": "quest.use.mine.message"
+        "Message": "quest.use.mine.message",
+        "Hint": "task.use.mine.mn_c.hint"
       }
     }
   },
@@ -1074,7 +1058,8 @@
       "QuestDescriptionComponent": {
         "Ico": "MN_B",
         "Title": "quest.use.mine.title",
-        "Message": "quest.use.mine.message"
+        "Message": "quest.use.mine.message",
+        "Hint": "task.use.mine.mn_b.hint"
       }
     }
   },
@@ -1208,7 +1193,8 @@
       "QuestDescriptionComponent": {
         "Ico": "collectIngredientDailyQuestIcon",
         "Title": "quest.collect.ingredient.title",
-        "Message": "quest.collect.ingredient.message"
+        "Message": "quest.collect.ingredient.message",
+        "Hint": "task.collect.ingredient.hint"
       }
     }
   },
@@ -1282,7 +1268,8 @@
       "QuestDescriptionComponent": {
         "Ico": "MN_B",
         "Title": "quest.use.mine.title",
-        "Message": "quest.use.mine.message"
+        "Message": "quest.use.mine.message",
+        "Hint": "task.use.mine.mn_b.hint"
       }
     }
   },
@@ -1355,7 +1342,8 @@
       "QuestDescriptionComponent": {
         "Ico": "collectIngredientDailyQuestIcon",
         "Title": "quest.collect.ingredient.title",
-        "Message": "quest.collect.ingredient.message"
+        "Message": "quest.collect.ingredient.message",
+        "Hint": "task.collect.ingredient.hint"
       }
     }
   },
@@ -1404,7 +1392,8 @@
       "QuestDescriptionComponent": {
         "Ico": "MN_E",
         "Title": "quest.use.mine.title",
-        "Message": "quest.use.mine.message"
+        "Message": "quest.use.mine.message",
+        "Hint": "task.use.mine.mn_e.hint"
       }
     }
   },

@@ -15,7 +15,8 @@ public class CharacterControllerAnimation : StateMachineBehaviour
 	{
 		animator.SetInteger(animationId, 0);
 
-		DOTween.Sequence().SetId(this)
+		DOTween.Sequence()
+			.SetId(this)
 			.InsertCallback(duration, () => animator.SetInteger(animationId, Random.Range(1, maxIndex + 1)));
 	}
 

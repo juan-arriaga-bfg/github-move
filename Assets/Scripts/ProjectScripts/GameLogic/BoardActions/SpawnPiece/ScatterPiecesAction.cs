@@ -12,6 +12,7 @@ public class ScatterPiecesAction : IBoardAction
 
 	public bool IsTargetReplace;
 	public bool IsSingle;
+	public bool IsSetRewardToComplete = true;
 
 	public Dictionary<int, int> Pieces;
 	private Dictionary<int, int> fakePieces;
@@ -89,9 +90,12 @@ public class ScatterPiecesAction : IBoardAction
 			
 			CreatePiece(gameBoardController, id, cell, pieces);
 		}
-		
-		rewardsStore.IsComplete = true;
-		
+
+		if (IsSetRewardToComplete)
+		{
+			rewardsStore.IsComplete = true;
+		}
+
 		animation.Pieces = pieces;
 		animation.OnCompleteEvent += (_) =>
 		{
