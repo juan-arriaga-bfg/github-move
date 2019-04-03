@@ -182,7 +182,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: a66a0ea3eb6591e46bdcbc6027e8b1b3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 403542d605608874b944e832859d25fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -272,10 +272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117a747512dc5ec4d9b6140529c27b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastBoardPosition:
-    X: 0
-    Y: 0
-    Z: 0
   cachedSortingGroup: {fileID: 0}
   IsFading: 0
   FadeValue: 0
@@ -291,6 +287,7 @@ MonoBehaviour:
     type: 2}
   highlightPieceMaterial: {fileID: 2100000, guid: 8df69b780d2d9354c8ffb9b8293c73ad,
     type: 2}
+  arrow: {fileID: 0}
   charAnimator: {fileID: 0}
 --- !u!114 &114309560755968382
 MonoBehaviour:
