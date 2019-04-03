@@ -20,6 +20,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.QuestStartWindow,
             UIWindowType.NextLevelWindow,
             UIWindowType.DailyQuestWindow,
+            UIWindowType.DailyRewardWindow,
             UIWindowType.ResourcePanelWindow,
             UIWindowType.SettingsWindow,
             UIWindowType.HardShopWindow,

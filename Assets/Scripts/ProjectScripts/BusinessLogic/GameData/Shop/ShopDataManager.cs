@@ -32,9 +32,7 @@ public class ShopDataManager : IECSComponent, IDataManager, IDataLoader<List<Sho
 			{
 				foreach (var def in data)
 				{
-					List<ShopDef> list;
-
-					if (Defs.TryGetValue(def.Uid, out list) == false)
+					if (Defs.TryGetValue(def.Uid, out var list) == false)
 					{
 						list = new List<ShopDef>();
 						Defs.Add(def.Uid, list);

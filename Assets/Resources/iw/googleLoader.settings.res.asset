@@ -93,3 +93,7 @@ MonoBehaviour:
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseLayout
     Pattern: '{}'
+  - Key: daily
+    Link: 1EFV988rf4zEE03k3rYJEAcaymt_GvKz5j0k2oB_K5LE
+    Route: parse
+    Pattern: '[{"Id":"","Rewards":[{"Currency":"","Amount":0}],"Icon":""}]'
