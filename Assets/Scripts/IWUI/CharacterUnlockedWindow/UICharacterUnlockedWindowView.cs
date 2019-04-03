@@ -117,10 +117,10 @@ public class UICharacterUnlockedWindowView : UIGenericWindowView
             UIService.Get.PoolContainer.Return(cachedCharacter.gameObject);
             cachedCharacter = null;
         }
+
+        var def = UiCharacterData.GetDefByCharId(characterId);
         
-        string viewName = $"UICharacter{characterId}View";
-        
-        UICharacterViewController character = UIService.Get.PoolContainer.Create<UICharacterViewController>(viewName);
+        UICharacterViewController character = UIService.Get.PoolContainer.Create<UICharacterViewController>(def.ViewName);
         character.CharacterId = characterId;
 
         Transform anchor = unlockedCharacterContainer;

@@ -264,9 +264,9 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     {
         var pool = UIService.Get.PoolContainer;
 
-        string viewName = $"UICharacter{characterId}View";
-        
-        UICharacterViewController character = pool.Create<UICharacterViewController>(viewName);
+        var def = UiCharacterData.GetDefByCharId(characterId);
+
+        UICharacterViewController character = pool.Create<UICharacterViewController>(def.ViewName);
         character.CharacterId = characterId;
        
         Transform anchor = GetAnchorForCharacterPosition(position);
