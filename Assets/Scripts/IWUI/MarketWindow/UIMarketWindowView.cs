@@ -66,11 +66,16 @@ public class UIMarketWindowView : UIGenericPopupWindowView
     public void Scroll(int index)
     {
         DOTween.Kill(content);
-
+        
         var posX = Mathf.Clamp((-content.CachedRectTransform.sizeDelta.x / content.Tabs.size) * index, -content.CachedRectTransform.sizeDelta.x, 0);
+
+        if (Mathf.Abs(content.CachedRectTransform.anchoredPosition.x - posX) <= 0.01f) return;
+        
+        const float duration = 1.5f;
+        var percent = Mathf.Abs(content.CachedRectTransform.anchoredPosition.x / content.CachedRectTransform.sizeDelta.x);
         
         content.GetScrollRect().enabled = false;
-        content.CachedRectTransform.DOAnchorPosX(posX, 1.5f)
+        content.CachedRectTransform.DOAnchorPosX(posX, duration*percent + duration*(1-percent))
             .SetEase(Ease.InOutBack)
             .SetId(content)
             .OnComplete(() => { content.GetScrollRect().enabled = true; });
@@ -102,6 +107,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
     {
         base.OnViewCloseCompleted();
         TackleBoxEvents.SendMarketClosed();
+        content.GetScrollRect().enabled = true;
     }
 
     private void UpdateLabel()
