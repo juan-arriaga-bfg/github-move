@@ -8,20 +8,30 @@ public class TouchRegion : IWBaseMonoBehaviour, ITouchableListener
     protected BoardElementView context;
 
     private CameraManipulator cameraManipulator;
+
+    private Rect cachedRect;
     
     protected virtual void Awake()
     {
         context = GetComponent<BoardElementView>();
-
-        cameraManipulator = GameObject.FindObjectOfType<CameraManipulator>();
     }
 
-    public virtual bool IsTouchableAt(Vector2 pos)
+    public virtual bool IsTouchableAt(Vector2 pos, int state)
     {
         for (int i = 0; i < touchRegions.Count; i++)
         {
-            var worldRect = GetWorldRect(touchRegions[i]);
-            if (worldRect.Contains(new Vector2(pos.x, pos.y)))
+            if (state == 0)
+            {
+                var worldRect = GetWorldRect(touchRegions[i]);
+                cachedRect = worldRect;
+            }
+
+            if (cachedRect == null)
+            {
+                continue;
+            }
+            
+            if (cachedRect.Contains(new Vector2(pos.x, pos.y)))
             {
                 return true;
             }
@@ -36,7 +46,10 @@ public class TouchRegion : IWBaseMonoBehaviour, ITouchableListener
 
     protected virtual void OnEnable()
     {
-        if (cameraManipulator == null) return;
+        if (cameraManipulator == null)
+        {
+            cameraManipulator = BoardService.Current.FirstBoard.Manipulator.CameraManipulator;
+        }
         
         cameraManipulator.RegisterTouchableListener(this);
     }

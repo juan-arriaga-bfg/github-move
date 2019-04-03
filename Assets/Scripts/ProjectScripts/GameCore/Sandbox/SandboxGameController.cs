@@ -65,8 +65,7 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new HintCooldownComponent()
             .RegisterComponent(new LockerComponent()));
         boardController.RegisterComponent(new PartPiecesLogicComponent());
-        boardController.RegisterComponent(new BoardRenderer().Init(gameBoardResourcesDef,
-            gameBoardRendererView.transform)
+        boardController.RegisterComponent(new BoardRenderer()
             .RegisterComponent(new RendererCachedMaterialsComponent())); // renderer context
         
         boardController.RegisterComponent(new BoardManipulatorComponent()
@@ -109,6 +108,7 @@ public class SandboxGameController : MonoBehaviour
         boardController.States.AddState(SessionBoardStateComponent.ComponentGuid);
         
         boardController.Init(new PieceBuildersBuilder().Build());
+        boardController.RendererContext.Init(gameBoardResourcesDef, gameBoardRendererView.transform);
 
         boardController.RendererContext.CreateBackgroundWater();
         
