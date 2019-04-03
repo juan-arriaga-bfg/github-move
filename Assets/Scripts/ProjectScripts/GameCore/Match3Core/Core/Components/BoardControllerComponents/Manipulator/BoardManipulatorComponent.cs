@@ -80,6 +80,8 @@ public class BoardManipulatorComponent : ECSEntity,
     private bool isFullPass = false;
     
     private BoardElementView cachedViewForDrag = null;
+
+    private BoardElementView cachedViewOnDown = null;
     
     private Vector2 cachedDragDownPos = Vector2.zero;
 
@@ -193,7 +195,7 @@ public class BoardManipulatorComponent : ECSEntity,
         return state;
     }
 
-    private void BeginDrag(Vector2 startPos, Vector2 pos)
+    private void BeginDrag(Vector2 startPos, Vector2 pos, BoardElementView selectedView)
     {
         isDrag = false;
         
@@ -204,7 +206,7 @@ public class BoardManipulatorComponent : ECSEntity,
 
         if (cachedViewForDrag == null)
         {
-            var selectedView = GetSelectedBoardElementView();
+//            var selectedView = GetSelectedBoardElementView();
             
             if (selectedView == null) return;
             
@@ -229,6 +231,7 @@ public class BoardManipulatorComponent : ECSEntity,
             
         }
     }
+    
 
     public bool OnSet(Vector2 startPos, Vector2 pos, float duration)
     {
@@ -244,19 +247,17 @@ public class BoardManipulatorComponent : ECSEntity,
 
         if (CheckDrag(startPos, pos, duration))
         {
-            var selectedView = GetSelectedBoardElementView();
-            if (selectedView != null && selectedView is PieceBoardElementView && (startPos - pos).magnitude < DragTreshold)
+            if (cameraManipulator.CameraMove.IsLockedBy(dragTresholdId))
             {
-                var pieceView = cachedViewForDrag as PieceBoardElementView;
-                if (pieceView != null && pieceView.Piece?.Draggable != null)
+                if ((startPos - pos).magnitude > DragTreshold)
                 {
-                    cameraManipulator.CameraMove.Lock(dragTresholdId, true);
+                    BeginDrag(startPos, startPos, cachedViewOnDown);
                 }
-
-                return true;
+                else
+                {
+                    return true;
+                }
             }
-            
-            BeginDrag(startPos, pos);
         }
         
         if ((pos - startPos).sqrMagnitude <= 0.01f || cachedViewForDrag == null) return false;
@@ -334,6 +335,21 @@ public class BoardManipulatorComponent : ECSEntity,
             isDrag = null;
             isTouch = true;
             isFullPass = true;
+            
+            var selectedView = GetSelectedBoardElementView();
+            if (selectedView != null && selectedView is PieceBoardElementView)
+            {
+                var pieceView = selectedView as PieceBoardElementView;
+                if (pieceView != null && pieceView.Piece?.Draggable != null)
+                {
+                    cameraManipulator.CameraMove.Lock(dragTresholdId, true);
+
+                    cachedViewOnDown = selectedView;
+                }
+
+                return true;
+            }
+            
             return true;
         }
         
@@ -345,6 +361,7 @@ public class BoardManipulatorComponent : ECSEntity,
         isDrag = false;
         
         cameraManipulator.CameraMove.UnLock(dragTresholdId);
+        cachedViewOnDown = null;
         
         if (cachedViewForDrag != null)
         {
