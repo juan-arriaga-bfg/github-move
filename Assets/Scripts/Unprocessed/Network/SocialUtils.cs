@@ -77,7 +77,7 @@ public static class SocialUtils
         MemoryStream zipped = CreateToMemoryStream(dataStream, "profile.data.txt");
         byte[] bytes = zipped.ToArray();
 
-        NetworkUtils.Instance.RequestToBackend("cloud-string/set",
+        NetworkUtils.Instance.RequestToBackend("user-progress/set",
             bytes,
             prms,
             (result) =>
@@ -118,7 +118,7 @@ public static class SocialUtils
             {"key", "progress"}
         };
 
-        NetworkUtils.Instance.PostToBackend("cloud-string/get",
+        NetworkUtils.Instance.PostToBackend("user-progress/get",
             prms,
             (result) =>
             {

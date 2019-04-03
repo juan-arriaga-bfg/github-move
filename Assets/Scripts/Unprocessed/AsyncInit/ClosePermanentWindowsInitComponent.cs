@@ -8,7 +8,9 @@ public class ClosePermanentWindowsInitComponent : AsyncInitComponentBase
     private readonly List<string> windowsToClose = new List<string>
     {
         UIWindowType.MainWindow,
-        UIWindowType.ResourcePanelWindow
+        UIWindowType.ResourcePanelWindow,
+        UIWindowType.WaitWindow,
+        UIWindowType.SettingsWindow
     };
     
     public override void Execute()
