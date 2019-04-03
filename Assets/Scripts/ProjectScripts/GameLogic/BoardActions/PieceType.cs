@@ -341,6 +341,8 @@ public static partial class PieceType
     public static readonly PieceTypeDef Soft4 = new PieceTypeDef{Id = 3103, Abbreviations = new List<string>{ "Soft4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     public static readonly PieceTypeDef Soft5 = new PieceTypeDef{Id = 3104, Abbreviations = new List<string>{ "Soft5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     public static readonly PieceTypeDef Soft6 = new PieceTypeDef{Id = 3105, Abbreviations = new List<string>{ "Soft6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Soft7 = new PieceTypeDef{Id = 3106, Abbreviations = new List<string>{ "Soft7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Soft8 = new PieceTypeDef{Id = 3107, Abbreviations = new List<string>{ "Soft8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     
     public static readonly PieceTypeDef Hard1 = new PieceTypeDef{Id = 3200, Abbreviations = new List<string>{ "Hard1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     public static readonly PieceTypeDef Hard2 = new PieceTypeDef{Id = 3201, Abbreviations = new List<string>{ "Hard2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};

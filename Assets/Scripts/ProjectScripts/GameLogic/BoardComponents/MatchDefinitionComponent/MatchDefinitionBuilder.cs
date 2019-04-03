@@ -263,7 +263,9 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.Soft3.Id, new PieceMatchDef {Next = PieceType.Soft4.Id, Previous = PieceType.Soft2.Id, Amount = 3});
         dict.Add(PieceType.Soft4.Id, new PieceMatchDef {Next = PieceType.Soft5.Id, Previous = PieceType.Soft3.Id, Amount = 3});
         dict.Add(PieceType.Soft5.Id, new PieceMatchDef {Next = PieceType.Soft6.Id, Previous = PieceType.Soft4.Id, Amount = 3});
-        dict.Add(PieceType.Soft6.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Soft5.Id});
+        dict.Add(PieceType.Soft6.Id, new PieceMatchDef {Next = PieceType.Soft7.Id, Previous = PieceType.Soft5.Id, Amount = 3});
+        dict.Add(PieceType.Soft7.Id, new PieceMatchDef {Next = PieceType.Soft8.Id, Previous = PieceType.Soft6.Id, Amount = 3});
+        dict.Add(PieceType.Soft8.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Soft7.Id});
         
         dict.Add(PieceType.Hard1.Id, new PieceMatchDef {Next = PieceType.Hard2.Id, Previous = PieceType.None.Id, Amount = 3});
         dict.Add(PieceType.Hard2.Id, new PieceMatchDef {Next = PieceType.Hard3.Id, Previous = PieceType.Hard1.Id, Amount = 3});

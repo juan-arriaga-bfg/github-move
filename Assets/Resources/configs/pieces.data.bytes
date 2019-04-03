@@ -807,6 +807,44 @@
     ]
   },
   {
+    "Uid": "Soft7",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Coins",
+      "Amount": 3750
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 17
+      }
+    ]
+  },
+  {
+    "Uid": "Soft8",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Coins",
+      "Amount": 11250
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 20
+      }
+    ]
+  },
+  {
     "Uid": "Mana1",
     "SpawnResources": {
       "Currency": "Mana",

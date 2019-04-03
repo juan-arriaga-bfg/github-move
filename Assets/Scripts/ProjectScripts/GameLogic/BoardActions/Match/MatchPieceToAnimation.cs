@@ -133,7 +133,7 @@ public class MatchPieceToAnimation : BoardAnimation
 			return;
 		}
 		
-		if (pieceTypeDef.Id >= PieceType.Soft1.Id && pieceTypeDef.Id <= PieceType.Soft6.Id)
+		if (pieceTypeDef.Id >= PieceType.Soft1.Id && pieceTypeDef.Id <= PieceType.Soft8.Id)
 		{
 			NSAudioService.Current.Play(SoundId.MergeSoftCurr);
 			return;

@@ -316,6 +316,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Soft4.Id, R.Soft4Piece);
         dict.Add(PieceType.Soft5.Id, R.Soft5Piece);
         dict.Add(PieceType.Soft6.Id, R.Soft6Piece);
+        dict.Add(PieceType.Soft7.Id, R.Soft7Piece);
+        dict.Add(PieceType.Soft8.Id, R.Soft8Piece);
         
         dict.Add(PieceType.Hard1.Id, R.Hard1Piece);
         dict.Add(PieceType.Hard2.Id, R.Hard2Piece);

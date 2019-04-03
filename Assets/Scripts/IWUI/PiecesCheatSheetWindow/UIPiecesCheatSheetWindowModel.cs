@@ -40,7 +40,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 break;
             case "Currencies":
                 ids.AddRange(GetPieceIds(PieceType.Mana1.Id, PieceType.Mana5.Id));
-                ids.AddRange(GetPieceIds(PieceType.Soft1.Id, PieceType.Soft6.Id));
+                ids.AddRange(GetPieceIds(PieceType.Soft1.Id, PieceType.Soft8.Id));
                 ids.AddRange(GetPieceIds(PieceType.Hard1.Id, PieceType.Hard6.Id));
                 break;
             case "Mines":

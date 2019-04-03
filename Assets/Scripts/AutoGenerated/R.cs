@@ -526,4 +526,6 @@ public class R
      public const string MN_IPiece = "MN_IPiece";
      public const string MN_IFakePiece = "MN_IFakePiece";
      public const string MineProgressView = "MineProgressView";
+     public const string Soft7Piece = "Soft7Piece";
+     public const string Soft8Piece = "Soft8Piece";
 }
