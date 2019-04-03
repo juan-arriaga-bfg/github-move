@@ -150,7 +150,12 @@ public class UIOfferWindowView : UIGenericPopupWindowView
     private void PurchaseComplete()
     {
         BoardService.Current.FirstBoard.MarketLogic.CompleteOffer();
-        Analytics.SendPurchase($"shop_{Currency.Offer.Name.ToLower()}", $"item{BoardService.Current.FirstBoard.MarketLogic.OfferIndex}", new List<CurrencyPair>{offer.Price}, new List<CurrencyPair>(offer.Products), true, false);
+        
+        Analytics.SendPurchase($"shop_{Currency.Offer.Name.ToLower()}",
+            $"item{ProfileService.Current.GetStorageItem(Currency.Offer.Name).Amount}",
+            new List<CurrencyPair> {offer.Price},
+            new List<CurrencyPair>(offer.Products), true, false);
+        
         Controller.CloseCurrentWindow();
     }
 }
