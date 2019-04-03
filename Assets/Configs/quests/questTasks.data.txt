@@ -116,11 +116,10 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "12_UseMine",
-    "PieceUid": "MN_B",
+    "PieceUid": "MN_B1",
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_B",
         "Title": "quest.use.mine.title",
         "Message": "quest.use.mine.message",
         "Hint": "task.use.mine.mn_b.hint"
@@ -218,19 +217,6 @@
     }
   },
   {
-    "$type": "TaskCollectIngredientEntity, GameAssembly",
-    "Id": "24_CreatePiece_PR_D5",
-    "PieceUid": "PR_D5",
-    "TargetValue": 6,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Title": "quest.collect.ingredient.title",
-        "Message": "quest.collect.ingredient.message",
-        "Hint": "task.collect.ingredient.hint"
-      }
-    }
-  },
-  {
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "25_CreatePiece_B6",
     "PieceUid": "B6",
@@ -245,11 +231,10 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "26_UseMine",
-    "PieceUid": "MN_C",
+    "PieceUid": "MN_C1",
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_C",
         "Title": "quest.use.mine.title",
         "Message": "quest.use.mine.message",
         "Hint": "task.use.mine.mn_c.hint"
@@ -442,11 +427,10 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "42_UseMine",
-    "PieceUid": "MN_B",
+    "PieceUid": "MN_B1",
     "TargetValue": 10,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_B",
         "Title": "quest.use.mine.title",
         "Message": "quest.use.mine.message",
         "Hint": "task.use.mine.mn_b.hint"
@@ -618,11 +602,10 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "57_UseMine",
-    "PieceUid": "MN_C",
+    "PieceUid": "MN_C1",
     "TargetValue": 15,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_C",
         "Title": "quest.use.mine.title",
         "Message": "quest.use.mine.message",
         "Hint": "task.use.mine.mn_c.hint"
@@ -644,11 +627,10 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "59_UseMine",
-    "PieceUid": "MN_E",
+    "PieceUid": "MN_E1",
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_E",
         "Title": "quest.use.mine.title",
         "Message": "quest.use.mine.message",
         "Hint": "task.use.mine.mn_e.hint"
@@ -1038,11 +1020,10 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "95_UseMine",
-    "PieceUid": "MN_C",
+    "PieceUid": "MN_C1",
     "TargetValue": 12,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_C",
         "Title": "quest.use.mine.title",
         "Message": "quest.use.mine.message",
         "Hint": "task.use.mine.mn_c.hint"
@@ -1052,11 +1033,10 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "96_UseMine",
-    "PieceUid": "MN_B",
+    "PieceUid": "MN_B1",
     "TargetValue": 10,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_B",
         "Title": "quest.use.mine.title",
         "Message": "quest.use.mine.message",
         "Hint": "task.use.mine.mn_b.hint"
@@ -1262,11 +1242,10 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "114_UseMine",
-    "PieceUid": "MN_B",
+    "PieceUid": "MN_B1",
     "TargetValue": 20,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_B",
         "Title": "quest.use.mine.title",
         "Message": "quest.use.mine.message",
         "Hint": "task.use.mine.mn_b.hint"
@@ -1386,11 +1365,10 @@
   {
     "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "124_UseMine",
-    "PieceUid": "MN_E",
+    "PieceUid": "MN_E1",
     "TargetValue": 20,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_E",
         "Title": "quest.use.mine.title",
         "Message": "quest.use.mine.message",
         "Hint": "task.use.mine.mn_e.hint"
@@ -1466,6 +1444,163 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "NPC_FIcon",
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "131_CreatePiece_NPC_F5",
+    "PieceUid": "NPC_F5",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "132_CreatePiece_NPC_F6",
+    "PieceUid": "NPC_F6",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "133_CreatePiece_NPC_F7",
+    "PieceUid": "NPC_F7",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "134_CreatePiece_NPC_G3",
+    "PieceUid": "NPC_G3",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "135_CreatePiece_NPC_G4",
+    "PieceUid": "NPC_G4",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "136_CreatePiece_NPC_G5",
+    "PieceUid": "NPC_G5",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "137_CreatePiece_NPC_G6",
+    "PieceUid": "NPC_G6",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "138_CreatePiece_NPC_G7",
+    "PieceUid": "NPC_G7",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "139_CreatePiece_NPC_G",
+    "PieceUid": "NPC_G",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "NPC_GIcon",
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "140_CreatePiece_A5",
+    "PieceUid": "A5",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "141_CreatePiece_B8",
+    "PieceUid": "B8",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "142_CreatePiece_B9",
+    "PieceUid": "B9",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "143_CreatePiece_B10",
+    "PieceUid": "B10",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
         "Title": "quest.create.piece.title",
         "Message": "quest.create.piece.message"
       }
@@ -1675,26 +1810,6 @@
     }
   },
   {
-    "$type": "TaskKillFieldEntity, GameAssembly",
-    "Id": "Daily_Quest_9",
-    "Group": "Normal",
-    "TargetValue": 4,
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 45
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Ico": "killFieldDailyQuestIcon",
-        "Message": "quest.kill.field.message"
-      }
-    }
-  },
-  {
     "$type": "TaskCurrencySpendEntity, GameAssembly",
     "Id": "Daily_Quest_10",
     "Group": "Hard",
@@ -1719,13 +1834,13 @@
     "Id": "Daily_Quest_11",
     "Group": "Hard",
     "PieceUid": "Crystals",
-    "TargetValue": 15,
+    "TargetValue": 10,
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
           {
             "Currency": "Crystals",
-            "Amount": 20
+            "Amount": 15
           }
         ]
       },
