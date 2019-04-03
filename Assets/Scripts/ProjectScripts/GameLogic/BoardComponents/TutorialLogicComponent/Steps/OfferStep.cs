@@ -30,7 +30,7 @@
         timer.OnComplete += OnTimerComplete;
         
         var save = ProfileService.Current.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
-        
+
         if (save != null && string.IsNullOrEmpty(save.OfferTimerStartTime) == false) timer.Start(long.Parse(save.OfferTimerStartTime));
         else timer.Start();
         
@@ -59,7 +59,7 @@
 
     private void OnTimerComplete()
     {
-        Context.UpdateHard();
         BoardService.Current.FirstBoard.MarketLogic.CompleteOffer();
+        Context.UpdateHard();
     }
 }
