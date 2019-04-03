@@ -149,7 +149,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         // Handle migration - case when target is changed
         foreach (var quest in startedQuests)
         {
-            quest.ForceCheckActiveTasks();
+            quest.ForceCheckActiveTasks(this);
         }
     }
 
