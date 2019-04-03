@@ -212,6 +212,10 @@
     ],
     "OrdersWeights": [
       {
+        "Uid": "Order1",
+        "Weight": 0
+      },
+      {
         "Uid": "Order4",
         "Weight": 4
       },
@@ -538,11 +542,6 @@
       {
         "Uid": "Order7",
         "Weight": 2,
-        "Override": true
-      },
-      {
-        "Uid": "Order1",
-        "Weight": 1,
         "Override": true
       },
       {

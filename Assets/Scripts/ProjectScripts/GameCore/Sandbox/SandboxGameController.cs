@@ -101,7 +101,6 @@ public class SandboxGameController : MonoBehaviour
             .RegisterState(new SessionBoardStateComponent(SessionBoardStateType.Processing))
         ); // states
         
-        boardController.RegisterComponent(new TutorialLogicComponent().RegisterComponent(new LockerComponent()));
         boardController.RegisterComponent(new QuestConnectorComponent());
 
         // GameBoardDebugComponent used for unit tests and debug operations with field
@@ -128,6 +127,7 @@ public class SandboxGameController : MonoBehaviour
         );
         
         boardController.BoardLogic.RegisterComponent(new FireflyLogicComponent());
+        boardController.RegisterComponent(new TutorialLogicComponent().RegisterComponent(new LockerComponent()));
         boardController.RendererContext.CreateBorders();
         
         // var widthShift = boardController.BoardDef.Width / 4;

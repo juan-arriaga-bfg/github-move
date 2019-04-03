@@ -6,6 +6,7 @@ public static class UiCharacterData
     public const string CharPussInBoots = "PussInBoots";
     public const string CharRapunzel = "Rapunzel";
     public const string CharGnomeWorker = "GnomeWorker";
+    public const string CharGnomeWorker2 = "GnomeWorker2";
     public const string CharRedHood = "RedHood";
     public const string Mermaid = "Mermaid";
     public const string TigerLilly = "TigerLilly";
@@ -80,6 +81,16 @@ public static class UiCharacterData
                 Id = CharGnomeWorker,
                 Name = "conversation.character.GnomeWorker",
                 ColorHex = "#00A0FF"
+            }
+        },
+        { 
+            CharGnomeWorker2, 
+            new UICharacterDef
+            {
+                Id = CharGnomeWorker2,
+                Name = "conversation.character.GnomeWorker2",
+                ColorHex = "#00A0FF",
+                ViewName = $"UICharacter{CharGnomeWorker}View" // Use the same view as for CharGnomeWorker #1
             }
         },
         { 
