@@ -163,6 +163,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         if (string.IsNullOrEmpty(id))
         {
             id = "codexQuestion";
+            IW.Logger.LogWarning($"[QuestButton] => icon is Null or Empty");
         }
 
         if (ContentService.Current.IsObjectRegistered(id) == false)

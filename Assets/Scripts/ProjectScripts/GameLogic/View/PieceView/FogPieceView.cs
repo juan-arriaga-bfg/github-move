@@ -195,18 +195,25 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 
                 if (context == currentPiece && observer.RequiredConditionReached() && observer.CanBeReached() && observer.CanBeFilled())
                 {
-                    PointToManaPieceOnBoard();
+                    Hint();
                 }
                 break;
         }
     }
 
-    private void PointToManaPieceOnBoard()
+    private void Hint()
     {
-        bool isManaOnField = HighlightTaskPointToPieceHelper.FindAndPointToLastPieceInChain(PieceType.Mana1.Id);
-        if (!isManaOnField)
+        // Check mana
+        bool isManaPieceOnField = HighlightTaskPointToPieceHelper.FindAndPointToLastPieceInChain(PieceType.Mana1.Id);
+        if (!isManaPieceOnField)
         {
-            new HighlightTaskPointToOrdersButton().Highlight(null);
+            // then order pieces
+            bool isOrderPieceOnField = new HighlightTaskPointToRandomOrderPiece().Highlight(null);
+            if (!isOrderPieceOnField)
+            {
+                // and finally orders btn
+                new HighlightTaskPointToOrdersButton().Highlight(null);
+            }
         }
     }
 

@@ -76,9 +76,9 @@ public class UINextLevelWindowView : UIGenericWindowView
     
     protected virtual UICharacterViewController CreateCharacter(string characterId, CharacterEmotion emotion, CharacterSide side, RectTransform container)
     {
-        string viewName = $"UICharacter{characterId}View";
+        var def = UiCharacterData.GetDefByCharId(characterId);
         
-        UICharacterViewController character = UIService.Get.PoolContainer.Create<UICharacterViewController>(viewName);
+        UICharacterViewController character = UIService.Get.PoolContainer.Create<UICharacterViewController>(def.ViewName);
         character.CharacterId = characterId;
 
         Transform anchor = container;
