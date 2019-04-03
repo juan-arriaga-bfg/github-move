@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touchRegions:
   - {fileID: 224055440444089832}
+  - {fileID: 0}
 --- !u!1 &1464588821666100
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,8 +548,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.25, y: 0}
-  m_SizeDelta: {x: 2, y: 2}
+  m_AnchoredPosition: {x: 1.25, y: 0.2143}
+  m_SizeDelta: {x: 3, y: 2.4286}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &87005539906727458
 GameObject:

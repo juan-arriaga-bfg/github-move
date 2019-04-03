@@ -4802,7 +4802,7 @@ ParticleSystem:
 --- !u!199 &199821800443633764
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -5006,8 +5006,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.15}
-  m_SizeDelta: {x: 1.8, y: 1.3}
+  m_AnchoredPosition: {x: 0, y: 0.3746}
+  m_SizeDelta: {x: 1.8, y: 1.7493}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1924086398574114
 GameObject:
@@ -5058,10 +5058,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4774c322be660e249b6b5cf383e639a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastBoardPosition:
-    X: 0
-    Y: 0
-    Z: 0
   cachedSortingGroup: {fileID: 0}
   IsFading: 0
   FadeValue: 0
