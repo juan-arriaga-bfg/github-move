@@ -145,7 +145,15 @@ public static class ProfileSlots
                 return;
             }
             
+            // Do not allow to write into current profile until reload
+            var curManager = ProfileService.Instance.Manager;
+            if (curManager != null)
+            {
+                curManager.ReadOnly = true;
+            }
+            
             manager.UploadCurrentProfile(GetDataMapper(ActiveSlot));
+
             onComplete(null);
         });
     }

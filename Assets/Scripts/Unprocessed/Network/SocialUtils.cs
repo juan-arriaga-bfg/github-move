@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using CodeStage.AntiCheat.ObscuredTypes;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
+using UnityEngine;
 
 public static class SocialUtils
 {
@@ -23,7 +27,7 @@ public static class SocialUtils
     private const string BACKEND_USER_ID = "BACKEND_USER_ID";
     private const string BACKEND_IS_LOGGED_IN = "BACKEND_IS_LOGGED_IN";
 
-    private static bool IsRequestInProgress;
+    private static volatile bool IsRequestInProgress;
     
     public static bool IsLoggedInRave()
     {
@@ -43,7 +47,7 @@ public static class SocialUtils
         public static bool IsLoggedInRave => IsLoggedInRave();
     }
 
-    public static void SendProgress(string data)
+    public static void ArchiveAndSend(string data)
     {
         if (IsRequestInProgress)
         {
@@ -57,14 +61,14 @@ public static class SocialUtils
             {
                 if (string.IsNullOrEmpty(error))
                 {
-                    SendProgress(data);
+                    ArchiveAndSend(data);
                 }
             });
             return;
         }
 
         IsRequestInProgress = true;
-        
+
         bool force = true;
         
         var prms = new Dictionary<string, string>
@@ -73,40 +77,65 @@ public static class SocialUtils
             {"force", force.ToString().ToLower()}
         };
         
-        MemoryStream dataStream = new MemoryStream(Encoding.UTF8.GetBytes(data));
-        MemoryStream zipped = CreateToMemoryStream(dataStream, "profile.data.txt");
-        byte[] bytes = zipped.ToArray();
+        byte[] bytes = null;
 
-        NetworkUtils.Instance.RequestToBackend("user-progress/set",
-            bytes,
-            prms,
-            (result) =>
+        Task.Run(() =>
+        {
+            bytes = Archive(data); // Parallel thread
+        })
+        .GetAwaiter().OnCompleted(() =>
+        {
+            SendProgress(bytes, prms); // Main thread
+        });
+
+    }
+
+    private static void SendProgress(byte[] bytes, Dictionary<string, string> prms)
+    {
+        NetworkUtils.Instance.RequestToBackend("user-progress/set", bytes, prms, (result) =>
+        {
+            if (result.IsOk)
             {
-                if (result.IsOk)
+                try
                 {
-                    try
-                    {
-                        var resultStr = result.ResultAsJson["status"].Value;
+                    var resultStr = result.ResultAsJson["status"].Value;
 
-                        IW.Logger.Log($"[SocialUtils] => SendProgress: {resultStr}");
-                    }
-                    catch (Exception e)
-                    {
-                        IW.Logger.LogError($"[SocialUtils] => SendProgress: {e.GetType()} {e.Message}");
-                    }
+                    IW.Logger.Log($"[SocialUtils] => SendProgress: {resultStr}");
                 }
-                else if (result.IsConnectionError)
+                catch (Exception e)
                 {
-                    IW.Logger.LogError($"[SocialUtils] => SendProgress: Connection error");
+                    IW.Logger.LogError($"[SocialUtils] => SendProgress: {e.GetType()} {e.Message}");
                 }
-                else
-                {
-                    IW.Logger.LogError($"[SocialUtils] => SendProgress: {result.ErrorAsText}");
-                }
-
-                IsRequestInProgress = false;
             }
-        );
+            else if (result.IsConnectionError)
+            {
+                IW.Logger.LogError($"[SocialUtils] => SendProgress: Connection error");
+            }
+            else
+            {
+                IW.Logger.LogError($"[SocialUtils] => SendProgress: {result.ErrorAsText}");
+            }
+
+            IsRequestInProgress = false;
+        }); 
+    }
+
+    private static byte[] Archive(string data)
+    {
+#if DEBUG
+        var sw = new Stopwatch();
+        sw.Start();
+#endif 
+        MemoryStream dataStream = new MemoryStream(Encoding.UTF8.GetBytes(data));
+        MemoryStream zipped = CreateZipToMemoryStream(dataStream, "profile.data.txt");
+        var ret = zipped.ToArray();
+        
+#if DEBUG
+        sw.Stop();
+        IW.Logger.Log($"[SocialUtils] => SendProgress: Archive: Done in {sw.ElapsedMilliseconds}ms");
+#endif
+
+        return ret;
     }
 
     public delegate void DownloadProgressCallback(SyncControllerDownloadRequestStatus status, string data);
@@ -170,7 +199,7 @@ public static class SocialUtils
             });
     }
     
-    public static MemoryStream CreateToMemoryStream(MemoryStream memStreamIn, string zipEntryName) {
+    public static MemoryStream CreateZipToMemoryStream(MemoryStream memStreamIn, string zipEntryName) {
 
         MemoryStream outputMemStream = new MemoryStream();
         ZipOutputStream zipStream = new ZipOutputStream(outputMemStream);
@@ -191,20 +220,23 @@ public static class SocialUtils
         outputMemStream.Position = 0;
         return outputMemStream;
     }
-    
+
     public static string ExtractZipFile(MemoryStream ms)
     {
         string ret = null;
-        
+
         ZipFile zf = null;
-        try {
+        try
+        {
             zf = new ZipFile(ms);
 
-            foreach (ZipEntry zipEntry in zf) {
-                if (!zipEntry.IsFile) {
+            foreach (ZipEntry zipEntry in zf)
+            {
+                if (!zipEntry.IsFile)
+                {
                     continue; // Ignore directories
                 }
-                
+
                 // String entryFileName = zipEntry.Name;
 
                 byte[] buffer = new byte[4096]; // 4K is optimum
@@ -216,8 +248,11 @@ public static class SocialUtils
                     ret = new UTF8Encoding(false).GetString(outputStream.ToArray());
                 }
             }
-        } finally {
-            if (zf != null) {
+        }
+        finally
+        {
+            if (zf != null)
+            {
                 zf.IsStreamOwner = true; // Makes close also shut the underlying stream
                 zf.Close();              // Ensure we release resources
             }

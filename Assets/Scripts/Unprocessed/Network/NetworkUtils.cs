@@ -107,7 +107,7 @@ public class NetworkUtils
         }
         else if (rawData != null)
         {
-            request.RawData = rawData;
+            request.AddBinaryData("raw", rawData);
         }
         else
         {
