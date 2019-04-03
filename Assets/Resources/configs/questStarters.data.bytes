@@ -1620,9 +1620,9 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
-        "Id": "PieceUnlocked",
-        "Value": "Boost_WR"
+        "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
+        "Id": "FogCleared",
+        "Value": "Fog 6"
       }
     ]
   },
