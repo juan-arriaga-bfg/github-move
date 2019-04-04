@@ -68,6 +68,8 @@ public class WorkerTutorialStep2 : LoopFingerTutorialStep
 
     private BoardPosition? CheckNearestState(List<BoardPosition> positions)
     {
+        if (positions == null) return null;
+        
         foreach (var position in positions)
         {
             var target = Context.Context.BoardLogic.GetPieceAt(position);
