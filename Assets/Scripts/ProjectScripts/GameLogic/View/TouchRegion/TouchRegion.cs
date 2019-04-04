@@ -31,7 +31,7 @@ public class TouchRegion : IWBaseMonoBehaviour, ITouchableListener
                 continue;
             }
             
-            if (cachedRect.Contains(new Vector2(pos.x, pos.y)))
+            if (Contains(new Vector2(pos.x, pos.y), cachedRect))
             {
                 return true;
             }
@@ -42,6 +42,11 @@ public class TouchRegion : IWBaseMonoBehaviour, ITouchableListener
     public object GetContext()
     {
         return context;
+    }
+    
+    public bool Contains(Vector2 point, Rect rect)
+    {
+        return point.x >= rect.xMin && point.x < rect.xMax && point.y >= rect.yMin && point.y < rect.yMax;
     }
 
     protected virtual void OnEnable()
