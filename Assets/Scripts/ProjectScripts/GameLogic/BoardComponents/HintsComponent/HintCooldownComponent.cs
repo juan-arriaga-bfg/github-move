@@ -69,7 +69,7 @@ public class HintCooldownComponent : ECSEntity
 		RegisterComponent(timerBounce, true);
 		
 		chestsId = PieceType.GetIdsByFilter(PieceTypeFilter.Chest);
-		minesId = PieceType.GetIdsByFilter(PieceTypeFilter.Mine);
+		minesId = PieceType.GetIdsByFilter(PieceTypeFilter.Mine, PieceTypeFilter.Fake);
 		obstaclesId = PieceType.GetIdsByFilter(PieceTypeFilter.Obstacle);
 		
 		Step(HintType.Obstacle);
