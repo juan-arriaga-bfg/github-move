@@ -162,9 +162,20 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     /// <param name="questsDataManager"></param>
     public virtual void ForceCheckActiveTasks(QuestsDataManager questsDataManager)
     {
+        bool anyTaskUpdated = false;
         foreach (var task in ActiveTasks)
         {
-            task.Check();
+            if (task.IsCompletedOrClaimed())
+            {
+                continue;
+            }
+            
+            anyTaskUpdated = anyTaskUpdated || task.Check();
+        }
+
+        if (anyTaskUpdated)
+        {
+            UpdateState();
         }
     }
     
