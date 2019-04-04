@@ -44,7 +44,30 @@ public class MarketItem
     
     public string Name => IsPiece ? $"piece.name.{Reward.Currency}" : current.Name;
     public string Icon => IsPiece ? Reward.Currency : current.Icon;
-    
+    public string Description
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(current?.Description)) return string.Format(LocalizationService.Get("window.market.description.lock", "window.market.description.lock {0}"), Level);
+            if (current.Bundle != MarketItemBundle.Chests) return LocalizationService.Get(current.Description, current.Description);
+            
+            var def = GameDataService.Current.ChestsManager.GetChest(PieceType.Parse(Reward.Currency));
+            var min = int.MaxValue;
+
+            foreach (var weight in def.PieceWeights)
+            {
+                var pieceDef = PieceType.GetDefById(weight.Piece);
+                if (pieceDef.Filter.Has(PieceTypeFilter.Progress) == false || min < weight.Piece) continue;
+
+                min = weight.Piece;
+            }
+
+            if (min == int.MaxValue) min = PieceType.None.Id;
+                
+            return string.Format(LocalizationService.Get(current.Description, $"{current.Description} {0}"), $"<sprite name={PieceType.Parse(min)}>");
+        }
+    }
+
     private readonly List<MarketDef> defs = new List<MarketDef>();
 
     private MarketDef current;

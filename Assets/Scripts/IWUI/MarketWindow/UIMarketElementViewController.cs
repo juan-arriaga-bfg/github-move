@@ -31,10 +31,6 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	{
 		base.Init();
 		
-#if !DEBUG
-		btnInfo.gameObject.SetActive(false);
-#endif
-		
 		var contentEntity = entity as UIMarketElementEntity;
 		
 		isClick = false;
@@ -127,7 +123,17 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 
 	private void OnClickInfo()
 	{
+		
+#if DEBUG
 		UIMessageWindowController.CreateDefaultMessage($"Slot {GetIndex()}");
+		return;
+#endif
+		
+		var contentEntity = entity as UIMarketElementEntity;
+		
+		UIMessageWindowController.CreateMessage(
+			LocalizationService.Get("window.market.description.title", "window.market.description.title"),
+			contentEntity.Def.Description);
 	}
 
 	private void OnClick()

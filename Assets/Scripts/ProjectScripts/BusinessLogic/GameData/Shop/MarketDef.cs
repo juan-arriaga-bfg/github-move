@@ -32,4 +32,5 @@ public class MarketDef
     public bool IsPermanent;
     public string Name;
     public string Icon;
+    public string Description;
 }
