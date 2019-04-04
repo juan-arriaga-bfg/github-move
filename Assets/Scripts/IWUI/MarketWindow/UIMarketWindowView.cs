@@ -107,7 +107,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
     {
         base.OnViewCloseCompleted();
         TackleBoxEvents.SendMarketClosed();
-        content.GetScrollRect().enabled = true;
+        if (content != null && content.GetScrollRect() != null) content.GetScrollRect().enabled = true;
     }
 
     private void UpdateLabel()
