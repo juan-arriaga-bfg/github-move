@@ -79,7 +79,7 @@ public class UIDailyRewardElementViewController : UISimpleScrollElementViewContr
         var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(btnClaim.transform.position);
 	    
         CurrencyHelper.PurchaseAsyncOnlyCurrency(currenciesReward, flyPosition, null);
-        ProfileService.Instance.Manager.UploadCurrentProfile();
+        ProfileService.Instance.Manager.UploadCurrentProfile(false);
         Analytics.SendPurchase("daily_reward", $"item{transform.GetSiblingIndex()}", null, new List<CurrencyPair>(currenciesReward), false, true);
         context.Controller.CloseCurrentWindow();
     }

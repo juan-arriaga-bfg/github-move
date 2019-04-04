@@ -43,7 +43,7 @@ public class UIQuestStartWindowView : IWUIWindowView
     {
         base.OnViewShow();
 
-        ProfileService.Instance.Manager.UploadCurrentProfile();
+        ProfileService.Instance.Manager.UploadCurrentProfile(false);
         
         CleanUp();
         

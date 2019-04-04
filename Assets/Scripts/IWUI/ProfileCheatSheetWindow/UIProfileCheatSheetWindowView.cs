@@ -20,7 +20,7 @@ public class UIProfileCheatSheetWindowView : UIGenericPopupWindowView
     {
         base.OnViewShow();
         
-        ProfileService.Instance.Manager.UploadCurrentProfile();
+        ProfileService.Instance.Manager.UploadCurrentProfile(false);
 
         UIProfileCheatSheetWindowModel windowModel = Model as UIProfileCheatSheetWindowModel;
         

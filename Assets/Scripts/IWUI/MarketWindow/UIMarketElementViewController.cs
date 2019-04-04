@@ -107,7 +107,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			rewardPosition,
 			() =>
 			{
-				ProfileService.Instance.Manager.UploadCurrentProfile();
+				ProfileService.Instance.Manager.UploadCurrentProfile(false);
 				BoardService.Current.FirstBoard.TutorialLogic.Update();
 			},
 			false,
@@ -201,7 +201,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 				{
 					if (success)
 					{
-						ProfileService.Instance.Manager.UploadCurrentProfile();
+						ProfileService.Instance.Manager.UploadCurrentProfile(false);
 						
                         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.PurchaseInMarket, contentEntity.Def);
 					}
