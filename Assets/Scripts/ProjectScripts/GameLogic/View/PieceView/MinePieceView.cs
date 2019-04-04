@@ -1,20 +1,17 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class MinePieceView : CooldownPieceView
-{
-    [SerializeField] private Transform rootObject;
-    protected override string coolDownParticle => R.MineProcessParticle;
-    protected override string coolDownLeaveParticle => R.MineEndParticle;
-    protected override string coolDownEnterParticle => R.MineEndParticle;
+public class MinePieceView : PieceBoardElementView
+{   
+    [SerializeField] private Transform rootObject; 
 
-    protected override void OnComplete()
+    public void PlayRestoreAnimation()
     {
-        ParticleView.Show(coolDownLeaveParticle, Piece.CachedPosition.SetZ(Piece.CachedPosition.Z + 1));
-        ToggleEffectsByState(false);
+        
+    }
 
-        var sequence = DOTween.Sequence();
-        sequence.InsertCallback(0.2f, UpdateSate);
+    public void CompleteRestoreAnimation()
+    {
         
     }
 
@@ -38,9 +35,16 @@ public class MinePieceView : CooldownPieceView
         sequence.Append(rootObject.DOScale(new Vector3(1.13f, 0.98f, 1f), 0.18f).SetEase(ease));
         sequence.Append(rootObject.DOScale(new Vector3(1f, 1f, 1f), 0.18f).SetEase(ease));
     }
-
+    
     public void CompleteWorkAnimation()
     {
         SetCustomMaterial(BoardElementMaterialType.PiecesHighlightMaterial, false);
     }
+
+    public override void Init(BoardRenderer context, Piece piece)
+    {
+        base.Init(context, piece);
+    }
+
+    
 }

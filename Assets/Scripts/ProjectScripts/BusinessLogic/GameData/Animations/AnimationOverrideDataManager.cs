@@ -28,10 +28,45 @@ public class AnimationOverrideDataManager
     private void AddByFilter(Dictionary<int, AnimationDef> defDict, PieceTypeFilter filter,
         AnimationDef definition)
     {
-        var piecesId = PieceType.GetIdsByFilter(filter);
+        AddByFilter(defDict, filter, PieceTypeFilter.Default, definition);
+    }
+    
+    private void AddByFilter(Dictionary<int, AnimationDef> defDict, PieceTypeFilter filter, PieceTypeFilter exclude,
+        AnimationDef definition)
+    {
+        var piecesId = PieceType.GetIdsByFilter(filter, exclude);
         foreach (var id in piecesId)
         {
             AddPiece(defDict, id, definition);
+        }
+    }
+
+    private void AddByManyFilters(Dictionary<int, AnimationDef> defDict, List<PieceTypeFilter> filters,
+        AnimationDef definition)
+    {
+        if (filters == null)
+        {
+            return;
+        }
+        
+        var piecesId = PieceType.GetAllIds();
+        foreach (var id in piecesId)
+        {
+            var def = PieceType.GetDefById(id);
+            var isValid = true;
+            foreach (var filter in filters)
+            {
+                if (def.Filter.Has(filter) == false)
+                {
+                    isValid = false;
+                    break;
+                }
+            }
+
+            if (isValid)
+            {
+                AddPiece(defDict, id, definition);    
+            }
         }
     }
     
@@ -62,6 +97,16 @@ public class AnimationOverrideDataManager
         AddPiece(defs, PieceType.NPC_Gnome.Id, new AnimationDef
         {
             OnDestroyFromBoard = R.DestroyWorkerAnimation
+        });
+        
+        AddByFilter(defs, PieceTypeFilter.Mine, PieceTypeFilter.Fake, new AnimationDef
+        {
+            OnMergeSpawn = R.DestroyWorkerAnimation
+        });
+        
+        AddByManyFilters(defs, new List<PieceTypeFilter> {PieceTypeFilter.Mine, PieceTypeFilter.Fake}, new AnimationDef
+        {
+            OnMergeSpawn = R.DestroyWorkerAnimation
         });
         
         return defs;
