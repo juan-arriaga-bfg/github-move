@@ -97,7 +97,7 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
         {
             var typeDef = PieceType.GetDefById(Context.PieceType);
             
-            if (typeDef.Filter.HasFlag(PieceTypeFilter.Mine))
+            if (typeDef.Filter.Has(PieceTypeFilter.Mine) && typeDef.Filter.Has(PieceTypeFilter.Fake) == false)
             {
                 NSAudioService.Current.Play(SoundId.WorkerMine);
             }

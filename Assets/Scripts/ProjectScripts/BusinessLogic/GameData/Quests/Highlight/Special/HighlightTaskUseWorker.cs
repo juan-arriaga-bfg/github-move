@@ -57,7 +57,7 @@ public class HighlightTaskUseWorker : TaskHighlightUsingArrow
 
         var board = BoardService.Current.FirstBoard;
         var posCache = board.BoardLogic.PositionsCache;
-        var workPlacesList = posCache.GetPiecePositionsByFilter(PieceTypeFilter.Mine);
+        var workPlacesList = posCache.GetPiecePositionsByFilter(PieceTypeFilter.Mine, PieceTypeFilter.Fake);
         
         workPlacesList.AddRange(posCache.GetPiecePositionsByFilter(PieceTypeFilter.Obstacle));
         workPlacesList.AddRange(posCache.GetPiecePositionsByFilter(PieceTypeFilter.Multicellular | PieceTypeFilter.Progress, PieceTypeFilter.Fake));
