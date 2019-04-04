@@ -12,8 +12,10 @@ public class TaskUseMineEntity : TaskEventCounterEntity
     protected override int EventCode => GameEventsCodes.MineUsed;
 
     public int PieceId { get; protected set; } = -1;
-    
+
     private List<int> chain;
+    
+    public List<int> Chain => chain ?? FillChain();
 
 #region Serialization
 
@@ -70,7 +72,7 @@ public class TaskUseMineEntity : TaskEventCounterEntity
         }
     }
 
-    private bool IsPieceInChain(int id)
+    private List<int> FillChain()
     {
         if (chain == null)
         {
@@ -85,6 +87,11 @@ public class TaskUseMineEntity : TaskEventCounterEntity
             }
         }
 
-        return chain.Contains(id);
+        return chain;
+    }
+    
+    private bool IsPieceInChain(int id)
+    {
+        return Chain.Contains(id);
     }
 }
