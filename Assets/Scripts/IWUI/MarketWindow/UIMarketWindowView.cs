@@ -97,6 +97,8 @@ public class UIMarketWindowView : UIGenericPopupWindowView
     {
         base.OnViewClose();
         
+        content.GetScrollRect().enabled = true;
+        
         DOTween.Kill(content);
         
         BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.OnTimeChanged -= UpdateLabel;
@@ -107,7 +109,6 @@ public class UIMarketWindowView : UIGenericPopupWindowView
     {
         base.OnViewCloseCompleted();
         TackleBoxEvents.SendMarketClosed();
-        if (content != null && content.GetScrollRect() != null) content.GetScrollRect().enabled = true;
     }
 
     private void UpdateLabel()
