@@ -13,10 +13,19 @@ public class UIChestMessageWindowModel : IWWindowModel
     {
         var icons = new List<string>();
 
+        if (ChestComponent.Def.Piece == PieceType.CH_NPC.Id && ChestComponent.Def.CharactersAmount.IsActive)
+        {
+            icons = AddIcons(icons, GameDataService.Current.CharactersManager.CharactersWeights);
+        }
+
         if (ChestComponent.Def.PieceAmount > 0) icons = AddIcons(icons, ChestComponent.Def.PieceWeights);
         if (ChestComponent.Def.ProductionAmount.IsActive) icons = AddIcons(icons, GameDataService.Current.LevelsManager.PieceWeights);
         if (ChestComponent.Def.ResourcesAmount.IsActive) icons = AddIcons(icons, GameDataService.Current.LevelsManager.ResourcesWeights);
-        if (ChestComponent.Def.CharactersAmount.IsActive) icons = AddIcons(icons, GameDataService.Current.CharactersManager.CharactersWeights);
+        
+        if (ChestComponent.Def.Piece != PieceType.CH_NPC.Id && ChestComponent.Def.CharactersAmount.IsActive)
+        {
+            icons = AddIcons(icons, GameDataService.Current.CharactersManager.CharactersWeights);
+        }
         
         return icons;
     }
