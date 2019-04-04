@@ -11,11 +11,12 @@ public class UIChestMessageWindowModel : IWWindowModel
 
     public List<string> Icons()
     {
-        var icons = AddIcons(new List<string>(), ChestComponent.Def.PieceWeights);
-        
-        icons = AddIcons(icons, GameDataService.Current.LevelsManager.PieceWeights);
-        icons = AddIcons(icons, GameDataService.Current.LevelsManager.ResourcesWeights);
-        icons = AddIcons(icons, GameDataService.Current.CharactersManager.CharactersWeights);
+        var icons = new List<string>();
+
+        if (ChestComponent.Def.PieceAmount > 0) icons = AddIcons(icons, ChestComponent.Def.PieceWeights);
+        if (ChestComponent.Def.ProductionAmount.IsActive) icons = AddIcons(icons, GameDataService.Current.LevelsManager.PieceWeights);
+        if (ChestComponent.Def.ResourcesAmount.IsActive) icons = AddIcons(icons, GameDataService.Current.LevelsManager.ResourcesWeights);
+        if (ChestComponent.Def.CharactersAmount.IsActive) icons = AddIcons(icons, GameDataService.Current.CharactersManager.CharactersWeights);
         
         return icons;
     }

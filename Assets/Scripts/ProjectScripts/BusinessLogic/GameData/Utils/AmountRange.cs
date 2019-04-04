@@ -22,4 +22,6 @@ public class AmountRange
         value = Random.Range(Min, Max + 1);
         return value;
     }
+
+    public bool IsActive => Min >= 0 && Max > 0;
 }
