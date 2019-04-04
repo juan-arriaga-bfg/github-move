@@ -417,6 +417,10 @@ public class DragAndCheckMatchAction : IBoardAction
 	private List<BoardPosition> NormalizeFreeList(List<BoardPosition> free, List<BoardPosition> piecesPositions)
 	{
 		var normalized = new List<BoardPosition>();
+		if (free == null || free.Count == 0)
+		{
+			return normalized;
+		}
 		foreach (var piecePos in piecesPositions)
 		{
 			var near = free[0];

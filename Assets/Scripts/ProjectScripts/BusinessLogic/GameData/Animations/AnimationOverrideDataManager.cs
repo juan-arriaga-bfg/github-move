@@ -101,12 +101,12 @@ public class AnimationOverrideDataManager
         
         AddByFilter(defs, PieceTypeFilter.Mine, PieceTypeFilter.Fake, new AnimationDef
         {
-            OnMergeSpawn = R.DestroyWorkerAnimation
+            OnMergeSpawn = R.SpawnNormalMineAnimation
         });
         
         AddByManyFilters(defs, new List<PieceTypeFilter> {PieceTypeFilter.Mine, PieceTypeFilter.Fake}, new AnimationDef
         {
-            OnMergeSpawn = R.DestroyWorkerAnimation
+            OnMergeSpawn = R.SpawnFakeMineAnimation
         });
         
         return defs;

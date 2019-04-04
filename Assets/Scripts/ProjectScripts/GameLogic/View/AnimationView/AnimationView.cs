@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimationView: BoardElementView
 {
-    [SerializeField] protected int lifeTime = 5;
+    [SerializeField] protected float lifeTime = 3;
     
     public Action OnComplete;
     public Action<PieceBoardElementView> OnPlay;
