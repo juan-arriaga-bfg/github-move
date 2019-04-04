@@ -110,21 +110,21 @@ public class UIHardShopElementViewController : UIShopElementViewController
 
     protected override void OnPurchaseComplete()
     {
+        if (isOffer)
+        {
+            BoardService.Current.FirstBoard.MarketLogic.CompleteOffer();
+            BoardService.Current.FirstBoard.TutorialLogic.UpdateHard();
+            BoardService.Current.FirstBoard.MarketLogic.OfferTimer.OnTimeChanged -= UpdateTimer;
+        }
+        
         base.OnPurchaseComplete();
         
         var contentEntity = entity as UIShopElementEntity;
 
-        if (contentEntity.IsPermanent == false)
-        {
-            isClaimed = true;
-            ChangeView();
-        }
+        if (contentEntity.IsPermanent) return;
         
-        if (isOffer == false) return;
-        
-        BoardService.Current.FirstBoard.MarketLogic.CompleteOffer();
-        BoardService.Current.FirstBoard.TutorialLogic.UpdateHard();
-        BoardService.Current.FirstBoard.MarketLogic.OfferTimer.OnTimeChanged -= UpdateTimer;
+        isClaimed = true;
+        ChangeView();
     }
     
     private void UpdateTimer()
