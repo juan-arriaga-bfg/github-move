@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
@@ -11,7 +12,9 @@ public class TaskUseMineEntity : TaskEventCounterEntity
     protected override int EventCode => GameEventsCodes.MineUsed;
 
     public int PieceId { get; protected set; } = -1;
-        
+    
+    private List<int> chain;
+
 #region Serialization
 
     [JsonProperty] public string PieceUid;
@@ -51,9 +54,37 @@ public class TaskUseMineEntity : TaskEventCounterEntity
             return;
         }
 
-        if (PieceId <= 0 || (context as MineLifeComponent)?.Context.PieceType == PieceId)
+        if (PieceId <= 0)
         {
             CurrentValue += 1;
+            return;
         }
-    } 
+
+        if (context is MineLifeComponent lifeComponent)
+        {
+            int id = lifeComponent.Context.PieceType;
+            if (IsPieceInChain(id))
+            {
+                CurrentValue += 1;
+            }
+        }
+    }
+
+    private bool IsPieceInChain(int id)
+    {
+        if (chain == null)
+        {
+            chain = GameDataService.Current.MatchDefinition.GetChain(PieceId);
+            for (int i = chain.Count - 1; i >= 0; i--)
+            {
+                PieceTypeDef def = PieceType.GetDefById(chain[i]);
+                if (!def.Filter.Has(PieceTypeFilter.Mine))
+                {
+                    chain.RemoveAt(i); 
+                }
+            }
+        }
+
+        return chain.Contains(id);
+    }
 }
