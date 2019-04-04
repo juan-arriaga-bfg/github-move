@@ -14,7 +14,8 @@
     "RandomType": "Base",
     "IsPermanent": true,
     "Icon": "CoinsShopIcon1",
-    "Name": "window.shop.coins.item1"
+    "Name": "window.shop.coins.item1",
+    "Description": "window.market.description.coins"
   },
   {
     "Uid": 2,
@@ -31,7 +32,8 @@
     "RandomType": "Base",
     "IsPermanent": true,
     "Icon": "CoinsShopIcon2",
-    "Name": "window.shop.coins.item2"
+    "Name": "window.shop.coins.item2",
+    "Description": "window.market.description.coins"
   },
   {
     "Uid": 3,
@@ -48,7 +50,8 @@
     "RandomType": "Base",
     "IsPermanent": true,
     "Icon": "CoinsShopIcon3",
-    "Name": "window.shop.coins.item3"
+    "Name": "window.shop.coins.item3",
+    "Description": "window.market.description.coins"
   },
   {
     "Uid": 12,
@@ -63,7 +66,8 @@
       "Currency": "Coins",
       "Amount": 55
     },
-    "RandomType": "Ingredients"
+    "RandomType": "Ingredients",
+    "Description": "window.market.description.ingredients"
   },
   {
     "Uid": 12,
@@ -78,7 +82,8 @@
       "Currency": "Coins",
       "Amount": 90
     },
-    "RandomType": "Ingredients"
+    "RandomType": "Ingredients",
+    "Description": "window.market.description.ingredients"
   },
   {
     "Uid": 13,
@@ -93,7 +98,8 @@
       "Currency": "Crystals",
       "Amount": 35
     },
-    "RandomType": "Ingredients"
+    "RandomType": "Ingredients",
+    "Description": "window.market.description.ingredients"
   },
   {
     "Uid": 6,
@@ -104,7 +110,8 @@
       "Uid": "Empty",
       "Weight": 1
     },
-    "RandomType": "BaseChestsFirst"
+    "RandomType": "BaseChestsFirst",
+    "Description": "window.market.description.chest"
   },
   {
     "Uid": 7,
@@ -115,7 +122,8 @@
       "Uid": "Empty",
       "Weight": 1
     },
-    "RandomType": "BaseChestsSecond"
+    "RandomType": "BaseChestsSecond",
+    "Description": "window.market.description.chest"
   },
   {
     "Uid": 8,
@@ -126,7 +134,8 @@
       "Uid": "Empty",
       "Weight": 1
     },
-    "RandomType": "BaseChestsLast"
+    "RandomType": "BaseChestsLast",
+    "Description": "window.market.description.chest"
   },
   {
     "Uid": 9,
@@ -140,7 +149,8 @@
       "Currency": "Coins",
       "Amount": 100
     },
-    "RandomType": "Base"
+    "RandomType": "Base",
+    "Description": "window.market.description.sack"
   },
   {
     "Uid": 9,
@@ -154,7 +164,8 @@
       "Currency": "Coins",
       "Amount": 250
     },
-    "RandomType": "Base"
+    "RandomType": "Base",
+    "Description": "window.market.description.sack"
   },
   {
     "Uid": 9,
@@ -168,7 +179,8 @@
       "Currency": "Coins",
       "Amount": 300
     },
-    "RandomType": "Base"
+    "RandomType": "Base",
+    "Description": "window.market.description.boost_cr_part"
   },
   {
     "Uid": 10,
@@ -182,7 +194,8 @@
       "Currency": "Crystals",
       "Amount": 99
     },
-    "RandomType": "Base"
+    "RandomType": "Base",
+    "Description": "window.market.description.boost_cr"
   },
   {
     "Uid": 11,
@@ -196,7 +209,8 @@
       "Currency": "Crystals",
       "Amount": 449
     },
-    "RandomType": "Base"
+    "RandomType": "Base",
+    "Description": "window.market.description.boost_cr"
   },
   {
     "Uid": 17,
@@ -206,7 +220,8 @@
       "Uid": "CH_Free",
       "Weight": 1
     },
-    "RandomType": "Base"
+    "RandomType": "Base",
+    "Description": "window.market.description.free_chest"
   },
   {
     "Uid": 16,
@@ -220,7 +235,8 @@
       "Currency": "Crystals",
       "Amount": 75
     },
-    "RandomType": "NPCChests"
+    "RandomType": "NPCChests",
+    "Description": "window.market.description.npc_chest"
   },
   {
     "Uid": 4,
@@ -231,7 +247,8 @@
       "Uid": "Empty",
       "Weight": 1
     },
-    "RandomType": "BasePiecesEasy"
+    "RandomType": "BasePiecesEasy",
+    "Description": "window.market.description.piece"
   },
   {
     "Uid": 5,
@@ -242,7 +259,8 @@
       "Uid": "Empty",
       "Weight": 1
     },
-    "RandomType": "BasePiecesNormal"
+    "RandomType": "BasePiecesNormal",
+    "Description": "window.market.description.piece"
   },
   {
     "Uid": 15,
@@ -253,7 +271,8 @@
       "Uid": "Empty",
       "Weight": 1
     },
-    "RandomType": "BasePiecesHard"
+    "RandomType": "BasePiecesHard",
+    "Description": "window.market.description.piece"
   },
   {
     "Uid": 14,
@@ -267,7 +286,8 @@
       "Currency": "Crystals",
       "Amount": 35
     },
-    "RandomType": "Worker"
+    "RandomType": "Worker",
+    "Description": "window.market.description.worker"
   },
   {
     "Uid": 14,
@@ -281,7 +301,8 @@
       "Currency": "Crystals",
       "Amount": 65
     },
-    "RandomType": "Worker"
+    "RandomType": "Worker",
+    "Description": "window.market.description.worker"
   },
   {
     "Uid": 14,
@@ -295,6 +316,7 @@
       "Currency": "Crystals",
       "Amount": 90
     },
-    "RandomType": "Worker"
+    "RandomType": "Worker",
+    "Description": "window.market.description.worker"
   }
 ]

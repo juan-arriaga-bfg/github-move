@@ -100,7 +100,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         {
             if (ProfileService.Instance != null && ProfileService.Instance.Manager != null)
             {
-                ProfileService.Instance.Manager.UploadCurrentProfile();
+                ProfileService.Instance.Manager.UploadCurrentProfile(false);
 
                 LocalNotificationsService.Current.ScheduleNotifications();
             }
@@ -121,7 +121,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
     {
         Debug.Log($"OnApplicationQuit");
         
-        ProfileService.Instance.Manager.UploadCurrentProfile();
+        ProfileService.Instance.Manager.UploadCurrentProfile(false);
 
         LocalNotificationsService.Current.ScheduleNotifications();
     }

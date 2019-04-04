@@ -12,6 +12,20 @@ public class HighlightTaskUseMine : TaskHighlightUsingArrow
             return false;
         }
 
-        return HighlightTaskMineHelper.Highlight(useMineTask.PieceId);
+        if (useMineTask.PieceId == PieceType.None.Id || useMineTask.PieceId == PieceType.Empty.Id)
+        {
+            return HighlightTaskMineHelper.Highlight(useMineTask.PieceId); 
+        }
+
+        var chain = useMineTask.Chain;
+        foreach (var id in chain)
+        {
+            if (HighlightTaskMineHelper.Highlight(id))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

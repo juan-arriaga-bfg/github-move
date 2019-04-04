@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
@@ -11,7 +12,11 @@ public class TaskUseMineEntity : TaskEventCounterEntity
     protected override int EventCode => GameEventsCodes.MineUsed;
 
     public int PieceId { get; protected set; } = -1;
-        
+
+    private List<int> chain;
+    
+    public List<int> Chain => chain ?? FillChain();
+
 #region Serialization
 
     [JsonProperty] public string PieceUid;
@@ -51,9 +56,65 @@ public class TaskUseMineEntity : TaskEventCounterEntity
             return;
         }
 
-        if (PieceId <= 0 || (context as MineLifeComponent)?.Context.PieceType == PieceId)
+        if (PieceId <= 0)
         {
             CurrentValue += 1;
+            return;
         }
-    } 
+
+        if (context is MineLifeComponent lifeComponent)
+        {
+            int id = lifeComponent.Context.PieceType;
+            if (IsPieceInChain(id))
+            {
+                CurrentValue += 1;
+            }
+        }
+    }
+
+    private List<int> FillChain()
+    {
+        if (chain == null)
+        {
+            chain = GameDataService.Current.MatchDefinition.GetChain(PieceId);
+            for (int i = chain.Count - 1; i >= 0; i--)
+            {
+                PieceTypeDef def = PieceType.GetDefById(chain[i]);
+                if (!def.Filter.Has(PieceTypeFilter.Mine) || def.Filter.Has(PieceTypeFilter.Fake))
+                {
+                    chain.RemoveAt(i); 
+                }
+            }
+        }
+
+        return chain;
+    }
+    
+    private bool IsPieceInChain(int id)
+    {
+        return Chain.Contains(id);
+    }
+
+    public override string GetIco()
+    {
+        var baseIco = base.GetIco();
+        if (!string.IsNullOrEmpty(baseIco) || PieceId == PieceType.None.Id || PieceId == PieceType.Empty.Id || Chain.Count == 0)
+        {
+            return baseIco;
+        }
+
+        int firstId = Chain[0];
+        string pieceUid = PieceType.Parse(firstId).ToLower();
+        
+        // First piece is fake, fix first real piece name to correspond icons naming
+        int len = pieceUid.Length;
+        if (!char.IsLetter(pieceUid[len - 1]))
+        {
+            pieceUid = pieceUid.Remove(len - 1, 1);
+        }
+        
+        string iconName = $"quest_icon_{pieceUid}";
+
+        return iconName;
+    }
 }

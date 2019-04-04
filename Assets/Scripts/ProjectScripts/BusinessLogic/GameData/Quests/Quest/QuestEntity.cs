@@ -161,9 +161,20 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     /// </summary>
     public virtual void ForceCheckActiveTasks()
     {
+        bool anyTaskUpdated = false;
         foreach (var task in ActiveTasks)
         {
-            task.Check();
+            if (task.IsCompletedOrClaimed())
+            {
+                continue;
+            }
+            
+            anyTaskUpdated = anyTaskUpdated || task.Check();
+        }
+
+        if (anyTaskUpdated)
+        {
+            UpdateState();
         }
     }
     

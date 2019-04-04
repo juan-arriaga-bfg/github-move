@@ -351,7 +351,7 @@ public class PieceBoardElementView : BoardElementView
             var defaultSubtrate = Piece.PieceType == PieceType.LockedEmpty.Id
                                || Piece.PieceType == PieceType.Fog.Id
                                || pieceDef.Filter.HasFlag(PieceTypeFilter.Tree)
-                               || pieceDef.Filter.HasFlag(PieceTypeFilter.Mine);
+                               || (pieceDef.Filter.HasFlag(PieceTypeFilter.Mine) && pieceDef.Filter.Has(PieceTypeFilter.Fake) == false);
             if (defaultSubtrate == false)
             {
                 var substratePositions = GetPieceLocatedPositions();

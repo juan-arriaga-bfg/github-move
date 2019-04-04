@@ -518,7 +518,7 @@ public class DevTools : UIContainerElementViewController
     [UsedImplicitly]
     public void OnReloadSceneClick()
     {
-        ProfileService.Instance.Manager.UploadCurrentProfile();
+        ProfileService.Instance.Manager.UploadCurrentProfile(false);
         ReloadScene();
     }
 

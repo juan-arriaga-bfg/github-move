@@ -79,7 +79,7 @@ public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
     {
         base.OnViewCloseCompleted();
         
-        ProfileService.Instance.Manager.UploadCurrentProfile();
+        ProfileService.Instance.Manager.UploadCurrentProfile(false);
     }
 
     private void OnSet(int value)

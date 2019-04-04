@@ -229,7 +229,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         
         CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, null, position, null, true, true);
         
-        ProfileService.Instance.Manager.UploadCurrentProfile();
+        ProfileService.Instance.Manager.UploadCurrentProfile(false);
         
         Analytics.SendPurchase("screen_daily", "item1", null, new List<CurrencyPair>(currenciesReward), false, false);
 

@@ -31,10 +31,6 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	{
 		base.Init();
 		
-#if !DEBUG
-		btnInfo.gameObject.SetActive(false);
-#endif
-		
 		var contentEntity = entity as UIMarketElementEntity;
 		
 		isClick = false;
@@ -107,7 +103,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			rewardPosition,
 			() =>
 			{
-				ProfileService.Instance.Manager.UploadCurrentProfile();
+				ProfileService.Instance.Manager.UploadCurrentProfile(false);
 				BoardService.Current.FirstBoard.TutorialLogic.Update();
 			},
 			false,
@@ -127,7 +123,17 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 
 	private void OnClickInfo()
 	{
+		
+#if DEBUG
 		UIMessageWindowController.CreateDefaultMessage($"Slot {GetIndex()}");
+		return;
+#endif
+		
+		var contentEntity = entity as UIMarketElementEntity;
+		
+		UIMessageWindowController.CreateMessage(
+			LocalizationService.Get("window.market.description.title", "window.market.description.title"),
+			contentEntity.Def.Description);
 	}
 
 	private void OnClick()
@@ -201,7 +207,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 				{
 					if (success)
 					{
-						ProfileService.Instance.Manager.UploadCurrentProfile();
+						ProfileService.Instance.Manager.UploadCurrentProfile(false);
 						
                         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.PurchaseInMarket, contentEntity.Def);
 					}
