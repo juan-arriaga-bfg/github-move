@@ -30,7 +30,6 @@ public class DailyRewardDataManager : IECSComponent, IDataManager, IDataLoader<L
             if (string.IsNullOrEmpty(error))
             {
                 Defs = data;
-                var a = 22;
             }
             else
             {

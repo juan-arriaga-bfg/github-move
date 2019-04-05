@@ -21,6 +21,7 @@ public class UIDailyRewardElementViewController : UISimpleScrollElementViewContr
     [IWUIBinding("#Unlock")] private GameObject unlockObj;
     [IWUIBinding("#Lock")] private GameObject lockObj;
     
+    [IWUIBinding("#Check")] private GameObject checkObj;
     [IWUIBinding("#LockBackground")] private GameObject lockBack;
     
     private bool isClick;
@@ -41,10 +42,14 @@ public class UIDailyRewardElementViewController : UISimpleScrollElementViewContr
         unlockObj.SetActive(contentEntity.State == DailyRewardState.Current);
         lockObj.SetActive(contentEntity.State != DailyRewardState.Current);
         lockBack.SetActive(contentEntity.State == DailyRewardState.Claimed);
+        checkObj.SetActive(contentEntity.State == DailyRewardState.Claimed);
 
         rewardLabel.Text = contentEntity.RewardsText;
         btnClaimLabel.Text = LocalizationService.Get("common.button.claim", "common.button.claim");
-        btnLockLabel.Text = LocalizationService.Get("window.shop.energy.item.locked", "window.shop.energy.item.locked");
+        
+        btnLockLabel.Text = contentEntity.State == DailyRewardState.Claimed
+            ? LocalizationService.Get("window.dailyReward.item.claimed", "window.dailyReward.item.claimed")
+            : LocalizationService.Get("window.dailyReward.item.locked", "window.dailyReward.item.locked");
     }
     
     public override void OnViewShowCompleted()
@@ -61,7 +66,7 @@ public class UIDailyRewardElementViewController : UISimpleScrollElementViewContr
         base.OnViewCloseCompleted();
 
         if (!(entity is UIDailyRewardElementEntity contentEntity) || contentEntity.State != DailyRewardState.Current) return;
-
+        
         var board = BoardService.Current.FirstBoard;
         var amount = piecesReward.Sum(pair => pair.Value);
 
@@ -78,8 +83,12 @@ public class UIDailyRewardElementViewController : UISimpleScrollElementViewContr
         
         var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(btnClaim.transform.position);
 	    
-        CurrencyHelper.PurchaseAsyncOnlyCurrency(currenciesReward, flyPosition, null);
-        ProfileService.Instance.Manager.UploadCurrentProfile(false);
+        CurrencyHelper.PurchaseAsyncOnlyCurrency(currenciesReward, flyPosition, success =>
+        {
+            if (success == false) return;
+            ProfileService.Instance.Manager.UploadCurrentProfile(false);
+        });
+        
         Analytics.SendPurchase("daily_reward", $"item{transform.GetSiblingIndex()}", null, new List<CurrencyPair>(currenciesReward), false, true);
         context.Controller.CloseCurrentWindow();
     }
