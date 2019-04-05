@@ -18,7 +18,7 @@ public class UIDailyRewardWindowView : UIGenericPopupWindowView
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
         
-        Fill(UpdateEntities(windowModel.Days), content);
+        Fill(UpdateEntities(windowModel.Defs), content);
         content.GetScrollRect().horizontalNormalizedPosition = 0f;
     }
     
