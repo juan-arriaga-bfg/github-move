@@ -61,6 +61,7 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 			var animationResource = AnimationOverrideDataService.Current.FindAnimation(piece.PieceType, def => def.OnMergeSpawn);
 			if (string.IsNullOrEmpty(animationResource) == false)
 			{
+				centerContainer.localScale = Vector3.one;
 			    var scaleForAnimationView = new Vector3(1f, 1f, 1f);
 			    if (piece.Multicellular != null)
 			    {
@@ -75,6 +76,8 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 
 				animView.OnComplete += () =>
 				{
+					ToggleView(true);
+					
 					CompleteAnimation(context);
 				};
 
