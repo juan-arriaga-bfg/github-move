@@ -41,6 +41,8 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     
     public DailyQuestEntity DailyQuest;
 
+    private DateTime dailyTimerStartTime;
+    
     public int DailyQuestRewardIndex { get; private set; }
     public int DailyQuestCompletedCount;
     
@@ -143,7 +145,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
 
         if (DailyQuest != null)
         {
-            StartDailyTimer(DateTimeExtension.UnixTimeToDateTime(questSave.DailyTimerStart));
+            dailyTimerStartTime = DateTimeExtension.UnixTimeToDateTime(questSave.DailyTimerStart);
         }
 
         // Handle migration - case when target is changed
@@ -612,36 +614,42 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
             quest.ConnectToBoard();
         }
 
-        StartDailyTimer(CalculateDailyTimerStartTime());
+        dailyTimerStartTime = CalculateDailyTimerStartTime();
+        StartDailyTimer();
     }
 
-    private void StartDailyTimer(DateTime startTime)
+    public void StartDailyTimer()
     {   
         StopDailyTimer();
+
+        if (DailyQuest == null)
+        {
+            return;
+        }
         
-        Debug.Log($"[QuestsDataManager] => StartDailyTimer: startTime: {startTime}, delay: {DAILY_TIMER_DELAY}");
+        Debug.Log($"[QuestsDataManager] => StartDailyTimer: startTime: {dailyTimerStartTime}, delay: {DAILY_TIMER_DELAY}");
 
         DailyTimer = new TimerComponent
         {
             UseUTC = false,
             Delay = DAILY_TIMER_DELAY,
-            Tag = "daily"
+            Tag = DAILY_QUEST_ID
         };
         
         DailyTimer.OnComplete += OnCompleteDailyTimer;
                                                                                                                 
         RegisterComponent(DailyTimer);
-        DailyTimer.Start(startTime);
+        DailyTimer.Start(dailyTimerStartTime);
     }
 
-    private void StopDailyTimer()
+    public void StopDailyTimer()
     {
-        Debug.Log($"[QuestsDataManager] => StopDailyTimer");
-        
         if (DailyTimer == null)
         {
             return;    
         }
+        
+        Debug.Log($"[QuestsDataManager] => StopDailyTimer");
 
         UnRegisterComponent(DailyTimer);
         

@@ -28,6 +28,7 @@
         profile.RegisterComponent(new PendingIapSaveComponent());
         profile.RegisterComponent(new BaseInformationSaveComponent());
         profile.RegisterComponent(new FogSaveComponent());
+        profile.RegisterComponent(new DailyRewardSaveComponent());
     }
     
     public void SetDefaultSettings(UserProfile profile)
