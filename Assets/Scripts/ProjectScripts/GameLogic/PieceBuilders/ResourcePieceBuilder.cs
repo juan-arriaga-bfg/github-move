@@ -18,8 +18,6 @@
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionCollectResource())
             .RegisterComponent(new TouchReactionConditionComponent()));
-        
-        AddPathfindLockObserver(piece, true);
 
         return piece;
     }

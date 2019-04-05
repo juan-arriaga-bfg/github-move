@@ -9,7 +9,6 @@
         piece.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
                 .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)))
              .RegisterComponent(new DraggablePieceComponent());
-        AddPathfindLockObserver(piece, true);
 		
         return piece;
     }

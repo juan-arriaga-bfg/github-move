@@ -211,7 +211,9 @@ public class PathfindLockerComponent : ECSEntity
     public virtual void RecalcCacheOnPieceAdded(HashSet<BoardPosition> target, BoardPosition changedPosition, Piece piece)
     {
         if (piece.PieceType == PieceType.Fog.Id)
-            RecalcFor(piece, target);   
+        {
+            RecalcFor(piece, target);
+        }
     }
     
     private List<BoardPosition> FindConnections(BoardPosition at, List<BoardPosition> positions)
@@ -349,10 +351,13 @@ public class PathfindLockerComponent : ECSEntity
         }
     }
     
-    public virtual void RecalcCacheOnPieceRemoved(HashSet<BoardPosition> target , BoardPosition changedPosition, Piece removedPiece)
+    public virtual void RecalcCacheOnPieceRemoved(Piece removedPiece)
     {
-        if(removedPiece.PieceType == PieceType.Fog.Id)
+        IW.Logger.LogError("RecalcCache");
+        if (removedPiece.PieceType == PieceType.Fog.Id)
+        {
             OnFogRemove(removedPiece);
+        }
         
         RecalculateRegions(removedPiece);
         if (PieceType.GetDefById(removedPiece.PieceType).Filter.HasFlag(PieceTypeFilter.Obstacle))

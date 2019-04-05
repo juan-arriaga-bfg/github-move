@@ -9,7 +9,6 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 		
 		piece.RegisterComponent(new DraggablePieceComponent());
 		
-		AddObserver(piece, new PathfindLockObserver {AutoLock = true});
 		AddObserver(piece, new MineLifeComponent());
 
 		piece.RegisterComponent(new TouchReactionComponent()
@@ -19,8 +18,6 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 			.RegisterComponent(new TouchReactionConditionWorkplace()))
 			.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
-
-		AddPathfindLockObserver(piece, true);
 		
 		return piece;
 	}

@@ -38,11 +38,10 @@ public class GenericPieceBuilder : IPieceBuilder
         if (piece.PathfindLockObserver != null)
         {
             var lockObserver = piece.PathfindLockObserver;
-            lockObserver.AutoLock = autoLock;
             return;
         }
         
-        var pathfindLockObserver = new PathfindLockObserver() {AutoLock = autoLock};
+        var pathfindLockObserver = new PathfindLockObserver();
         AddObserver(piece, pathfindLockObserver);
         piece.RegisterComponent(pathfindLockObserver);
     }

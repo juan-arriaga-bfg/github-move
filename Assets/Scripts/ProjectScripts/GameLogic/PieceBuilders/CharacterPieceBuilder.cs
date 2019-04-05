@@ -5,8 +5,6 @@ public class CharacterPieceBuilder : GenericPieceBuilder
 		var piece = base.Build(pieceType, context);
 		
 		CreateViewComponent(piece);
-		
-		AddPathfindLockObserver(piece, true);
 
 		piece.RegisterComponent(new TimerComponent());
 		

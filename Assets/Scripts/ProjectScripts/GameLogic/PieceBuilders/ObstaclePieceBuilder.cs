@@ -6,7 +6,6 @@ public class ObstaclePieceBuilder : GenericPieceBuilder
 		
 		CreateViewComponent(piece);
 		
-		AddObserver(piece, new PathfindLockObserver {AutoLock = true});
 		AddObserver(piece, new ObstacleLifeComponent());
 		
 		piece.RegisterComponent(new TouchReactionComponent()
@@ -18,8 +17,6 @@ public class ObstaclePieceBuilder : GenericPieceBuilder
 				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
 		
 		AddObserver(piece, new AreaRecalculateObserver());
-		
-		AddPathfindLockObserver(piece, true);
 		
 		return piece;
 	}

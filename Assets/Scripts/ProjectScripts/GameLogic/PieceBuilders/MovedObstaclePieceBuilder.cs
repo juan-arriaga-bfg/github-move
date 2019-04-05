@@ -8,7 +8,6 @@
 	    
         piece.RegisterComponent(new DraggablePieceComponent());
         
-	    AddObserver(piece, new PathfindLockObserver {AutoLock = true});
 	    AddObserver(piece, new ObstacleLifeComponent());
 
 	    piece.RegisterComponent(new TouchReactionComponent()
@@ -18,8 +17,6 @@
 		    .RegisterComponent(new TouchReactionConditionWorkplace()))
 	        .RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 	            .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
-
-		AddPathfindLockObserver(piece, true);
 		
         return piece;
     }

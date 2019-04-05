@@ -12,8 +12,6 @@
         
         CreateViewComponent(piece);
         
-        AddPathfindLockObserver(piece, true);
-        
         return piece;
     }
 

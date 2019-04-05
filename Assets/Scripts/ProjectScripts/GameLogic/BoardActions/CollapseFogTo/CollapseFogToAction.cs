@@ -96,9 +96,9 @@ public class CollapseFogToAction : IBoardAction
             {
                 
                 gameBoardController.PathfindLocker.OnAddComplete(posByMask);
-                pathObserver.OnRemoveFromBoard(context.CachedPosition);
+                pathObserver?.OnRemoveFromBoard(context.CachedPosition);
                 
-                context.PathfindLockObserver.RemoveRecalculate(context.CachedPosition);
+                gameBoardController.PathfindLocker?.RecalcCacheOnPieceRemoved(context);
                 var emptyCells = gameBoardController.PathfindLocker.CollectUnlockedEmptyCells();
                 foreach (var emptyCell in emptyCells)
                 {
