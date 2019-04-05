@@ -3,15 +3,21 @@
     "PieceWeights": [
       {
         "Uid": 1,
-        "Weight": 7
+        "Weight": 7,
+        "0": 1,
+        "Override": 0
       },
       {
         "Uid": 2,
-        "Weight": 4
+        "Weight": 4,
+        "0": 2,
+        "Override": 2
       },
       {
         "Uid": 3,
-        "Weight": 1
+        "Weight": 1,
+        "0": 3,
+        "Override": 1
       }
     ]
   },
@@ -19,11 +25,15 @@
     "PieceWeights": [
       {
         "Uid": 1,
-        "Weight": 2
+        "Weight": 2,
+        "0": 1,
+        "Override": 1
       },
       {
         "Uid": 2,
-        "Weight": 1
+        "Weight": 1,
+        "0": 2,
+        "Override": 0
       }
     ]
   }

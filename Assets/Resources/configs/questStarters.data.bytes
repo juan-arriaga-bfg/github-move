@@ -158,13 +158,14 @@
     "Id": 13,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "15_CreatePiece_B4"
+      "15_CreatePiece_B4",
+      "11_UseWorker"
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
-        "Id": "PieceUnlocked",
-        "Value": "B3"
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "14_CreatePiece_B3"
       }
     ]
   },
@@ -180,20 +181,6 @@
         "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
         "Id": "QuestCompleted",
         "Value": "7_CreatePiece_PR_A5"
-      }
-    ]
-  },
-  {
-    "Id": 16,
-    "$type": "QuestStarterEntity, GameAssembly",
-    "QuestToStartIds": [
-      "11_UseWorker"
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
-        "Id": "QuestCompleted",
-        "Value": "14_CreatePiece_B3"
       }
     ]
   },
