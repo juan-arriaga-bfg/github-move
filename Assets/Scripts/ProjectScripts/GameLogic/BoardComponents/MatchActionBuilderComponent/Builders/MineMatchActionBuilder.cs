@@ -12,6 +12,7 @@ public class MineMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBui
             PieceType.MN_B2.Id,
             PieceType.MN_B3Fake.Id,
             PieceType.MN_B3.Id,
+            PieceType.MN_B4Fake.Id,
             
             PieceType.MN_C.Id,
             PieceType.MN_C1.Id,
@@ -19,6 +20,7 @@ public class MineMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBui
             PieceType.MN_C2.Id,
             PieceType.MN_C3Fake.Id,
             PieceType.MN_C3.Id,
+            PieceType.MN_C4Fake.Id,
             
             PieceType.MN_E.Id,
             PieceType.MN_E1.Id,
@@ -26,6 +28,7 @@ public class MineMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBui
             PieceType.MN_E2.Id,
             PieceType.MN_E3Fake.Id,
             PieceType.MN_E3.Id,
+            PieceType.MN_E4Fake.Id,
             
             PieceType.MN_F.Id,
             PieceType.MN_F1.Id,
@@ -33,6 +36,7 @@ public class MineMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBui
             PieceType.MN_F2.Id,
             PieceType.MN_F3Fake.Id,
             PieceType.MN_F3.Id,
+            PieceType.MN_F4Fake.Id,
             
             PieceType.MN_H.Id,
             PieceType.MN_H1.Id,
@@ -40,6 +44,7 @@ public class MineMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBui
             PieceType.MN_H2.Id,
             PieceType.MN_H3Fake.Id,
             PieceType.MN_H3.Id,
+            PieceType.MN_H4Fake.Id,
             
             PieceType.MN_I.Id,
             PieceType.MN_I1.Id,
@@ -47,6 +52,7 @@ public class MineMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBui
             PieceType.MN_I2.Id,
             PieceType.MN_I3Fake.Id,
             PieceType.MN_I3.Id,
+            PieceType.MN_I4Fake.Id,
         };
     }
     

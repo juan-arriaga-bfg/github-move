@@ -336,6 +336,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MN_B2.Id,     R.MN_BPiece);
         dict.Add(PieceType.MN_B3Fake.Id, R.MN_BFakePiece);
         dict.Add(PieceType.MN_B3.Id,     R.MN_BPiece);
+        dict.Add(PieceType.MN_B4Fake.Id, R.MN_BFakePiece);
         
         dict.Add(PieceType.MN_C.Id,      R.MN_CFakePiece);
         dict.Add(PieceType.MN_C1.Id,     R.MN_CPiece);
@@ -343,6 +344,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MN_C2.Id,     R.MN_CPiece);
         dict.Add(PieceType.MN_C3Fake.Id, R.MN_CFakePiece);
         dict.Add(PieceType.MN_C3.Id,     R.MN_CPiece);
+        dict.Add(PieceType.MN_C4Fake.Id, R.MN_CFakePiece);
         
         dict.Add(PieceType.MN_E.Id,      R.MN_EFakePiece);
         dict.Add(PieceType.MN_E1.Id,     R.MN_EPiece);
@@ -350,6 +352,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MN_E2.Id,     R.MN_EPiece);
         dict.Add(PieceType.MN_E3Fake.Id, R.MN_EFakePiece);
         dict.Add(PieceType.MN_E3.Id,     R.MN_EPiece);
+        dict.Add(PieceType.MN_E4Fake.Id, R.MN_EFakePiece);
         
         dict.Add(PieceType.MN_F.Id,      R.MN_FFakePiece);
         dict.Add(PieceType.MN_F1.Id,     R.MN_FPiece);
@@ -357,6 +360,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MN_F2.Id,     R.MN_FPiece);
         dict.Add(PieceType.MN_F3Fake.Id, R.MN_FFakePiece);
         dict.Add(PieceType.MN_F3.Id,     R.MN_FPiece);
+        dict.Add(PieceType.MN_F4Fake.Id, R.MN_FFakePiece);
         
         dict.Add(PieceType.MN_H.Id,      R.MN_HFakePiece);
         dict.Add(PieceType.MN_H1.Id,     R.MN_HPiece);
@@ -364,6 +368,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MN_H2.Id,     R.MN_HPiece);
         dict.Add(PieceType.MN_H3Fake.Id, R.MN_HFakePiece);
         dict.Add(PieceType.MN_H3.Id,     R.MN_HPiece);
+        dict.Add(PieceType.MN_H4Fake.Id, R.MN_HFakePiece);
         
         dict.Add(PieceType.MN_I.Id,      R.MN_IFakePiece);
         dict.Add(PieceType.MN_I1.Id,     R.MN_IPiece);
@@ -371,6 +376,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MN_I2.Id,     R.MN_IPiece);
         dict.Add(PieceType.MN_I3Fake.Id, R.MN_IFakePiece);
         dict.Add(PieceType.MN_I3.Id,     R.MN_IPiece);
+        dict.Add(PieceType.MN_I4Fake.Id, R.MN_IFakePiece);
         
 #endregion
         

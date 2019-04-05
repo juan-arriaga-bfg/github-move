@@ -37,12 +37,13 @@ public class WorkerTutorialStep2 : LoopFingerTutorialStep
 
     public override void Execute()
     {
-        var wrs = Context.Context.BoardLogic.PositionsCache.GetUnlockedPiecePositionsByType(PieceType.Boost_WR.Id);
+        var cache = Context.Context.BoardLogic.PositionsCache;
+        var wrs = cache.GetUnlockedPiecePositionsByType(PieceType.Boost_WR.Id);
         var min = float.MaxValue;
 
         foreach (var wrPosition in wrs)
         {
-            var positions = Context.Context.BoardLogic.PositionsCache.GetUnlockedNearestByFilter(PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace, wrPosition, 3);
+            var positions = cache.GetUnlockedNearestByFilter(PieceTypeFilter.Fake | PieceTypeFilter.Workplace, wrPosition, 3);
             var nearest = CheckNearestState(positions);
 
             if (nearest == null) continue;
