@@ -32,19 +32,6 @@ public class GenericPieceBuilder : IPieceBuilder
     {
         piece.RegisterComponent(new MatchablePieceComponent());
     }
-
-    protected void AddPathfindLockObserver(Piece piece, bool autoLock)
-    {   
-        if (piece.PathfindLockObserver != null)
-        {
-            var lockObserver = piece.PathfindLockObserver;
-            return;
-        }
-        
-        var pathfindLockObserver = new PathfindLockObserver();
-        AddObserver(piece, pathfindLockObserver);
-        piece.RegisterComponent(pathfindLockObserver);
-    }
     
     protected void AddObserver(Piece piece, IPieceBoardObserver observer)
     {

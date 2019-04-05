@@ -7,8 +7,7 @@
         CreateViewComponent(piece);
 
         piece.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
-                .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)))
-             .RegisterComponent(new DraggablePieceComponent());
+                .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
 		
         return piece;
     }
