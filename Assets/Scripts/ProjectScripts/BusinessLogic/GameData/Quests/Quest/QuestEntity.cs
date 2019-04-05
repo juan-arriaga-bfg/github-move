@@ -159,7 +159,8 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     /// <summary>
     /// Recheck state of all task to handle target change due to migration
     /// </summary>
-    public virtual void ForceCheckActiveTasks()
+    /// <param name="questsDataManager"></param>
+    public virtual void ForceCheckActiveTasks(QuestsDataManager questsDataManager)
     {
         bool anyTaskUpdated = false;
         foreach (var task in ActiveTasks)

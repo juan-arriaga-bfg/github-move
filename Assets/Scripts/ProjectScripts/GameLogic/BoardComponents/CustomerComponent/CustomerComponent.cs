@@ -77,6 +77,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         if(item.IsStartCooldown) Cooldown.Start(item.CooldownTime);
 
         Order.State = item.State;
+        Order.Check();
         
         UpdateView();
         

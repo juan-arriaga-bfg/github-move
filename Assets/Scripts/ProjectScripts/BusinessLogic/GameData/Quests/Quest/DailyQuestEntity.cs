@@ -196,10 +196,10 @@ public class DailyQuestEntity : QuestEntity
         return true;
     }
 
-    public override void ForceCheckActiveTasks()
+    public override void ForceCheckActiveTasks(QuestsDataManager questsDataManager)
     {
-        base.ForceCheckActiveTasks();
+        base.ForceCheckActiveTasks(questsDataManager);
         
-        GetAllClearTask().CalculateCurrentValue();
+        GetAllClearTask().CalculateCurrentValue(questsDataManager);
     }
 }

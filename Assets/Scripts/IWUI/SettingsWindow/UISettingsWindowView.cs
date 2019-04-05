@@ -1,5 +1,6 @@
 using Debug = IW.Logger;
 using System;
+using Backend;
 using UnityEngine;
 
 public class UISettingsWindowView : UIGenericPopupWindowView
@@ -39,6 +40,8 @@ public class UISettingsWindowView : UIGenericPopupWindowView
     [IWUIBinding("#TermsOfUseButton")] private UIButtonViewController btnTermsOfUse;
     [IWUIBinding("#PolicyButton")] private UIButtonViewController btnPolicy;
     
+    [IWUIBinding("#Message")] private NSText messageLabel;
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -75,6 +78,10 @@ public class UISettingsWindowView : UIGenericPopupWindowView
         
         btnSound.ToState(ProfileService.Current.Settings.GetVolume("Sound") > 0.1f ? GenericButtonState.Active : GenericButtonState.UnActive);
         btnMusic.ToState(ProfileService.Current.Settings.GetVolume("Music") > 0.1f ? GenericButtonState.Active : GenericButtonState.UnActive);
+        
+        // todo: fix this!
+        btnLogin.gameObject.SetActive(false);
+        messageLabel.Text = $"Profile ID: {SocialUtils.SessionUser.SupportId ?? "Not registered"}";
     }
 
     public override void OnViewShowCompleted()
@@ -169,10 +176,56 @@ public class UISettingsWindowView : UIGenericPopupWindowView
     {
         Debug.Log("OnSupportClick");
         
-        if (NetworkUtils.CheckInternetConnection(true) && !EditorPlaceholderForBfgServices())
+        if (NetworkUtils.CheckInternetConnection(true))
         {
-            bfgManager.showSupport();
+            UIWaitWindowView.Show();
+            CheckClientSupport(pendingAction =>
+            {
+                UIWaitWindowView.Hide();
+                
+                if (!pendingAction)
+                {
+                    if (!EditorPlaceholderForBfgServices())
+                    {
+                        bfgManager.showSupport();
+                    }
+                } 
+            });
         }
+    }
+
+    private void CheckClientSupport(Action<bool> onComplete)         
+    {
+        ClientSupport.Get(SocialUtils.SessionUser.UserId, def =>
+        {
+            if (def?.Data == null)
+            {
+                onComplete(false);
+                return;
+            }
+            
+            var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+
+            model.Title = "Client support";
+            model.Message = "Press OK to apply update from the server";
+            model.AcceptLabel = LocalizationService.Get("common.button.ok",          "common.button.ok");
+        
+            model.OnAccept = () =>
+            {
+                ClientSupport.ConsumeAndApplyDef(def, error =>
+                {
+                    if (!string.IsNullOrEmpty(error))
+                    {
+                        UIMessageWindowController.CreateDefaultMessage($"Update failed with error: {error}");
+                        return;
+                    }
+                    
+                    UIMessageWindowController.CreateDefaultMessage($"Success!", () => { DevTools.ReloadScene(); });
+                });
+            };
+        
+            UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+        });
     }
     
     private void OnLanguageClick()
