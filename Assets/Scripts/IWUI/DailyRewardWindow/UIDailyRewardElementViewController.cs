@@ -89,7 +89,7 @@ public class UIDailyRewardElementViewController : UISimpleScrollElementViewContr
             ProfileService.Instance.Manager.UploadCurrentProfile(false);
         });
         
-        Analytics.SendPurchase("daily_reward", $"item{transform.GetSiblingIndex()}", null, new List<CurrencyPair>(currenciesReward), false, true);
+        Analytics.SendPurchase("screen_dailyreward", $"item{transform.GetSiblingIndex()}", null, new List<CurrencyPair>(currenciesReward), false, true);
         context.Controller.CloseCurrentWindow();
     }
 }
