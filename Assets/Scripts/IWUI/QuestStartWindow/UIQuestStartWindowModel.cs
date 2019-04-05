@@ -14,9 +14,14 @@ public class UIQuestStartWindowModel : IWWindowModel
     public string StarterId { get; private set; }
 
     public bool TestMode;
+
+    private List<string> commonStartMessages;
+    private List<string> commonCompleteMessages;
     
     public void Init(QuestEntity completedQuest, HashSet<string> questsToStart, string starterId)
     {
+        FillCommonMessagesCache();
+        
         CompletedQuest = completedQuest;
         StarterId = starterId;
         TestMode = false;
@@ -50,6 +55,61 @@ public class UIQuestStartWindowModel : IWWindowModel
         }
     }
 
+    private void FillCommonMessagesCache()
+    {
+        if (commonStartMessages != null && commonCompleteMessages != null)
+        {
+            return;
+        }
+        
+        commonStartMessages = new List<string>();
+        commonCompleteMessages = new List<string>();
+
+        int counter = 0;
+        while (true)
+        {
+            counter++;
+            string key = $"conversation.common.message{counter}";
+            if (LocalizationService.Current.IsExists(key))
+            {
+                commonStartMessages.Add(key);
+            }
+            else
+            {
+                break;
+            }
+        }
+        
+        counter = 0;
+        while (true)
+        {
+            counter++;
+            string key = $"conversation.common.quest.complete{counter}";
+            if (LocalizationService.Current.IsExists(key))
+            {
+                commonCompleteMessages.Add(key);
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+    
+    private string GetRandomCommonQuestStartText()
+    {
+        var key = commonStartMessages[UnityEngine.Random.Range(0, commonStartMessages.Count)];
+        var ret = LocalizationService.Get(key, key);
+        return ret;
+    }
+    
+    private string GetRandomCommonQuestCompleteText()
+    {
+        var key = commonCompleteMessages[UnityEngine.Random.Range(0, commonCompleteMessages.Count)];
+        var ret = LocalizationService.Get(key, key);
+        return ret;
+    }
+
     private void BuildQuestStartScenario()
     {
         QuestStartScenario = GameDataService.Current.ConversationsManager.BuildScenario(StarterId);
@@ -76,8 +136,8 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         emotion = CharacterEmotion.Happy;
         characterId = UiCharacterData.CharSleepingBeauty;
-        
-        message = LocalizationService.Get("conversation.error.quest.complete", "conversation.error.quest.complete");
+
+        message = GetRandomCommonQuestCompleteText();
     }
     
     private ConversationActionBubbleEntity CreateStartBubble(string charId, string message, CharacterEmotion emotion = CharacterEmotion.Normal, HashSet<string> questIds = null)
@@ -152,7 +212,7 @@ public class UIQuestStartWindowModel : IWWindowModel
         
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
-            LocalizationService.Get("conversation.error.message1", "conversation.error.message1"),
+            GetRandomCommonQuestStartText(),
             CharacterEmotion.Normal,
             new HashSet<string>(QuestsToStart.Select(e => e.Id))
         ));
