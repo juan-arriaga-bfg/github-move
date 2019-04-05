@@ -4,6 +4,8 @@ namespace BfgAnalytics
 {
     public interface IAnalyticsManager
     {
+        bool IsEnabled { get; set; }
+        
         // Fields naming
         // st1 - details1 - category
         // st2 - details2 - type
