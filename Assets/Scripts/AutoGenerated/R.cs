@@ -528,4 +528,5 @@ public class R
      public const string MineProgressView = "MineProgressView";
      public const string Soft7Piece = "Soft7Piece";
      public const string Soft8Piece = "Soft8Piece";
+     public const string FogProgressParticle = "FogProgressParticle";
 }
