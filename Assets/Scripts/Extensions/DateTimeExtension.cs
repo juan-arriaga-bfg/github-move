@@ -108,7 +108,8 @@ public static class DateTimeExtension
 
         if (daysConvert && temp.Days > 0) value = $"{temp.Days:0}{d}{temp.Hours:00}{h}{temp.Minutes:00}{m}";
         else if ((int) temp.TotalHours > 0) value = $"{temp.Days * 24 + temp.Hours:0}{h}{temp.Minutes:00}{m}{temp.Seconds:00}{s}";
-        else value = $"{temp.Minutes:00}{m}{temp.Seconds:00}{s}";
+        else if ((int) temp.TotalSeconds > 0) value = $"{temp.Minutes:00}{m}{temp.Seconds:00}{s}";
+        else value = $"00{m}00{s}";
         
         return string.Format(format, iconStr, mspaceStr, value);
     }
