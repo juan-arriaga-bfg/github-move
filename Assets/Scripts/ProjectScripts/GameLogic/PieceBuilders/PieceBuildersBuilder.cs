@@ -150,10 +150,13 @@ public class PieceBuildersBuilder
 
     private Dictionary<int, IPieceBuilder> AddMinePiece(Dictionary<int, IPieceBuilder> dict)
     {
+        dict = AddMineBranchPiece(dict, PieceType.MN_A.Id, PieceType.MN_A4Fake.Id);
         dict = AddMineBranchPiece(dict, PieceType.MN_B.Id, PieceType.MN_B4Fake.Id);
         dict = AddMineBranchPiece(dict, PieceType.MN_C.Id, PieceType.MN_C4Fake.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_D.Id, PieceType.MN_D4Fake.Id);
         dict = AddMineBranchPiece(dict, PieceType.MN_E.Id, PieceType.MN_E4Fake.Id);
         dict = AddMineBranchPiece(dict, PieceType.MN_F.Id, PieceType.MN_F4Fake.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_G.Id, PieceType.MN_G4Fake.Id);
         dict = AddMineBranchPiece(dict, PieceType.MN_H.Id, PieceType.MN_H4Fake.Id);
         dict = AddMineBranchPiece(dict, PieceType.MN_I.Id, PieceType.MN_I4Fake.Id);
         

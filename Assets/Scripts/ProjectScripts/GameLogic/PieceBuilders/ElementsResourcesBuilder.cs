@@ -330,6 +330,14 @@ public class ElementsResourcesBuilder
         
 #region Mines
         
+        dict.Add(PieceType.MN_A.Id,      R.MN_AFakePiece);
+        dict.Add(PieceType.MN_A1.Id,     R.MN_APiece);
+        dict.Add(PieceType.MN_A2Fake.Id, R.MN_AFakePiece);
+        dict.Add(PieceType.MN_A2.Id,     R.MN_APiece);
+        dict.Add(PieceType.MN_A3Fake.Id, R.MN_AFakePiece);
+        dict.Add(PieceType.MN_A3.Id,     R.MN_APiece);
+        dict.Add(PieceType.MN_A4Fake.Id, R.MN_AFakePiece);
+
         dict.Add(PieceType.MN_B.Id,      R.MN_BFakePiece);
         dict.Add(PieceType.MN_B1.Id,     R.MN_BPiece);
         dict.Add(PieceType.MN_B2Fake.Id, R.MN_BFakePiece);
@@ -346,6 +354,14 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MN_C3.Id,     R.MN_CPiece);
         dict.Add(PieceType.MN_C4Fake.Id, R.MN_CFakePiece);
         
+        dict.Add(PieceType.MN_D.Id,      R.MN_DFakePiece);
+        dict.Add(PieceType.MN_D1.Id,     R.MN_DPiece);
+        dict.Add(PieceType.MN_D2Fake.Id, R.MN_DFakePiece);
+        dict.Add(PieceType.MN_D2.Id,     R.MN_DPiece);
+        dict.Add(PieceType.MN_D3Fake.Id, R.MN_DFakePiece);
+        dict.Add(PieceType.MN_D3.Id,     R.MN_DPiece);
+        dict.Add(PieceType.MN_D4Fake.Id, R.MN_DFakePiece);
+        
         dict.Add(PieceType.MN_E.Id,      R.MN_EFakePiece);
         dict.Add(PieceType.MN_E1.Id,     R.MN_EPiece);
         dict.Add(PieceType.MN_E2Fake.Id, R.MN_EFakePiece);
@@ -361,6 +377,14 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MN_F3Fake.Id, R.MN_FFakePiece);
         dict.Add(PieceType.MN_F3.Id,     R.MN_FPiece);
         dict.Add(PieceType.MN_F4Fake.Id, R.MN_FFakePiece);
+        
+        dict.Add(PieceType.MN_G.Id,      R.MN_GFakePiece);
+        dict.Add(PieceType.MN_G1.Id,     R.MN_GPiece);
+        dict.Add(PieceType.MN_G2Fake.Id, R.MN_GFakePiece);
+        dict.Add(PieceType.MN_G2.Id,     R.MN_GPiece);
+        dict.Add(PieceType.MN_G3Fake.Id, R.MN_GFakePiece);
+        dict.Add(PieceType.MN_G3.Id,     R.MN_GPiece);
+        dict.Add(PieceType.MN_G4Fake.Id, R.MN_GFakePiece);
         
         dict.Add(PieceType.MN_H.Id,      R.MN_HFakePiece);
         dict.Add(PieceType.MN_H1.Id,     R.MN_HPiece);

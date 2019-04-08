@@ -6,6 +6,14 @@ public class MineMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBui
     {
         return new List<int>
         {
+            PieceType.MN_A.Id,
+            PieceType.MN_A1.Id,
+            PieceType.MN_A2Fake.Id,
+            PieceType.MN_A2.Id,
+            PieceType.MN_A3Fake.Id,
+            PieceType.MN_A3.Id,
+            PieceType.MN_A4Fake.Id,
+            
             PieceType.MN_B.Id,
             PieceType.MN_B1.Id,
             PieceType.MN_B2Fake.Id,
@@ -22,6 +30,14 @@ public class MineMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBui
             PieceType.MN_C3.Id,
             PieceType.MN_C4Fake.Id,
             
+            PieceType.MN_D.Id,
+            PieceType.MN_D1.Id,
+            PieceType.MN_D2Fake.Id,
+            PieceType.MN_D2.Id,
+            PieceType.MN_D3Fake.Id,
+            PieceType.MN_D3.Id,
+            PieceType.MN_D4Fake.Id,
+            
             PieceType.MN_E.Id,
             PieceType.MN_E1.Id,
             PieceType.MN_E2Fake.Id,
@@ -37,6 +53,14 @@ public class MineMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBui
             PieceType.MN_F3Fake.Id,
             PieceType.MN_F3.Id,
             PieceType.MN_F4Fake.Id,
+            
+            PieceType.MN_G.Id,
+            PieceType.MN_G1.Id,
+            PieceType.MN_G2Fake.Id,
+            PieceType.MN_G2.Id,
+            PieceType.MN_G3Fake.Id,
+            PieceType.MN_G3.Id,
+            PieceType.MN_G4Fake.Id,
             
             PieceType.MN_H.Id,
             PieceType.MN_H1.Id,
