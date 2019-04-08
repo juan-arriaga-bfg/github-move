@@ -332,6 +332,10 @@ public class UIMainWindowView : UIBaseWindowView
     {
         var time = 0.5f;
 
+        questsCanvasGroup.interactable = visible;
+        rightButtonsCanvasGroups.interactable = visible;
+        leftButtonsCanvasGroups.interactable = visible;
+        
         questsCanvasGroup.DOFade(visible ? 1 : 0, time);
         rightButtonsCanvasGroups.DOFade(visible ? 1 : 0, time);
         leftButtonsCanvasGroups.DOFade(visible ? 1 : 0, time);
