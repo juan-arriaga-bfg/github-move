@@ -17,8 +17,16 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         }
     }
 
-    public override string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.chop", "gameboard.bubble.button.chop {0}"), Energy.ToStringIcon());
-    
+    public override string Price
+    {
+        get
+        {
+            var key = Context.Draggable == null ? "gameboard.bubble.button.chop" : "gameboard.bubble.button.eradicate";
+            
+            return string.Format(LocalizationService.Get(key, $"{key} {0}"), Energy.ToStringIcon());
+        }
+    }
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
