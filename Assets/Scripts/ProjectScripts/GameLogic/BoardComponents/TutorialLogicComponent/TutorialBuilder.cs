@@ -402,6 +402,20 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = 2, Currency = new List<string>{Currency.Offer.Name}, IsPermanentCheck = true, ConditionType = TutorialConditionType.Hard}, true);
                 break;
             }
+            case 27: // first order piece click
+            {
+                step = new BoardArrowTutorialStep
+                {
+                    Targets = new List<int>{PieceType.RC_I.Id},
+                    IsAnyStartCondition = true,
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("orderclick"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("orderclick", currentStep.StartTime)
+                };
+                
+                step.RegisterComponent(new CheckPieceTutorialCondition {ConditionType = TutorialConditionType.Start, Target = PieceType.RC_I.Id, Amount = 1}, true);
+                step.RegisterComponent(new CheckPieceTutorialCondition {ConditionType = TutorialConditionType.Complete, Target = PieceType.RC_I.Id, Amount = 0}, true);
+                break;
+            }
             default:
                 return null;
         }
