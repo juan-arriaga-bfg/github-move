@@ -194,7 +194,10 @@ public class MarketItem
     {
         max -= 1;
         
-        var definition = BoardService.Current.FirstBoard.BoardLogic.MatchDefinition;
+        var definition = BoardService.Current?.FirstBoard?.BoardLogic?.MatchDefinition;
+
+        if (definition == null) return string.Empty;
+        
         var pieces = PieceType.GetIdsByFilter(PieceTypeFilter.Normal, PieceTypeFilter.Fake);
         var used = GameDataService.Current.MarketManager.Defs.FindAll(def => def.current != null && def.current.Bundle == MarketItemBundle.Pieces);
         
@@ -240,7 +243,10 @@ public class MarketItem
     
     private string GetRandomIngredient()
     {
-        var definition = BoardService.Current.FirstBoard.BoardLogic.MatchDefinition;
+        var definition = BoardService.Current?.FirstBoard?.BoardLogic?.MatchDefinition;
+
+        if (definition == null) return string.Empty;
+
         var weights = new List<ItemWeight>(GameDataService.Current.LevelsManager.ResourcesWeights);
         var used = GameDataService.Current.MarketManager.Defs.FindAll(def => def.current != null && def.current.Bundle == MarketItemBundle.Ingredients);
         
