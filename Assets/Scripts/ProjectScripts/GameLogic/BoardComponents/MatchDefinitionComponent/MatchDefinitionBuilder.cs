@@ -472,12 +472,10 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.B8.Id, new PieceMatchDef {Next = PieceType.B9Fake.Id, Previous = PieceType.B7.Id, Amount = 3});
         dict.Add(PieceType.B9Fake.Id, new PieceMatchDef {Next = PieceType.B9.Id, Previous = PieceType.B8.Id, Amount = 1, IsIgnore = true});
         dict.Add(PieceType.B9.Id, new PieceMatchDef {Next = PieceType.B10Fake.Id, Previous = PieceType.B8.Id, Amount = 3});
-        dict.Add(PieceType.B10Fake.Id, new PieceMatchDef {Next = PieceType.B10.Id, Previous = PieceType.B9.Id, Amount = 1, IsIgnore = true});
-        dict.Add(PieceType.B10.Id, new PieceMatchDef {Next = PieceType.B11Fake.Id, Previous = PieceType.B9.Id, Amount = 3});
         
-        dict = AddFakeMulticellularPiece(dict, PieceType.B11Fake.Id, PieceType.B11.Id, PieceType.B10.Id);
+        dict = AddFakeMulticellularPiece(dict, PieceType.B10Fake.Id, PieceType.B10.Id, PieceType.B9.Id);
         
-        dict.Add(PieceType.B11.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.B10.Id});
+        dict.Add(PieceType.B10.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.B9.Id});
         
         #endregion
         
