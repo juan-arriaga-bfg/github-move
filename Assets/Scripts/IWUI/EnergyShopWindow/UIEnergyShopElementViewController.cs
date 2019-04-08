@@ -27,12 +27,16 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
 	    freeObj.SetActive(isFree);
 	    extraObj.SetActive(string.IsNullOrEmpty(contentEntity.ExtraText) == false);
 
-	    if (isFree == false) return;
-	    
-	    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnStart += UpdateLabel;
-	    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnTimeChanged += UpdateLabel;
-	    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnComplete += CompleteTimer;
-	    UpdateLabel();
+        if (isFree)
+        {
+            BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnStart += UpdateLabel;
+            BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnTimeChanged += UpdateLabel;
+            BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnComplete += CompleteResetEnergyTimer;
+            BoardService.Current.FirstBoard.MarketLogic.ClaimEnergyTimer.OnStart += UpdateLabel;
+            BoardService.Current.FirstBoard.MarketLogic.ClaimEnergyTimer.OnTimeChanged += UpdateLabel;
+            BoardService.Current.FirstBoard.MarketLogic.ClaimEnergyTimer.OnComplete += CompleteClaimEnergyTimer;
+            UpdateLabel();
+        }
     }
     
     public override void OnViewClose(IWUIWindowView context)
@@ -41,7 +45,10 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
 	    {
 		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnStart -= UpdateLabel;
 		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnTimeChanged -= UpdateLabel;
-		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnComplete -= CompleteTimer;
+		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnComplete -= CompleteResetEnergyTimer;
+            BoardService.Current.FirstBoard.MarketLogic.ClaimEnergyTimer.OnStart -= UpdateLabel;
+            BoardService.Current.FirstBoard.MarketLogic.ClaimEnergyTimer.OnTimeChanged -= UpdateLabel;
+            BoardService.Current.FirstBoard.MarketLogic.ClaimEnergyTimer.OnComplete -= CompleteClaimEnergyTimer;
 	    }
 	    
 	    base.OnViewClose(context);
@@ -60,16 +67,25 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
 	    timerLabel.Text = BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.CompleteTime.GetTimeLeftText(true, true);
     }
 
-    private void CompleteTimer()
+    private void CompleteResetEnergyTimer()
     {
 	    isClaimed = false;
 	    ChangeView();
+    }
+    
+    private void CompleteClaimEnergyTimer()
+    {
+        isClaimed = true;
+        ChangeView();
     }
 
     protected override void OnPurchaseComplete()
     {
 	    base.OnPurchaseComplete();
-	    
-	    if (isFree) BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.Start();
+
+        if (isFree)
+        {
+            BoardService.Current.FirstBoard.MarketLogic.FreeEnergyClaimed();
+        }
     }
 }
