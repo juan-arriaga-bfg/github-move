@@ -78,6 +78,17 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 				{
 					ToggleView(true);
 					
+					/*if (centerContainer != null)
+					{
+						boardElement.CachedTransform.SetParent(centerContainer.parent);
+			        
+						GameObject.Destroy(centerContainer.gameObject);
+
+						centerContainer = null;
+					}
+			    
+					boardElement.SyncRendererLayers(position.Copy());*/
+					
 					CompleteAnimation(context);
 				};
 

@@ -3,21 +3,25 @@
     "PieceWeights": [
       {
         "Uid": 1,
-        "Weight": 7,
-        "0": 1,
-        "Override": 0
+        "Weight": 7
       },
       {
         "Uid": 2,
-        "Weight": 4,
-        "0": 2,
-        "Override": 2
+        "Weight": 4
       },
       {
         "Uid": 3,
-        "Weight": 1,
-        "0": 3,
-        "Override": 1
+        "Weight": 1
+      }
+    ],
+    "ChestWeights": [
+      {
+        "Uid": 2,
+        "Weight": 2
+      },
+      {
+        "Uid": 3,
+        "Weight": 1
       }
     ]
   },
@@ -25,15 +29,17 @@
     "PieceWeights": [
       {
         "Uid": 1,
-        "Weight": 2,
-        "0": 1,
-        "Override": 1
+        "Weight": 2
       },
       {
         "Uid": 2,
-        "Weight": 1,
-        "0": 2,
-        "Override": 0
+        "Weight": 1
+      }
+    ],
+    "ChestWeights": [
+      {
+        "Uid": 1,
+        "Weight": 1
       }
     ]
   }
