@@ -11,8 +11,6 @@ public class PathfindLockerComponent : ECSEntity
         
         private HashSet<Piece> piecesOnRegion;
         public HashSet<Piece> RegionPieces => piecesOnRegion;
-        
-        private List<BoardPosition> blockPathPositions;
 
         private BoardController board;
         
@@ -60,7 +58,7 @@ public class PathfindLockerComponent : ECSEntity
                 
             var firstPiece = piecesOnRegion.First();
             var canPath = board.Pathfinder.HasPath(firstPiece.CachedPosition, board.AreaAccessController.AvailiablePositions, 
-                                                   out blockPathPositions, firstPiece, board.Pathfinder.GetCondition(firstPiece));
+                                                   out _, firstPiece, board.Pathfinder.GetCondition(firstPiece));
             if (canPath)
             {
                 onRegionOpen?.Invoke(piecesOnRegion);
@@ -73,7 +71,7 @@ public class PathfindLockerComponent : ECSEntity
         {
             board = boardController;
             regPositions = new HashSet<BoardPosition>();
-            blockPathPositions = new List<BoardPosition>();
+            new List<BoardPosition>();
             piecesOnRegion = new HashSet<Piece>();
         }
     }
@@ -218,7 +216,6 @@ public class PathfindLockerComponent : ECSEntity
     
     private List<BoardPosition> FindConnections(BoardPosition at, List<BoardPosition> positions)
     {
-        var piece = context.BoardLogic.GetPieceAt(at);
         var result = new List<BoardPosition>();
         foreach (var pos in positions)
         {

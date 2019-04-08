@@ -25,9 +25,6 @@ public class CharacterPieceBuilder : GenericPieceBuilder
 				.RegisterDefinition(new TouchReactionDefinitionSpawnShop()))
 			.RegisterComponent(new TouchReactionConditionCharacter()));
 		
-		piece.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
-				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
-		
 		return piece;
 	}
 }
