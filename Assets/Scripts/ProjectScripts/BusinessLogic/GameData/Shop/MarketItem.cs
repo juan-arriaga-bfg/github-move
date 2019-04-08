@@ -260,7 +260,10 @@ public class MarketItem
     
     private string GetRandomChest(int index)
     {
-        var definition = BoardService.Current.FirstBoard.BoardLogic.MatchDefinition;
+        var definition = BoardService.Current?.FirstBoard?.BoardLogic?.MatchDefinition;
+
+        if (definition == null) return string.Empty;
+        
         var chests = PieceType.GetIdsByFilter(PieceTypeFilter.Chest, PieceTypeFilter.Bag);
         var used = GameDataService.Current.MarketManager.Defs.FindAll(def => def.current != null && def.current.Bundle == MarketItemBundle.Chests);
 
@@ -274,7 +277,7 @@ public class MarketItem
             chests = chests.FindAll(id => used.Find(item => definition.GetFirst(PieceType.Parse(item.Reward.Currency)) == id) == null);
         }
         
-        if (chests.Count == 0) return null;
+        if (chests.Count == 0) return string.Empty;
         
         var chest = chests[Random.Range(0, chests.Count)];
         var chain = definition.GetChain(chest);
