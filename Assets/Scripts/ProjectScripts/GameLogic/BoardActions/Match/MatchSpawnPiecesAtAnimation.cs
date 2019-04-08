@@ -78,7 +78,7 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 				{
 					ToggleView(true);
 					
-					/*if (centerContainer != null)
+					if (centerContainer != null)
 					{
 						boardElement.CachedTransform.SetParent(centerContainer.parent);
 			        
@@ -87,7 +87,7 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 						centerContainer = null;
 					}
 			    
-					boardElement.SyncRendererLayers(position.Copy());*/
+					boardElement.SyncRendererLayers(position.Copy());
 					
 					CompleteAnimation(context);
 				};
