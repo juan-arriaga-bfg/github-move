@@ -52,7 +52,7 @@ MonoBehaviour:
   - Key: characters
     Link: 14157BrSwktywhceGuIPnhtanwFOoRUf-TvsROijmyL8
     Route: parse
-    Pattern: '[{"":"","PieceWeights":[{"Uid":"","Weight":0,"":"","Override":true}]}]'
+    Pattern: '[{"":"","PieceWeights":[{"Uid":"","Weight":0}],"ChestWeights":[{"Uid":"","Weight":0}]}]'
   - Key: enemies
     Link: 1ggZRqwYTC5dMe-X53tOAMfxCmgJh-RjGQHv5u2iPYZ0
     Route: parse

@@ -8,13 +8,16 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    public static PieceTypeDef ReplacePiece = PieceType.Soft1;
+    public static readonly PieceTypeDef ReplacePiece = PieceType.Soft1;
 
     public List<int> Characters;
     private List<CharacterDef> defs;
     public List<ItemWeight> CharactersWeights;
+    public List<ItemWeight> CharactersChestWeights;
 
     public Action OnUpdateSequence;
+
+    public string ChestKey => $"{Currency.Character.Name}_{PieceType.CH_NPC.Abbreviations[0]}";
     
     public override void Reload()
     {
@@ -44,6 +47,7 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
                 
                 UpdateSequence();
                 AddSequence(Currency.Character.Name, CharactersWeights);
+                AddSequence(ChestKey, CharactersChestWeights);
             }
             else
             {
@@ -59,6 +63,8 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
         Characters.Remove(id);
         UpdateSequence();
         GetSequence(Currency.Character.Name).Reinit(CharactersWeights);
+        GetSequence(ChestKey).Reinit(CharactersChestWeights);
+        
         OnUpdateSequence?.Invoke();
         GameDataService.Current.FogsManager.UpdateFogObserver(id);
     }
@@ -68,10 +74,12 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
         var amount = Mathf.Min(3, Characters.Count);
         
         CharactersWeights = new List<ItemWeight>();
+        CharactersChestWeights = new List<ItemWeight>();
         
         if (amount == 0)
         {
             CharactersWeights.Add(new ItemWeight{Uid = ReplacePiece.Abbreviations[0], Weight = 10});
+            CharactersChestWeights.Add(new ItemWeight{Uid = ReplacePiece.Abbreviations[0], Weight = 10});
             GameDataService.Current.MarketManager.Defs.Find(item => item.Current?.RandomType == MarketRandomType.NPCChests)?.Update(true);
             return;
         }
@@ -79,13 +87,20 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
         for (var i = 0; i < defs.Count; i++)
         {
             var def = defs[i];
-            var chain = i < amount ? GameDataService.Current.MatchDefinition.GetChain(Characters[i]) : new List<int>();
+            var isReplace = i < amount;
+            var chain = isReplace ? GameDataService.Current.MatchDefinition.GetChain(Characters[i]) : new List<int>();
 
-            foreach (var item in def.PieceWeights)
-            {
-                var uid = i < amount ? PieceType.Parse(chain[int.Parse(item.Uid) - 1]) : ReplacePiece.Abbreviations[0];
-                CharactersWeights.Add(new ItemWeight{Uid = uid, Weight = item.Weight});
-            }
+            UpdateCurrentSequence(def.PieceWeights, CharactersWeights, isReplace, chain);
+            UpdateCurrentSequence(def.ChestWeights, CharactersChestWeights, isReplace, chain);
+        }
+    }
+
+    private void UpdateCurrentSequence(List<ItemWeight> target, List<ItemWeight> current, bool isReplace, List<int> chain)
+    {
+        foreach (var item in target)
+        {
+            var uid = isReplace ? PieceType.Parse(chain[int.Parse(item.Uid) - 1]) : ReplacePiece.Abbreviations[0];
+            current.Add(new ItemWeight{Uid = uid, Weight = item.Weight});
         }
     }
 }

@@ -15,7 +15,7 @@ public class UIChestMessageWindowModel : IWWindowModel
 
         if (ChestComponent.Def.Piece == PieceType.CH_NPC.Id && ChestComponent.Def.CharactersAmount.IsActive)
         {
-            icons = AddIcons(icons, GameDataService.Current.CharactersManager.CharactersWeights);
+            icons = AddIcons(icons, GameDataService.Current.CharactersManager.CharactersChestWeights);
         }
 
         if (ChestComponent.Def.PieceAmount > 0) icons = AddIcons(icons, ChestComponent.Def.PieceWeights);

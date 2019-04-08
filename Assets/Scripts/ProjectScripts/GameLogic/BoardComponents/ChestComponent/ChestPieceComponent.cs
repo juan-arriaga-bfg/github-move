@@ -51,8 +51,12 @@ public class ChestPieceComponent : IECSComponent, IPieceBoardObserver
     {
         var hard = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name);
         var resources = GameDataService.Current.LevelsManager.GetSequence(Currency.Resources.Name);
-        var character = GameDataService.Current.CharactersManager.GetSequence(Currency.Character.Name);
         var sequence = GameDataService.Current.ChestsManager.GetSequence(Def.Uid);
+        
+        var character = GameDataService.Current.CharactersManager.GetSequence(
+            contextPiece.PieceType == PieceType.CH_NPC.Id
+                ? GameDataService.Current.CharactersManager.ChestKey
+                : Currency.Character.Name);
 
         var productionAmount = Def.ProductionAmount.Range();
         var resourcesAmount = Def.ResourcesAmount.Range();
@@ -61,8 +65,8 @@ public class ChestPieceComponent : IECSComponent, IPieceBoardObserver
         var reward = hard.GetNextDict(productionAmount);
         
         reward = resources.GetNextDict(resourcesAmount, reward);
-        reward = character.GetNextDict(charactersAmount, reward);
         reward = sequence.GetNextDict(Def.PieceAmount, reward);
+        reward = character.GetNextDict(charactersAmount, reward);
         
         return reward;
     }
