@@ -221,6 +221,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         bar.UpdateProgress(onComplete);
     }
+
+    public void OnProgress(BoardPosition position)
+    {
+        (Context.ActorView as FogPieceView)?.ShowProgressEffect(position);
+    }
     
     public void FillingFake(int value)
     {

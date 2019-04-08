@@ -150,12 +150,12 @@ public class PieceBuildersBuilder
 
     private Dictionary<int, IPieceBuilder> AddMinePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict = AddMineBranchPiece(dict, PieceType.MN_B.Id, PieceType.MN_B3.Id);
-        dict = AddMineBranchPiece(dict, PieceType.MN_C.Id, PieceType.MN_C3.Id);
-        dict = AddMineBranchPiece(dict, PieceType.MN_E.Id, PieceType.MN_E3.Id);
-        dict = AddMineBranchPiece(dict, PieceType.MN_F.Id, PieceType.MN_F3.Id);
-        dict = AddMineBranchPiece(dict, PieceType.MN_H.Id, PieceType.MN_H3.Id);
-        dict = AddMineBranchPiece(dict, PieceType.MN_I.Id, PieceType.MN_I3.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_B.Id, PieceType.MN_B4Fake.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_C.Id, PieceType.MN_C4Fake.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_E.Id, PieceType.MN_E4Fake.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_F.Id, PieceType.MN_F4Fake.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_H.Id, PieceType.MN_H4Fake.Id);
+        dict = AddMineBranchPiece(dict, PieceType.MN_I.Id, PieceType.MN_I4Fake.Id);
         
         return dict;
     }

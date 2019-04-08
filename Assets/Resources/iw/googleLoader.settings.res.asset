@@ -48,7 +48,7 @@ MonoBehaviour:
   - Key: piecesMine
     Link: 17Ye0azQ3ZWoojGheuGxcDdg2FqO-5i5ie4s2j8HU294
     Route: parse
-    Pattern: '[{"Uid":"","Loop":0,"Size":0,"Price":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"LastRewards":[{"Currency":"","Amount":0}]}]'
+    Pattern: '[{"Uid":"","Loop":0,"Size":0,"Price":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"LastRewards":[{"Currency":"","Amount":0}],"Delay":0}]'
   - Key: characters
     Link: 14157BrSwktywhceGuIPnhtanwFOoRUf-TvsROijmyL8
     Route: parse

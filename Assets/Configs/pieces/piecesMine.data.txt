@@ -26,7 +26,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 10
   },
   {
     "Uid": "MN_B2",
@@ -55,7 +56,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 20
   },
   {
     "Uid": "MN_B3",
@@ -113,7 +115,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 10
   },
   {
     "Uid": "MN_C2",
@@ -142,7 +145,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 20
   },
   {
     "Uid": "MN_C3",
@@ -171,7 +175,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 30
   },
   {
     "Uid": "MN_E1",
@@ -179,7 +184,7 @@
     "Size": 20,
     "Price": {
       "Currency": "Energy",
-      "Amount": 20
+      "Amount": 15
     },
     "Reward": {
       "Currency": "CH1_E",
@@ -188,7 +193,7 @@
     "StepRewards": [
       {
         "Currency": "Experience",
-        "Amount": 25
+        "Amount": 20
       }
     ],
     "LastRewards": [
@@ -200,7 +205,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 10
   },
   {
     "Uid": "MN_E2",
@@ -208,7 +214,7 @@
     "Size": 10,
     "Price": {
       "Currency": "Energy",
-      "Amount": 25
+      "Amount": 20
     },
     "Reward": {
       "Currency": "CH2_E",
@@ -229,7 +235,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 20
   },
   {
     "Uid": "MN_E3",
@@ -237,7 +244,7 @@
     "Size": 3,
     "Price": {
       "Currency": "Energy",
-      "Amount": 35
+      "Amount": 30
     },
     "Reward": {
       "Currency": "CH3_E",
@@ -258,7 +265,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 30
   },
   {
     "Uid": "MN_F1",
@@ -287,7 +295,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 10
   },
   {
     "Uid": "MN_F2",
@@ -316,7 +325,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 20
   },
   {
     "Uid": "MN_F3",
@@ -345,7 +355,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 30
   },
   {
     "Uid": "MN_H1",
@@ -374,7 +385,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 10
   },
   {
     "Uid": "MN_H2",
@@ -403,7 +415,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 20
   },
   {
     "Uid": "MN_H3",
@@ -432,7 +445,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 30
   },
   {
     "Uid": "MN_I1",
@@ -461,7 +475,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 10
   },
   {
     "Uid": "MN_I2",
@@ -490,7 +505,8 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 20
   },
   {
     "Uid": "MN_I3",
@@ -519,6 +535,7 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ]
+    ],
+    "Delay": 30
   }
 ]

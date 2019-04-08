@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Contexts;
-using UnityEngine;
 
 public enum BuildingState
 {
@@ -64,10 +62,22 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         thisContext = entity as Piece;
         
-        var def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType + 1);
-
-        Timer = new TimerComponent {Delay = def.Delay, IsCanceled = thisContext.Multicellular == null};
+        Timer = new TimerComponent {IsCanceled = thisContext.Multicellular == null};
         RegisterComponent(Timer);
+        
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType - 1);
+        
+        if (def?.MineDef != null)
+        {
+            var data = GameDataService.Current.PiecesManager.GetComponent<PiecesMineDataManager>(PiecesMineDataManager.ComponentGuid);
+            var loop = data.GetCurrentLoop(thisContext.PieceType - 1) + 1;
+
+            Timer.Delay = def.Delay + def.MineDef.Delay * (def.MineDef.Loop - loop);
+            return;
+        }
+        
+        def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType + 1);
+        Timer.Delay = def.Delay;
     }
     
     public void OnAddToBoard(BoardPosition position, Piece context = null)

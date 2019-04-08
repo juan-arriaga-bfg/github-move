@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BuildingPieceView : PieceBoardElementView
 {
-	private PieceStateComponent state;
+	protected PieceStateComponent state;
 	
 	private GameObject warning;
     
