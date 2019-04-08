@@ -530,4 +530,10 @@ public class R
      public const string SpawnFakeMineAnimation = "SpawnFakeMineAnimation";
      public const string SpawnNormalMineAnimation = "SpawnNormalMineAnimation";
      public const string FogProgressParticle = "FogProgressParticle";
+     public const string MN_AFakePiece = "MN_AFakePiece";
+     public const string MN_APiece = "MN_APiece";
+     public const string MN_DFakePiece = "MN_DFakePiece";
+     public const string MN_DPiece = "MN_DPiece";
+     public const string MN_GFakePiece = "MN_GFakePiece";
+     public const string MN_GPiece = "MN_GPiece";
 }
