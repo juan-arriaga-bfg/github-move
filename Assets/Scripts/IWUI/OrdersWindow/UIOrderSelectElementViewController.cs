@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
@@ -237,6 +238,12 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
                 jumpSequence.Insert(Time.deltaTime * 2f + index * jumpDelay, innerElementCopy.DOScale(upScale, jumpDuration * 0.5f).SetEase(Ease.InSine));
                 jumpSequence.Insert(Time.deltaTime * 2f + index * jumpDelay + jumpDuration * 0.5f, innerElementCopy.DOScale(downScale, jumpDuration * 0.4f).SetEase(Ease.InSine));
                 jumpSequence.Insert(Time.deltaTime * 2f + index * jumpDelay + jumpDuration * 0.9f, innerElementCopy.DOScale(Vector3.zero, jumpDuration * 0.1f).SetEase(Ease.InSine));
+                jumpSequence.InsertCallback(Time.deltaTime * 2f + index * jumpDelay + jumpDuration * 0.9f, () =>
+                {
+                    var uiParticle = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(R.IngredientFlyUIParticle));
+                    uiParticle.SetParentAndReset(transform);
+                    uiParticle.position = resultAnchor.position;
+                });
             }
 
             jumpSequence.OnComplete(() =>
