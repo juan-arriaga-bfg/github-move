@@ -9,15 +9,15 @@
         var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
 
         if (def == null) return piece;
-
-        piece.RegisterComponent(new PiecePathfindBoardCondition(piece.Context, piece)
-            .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
-
+        
         piece.RegisterComponent(new ResourceStorageComponent {Resources = def.SpawnResources});
 
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionCollectResource())
             .RegisterComponent(new TouchReactionConditionComponent()));
+        
+        piece.RegisterComponent(new PiecePathfindBoardCondition(piece.Context, piece)
+            .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
         
         AddPathfindLockObserver(piece, true);
 
