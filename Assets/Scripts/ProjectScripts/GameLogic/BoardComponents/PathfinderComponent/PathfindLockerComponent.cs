@@ -350,7 +350,6 @@ public class PathfindLockerComponent : ECSEntity
     
     public virtual void RecalcCacheOnPieceRemoved(Piece removedPiece)
     {
-        IW.Logger.LogError("RecalcCache");
         if (removedPiece.PieceType == PieceType.Fog.Id)
         {
             OnFogRemove(removedPiece);
