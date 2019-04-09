@@ -21,7 +21,7 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
     {
         get
         {
-            var key = Context.Draggable == null ? "gameboard.bubble.button.chop" : "gameboard.bubble.button.eradicate";
+            var key = Context.Draggable == null ? "gameboard.bubble.button.obstacle" : "gameboard.bubble.button.deadfield";
             
             return string.Format(LocalizationService.Get(key, $"{key} {0}"), Energy.ToStringIcon());
         }

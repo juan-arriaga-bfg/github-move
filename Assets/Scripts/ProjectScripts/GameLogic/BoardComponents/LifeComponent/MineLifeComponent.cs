@@ -8,7 +8,7 @@ public class MineLifeComponent : WorkplaceLifeComponent
     public override CurrencyPair Energy => def.Price;
     public override string AnalyticsLocation => $"skip_mine";
     public override string Message => LocalizationService.Get("gameboard.bubble.message.mine", "gameboard.bubble.message.mine");
-    public override string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.clear", "gameboard.bubble.button.clear {0}"), Energy.ToStringIcon());
+    public override string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.mine", "gameboard.bubble.button.mine {0}"), Energy.ToStringIcon());
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
