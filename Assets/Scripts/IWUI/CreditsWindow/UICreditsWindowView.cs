@@ -1,4 +1,5 @@
 using DG.Tweening;
+using UnityEditor.Sprites;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,9 +23,18 @@ public class UICreditsWindowView : UIGenericPopupWindowView
         
         SetTitle(windowModel.Title);
         
-        team.Text = windowModel.Team;
-        bigFish.Text = windowModel.BigFish;
-        trademark.Text = windowModel.Trademark;
+        team.Text = "";
+
+        var iconManager = IconService.Instance.Manager as IconResourceManager;
+
+        foreach (var iconData in iconManager.CachedIconsData.Keys)
+        {
+            team.Text += $"{iconData} text for <sprite name={iconData}> example \n";
+            
+        }
+        
+//        bigFish.Text = windowModel.BigFish;
+//        trademark.Text = windowModel.Trademark;
         
         LayoutRebuilder.ForceRebuildLayoutImmediate(parrent);
         
@@ -45,6 +55,7 @@ public class UICreditsWindowView : UIGenericPopupWindowView
 
     private void StartAnimation()
     {
+        return;
         DOTween.Kill(parrent);
         
         parrent.DOAnchorPosY(parrent.sizeDelta.y, delay)
@@ -72,6 +83,7 @@ public class UICreditsWindowView : UIGenericPopupWindowView
     
     private void OnUp()
     {
+        return;
         scroll.enabled = false;
 
         var time = delay * (1 - parrent.anchoredPosition.y / parrent.sizeDelta.y);
