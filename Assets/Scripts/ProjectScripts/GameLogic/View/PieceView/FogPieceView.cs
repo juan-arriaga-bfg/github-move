@@ -320,4 +320,9 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
     {
 	    ParticleView.Show(R.FogProgressParticle, position.SetZ(BoardLayer.FX.Layer));
     }
+
+    public void ShowProgressCompleteEffect()
+    {
+	    ParticleView.Show(R.FogProgressCompleteParticle, Piece.CachedPosition.SetZ(BoardLayer.FX.Layer));
+    }
 }

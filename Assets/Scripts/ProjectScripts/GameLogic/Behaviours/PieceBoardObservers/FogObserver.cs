@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Contexts;
 using DG.Tweening;
 using UnityEngine;
 
@@ -215,6 +216,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             {
                 bar.Priority = 1;
                 bar.Change(false);
+                (Context.ActorView as FogPieceView)?.ShowProgressCompleteEffect();
                 OpenBubble();
             };
         }
