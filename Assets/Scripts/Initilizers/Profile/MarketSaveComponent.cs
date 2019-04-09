@@ -22,7 +22,7 @@ public class MarketSaveComponent : ECSEntity, IECSSerializeable
     public override int Guid => ComponentGuid;
     
     [JsonProperty] public string ResetMarketStartTime;
-    [JsonProperty] public string ResetEnergyStartTime;
+    [JsonProperty] public long FreeEnergyClaimTime;
     [JsonProperty] public string OfferTimerStartTime;
     
     private List<MarketSaveItem> slots;
@@ -44,7 +44,7 @@ public class MarketSaveComponent : ECSEntity, IECSSerializeable
         
         ResetMarketStartTime = board.MarketLogic.ResetMarketTimer.StartTimeLong.ToString();
         OfferTimerStartTime = board.MarketLogic.OfferTimer.IsExecuteable() ? board.MarketLogic.OfferTimer.StartTimeLong.ToString() : string.Empty;
-        ResetEnergyStartTime = board.MarketLogic.ResetEnergyTimer.IsExecuteable() ? board.MarketLogic.ResetEnergyTimer.StartTimeLong.ToString() : string.Empty;
+        FreeEnergyClaimTime = UnixTimeHelper.DateTimeToUnixTimestamp(board.MarketLogic.FreeEnergyClaimTime);
         
         slots = new List<MarketSaveItem>();
 
