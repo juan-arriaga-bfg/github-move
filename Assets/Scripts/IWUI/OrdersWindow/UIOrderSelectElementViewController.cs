@@ -240,11 +240,13 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
                 jumpSequence.InsertCallback(Time.deltaTime * 2f + index * jumpDelay + jumpDuration * 0.9f, () =>
                 {
                     var uiParticle = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(R.IngredientFlyUIParticle));
-                    uiParticle.SetParentAndReset(transform);
+                    uiParticle.SetParentAndReset(resultAnchor);
                     uiParticle.position = resultAnchor.position;
                     particles.Add(uiParticle);
                 });
             }
+            
+            jumpSequence.AppendInterval(1.8f);
 
             jumpSequence.OnComplete(() =>
             {
@@ -257,7 +259,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
                 for (int i = 0; i < jumpItems.Count; i++)
                 {
                     var jumpItem = jumpItems[i];
-                    Destroy(jumpItem.gameObject);
+                    UIService.Get.PoolContainer.Return(jumpItem.gameObject);
                 }
             });
     }
