@@ -39,7 +39,7 @@ public class CellHintsComponent : IECSComponent
 	{
 	}
 
-    public void OnDragStartBoost(BoardPosition boardPos)
+    public bool OnDragStartBoost(BoardPosition boardPos)
     {
         selectCells = new List<BoardElementView>();
         
@@ -49,6 +49,8 @@ public class CellHintsComponent : IECSComponent
             
             FindVariants(boardPos, id, true);
         }
+
+        return selectCells.Count > 0;
     }
 	
     public void OnDragStart(BoardPosition boardPos, int pieceId)

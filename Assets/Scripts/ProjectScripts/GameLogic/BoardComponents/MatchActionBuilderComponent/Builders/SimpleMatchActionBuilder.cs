@@ -2,7 +2,7 @@
 
 public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBuilder
 {
-    private const int amountBonus = 5;
+    public const int AMOUNT_BONUS = 5;
     
     public List<int> GetKeys()
     {
@@ -21,9 +21,9 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         if (next == PieceType.None.Id
             || UseBoost(definition, matchField) && definition.GetLast(pieceType) == PieceType.Boost_CR.Id) return false;
         
-        var countForMatchDefault = definition.GetPieceCountForMatch(pieceType);
+        var amountForMatchDefault = definition.GetPieceCountForMatch(pieceType);
         
-        return countForMatchDefault != -1 && matchField.Count >= countForMatchDefault;
+        return amountForMatchDefault != -1 && matchField.Count >= amountForMatchDefault;
     }
     
     public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
@@ -63,11 +63,11 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         
         if (amountDefault == -1 || amountCurrent < amountDefault) return nextPieces;
         
-        if (amountCurrent < amountBonus)
+        if (amountCurrent < AMOUNT_BONUS)
         {
             nextPieces = Add(1, nextType, nextPieces);
 
-            if (amountCurrent == amountBonus - 1)
+            if (amountCurrent == AMOUNT_BONUS - 1)
             {
                 nextPieces = Add(1, useBoost ? PieceType.Boost_CR.Id : currentType, nextPieces);
                 ignoreBoost = useBoost;
@@ -76,8 +76,8 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
             return nextPieces;
         }
 
-        var amount = amountCurrent / amountBonus * 2;
-        var remainder = amountCurrent % amountBonus;
+        var amount = amountCurrent / AMOUNT_BONUS * 2;
+        var remainder = amountCurrent % AMOUNT_BONUS;
 
         switch (remainder)
         {
