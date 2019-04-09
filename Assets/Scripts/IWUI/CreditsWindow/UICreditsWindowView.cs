@@ -29,7 +29,9 @@ public class UICreditsWindowView : UIGenericPopupWindowView
 
         foreach (var iconData in iconManager.CachedIconsData.Keys)
         {
-            team.Text += $"{iconData} text for <sprite name={iconData}> example \n";
+            team.Text += $"{iconData}: text for <sprite name={iconData}> example \n";
+            team.Text += $"<sprite name={iconData}> and icon on begining string and end string <sprite name={iconData}> \n";
+            team.Text += $"and simple long long lorem ipsum text for debug \n\n";
             
         }
         
