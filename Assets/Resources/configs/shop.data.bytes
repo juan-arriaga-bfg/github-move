@@ -12,7 +12,12 @@
       "Amount": 0
     },
     "Icon": "EnergyShopIcon1",
-    "Name": "window.shop.energy.item1"
+    "Name": "window.shop.energy.item1",
+    "Delays": [
+      43200,
+      54000,
+      72000
+    ]
   },
   {
     "Uid": "Energy",
@@ -195,7 +200,9 @@
     "Name": "window.shop.offer.item1",
     "PurchaseKey": "iap7",
     "Sale": 30,
-    "Delay": 345600
+    "Delays": [
+      345600
+    ]
   },
   {
     "Uid": "Offer",
@@ -217,6 +224,8 @@
     "Name": "window.shop.offer.item2",
     "PurchaseKey": "iap8",
     "Sale": 30,
-    "Delay": 7200
+    "Delays": [
+      7200
+    ]
   }
 ]
