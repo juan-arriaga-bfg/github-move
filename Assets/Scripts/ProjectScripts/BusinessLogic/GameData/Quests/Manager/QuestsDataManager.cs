@@ -636,12 +636,12 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
 
     private void StopDailyTimer()
     {
-        Debug.Log($"[QuestsDataManager] => StopDailyTimer");
-        
         if (DailyTimer == null)
         {
             return;    
         }
+        
+        Debug.Log($"[QuestsDataManager] => StopDailyTimer");
 
         UnRegisterComponent(DailyTimer);
         
