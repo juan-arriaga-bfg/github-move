@@ -193,6 +193,7 @@ public class CrystalPieceView : PieceBoardElementView
         
         var minBranch = int.MaxValue;
         var maxIndex = maxId;
+        var minDistance = float.MaxValue;
 
         foreach (var pair in cache)
         {
@@ -219,6 +220,8 @@ public class CrystalPieceView : PieceBoardElementView
                 var match = new List<BoardPosition>();
                 
                 if (CheckMatch(position, match) == false) continue;
+
+                match.Remove(Piece.CachedPosition);
                 
                 foreach (var pos in match)
                 {
@@ -229,11 +232,21 @@ public class CrystalPieceView : PieceBoardElementView
                 {
                     minBranch = branch;
                     maxIndex = index;
-                    bestPosition = new List<BoardPosition>();
+                    bestPosition = match;
                 }
 
-                if (bestPosition.Count >= match.Count) continue;
+                if (bestPosition.Count > match.Count) continue;
+                
+                if (bestPosition.Count == match.Count)
+                {
+                    var nearest = Piece.CachedPosition.GetImmediate(match)[0];
+                    var distance = BoardPosition.SqrMagnitude(Piece.CachedPosition, nearest);
 
+                    if (minDistance <= distance) continue;
+
+                    minDistance = distance;
+                }
+                
                 bestPosition = match;
             }
         }
