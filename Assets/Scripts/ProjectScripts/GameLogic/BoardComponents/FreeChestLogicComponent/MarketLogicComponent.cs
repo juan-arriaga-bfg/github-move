@@ -57,34 +57,6 @@ public class MarketLogicComponent : ECSEntity
         InitResetMarketTimer();
 
         InitEnergyTimers();
-
-        //       ResetEnergyTimer.Delay = GetResetEnergyDelay();
-		//
-		// ResetMarketTimer.OnComplete += () =>
-		// {
-		// 	GameDataService.Current.MarketManager.UpdateSlots(true);
-  //           ClaimEnergyTimer.Start();
-		// };
-		//
-  //       ClaimEnergyTimer.OnComplete += () =>
-  //       {
-  //           GameDataService.Current.MarketManager.UpdateSlots(true);
-  //           ResetMarketTimer.Start();
-  //       };
-		//
-		// var save = ProfileService.Current.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
-  //
-  //       if (save != null && string.IsNullOrEmpty(save.ResetMarketStartTime) == false)
-  //       {
-  //           ResetMarketTimer.Start(long.Parse(save.ResetMarketStartTime));
-  //       }
-  //       else
-  //       {
-  //           ResetMarketTimer.Start();
-  //       }
-  //
-		// if (save == null) return;
-		// if (string.IsNullOrEmpty(save.ResetEnergyStartTime) == false) ResetEnergyTimer.Start(long.Parse(save.ResetEnergyStartTime));
 	}
 
     private void InitEnergyTimers()
