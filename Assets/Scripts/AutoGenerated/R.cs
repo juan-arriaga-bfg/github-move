@@ -536,4 +536,5 @@ public class R
      public const string MN_DPiece = "MN_DPiece";
      public const string MN_GFakePiece = "MN_GFakePiece";
      public const string MN_GPiece = "MN_GPiece";
+     public const string IngredientFlyUIParticle = "IngredientFlyUIParticle";
 }
