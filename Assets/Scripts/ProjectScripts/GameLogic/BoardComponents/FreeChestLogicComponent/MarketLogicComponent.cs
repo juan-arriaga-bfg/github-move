@@ -21,7 +21,7 @@ public class MarketLogicComponent : ECSEntity
         
         public bool Contains(long time)
         {
-            return time > From && time <= To;
+            return time >= From && time < To;
         }
     }
     
@@ -53,30 +53,12 @@ public class MarketLogicComponent : ECSEntity
 		
 		LocalNotificationsService.Current.RegisterNotifier(new Notifier(ResetMarketTimer, NotifyType.MarketRefresh));
 		LocalNotificationsService.Current.RegisterNotifier(new Notifier(ResetEnergyTimer, NotifyType.FreeEnergyRefill));
-		
-		ResetMarketTimer.Delay = GameDataService.Current.ConstantsManager.MarketUpdateDelay;
+				
+        InitResetMarketTimer();
 
-        var save = ProfileService.Current.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
-        if (save != null)
-        {
-            FreeEnergyClaimTime = UnixTimeHelper.UnixTimestampToDateTime(save.FreeEnergyClaimTime);
-        }
-		
-        InitResetEnergyTimer();
-        
-        ResetMarketTimer.OnComplete += () =>
-        {
-            GameDataService.Current.MarketManager.UpdateSlots(true);
-            ClaimEnergyTimer.Start();
-        };
-        
-        ClaimEnergyTimer.OnComplete += () =>
-        {
-            GameDataService.Current.MarketManager.UpdateSlots(true);
-            ResetMarketTimer.Start();
-        };
-        
-  //       ResetEnergyTimer.Delay = GetResetEnergyDelay();
+        InitEnergyTimers();
+
+        //       ResetEnergyTimer.Delay = GetResetEnergyDelay();
 		//
 		// ResetMarketTimer.OnComplete += () =>
 		// {
@@ -105,18 +87,67 @@ public class MarketLogicComponent : ECSEntity
 		// if (string.IsNullOrEmpty(save.ResetEnergyStartTime) == false) ResetEnergyTimer.Start(long.Parse(save.ResetEnergyStartTime));
 	}
 
-    private void InitResetEnergyTimer()
+    private void InitEnergyTimers()
+    {
+        var save = ProfileService.Current.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
+        if (save != null)
+        {
+            FreeEnergyClaimTime = UnixTimeHelper.UnixTimestampToDateTime(save.FreeEnergyClaimTime);
+        }
+
+        ResetEnergyTimer.OnComplete += () =>
+        {
+            UpdateEnergyTimers();
+        };
+
+        ClaimEnergyTimer.OnComplete += () =>
+        {
+            UpdateEnergyTimers();
+        };
+        
+        UpdateEnergyTimers();
+    }
+
+    private void InitResetMarketTimer()
+    {
+        ResetMarketTimer.Delay = GameDataService.Current.ConstantsManager.MarketUpdateDelay;
+        
+        ResetMarketTimer.OnComplete += () =>
+        {
+            GameDataService.Current.MarketManager.UpdateSlots(true);
+            ResetMarketTimer.Start();
+        };
+
+        var save = ProfileService.Current.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
+
+        if (save != null && string.IsNullOrEmpty(save.ResetMarketStartTime) == false)
+        {
+            ResetMarketTimer.Start(long.Parse(save.ResetMarketStartTime));
+        }
+        else
+        {
+            ResetMarketTimer.Start();
+        }
+    }
+
+    private void UpdateEnergyTimers()
     {
         EnergySlotState state = CheckEnergySlot(out int resetDelay, out int claimDelay);
 
         switch (state)
         {
             case EnergySlotState.WaitForReset:
+                IW.Logger.Log($"[MarketLogicComponent] => UpdateEnergyTimers: WaitForReset");
+                
                 ResetEnergyTimer.Delay = resetDelay;
+                ClaimEnergyTimer.Stop();
                 ResetEnergyTimer.Start();
                 break;
             
             case EnergySlotState.WaitForClaim:
+                IW.Logger.Log($"[MarketLogicComponent] => UpdateEnergyTimers: WaitForClaim");
+                
+                ResetEnergyTimer.Stop();
                 ClaimEnergyTimer.Delay = claimDelay;
                 ClaimEnergyTimer.Start();
                 break;
@@ -198,7 +229,7 @@ public class MarketLogicComponent : ECSEntity
 
         long claimOccuredAfterSecondsFromDayStart = (long)(FreeEnergyClaimTime - todayDayStart).TotalSeconds;
 
-        IW.Logger.Log($"[MarketLogicComponent] => CheckEnergySlot: todayDayStart: {todayDayStart}, FreeEnergyClaimTime: {FreeEnergyClaimTime},  elapsedTodayAfterClaim: {claimOccuredAfterSecondsFromDayStart} - ");
+        IW.Logger.Log($"[MarketLogicComponent] => CheckEnergySlot: todayDayStart: {todayDayStart}, FreeEnergyClaimTime: {FreeEnergyClaimTime},  elapsedTodayAfterClaim: {claimOccuredAfterSecondsFromDayStart}");
         
         foreach (var claimRange in claimRanges)
         {
