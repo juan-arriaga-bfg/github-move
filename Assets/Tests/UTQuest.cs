@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -236,5 +237,78 @@ namespace UT
                 Assert.Fail(message);
             }
         }
+        
+        [Test]
+        public void UTTaskPieceIds()
+        {
+            LogAssert.ignoreFailingMessages = true;
+
+            QuestsDataManager questsDataManager = new QuestsDataManager();
+            questsDataManager.Reload();
+            if (!questsDataManager.CreateStarters())
+            {
+                LogAssert.ignoreFailingMessages = false;
+                Assert.Fail("Can't create starters");
+                return;
+            }
+
+            var sb = new StringBuilder();
+            
+            var tasks = questsDataManager.Cache[typeof(TaskEntity)];
+            foreach (var taskJson in tasks.Values)
+            {
+                TaskEntity task = questsDataManager.InstantiateFromJson<TaskEntity>(taskJson);
+                FieldInfo[] fields = task.GetType().GetFields(BindingFlags.Public | 
+                                                              BindingFlags.NonPublic | 
+                                                              BindingFlags.Instance);
+
+                FieldInfo pieceUidField = fields.FirstOrDefault(e => e.Name == "PieceUid");
+                if (pieceUidField == null)
+                {
+                    continue;
+                }
+
+                string pieceUid = pieceUidField.GetValue(task) as string;
+                if (string.IsNullOrEmpty(pieceUid))
+                {
+                    continue;
+                }
+
+                switch (pieceUid)
+                {
+                    case "None":
+                    case "Empty":
+                        continue;
+                }
+
+                int parsedId = PieceType.Parse(pieceUid);
+                if (parsedId == PieceType.None.Id)
+                {
+                    sb.Append($"Task '{task.Id}' has invalid PieceUid: '{pieceUid}'");
+                }
+            }
+            
+
+            LogAssert.ignoreFailingMessages = false;
+            
+            var message = sb.ToString();
+            if (string.IsNullOrEmpty(message))
+            {
+                Assert.Pass($"Tasks checked: {tasks.Count}");
+            }
+            else
+            {
+                Assert.Fail(message);
+            }
+        }
+
+        // A UnityTest behaves like a coroutine in PlayMode
+        // and allows you to yield null to skip a frame in EditMode
+        // [UnityTest]
+        // public IEnumerator UTQuestIdsWithEnumeratorPasses() {
+        //     // Use the Assert class to test conditions.
+        //     // yield to skip a frame
+        //     yield return null;
+        // }
     }
 }
