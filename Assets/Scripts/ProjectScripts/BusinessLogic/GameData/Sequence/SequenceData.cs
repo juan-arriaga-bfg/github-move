@@ -52,7 +52,7 @@ public abstract class SequenceData : ECSEntity, IDataManager
         }
     }
 
-    public void AddSequence(string uid, List<ItemWeight> weights)
+    public void AddSequence(string uid, List<ItemWeight> weights, List<string> hard = null)
     {
         var sequenceData = new SequenceComponent
         {
@@ -61,7 +61,7 @@ public abstract class SequenceData : ECSEntity, IDataManager
         };
         
         RegisterComponent(sequenceData, true);
-        sequenceData.Init(weights);
+        sequenceData.Init(weights, hard);
     }
     
     public SequenceComponent GetSequence(string uid)

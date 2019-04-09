@@ -170,10 +170,15 @@
         "Amount": 30
       }
     ],
+    "HardOrders": [
+      {
+        "Currency": "RC_J"
+      }
+    ],
     "OrdersWeights": [
       {
         "Uid": "RC_J",
-        "Weight": 4
+        "Weight": 1
       }
     ],
     "PieceWeights": [
@@ -218,6 +223,11 @@
       {
         "Currency": "Energy",
         "Amount": 50
+      }
+    ],
+    "HardOrders": [
+      {
+        "Currency": "RC_D"
       }
     ],
     "OrdersWeights": [
