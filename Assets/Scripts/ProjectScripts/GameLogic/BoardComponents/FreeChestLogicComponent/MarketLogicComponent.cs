@@ -38,6 +38,8 @@ public class MarketLogicComponent : ECSEntity
 	public TimerComponent ResetEnergyTimer { get; } = new TimerComponent();
 	public TimerComponent ClaimEnergyTimer { get; } = new TimerComponent();
 	public TimerComponent OfferTimer { get; } = new TimerComponent();
+	
+	public TimerComponent FreeEnergyLocalNotificationTimer { get; } = new TimerComponent();
 
     public DateTime FreeEnergyClaimTime { get; private set; } = UnixTimeHelper.UnixTimestampToDateTime(0);
 	
@@ -52,7 +54,7 @@ public class MarketLogicComponent : ECSEntity
 		RegisterComponent(OfferTimer, true);
 		
 		LocalNotificationsService.Current.RegisterNotifier(new Notifier(ResetMarketTimer, NotifyType.MarketRefresh));
-		LocalNotificationsService.Current.RegisterNotifier(new Notifier(ResetEnergyTimer, NotifyType.FreeEnergyRefill));
+		LocalNotificationsService.Current.RegisterNotifier(new Notifier(FreeEnergyLocalNotificationTimer, NotifyType.FreeEnergyRefill));
 				
         InitResetMarketTimer();
 
@@ -124,6 +126,9 @@ public class MarketLogicComponent : ECSEntity
                 ClaimEnergyTimer.Start();
                 break;
         }
+
+        FreeEnergyLocalNotificationTimer.Delay = resetDelay;
+        FreeEnergyLocalNotificationTimer.Start();
     }
     
     public void FreeEnergyClaimed()
