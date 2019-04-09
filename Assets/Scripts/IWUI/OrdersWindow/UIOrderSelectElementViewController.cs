@@ -113,19 +113,16 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
                 mark = false;
                 message = string.Empty;
             }
+            else if (current >= def.Amount)
+            {
+                mark = true;
+                message = string.Empty;
+            }
             else
             {
-                if (current >= def.Amount)
-                {
-                    mark = true;
-                    message = string.Empty;
-                }
-                else
-                {
-                    mark = false;
-                    color = "EC5928";
-                    message = $"<color=#{color}>{current}</color><size=45>/{def.Amount}</size>";
-                } 
+                mark = false;
+                color = "EC5928";
+                message = $"<color=#{color}>{current}</color><size=45>/{def.Amount}</size>";
             }
 
             var entity = new UIOrderIngredientElementEntity
@@ -214,6 +211,8 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             Vector3 downScale = new Vector3(1f, 1f, 1f);
             var jumpItems = new List<Transform>();
 
+            List<Transform> particles = new List<Transform>();
+            
             for (int i = innerElements.size - 1; i >= 0; i--)
             {
                 var innerElement = innerElements[i] as UIOrderIngredientElementViewController;
@@ -243,11 +242,18 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
                     var uiParticle = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(R.IngredientFlyUIParticle));
                     uiParticle.SetParentAndReset(transform);
                     uiParticle.position = resultAnchor.position;
+                    particles.Add(uiParticle);
                 });
             }
 
             jumpSequence.OnComplete(() =>
             {
+                while (particles.Count > 0)
+                {
+                    UIService.Get.PoolContainer.Return(particles[0].gameObject);
+                    particles.RemoveAt(0);
+                }
+                
                 for (int i = 0; i < jumpItems.Count; i++)
                 {
                     var jumpItem = jumpItems[i];
