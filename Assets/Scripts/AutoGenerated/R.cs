@@ -538,4 +538,7 @@ public class R
      public const string MN_GPiece = "MN_GPiece";
      public const string IngredientFlyUIParticle = "IngredientFlyUIParticle";
      public const string FogProgressCompleteParticle = "FogProgressCompleteParticle";
+     public const string DestroyHardCurrencyAnimation = "DestroyHardCurrencyAnimation";
+     public const string DestroySoftCurrencyAnimation = "DestroySoftCurrencyAnimation";
+     public const string MagicWandFlyParticle = "MagicWandFlyParticle";
 }

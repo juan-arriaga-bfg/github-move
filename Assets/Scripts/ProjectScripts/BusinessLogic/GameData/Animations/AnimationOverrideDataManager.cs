@@ -74,6 +74,16 @@ public class AnimationOverrideDataManager
     {
         var defs = new Dictionary<int, AnimationDef>();
 
+        AddPieceChain(defs, PieceType.Soft1.Id, PieceType.Soft8.Id, new AnimationDef()
+        {
+            OnDestroyFromBoard = R.DestroySoftCurrencyAnimation
+        });
+        
+        AddPieceChain(defs, PieceType.Hard1.Id, PieceType.Hard6.Id, new AnimationDef()
+        {
+            OnDestroyFromBoard = R.DestroyHardCurrencyAnimation
+        });
+        
         AddByFilter(defs, PieceTypeFilter.Obstacle, new AnimationDef
         {
             OnDestroyFromBoard = R.DestroyObstacleAnimation
