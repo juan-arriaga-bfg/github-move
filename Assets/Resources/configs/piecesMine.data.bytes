@@ -5,7 +5,7 @@
     "Size": 20,
     "Price": {
       "Currency": "Energy",
-      "Amount": 10
+      "Amount": 15
     },
     "Reward": {
       "Currency": "CH1_A",
@@ -27,7 +27,7 @@
         "Amount": 1
       }
     ],
-    "Delay": 10
+    "Delay": 300
   },
   {
     "Uid": "MN_A2",
@@ -35,7 +35,7 @@
     "Size": 10,
     "Price": {
       "Currency": "Energy",
-      "Amount": 15
+      "Amount": 30
     },
     "Reward": {
       "Currency": "CH2_A",
@@ -57,7 +57,7 @@
         "Amount": 1
       }
     ],
-    "Delay": 20
+    "Delay": 600
   },
   {
     "Uid": "MN_A3",
@@ -65,7 +65,7 @@
     "Size": 3,
     "Price": {
       "Currency": "Energy",
-      "Amount": 25
+      "Amount": 50
     },
     "Reward": {
       "Currency": "CH3_A",
@@ -116,7 +116,7 @@
         "Amount": 1
       }
     ],
-    "Delay": 10
+    "Delay": 30
   },
   {
     "Uid": "MN_B2",
@@ -124,7 +124,7 @@
     "Size": 10,
     "Price": {
       "Currency": "Energy",
-      "Amount": 15
+      "Amount": 25
     },
     "Reward": {
       "Currency": "CH2_B",
@@ -146,7 +146,7 @@
         "Amount": 1
       }
     ],
-    "Delay": 20
+    "Delay": 300
   },
   {
     "Uid": "MN_B3",
@@ -154,7 +154,7 @@
     "Size": 3,
     "Price": {
       "Currency": "Energy",
-      "Amount": 25
+      "Amount": 60
     },
     "Reward": {
       "Currency": "CH3_B",
@@ -205,7 +205,7 @@
         "Amount": 1
       }
     ],
-    "Delay": 10
+    "Delay": 60
   },
   {
     "Uid": "MN_C2",
@@ -213,7 +213,7 @@
     "Size": 10,
     "Price": {
       "Currency": "Energy",
-      "Amount": 20
+      "Amount": 35
     },
     "Reward": {
       "Currency": "CH2_C",
@@ -235,7 +235,7 @@
         "Amount": 1
       }
     ],
-    "Delay": 20
+    "Delay": 600
   },
   {
     "Uid": "MN_C3",
@@ -243,7 +243,7 @@
     "Size": 3,
     "Price": {
       "Currency": "Energy",
-      "Amount": 30
+      "Amount": 70
     },
     "Reward": {
       "Currency": "CH3_C",
@@ -264,8 +264,7 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ],
-    "Delay": 30
+    ]
   },
   {
     "Uid": "MN_D1",

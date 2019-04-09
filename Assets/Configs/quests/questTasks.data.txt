@@ -27,6 +27,7 @@
   {
     "$type": "TaskKillTreeEntity, GameAssembly",
     "Id": "3_KillTree",
+    "PieceUid": "OB1_A",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -96,7 +97,7 @@
         "Ico": "CH1_A",
         "Title": "quest.open.chest.title",
         "Message": "quest.open.chest.message",
-        "Hint": "task.open.chest.tutor.hint"
+        "Hint": "task.open.chest.hint"
       }
     }
   },
@@ -200,7 +201,7 @@
         "Ico": "CH_Free",
         "Title": "quest.open.chest.title",
         "Message": "quest.open.chest.message",
-        "Hint": "task.open.chest.hint"
+        "Hint": "task.open.chest.free.hint"
       }
     }
   },
@@ -585,7 +586,8 @@
       "QuestDescriptionComponent": {
         "Ico": "CH3_D",
         "Title": "quest.open.chest.title",
-        "Message": "quest.open.chest.message"
+        "Message": "quest.open.chest.message",
+        "Hint": "task.open.chest.hint"
       }
     }
   },
@@ -905,7 +907,8 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.open.chest.title",
-        "Message": "quest.open.chest.message"
+        "Message": "quest.open.chest.message",
+        "Hint": "task.open.chest.hint"
       }
     }
   },
@@ -926,6 +929,7 @@
   {
     "$type": "TaskKillTreeEntity, GameAssembly",
     "Id": "87_KillTree",
+    "PieceUid": "OB9_A",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -951,6 +955,7 @@
   {
     "$type": "TaskKillTreeEntity, GameAssembly",
     "Id": "89_KillTree",
+    "PieceUid": "OB9_A",
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -982,7 +987,8 @@
       "QuestDescriptionComponent": {
         "Ico": "CH1_B",
         "Title": "quest.open.chest.title",
-        "Message": "quest.open.chest.message"
+        "Message": "quest.open.chest.message",
+        "Hint": "task.open.chest.hint"
       }
     }
   },
@@ -1142,7 +1148,8 @@
       "QuestDescriptionComponent": {
         "Ico": "CH3_B",
         "Title": "quest.open.chest.title",
-        "Message": "quest.open.chest.message"
+        "Message": "quest.open.chest.message",
+        "Hint": "task.open.chest.hint"
       }
     }
   },
@@ -1167,7 +1174,8 @@
       "QuestDescriptionComponent": {
         "Ico": "CH3_D",
         "Title": "quest.open.chest.title",
-        "Message": "quest.open.chest.message"
+        "Message": "quest.open.chest.message",
+        "Hint": "task.open.chest.hint"
       }
     }
   },
@@ -1243,7 +1251,8 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.open.chest.title",
-        "Message": "quest.open.chest.message"
+        "Message": "quest.open.chest.message",
+        "Hint": "task.open.chest.hint"
       }
     }
   },
@@ -1287,6 +1296,7 @@
   {
     "$type": "TaskHitTreeEntity, GameAssembly",
     "Id": "117_HitTree",
+    "PieceUid": "OB9_D",
     "TargetValue": 30,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -1395,7 +1405,8 @@
       "QuestDescriptionComponent": {
         "Ico": "CH3_E",
         "Title": "quest.open.chest.title",
-        "Message": "quest.open.chest.message"
+        "Message": "quest.open.chest.message",
+        "Hint": "task.open.chest.hint"
       }
     }
   },
@@ -1610,6 +1621,90 @@
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "143_CreatePiece_B10",
     "PieceUid": "B10",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "144_CreatePiece_Ext_A3",
+    "PieceUid": "EXT_A3",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "145_CreatePiece_Ext_A4",
+    "PieceUid": "EXT_A4",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "146_CreatePiece_Ext_A5",
+    "PieceUid": "EXT_A5",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "146_CreatePiece_Ext_A6",
+    "PieceUid": "EXT_A6",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "147_CreatePiece_Ext_A7",
+    "PieceUid": "EXT_A7",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "148_CreatePiece_Ext_A8",
+    "PieceUid": "EXT_A8",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "149_CreatePiece_Ext_A9",
+    "PieceUid": "EXT_A9",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {

@@ -355,8 +355,7 @@
     "OrdersWeights": [
       {
         "Uid": "RC_G",
-        "Weight": 5,
-        "Override": true
+        "Weight": 5
       },
       {
         "Uid": "RC_R",
@@ -385,12 +384,6 @@
         "Override": true
       }
     ],
-    "ResourcesWeights": [
-      {
-        "Uid": "PR_B5",
-        "Weight": 1
-      }
-    ],
     "OrdersDelay": 30
   },
   {
@@ -402,7 +395,7 @@
     "Rewards": [
       {
         "Currency": "Coins",
-        "Amount": 100
+        "Amount": 150
       },
       {
         "Currency": "Crystals",
@@ -410,7 +403,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 120
+        "Amount": 100
       }
     ],
     "OrdersWeights": [
@@ -468,7 +461,7 @@
     "Rewards": [
       {
         "Currency": "Coins",
-        "Amount": 100
+        "Amount": 250
       },
       {
         "Currency": "Crystals",
@@ -476,7 +469,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 120
+        "Amount": 100
       }
     ],
     "OrdersWeights": [
@@ -534,7 +527,7 @@
     "Rewards": [
       {
         "Currency": "Coins",
-        "Amount": 100
+        "Amount": 250
       },
       {
         "Currency": "Crystals",
@@ -542,7 +535,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 120
+        "Amount": 100
       }
     ],
     "OrdersWeights": [
@@ -604,7 +597,7 @@
     "Rewards": [
       {
         "Currency": "Coins",
-        "Amount": 100
+        "Amount": 250
       },
       {
         "Currency": "Crystals",
@@ -612,7 +605,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 150
+        "Amount": 100
       }
     ],
     "OrdersWeights": [
@@ -628,8 +621,7 @@
       },
       {
         "Uid": "RC_Q",
-        "Weight": 3,
-        "Override": true
+        "Weight": 3
       }
     ],
     "PieceWeights": [
@@ -670,7 +662,7 @@
     "Rewards": [
       {
         "Currency": "Coins",
-        "Amount": 100
+        "Amount": 250
       },
       {
         "Currency": "Crystals",
@@ -678,7 +670,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 150
+        "Amount": 100
       }
     ],
     "OrdersWeights": [
@@ -744,7 +736,7 @@
     "Rewards": [
       {
         "Currency": "Coins",
-        "Amount": 100
+        "Amount": 250
       },
       {
         "Currency": "Crystals",
@@ -752,7 +744,7 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 150
+        "Amount": 100
       }
     ],
     "OrdersWeights": [
@@ -814,7 +806,7 @@
     "Rewards": [
       {
         "Currency": "Coins",
-        "Amount": 100
+        "Amount": 300
       },
       {
         "Currency": "Crystals",
@@ -822,14 +814,13 @@
       },
       {
         "Currency": "Energy",
-        "Amount": 150
+        "Amount": 100
       }
     ],
     "OrdersWeights": [
       {
         "Uid": "RC_U",
-        "Weight": 8,
-        "Override": true
+        "Weight": 8
       },
       {
         "Uid": "RC_N",
