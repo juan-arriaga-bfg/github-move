@@ -1724,5 +1724,61 @@
         "Value": "148_CreatePiece_Ext_A8"
       }
     ]
+  },
+  {
+    "Id": 135,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "150_CreatePiece_E8"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "64_CreatePiece_E7"
+      }
+    ]
+  },
+  {
+    "Id": 136,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "151_CreatePiece_E9"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "150_CreatePiece_E8"
+      }
+    ]
+  },
+  {
+    "Id": 137,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "152_CreatePiece_E10"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "151_CreatePiece_E9"
+      }
+    ]
+  },
+  {
+    "Id": 138,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "153_CreatePiece_C10"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "109_CreatePiece_C9"
+      }
+    ]
   }
 ]

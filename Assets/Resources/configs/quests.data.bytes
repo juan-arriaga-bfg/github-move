@@ -1334,7 +1334,7 @@
           },
           {
             "Currency": "Crystals",
-            "Amount": 3
+            "Amount": 1
           }
         ]
       }
@@ -1353,7 +1353,7 @@
         "Value": [
           {
             "Currency": "Coins",
-            "Amount": 15
+            "Amount": 10
           },
           {
             "Currency": "Experience",
@@ -1361,7 +1361,7 @@
           },
           {
             "Currency": "Crystals",
-            "Amount": 5
+            "Amount": 1
           }
         ]
       }
@@ -2289,15 +2289,15 @@
         "Value": [
           {
             "Currency": "Coins",
-            "Amount": 50
+            "Amount": 25
           },
           {
             "Currency": "Experience",
-            "Amount": 1000
+            "Amount": 400
           },
           {
             "Currency": "Crystals",
-            "Amount": 20
+            "Amount": 10
           }
         ]
       }
@@ -3234,6 +3234,110 @@
     "TaskDefs": [
       {
         "TaskId": "149_CreatePiece_Ext_A9"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 1000
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 20
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "150_CreatePiece_E8",
+    "TaskDefs": [
+      {
+        "TaskId": "150_CreatePiece_E8"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 10
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 200
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 3
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "151_CreatePiece_E9",
+    "TaskDefs": [
+      {
+        "TaskId": "151_CreatePiece_E9"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 400
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "152_CreatePiece_E10",
+    "TaskDefs": [
+      {
+        "TaskId": "152_CreatePiece_E10"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 1000
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 20
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "153_CreatePiece_C10",
+    "TaskDefs": [
+      {
+        "TaskId": "153_CreatePiece_C10"
       }
     ],
     "ComponentsCache": {
