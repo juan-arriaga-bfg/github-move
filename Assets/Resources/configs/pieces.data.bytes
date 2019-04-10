@@ -2208,6 +2208,26 @@
     ]
   },
   {
+    "Uid": "C10",
+    "Delay": 86400,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 250
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      }
+    ]
+  },
+  {
     "Uid": "D1",
     "UnlockBonus": [
       {
@@ -2565,6 +2585,26 @@
   },
   {
     "Uid": "E9",
+    "Delay": 3600,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 50
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 100
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      }
+    ]
+  },
+  {
+    "Uid": "E10",
     "Delay": 3600,
     "CreateRewards": [
       {

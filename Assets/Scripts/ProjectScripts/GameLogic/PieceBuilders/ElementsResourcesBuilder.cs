@@ -602,6 +602,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.E8.Id, R.E8Piece);
         dict.Add(PieceType.E9Fake.Id, R.E9Piece);
         dict.Add(PieceType.E9.Id, R.E9Piece);
+        dict.Add(PieceType.E10Fake.Id, R.E10Piece);
+        dict.Add(PieceType.E10.Id, R.E10Piece);
             
         #endregion
         
