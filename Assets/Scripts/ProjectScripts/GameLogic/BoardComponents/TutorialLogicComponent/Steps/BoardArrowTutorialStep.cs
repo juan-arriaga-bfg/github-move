@@ -16,7 +16,7 @@ public class BoardArrowTutorialStep : BaseTutorialStep, IBoardEventListener
         started.Add(Id);
         OnFirstStartCallback?.Invoke(this);
     }
-    
+
     public override void PauseOff()
     {
         base.PauseOff();
@@ -26,7 +26,7 @@ public class BoardArrowTutorialStep : BaseTutorialStep, IBoardEventListener
     
     public override void Perform()
     {
-        if(IsPerform) return;
+        if (IsPerform) return;
         
         base.Perform();
         
@@ -53,7 +53,7 @@ public class BoardArrowTutorialStep : BaseTutorialStep, IBoardEventListener
     private void AddArrow()
     {
         var positions = GetPositions(Targets);
-            
+        
         foreach (var position in positions)
         {
             var element = Context.Context.BoardLogic.GetPieceAt(position).ActorView;
@@ -73,6 +73,8 @@ public class BoardArrowTutorialStep : BaseTutorialStep, IBoardEventListener
         
         foreach (var position in positions)
         {
+            if (Context.Context.BoardLogic.IsLockedCell(position)) continue;
+            
             var element = Context.Context.BoardLogic.GetPieceAt(position).ActorView;
             
             element.UpdateArrow();

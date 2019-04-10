@@ -230,6 +230,7 @@ public class RewardsStoreComponent : IECSComponent
     private void Scatter(bool isSetRewardToComplete = true)
     {
         var filter = PieceType.GetDefById(context.PieceType).Filter;
+        
         context.Context.ActionExecutor.AddAction(new ScatterPiecesAction
         {
             IsSingle = IsSingle,
@@ -241,6 +242,7 @@ public class RewardsStoreComponent : IECSComponent
             {
                 IsScatter = false;
                 OnComplete(value);
+                context.Context.TutorialLogic.Update();
             },
             RewardEffect = filter.Has(PieceTypeFilter.Chest) || filter.Has(PieceTypeFilter.Obstacle)
         });

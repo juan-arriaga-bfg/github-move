@@ -159,30 +159,15 @@ public static class TutorialBuilder
             {
                 step = new BoardArrowTutorialStep
                 {
+                    Targets = new List<int>{PieceType.PR_C5.Id},
                     IsAnyStartCondition = true,
-                    Targets = PieceType.GetIdsByFilter(PieceTypeFilter.Ingredient),
                     OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("ingredients"),
                     OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("ingredients", currentStep.StartTime)
                 };
                 
-                step.RegisterComponent(new CheckStepTutorialCondition {Target = 18, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "65_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckCurrencyTutorialCondition
-                {
-                    Target = 3,
-                    Currency = new List<string>
-                    {
-                        Currency.PR_A5.Name,
-                        Currency.PR_B5.Name,
-                        Currency.PR_C5.Name,
-                        Currency.PR_D5.Name,
-                        Currency.PR_E5.Name,
-                        Currency.PR_F5.Name,
-                        Currency.PR_G5.Name,
-                    },
-                    ConditionType = TutorialConditionType.Complete
-                }, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "16_CompleteOrder", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.PR_C5.Id, Amount = 1, MoreThan = true, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = 3, Currency = new List<string>{Currency.PR_C5.Name}, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.PR_C5.Id, Amount = 3, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
@@ -412,8 +397,8 @@ public static class TutorialBuilder
                     OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("orderclick", currentStep.StartTime)
                 };
                 
-                step.RegisterComponent(new CheckPieceTutorialCondition {ConditionType = TutorialConditionType.Start, Target = PieceType.RC_I.Id, Amount = 1}, true);
-                step.RegisterComponent(new CheckPieceTutorialCondition {ConditionType = TutorialConditionType.Complete, Target = PieceType.RC_I.Id, Amount = 0}, true);
+                step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.RC_I.Id, Amount = 1, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.RC_I.Id, Amount = 0, ConditionType = TutorialConditionType.Complete}, true);
                 break;
             }
             default:
