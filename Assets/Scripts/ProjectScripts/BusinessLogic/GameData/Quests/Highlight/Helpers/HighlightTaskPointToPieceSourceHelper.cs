@@ -50,11 +50,11 @@ public static class HighlightTaskPointToPieceSourceHelper
             string sourcePieceIdStr = sourceDef.Abbreviations[0];
             string sourceBranch = sourceBranchRegex.Match(sourcePieceIdStr).Value;
 
-            // Hack for tutorials
-            if (sourceBranch == "TT")
-            {
-                sourceBranch = "A";
-            }
+            // // Hack for tutorials
+            // if (sourceBranch == "TT")
+            // {
+            //     sourceBranch = "A";
+            // }
             
             if (allowedSourceBranches != null && !allowedSourceBranches.Contains(sourceBranch))
             {

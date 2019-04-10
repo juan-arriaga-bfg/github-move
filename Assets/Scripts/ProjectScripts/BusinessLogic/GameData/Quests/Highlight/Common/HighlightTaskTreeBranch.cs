@@ -30,11 +30,11 @@ public class HighlightTaskTreeBranch : TaskHighlightUsingArrow
             return false;
         }
         
-        // fallback for tutorial pieces
-        if (targetBranch == "TT")
-        {
-            targetBranch = "A";
-        }
+        // // fallback for tutorial pieces
+        // if (targetBranch == "TT")
+        // {
+        //     targetBranch = "A";
+        // }
 
         var sourceFilter = PieceTypeFilter.Tree;
         var excludeFilter = PieceTypeFilter.ProductionField;
