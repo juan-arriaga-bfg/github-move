@@ -27,7 +27,7 @@
   {
     "$type": "TaskKillTreeEntity, GameAssembly",
     "Id": "3_KillTree",
-    "PieceUid": "OB1_A",
+    "PieceUid": "OB1_TT",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -979,7 +979,7 @@
     }
   },
   {
-    "$type": "TaskOpenChestEntity, GameAssembly",
+    "$type": "TaskOpenChestTypeEntity, GameAssembly",
     "Id": "91_OpenChest",
     "PieceUid": "CH1_B",
     "TargetValue": 5,
