@@ -48,12 +48,17 @@ public static class ProfileSlots
     }
     
     public delegate void LoadCallback(ProfileManager<UserProfile> profileManager, bool dataExistsOnPath, string error);
+
     public static void Load(string path, LoadCallback onComplete)
     {
-        //init profile 
-        ProfileManager<UserProfile> profileManager = new ProfileManager<UserProfile> {SystemVersion = IWVersion.Get.BuildNumber};
-
         var dataMapper = GetDataMapper(path);
+        Load(dataMapper, onComplete);
+    }
+    
+    public static void Load(IJsonDataMapper<UserProfile> dataMapper, LoadCallback onComplete)
+    {
+        //init profile 
+        ProfileManager<UserProfile> profileManager = new SherwoodProfileManager<UserProfile> {SystemVersion = IWVersion.Get.BuildNumber};
 
         bool dataExists = dataMapper.IsDataExists();
         
@@ -123,6 +128,33 @@ public static class ProfileSlots
                     onComplete(profileManager, dataExists, error);
                 });
             }
+        });
+    }
+
+    /// <summary>
+    /// Check syntax and try parse jsonData. if All is ok, current profile will be rewriten
+    /// </summary>
+    public static void SafeReplaceCurrentProfile(string jsonData, Action<string> onComplete)
+    {
+        IJsonDataMapper<UserProfile> dataMapper = new JsonStringDataMapper<UserProfile>(jsonData);
+        Load(dataMapper, (manager, path, error) =>
+        {
+            if (!string.IsNullOrEmpty(error))
+            {
+                onComplete(error);
+                return;
+            }
+            
+            // Do not allow to write into current profile until reload
+            var curManager = ProfileService.Instance.Manager;
+            if (curManager != null)
+            {
+                curManager.ReadOnly = true;
+            }
+            
+            manager.UploadCurrentProfile(GetDataMapper(ActiveSlot));
+
+            onComplete(null);
         });
     }
 

@@ -9,8 +9,8 @@ namespace BfgAnalytics
 {
     public class BfgAnalyticsManager : IAnalyticsManager
     {
-        public bool IsEnabled;
-
+        public bool IsEnabled { get; set; }
+        
         private JsonDataGenerator jsonDataGenerator;
 
         [UsedImplicitly]

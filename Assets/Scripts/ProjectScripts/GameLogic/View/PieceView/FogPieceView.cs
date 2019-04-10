@@ -1,4 +1,4 @@
-using Debug = IW.Logger;
+﻿using Debug = IW.Logger;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -314,5 +314,15 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
     public override bool AvailiableLockTouchMessage()
     {
 	    return false;
+    }
+
+    public void ShowProgressEffect(BoardPosition position)
+    {
+	    ParticleView.Show(R.FogProgressParticle, position.SetZ(BoardLayer.FX.Layer));
+    }
+
+    public void ShowProgressCompleteEffect()
+    {
+	    ParticleView.Show(R.FogProgressCompleteParticle, Piece.CachedPosition.SetZ(BoardLayer.FX.Layer));
     }
 }

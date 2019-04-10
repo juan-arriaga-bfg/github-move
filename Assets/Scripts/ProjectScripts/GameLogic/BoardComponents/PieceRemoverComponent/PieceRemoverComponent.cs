@@ -156,13 +156,21 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         }
     }
 
-    protected virtual void CollapsePieceAt(BoardPosition position)
+    protected virtual void CollapsePieceAt(BoardPosition position, bool pathRecalc = false)
     {
+        var piece = context.GetPieceAt(position);
         context.Context.ActionExecutor.AddAction(new CollapsePieceToAction
         {
             Positions = new List<BoardPosition> {position},
             To = position,
-            OnCompleteAction = null
+            OnCompleteAction = null,
+            OnComplete = () =>
+            {
+                if (pathRecalc)
+                {
+                    piece?.PathfindLockObserver?.RemoveRecalculate(position);
+                }
+            }
         });
     }
 
@@ -210,10 +218,12 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
             {
                 EndRemover();
                 ToggleFilterPieces(false);
+                
                 if (TryOpenFog(boardPosition) == false)
                 {
-                    CollapsePieceAt(boardPosition);    
+                    CollapsePieceAt(boardPosition, true);
                 }                
+
                 return true;
             }
             

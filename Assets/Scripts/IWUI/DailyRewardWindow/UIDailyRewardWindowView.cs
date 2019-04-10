@@ -41,7 +41,7 @@ public class UIDailyRewardWindowView : UIGenericPopupWindowView
             var entity = new UIDailyRewardElementEntity
             {
                 ContentId = def.Icon,
-                LabelText = string.Format(LocalizationService.Get("window.dailyReward.day", "window.dailyReward.day {0}"), i + 1),
+                LabelText = string.Format(LocalizationService.Get("window.dailyReward.item.day", "window.dailyReward.item.day {0}"), i + 1),
                 State = i == 2 ? DailyRewardState.Current : ( i < 2 ? DailyRewardState.Claimed : DailyRewardState.Lock),
                 Rewards = def.Rewards,
                 OnSelectEvent = null,

@@ -9,7 +9,14 @@ public class FontStylesTester : MonoBehaviour
     [SerializeField] private Transform host;
     [SerializeField] private NSText prefab;
 
-    private void Start()
+    public static FontStylesTester Instance;
+    
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    public void Init()
     {
         IWAssetBundleManager assetBundleManager = new IWAssetBundleManager();
         IDataMapper<List<IWAssetBundleData>> assetBundleManagerDataMapper = new ResourceConfigDataMapper<List<IWAssetBundleData>>("iw/assetbundles.data", false);
@@ -23,7 +30,7 @@ public class FontStylesTester : MonoBehaviour
         
         Refresh();
     }
-    
+
     [ContextMenu("Refresh")]
     public void Refresh()
     {

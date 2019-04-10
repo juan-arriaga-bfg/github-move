@@ -1,14 +1,7 @@
 public class SherwoodProfileManager<T>: ProfileManager<T>  where T : UserProfile, new()
 {
-    protected void OnUploadProfileEventHandler(string error, string data)
+    protected override void UploadToBackend(string data)
     {
-        base.OnUploadProfileEventHandler(error, data);
-        
-        if (!string.IsNullOrEmpty(error) || string.IsNullOrEmpty(data))
-        {
-            return;
-        }
-        
-        SocialUtils.SendProgress(data);
+        SocialUtils.ArchiveAndSend(data);
     }
 }

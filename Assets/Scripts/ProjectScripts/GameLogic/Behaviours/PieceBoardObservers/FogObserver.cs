@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Contexts;
 using DG.Tweening;
 using UnityEngine;
 
@@ -215,25 +216,27 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             {
                 bar.Priority = 1;
                 bar.Change(false);
+                (Context.ActorView as FogPieceView)?.ShowProgressCompleteEffect();
                 OpenBubble();
             };
         }
         
         bar.UpdateProgress(onComplete);
     }
+
+    public void OnProgress(BoardPosition position)
+    {
+        (Context.ActorView as FogPieceView)?.ShowProgressEffect(position);
+    }
     
     public void FillingFake(int value)
     {
-        if (bar != null)
-        {
-            bar.UpdateFakeProgress(value);
+        if (bar == null) return;
+        
+        bar.UpdateFakeProgress(value);
             
-            FogPieceView fog = Context.ActorView as FogPieceView;
-            if (fog != null)
-            {
-                fog.ToggleHighlightWhenReadyToClear(value > 0);
-            }
-        }
+        var fog = Context.ActorView as FogPieceView;
+        if (fog != null) fog.ToggleHighlightWhenReadyToClear(value > 0);
     }
     
     private void OnClick(Piece piece)

@@ -180,8 +180,15 @@ public class BoardManipulatorComponent : ECSEntity,
                 
                 UIErrorWindowController.AddError(LocalizationService.Get("message.error.pieceLock"));  
             }
-            
-            if (pieceView.Piece.TouchReaction != null) return pieceView.Piece.TouchReaction.Touch(pieceView.Piece.CachedPosition);
+
+            if (pieceView.Piece.TouchReaction != null)
+            {
+                var isPieceTouch = pieceView.Piece.TouchReaction.Touch(pieceView.Piece.CachedPosition);
+
+                if (isPieceTouch) context.TutorialLogic.Update();
+                
+                return isPieceTouch;
+            }
         }
         
         context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
@@ -460,8 +467,6 @@ public class BoardManipulatorComponent : ECSEntity,
             
             return true;
         }
-
-        
         
         context.TutorialLogic.Pause(false);
         context.TutorialLogic.Update();

@@ -27,21 +27,77 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
 	    freeObj.SetActive(isFree);
 	    extraObj.SetActive(string.IsNullOrEmpty(contentEntity.ExtraText) == false);
 
-	    if (isFree == false) return;
-	    
-	    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnStart += UpdateLabel;
-	    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnTimeChanged += UpdateLabel;
-	    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnComplete += CompleteTimer;
-	    UpdateLabel();
+        if (isFree)
+        {
+            BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnStart += StartResetEnergyTimer;
+            BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnTimeChanged += UpdateLabel;
+            BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnComplete += CompleteResetEnergyTimer;
+            
+            BoardService.Current.FirstBoard.MarketLogic.ClaimEnergyTimer.OnStart += StartClaimEnergyTimer;
+            BoardService.Current.FirstBoard.MarketLogic.ClaimEnergyTimer.OnTimeChanged += UpdateLabel;
+            BoardService.Current.FirstBoard.MarketLogic.ClaimEnergyTimer.OnComplete += CompleteClaimEnergyTimer;
+            UpdateLabel();
+        }
+    }
+
+    private void SetModeClaimed()
+    {
+        IW.Logger.Log($"[UIEnergyShopElementViewController] => SetModeClaimed");
+        
+        isClaimed = true;
+        ChangeView();
+        UpdateLabel();
+    }
+
+    private void SetModeAvailable()
+    {
+        IW.Logger.Log($"[UIEnergyShopElementViewController] => SetModeAvailable");
+        
+        isClaimed = false;
+        ChangeView();
+        UpdateLabel();
     }
     
+    private void StartClaimEnergyTimer()
+    {
+        IW.Logger.Log($"[UIEnergyShopElementViewController] => StartClaimEnergyTimer");
+        
+        SetModeAvailable();
+    }
+    
+    private void CompleteClaimEnergyTimer()
+    {
+        IW.Logger.Log($"[UIEnergyShopElementViewController] => CompleteClaimEnergyTimer");
+        
+        SetModeClaimed();
+    }
+    
+    private void StartResetEnergyTimer()
+    {
+        IW.Logger.Log($"[UIEnergyShopElementViewController] => StartResetEnergyTimer");
+        
+        UpdateLabel();
+    }
+
+    private void CompleteResetEnergyTimer()
+    {
+        IW.Logger.Log($"[UIEnergyShopElementViewController] => CompleteResetEnergyTimer");
+        
+        UpdateLabel();
+    }
+
+
     public override void OnViewClose(IWUIWindowView context)
     {
 	    if (isFree)
 	    {
-		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnStart -= UpdateLabel;
+		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnStart -= StartResetEnergyTimer;
 		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnTimeChanged -= UpdateLabel;
-		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnComplete -= CompleteTimer;
+		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnComplete -= CompleteResetEnergyTimer;
+		    
+            BoardService.Current.FirstBoard.MarketLogic.ClaimEnergyTimer.OnStart -= StartClaimEnergyTimer;
+            BoardService.Current.FirstBoard.MarketLogic.ClaimEnergyTimer.OnTimeChanged -= UpdateLabel;
+            BoardService.Current.FirstBoard.MarketLogic.ClaimEnergyTimer.OnComplete -= CompleteClaimEnergyTimer;
 	    }
 	    
 	    base.OnViewClose(context);
@@ -57,19 +113,35 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
 
     private void UpdateLabel()
     {
-	    timerLabel.Text = BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.CompleteTime.GetTimeLeftText(true, true);
-    }
-
-    private void CompleteTimer()
-    {
-	    isClaimed = false;
-	    ChangeView();
+        var marketLogic = BoardService.Current.FirstBoard.MarketLogic;
+        
+        if (marketLogic.ResetEnergyTimer.IsStarted)
+        {
+            timerLabel.Text = marketLogic.ResetEnergyTimer.CompleteTime.GetTimeLeftText(true, true, null, true, true);
+        }
+        
+        if (marketLogic.ClaimEnergyTimer.IsStarted)
+        {
+            if (!marketLogic.FirstFreeEnergyClaimed)
+            {
+                nameLabel.Text = LocalizationService.Get("window.shop.energy.item1", "window.shop.energy.item1");
+            }
+            else
+            {
+                string mask = LocalizationService.Get("window.shop.energy.disappear", "window.shop.energy.disappear");
+                string timeLeft = marketLogic.ClaimEnergyTimer.CompleteTime.GetTimeLeftText(true, true, null, true, true);
+                nameLabel.Text = string.Format(mask, timeLeft);
+            }
+        }
     }
 
     protected override void OnPurchaseComplete()
     {
 	    base.OnPurchaseComplete();
-	    
-	    if (isFree) BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.Start();
+
+        if (isFree)
+        {
+            BoardService.Current.FirstBoard.MarketLogic.FreeEnergyClaim();
+        }
     }
 }

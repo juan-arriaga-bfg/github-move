@@ -40,7 +40,9 @@ public class HighlightedPieceView : PieceBoardElementView
             return;
         
         var sequence = DOTween.Sequence().SetId(body);
+
         SetCustomMaterial(BoardElementMaterialType.PiecesLowHighlightMaterial, true);
+        SaveCurrentMaterialAsDefault();
         
         sequence.SetLoops(-1);
         

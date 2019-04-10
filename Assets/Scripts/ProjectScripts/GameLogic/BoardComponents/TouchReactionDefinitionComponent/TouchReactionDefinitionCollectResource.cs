@@ -24,7 +24,8 @@ public class TouchReactionDefinitionCollectResource : TouchReactionDefinitionCom
         piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
         {
             To = position,
-            Positions = new List<BoardPosition>{position}
+            Positions = new List<BoardPosition>{position},
+            AnimationResourceSearch = pieceType => AnimationOverrideDataService.Current.FindAnimation(pieceType, def => def.OnDestroyFromBoard)
         });
         
         return true;

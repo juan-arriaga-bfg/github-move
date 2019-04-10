@@ -330,12 +330,21 @@ public class ElementsResourcesBuilder
         
 #region Mines
         
+        dict.Add(PieceType.MN_A.Id,      R.MN_AFakePiece);
+        dict.Add(PieceType.MN_A1.Id,     R.MN_APiece);
+        dict.Add(PieceType.MN_A2Fake.Id, R.MN_AFakePiece);
+        dict.Add(PieceType.MN_A2.Id,     R.MN_APiece);
+        dict.Add(PieceType.MN_A3Fake.Id, R.MN_AFakePiece);
+        dict.Add(PieceType.MN_A3.Id,     R.MN_APiece);
+        dict.Add(PieceType.MN_A4Fake.Id, R.MN_AFakePiece);
+
         dict.Add(PieceType.MN_B.Id,      R.MN_BFakePiece);
         dict.Add(PieceType.MN_B1.Id,     R.MN_BPiece);
         dict.Add(PieceType.MN_B2Fake.Id, R.MN_BFakePiece);
         dict.Add(PieceType.MN_B2.Id,     R.MN_BPiece);
         dict.Add(PieceType.MN_B3Fake.Id, R.MN_BFakePiece);
         dict.Add(PieceType.MN_B3.Id,     R.MN_BPiece);
+        dict.Add(PieceType.MN_B4Fake.Id, R.MN_BFakePiece);
         
         dict.Add(PieceType.MN_C.Id,      R.MN_CFakePiece);
         dict.Add(PieceType.MN_C1.Id,     R.MN_CPiece);
@@ -343,6 +352,15 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MN_C2.Id,     R.MN_CPiece);
         dict.Add(PieceType.MN_C3Fake.Id, R.MN_CFakePiece);
         dict.Add(PieceType.MN_C3.Id,     R.MN_CPiece);
+        dict.Add(PieceType.MN_C4Fake.Id, R.MN_CFakePiece);
+        
+        dict.Add(PieceType.MN_D.Id,      R.MN_DFakePiece);
+        dict.Add(PieceType.MN_D1.Id,     R.MN_DPiece);
+        dict.Add(PieceType.MN_D2Fake.Id, R.MN_DFakePiece);
+        dict.Add(PieceType.MN_D2.Id,     R.MN_DPiece);
+        dict.Add(PieceType.MN_D3Fake.Id, R.MN_DFakePiece);
+        dict.Add(PieceType.MN_D3.Id,     R.MN_DPiece);
+        dict.Add(PieceType.MN_D4Fake.Id, R.MN_DFakePiece);
         
         dict.Add(PieceType.MN_E.Id,      R.MN_EFakePiece);
         dict.Add(PieceType.MN_E1.Id,     R.MN_EPiece);
@@ -350,6 +368,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MN_E2.Id,     R.MN_EPiece);
         dict.Add(PieceType.MN_E3Fake.Id, R.MN_EFakePiece);
         dict.Add(PieceType.MN_E3.Id,     R.MN_EPiece);
+        dict.Add(PieceType.MN_E4Fake.Id, R.MN_EFakePiece);
         
         dict.Add(PieceType.MN_F.Id,      R.MN_FFakePiece);
         dict.Add(PieceType.MN_F1.Id,     R.MN_FPiece);
@@ -357,6 +376,15 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MN_F2.Id,     R.MN_FPiece);
         dict.Add(PieceType.MN_F3Fake.Id, R.MN_FFakePiece);
         dict.Add(PieceType.MN_F3.Id,     R.MN_FPiece);
+        dict.Add(PieceType.MN_F4Fake.Id, R.MN_FFakePiece);
+        
+        dict.Add(PieceType.MN_G.Id,      R.MN_GFakePiece);
+        dict.Add(PieceType.MN_G1.Id,     R.MN_GPiece);
+        dict.Add(PieceType.MN_G2Fake.Id, R.MN_GFakePiece);
+        dict.Add(PieceType.MN_G2.Id,     R.MN_GPiece);
+        dict.Add(PieceType.MN_G3Fake.Id, R.MN_GFakePiece);
+        dict.Add(PieceType.MN_G3.Id,     R.MN_GPiece);
+        dict.Add(PieceType.MN_G4Fake.Id, R.MN_GFakePiece);
         
         dict.Add(PieceType.MN_H.Id,      R.MN_HFakePiece);
         dict.Add(PieceType.MN_H1.Id,     R.MN_HPiece);
@@ -364,6 +392,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MN_H2.Id,     R.MN_HPiece);
         dict.Add(PieceType.MN_H3Fake.Id, R.MN_HFakePiece);
         dict.Add(PieceType.MN_H3.Id,     R.MN_HPiece);
+        dict.Add(PieceType.MN_H4Fake.Id, R.MN_HFakePiece);
         
         dict.Add(PieceType.MN_I.Id,      R.MN_IFakePiece);
         dict.Add(PieceType.MN_I1.Id,     R.MN_IPiece);
@@ -371,6 +400,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MN_I2.Id,     R.MN_IPiece);
         dict.Add(PieceType.MN_I3Fake.Id, R.MN_IFakePiece);
         dict.Add(PieceType.MN_I3.Id,     R.MN_IPiece);
+        dict.Add(PieceType.MN_I4Fake.Id, R.MN_IFakePiece);
         
 #endregion
         
@@ -507,8 +537,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.B9.Id, R.B9Piece);
         dict.Add(PieceType.B10Fake.Id, R.B10Piece);
         dict.Add(PieceType.B10.Id, R.B10Piece);
-        dict.Add(PieceType.B11Fake.Id, R.B11Piece);
-        dict.Add(PieceType.B11.Id, R.B11Piece);
         
         #endregion
         
@@ -530,6 +558,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.C8.Id, R.C8Piece);
         dict.Add(PieceType.C9Fake.Id, R.C9Piece);
         dict.Add(PieceType.C9.Id, R.C9Piece);
+        dict.Add(PieceType.C10Fake.Id, R.C10Piece);
+        dict.Add(PieceType.C10.Id, R.C10Piece);
         
         #endregion
         
@@ -572,6 +602,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.E8.Id, R.E8Piece);
         dict.Add(PieceType.E9Fake.Id, R.E9Piece);
         dict.Add(PieceType.E9.Id, R.E9Piece);
+        dict.Add(PieceType.E10Fake.Id, R.E10Piece);
+        dict.Add(PieceType.E10.Id, R.E10Piece);
             
         #endregion
         
@@ -760,29 +792,29 @@ public class ElementsResourcesBuilder
 
 #region Order Pieces
         
-        dict.Add(PieceType.Order1.Id, R.OrderPiece1);
-        dict.Add(PieceType.Order2.Id, R.OrderPiece2);
-        dict.Add(PieceType.Order3.Id, R.OrderPiece3);
-        dict.Add(PieceType.Order4.Id, R.OrderPiece4);
-        dict.Add(PieceType.Order5.Id, R.OrderPiece5);
-        dict.Add(PieceType.Order6.Id, R.OrderPiece6);
-        dict.Add(PieceType.Order7.Id, R.OrderPiece7);
-        dict.Add(PieceType.Order8.Id, R.OrderPiece8);
-        dict.Add(PieceType.Order9.Id, R.OrderPiece9);
-        dict.Add(PieceType.Order10.Id, R.OrderPiece10);
-        dict.Add(PieceType.Order11.Id, R.OrderPiece11);
-        dict.Add(PieceType.Order12.Id, R.OrderPiece12);
-        dict.Add(PieceType.Order13.Id, R.OrderPiece13);
-        dict.Add(PieceType.Order14.Id, R.OrderPiece14);
-        dict.Add(PieceType.Order15.Id, R.OrderPiece15);
-        dict.Add(PieceType.Order16.Id, R.OrderPiece16);
-        dict.Add(PieceType.Order17.Id, R.OrderPiece17);
-        dict.Add(PieceType.Order18.Id, R.OrderPiece18);
-        dict.Add(PieceType.Order19.Id, R.OrderPiece19);
-        dict.Add(PieceType.Order20.Id, R.OrderPiece20);
-        dict.Add(PieceType.Order21.Id, R.OrderPiece21);
-        dict.Add(PieceType.Order22.Id, R.OrderPiece22);
-        dict.Add(PieceType.Order23.Id, R.OrderPiece23);
+        dict.Add(PieceType.RC_A.Id, R.RC_APiece);
+        dict.Add(PieceType.RC_B.Id, R.RC_BPiece);
+        dict.Add(PieceType.RC_C.Id, R.RC_CPiece);
+        dict.Add(PieceType.RC_D.Id, R.RC_DPiece);
+        dict.Add(PieceType.RC_E.Id, R.RC_EPiece);
+        dict.Add(PieceType.RC_F.Id, R.RC_FPiece);
+        dict.Add(PieceType.RC_G.Id, R.RC_GPiece);
+        dict.Add(PieceType.RC_H.Id, R.RC_HPiece);
+        dict.Add(PieceType.RC_I.Id, R.RC_IPiece);
+        dict.Add(PieceType.RC_J.Id, R.RC_JPiece);
+        dict.Add(PieceType.RC_K.Id, R.RC_KPiece);
+        dict.Add(PieceType.RC_L.Id, R.RC_LPiece);
+        dict.Add(PieceType.RC_M.Id, R.RC_MPiece);
+        dict.Add(PieceType.RC_N.Id, R.RC_NPiece);
+        dict.Add(PieceType.RC_O.Id, R.RC_OPiece);
+        dict.Add(PieceType.RC_P.Id, R.RC_PPiece);
+        dict.Add(PieceType.RC_Q.Id, R.RC_QPiece);
+        dict.Add(PieceType.RC_R.Id, R.RC_RPiece);
+        dict.Add(PieceType.RC_S.Id, R.RC_SPiece);
+        dict.Add(PieceType.RC_T.Id, R.RC_TPiece);
+        dict.Add(PieceType.RC_U.Id, R.RC_UPiece);
+        dict.Add(PieceType.RC_V.Id, R.RC_VPiece);
+        dict.Add(PieceType.RC_W.Id, R.RC_WPiece);
 
 #endregion
      

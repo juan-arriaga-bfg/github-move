@@ -25,7 +25,7 @@ public class SequenceComponent : IECSComponent
     
     public ECSEntity Context;
     
-    public void Init(List<ItemWeight> value)
+    public void Init(List<ItemWeight> value, List<string> hard = null)
     {
         weights = value ?? new List<ItemWeight>();
         
@@ -33,17 +33,35 @@ public class SequenceComponent : IECSComponent
         
         seed = save?.Seed ?? Random.Range(0, Range);
         sequence = ItemWeight.GetRandomSequence(weights, seed);
+        
+        AddHard(hard);
 
         if (save == null) return;
         
         sequence.RemoveRange(0, Mathf.Max(sequence.Count - save.Count, 0));
     }
 
-    public void Reinit(List<ItemWeight> value)
+    public void Reinit(List<ItemWeight> value, List<string> hard = null)
     {
         weights = value ?? new List<ItemWeight>();
         seed = Random.Range(0, Range);
         sequence = ItemWeight.GetRandomSequence(weights, seed);
+        
+        AddHard(hard);
+    }
+
+    private void AddHard(List<string> value)
+    {
+        if (value == null) return;
+        
+        for (var i = value.Count - 1; i >= 0; i--)
+        {
+            var index = (byte)weights.FindIndex(weight => weight.Uid == value[i]);
+
+            if (index == -1) continue;
+                
+            sequence.Insert(0, index);
+        }
     }
 
     private bool IsValid()

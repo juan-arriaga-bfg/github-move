@@ -518,10 +518,7 @@ public class PieceBoardElementView : BoardElementView
             this.arrow = arrow;
             this.arrow.AddOnRemoveAction(() =>
             {
-                if (this.arrow == arrow)
-                {
-                    this.arrow = null;
-                }
+                if (this.arrow == arrow) this.arrow = null;
             });
         }
         else

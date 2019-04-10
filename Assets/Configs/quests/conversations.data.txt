@@ -165,24 +165,6 @@
     ]
   },
   {
-    "Id": 11,
-    "ConversationCharacters": {
-      "LeftInner": "GnomeWorker"
-    },
-    "Bubbles": [
-      {
-        "CharacterId": "GnomeWorker",
-        "Emotion": "Happy",
-        "Message": "conversation.5.message1"
-      },
-      {
-        "CharacterId": "GnomeWorker",
-        "Emotion": "Normal",
-        "Message": "conversation.5.message2"
-      }
-    ]
-  },
-  {
     "Id": "4_CreatePiece_A2",
     "Bubbles": [
       {
@@ -539,44 +521,31 @@
     ]
   },
   {
-    "Id": 13,
-    "ConversationCharacters": {
-      "LeftInner": "SleepingBeauty",
-      "RightInner": "PussInBoots"
-    },
-    "Bubbles": [
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Normal",
-        "Message": "conversation.13.message1"
-      },
-      {
-        "CharacterId": "PussInBoots",
-        "Emotion": "Normal",
-        "Message": "conversation.13.message2"
-      }
-    ]
-  },
-  {
-    "Id": 16,
-    "ConversationCharacters": {
-      "LeftInner": "GnomeWorker"
-    },
-    "Bubbles": [
-      {
-        "CharacterId": "GnomeWorker",
-        "Emotion": "Normal",
-        "Message": "conversation.10.message1"
-      }
-    ]
-  },
-  {
     "Id": "14_CreatePiece_B3",
     "Bubbles": [
       {
         "CharacterId": "GnomeWorker",
         "Emotion": "Happy",
         "Message": "conversation.quest.complete15"
+      }
+    ]
+  },
+  {
+    "Id": 13,
+    "ConversationCharacters": {
+      "LeftInner": "GnomeWorker",
+      "RightInner": "PussInBoots"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
+        "Message": "conversation.13.message1"
+      },
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.13.message2"
       }
     ]
   },

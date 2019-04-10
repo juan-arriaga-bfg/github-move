@@ -249,6 +249,63 @@
     ]
   },
   {
+    "Uid": "MN_A",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_A1",
+    "Delay": 100,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_A2",
+    "Delay": 600,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_A3",
+    "Delay": 5400,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
     "Uid": "MN_B",
     "UnlockBonus": [
       {
@@ -363,6 +420,63 @@
     ]
   },
   {
+    "Uid": "MN_D",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_D1",
+    "Delay": 100,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_D2",
+    "Delay": 1800,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_D3",
+    "Delay": 7200,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
     "Uid": "MN_E",
     "UnlockBonus": [
       {
@@ -462,6 +576,63 @@
   },
   {
     "Uid": "MN_F3",
+    "Delay": 7200,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_G",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_G1",
+    "Delay": 100,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_G2",
+    "Delay": 1800,
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_G3",
     "Delay": 7200,
     "CreateRewards": [
       {
@@ -702,7 +873,7 @@
     "Uid": "Soft1",
     "SpawnResources": {
       "Currency": "Coins",
-      "Amount": 5
+      "Amount": 1
     },
     "UnlockBonus": [
       {
@@ -721,7 +892,7 @@
     ],
     "SpawnResources": {
       "Currency": "Coins",
-      "Amount": 15
+      "Amount": 3
     },
     "UnlockBonus": [
       {
@@ -740,7 +911,7 @@
     ],
     "SpawnResources": {
       "Currency": "Coins",
-      "Amount": 45
+      "Amount": 10
     },
     "UnlockBonus": [
       {
@@ -759,7 +930,7 @@
     ],
     "SpawnResources": {
       "Currency": "Coins",
-      "Amount": 135
+      "Amount": 30
     },
     "UnlockBonus": [
       {
@@ -778,7 +949,7 @@
     ],
     "SpawnResources": {
       "Currency": "Coins",
-      "Amount": 410
+      "Amount": 90
     },
     "UnlockBonus": [
       {
@@ -797,7 +968,7 @@
     ],
     "SpawnResources": {
       "Currency": "Coins",
-      "Amount": 1250
+      "Amount": 270
     },
     "UnlockBonus": [
       {
@@ -816,7 +987,7 @@
     ],
     "SpawnResources": {
       "Currency": "Coins",
-      "Amount": 3750
+      "Amount": 810
     },
     "UnlockBonus": [
       {
@@ -835,7 +1006,7 @@
     ],
     "SpawnResources": {
       "Currency": "Coins",
-      "Amount": 11250
+      "Amount": 2450
     },
     "UnlockBonus": [
       {
@@ -961,7 +1132,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 35
+      "Amount": 50
     }
   },
   {
@@ -980,7 +1151,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 95
+      "Amount": 145
     }
   },
   {
@@ -999,7 +1170,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 65
+      "Amount": 90
     }
   },
   {
@@ -1031,7 +1202,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 210
+      "Amount": 200
     }
   },
   {
@@ -1063,7 +1234,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 105
+      "Amount": 110
     }
   },
   {
@@ -1082,7 +1253,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 320
+      "Amount": 315
     }
   },
   {
@@ -1101,7 +1272,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 190
+      "Amount": 175
     }
   },
   {
@@ -1114,7 +1285,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 35
+      "Amount": 50
     }
   },
   {
@@ -1133,7 +1304,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 95
+      "Amount": 145
     }
   },
   {
@@ -1152,7 +1323,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 65
+      "Amount": 90
     }
   },
   {
@@ -1165,7 +1336,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 140
+      "Amount": 110
     }
   },
   {
@@ -1184,7 +1355,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 460
+      "Amount": 315
     }
   },
   {
@@ -1203,7 +1374,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 250
+      "Amount": 175
     }
   },
   {
@@ -1216,7 +1387,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 140
+      "Amount": 110
     }
   },
   {
@@ -1235,7 +1406,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 460
+      "Amount": 315
     }
   },
   {
@@ -1254,7 +1425,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 250
+      "Amount": 175
     }
   },
   {
@@ -1267,7 +1438,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 90
+      "Amount": 50
     }
   },
   {
@@ -1286,7 +1457,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 250
+      "Amount": 145
     }
   },
   {
@@ -1305,7 +1476,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 150
+      "Amount": 90
     }
   },
   {
@@ -1318,7 +1489,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 140
+      "Amount": 110
     }
   },
   {
@@ -1337,7 +1508,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 460
+      "Amount": 315
     }
   },
   {
@@ -1356,7 +1527,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 250
+      "Amount": 175
     }
   },
   {
@@ -1369,7 +1540,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 140
+      "Amount": 110
     }
   },
   {
@@ -1388,7 +1559,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 460
+      "Amount": 315
     }
   },
   {
@@ -1407,7 +1578,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 250
+      "Amount": 175
     }
   },
   {
@@ -1478,7 +1649,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 45
+      "Amount": 35
     }
   },
   {
@@ -1502,7 +1673,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 130
+      "Amount": 90
     }
   },
   {
@@ -1526,7 +1697,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 400
+      "Amount": 225
     }
   },
   {
@@ -1553,7 +1724,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 1200
+      "Amount": 550
     }
   },
   {
@@ -1577,7 +1748,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 650
+      "Amount": 250
     }
   },
   {
@@ -1669,7 +1840,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 45
+      "Amount": 35
     }
   },
   {
@@ -1693,7 +1864,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 130
+      "Amount": 90
     }
   },
   {
@@ -1717,7 +1888,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 400
+      "Amount": 225
     }
   },
   {
@@ -1741,7 +1912,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 1200
+      "Amount": 550
     }
   },
   {
@@ -1765,7 +1936,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 650
+      "Amount": 250
     }
   },
   {
@@ -1790,26 +1961,6 @@
   },
   {
     "Uid": "B8",
-    "Delay": 18000,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 20
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 150
-      }
-    ],
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 50
-      }
-    ]
-  },
-  {
-    "Uid": "B9",
     "Delay": 86400,
     "CreateRewards": [
       {
@@ -1829,7 +1980,7 @@
     ]
   },
   {
-    "Uid": "B10",
+    "Uid": "B9",
     "Delay": 108000,
     "CreateRewards": [
       {
@@ -1849,7 +2000,7 @@
     ]
   },
   {
-    "Uid": "B11",
+    "Uid": "B10",
     "Delay": 172800,
     "CreateRewards": [
       {
@@ -1897,7 +2048,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 85
+      "Amount": 40
     }
   },
   {
@@ -1921,7 +2072,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 270
+      "Amount": 95
     }
   },
   {
@@ -1945,7 +2096,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 790
+      "Amount": 250
     }
   },
   {
@@ -1969,7 +2120,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 2400
+      "Amount": 600
     }
   },
   {
@@ -1993,7 +2144,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 1300
+      "Amount": 300
     }
   },
   {
@@ -2057,6 +2208,26 @@
     ]
   },
   {
+    "Uid": "C10",
+    "Delay": 86400,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 250
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      }
+    ]
+  },
+  {
     "Uid": "D1",
     "UnlockBonus": [
       {
@@ -2085,7 +2256,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 45
+      "Amount": 35
     }
   },
   {
@@ -2109,7 +2280,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 130
+      "Amount": 90
     }
   },
   {
@@ -2133,7 +2304,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 400
+      "Amount": 225
     }
   },
   {
@@ -2157,7 +2328,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 1200
+      "Amount": 550
     }
   },
   {
@@ -2181,7 +2352,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 650
+      "Amount": 250
     }
   },
   {
@@ -2273,7 +2444,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 85
+      "Amount": 40
     }
   },
   {
@@ -2297,7 +2468,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 270
+      "Amount": 95
     }
   },
   {
@@ -2321,7 +2492,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 790
+      "Amount": 250
     }
   },
   {
@@ -2345,7 +2516,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 2400
+      "Amount": 600
     }
   },
   {
@@ -2369,7 +2540,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 1300
+      "Amount": 300
     }
   },
   {
@@ -2433,6 +2604,26 @@
     ]
   },
   {
+    "Uid": "E10",
+    "Delay": 3600,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 50
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 100
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      }
+    ]
+  },
+  {
     "Uid": "F1",
     "UnlockBonus": [
       {
@@ -2461,7 +2652,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 85
+      "Amount": 40
     }
   },
   {
@@ -2485,7 +2676,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 270
+      "Amount": 95
     }
   },
   {
@@ -2509,7 +2700,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 790
+      "Amount": 250
     }
   },
   {
@@ -2533,7 +2724,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 2400
+      "Amount": 600
     }
   },
   {
@@ -2557,7 +2748,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 1300
+      "Amount": 300
     }
   },
   {
@@ -2649,7 +2840,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 85
+      "Amount": 40
     }
   },
   {
@@ -2673,7 +2864,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 270
+      "Amount": 95
     }
   },
   {
@@ -2697,7 +2888,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 790
+      "Amount": 250
     }
   },
   {
@@ -2721,7 +2912,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 2400
+      "Amount": 600
     }
   },
   {
@@ -2745,7 +2936,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 1300
+      "Amount": 300
     }
   },
   {
@@ -2837,7 +3028,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 85
+      "Amount": 40
     }
   },
   {
@@ -2861,7 +3052,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 270
+      "Amount": 95
     }
   },
   {
@@ -2885,7 +3076,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 790
+      "Amount": 250
     }
   },
   {
@@ -2909,7 +3100,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 2400
+      "Amount": 600
     }
   },
   {
@@ -2933,7 +3124,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 1300
+      "Amount": 300
     }
   },
   {
@@ -3025,7 +3216,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 85
+      "Amount": 40
     }
   },
   {
@@ -3049,7 +3240,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 270
+      "Amount": 95
     }
   },
   {
@@ -3073,7 +3264,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 790
+      "Amount": 250
     }
   },
   {
@@ -3097,7 +3288,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 2400
+      "Amount": 600
     }
   },
   {
@@ -3121,7 +3312,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 1300
+      "Amount": 300
     }
   },
   {
@@ -3213,7 +3404,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 45
+      "Amount": 40
     }
   },
   {
@@ -3237,7 +3428,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 130
+      "Amount": 95
     }
   },
   {
@@ -3261,7 +3452,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 400
+      "Amount": 250
     }
   },
   {
@@ -3285,7 +3476,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Coins",
-      "Amount": 1200
+      "Amount": 600
     }
   },
   {
@@ -3309,7 +3500,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 650
+      "Amount": 300
     }
   },
   {
@@ -3398,11 +3589,7 @@
         "Currency": "Coins",
         "Amount": 1
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 45
-    }
+    ]
   },
   {
     "Uid": "EXT_A3",
@@ -3422,11 +3609,7 @@
         "Currency": "Coins",
         "Amount": 2
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 130
-    }
+    ]
   },
   {
     "Uid": "EXT_A4",
@@ -3446,11 +3629,7 @@
         "Currency": "Coins",
         "Amount": 3
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 400
-    }
+    ]
   },
   {
     "Uid": "EXT_A5",
@@ -3470,11 +3649,7 @@
         "Currency": "Coins",
         "Amount": 5
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 1200
-    }
+    ]
   },
   {
     "Uid": "EXT_A6",
@@ -3494,11 +3669,7 @@
         "Currency": "Coins",
         "Amount": 10
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Crystals",
-      "Amount": 650
-    }
+    ]
   },
   {
     "Uid": "EXT_A7",
@@ -3586,11 +3757,7 @@
         "Currency": "Coins",
         "Amount": 1
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 45
-    }
+    ]
   },
   {
     "Uid": "EXT_B3",
@@ -3610,11 +3777,7 @@
         "Currency": "Coins",
         "Amount": 2
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 130
-    }
+    ]
   },
   {
     "Uid": "EXT_B4",
@@ -3634,11 +3797,7 @@
         "Currency": "Coins",
         "Amount": 3
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 400
-    }
+    ]
   },
   {
     "Uid": "EXT_B5",
@@ -3658,11 +3817,7 @@
         "Currency": "Coins",
         "Amount": 5
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 1200
-    }
+    ]
   },
   {
     "Uid": "EXT_B6",
@@ -3682,11 +3837,7 @@
         "Currency": "Coins",
         "Amount": 10
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Crystals",
-      "Amount": 650
-    }
+    ]
   },
   {
     "Uid": "EXT_B7",
@@ -3774,11 +3925,7 @@
         "Currency": "Coins",
         "Amount": 1
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 45
-    }
+    ]
   },
   {
     "Uid": "EXT_C3",
@@ -3798,11 +3945,7 @@
         "Currency": "Coins",
         "Amount": 2
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 130
-    }
+    ]
   },
   {
     "Uid": "EXT_C4",
@@ -3822,11 +3965,7 @@
         "Currency": "Coins",
         "Amount": 3
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 400
-    }
+    ]
   },
   {
     "Uid": "EXT_C5",
@@ -3846,11 +3985,7 @@
         "Currency": "Coins",
         "Amount": 5
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 1200
-    }
+    ]
   },
   {
     "Uid": "EXT_C6",
@@ -3870,11 +4005,7 @@
         "Currency": "Coins",
         "Amount": 10
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Crystals",
-      "Amount": 650
-    }
+    ]
   },
   {
     "Uid": "EXT_C7",
@@ -3962,11 +4093,7 @@
         "Currency": "Coins",
         "Amount": 1
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 45
-    }
+    ]
   },
   {
     "Uid": "EXT_D3",
@@ -3986,11 +4113,7 @@
         "Currency": "Coins",
         "Amount": 2
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 130
-    }
+    ]
   },
   {
     "Uid": "EXT_D4",
@@ -4010,11 +4133,7 @@
         "Currency": "Coins",
         "Amount": 3
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 400
-    }
+    ]
   },
   {
     "Uid": "EXT_D5",
@@ -4034,11 +4153,7 @@
         "Currency": "Coins",
         "Amount": 5
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 1200
-    }
+    ]
   },
   {
     "Uid": "EXT_D6",
@@ -4058,11 +4173,7 @@
         "Currency": "Coins",
         "Amount": 10
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Crystals",
-      "Amount": 650
-    }
+    ]
   },
   {
     "Uid": "EXT_D7",
@@ -4150,11 +4261,7 @@
         "Currency": "Coins",
         "Amount": 1
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 45
-    }
+    ]
   },
   {
     "Uid": "EXT_E3",
@@ -4174,11 +4281,7 @@
         "Currency": "Coins",
         "Amount": 2
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 130
-    }
+    ]
   },
   {
     "Uid": "EXT_E4",
@@ -4198,11 +4301,7 @@
         "Currency": "Coins",
         "Amount": 3
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 400
-    }
+    ]
   },
   {
     "Uid": "EXT_E5",
@@ -4222,11 +4321,7 @@
         "Currency": "Coins",
         "Amount": 5
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Coins",
-      "Amount": 1200
-    }
+    ]
   },
   {
     "Uid": "EXT_E6",
@@ -4246,11 +4341,7 @@
         "Currency": "Coins",
         "Amount": 10
       }
-    ],
-    "ExchangePrice": {
-      "Currency": "Crystals",
-      "Amount": 650
-    }
+    ]
   },
   {
     "Uid": "EXT_E7",
@@ -5334,7 +5425,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 7
+      "Amount": 3
     }
   },
   {
@@ -5413,7 +5504,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 7
+      "Amount": 3
     }
   },
   {
@@ -5492,7 +5583,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 7
+      "Amount": 3
     }
   },
   {
@@ -5571,7 +5662,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 7
+      "Amount": 3
     }
   },
   {
@@ -5650,7 +5741,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 7
+      "Amount": 3
     }
   },
   {
@@ -5729,7 +5820,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 7
+      "Amount": 3
     }
   },
   {
@@ -5808,7 +5899,7 @@
     ],
     "ExchangePrice": {
       "Currency": "Crystals",
-      "Amount": 7
+      "Amount": 3
     }
   }
 ]

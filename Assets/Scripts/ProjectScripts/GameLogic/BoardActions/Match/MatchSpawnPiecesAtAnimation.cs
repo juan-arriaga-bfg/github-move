@@ -61,6 +61,7 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 			var animationResource = AnimationOverrideDataService.Current.FindAnimation(piece.PieceType, def => def.OnMergeSpawn);
 			if (string.IsNullOrEmpty(animationResource) == false)
 			{
+				centerContainer.localScale = Vector3.one;
 			    var scaleForAnimationView = new Vector3(1f, 1f, 1f);
 			    if (piece.Multicellular != null)
 			    {
@@ -75,6 +76,19 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 
 				animView.OnComplete += () =>
 				{
+					ToggleView(true);
+					
+					if (centerContainer != null)
+					{
+						boardElement.CachedTransform.SetParent(centerContainer.parent);
+			        
+						GameObject.Destroy(centerContainer.gameObject);
+
+						centerContainer = null;
+					}
+			    
+					boardElement.SyncRendererLayers(position.Copy());
+					
 					CompleteAnimation(context);
 				};
 

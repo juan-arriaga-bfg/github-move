@@ -1,4 +1,4 @@
-using Debug = IW.Logger;
+﻿using Debug = IW.Logger;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -339,7 +339,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         if (observer == null || observer.IsRemoved || observer.CanBeFilled() == false || observer.CanBeCleared() == false) return false;
         
         observer.Filling(def.SpawnResources.Amount, out var balance);
-
+        observer.OnProgress(targetPosition);
         if (balance <= 0)
         {
             piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction

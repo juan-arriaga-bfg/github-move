@@ -26,7 +26,7 @@
         
         if (window == null) return;
         
-        timer.Delay = def.Delay;
+        timer.Delay = def.Delays[0];
         timer.OnComplete += OnTimerComplete;
         
         var save = ProfileService.Current.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
