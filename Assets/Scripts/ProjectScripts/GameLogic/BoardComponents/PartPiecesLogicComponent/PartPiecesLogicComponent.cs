@@ -109,17 +109,36 @@ public class PartPiecesLogicComponent : IECSComponent
     private void OnClick(Piece piece)
     {
         if (context.WorkerLogic.Get(piece.CachedPosition, null) == false) return;
-        
         Work(piece, false);
     }
 
     public bool Work(Piece piece, bool isExtra)
     {
+        var key = piece.PieceType;
+        var pattern = new List<BoardPosition>();
+        
+        if (key == PieceType.Boost_CR.Id)
+        {
+            var def = links[piece.CachedPosition].Find(d => d.ViewDefinition == piece.ViewDefinition);
+
+            pattern = def.Pattern;
+            
+            foreach (var position in pattern)
+            {
+                var id = piece.Context.BoardLogic.GetPieceAt(position).PieceType;
+                
+                if (id == PieceType.Boost_CR.Id) continue;
+                
+                key = id;
+                break;
+            }
+        }
+        
         var positions = new List<BoardPosition>();
-        var action = context.BoardLogic.MatchActionBuilder.GetMatchAction(positions, piece.PieceType, piece.CachedPosition);
-
+        var action = context.BoardLogic.MatchActionBuilder.GetMatchAction(positions, key, piece.CachedPosition);
+        
         if (action == null) return false;
-
+        
         Remove(positions);
         context.ActionExecutor.PerformAction(action);
 
