@@ -122,9 +122,16 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
         
         if (marketLogic.ClaimEnergyTimer.IsStarted)
         {
-            string mask = LocalizationService.Get("window.shop.energy.disappear", "window.shop.energy.disappear");
-            string timeLeft = marketLogic.ClaimEnergyTimer.CompleteTime.GetTimeLeftText(true, true, null, true, true);
-            nameLabel.Text = string.Format(mask, timeLeft);
+            if (!marketLogic.FirstFreeEnergyClaimed)
+            {
+                nameLabel.Text = LocalizationService.Get("window.shop.energy.item1", "window.shop.energy.item1");
+            }
+            else
+            {
+                string mask = LocalizationService.Get("window.shop.energy.disappear", "window.shop.energy.disappear");
+                string timeLeft = marketLogic.ClaimEnergyTimer.CompleteTime.GetTimeLeftText(true, true, null, true, true);
+                nameLabel.Text = string.Format(mask, timeLeft);
+            }
         }
     }
 
@@ -134,7 +141,7 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
 
         if (isFree)
         {
-            BoardService.Current.FirstBoard.MarketLogic.FreeEnergyClaimed();
+            BoardService.Current.FirstBoard.MarketLogic.FreeEnergyClaim();
         }
     }
 }

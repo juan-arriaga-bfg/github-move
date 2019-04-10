@@ -42,7 +42,9 @@ public class MarketLogicComponent : ECSEntity
 	public TimerComponent FreeEnergyLocalNotificationTimer { get; } = new TimerComponent();
 
     public DateTime FreeEnergyClaimTime { get; private set; } = UnixTimeHelper.UnixTimestampToDateTime(0);
-	
+
+    public bool FirstFreeEnergyClaimed { get; private set; } 
+    
 	public int OfferIndex;
 	public ShopDef Offer;
 
@@ -67,6 +69,7 @@ public class MarketLogicComponent : ECSEntity
         if (save != null)
         {
             FreeEnergyClaimTime = UnixTimeHelper.UnixTimestampToDateTime(save.FreeEnergyClaimTime);
+            FirstFreeEnergyClaimed = save.FirstEnergyClaimed;
         }
 
         ResetEnergyTimer.OnComplete += () =>
@@ -106,6 +109,14 @@ public class MarketLogicComponent : ECSEntity
 
     private void UpdateEnergyTimers()
     {
+        if (!FirstFreeEnergyClaimed)
+        {
+            ResetEnergyTimer.Stop();
+            ClaimEnergyTimer.Delay = int.MaxValue;
+            ClaimEnergyTimer.Start();
+            return;
+        }
+        
         EnergySlotState state = CheckEnergySlot(out int resetDelay, out int claimDelay);
 
         switch (state)
@@ -131,8 +142,10 @@ public class MarketLogicComponent : ECSEntity
         FreeEnergyLocalNotificationTimer.Start();
     }
     
-    public void FreeEnergyClaimed()
+    public void FreeEnergyClaim()
     {
+        FirstFreeEnergyClaimed = true;
+        
         FreeEnergyClaimTime = SecuredTimeService.Current.Now;
         
         CheckEnergySlot(out int resetDelay, out int claimDelay);
