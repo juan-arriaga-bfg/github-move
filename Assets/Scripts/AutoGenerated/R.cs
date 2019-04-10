@@ -541,4 +541,6 @@ public class R
      public const string DestroyHardCurrencyAnimation = "DestroyHardCurrencyAnimation";
      public const string DestroySoftCurrencyAnimation = "DestroySoftCurrencyAnimation";
      public const string MagicWandFlyParticle = "MagicWandFlyParticle";
+     public const string C10Piece = "C10Piece";
+     public const string E10Piece = "E10Piece";
 }

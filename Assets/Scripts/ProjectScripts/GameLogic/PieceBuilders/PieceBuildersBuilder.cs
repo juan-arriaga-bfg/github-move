@@ -25,9 +25,9 @@ public class PieceBuildersBuilder
         
         dict = AddBuildingBranchPiece(dict, PieceType.A1.Id, PieceType.A9.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.B1.Id, PieceType.B10.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.C1.Id, PieceType.C9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.C1.Id, PieceType.C10.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.D1.Id, PieceType.D9.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.E1.Id, PieceType.E9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.E1.Id, PieceType.E10.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.F1.Id, PieceType.F9.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.G1.Id, PieceType.G9.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.H1.Id, PieceType.H9.Id);
