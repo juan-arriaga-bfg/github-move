@@ -27,7 +27,7 @@
   {
     "$type": "TaskKillTreeEntity, GameAssembly",
     "Id": "3_KillTree",
-    "PieceUid": "OB1_A",
+    "PieceUid": "OB1_TT",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -192,7 +192,7 @@
     }
   },
   {
-    "$type": "TaskOpenChestEntity, GameAssembly",
+    "$type": "TaskOpenChestTypeEntity, GameAssembly",
     "Id": "21_OpenChest",
     "PieceUid": "CH_Free",
     "TargetValue": 1,
@@ -578,7 +578,7 @@
     }
   },
   {
-    "$type": "TaskOpenChestEntity, GameAssembly",
+    "$type": "TaskOpenChestTypeEntity, GameAssembly",
     "Id": "54_OpenChest",
     "PieceUid": "CH3_D",
     "TargetValue": 5,
@@ -900,7 +900,7 @@
     }
   },
   {
-    "$type": "TaskOpenChestEntity, GameAssembly",
+    "$type": "TaskOpenChestTypeEntity, GameAssembly",
     "Id": "85_OpenChest_CH_A",
     "PieceUid": "CH3_A",
     "TargetValue": 5,
@@ -1140,7 +1140,7 @@
     }
   },
   {
-    "$type": "TaskOpenChestEntity, GameAssembly",
+    "$type": "TaskOpenChestTypeEntity, GameAssembly",
     "Id": "105_OpenChest",
     "PieceUid": "CH3_B",
     "TargetValue": 3,
@@ -1166,7 +1166,7 @@
     }
   },
   {
-    "$type": "TaskOpenChestEntity, GameAssembly",
+    "$type": "TaskOpenChestTypeEntity, GameAssembly",
     "Id": "107_OpenChest",
     "PieceUid": "CH3_D",
     "TargetValue": 3,
@@ -1244,7 +1244,7 @@
     }
   },
   {
-    "$type": "TaskOpenChestEntity, GameAssembly",
+    "$type": "TaskOpenChestTypeEntity, GameAssembly",
     "Id": "113_OpenChest",
     "PieceUid": "CH3_C",
     "TargetValue": 5,
@@ -1320,7 +1320,7 @@
     }
   },
   {
-    "$type": "TaskOpenChestEntity, GameAssembly",
+    "$type": "TaskOpenChestTypeEntity, GameAssembly",
     "Id": "119_OpenChest",
     "PieceUid": "CH_Free",
     "TargetValue": 2,
@@ -1397,7 +1397,7 @@
     }
   },
   {
-    "$type": "TaskOpenChestEntity, GameAssembly",
+    "$type": "TaskOpenChestTypeEntity, GameAssembly",
     "Id": "125_OpenChest",
     "PieceUid": "CH3_E",
     "TargetValue": 5,
