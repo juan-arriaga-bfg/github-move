@@ -558,6 +558,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.C8.Id, R.C8Piece);
         dict.Add(PieceType.C9Fake.Id, R.C9Piece);
         dict.Add(PieceType.C9.Id, R.C9Piece);
+        dict.Add(PieceType.C10Fake.Id, R.C10Piece);
+        dict.Add(PieceType.C10.Id, R.C10Piece);
         
         #endregion
         
@@ -600,6 +602,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.E8.Id, R.E8Piece);
         dict.Add(PieceType.E9Fake.Id, R.E9Piece);
         dict.Add(PieceType.E9.Id, R.E9Piece);
+        dict.Add(PieceType.E10Fake.Id, R.E10Piece);
+        dict.Add(PieceType.E10.Id, R.E10Piece);
             
         #endregion
         

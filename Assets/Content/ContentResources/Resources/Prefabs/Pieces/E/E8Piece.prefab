@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 114266921296245860}
   - component: {fileID: 114122468620591434}
   m_Layer: 0
-  m_Name: F8Piece
+  m_Name: E8Piece
   m_TagString: Untagged
   m_Icon: {fileID: 4660412927644837186, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -268,17 +268,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1813173065500438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 822bb2fb32e400f42b6d7da416a6f5b3, type: 3}
+  m_Script: {fileID: 11500000, guid: b417249933ed1444d9155c0a93fc2e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastBoardPosition:
-    X: 0
-    Y: 0
-    Z: 0
   cachedSortingGroup: {fileID: 0}
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 4048830620199960}
+  anchors: []
   bodySprites: []
   particles: []
   errorSelectionMaterial: {fileID: 2100000, guid: 1faf170e9acf1d64f86eefcd318ff557,
@@ -287,6 +284,7 @@ MonoBehaviour:
     type: 2}
   highlightPieceMaterial: {fileID: 2100000, guid: 8df69b780d2d9354c8ffb9b8293c73ad,
     type: 2}
+  arrow: {fileID: 0}
 --- !u!114 &114122468620591434
 MonoBehaviour:
   m_ObjectHideFlags: 0
