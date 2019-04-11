@@ -42,8 +42,8 @@ public static class BoardTiles
                 {
                     Height = 0,
                     IsLock = false,
-                    SpriteName = "tile_grass_light",
-                    SpriteNameChess = "tile_grass_dark"
+                    SpriteName = "tile_grass_1",
+                    SpriteNameChess = "tile_grass_2"
                 }
             },
             {
@@ -51,7 +51,8 @@ public static class BoardTiles
                 {
                     Height = 0,
                     IsLock = false,
-                    SpriteName = "tile_sand",
+                    SpriteName = "tile_sand_1",
+                    SpriteNameChess = "tile_sand_2"
                 }
             },
             {
@@ -59,7 +60,8 @@ public static class BoardTiles
                 {
                     Height = 0,
                     IsLock = false,
-                    SpriteName = "tile_clay",
+                    SpriteName = "tile_clay_1",
+                    SpriteNameChess = "tile_clay_2"
                 }
             },
 
@@ -69,8 +71,8 @@ public static class BoardTiles
                 {
                     Height = 1,
                     IsLock = false,
-                    SpriteName = "tile_grass_light",
-                    SpriteNameChess = "tile_grass_dark"
+                    SpriteName = "tile_grass_1",
+                    SpriteNameChess = "tile_grass_2"
                 }
             },
             {
@@ -78,7 +80,8 @@ public static class BoardTiles
                 {
                     Height = 1,
                     IsLock = false,
-                    SpriteName = "tile_sand",
+                    SpriteName = "tile_sand_1",
+                    SpriteNameChess = "tile_sand_2"
                 }
             },
             {
@@ -86,7 +89,8 @@ public static class BoardTiles
                 {
                     Height = 1,
                     IsLock = false,
-                    SpriteName = "tile_clay",
+                    SpriteName = "tile_clay_1",
+                    SpriteNameChess = "tile_clay_2"
                 }
             }
 
@@ -103,12 +107,14 @@ public static class BoardTiles
             int key = pair.Key;
             BoardTileDef value = pair.Value;
 
-            if (value.Sprite != null)
+            value.Id = key;
+            
+            if (value.SpriteName != null)
             {
                 value.Sprite = iconManager.GetSpriteById(value.SpriteName);
             }
             
-            if (value.SpriteChess != null)
+            if (value.SpriteNameChess != null)
             {
                 value.SpriteChess = iconManager.GetSpriteById(value.SpriteNameChess);
             }

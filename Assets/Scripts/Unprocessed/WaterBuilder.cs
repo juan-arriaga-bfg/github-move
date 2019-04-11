@@ -18,7 +18,7 @@ public class WaterBuilder : MonoBehaviour
             boardController.BoardDef.Height,
             boardController.BoardDef.UnitSize,
             GameDataService.Current.FieldManager.LayoutData,
-            1,
+            100,
             10,
             10,
             30

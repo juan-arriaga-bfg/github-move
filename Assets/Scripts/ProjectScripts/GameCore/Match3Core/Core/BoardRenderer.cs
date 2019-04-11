@@ -1182,7 +1182,7 @@ public partial class BoardRenderer : ECSEntity
                 BoardTileDef tileDef = tileDefs[layout[layoutIndex]];
                 
                 Sprite sprite;
-                if (tileDef.SpriteChess != null && x % 2 == 0 && y % 2 == 0)
+                if (tileDef.SpriteChess != null && (x + y) % 2 == 0)
                 {
                     sprite = tileDef.SpriteChess;
                 }

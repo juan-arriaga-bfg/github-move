@@ -35,26 +35,41 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 8f901b1e71230ec46b04624ff8ebb80d, type: 3}
     - {fileID: 21300000, guid: 1d816f45a87f4f6479c05c9c60c86518, type: 3}
     - {fileID: 21300000, guid: 4cf8f5b46cf4d5540bd17557b1338bc8, type: 3}
-    - {fileID: 21300000, guid: 44bfd5ce668e64a06965ec90aeda04c3, type: 3}
+    - {fileID: 21300000, guid: 643ae8ebc67e97f4bb6efc2a81a44207, type: 3}
+    - {fileID: 21300000, guid: f7d40aaec317b5a4d9caadc01e19653b, type: 3}
+    - {fileID: 21300000, guid: 0f2ef7201aa6de049ad50cae153727f3, type: 3}
+    - {fileID: 21300000, guid: 953e2547146681a4bb2d4a191f0cca06, type: 3}
+    - {fileID: 21300000, guid: f0f238cf0d568ba42a64911d7de328d1, type: 3}
+    - {fileID: 21300000, guid: ff996768a17c809479f54c506d7b80d0, type: 3}
     - {fileID: 21300000, guid: 7241819afe16a0f4e9203487896ec796, type: 3}
-    totalSpriteSurfaceArea: 81520
+    totalSpriteSurfaceArea: 163440
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 0f2ef7201aa6de049ad50cae153727f3, type: 3}
   - {fileID: 21300000, guid: 112090c1e38cc23439ee30550a8e9ed5, type: 3}
   - {fileID: 21300000, guid: 9fd95432270e96f4eb2dd119e98fae98, type: 3}
   - {fileID: 21300000, guid: 4cf8f5b46cf4d5540bd17557b1338bc8, type: 3}
   - {fileID: 21300000, guid: 1d816f45a87f4f6479c05c9c60c86518, type: 3}
+  - {fileID: 21300000, guid: 953e2547146681a4bb2d4a191f0cca06, type: 3}
+  - {fileID: 21300000, guid: ff996768a17c809479f54c506d7b80d0, type: 3}
   - {fileID: 21300000, guid: 7241819afe16a0f4e9203487896ec796, type: 3}
+  - {fileID: 21300000, guid: 643ae8ebc67e97f4bb6efc2a81a44207, type: 3}
   - {fileID: 21300000, guid: 8f901b1e71230ec46b04624ff8ebb80d, type: 3}
-  - {fileID: 21300000, guid: 44bfd5ce668e64a06965ec90aeda04c3, type: 3}
+  - {fileID: 21300000, guid: f7d40aaec317b5a4d9caadc01e19653b, type: 3}
+  - {fileID: 21300000, guid: f0f238cf0d568ba42a64911d7de328d1, type: 3}
   m_PackedSpriteNamesToIndex:
+  - tile_grass_1
   - bottom_border_alpha
   - border_edge_tile
   - left_border_alpha_hole
   - left_border_alpha
+  - tile_grass_2
+  - tile_sand_2
   - tile_water
+  - tile_clay_1
   - bottom_border_alpha_hole
-  - tile_grass_dark
+  - tile_clay_2
+  - tile_sand_1
   m_Tag: tiles
   m_IsVariant: 0
