@@ -3,7 +3,6 @@ using System.Diagnostics;
 using UnityEngine;
 using Debug = IW.Logger;
 
-
 public partial class BoardRenderer : ECSEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
@@ -1096,7 +1095,7 @@ public partial class BoardRenderer : ECSEntity
         viewRoot.localPosition = new Vector3(52f, 61f, 0f);
     }
     
-    public Transform GenerateField(int width, int height, float size, List<string> tiles, string backgroundTile = null, IList<BoardPosition> ignorablePositions = null)
+    public Transform GenerateField(int width, int height, float size, Dictionary<int, BoardTileDef> tileDefs)
     {
          SectorsContainer = new GameObject("Sectors.Container").transform;
          SectorsContainer.localPosition = new Vector3(0f, 0f, 0f);
@@ -1105,7 +1104,7 @@ public partial class BoardRenderer : ECSEntity
 
          var layout = GameDataService.Current.FieldManager.LayoutData;
          
-         var sectorsMesh = GenerateMesh(width, height, size, layout, tiles);
+         var sectorsMesh = GenerateMesh(width, height, size, layout, tileDefs);
          
          var meshGO = new GameObject("_cells");
          var meshTransform = meshGO.transform;
@@ -1121,17 +1120,14 @@ public partial class BoardRenderer : ECSEntity
                  
          // load texture
          Sprite tileSprite = null;
-         int index = 0;
-         do
+         foreach (var def in tileDefs.Values)
          {
-             string id = tiles[index];
+             string id = def.SpriteName;
              if (!string.IsNullOrEmpty(id))
              {
                  tileSprite = IconService.Current.GetSpriteById(id);
              }
-             index++;
-         } 
-         while (tileSprite == null && index < tiles.Count);
+         }
          
          var tileTexture = tileSprite == null ? null : tileSprite.texture;
          
@@ -1147,7 +1143,7 @@ public partial class BoardRenderer : ECSEntity
          return SectorsContainer.transform;
      }
 
-    private Mesh GenerateMesh(int width, int height, float size, int[] layout, List<string> tiles)
+    private Mesh GenerateMesh(int width, int height, float size, int[] layout, Dictionary<int, BoardTileDef> tileDefs)
     {
 #if DEBUG
         var sw = new Stopwatch();
@@ -1162,19 +1158,20 @@ public partial class BoardRenderer : ECSEntity
         float borderWidth = size;
         var defaultColor = new Color(1f, 1f, 1f, 1f);
         
+        // todo: implement index-based cache for sprites access instead of dictionary? 
         // Cache sprites
-        Sprite[] tilesSprites = new Sprite[tiles.Count];
-        for (var i = 0; i < tiles.Count; i++)
-        {
-            var tile = tiles[i];
-            if (string.IsNullOrEmpty(tile))
-            {
-                continue;
-            }
-            
-            Sprite sprite = IconService.Current.GetSpriteById(tile);
-            tilesSprites[i] = sprite;
-        }
+        // Sprite[] tilesSprites = new Sprite[tiles.Count];
+        // for (var i = 0; i < tiles.Count; i++)
+        // {
+        //     var tile = tiles[i];
+        //     if (string.IsNullOrEmpty(tile))
+        //     {
+        //         continue;
+        //     }
+        //     
+        //     Sprite sprite = IconService.Current.GetSpriteById(tile);
+        //     tilesSprites[i] = sprite;
+        // }
 
         // Build layout
         int layoutIndex = 0;
@@ -1182,7 +1179,18 @@ public partial class BoardRenderer : ECSEntity
         {
             for (int y = 0; y < height; y++)
             {
-                Sprite sprite = tilesSprites[layout[layoutIndex]];
+                BoardTileDef tileDef = tileDefs[layout[layoutIndex]];
+                
+                Sprite sprite;
+                if (tileDef.SpriteChess != null && x % 2 == 0 && y % 2 == 0)
+                {
+                    sprite = tileDef.SpriteChess;
+                }
+                else
+                {
+                    sprite = tileDef.Sprite; 
+                }
+
                 if (sprite != null)
                 {
                     vertices.Add(new Vector3(x * borderWidth,       (y + 1) * borderWidth, 0));

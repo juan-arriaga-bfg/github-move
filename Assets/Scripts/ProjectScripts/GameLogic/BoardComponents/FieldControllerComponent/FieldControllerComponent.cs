@@ -17,7 +17,7 @@ public class FieldControllerComponent : IECSComponent
         
         //GenerateBorder();
 
-        LockWater();
+        LockCellsByLayout();
         
         // var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
         // CutTriangles(maxEdge / 2, Directions.All);
@@ -192,19 +192,21 @@ public class FieldControllerComponent : IECSComponent
         view.CachedTransform.localPosition += offset;
     }
     
-    private void LockWater()
+    private void LockCellsByLayout()
     {
         var width = context.BoardDef.Width;
         var height = context.BoardDef.Height;
         var layout = GameDataService.Current.FieldManager.LayoutData;
+        var tileDefs = BoardTiles.GetDefs();
         
         int layoutIndex = 0;
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                var cell = layout[layoutIndex++];
-                if (cell == 1)
+                var tileId = layout[layoutIndex++];
+                var def = tileDefs[tileId];
+                if (def.IsLock)
                 {
                     var point = new BoardPosition(x, y, BoardLayer.Piece.Layer);
                     context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreateEmptyPiece());

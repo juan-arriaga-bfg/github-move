@@ -117,13 +117,7 @@ public class SandboxGameController : MonoBehaviour
             boardController.BoardDef.Width,
             boardController.BoardDef.Height,
             boardController.BoardDef.UnitSize,
-            new List<string>
-            {
-                null,            // 0
-                null,            // 1
-                "tile_grass_1",  // 2
-                "tile_grass_2"   // 3
-            }
+            BoardTiles.GetDefs()
         );
         
         boardController.BoardLogic.RegisterComponent(new FireflyLogicComponent());
