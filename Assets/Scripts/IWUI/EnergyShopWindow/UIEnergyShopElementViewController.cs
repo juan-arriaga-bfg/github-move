@@ -117,7 +117,7 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
         
         if (marketLogic.ResetEnergyTimer.IsStarted)
         {
-            timerLabel.Text = marketLogic.ResetEnergyTimer.CompleteTime.GetTimeLeftText(true, true, null, true, true);
+            timerLabel.Text = marketLogic.ResetEnergyTimer.CompleteTime.GetTimeLeftText(true, true, null, true, false);
         }
         
         if (marketLogic.ClaimEnergyTimer.IsStarted)
@@ -129,7 +129,7 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
             else
             {
                 string mask = LocalizationService.Get("window.shop.energy.disappear", "window.shop.energy.disappear");
-                string timeLeft = marketLogic.ClaimEnergyTimer.CompleteTime.GetTimeLeftText(true, true, null, true, true);
+                string timeLeft = marketLogic.ClaimEnergyTimer.CompleteTime.GetTimeLeftText(true, true, null, true, false);
                 nameLabel.Text = string.Format(mask, timeLeft);
             }
         }
