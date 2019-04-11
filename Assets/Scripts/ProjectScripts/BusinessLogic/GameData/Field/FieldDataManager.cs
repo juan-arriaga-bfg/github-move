@@ -64,20 +64,19 @@ public class FieldDataManager : IECSComponent, IDataManager
                 LayoutH = data.Height;
 
                 int size = LayoutW * LayoutH;
-                if (size != data.Data.Length)
+
+                string[] idsStr = data.Data.Split(',');
+                
+                if (size != idsStr.Length)
                 {
                     Debug.LogError("[FieldDataManager] => LoadLayoutData: LayoutW * LayoutH != Data.Length"); 
                     return;
                 }
                 
                 LayoutData = new int[size];
-
-                int index = 0;
-                for (var i = 0; i < data.Data.Length; i++)
+                for (int i = 0; i < idsStr.Length; i++)
                 {
-                    char c = data.Data[i];
-                    int value = c - '0';
-                    LayoutData[index++] = value;
+                    LayoutData[i] = int.Parse(idsStr[i]);
                 }
             }
             else
