@@ -27,7 +27,7 @@ public class NetworkUtils
         {
             ClientPlatform = Application.platform.ToString(),
             Protocol = "v3",
-            Host = "http://127.0.0.1:8080/nodejs101",
+            Host = "http://134.17.4.143/nodejs101",
             GameVersion = IWVersion.Get.CurrentVersion
         };
     }
