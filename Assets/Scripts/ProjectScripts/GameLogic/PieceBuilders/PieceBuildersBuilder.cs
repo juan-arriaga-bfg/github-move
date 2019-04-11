@@ -21,28 +21,27 @@ public class PieceBuildersBuilder
     {
         dict.Add(PieceType.Boost_WR.Id, new SimplePieceBuilder());
         
-        dict = AddSimplePiece<CharacterPieceBuilder>(PieceType.NPC_A.Id, PieceType.NPC_R.Id, dict);
+        dict.Add(PieceType.NPC_SleepingBeautyPlaid.Id, new SimplePieceBuilder());
+        dict.Add(PieceType.NPC_Gnome.Id, new SimplePieceBuilder());
         
-        dict = AddBuildingBranchPiece(dict, PieceType.A1.Id, PieceType.A9.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.B1.Id, PieceType.B10.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.C1.Id, PieceType.C10.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.D1.Id, PieceType.D9.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.E1.Id, PieceType.E10.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.F1.Id, PieceType.F9.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.G1.Id, PieceType.G9.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.H1.Id, PieceType.H9.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.I1.Id, PieceType.I9.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.J1.Id, PieceType.J9.Id);
-        
-        dict = AddBuildingBranchPiece(dict, PieceType.EXT_A1.Id, PieceType.EXT_A9.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.EXT_B1.Id, PieceType.EXT_B9.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.EXT_C1.Id, PieceType.EXT_C9.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.EXT_D1.Id, PieceType.EXT_D9.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.EXT_E1.Id, PieceType.EXT_E9.Id);
-        
-        dict = AddSimplePiece<ManaPieceBuilder>(PieceType.Mana1.Id, PieceType.Mana6.Id, dict);
-        dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Soft1.Id, PieceType.Soft8.Id, dict);
-        dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Hard1.Id, PieceType.Hard6.Id, dict);
+        dict.Add(PieceType.NPC_A.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_B.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_C.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_D.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_E.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_F.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_G.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_H.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_I.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_J.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_K.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_L.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_M.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_N.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_O.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_P.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_Q.Id, new CharacterPieceBuilder());
+        dict.Add(PieceType.NPC_R.Id, new CharacterPieceBuilder());
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_B1.Id, PieceType.NPC_B3.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_C1.Id, PieceType.NPC_C5.Id, dict);
@@ -61,6 +60,27 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_P1.Id, PieceType.NPC_P8.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_Q1.Id, PieceType.NPC_Q8.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_R1.Id, PieceType.NPC_R8.Id, dict);
+        
+        dict = AddBuildingBranchPiece(dict, PieceType.A1.Id, PieceType.A8.Id, PieceType.A9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.B1.Id, PieceType.B9.Id, PieceType.B10.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.C1.Id, PieceType.C9.Id, PieceType.C10.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.D1.Id, PieceType.D8.Id, PieceType.D9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.E1.Id, PieceType.E9.Id, PieceType.E10.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.F1.Id, PieceType.F8.Id, PieceType.F9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.G1.Id, PieceType.G8.Id, PieceType.G9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.H1.Id, PieceType.H8.Id, PieceType.H9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.I1.Id, PieceType.I8.Id, PieceType.I9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.J1.Id, PieceType.J8.Id, PieceType.J9.Id);
+        
+        dict = AddBuildingBranchPiece(dict, PieceType.EXT_A1.Id, PieceType.EXT_A8.Id, PieceType.EXT_A9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.EXT_B1.Id, PieceType.EXT_B8.Id, PieceType.EXT_B9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.EXT_C1.Id, PieceType.EXT_C8.Id, PieceType.EXT_C9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.EXT_D1.Id, PieceType.EXT_D8.Id, PieceType.EXT_D9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.EXT_E1.Id, PieceType.EXT_E8.Id, PieceType.EXT_E9.Id);
+        
+        dict = AddSimplePiece<ManaPieceBuilder>(PieceType.Mana1.Id, PieceType.Mana6.Id, dict);
+        dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Soft1.Id, PieceType.Soft8.Id, dict);
+        dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Hard1.Id, PieceType.Hard6.Id, dict);
         
         dict.Add(PieceType.CH_Free.Id, new ChestPieceBuilder());
         dict.Add(PieceType.CH_NPC.Id, new ChestPieceBuilder());
@@ -125,7 +145,14 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OB1_A.Id, PieceType.OB9_A.Id, dict);
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OB1_D.Id, PieceType.OB9_D.Id, dict);
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OB1_G.Id, PieceType.OB5_G.Id, dict);
-        dict = AddSimplePiece<MovedObstaclePieceBuilder>(PieceType.OB_PR_A.Id, PieceType.OB_PR_G.Id, dict);
+        
+        dict.Add(PieceType.OB_PR_A.Id, new MovedObstaclePieceBuilder());
+        dict.Add(PieceType.OB_PR_B.Id, new MovedObstaclePieceBuilder());
+        dict.Add(PieceType.OB_PR_C.Id, new MovedObstaclePieceBuilder());
+        dict.Add(PieceType.OB_PR_D.Id, new MovedObstaclePieceBuilder());
+        dict.Add(PieceType.OB_PR_E.Id, new MovedObstaclePieceBuilder());
+        dict.Add(PieceType.OB_PR_F.Id, new MovedObstaclePieceBuilder());
+        dict.Add(PieceType.OB_PR_G.Id, new MovedObstaclePieceBuilder());
         
         dict.Add(PieceType.Fog.Id, new FogPieceBuilder());
         
@@ -143,7 +170,7 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddEnemyPiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict = AddSimplePiece<EnemyPieceBuilder>(PieceType.Enemy1.Id,  PieceType.Enemy1.Id,  dict);
+        dict.Add(PieceType.Enemy1.Id, new EnemyPieceBuilder());
         
         return dict;
     }
@@ -196,14 +223,14 @@ public class PieceBuildersBuilder
         return dict;
     }
     
-    private Dictionary<int, IPieceBuilder> AddBuildingBranchPiece(Dictionary<int, IPieceBuilder> dict, int idMin, int idMax)
+    private Dictionary<int, IPieceBuilder> AddBuildingBranchPiece(Dictionary<int, IPieceBuilder> dict, int idMin, int idMax, int idMonument)
     {
         dict.Add(idMin, new SimplePieceBuilder());
 
         var flag = true;
         var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
 
-        for (var i = idMin + 1; i < idMax - 2; i++)
+        for (var i = idMin + 1; i < idMax; i++)
         {
             if (flag) dict.Add(i, new SimplePieceBuilder());
             else dict.Add(i, new BuildingPieceBuilder());
@@ -211,9 +238,10 @@ public class PieceBuildersBuilder
             flag = !flag;
         }
         
-        dict.Add(idMax - 2, new PartPieceBuilder());
-        dict.Add(idMax - 1, new BuildingBigPieceBuilder {Mask = mask});
-        dict.Add(idMax, new MakingPieceBuilder {Mask = mask});
+        dict.Add(idMax, new PartPieceBuilder());
+        
+        dict.Add(idMonument - 1, new BuildingBigPieceBuilder {Mask = mask});
+        dict.Add(idMonument, new MakingPieceBuilder {Mask = mask});
         
         return dict;
     }

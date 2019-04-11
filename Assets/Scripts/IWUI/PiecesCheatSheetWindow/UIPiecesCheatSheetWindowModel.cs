@@ -1,5 +1,3 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,10 +30,11 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
         switch (tab)
         {
             case "Characters":
-                ids.AddRange(GetPieceIds(PieceType.NPC_A.Id, PieceType.NPC_R.Id));
+                ids.AddRange(PieceType.GetIdsByFilter(PieceTypeFilter.Character, PieceTypeFilter.Fake));
                 break;
             case "Boosters":
-                ids.AddRange(GetPieceIds(PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id));
+                ids.AddRange(GetPieceIds(PieceType.Boost_CR1.Id, PieceType.Boost_CR3.Id));
+                ids.Add(PieceType.Boost_CR.Id);
                 ids.Add(PieceType.Boost_WR.Id);
                 break;
             case "Currencies":
@@ -73,55 +72,77 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.AddRange(GetPieceIds(PieceType.OB1_A.Id, PieceType.OB9_A.Id));
                 ids.AddRange(GetPieceIds(PieceType.OB1_D.Id, PieceType.OB9_D.Id));
                 ids.AddRange(GetPieceIds(PieceType.OB1_G.Id, PieceType.OB5_G.Id));
-                ids.AddRange(GetPieceIds(PieceType.OB_PR_A.Id, PieceType.OB_PR_G.Id));
+                
+                ids.Add(PieceType.OB_PR_A.Id);
+                ids.Add(PieceType.OB_PR_B.Id);
+                ids.Add(PieceType.OB_PR_C.Id);
+                ids.Add(PieceType.OB_PR_D.Id);
+                ids.Add(PieceType.OB_PR_E.Id);
+                ids.Add(PieceType.OB_PR_F.Id);
+                ids.Add(PieceType.OB_PR_G.Id);
                 break;
             case "Orders":
                 ids.AddRange(PieceType.GetIdsByFilter(PieceTypeFilter.OrderPiece));
                 break;
             case "Simple A":
-                ids.AddRange(GetPieceIds(PieceType.A1.Id, PieceType.A9.Id));
+                ids.AddRange(GetPieceIds(PieceType.A1.Id, PieceType.A8.Id));
+                ids.Add(PieceType.A9.Id);
                 break;
             case "Simple B":
-                ids.AddRange(GetPieceIds(PieceType.B1.Id, PieceType.B10.Id));
+                ids.AddRange(GetPieceIds(PieceType.B1.Id, PieceType.B9.Id));
+                ids.Add(PieceType.B10.Id);
                 break;
             case "Simple C":
-                ids.AddRange(GetPieceIds(PieceType.C1.Id, PieceType.C10.Id));
+                ids.AddRange(GetPieceIds(PieceType.C1.Id, PieceType.C9.Id));
+                ids.Add(PieceType.C10.Id);
                 break;
             case "Simple D":
-                ids.AddRange(GetPieceIds(PieceType.D1.Id, PieceType.D9.Id));
+                ids.AddRange(GetPieceIds(PieceType.D1.Id, PieceType.D8.Id));
+                ids.Add(PieceType.D9.Id);
                 break;
             case "Simple E":
-                ids.AddRange(GetPieceIds(PieceType.E1.Id, PieceType.E10.Id));
+                ids.AddRange(GetPieceIds(PieceType.E1.Id, PieceType.E9.Id));
+                ids.Add(PieceType.E10.Id);
                 break;
             case "Simple F":
-                ids.AddRange(GetPieceIds(PieceType.F1.Id, PieceType.F9.Id));
+                ids.AddRange(GetPieceIds(PieceType.F1.Id, PieceType.F8.Id));
+                ids.Add(PieceType.F9.Id);
                 break;
             case "Simple G":
-                ids.AddRange(GetPieceIds(PieceType.G1.Id, PieceType.G9.Id));
+                ids.AddRange(GetPieceIds(PieceType.G1.Id, PieceType.G8.Id));
+                ids.Add(PieceType.G9.Id);
                 break;
             case "Simple H":
-                ids.AddRange(GetPieceIds(PieceType.H1.Id, PieceType.H9.Id));
+                ids.AddRange(GetPieceIds(PieceType.H1.Id, PieceType.H8.Id));
+                ids.Add(PieceType.H9.Id);
                 break;
             case "Simple I":
-                ids.AddRange(GetPieceIds(PieceType.I1.Id, PieceType.I9.Id));
+                ids.AddRange(GetPieceIds(PieceType.I1.Id, PieceType.I8.Id));
+                ids.Add(PieceType.I9.Id);
                 break;
             case "Simple J":
-                ids.AddRange(GetPieceIds(PieceType.J1.Id, PieceType.J9.Id));
+                ids.AddRange(GetPieceIds(PieceType.J1.Id, PieceType.J8.Id));
+                ids.Add(PieceType.J9.Id);
                 break;
             case "Extended A":
-                ids.AddRange(GetPieceIds(PieceType.EXT_A1.Id, PieceType.EXT_A9.Id));
+                ids.AddRange(GetPieceIds(PieceType.EXT_A1.Id, PieceType.EXT_A8.Id));
+                ids.Add(PieceType.EXT_A9.Id);
                 break;
             case "Extended B":
-                ids.AddRange(GetPieceIds(PieceType.EXT_B1.Id, PieceType.EXT_B9.Id));
+                ids.AddRange(GetPieceIds(PieceType.EXT_B1.Id, PieceType.EXT_B8.Id));
+                ids.Add(PieceType.EXT_B9.Id);
                 break;
             case "Extended C":
-                ids.AddRange(GetPieceIds(PieceType.EXT_C1.Id, PieceType.EXT_C9.Id));
+                ids.AddRange(GetPieceIds(PieceType.EXT_C1.Id, PieceType.EXT_C8.Id));
+                ids.Add(PieceType.EXT_C9.Id);
                 break;
             case "Extended D":
-                ids.AddRange(GetPieceIds(PieceType.EXT_D1.Id, PieceType.EXT_D9.Id));
+                ids.AddRange(GetPieceIds(PieceType.EXT_D1.Id, PieceType.EXT_D8.Id));
+                ids.Add(PieceType.EXT_D9.Id);
                 break;
             case "Extended E":
-                ids.AddRange(GetPieceIds(PieceType.EXT_E1.Id, PieceType.EXT_E9.Id));
+                ids.AddRange(GetPieceIds(PieceType.EXT_E1.Id, PieceType.EXT_E8.Id));
+                ids.Add(PieceType.EXT_E9.Id);
                 break;
             case "Ingredient A":
                 ids.AddRange(GetPieceIds(PieceType.PR_A1.Id, PieceType.PR_A5.Id));
@@ -163,9 +184,11 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
     {
         var ids = new List<int>();
 
-        for (var i = idMin; i < idMax + 1; i++)
+        for (var i = idMin; i <= idMax; i++)
         {
-            if (PieceType.GetDefById(i).Filter.Has(PieceTypeFilter.Fake)) continue;
+            var def = PieceType.GetDefById(i);
+            
+            if (def == null || def.Filter.Has(PieceTypeFilter.Fake)) continue;
             
             ids.Add(i);
         }
