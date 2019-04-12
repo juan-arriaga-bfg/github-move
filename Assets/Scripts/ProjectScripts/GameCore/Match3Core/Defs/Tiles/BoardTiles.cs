@@ -30,15 +30,21 @@ public static class BoardTiles
                 }
             },
             {
-                20, new BoardTileDef // Border
+                20, new BoardTileDef // Floor 0 -> 1
                 {
                     Height = 0,
                     IsLock = true,
                 }
             },
+            {
+                21, new BoardTileDef // Floor 1 -> 2
+                {
+                    Height = 1,
+                    IsLock = true,
+                }
+            },
 
             // HEIGHT 0    
-
             {
                 100, new BoardTileDef
                 {
@@ -94,9 +100,36 @@ public static class BoardTiles
                     SpriteName = "tile_clay_1",
                     SpriteNameChess = "tile_clay_2"
                 }
-            }
+            },
 
-            // HEIGHT 2
+            // HEIGHT 2 
+            {
+                300, new BoardTileDef
+                {
+                    Height = 2,
+                    IsLock = false,
+                    SpriteName = "tile_grass_1",
+                    SpriteNameChess = "tile_grass_2"
+                }
+            },
+            {
+                301, new BoardTileDef
+                {
+                    Height = 2,
+                    IsLock = false,
+                    SpriteName = "tile_sand_1",
+                    SpriteNameChess = "tile_sand_2"
+                }
+            },
+            {
+                302, new BoardTileDef
+                {
+                    Height = 2,
+                    IsLock = false,
+                    SpriteName = "tile_clay_1",
+                    SpriteNameChess = "tile_clay_2"
+                }
+            }
         };
     }
 
