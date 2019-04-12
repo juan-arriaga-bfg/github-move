@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 public class PartDef
 {
     public int Id = PieceType.None.Id;
     public BoardPosition Key;
     public List<BoardPosition> Main;
-    public readonly List<List<BoardPosition>> Second = new List<List<BoardPosition>>();
-    public bool IsFree => Second.Count == 0 && Main == null;
+    public readonly List<List<BoardPosition>> Seconds = new List<List<BoardPosition>>();
+    public bool IsFree => Seconds.Count == 0 && Main == null;
 
     private PartPiecesLogicComponent context;
     public ViewDefinitionComponent ViewDefinition;
@@ -20,14 +19,23 @@ public class PartDef
     
     public void Add(List<BoardPosition> option)
     {
-        if (option[2].Equals(Key))
+        var key = option[2];
+        
+        if (key.Equals(Key))
         {
             Main = option;
             OpenBubble();
             return;
         }
-        
-        Second.Add(option);
+
+        foreach (var second in Seconds)
+        {
+            if(second[2].Equals(key) == false) continue;
+            
+            return;
+        }
+
+        Seconds.Add(option);
     }
 
     public void Remove(List<BoardPosition> option)
@@ -44,7 +52,7 @@ public class PartDef
             return;
         }
         
-        Second.Remove(option);
+        Seconds.Remove(option);
     }
 
     private void OpenBubble()
@@ -117,9 +125,9 @@ public class PartPiecesLogicComponent : IECSComponent
             def.Remove(def.Main);
         }
 
-        for (var i = def.Second.Count - 1; i >= 0; i--)
+        for (var i = def.Seconds.Count - 1; i >= 0; i--)
         {
-            var option = def.Second[i];
+            var option = def.Seconds[i];
             Remove(option, position);
             def.Remove(option);
         }
