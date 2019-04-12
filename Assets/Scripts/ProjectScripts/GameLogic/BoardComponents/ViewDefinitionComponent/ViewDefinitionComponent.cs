@@ -100,18 +100,31 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
     {
-        var f = from;
-        var t = Position = to;
-
         if (container == null) return;
         
-        f.Z = t.Z = BoardLayer.UI.Layer;
-        thisContext.Context.RendererContext.MoveElement(f, t);
-        container.CachedTransform.localPosition = thisContext.Context.BoardDef.GetPiecePosition(Position.X, Position.Y);
+        var f = from;
+        f.Z = BoardLayer.UI.Layer;
+
+        thisContext.Context.RendererContext.RemoveElementAt(f, false);
     }
 
     public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
+        var t = Position = to;
+        
+        if (container == null) return;
+        
+        t.Z = BoardLayer.UI.Layer;
+        container.CachedTransform.localPosition = thisContext.Context.BoardDef.GetPiecePosition(Position.X, Position.Y);
+        thisContext.Context.RendererContext.SetElementAt(t, container);
+        
+        foreach (var view in views.Values)
+        {
+            if (!view.IsShow) continue;
+            
+            view.SyncRendererLayers(t);
+        }
+        
         OnDrag(true);
     }
     
@@ -154,15 +167,12 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     public UIBoardView AddView(ViewType id)
     {
-        if (views.TryGetValue(id, out var view))
-        {
-            return view;
-        }
+        if (views.TryGetValue(id, out var view)) return view;
         
         var pos = Position;
 
         pos.Z = BoardLayer.UI.Layer;
-
+        
         if (container == null)
         {
             container = thisContext.Context.RendererContext.CreateElementAt((int) ViewType.UIContainer, pos) as UIBoardView;
@@ -176,7 +186,6 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         element.CachedTransform.SetParentAndReset(container.CachedTransform);
         element.SyncRendererLayers(pos);
         element.SetOffset(thisContext?.ActorView != null ? GetViewPosition(element.IsTop) + thisContext.ActorView.GetUIPosition(id) : Vector2.zero);
-        
         views.Add(id, element);
         
         return element;
