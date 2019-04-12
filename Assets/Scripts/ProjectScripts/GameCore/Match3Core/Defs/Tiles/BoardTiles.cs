@@ -6,6 +6,8 @@ public static class BoardTiles
 
     private static bool isInited;
     
+    public static readonly int WATER_TILE_ID = 10; 
+      
     public static Dictionary<int, BoardTileDef> GetDefs()
     {
         if (!isInited)
@@ -21,14 +23,14 @@ public static class BoardTiles
         defs = new Dictionary<int, BoardTileDef>
         {
             {
-                100, new BoardTileDef // Water
+                10, new BoardTileDef // Water
                 {
                     Height = 0,
                     IsLock = true,
                 }
             },
             {
-                200, new BoardTileDef // Border
+                20, new BoardTileDef // Border
                 {
                     Height = 0,
                     IsLock = true,
@@ -38,7 +40,7 @@ public static class BoardTiles
             // HEIGHT 0    
 
             {
-                1000, new BoardTileDef
+                100, new BoardTileDef
                 {
                     Height = 0,
                     IsLock = false,
@@ -47,7 +49,7 @@ public static class BoardTiles
                 }
             },
             {
-                1001, new BoardTileDef
+                101, new BoardTileDef
                 {
                     Height = 0,
                     IsLock = false,
@@ -56,7 +58,7 @@ public static class BoardTiles
                 }
             },
             {
-                1002, new BoardTileDef
+                102, new BoardTileDef
                 {
                     Height = 0,
                     IsLock = false,
@@ -67,7 +69,7 @@ public static class BoardTiles
 
             // HEIGHT 1  
             {
-                2000, new BoardTileDef
+                200, new BoardTileDef
                 {
                     Height = 1,
                     IsLock = false,
@@ -76,7 +78,7 @@ public static class BoardTiles
                 }
             },
             {
-                2001, new BoardTileDef
+                201, new BoardTileDef
                 {
                     Height = 1,
                     IsLock = false,
@@ -85,7 +87,7 @@ public static class BoardTiles
                 }
             },
             {
-                2002, new BoardTileDef
+                202, new BoardTileDef
                 {
                     Height = 1,
                     IsLock = false,
