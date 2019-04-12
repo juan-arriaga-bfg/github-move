@@ -543,4 +543,17 @@ public class R
      public const string MagicWandFlyParticle = "MagicWandFlyParticle";
      public const string C10Piece = "C10Piece";
      public const string E10Piece = "E10Piece";
+     public const string BorderWallRight1 = "BorderWallRight1";
+     public const string BorderWallTop1 = "BorderWallTop1";
+     public const string BorderWallTopRight1 = "BorderWallTopRight1";
+     public const string BorderBottom1 = "BorderBottom1";
+     public const string BorderLeft1 = "BorderLeft1";
+     public const string BorderLeft1Hole = "BorderLeft1Hole";
+     public const string BorderBottom1Hole = "BorderBottom1Hole";
+     public const string BorderWallBottomLeft1 = "BorderWallBottomLeft1";
+     public const string BorderBottom2 = "BorderBottom2";
+     public const string BorderBottom2Hole = "BorderBottom2Hole";
+     public const string BorderLeft2 = "BorderLeft2";
+     public const string BorderLeft2Hole = "BorderLeft2Hole";
+     public const string DebugCell2 = "DebugCell2";
 }
