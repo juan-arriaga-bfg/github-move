@@ -1363,14 +1363,14 @@ public partial class BoardRenderer : ECSEntity
                 // Coast
                 if (!meta.neighborT)
                 {
-                    Create(x, y, R.BorderTop);
+                    Create(x, y, R.BorderTop0);
                 }
                 
                 if (!meta.neighborB)
                 {
                     if (meta.floorDiffB == 0)
                     {
-                        Create(x, y, meta.neighborBL ? R.BorderBottomHole : R.BorderBottom);
+                        Create(x, y, meta.neighborBL ? R.BorderBottom0Hole : R.BorderBottom0);
                     }
                     else if (meta.floorDiffB == -1)
                     {
@@ -1386,7 +1386,7 @@ public partial class BoardRenderer : ECSEntity
                 {
                     if (meta.floorDiffL == 0)
                     {
-                        Create(x, y, meta.neighborBL ? R.BorderLeftHole : R.BorderLeft);
+                        Create(x, y, meta.neighborBL ? R.BorderLeft0Hole : R.BorderLeft0);
                     }
                     else if (meta.floorDiffL == -1)
                     {
@@ -1400,7 +1400,7 @@ public partial class BoardRenderer : ECSEntity
                 
                 if (!meta.neighborR)
                 {
-                    Create(x, y, R.BorderRight);
+                    Create(x, y, R.BorderRight0);
                 }
             }
         }

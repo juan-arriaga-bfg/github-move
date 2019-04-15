@@ -179,10 +179,10 @@ public class R
      public const string BoardProgressView = "BoardProgressView";
      public const string PieceRemover = "PieceRemover";
      public const string UIBoardViewContainer = "UIBoardViewContainer";
-     public const string BorderBottom = "BorderBottom";
-     public const string BorderLeft = "BorderLeft";
-     public const string BorderRight = "BorderRight";
-     public const string BorderTop = "BorderTop";
+     public const string BorderBottom0 = "BorderBottom0";
+     public const string BorderLeft0 = "BorderLeft0";
+     public const string BorderRight0 = "BorderRight0";
+     public const string BorderTop0 = "BorderTop0";
      public const string PiecesLockedMaterial = "PiecesLockedMaterial";
      public const string PiecesFogHighlightMaterial = "PiecesFogHighlightMaterial";
      public const string OB_PR_FPiece = "OB_PR_FPiece";
@@ -326,8 +326,8 @@ public class R
      public const string NPC_C7Piece = "NPC_C7Piece";
      public const string NPC_C8Piece = "NPC_C8Piece";
      public const string BackgroundWater = "BackgroundWater";
-     public const string BorderLeftHole = "BorderLeftHole";
-     public const string BorderBottomHole = "BorderBottomHole";
+     public const string BorderLeft0Hole = "BorderLeft0Hole";
+     public const string BorderBottom0Hole = "BorderBottom0Hole";
      public const string RewardDropParticles = "RewardDropParticles";
      public const string NPC_G1Piece = "NPC_G1Piece";
      public const string NPC_G2Piece = "NPC_G2Piece";

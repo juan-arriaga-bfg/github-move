@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using BestHTTP.Extensions;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -23,7 +24,7 @@ public class ObjectBuilderEditor : Editor
         BordersGenerator script = (BordersGenerator)target;
         if(GUILayout.Button("Generate!"))
         {
-            
+            Generate();
         }
     }
 
@@ -72,16 +73,16 @@ public class ObjectBuilderEditor : Editor
        
         HashSet<string> doNotClone = new HashSet<string>
         {
-            "tile_grass_1"
+            "tile_grass"
         };
         
         List<string> itemsToCreate = new List<string>();
         
-        GameObject go = AssetDatabase.LoadAssetAtPath<GameObject>(generatorPath);
+        GameObject go = PrefabUtility.LoadPrefabContents(generatorPath);
         
         // Find childs
         int count = go.transform.childCount;
-        for (int i = count - 1; i >= 0; i++)
+        for (int i = count - 1; i >= 0; i--)
         {
             Transform item = go.transform.GetChild(i);
             if (!doNotClone.Contains(item.name))
@@ -101,17 +102,21 @@ public class ObjectBuilderEditor : Editor
             
             // Fix item
             GameObject newGo = PrefabUtility.LoadPrefabContents(dst);
-            count = go.transform.childCount;
-            for (int i = count - 1; i >= 0; i++)
+            count = newGo.transform.childCount;
+            for (int i = count - 1; i >= 0; i--)
             {
-                Transform t = go.transform.GetChild(i);
+                Transform t = newGo.transform.GetChild(i);
                 if (t.name != itemName)
                 {
-                    DestroyImmediate(t);
+                    DestroyImmediate(t.gameObject);
+                }
+                else
+                {
+                    t.gameObject.SetActive(true);
                 }
             }
 
-            PrefabUtility.SavePrefabAsset(newGo);
+            PrefabUtility.SaveAsPrefabAsset(newGo, dst);
         }
         
         AssetDatabase.Refresh();
