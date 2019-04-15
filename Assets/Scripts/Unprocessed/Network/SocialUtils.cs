@@ -287,7 +287,11 @@ public static class SocialUtils
             {"user_id", installId},
             {"social_id", null},
             {"social_token", null},
+#if UNITY_EDITOR
             {"name", Environment.MachineName},
+#else 
+            {"name", SystemInfo.deviceModel},
+#endif
             {"email", null},
             {"social_network", null},
             {"platform", null}
