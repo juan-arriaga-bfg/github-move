@@ -6,8 +6,8 @@
         
         piece.Matchable?.Locker.Lock(piece);
         
-        CreateViewComponent(piece);
         AddObserver(piece, new PartPieceBoardObserver());
+        CreateViewComponent(piece);
         
         return piece;
     }
