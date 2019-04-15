@@ -556,4 +556,16 @@ public class R
      public const string BorderLeft2 = "BorderLeft2";
      public const string BorderLeft2Hole = "BorderLeft2Hole";
      public const string DebugCell2 = "DebugCell2";
+     public const string BorderRight0Short = "BorderRight0Short";
+     public const string BorderTop0Short = "BorderTop0Short";
+     public const string BorderWallRight1_Prop_1 = "BorderWallRight1_Prop_1";
+     public const string BorderWallRight1_Prop_2 = "BorderWallRight1_Prop_2";
+     public const string BorderWallRight1_Prop_3 = "BorderWallRight1_Prop_3";
+     public const string BorderWallRight1_Prop_4 = "BorderWallRight1_Prop_4";
+     public const string BorderWallRight1_Prop_5 = "BorderWallRight1_Prop_5";
+     public const string BorderWallTop1_Prop_1 = "BorderWallTop1_Prop_1";
+     public const string BorderWallTop1_Prop_2 = "BorderWallTop1_Prop_2";
+     public const string BorderWallTop1_Prop_3 = "BorderWallTop1_Prop_3";
+     public const string BorderWallBottomLeft1_Prop_1 = "BorderWallBottomLeft1_Prop_1";
+     public const string BorderWallTopRight1_Prop_1 = "BorderWallTopRight1_Prop_1";
 }
