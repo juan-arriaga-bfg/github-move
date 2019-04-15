@@ -7,8 +7,7 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 	public int Guid => ComponentGuid;
 
 	public List<BoardPosition> Mask;
-
-    
+	
 	public BoardPosition GetTopPosition
 	{
 		get
@@ -113,6 +112,13 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
     }
 	
 	protected BoardPosition realPosition;
+
+	public BoardPosition RealPosition
+	{
+		get => realPosition;
+		set => realPosition = value;
+	}
+	
 	public Piece Context;
 	
 	public void OnRegisterEntity(ECSEntity entity)

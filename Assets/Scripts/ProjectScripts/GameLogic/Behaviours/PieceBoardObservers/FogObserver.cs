@@ -243,14 +243,17 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         bubble.OnHide = () =>
         {
+            var center = Def.GetCenter();
+            center.Z = BoardLayer.Piece.Layer;
+            
             piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, Def);
             AddResourceView.Show(Def.GetCenter(piece.Context), Def.Reward);
                 
             IsRemoved = true;
             piece.Context.ActionExecutor.AddAction(new CollapseFogToAction
             {
-                To = piece.CachedPosition,
-                Positions = new List<BoardPosition> {piece.CachedPosition},
+                To = center,
+                Positions = new List<BoardPosition> {center},
                 FogObserver = this,
                 OnComplete = () =>
                 {

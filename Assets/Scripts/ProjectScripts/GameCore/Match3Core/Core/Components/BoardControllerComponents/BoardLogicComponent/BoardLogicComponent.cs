@@ -463,7 +463,6 @@ public partial class BoardLogicComponent : ECSEntity,
             || boardEntities.Remove(pos) == false) return false;
         
         logicMatrix[pos.X, pos.Y, pos.Z] = -1;
-        PositionsCache.RemovePosition(piece.PieceType, pos);
         
         return true;
     }
@@ -475,7 +474,6 @@ public partial class BoardLogicComponent : ECSEntity,
             || boardEntities.Remove(pos) == false) return null;
         
         logicMatrix[pos.X, pos.Y, pos.Z] = -1;
-        PositionsCache.RemovePosition(piece.PieceType, pos);
                 
         var observer = piece?.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
         observer?.OnRemoveFromBoard(pos, piece);
@@ -530,7 +528,6 @@ public partial class BoardLogicComponent : ECSEntity,
         else boardEntities.Add(position, piece);
         
         piece.CachedPosition = position;
-        PositionsCache.AddPosition(piece.PieceType, position);
     }
 
     public virtual void ClearBoard()

@@ -11,6 +11,8 @@ public class GenericPieceBuilder : IPieceBuilder
         piece.RegisterComponent(new PieceBoardObserversComponent());
         piece.RegisterComponent(new PathfindLockListenerComponent());
         
+        AddObserver(piece, new CachedPiecePositionComponent());
+        
         AddMatchableComponent(piece);
         
         return piece;
