@@ -12,10 +12,10 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchab
 
     public BoardPosition CachedPosition
     {
-        get { return cachedPosition; }
-        set { cachedPosition = value; }
+        get => Multicellular?.RealPosition ?? cachedPosition;
+        set => cachedPosition = value;
     }
-
+    
     private LayerPieceComponent layer;
     public virtual LayerPieceComponent Layer => layer ?? (layer = GetComponent<LayerPieceComponent>(LayerPieceComponent.ComponentGuid));
     

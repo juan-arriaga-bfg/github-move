@@ -23,12 +23,12 @@
 	{
 		if (contextPiece == null) return;
 		
-		contextPiece.CachedPosition = position;
 		context?.Context.BoardLogic.PositionsCache.AddPosition(context.PieceType, position);
 	}
 
 	public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
 	{
+		
 	}
 
 	public void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
