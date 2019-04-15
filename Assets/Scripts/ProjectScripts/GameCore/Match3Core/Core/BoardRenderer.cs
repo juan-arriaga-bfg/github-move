@@ -1279,6 +1279,8 @@ public partial class BoardRenderer : ECSEntity
     
     public void CreateBorders()
     {
+        System.Random random = new System.Random();
+        
         var boardDef = context.BoardDef;
         
         var fieldManager = GameDataService.Current.FieldManager;
@@ -1293,10 +1295,67 @@ public partial class BoardRenderer : ECSEntity
         {
             return x >= 0 && y >= 0 && x < w && y < h;
         }
+        
+        Dictionary<string, string[]> props = new Dictionary<string, string[]>
+        {
+            {
+                R.BorderWallRight1, new[]
+                {
+                    R.BorderWallRight1_Prop_1,
+                    R.BorderWallRight1_Prop_2,
+                    R.BorderWallRight1_Prop_3,
+                    R.BorderWallRight1_Prop_4,
+                    R.BorderWallRight1_Prop_5,
+                }
+            },
+            {
+                R.BorderWallTop1, new[]
+                {
+                    R.BorderWallTop1_Prop_1,
+                    R.BorderWallTop1_Prop_2,
+                    R.BorderWallTop1_Prop_3,
+                    null
+                }
+            },
+            {
+                R.BorderWallBottomLeft1, new[]
+                {
+                    R.BorderWallBottomLeft1_Prop_1,
+                }
+            },
+            {
+                R.BorderWallTopRight1, new[]
+                {
+                    R.BorderWallTopRight1_Prop_1,
+                }
+            }
+        };
 
-        void Create(int x, int y, string item)
+        void CreateBorder(int x, int y, string item)
+        {
+            InstantiateItem(x, y, item);
+
+            if (props.TryGetValue(item, out string[] availableProps))
+            {
+                int len = availableProps.Length;
+                int index = random.Next(0, len);
+                string prop = availableProps[index];
+
+                if (prop != null)
+                {
+                    InstantiateItem(x, y, prop);
+                }
+            }
+        }
+            
+        void InstantiateItem(int x, int y, string item)
         {
             var prefab = ContentService.Current.GetObjectByName(item);
+            if (prefab == null)
+            {
+                IW.Logger.LogError($"InstantiateItem: Prefab Not found: {item}");
+            }
+            
             GameObject go = (GameObject) Object.Instantiate(prefab, root.transform, true);
             go.transform.position = boardDef.GetPiecePosition(x, y);
         }
@@ -1325,12 +1384,13 @@ public partial class BoardRenderer : ECSEntity
                 int idBL = fieldManager.GetTileId(x + 1, y - 1);
                 int idTR = fieldManager.GetTileId(x - 1, y + 1);
                 
-                meta.neighborR  = IsCellExists(x + 0, y + 1) && idR  != waterId;
-                meta.neighborL  = IsCellExists(x + 0, y - 1) && idL  != waterId;              
-                meta.neighborT  = IsCellExists(x - 1, y + 0) && idT  != waterId;
-                meta.neighborB  = IsCellExists(x + 1, y + 0) && idB  != waterId;
-                meta.neighborBL = IsCellExists(x + 1, y - 1) && idBL != waterId;
-                meta.neighborTR = IsCellExists(x - 1, y + 1) && idTR != waterId;
+                // IsCellExists NOT required until we have any non-water tiles place on borders of the field
+                meta.neighborR  = /*IsCellExists(x + 0, y + 1) && */idR  != waterId;
+                meta.neighborL  = /*IsCellExists(x + 0, y - 1) && */idL  != waterId;              
+                meta.neighborT  = /*IsCellExists(x - 1, y + 0) && */idT  != waterId;
+                meta.neighborB  = /*IsCellExists(x + 1, y + 0) && */idB  != waterId;
+                meta.neighborBL = /*IsCellExists(x + 1, y - 1) && */idBL != waterId;
+                meta.neighborTR = /*IsCellExists(x - 1, y + 1) && */idTR != waterId;
 
                 meta.floorDiffR  = tilesDefs[idR ].Height - currentHeight;
                 meta.floorDiffL  = tilesDefs[idL ].Height - currentHeight;                
@@ -1345,40 +1405,59 @@ public partial class BoardRenderer : ECSEntity
                 // Walls
                 if (meta.neighborT && meta.neighborR && meta.floorDiffT == 1 && meta.floorDiffR == 1)
                 {
-                    Create(x, y, R.BorderWallBottomLeft1);
+                    CreateBorder(x, y, R.BorderWallBottomLeft1);
                 }
                 else if (meta.neighborTR && meta.floorDiffTR == 1 && meta.floorDiffT == 0 && meta.floorDiffR == 0)
                 {
-                    Create(x, y, R.BorderWallTopRight1);
+                    CreateBorder(x, y, R.BorderWallTopRight1);
                 }
                 else if (meta.neighborR && meta.floorDiffR == 1)
                 {
-                    Create(x, y, R.BorderWallRight1);
+                    CreateBorder(x, y, R.BorderWallRight1);
                 }
                 else if (meta.neighborT && meta.floorDiffT == 1)
                 {
-                    Create(x, y, R.BorderWallTop1);
+                    CreateBorder(x, y, R.BorderWallTop1);
                 }
                 
                 // Coast
                 if (!meta.neighborT)
                 {
-                    Create(x, y, R.BorderTop0);
+                    if (meta.neighborR && meta.floorDiffR == 1)
+                    {
+                        CreateBorder(x, y, R.BorderTop0Short);   
+                    }
+                    else
+                    {
+                        CreateBorder(x, y, R.BorderTop0);
+                    }
+                }
+                
+                if (!meta.neighborR)
+                {
+                    if (meta.neighborT && meta.floorDiffT == 1)
+                    {
+                        CreateBorder(x, y, R.BorderRight0Short);   
+                    }
+                    else
+                    {
+                        CreateBorder(x, y, R.BorderRight0);
+                    }
                 }
                 
                 if (!meta.neighborB)
                 {
                     if (meta.floorDiffB == 0)
                     {
-                        Create(x, y, meta.neighborBL ? R.BorderBottom0Hole : R.BorderBottom0);
+                        CreateBorder(x, y, meta.neighborBL ? R.BorderBottom0Hole : R.BorderBottom0);
                     }
                     else if (meta.floorDiffB == -1)
                     {
-                        Create(x, y, meta.neighborBL ? R.BorderBottom1Hole : R.BorderBottom1);
+                        CreateBorder(x, y, meta.neighborBL ? R.BorderBottom1Hole : R.BorderBottom1);
                     }
                     else if (meta.floorDiffB == -2)
                     {
-                        Create(x, y, meta.neighborBL ? R.BorderBottom2Hole : R.BorderBottom2);
+                        CreateBorder(x, y, meta.neighborBL ? R.BorderBottom2Hole : R.BorderBottom2);
                     }
                 }
                 
@@ -1386,21 +1465,16 @@ public partial class BoardRenderer : ECSEntity
                 {
                     if (meta.floorDiffL == 0)
                     {
-                        Create(x, y, meta.neighborBL ? R.BorderLeft0Hole : R.BorderLeft0);
+                        CreateBorder(x, y, meta.neighborBL ? R.BorderLeft0Hole : R.BorderLeft0);
                     }
                     else if (meta.floorDiffL == -1)
                     {
-                        Create(x, y, meta.neighborBL ? R.BorderLeft1Hole : R.BorderLeft1);
+                        CreateBorder(x, y, meta.neighborBL ? R.BorderLeft1Hole : R.BorderLeft1);
                     }
                     else if (meta.floorDiffL == -2)
                     {
-                        Create(x, y, meta.neighborBL ? R.BorderLeft2Hole : R.BorderLeft2);
+                        CreateBorder(x, y, meta.neighborBL ? R.BorderLeft2Hole : R.BorderLeft2);
                     }
-                }
-                
-                if (!meta.neighborR)
-                {
-                    Create(x, y, R.BorderRight0);
                 }
             }
         }

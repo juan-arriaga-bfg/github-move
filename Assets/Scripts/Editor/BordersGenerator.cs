@@ -73,7 +73,7 @@ public class ObjectBuilderEditor : Editor
        
         HashSet<string> doNotClone = new HashSet<string>
         {
-            "tile_grass"
+            "Helpers"
         };
         
         List<string> itemsToCreate = new List<string>();
