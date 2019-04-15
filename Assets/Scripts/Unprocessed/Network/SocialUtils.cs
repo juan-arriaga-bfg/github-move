@@ -49,9 +49,11 @@ public static class SocialUtils
 
     public static void ArchiveAndSend(string data)
     {
+        IW.Logger.Log($"[SocialUtils] => ArchiveAndSend: {data.Length} bytes...");
+        
         if (IsRequestInProgress)
         {
-            IW.Logger.LogWarning($"SendProgress: Cancelled by IsRequestInProgress == true");
+            IW.Logger.LogWarning($"SendProgress: ArchiveAndSend: Cancelled by IsRequestInProgress == true");
             return;
         }
         
@@ -77,21 +79,29 @@ public static class SocialUtils
             {"force", force.ToString().ToLower()}
         };
         
+        IW.Logger.Log($"[SocialUtils] => ArchiveAndSend: Running async task...");
+        
         byte[] bytes = null;
-
-        Task.Run(() =>
-        {
-            bytes = Archive(data); // Parallel thread
-        })
-        .GetAwaiter().OnCompleted(() =>
-        {
-            SendProgress(bytes, prms); // Main thread
-        });
+        bytes = Archive(data);
+        SendProgress(bytes, prms);
+        
+        // todo: async not working on the device if going to background
+        
+        // Task.Run(() =>
+        // {
+        //     bytes = Archive(data); // Parallel thread
+        // })
+        // .GetAwaiter().OnCompleted(() =>
+        // {
+        //     SendProgress(bytes, prms); // Main thread
+        // });
 
     }
 
     private static void SendProgress(byte[] bytes, Dictionary<string, string> prms)
     {
+        IW.Logger.Log($"[SocialUtils] => SendProgress: RequestToBackend");
+        
         NetworkUtils.Instance.RequestToBackend("user-progress/set", bytes, prms, (result) =>
         {
             if (result.IsOk)
@@ -122,6 +132,8 @@ public static class SocialUtils
 
     private static byte[] Archive(string data)
     {
+        IW.Logger.Log($"[SocialUtils] => Archiving...");
+        
 #if DEBUG
         var sw = new Stopwatch();
         sw.Start();
