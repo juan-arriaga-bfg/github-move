@@ -9,8 +9,9 @@ public class GenericPieceBuilder : IPieceBuilder
         piece.RegisterComponent(new LayerPieceComponent {Index = BoardLayer.Piece.Layer});
         
         piece.RegisterComponent(new PieceBoardObserversComponent());
-        piece.RegisterComponent(new CachedPiecePositionComponent());
         piece.RegisterComponent(new PathfindLockListenerComponent());
+        
+        AddObserver(piece, new CachedPiecePositionComponent());
         
         AddMatchableComponent(piece);
         

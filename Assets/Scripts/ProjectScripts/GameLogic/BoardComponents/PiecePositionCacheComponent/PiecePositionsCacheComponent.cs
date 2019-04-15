@@ -148,11 +148,15 @@ public class PiecePositionsCacheComponent : IECSComponent
 
 	public void AddPosition(int pieceType, BoardPosition position)
 	{
+		if (pieceType == PieceType.Empty.Id || pieceType == PieceType.None.Id) return;
+		
 		if (cache.TryGetValue(pieceType, out var list) == false)
 		{
 			list = new List<BoardPosition>();
 			cache.Add(pieceType, list);
 		}
+		
+		if(list.IndexOf(position) != -1) return;
 		
 		list.Add(position);
 		context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ChangePiecePosition, pieceType);

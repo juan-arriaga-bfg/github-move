@@ -2,6 +2,8 @@ using Debug = IW.Logger;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class ModificationPiecesAction : IBoardAction
@@ -25,25 +27,40 @@ public class ModificationPiecesAction : IBoardAction
 		
 		var free = new List<BoardPosition>();
 		
-		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(To, free, NextPieces.Count) == false) return false;
+		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(To, free, NextPieces.Count * 2) == false) return false;
+		
+		
 		
 		var index = free.IndexOf(To);
+		
+//		Debug.LogWarning($"_free: {JsonConvert.SerializeObject(free.Select(x => x.ToString()).ToList(), Formatting.Indented)}");
 
 		free.RemoveAt(index != -1 ? index : 0);
 		free.Add(To);
+		// sort by distance to center
+		free = free.OrderBy(x => BoardPosition.SqrMagnitude(x, To)).ToList();
+		
 		NextPieces.Sort();
+		
+//		Debug.LogWarning($"_sorted: {JsonConvert.SerializeObject(free.Select(x => x.ToString()).ToList(), Formatting.Indented)}");
+//		Debug.LogWarning($"_next: {JsonConvert.SerializeObject(NextPieces.Select(x => x.ToString()).ToList(), Formatting.Indented)}");
 		
 		var pieces = new List<Piece>();
 		
 		for (var i = 0; i < NextPieces.Count; i++)
 		{
 			var piece = gameBoardController.CreatePieceFromType(NextPieces[i]);
+			
+			if (free.Count <= i || i < 0) continue;
+			
 			var position = free[i];
 
 			if (gameBoardController.BoardLogic.AddPieceToBoard(position.X, position.Y, piece) == false)
 			{
-				Debug.LogErrorFormat("Can't create piece with id {0} at {1}", NextPieces[i], position);
+				Debug.LogWarning($"Safe operation: Can't create piece with id {NextPieces[i]} at {position}");
 				free.Remove(position);
+				i--;
+				
 				continue;
 			}
 			

@@ -2,7 +2,31 @@
 
 public class PartDef
 {
-    public int Id = PieceType.None.Id;
+    private int id  = PieceType.None.Id;
+
+    public int Id
+    {
+        get
+        {
+            if (id != PieceType.None.Id || Seconds.Count == 0) return id;
+            
+            var piece = context.Context.BoardLogic.GetPieceAt(Key);
+
+            if (piece.PieceType != PieceType.Boost_CR.Id) return piece.PieceType;
+
+            foreach (var position in Seconds[0])
+            {
+                piece = context.Context.BoardLogic.GetPieceAt(position);
+
+                if (piece.PieceType == PieceType.Boost_CR.Id) continue;
+
+                return piece.PieceType;
+            }
+
+            return PieceType.None.Id;
+        }
+    }
+
     public BoardPosition Key;
     public List<BoardPosition> Main;
     public readonly List<List<BoardPosition>> Seconds = new List<List<BoardPosition>>();
@@ -42,13 +66,11 @@ public class PartDef
     {
         if (option[2].Equals(Key))
         {
-            var view = ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
-            
-            view.Change(false);
+            ViewDefinition.HideView(ViewType.Bubble);
             
             Main = null;
             ViewDefinition = null;
-            Id = PieceType.None.Id;
+            id = PieceType.None.Id;
             return;
         }
         
@@ -57,15 +79,15 @@ public class PartDef
 
     private void OpenBubble()
     {
-        if (Id != PieceType.None.Id) return;
+        if (id != PieceType.None.Id) return;
         
         var piece = context.Context.BoardLogic.GetPieceAt(Key);
         
-        Id = piece.PieceType != PieceType.Boost_CR.Id ? piece.PieceType : context.Context.BoardLogic.GetPieceAt(Main[0]).PieceType;
+        id = piece.PieceType != PieceType.Boost_CR.Id ? piece.PieceType : context.Context.BoardLogic.GetPieceAt(Main[0]).PieceType;
         ViewDefinition = piece.ViewDefinition;
         
         var view = piece.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
-        var lastId = context.Context.BoardLogic.MatchDefinition.GetLast(Id);
+        var lastId = context.Context.BoardLogic.MatchDefinition.GetLast(id);
         var def = GameDataService.Current.PiecesManager.GetPieceDef(lastId);
         
         var title = string.Format(LocalizationService.Get("gameboard.bubble.message.castle.build", "gameboard.bubble.message.castle.build\n{0}?"), DateTimeExtension.GetDelayText(def.Delay, true));
