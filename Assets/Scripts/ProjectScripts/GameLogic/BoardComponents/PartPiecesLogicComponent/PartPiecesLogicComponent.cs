@@ -42,9 +42,7 @@ public class PartDef
     {
         if (option[2].Equals(Key))
         {
-            var view = ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
-            
-            view.Change(false);
+            ViewDefinition.HideView(ViewType.Bubble);
             
             Main = null;
             ViewDefinition = null;

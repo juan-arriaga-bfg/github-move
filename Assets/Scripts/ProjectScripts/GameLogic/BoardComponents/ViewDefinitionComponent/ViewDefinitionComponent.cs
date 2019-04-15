@@ -191,9 +191,11 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         return element;
     }
     
-    public UIBoardView GetView(ViewType viewType)
+    public void HideView(ViewType viewType)
     {
-        return views.TryGetValue(viewType, out var targetView) ? targetView : null;
+        if(views.TryGetValue(viewType, out var view) == false) return;
+        
+        view.Change(false);
     }
 
     public List<UIBoardView> GetViews()
