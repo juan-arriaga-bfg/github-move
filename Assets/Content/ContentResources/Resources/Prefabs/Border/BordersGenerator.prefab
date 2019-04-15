@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4023092637272936}
   - component: {fileID: 114955801041818516}
+  - component: {fileID: 3086090032500291335}
   m_Layer: 0
-  m_Name: BorderExample
+  m_Name: BordersGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 4660412927644837186, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -65,6 +66,18 @@ MonoBehaviour:
   cachedSortingGroup: {fileID: 0}
   IsFading: 0
   FadeValue: 0
+--- !u!114 &3086090032500291335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254380551073046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbfd02c14f76f5c488d2a49eb0e3e81d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1510319274159845045
 GameObject:
   m_ObjectHideFlags: 0
