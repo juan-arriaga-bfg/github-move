@@ -8,15 +8,10 @@
 	public void OnRegisterEntity(ECSEntity entity)
 	{
 		contextPiece = entity as Piece;
-
-		var observer = contextPiece?.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
-		observer?.RegisterObserver(this);
 	}
 	
 	public void OnUnRegisterEntity(ECSEntity entity)
 	{
-		var observer = contextPiece?.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
-		observer?.UnRegisterObserver(this);
 	}
 
 	public void OnAddToBoard(BoardPosition position, Piece context = null)
