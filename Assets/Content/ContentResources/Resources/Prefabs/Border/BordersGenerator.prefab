@@ -43,8 +43,8 @@ Transform:
   - {fileID: 1983146200039164209}
   - {fileID: 4667837830474674315}
   - {fileID: 4352732895098608761}
-  - {fileID: 1199859559580286800}
   - {fileID: 2333573268915702423}
+  - {fileID: 1199859559580286800}
   - {fileID: 5296037490884393784}
   - {fileID: 8065060441852725776}
   - {fileID: 2607771734603929310}
@@ -89,12 +89,12 @@ GameObject:
   - component: {fileID: 6822612671715812141}
   - component: {fileID: 8657236523514129399}
   m_Layer: 0
-  m_Name: left_border_hole
+  m_Name: BorderLeft0Hole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6822612671715812141
 Transform:
   m_ObjectHideFlags: 0
@@ -168,12 +168,12 @@ GameObject:
   - component: {fileID: 3709576027320681603}
   - component: {fileID: 4307136886440693762}
   m_Layer: 0
-  m_Name: bottom_border_1_hole
+  m_Name: BorderBottom1Hole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3709576027320681603
 Transform:
   m_ObjectHideFlags: 0
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 5188680173792760337}
   - component: {fileID: 2475875924667908222}
   m_Layer: 0
-  m_Name: tile_grass_1
+  m_Name: tile_grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326,12 +326,12 @@ GameObject:
   - component: {fileID: 956257583980277330}
   - component: {fileID: 1257097127945527511}
   m_Layer: 0
-  m_Name: bottom_border_2
+  m_Name: BorderBottom2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &956257583980277330
 Transform:
   m_ObjectHideFlags: 0
@@ -405,12 +405,12 @@ GameObject:
   - component: {fileID: 2333573268915702423}
   - component: {fileID: 3722638348633634981}
   m_Layer: 0
-  m_Name: right_border
+  m_Name: BorderRight0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2333573268915702423
 Transform:
   m_ObjectHideFlags: 0
@@ -423,7 +423,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4023092637272936}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3722638348633634981
 SpriteRenderer:
@@ -484,12 +484,12 @@ GameObject:
   - component: {fileID: 7897029959298679771}
   - component: {fileID: 3373479893507361783}
   m_Layer: 0
-  m_Name: bottom_border_hole
+  m_Name: BorderBottom0Hole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7897029959298679771
 Transform:
   m_ObjectHideFlags: 0
@@ -563,12 +563,12 @@ GameObject:
   - component: {fileID: 2608176011203077165}
   - component: {fileID: 1637480847182476979}
   m_Layer: 0
-  m_Name: left_border
+  m_Name: BorderLeft0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2608176011203077165
 Transform:
   m_ObjectHideFlags: 0
@@ -642,12 +642,12 @@ GameObject:
   - component: {fileID: 3658868392927604402}
   - component: {fileID: 3891792139453698683}
   m_Layer: 0
-  m_Name: left_border_1
+  m_Name: BorderLeft1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3658868392927604402
 Transform:
   m_ObjectHideFlags: 0
@@ -721,12 +721,12 @@ GameObject:
   - component: {fileID: 1983146200039164209}
   - component: {fileID: 1427555799519060869}
   m_Layer: 0
-  m_Name: left_border_1_hole
+  m_Name: BorderLeft1Hole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1983146200039164209
 Transform:
   m_ObjectHideFlags: 0
@@ -800,12 +800,12 @@ GameObject:
   - component: {fileID: 768304439369058446}
   - component: {fileID: 6207458400482445222}
   m_Layer: 0
-  m_Name: left_border_2
+  m_Name: BorderLeft2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &768304439369058446
 Transform:
   m_ObjectHideFlags: 0
@@ -879,12 +879,12 @@ GameObject:
   - component: {fileID: 5296037490884393784}
   - component: {fileID: 5792954436867323290}
   m_Layer: 0
-  m_Name: right_wall_height_1
+  m_Name: BorderWallRight1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5296037490884393784
 Transform:
   m_ObjectHideFlags: 0
@@ -958,12 +958,12 @@ GameObject:
   - component: {fileID: 8910358877237117883}
   - component: {fileID: 3311599362928964014}
   m_Layer: 0
-  m_Name: bottom_border
+  m_Name: BorderBottom0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8910358877237117883
 Transform:
   m_ObjectHideFlags: 0
@@ -1037,12 +1037,12 @@ GameObject:
   - component: {fileID: 1199859559580286800}
   - component: {fileID: 2644876141097629104}
   m_Layer: 0
-  m_Name: top_wall_height_1
+  m_Name: BorderWallTop1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1199859559580286800
 Transform:
   m_ObjectHideFlags: 0
@@ -1055,7 +1055,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4023092637272936}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2644876141097629104
 SpriteRenderer:
@@ -1116,12 +1116,12 @@ GameObject:
   - component: {fileID: 4667837830474674315}
   - component: {fileID: 4862231868494801381}
   m_Layer: 0
-  m_Name: left_border_2_hole
+  m_Name: BorderLeft2Hole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4667837830474674315
 Transform:
   m_ObjectHideFlags: 0
@@ -1195,12 +1195,12 @@ GameObject:
   - component: {fileID: 230677879105377364}
   - component: {fileID: 4920523021014846755}
   m_Layer: 0
-  m_Name: bottom_border_2_hole
+  m_Name: BorderBottom2Hole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &230677879105377364
 Transform:
   m_ObjectHideFlags: 0
@@ -1274,12 +1274,12 @@ GameObject:
   - component: {fileID: 4352732895098608761}
   - component: {fileID: 2298466028788670071}
   m_Layer: 0
-  m_Name: top_border
+  m_Name: BorderTop0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4352732895098608761
 Transform:
   m_ObjectHideFlags: 0
@@ -1353,12 +1353,12 @@ GameObject:
   - component: {fileID: 8018666969429735665}
   - component: {fileID: 3282663466653766203}
   m_Layer: 0
-  m_Name: bottom_border_1
+  m_Name: BorderBottom1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8018666969429735665
 Transform:
   m_ObjectHideFlags: 0
@@ -1432,12 +1432,12 @@ GameObject:
   - component: {fileID: 8065060441852725776}
   - component: {fileID: 3037158517350386323}
   m_Layer: 0
-  m_Name: top_right_wall_1
+  m_Name: BorderWallTopRight1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8065060441852725776
 Transform:
   m_ObjectHideFlags: 0
@@ -1511,12 +1511,12 @@ GameObject:
   - component: {fileID: 2607771734603929310}
   - component: {fileID: 7187061726086462351}
   m_Layer: 0
-  m_Name: bottom_left_wall_1
+  m_Name: BorderWallBottomLeft1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2607771734603929310
 Transform:
   m_ObjectHideFlags: 0
