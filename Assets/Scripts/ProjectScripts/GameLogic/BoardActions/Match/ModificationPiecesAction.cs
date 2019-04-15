@@ -29,8 +29,7 @@ public class ModificationPiecesAction : IBoardAction
 		
 		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(To, free, NextPieces.Count * 2) == false) return false;
 		
-		// sort by distance to center
-		free = free.OrderBy(x => BoardPosition.SqrMagnitude(x, To)).ToList();
+		
 		
 		var index = free.IndexOf(To);
 		
@@ -38,6 +37,9 @@ public class ModificationPiecesAction : IBoardAction
 
 		free.RemoveAt(index != -1 ? index : 0);
 		free.Add(To);
+		// sort by distance to center
+		free = free.OrderBy(x => BoardPosition.SqrMagnitude(x, To)).ToList();
+		
 		NextPieces.Sort();
 		
 //		Debug.LogWarning($"_sorted: {JsonConvert.SerializeObject(free.Select(x => x.ToString()).ToList(), Formatting.Indented)}");
