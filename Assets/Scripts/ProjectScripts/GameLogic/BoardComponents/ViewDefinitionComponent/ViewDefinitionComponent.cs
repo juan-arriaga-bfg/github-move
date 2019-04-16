@@ -11,7 +11,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     public List<ViewType> ViewIds { get; set; }
 
     private int shownViewPriority;
-    private BoardPosition Position;
+    private BoardPosition CachedPosition => thisContext.Multicellular is FogObserver observer ? observer.Def.GetCenter() : thisContext.CachedPosition;
     private readonly Dictionary<ViewType, UIBoardView> views = new Dictionary<ViewType, UIBoardView>();
 
     private Piece thisContext;
@@ -29,7 +29,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     public void OnUnRegisterEntity(ECSEntity entity)
     {
-        OnRemoveFromBoard(Position, thisContext);
+        OnRemoveFromBoard(CachedPosition, thisContext);
     }
 
     public bool Visible
@@ -86,12 +86,8 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
             })
             .AppendInterval(0.1f);
         
-        if (thisContext == null) return;
-
-        Position = thisContext.Multicellular is FogObserver observer ? observer.Def.GetCenter() : position;
-
-        if (ViewIds == null) return;
-
+        if (thisContext == null || ViewIds == null) return;
+        
         foreach (var id in ViewIds)
         {
             AddView(id).Change(true);
@@ -110,12 +106,12 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
-        var t = Position = to;
+        var t = to;
         
         if (container == null) return;
         
         t.Z = BoardLayer.UI.Layer;
-        container.CachedTransform.localPosition = thisContext.Context.BoardDef.GetPiecePosition(Position.X, Position.Y);
+        container.CachedTransform.localPosition = thisContext.Context.BoardDef.GetPiecePosition(CachedPosition.X, CachedPosition.Y);
         thisContext.Context.RendererContext.SetElementAt(t, container);
         
         foreach (var view in views.Values)
@@ -169,7 +165,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     {
         if (views.TryGetValue(id, out var view)) return view;
         
-        var pos = Position;
+        var pos = CachedPosition;
 
         pos.Z = BoardLayer.UI.Layer;
         
@@ -191,9 +187,11 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         return element;
     }
     
-    public UIBoardView GetView(ViewType viewType)
+    public void HideView(ViewType viewType)
     {
-        return views.TryGetValue(viewType, out var targetView) ? targetView : null;
+        if(views.TryGetValue(viewType, out var view) == false) return;
+        
+        view.Change(false);
     }
 
     public List<UIBoardView> GetViews()

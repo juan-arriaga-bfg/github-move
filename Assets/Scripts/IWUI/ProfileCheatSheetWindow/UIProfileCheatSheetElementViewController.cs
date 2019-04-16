@@ -57,6 +57,9 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
     
     private void InitButtons()
     {
+        // Disable btn to avoid user errors
+        btnDlgSave.gameObject.SetActive(false);
+        
         btnDlgSave.OnClick(() =>
         {
             var dataMapper = ProfileSlots.GetDataMapper(slotData.SlotPath);
