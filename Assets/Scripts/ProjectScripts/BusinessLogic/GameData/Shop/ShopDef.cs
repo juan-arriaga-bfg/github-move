@@ -7,6 +7,7 @@ public class ShopDef
     public string Icon;
     public string Name;
     public string PurchaseKey;
+    public string SaleKey;
     public List<CurrencyPair> Products;
     public List<CurrencyPair> Extras;
     public CurrencyPair Price;
@@ -38,6 +39,7 @@ public class ShopDef
             Icon = this.Icon,
             Name = this.Name,
             PurchaseKey = this.PurchaseKey,
+            SaleKey = this.SaleKey,
             Price = new CurrencyPair{Currency = this.Price.Currency, Amount = this.Price.Amount},
             Products = products,
             Extras = extras,
