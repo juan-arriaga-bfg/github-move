@@ -104,17 +104,29 @@ public class DragAndCheckMatchAction : IBoardAction
 		allPieces = new List<Piece>();
 		
 		var saveTarget = new List<Piece>();
+		var saveTargetPositions = new List<BoardPosition>();
+		
 		var countPositions = fromPositions.Count;
 
 		for (int i = 0; i < countPositions; i++)
 		{
-			var toPiece = logic.GetPieceAt(targetPositions[i]);
+			var targetPos = targetPositions[i];
+			var fromPos = fromPositions[i];
+			
+			var toPiece = logic.GetPieceAt(targetPos);
 
 			if (toPiece != null && multicellularPiece != toPiece)
+			{
 				saveTarget.Add(toPiece);
-			logic.RemovePieceFromBoardSilent(fromPositions[i]);
+				saveTargetPositions.Add(targetPos);
+			}
+
+			logic.RemovePieceFromBoardSilent(fromPos);
+			
 			if (toPiece != null)
-				logic.RemovePieceFromBoardSilent(targetPositions[i]);
+			{
+				logic.RemovePieceFromBoardSilent(targetPos);
+			}
 		}
 
 		allSpace = targetPositions.Concat(fromPositions).Distinct().ToList();
@@ -132,12 +144,15 @@ public class DragAndCheckMatchAction : IBoardAction
 
 			if (index >= saveTarget.Count)
 				break;
-			allPieces.Add(saveTarget[index]);
-			logic.AddPieceToBoardSilent(target.X, target.Y, saveTarget[index]);
+
+			var piece = saveTarget[index];
+			var fromPiecePosition = saveTargetPositions[index];
+			
+			allPieces.Add(piece);
+			logic.AddPieceToBoardSilent(target.X, target.Y, piece);
 				
 			var observerTo = saveTarget[index].GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
-			observerTo?.OnMovedFromToFinish(saveTarget[index].CachedPosition, target);
-
+			observerTo?.OnMovedFromToFinish(fromPiecePosition, target);
 		}
 		
 		var observerFrom = multicellularPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
