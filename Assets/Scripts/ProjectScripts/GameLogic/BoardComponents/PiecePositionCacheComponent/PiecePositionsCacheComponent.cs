@@ -156,8 +156,6 @@ public class PiecePositionsCacheComponent : IECSComponent
 			cache.Add(pieceType, list);
 		}
 		
-		if(list.IndexOf(position) != -1) return;
-		
 		list.Add(position);
 		context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ChangePiecePosition, pieceType);
 	}
