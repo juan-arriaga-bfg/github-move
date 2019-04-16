@@ -355,8 +355,13 @@ public class BoardManipulatorComponent : ECSEntity,
 
                     cachedViewOnDown = selectedView;
                 }
-
                 return true;
+            }
+            else if (context.BoardLogic.FireflyLogic.Check(selectedView))
+            {
+                cameraManipulator.CameraMove.Lock(dragTresholdId, true);
+
+                cachedViewOnDown = selectedView;
             }
             
             return true;
