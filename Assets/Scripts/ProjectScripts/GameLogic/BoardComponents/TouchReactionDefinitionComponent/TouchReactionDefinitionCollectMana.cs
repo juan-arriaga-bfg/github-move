@@ -15,7 +15,12 @@ public class TouchReactionDefinitionCollectMana : TouchReactionDefinitionCompone
         var observer = fogs[0];
         var target = observer.Context.CachedPosition;
 
-        observer.CanBeFilled(piece, true);
+        observer.CanBeFilled(piece, true); // add
+
+        if (observer.CanBeFilled(null, false) == false) // check
+        {
+            piece.Context.Manipulator.CameraManipulator.MoveTo(observer.Def.GetCenter(piece.Context));
+        }
         
         piece.Context.ActionExecutor.AddAction(new CollapseManaAction
         {
