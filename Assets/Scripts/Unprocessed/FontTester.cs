@@ -134,6 +134,9 @@ public class FontTester : MonoBehaviour
         text.Text += $"icon without space before<sprite name={iconName}>and after\n";
         text.Text += $"numbers before 145<sprite name={iconName}>345 and after\n";
         text.Text += $"example <sprite name={iconName}>, example: <sprite name={iconName}>. etc...\n";
+        text.Text += $"example <sprite name={iconName}>, <sprite name={iconName}> example\n";
+        text.Text += $"example - <sprite name={iconName}> - example\n";
+        text.Text += $"example <sprite name={iconName}> & <sprite name={iconName}> example\n";
     }
 
     public void ToggleTest(bool value)
