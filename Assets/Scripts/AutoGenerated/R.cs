@@ -543,4 +543,10 @@ public class R
      public const string MagicWandFlyParticle = "MagicWandFlyParticle";
      public const string CMPiece = "CMPiece";
      public const string EMPiece = "EMPiece";
+     public const string D9Piece = "D9Piece";
+     public const string F9Piece = "F9Piece";
+     public const string G9Piece = "G9Piece";
+     public const string H9Piece = "H9Piece";
+     public const string I9Piece = "I9Piece";
+     public const string J9Piece = "J9Piece";
 }
