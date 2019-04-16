@@ -9,7 +9,7 @@ public class TouchReactionConditionMana : TouchReactionConditionComponent
 
         foreach (var fog in fogs)
         {
-            if (fog.CanBeCleared() == false || fog.CanBeFilled() == false) continue;
+            if (fog.CanBeCleared() == false || fog.CanBeFilled(piece, false) == false) continue;
             
             return true;
         }

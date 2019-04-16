@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using DG.Tweening;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 {
     public FogDef Def { get; private set; }
     public CurrencyPair AlreadyPaid { get; private set; }
+    public Dictionary<Piece, int> TempMana = new Dictionary<Piece, int>();
     
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
@@ -95,7 +97,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         if (bubble != null && bubble.IsShow) return;
 
-        if (AlreadyPaid.Amount >= Def.Condition.Amount)
+        if (CanBeFilled() == false)
         {
             OpenBubble();
             return;
@@ -187,6 +189,23 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     public bool CanBeFilled()
     {
         return AlreadyPaid.Amount < Def.Condition.Amount;
+    }
+    
+    public bool CanBeFilled(Piece piece, bool isAdd)
+    {
+        if (TempMana.ContainsKey(piece)) return true;
+
+        var temp = TempMana.Sum(pair => pair.Value);
+
+        if (AlreadyPaid.Amount + temp >= Def.Condition.Amount) return false;
+
+        if (isAdd)
+        {
+            var def = GameDataService.Current.PiecesManager.GetPieceDef(piece.PieceType);
+            TempMana.Add(piece, def.SpawnResources.Amount);
+        }
+        
+        return true;
     }
     
     public bool RequiredConditionReached()
