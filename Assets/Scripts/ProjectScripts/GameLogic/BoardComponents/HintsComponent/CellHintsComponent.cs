@@ -113,20 +113,6 @@ public class CellHintsComponent : IECSComponent
 
             // search max count pieces variants
             if (hints.Count == 0) continue;
-
-            hints.Sort((a, b) => -a.Weight.CompareTo(b.Weight));
-
-            var max = hints[0].Weight;
-
-            if (max < CurrentWeight * 2)
-            {
-                var cells = hints[0].Cells;
-                
-                hintCells = AddCells(hintCells, cells);
-                hintBigCells = AddBigCells(hintBigCells, cells);
-                
-                continue;
-            }
             
             variants.AddRange(hints);
         }
@@ -142,7 +128,7 @@ public class CellHintsComponent : IECSComponent
             {
                 foreach (var cell in cells)
                 {
-                    if(variants[j].Cells.Contains(cell) == false) continue;
+                    if (variants[j].Cells.Contains(cell) == false) continue;
 
                     variants.RemoveAt(j);
                     j--;
