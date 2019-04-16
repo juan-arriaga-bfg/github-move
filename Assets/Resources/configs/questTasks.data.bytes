@@ -441,7 +441,7 @@
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "43_CreatePiece_A9",
-    "PieceUid": "A9",
+    "PieceUid": "AM",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -1620,7 +1620,7 @@
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "143_CreatePiece_B10",
-    "PieceUid": "B10",
+    "PieceUid": "BM",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -1704,7 +1704,7 @@
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "149_CreatePiece_Ext_A9",
-    "PieceUid": "EXT_A9",
+    "PieceUid": "EXT_AM",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -1740,7 +1740,7 @@
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "152_CreatePiece_E10",
-    "PieceUid": "E10",
+    "PieceUid": "EM",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -1752,7 +1752,7 @@
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "153_CreatePiece_C10",
-    "PieceUid": "C10",
+    "PieceUid": "CM",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -1772,10 +1772,6 @@
             "Amount": 1
           },
           {
-            "Currency": "SK3_PR",
-            "Amount": 1
-          },
-          {
             "Currency": "Hard3",
             "Amount": 1
           },
@@ -1784,15 +1780,11 @@
             "Amount": 1
           },
           {
+            "Currency": "SK3_PR",
+            "Amount": 1
+          },
+          {
             "Currency": "Boost_CR",
-            "Amount": 1
-          },
-          {
-            "Currency": "Hard4",
-            "Amount": 1
-          },
-          {
-            "Currency": "Hard5",
             "Amount": 1
           }
         ]
@@ -1813,7 +1805,7 @@
         "Value": [
           {
             "Currency": "Coins",
-            "Amount": 15
+            "Amount": 10
           }
         ]
       },
@@ -1834,7 +1826,7 @@
         "Value": [
           {
             "Currency": "Coins",
-            "Amount": 20
+            "Amount": 10
           }
         ]
       },
@@ -1854,7 +1846,7 @@
         "Value": [
           {
             "Currency": "Coins",
-            "Amount": 30
+            "Amount": 15
           }
         ]
       },
@@ -1874,7 +1866,7 @@
         "Value": [
           {
             "Currency": "Coins",
-            "Amount": 25
+            "Amount": 15
           }
         ]
       },
@@ -1894,7 +1886,7 @@
         "Value": [
           {
             "Currency": "Coins",
-            "Amount": 25
+            "Amount": 15
           }
         ]
       },
@@ -1914,7 +1906,7 @@
         "Value": [
           {
             "Currency": "Coins",
-            "Amount": 25
+            "Amount": 15
           }
         ]
       },
@@ -1935,7 +1927,7 @@
         "Value": [
           {
             "Currency": "Coins",
-            "Amount": 45
+            "Amount": 25
           }
         ]
       },
@@ -1954,7 +1946,7 @@
         "Value": [
           {
             "Currency": "Coins",
-            "Amount": 45
+            "Amount": 25
           }
         ]
       },

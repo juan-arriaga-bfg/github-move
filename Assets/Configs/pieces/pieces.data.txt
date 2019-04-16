@@ -982,7 +982,7 @@
     "CreateRewards": [
       {
         "Currency": "Experience",
-        "Amount": 50
+        "Amount": 100
       }
     ],
     "SpawnResources": {
@@ -1001,7 +1001,7 @@
     "CreateRewards": [
       {
         "Currency": "Experience",
-        "Amount": 50
+        "Amount": 150
       }
     ],
     "SpawnResources": {
@@ -1792,16 +1792,16 @@
     ]
   },
   {
-    "Uid": "A9",
+    "Uid": "AM",
     "Delay": 14400,
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 25
+        "Amount": 50
       },
       {
         "Currency": "Experience",
-        "Amount": 50
+        "Amount": 250
       }
     ],
     "UnlockBonus": [
@@ -1969,7 +1969,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 250
+        "Amount": 50
       }
     ],
     "UnlockBonus": [
@@ -1989,7 +1989,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 500
+        "Amount": 150
       }
     ],
     "UnlockBonus": [
@@ -2000,7 +2000,7 @@
     ]
   },
   {
-    "Uid": "B10",
+    "Uid": "BM",
     "Delay": 172800,
     "CreateRewards": [
       {
@@ -2009,7 +2009,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 750
+        "Amount": 250
       }
     ],
     "UnlockBonus": [
@@ -2173,11 +2173,11 @@
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 20
+        "Amount": 25
       },
       {
         "Currency": "Experience",
-        "Amount": 150
+        "Amount": 50
       }
     ],
     "UnlockBonus": [
@@ -2193,11 +2193,11 @@
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 25
+        "Amount": 50
       },
       {
         "Currency": "Experience",
-        "Amount": 250
+        "Amount": 150
       }
     ],
     "UnlockBonus": [
@@ -2208,12 +2208,12 @@
     ]
   },
   {
-    "Uid": "C10",
+    "Uid": "CM",
     "Delay": 86400,
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 25
+        "Amount": 75
       },
       {
         "Currency": "Experience",
@@ -2381,11 +2381,11 @@
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 20
+        "Amount": 25
       },
       {
         "Currency": "Experience",
-        "Amount": 150
+        "Amount": 50
       }
     ],
     "UnlockBonus": [
@@ -2396,12 +2396,12 @@
     ]
   },
   {
-    "Uid": "D9",
+    "Uid": "DM",
     "Delay": 86400,
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 25
+        "Amount": 50
       },
       {
         "Currency": "Experience",
@@ -2553,7 +2553,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 50
+        "Amount": 25
       }
     ],
     "UnlockBonus": [
@@ -2573,7 +2573,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 75
+        "Amount": 50
       }
     ],
     "UnlockBonus": [
@@ -2593,7 +2593,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 100
+        "Amount": 150
       }
     ],
     "UnlockBonus": [
@@ -2604,16 +2604,16 @@
     ]
   },
   {
-    "Uid": "E10",
+    "Uid": "EM",
     "Delay": 3600,
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 50
+        "Amount": 75
       },
       {
         "Currency": "Experience",
-        "Amount": 100
+        "Amount": 250
       }
     ],
     "UnlockBonus": [
@@ -2792,7 +2792,7 @@
     ]
   },
   {
-    "Uid": "F9",
+    "Uid": "FM",
     "Delay": 3600,
     "CreateRewards": [
       {
@@ -2980,7 +2980,7 @@
     ]
   },
   {
-    "Uid": "G9",
+    "Uid": "GM",
     "Delay": 3600,
     "CreateRewards": [
       {
@@ -3168,7 +3168,7 @@
     ]
   },
   {
-    "Uid": "H9",
+    "Uid": "HM",
     "Delay": 3600,
     "CreateRewards": [
       {
@@ -3356,7 +3356,7 @@
     ]
   },
   {
-    "Uid": "I9",
+    "Uid": "IM",
     "Delay": 3600,
     "CreateRewards": [
       {
@@ -3544,7 +3544,7 @@
     ]
   },
   {
-    "Uid": "J9",
+    "Uid": "JM",
     "Delay": 3600,
     "CreateRewards": [
       {
@@ -3712,7 +3712,7 @@
     ]
   },
   {
-    "Uid": "EXT_A9",
+    "Uid": "EXT_AM",
     "Delay": 3600,
     "CreateRewards": [
       {
@@ -3880,7 +3880,7 @@
     ]
   },
   {
-    "Uid": "EXT_B9",
+    "Uid": "EXT_BM",
     "Delay": 3600,
     "CreateRewards": [
       {
@@ -4048,7 +4048,7 @@
     ]
   },
   {
-    "Uid": "EXT_C9",
+    "Uid": "EXT_CM",
     "Delay": 3600,
     "CreateRewards": [
       {
@@ -4216,7 +4216,7 @@
     ]
   },
   {
-    "Uid": "EXT_D9",
+    "Uid": "EXT_DM",
     "Delay": 3600,
     "CreateRewards": [
       {
@@ -4384,7 +4384,7 @@
     ]
   },
   {
-    "Uid": "EXT_E9",
+    "Uid": "EXT_EM",
     "Delay": 3600,
     "CreateRewards": [
       {
