@@ -41,28 +41,6 @@ public class MatchPieceToAnimation : BoardAnimation
         }
         return Vector3.one;
     }
-
-    public void ToggleView(bool state)
-    {
-	    if (NextPieces != null)
-	    {
-		    for (int i = 0; i < NextPieces.Count; i++)
-		    {
-			    var nextPiece = NextPieces[i];
-
-			    if (nextPiece?.ViewDefinition == null) continue;
-                
-//                nextPiece.ViewDefinition.Visible = state;
-			    var views = nextPiece.ViewDefinition.GetViews();
-			    for (int j = 0; j < views.Count; j++)
-			    {
-				    var view = views[j];
-				    view.OnSwap(state);
-//	                view.UpdateVisibility(state);
-			    }
-		    }
-	    }
-    }
 	
 	public override void Animate(BoardRenderer context)
 	{
@@ -70,7 +48,7 @@ public class MatchPieceToAnimation : BoardAnimation
 	    var to = GetToWorldPosition(context);
 	    var targetScale = GetTargetScale();
 
-	    ToggleView(false);
+	    ToggleView(false, NextPieces);
 	    
 		var sequence = DOTween.Sequence().SetId(animationUid);
 		const float elementOffset = 0.00f;
@@ -114,7 +92,7 @@ public class MatchPieceToAnimation : BoardAnimation
 		
 		sequence.OnComplete(() =>
 		{
-		    ToggleView(true);
+		    ToggleView(true, NextPieces);
 		    
 			foreach (var point in points)
 			{
