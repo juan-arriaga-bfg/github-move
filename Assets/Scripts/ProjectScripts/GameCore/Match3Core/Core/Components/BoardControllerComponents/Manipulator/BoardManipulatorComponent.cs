@@ -91,6 +91,25 @@ public class BoardManipulatorComponent : ECSEntity,
 
     public override int Guid => ComponentGuid;
 
+    private IDraggableFlyingObjectLogic[] flyingObjectLogics;
+
+    private IDraggableFlyingObjectLogic[] FlyingObjectLogics {
+        get
+        {
+            if (flyingObjectLogics == null)
+            {
+                // Touch will be processed using order of elements in this list
+                flyingObjectLogics = new IDraggableFlyingObjectLogic[]
+                {
+                    context.BoardLogic.FireflyLogic,
+                    context.BoardLogic.AirShipLogic
+                };
+            }
+
+            return flyingObjectLogics;
+        }
+    }
+
     public bool IsExecuteable()
     {
         return true;
@@ -168,7 +187,10 @@ public class BoardManipulatorComponent : ECSEntity,
             return false;
         }
 
-        if (context.BoardLogic.FireflyLogic.OnClick(selectedView)) return true;
+        foreach (var flyingObjectLogic in FlyingObjectLogics)
+        {
+            if (flyingObjectLogic.OnClick(selectedView)) return true;
+        }
 
         var pieceView = selectedView as PieceBoardElementView;
         if (pieceView != null && context.BoardLogic.IsLockedCell(pieceView.Piece.CachedPosition) == false && pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero()) == false)
@@ -218,24 +240,26 @@ public class BoardManipulatorComponent : ECSEntity,
             if (selectedView == null) return;
             
             var pieceView = selectedView as PieceBoardElementView;
-            
-            if (context.BoardLogic.FireflyLogic.OnDragStart(selectedView) == false && pieceView != null)
+
+            foreach (var flyingObject in FlyingObjectLogics)
             {
-                if (pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero()) || pieceView.Piece.Draggable == null || pieceView.Piece.Draggable.IsDraggable(pieceView.Piece.CachedPosition) == false)
+                if (flyingObject.OnDragStart(selectedView) == false && pieceView != null)
                 {
-                    return;
-                }
+                    if (pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero()) || pieceView.Piece.Draggable == null || pieceView.Piece.Draggable.IsDraggable(pieceView.Piece.CachedPosition) == false)
+                    {
+                        return;
+                    }
                 
-                var boardPos = context.BoardDef.GetSectorPosition(pos);
-                pieceView.OnDragStart(boardPos, pos);
+                    var boardPos = context.BoardDef.GetSectorPosition(pos);
+                    pieceView.OnDragStart(boardPos, pos);
+                    break;
+                }
             }
-            
+
             cachedViewForDrag = selectedView;
             cachedDragDownPos = pos + Vector2.up * 0.5f;
             cameraManipulator.CameraMove.Lock(this);
             isDrag = true;
-            
-            
         }
     }
     
@@ -273,10 +297,13 @@ public class BoardManipulatorComponent : ECSEntity,
 
         var targetPos = new Vector3(pos.x, pos.y, cachedViewForDrag.CachedTransform.position.z);
 
-        if (context.BoardLogic.FireflyLogic.Check(cachedViewForDrag))
+        foreach (var flyingObjectLogic in FlyingObjectLogics)
         {
-            cachedViewForDrag.CachedTransform.localPosition = pos;
-            return true;
+            if (flyingObjectLogic.Check(cachedViewForDrag))
+            {
+                cachedViewForDrag.CachedTransform.localPosition = pos;
+                return true;
+            }
         }
 
         if (cachedViewForDrag is PieceBoardElementView)
@@ -357,13 +384,18 @@ public class BoardManipulatorComponent : ECSEntity,
                 }
                 return true;
             }
-            else if (context.BoardLogic.FireflyLogic.Check(selectedView))
-            {
-                cameraManipulator.CameraMove.Lock(dragTresholdId, true);
 
-                cachedViewOnDown = selectedView;
+            foreach (var flyingObjectLogic in FlyingObjectLogics)
+            {
+                if (flyingObjectLogic.Check(selectedView))
+                {
+                    cameraManipulator.CameraMove.Lock(dragTresholdId, true);
+
+                    cachedViewOnDown = selectedView;
+                    break;
+                }
             }
-            
+
             return true;
         }
         
@@ -383,15 +415,18 @@ public class BoardManipulatorComponent : ECSEntity,
 
             StopDragAnimationInternal();
 
-            if (context.BoardLogic.FireflyLogic.OnDragEnd(cachedViewForDrag))
+            foreach (var flyingObjectLogic in FlyingObjectLogics)
             {
-                cachedViewForDrag = null;
-                cameraManipulator.CameraMove.UnLock(this);
-                context.TutorialLogic.Pause(false);
-                context.TutorialLogic.Update();
-                return true;
+                if (flyingObjectLogic.OnDragEnd(cachedViewForDrag))
+                {
+                    cachedViewForDrag = null;
+                    cameraManipulator.CameraMove.UnLock(this);
+                    context.TutorialLogic.Pause(false);
+                    context.TutorialLogic.Update();
+                    return true;
+                }
             }
-            
+
             if (cachedViewForDrag is PieceBoardElementView)
             {
                 var pieceView = cachedViewForDrag as PieceBoardElementView;
@@ -506,11 +541,16 @@ public class BoardManipulatorComponent : ECSEntity,
                 coef = position.X * context.BoardDef.Width - position.Y + position.Z;
             }
 
-            if (context.BoardLogic.FireflyLogic.Check(touchableObject as BoardElementView))
+
+            foreach (var flyingObjectLogic in FlyingObjectLogics)
             {
-                coef = int.MaxValue;
+                if (flyingObjectLogic.Check(touchableObject as BoardElementView))
+                {
+                    coef = int.MaxValue;
+                    break;
+                }
             }
-            
+
             if (coef != null && coef > maxCoef)
             {
                 maxCoef = coef.Value;

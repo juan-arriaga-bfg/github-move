@@ -5,7 +5,7 @@ using System.Text;
 
 public partial class BoardLogicComponent : ECSEntity,
     IMatchDefinitionComponent, IFieldFinderComponent, IEmptyCellsFinderComponent, IMatchActionBuilderComponent, IPiecePositionsCacheComponent,
-    IPieceFlyerComponent, ICellHintsComponent, IFireflyLogicComponent
+    IPieceFlyerComponent, ICellHintsComponent, IFireflyLogicComponent, IAirShipLogicComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -65,6 +65,10 @@ public partial class BoardLogicComponent : ECSEntity,
     protected FireflyLogicComponent fireflyLogic;
     public FireflyLogicComponent FireflyLogic => fireflyLogic ?? (fireflyLogic = GetComponent<FireflyLogicComponent>(FireflyLogicComponent.ComponentGuid));
     
+    
+    protected AirShipLogicComponent airShipLogic;
+    public AirShipLogicComponent AirShipLogic => airShipLogic ?? (airShipLogic = GetComponent<AirShipLogicComponent>(AirShipLogicComponent.ComponentGuid));
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as BoardController;

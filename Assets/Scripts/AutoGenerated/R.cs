@@ -543,4 +543,5 @@ public class R
      public const string MagicWandFlyParticle = "MagicWandFlyParticle";
      public const string C10Piece = "C10Piece";
      public const string E10Piece = "E10Piece";
+     public const string AirShipView = "AirShipView";
 }

@@ -28,6 +28,7 @@ public class ElementsResourcesBuilder
         dict.Add((int) ViewType.UIContainer, R.UIBoardViewContainer);
         dict.Add((int) ViewType.FogProgress, R.FogProgressView);
         dict.Add((int) ViewType.MineProgress, R.MineProgressView);
+        dict.Add((int) ViewType.AirShip, R.AirShipView);
         
 #endregion
         
