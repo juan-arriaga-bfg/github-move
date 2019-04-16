@@ -217,8 +217,10 @@ public static partial class PieceType
     public static readonly PieceTypeDef D7Fake = new PieceTypeDef{Id = 1000411, Abbreviations = new List<string>{ "D7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef D7     = new PieceTypeDef{Id = 1000412, Abbreviations = new List<string>{ "D7" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef D8Fake = new PieceTypeDef{Id = 1000413, Abbreviations = new List<string>{ "D8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef D8     = new PieceTypeDef{Id = 1000414, Abbreviations = new List<string>{ "D8" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
-    
+    public static readonly PieceTypeDef D8     = new PieceTypeDef{Id = 1000414, Abbreviations = new List<string>{ "D8" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef D9Fake = new PieceTypeDef{Id = 1000415, Abbreviations = new List<string>{ "D9Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef D9     = new PieceTypeDef{Id = 1000416, Abbreviations = new List<string>{ "D9" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+
     public static readonly PieceTypeDef DMFake = new PieceTypeDef{Id = 1000490, Abbreviations = new List<string>{ "DMFake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef DM     = new PieceTypeDef{Id = 1000491, Abbreviations = new List<string>{ "DM" },     Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     
@@ -263,8 +265,10 @@ public static partial class PieceType
     public static readonly PieceTypeDef F7Fake = new PieceTypeDef{Id = 1000611, Abbreviations = new List<string>{ "F7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef F7     = new PieceTypeDef{Id = 1000612, Abbreviations = new List<string>{ "F7" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef F8Fake = new PieceTypeDef{Id = 1000613, Abbreviations = new List<string>{ "F8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef F8     = new PieceTypeDef{Id = 1000614, Abbreviations = new List<string>{ "F8" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
-    
+    public static readonly PieceTypeDef F8     = new PieceTypeDef{Id = 1000614, Abbreviations = new List<string>{ "F8" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef F9Fake = new PieceTypeDef{Id = 1000615, Abbreviations = new List<string>{ "F9Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef F9     = new PieceTypeDef{Id = 1000616, Abbreviations = new List<string>{ "F9" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+
     public static readonly PieceTypeDef FMFake = new PieceTypeDef{Id = 1000690, Abbreviations = new List<string>{ "FMFake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef FM     = new PieceTypeDef{Id = 1000691, Abbreviations = new List<string>{ "FM" },     Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     
@@ -285,8 +289,10 @@ public static partial class PieceType
     public static readonly PieceTypeDef G7Fake = new PieceTypeDef{Id = 1000711, Abbreviations = new List<string>{ "G7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef G7     = new PieceTypeDef{Id = 1000712, Abbreviations = new List<string>{ "G7" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef G8Fake = new PieceTypeDef{Id = 1000713, Abbreviations = new List<string>{ "G8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef G8     = new PieceTypeDef{Id = 1000714, Abbreviations = new List<string>{ "G8" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
-    
+    public static readonly PieceTypeDef G8     = new PieceTypeDef{Id = 1000714, Abbreviations = new List<string>{ "G8" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef G9Fake = new PieceTypeDef{Id = 1000715, Abbreviations = new List<string>{ "G9Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef G9     = new PieceTypeDef{Id = 1000716, Abbreviations = new List<string>{ "G9" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+
     public static readonly PieceTypeDef GMFake = new PieceTypeDef{Id = 1000790, Abbreviations = new List<string>{ "GMFake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef GM     = new PieceTypeDef{Id = 1000791, Abbreviations = new List<string>{ "GM" },     Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     
@@ -307,8 +313,10 @@ public static partial class PieceType
     public static readonly PieceTypeDef H7Fake = new PieceTypeDef{Id = 1000811, Abbreviations = new List<string>{ "H7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef H7     = new PieceTypeDef{Id = 1000812, Abbreviations = new List<string>{ "H7" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef H8Fake = new PieceTypeDef{Id = 1000813, Abbreviations = new List<string>{ "H8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef H8     = new PieceTypeDef{Id = 1000814, Abbreviations = new List<string>{ "H8" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
-    
+    public static readonly PieceTypeDef H8     = new PieceTypeDef{Id = 1000814, Abbreviations = new List<string>{ "H8" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef H9Fake = new PieceTypeDef{Id = 1000815, Abbreviations = new List<string>{ "H9Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef H9     = new PieceTypeDef{Id = 1000816, Abbreviations = new List<string>{ "H9" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+
     public static readonly PieceTypeDef HMFake = new PieceTypeDef{Id = 1000890, Abbreviations = new List<string>{ "HMFake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef HM     = new PieceTypeDef{Id = 1000891, Abbreviations = new List<string>{ "HM" },     Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     
@@ -329,8 +337,10 @@ public static partial class PieceType
     public static readonly PieceTypeDef I7Fake = new PieceTypeDef{Id = 1000911, Abbreviations = new List<string>{ "I7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef I7     = new PieceTypeDef{Id = 1000912, Abbreviations = new List<string>{ "I7" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef I8Fake = new PieceTypeDef{Id = 1000913, Abbreviations = new List<string>{ "I8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef I8     = new PieceTypeDef{Id = 1000914, Abbreviations = new List<string>{ "I8" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
-    
+    public static readonly PieceTypeDef I8     = new PieceTypeDef{Id = 1000914, Abbreviations = new List<string>{ "I8" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef I9Fake = new PieceTypeDef{Id = 1000915, Abbreviations = new List<string>{ "I9Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef I9     = new PieceTypeDef{Id = 1000916, Abbreviations = new List<string>{ "I9" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+
     public static readonly PieceTypeDef IMFake = new PieceTypeDef{Id = 1000990, Abbreviations = new List<string>{ "IMFake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef IM     = new PieceTypeDef{Id = 1000991, Abbreviations = new List<string>{ "IM" },     Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     
@@ -351,8 +361,10 @@ public static partial class PieceType
     public static readonly PieceTypeDef J7Fake = new PieceTypeDef{Id = 1001011, Abbreviations = new List<string>{ "J7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef J7     = new PieceTypeDef{Id = 1001012, Abbreviations = new List<string>{ "J7" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef J8Fake = new PieceTypeDef{Id = 1001013, Abbreviations = new List<string>{ "J8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef J8     = new PieceTypeDef{Id = 1001014, Abbreviations = new List<string>{ "J8" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
-    
+    public static readonly PieceTypeDef J8     = new PieceTypeDef{Id = 1001014, Abbreviations = new List<string>{ "J8" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef J9Fake = new PieceTypeDef{Id = 1001015, Abbreviations = new List<string>{ "J9Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef J9     = new PieceTypeDef{Id = 1001016, Abbreviations = new List<string>{ "J9" },     Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
+
     public static readonly PieceTypeDef JMFake = new PieceTypeDef{Id = 1001090, Abbreviations = new List<string>{ "JMFake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef JM     = new PieceTypeDef{Id = 1001091, Abbreviations = new List<string>{ "JM" },     Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Normal | PieceTypeFilter.Progress};
     
