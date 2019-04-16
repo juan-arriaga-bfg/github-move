@@ -22,7 +22,7 @@ public class R
      public const string A6Piece = "A6Piece";
      public const string A7Piece = "A7Piece";
      public const string A8Piece = "A8Piece";
-     public const string A9Piece = "A9Piece";
+     public const string AMPiece = "AMPiece";
      public const string B1Piece = "B1Piece";
      public const string B2Piece = "B2Piece";
      public const string B3Piece = "B3Piece";
@@ -32,7 +32,7 @@ public class R
      public const string B7Piece = "B7Piece";
      public const string B8Piece = "B8Piece";
      public const string B9Piece = "B9Piece";
-     public const string B10Piece = "B10Piece";
+     public const string BMPiece = "BMPiece";
      public const string C1Piece = "C1Piece";
      public const string C2Piece = "C2Piece";
      public const string C3Piece = "C3Piece";
@@ -50,7 +50,7 @@ public class R
      public const string D6Piece = "D6Piece";
      public const string D7Piece = "D7Piece";
      public const string D8Piece = "D8Piece";
-     public const string D9Piece = "D9Piece";
+     public const string DMPiece = "DMPiece";
      public const string PR_A1Piece = "PR_A1Piece";
      public const string PR_A2Piece = "PR_A2Piece";
      public const string PR_A3Piece = "PR_A3Piece";
@@ -245,7 +245,7 @@ public class R
      public const string F6Piece = "F6Piece";
      public const string F7Piece = "F7Piece";
      public const string F8Piece = "F8Piece";
-     public const string F9Piece = "F9Piece";
+     public const string FMPiece = "FMPiece";
      public const string G1Piece = "G1Piece";
      public const string G2Piece = "G2Piece";
      public const string G3Piece = "G3Piece";
@@ -254,7 +254,7 @@ public class R
      public const string G6Piece = "G6Piece";
      public const string G7Piece = "G7Piece";
      public const string G8Piece = "G8Piece";
-     public const string G9Piece = "G9Piece";
+     public const string GMPiece = "GMPiece";
      public const string H1Piece = "H1Piece";
      public const string H2Piece = "H2Piece";
      public const string H3Piece = "H3Piece";
@@ -263,7 +263,7 @@ public class R
      public const string H6Piece = "H6Piece";
      public const string H7Piece = "H7Piece";
      public const string H8Piece = "H8Piece";
-     public const string H9Piece = "H9Piece";
+     public const string HMPiece = "HMPiece";
      public const string I1Piece = "I1Piece";
      public const string I2Piece = "I2Piece";
      public const string I3Piece = "I3Piece";
@@ -272,7 +272,7 @@ public class R
      public const string I6Piece = "I6Piece";
      public const string I7Piece = "I7Piece";
      public const string I8Piece = "I8Piece";
-     public const string I9Piece = "I9Piece";
+     public const string IMPiece = "IMPiece";
      public const string J1Piece = "J1Piece";
      public const string J2Piece = "J2Piece";
      public const string J3Piece = "J3Piece";
@@ -281,7 +281,7 @@ public class R
      public const string J6Piece = "J6Piece";
      public const string J7Piece = "J7Piece";
      public const string J8Piece = "J8Piece";
-     public const string J9Piece = "J9Piece";
+     public const string JMPiece = "JMPiece";
      public const string CH1_FPiece = "CH1_FPiece";
      public const string CH2_FPiece = "CH2_FPiece";
      public const string CH3_FPiece = "CH3_FPiece";
@@ -451,7 +451,7 @@ public class R
      public const string EXT_A6Piece = "EXT_A6Piece";
      public const string EXT_A7Piece = "EXT_A7Piece";
      public const string EXT_A8Piece = "EXT_A8Piece";
-     public const string EXT_A9Piece = "EXT_A9Piece";
+     public const string EXT_AMPiece = "EXT_AMPiece";
      public const string EXT_B1Piece = "EXT_B1Piece";
      public const string EXT_B2Piece = "EXT_B2Piece";
      public const string EXT_B3Piece = "EXT_B3Piece";
@@ -460,7 +460,7 @@ public class R
      public const string EXT_B6Piece = "EXT_B6Piece";
      public const string EXT_B7Piece = "EXT_B7Piece";
      public const string EXT_B8Piece = "EXT_B8Piece";
-     public const string EXT_B9Piece = "EXT_B9Piece";
+     public const string EXT_BMPiece = "EXT_BMPiece";
      public const string EXT_C1Piece = "EXT_C1Piece";
      public const string EXT_C2Piece = "EXT_C2Piece";
      public const string EXT_C4Piece = "EXT_C4Piece";
@@ -468,7 +468,7 @@ public class R
      public const string EXT_C6Piece = "EXT_C6Piece";
      public const string EXT_C7Piece = "EXT_C7Piece";
      public const string EXT_C8Piece = "EXT_C8Piece";
-     public const string EXT_C9Piece = "EXT_C9Piece";
+     public const string EXT_CMPiece = "EXT_CMPiece";
      public const string EXT_D1Piece = "EXT_D1Piece";
      public const string EXT_D2Piece = "EXT_D2Piece";
      public const string EXT_D3Piece = "EXT_D3Piece";
@@ -477,7 +477,7 @@ public class R
      public const string EXT_D6Piece = "EXT_D6Piece";
      public const string EXT_D7Piece = "EXT_D7Piece";
      public const string EXT_D8Piece = "EXT_D8Piece";
-     public const string EXT_D9Piece = "EXT_D9Piece";
+     public const string EXT_DMPiece = "EXT_DMPiece";
      public const string EXT_E1Piece = "EXT_E1Piece";
      public const string EXT_E2Piece = "EXT_E2Piece";
      public const string EXT_E3Piece = "EXT_E3Piece";
@@ -486,7 +486,7 @@ public class R
      public const string EXT_E6Piece = "EXT_E6Piece";
      public const string EXT_E7Piece = "EXT_E7Piece";
      public const string EXT_E8Piece = "EXT_E8Piece";
-     public const string EXT_E9Piece = "EXT_E9Piece";
+     public const string EXT_EMPiece = "EXT_EMPiece";
      public const string EXT_C3Piece = "EXT_C3Piece";
      public const string DestroyOrderAnimation = "DestroyOrderAnimation";
      public const string MN_BPiece = "MN_BPiece";
@@ -541,6 +541,6 @@ public class R
      public const string DestroyHardCurrencyAnimation = "DestroyHardCurrencyAnimation";
      public const string DestroySoftCurrencyAnimation = "DestroySoftCurrencyAnimation";
      public const string MagicWandFlyParticle = "MagicWandFlyParticle";
-     public const string C10Piece = "C10Piece";
-     public const string E10Piece = "E10Piece";
+     public const string CMPiece = "CMPiece";
+     public const string EMPiece = "EMPiece";
 }

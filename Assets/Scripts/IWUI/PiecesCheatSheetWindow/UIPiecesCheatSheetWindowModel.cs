@@ -86,63 +86,63 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 break;
             case "Simple A":
                 ids.AddRange(GetPieceIds(PieceType.A1.Id, PieceType.A8.Id));
-                ids.Add(PieceType.A9.Id);
+                ids.Add(PieceType.AM.Id);
                 break;
             case "Simple B":
                 ids.AddRange(GetPieceIds(PieceType.B1.Id, PieceType.B9.Id));
-                ids.Add(PieceType.B10.Id);
+                ids.Add(PieceType.BM.Id);
                 break;
             case "Simple C":
                 ids.AddRange(GetPieceIds(PieceType.C1.Id, PieceType.C9.Id));
-                ids.Add(PieceType.C10.Id);
+                ids.Add(PieceType.CM.Id);
                 break;
             case "Simple D":
                 ids.AddRange(GetPieceIds(PieceType.D1.Id, PieceType.D8.Id));
-                ids.Add(PieceType.D9.Id);
+                ids.Add(PieceType.DM.Id);
                 break;
             case "Simple E":
                 ids.AddRange(GetPieceIds(PieceType.E1.Id, PieceType.E9.Id));
-                ids.Add(PieceType.E10.Id);
+                ids.Add(PieceType.EM.Id);
                 break;
             case "Simple F":
                 ids.AddRange(GetPieceIds(PieceType.F1.Id, PieceType.F8.Id));
-                ids.Add(PieceType.F9.Id);
+                ids.Add(PieceType.FM.Id);
                 break;
             case "Simple G":
                 ids.AddRange(GetPieceIds(PieceType.G1.Id, PieceType.G8.Id));
-                ids.Add(PieceType.G9.Id);
+                ids.Add(PieceType.GM.Id);
                 break;
             case "Simple H":
                 ids.AddRange(GetPieceIds(PieceType.H1.Id, PieceType.H8.Id));
-                ids.Add(PieceType.H9.Id);
+                ids.Add(PieceType.HM.Id);
                 break;
             case "Simple I":
                 ids.AddRange(GetPieceIds(PieceType.I1.Id, PieceType.I8.Id));
-                ids.Add(PieceType.I9.Id);
+                ids.Add(PieceType.IM.Id);
                 break;
             case "Simple J":
                 ids.AddRange(GetPieceIds(PieceType.J1.Id, PieceType.J8.Id));
-                ids.Add(PieceType.J9.Id);
+                ids.Add(PieceType.JM.Id);
                 break;
             case "Extended A":
                 ids.AddRange(GetPieceIds(PieceType.EXT_A1.Id, PieceType.EXT_A8.Id));
-                ids.Add(PieceType.EXT_A9.Id);
+                ids.Add(PieceType.EXT_AM.Id);
                 break;
             case "Extended B":
                 ids.AddRange(GetPieceIds(PieceType.EXT_B1.Id, PieceType.EXT_B8.Id));
-                ids.Add(PieceType.EXT_B9.Id);
+                ids.Add(PieceType.EXT_BM.Id);
                 break;
             case "Extended C":
                 ids.AddRange(GetPieceIds(PieceType.EXT_C1.Id, PieceType.EXT_C8.Id));
-                ids.Add(PieceType.EXT_C9.Id);
+                ids.Add(PieceType.EXT_CM.Id);
                 break;
             case "Extended D":
                 ids.AddRange(GetPieceIds(PieceType.EXT_D1.Id, PieceType.EXT_D8.Id));
-                ids.Add(PieceType.EXT_D9.Id);
+                ids.Add(PieceType.EXT_DM.Id);
                 break;
             case "Extended E":
                 ids.AddRange(GetPieceIds(PieceType.EXT_E1.Id, PieceType.EXT_E8.Id));
-                ids.Add(PieceType.EXT_E9.Id);
+                ids.Add(PieceType.EXT_EM.Id);
                 break;
             case "Ingredient A":
                 ids.AddRange(GetPieceIds(PieceType.PR_A1.Id, PieceType.PR_A5.Id));
