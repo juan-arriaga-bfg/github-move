@@ -9,6 +9,6 @@ public class TestFontStylesSceneInitializer : SceneInitializer<TestApplicationIn
         // set resource deliverer for UI
         IWUISettings.Instance.SetResourceManager(new DefaultUIResourceManager());
         
-        FontStylesTester.Instance?.Init();
+        FontTester.Instance?.Init();
     }
 }
