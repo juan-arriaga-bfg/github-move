@@ -64,13 +64,13 @@ public class PieceBuildersBuilder
         dict = AddBuildingBranchPiece(dict, PieceType.A1.Id, PieceType.A8.Id, PieceType.AM.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.B1.Id, PieceType.B9.Id, PieceType.BM.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.C1.Id, PieceType.C9.Id, PieceType.CM.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.D1.Id, PieceType.D8.Id, PieceType.DM.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.D1.Id, PieceType.D9.Id, PieceType.DM.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.E1.Id, PieceType.E9.Id, PieceType.EM.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.F1.Id, PieceType.F8.Id, PieceType.FM.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.G1.Id, PieceType.G8.Id, PieceType.GM.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.H1.Id, PieceType.H8.Id, PieceType.HM.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.I1.Id, PieceType.I8.Id, PieceType.IM.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.J1.Id, PieceType.J8.Id, PieceType.JM.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.F1.Id, PieceType.F9.Id, PieceType.FM.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.G1.Id, PieceType.G9.Id, PieceType.GM.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.H1.Id, PieceType.H9.Id, PieceType.HM.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.I1.Id, PieceType.I9.Id, PieceType.IM.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.J1.Id, PieceType.J9.Id, PieceType.JM.Id);
         
         dict = AddBuildingBranchPiece(dict, PieceType.EXT_A1.Id, PieceType.EXT_A8.Id, PieceType.EXT_AM.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.EXT_B1.Id, PieceType.EXT_B8.Id, PieceType.EXT_BM.Id);

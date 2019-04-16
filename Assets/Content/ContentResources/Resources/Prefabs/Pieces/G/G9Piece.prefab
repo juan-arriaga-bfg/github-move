@@ -68,7 +68,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: ede780323c987dc4fbd57769ac3da20b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7af036f2c111bdd41b99c76c393af6b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 114214400106705608}
   - component: {fileID: 8618982478597696281}
   m_Layer: 0
-  m_Name: G8Piece
+  m_Name: G9Piece
   m_TagString: Untagged
   m_Icon: {fileID: 4660412927644837186, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1924086398574114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b417249933ed1444d9155c0a93fc2e11, type: 3}
+  m_Script: {fileID: 11500000, guid: 822bb2fb32e400f42b6d7da416a6f5b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cachedSortingGroup: {fileID: 0}

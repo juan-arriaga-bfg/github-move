@@ -579,6 +579,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.D7.Id, R.D7Piece);
         dict.Add(PieceType.D8Fake.Id, R.D8Piece);
         dict.Add(PieceType.D8.Id, R.D8Piece);
+        dict.Add(PieceType.D9Fake.Id, R.D9Piece);
+        dict.Add(PieceType.D9.Id, R.D9Piece);
         dict.Add(PieceType.DMFake.Id, R.DMPiece);
         dict.Add(PieceType.DM.Id, R.DMPiece);
             
@@ -623,6 +625,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.F7.Id, R.F7Piece);
         dict.Add(PieceType.F8Fake.Id, R.F8Piece);
         dict.Add(PieceType.F8.Id, R.F8Piece);
+        dict.Add(PieceType.F9Fake.Id, R.F9Piece);
+        dict.Add(PieceType.F9.Id, R.F9Piece);
         dict.Add(PieceType.FMFake.Id, R.FMPiece);
         dict.Add(PieceType.FM.Id, R.FMPiece);
             
@@ -644,6 +648,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.G7.Id, R.G7Piece);
         dict.Add(PieceType.G8Fake.Id, R.G8Piece);
         dict.Add(PieceType.G8.Id, R.G8Piece);
+        dict.Add(PieceType.G9Fake.Id, R.G9Piece);
+        dict.Add(PieceType.G9.Id, R.G9Piece);
         dict.Add(PieceType.GMFake.Id, R.GMPiece);
         dict.Add(PieceType.GM.Id, R.GMPiece);
             
@@ -665,6 +671,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.H7.Id, R.H7Piece);
         dict.Add(PieceType.H8Fake.Id, R.H8Piece);
         dict.Add(PieceType.H8.Id, R.H8Piece);
+        dict.Add(PieceType.H9Fake.Id, R.H9Piece);
+        dict.Add(PieceType.H9.Id, R.H9Piece);
         dict.Add(PieceType.HMFake.Id, R.HMPiece);
         dict.Add(PieceType.HM.Id, R.HMPiece);
             
@@ -686,6 +694,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.I7.Id, R.I7Piece);
         dict.Add(PieceType.I8Fake.Id, R.I8Piece);
         dict.Add(PieceType.I8.Id, R.I8Piece);
+        dict.Add(PieceType.I9Fake.Id, R.I9Piece);
+        dict.Add(PieceType.I9.Id, R.I9Piece);
         dict.Add(PieceType.IMFake.Id, R.IMPiece);
         dict.Add(PieceType.IM.Id, R.IMPiece);
             
@@ -707,6 +717,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.J7.Id, R.J7Piece);
         dict.Add(PieceType.J8Fake.Id, R.J8Piece);
         dict.Add(PieceType.J8.Id, R.J8Piece);
+        dict.Add(PieceType.J9Fake.Id, R.J9Piece);
+        dict.Add(PieceType.J9.Id, R.J9Piece);
         dict.Add(PieceType.JMFake.Id, R.JMPiece);
         dict.Add(PieceType.JM.Id, R.JMPiece);
             

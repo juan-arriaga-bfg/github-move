@@ -97,7 +97,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.Add(PieceType.CM.Id);
                 break;
             case "Simple D":
-                ids.AddRange(GetPieceIds(PieceType.D1.Id, PieceType.D8.Id));
+                ids.AddRange(GetPieceIds(PieceType.D1.Id, PieceType.D9.Id));
                 ids.Add(PieceType.DM.Id);
                 break;
             case "Simple E":
@@ -105,23 +105,23 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.Add(PieceType.EM.Id);
                 break;
             case "Simple F":
-                ids.AddRange(GetPieceIds(PieceType.F1.Id, PieceType.F8.Id));
+                ids.AddRange(GetPieceIds(PieceType.F1.Id, PieceType.F9.Id));
                 ids.Add(PieceType.FM.Id);
                 break;
             case "Simple G":
-                ids.AddRange(GetPieceIds(PieceType.G1.Id, PieceType.G8.Id));
+                ids.AddRange(GetPieceIds(PieceType.G1.Id, PieceType.G9.Id));
                 ids.Add(PieceType.GM.Id);
                 break;
             case "Simple H":
-                ids.AddRange(GetPieceIds(PieceType.H1.Id, PieceType.H8.Id));
+                ids.AddRange(GetPieceIds(PieceType.H1.Id, PieceType.H9.Id));
                 ids.Add(PieceType.HM.Id);
                 break;
             case "Simple I":
-                ids.AddRange(GetPieceIds(PieceType.I1.Id, PieceType.I8.Id));
+                ids.AddRange(GetPieceIds(PieceType.I1.Id, PieceType.I9.Id));
                 ids.Add(PieceType.IM.Id);
                 break;
             case "Simple J":
-                ids.AddRange(GetPieceIds(PieceType.J1.Id, PieceType.J8.Id));
+                ids.AddRange(GetPieceIds(PieceType.J1.Id, PieceType.J9.Id));
                 ids.Add(PieceType.JM.Id);
                 break;
             case "Extended A":
