@@ -361,7 +361,17 @@ public class PathfindLockerComponent : ECSEntity
         var border = new HashSet<BoardPosition>();
         foreach (var pos in area)
         {
+            
             var neighbors = pos.Neighbors();
+            foreach (var position in pos.Neighbors())
+            {
+                var tileDefId = GameDataService.Current.FieldManager.GetTileId(position.X, position.Y);
+                var isRelief = tileDefId != BoardTiles.WATER_TILE_ID && BoardTiles.GetDefs()[tileDefId].IsLock;
+                if (isRelief)
+                {
+                    neighbors.AddRange(position.Neighbors());
+                }
+            }
             foreach (var neighPos in neighbors)
             {
                 var normilizedNeight = new BoardPosition(neighPos.X, neighPos.Y, BoardLayer.Piece.Layer);
