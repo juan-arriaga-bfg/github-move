@@ -37,6 +37,8 @@ public class PieceBoardElementView : BoardElementView
 
     private readonly ViewAnimationUid selectedAnimationId = new ViewAnimationUid();
     
+    private readonly ViewAnimationUid selectionViewAnimationId = new ViewAnimationUid();
+    
     public ViewAnimationUid SelectedAnimationId { get { return selectedAnimationId; } }
     public List<ViewAnchorLink> Anchors => anchors;
     private SpriteRenderer selectionSprite;
@@ -499,9 +501,9 @@ public class PieceBoardElementView : BoardElementView
         {
             var duration = 0.2f;
 
-            DOTween.Kill(animationUid);
+            DOTween.Kill(selectionViewAnimationId);
 
-            var sequence = DOTween.Sequence().SetId(animationUid);
+            var sequence = DOTween.Sequence().SetId(selectionViewAnimationId);
 
             if ((Piece == null || Piece.Draggable != null) && isValid)
             {
@@ -521,7 +523,7 @@ public class PieceBoardElementView : BoardElementView
         }
         else
         {
-            DOTween.Kill(animationUid);
+            DOTween.Kill(selectionViewAnimationId);
             bodySprites.ForEach(sprite => sprite.color = Color.white);
             selectionSprite.color = baseColor;
             selectionView.gameObject.SetActive(false);
