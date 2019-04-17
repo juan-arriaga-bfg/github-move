@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BfgAnalytics;
+using DG.Tweening;
 using UnityEngine;
 
 public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
@@ -79,9 +80,27 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     public void Add(int value)
     {
         if (Delay == 0 || IsStarted == false) return;
+
+        IsPaused = true;
+        
+        var then = value;
+        var animationTime = StartTime;
         
         StartTime = StartTime.AddSeconds(value);
-        CompleteTime = StartTime.AddSeconds(Delay);
+        
+        DOTween
+            .To(() => value, (v) => { value = v; }, 0, 1.5f)
+            .OnStart(() => View.Attention())
+            .OnUpdate(() =>
+            {
+                var step = then - value;
+                
+                then = value;
+                animationTime = animationTime.AddSeconds(step);
+                CompleteTime = animationTime.AddSeconds(Delay);
+                OnTimeChanged?.Invoke();
+            })
+            .OnComplete(() => { IsPaused = false; });
     }
 
     public void Subtract(int value)
