@@ -82,12 +82,17 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
         if (Delay == 0 || IsStarted == false) return;
 
         IsPaused = true;
+        StartTime = StartTime.AddSeconds(value);
+
+        if (duration <= 0)
+        {
+            CompleteTime = StartTime.AddSeconds(Delay);
+            IsPaused = false;
+            return;
+        }
         
         var then = value;
         var animationTime = StartTime;
-        
-        StartTime = StartTime.AddSeconds(value);
-
         var sequence = DOTween.Sequence();
 
         sequence.AppendInterval(duration);
