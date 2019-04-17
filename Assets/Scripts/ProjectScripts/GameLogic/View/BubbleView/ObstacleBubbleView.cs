@@ -21,7 +21,7 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
     {
         base.Init(piece);
         
-        Priority = defaultPriority = 1;
+        Priority = defaultPriority = 12;
         
         life = piece.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
         
@@ -45,12 +45,15 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
             life.TimerCooldown.OnTimeChanged -= UpdateButtonText;
             life.TimerCooldown.OnComplete -= UpdateButtonText;
         }
+
+        life = null;
+        controller = null;
         
         base.ResetViewOnDestroy();
     }
     
     public override void UpdateVisibility(bool isVisible)
-    {
+    {    
         if (isVisible)
         {
             Context.Context.HintCooldown.Pause(this);
@@ -63,7 +66,7 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
         base.UpdateVisibility(isVisible);
         
         UpdateListener(isVisible);
-        
+
         if (IsShow == false) return;
         
         message.Text = life.Message;
@@ -129,5 +132,11 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
         
         canvas.overrideSorting = true;
         canvas.sortingOrder = GetLayerIndexBy(new BoardPosition(boardPosition.X, boardPosition.Y, BoardLayer.UIUP1.Layer));
+    }
+
+    public override void OnViewInContainerToggle(UIBoardView view, bool state)
+    {
+        base.OnViewInContainerToggle(view, state);
+ 
     }
 }

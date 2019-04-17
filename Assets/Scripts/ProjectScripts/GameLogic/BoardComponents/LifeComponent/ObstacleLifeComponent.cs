@@ -59,6 +59,13 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         return item;
     }
 
+    public override void OnAddToBoard(BoardPosition position, Piece context = null)
+    {
+        base.OnAddToBoard(position, context);
+        
+        Context.AddView(ViewType.ObstacleProgress);
+    }
+
     protected override Dictionary<int, int> GetRewards()
     {
         return IsDead

@@ -20,5 +20,6 @@
     GodRay = -1016,
     UIContainer = -1017,
     FogProgress = -1018,
-    MineProgress = -1019
+    MineProgress = -1019,
+    ObstacleProgress = -1020,
 }

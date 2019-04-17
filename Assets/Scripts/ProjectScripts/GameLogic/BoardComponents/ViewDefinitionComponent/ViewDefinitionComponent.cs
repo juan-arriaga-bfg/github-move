@@ -21,6 +21,8 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     private UIBoardView container;
     
+    private BetterList<UIBoardView> showedViews = new BetterList<UIBoardView>();
+    
     public void OnRegisterEntity(ECSEntity entity)
     {
         thisContext = entity as Piece;
@@ -225,6 +227,20 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         }
     }
 
+    public BetterList<UIBoardView> GetShowedViews()
+    {
+        showedViews.Clear();
+        
+        foreach (var view in views.Values)
+        {
+            if (!view.IsShow) continue;
+            
+            showedViews.Add(view);
+        }
+
+        return showedViews;
+    }
+
     private Vector2 GetViewPosition(bool isTop)
     {
         var position = BoardPosition.Zero();
@@ -239,4 +255,14 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         
         return thisContext.Context.BoardDef.GetSectorWorldPosition(position.X, position.Y, position.Z);
     }
+
+    public virtual void OnViewToggle(UIBoardView view, bool state)
+    {
+        foreach (var viewPair in views)
+        {
+            var currentView = viewPair.Value;
+            currentView.OnViewInContainerToggle(view, state);
+        }
+    }
+
 }
