@@ -15,6 +15,7 @@ public class WorkerTutorialStep1 : BaseTutorialStep
             CurrencyHelper.PurchaseAsync(Currency.Worker.Name, 2).Complete();
         }
         
+        Context.LockAll();
         base.Perform();
     }
 
@@ -25,8 +26,13 @@ public class WorkerTutorialStep1 : BaseTutorialStep
             var from = Context.Context.BoardDef.GetPiecePosition(position.X, position.Y);
             var fly = Context.Context.BoardDef.ViewCamera.WorldToScreenPoint(from);
 
-            CurrencyHelper.PurchaseAsync(Currency.Worker.Name, 1, null, fly).Complete();
+            CurrencyHelper.PurchaseAsync(Currency.Worker.Name, 1, b =>
+            {
+                Context.UnlockAll();
+            }, fly).Complete();
         }
+
+        if (positions.Count == 0) Context.UnlockAll();
         
         base.Complete();
     }

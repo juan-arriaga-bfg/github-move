@@ -88,9 +88,11 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         {
             completeTimesList.Sort((a, b) => a.Value.CompleteTime.CompareTo(b.Value.CompleteTime));
             
-            var select = completeTimesList[0];
-            
             UIErrorWindowController.AddError(LocalizationService.Get("message.error.workerBusy", "message.error.workerBusy"));
+
+            if (completeTimesList.Count == 0) return false;
+            
+            var select = completeTimesList[0];
 
             if (select.Value.CompleteTime.GetTimeLeft().TotalSeconds <= MinDelay) return false;
             
