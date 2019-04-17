@@ -21,6 +21,8 @@ public class AirShipView : BoardElementView
     private HintArrowView arrow;
 
     private Dictionary<int, int> pieces;
+
+    private List<int> normalizedPieces;
     
     public void Init(BoardRenderer context, Dictionary<int, int> pieces)
     {
@@ -47,6 +49,8 @@ public class AirShipView : BoardElementView
 
     private void CreatePieces()
     {
+        NormilizePieces();
+        
         int currentSlot = -1;
 
         foreach (var pair in pieces)
@@ -69,6 +73,23 @@ public class AirShipView : BoardElementView
                 pieceView.transform.localScale = Vector3.one;
                 pieceView.transform.localPosition = Vector3.zero;
                 pieceView.SyncRendererLayers(new BoardPosition(Context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer));
+            }
+        }
+    }
+
+    private void NormilizePieces()
+    {
+        normalizedPieces = new List<int>();
+        
+        foreach (var pair in pieces)
+        {
+            var pieceId = pair.Key;
+            var count = pair.Value;
+            
+            for (var i = 0; i < count; i++)
+            {
+                var id = pieceId;
+                normalizedPieces.Add(id);
             }
         }
     }
