@@ -152,7 +152,7 @@ public class DevTools : UIContainerElementViewController
             { PieceType.Parse("B5"), 1 },
         };
         
-        BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Add(pieces1);        
+        BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Add(pieces1, true);        
         return;
         
         var allIds = PieceType.GetAllIds();
@@ -216,7 +216,7 @@ public class DevTools : UIContainerElementViewController
 
             try
             {
-                var view = BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Add(pieces);
+                var view = BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Add(pieces, true);
                 view.PlaceTo(new Vector2(17 + i * 3f, view.transform.position.y + 10));
             }
             catch (Exception e)

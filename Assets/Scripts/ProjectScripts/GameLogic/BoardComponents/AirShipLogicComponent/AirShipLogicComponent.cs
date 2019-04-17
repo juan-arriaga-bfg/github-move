@@ -66,7 +66,7 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
 	}
 
 
-    public AirShipView Add(Dictionary<int, int> pieces)
+    public AirShipView Add(Dictionary<int, int> pieces, bool animated)
     {
         Vector3 pos = GetFreePlaceToSpawn();
         
@@ -76,7 +76,15 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
         views.Add(view);
 
         view.PlaceTo(pos);
-        view.AnimateIdle();
+
+        if (animated)
+        {            
+            view.AnimateSpawn(); 
+        }
+        else
+        {
+            view.AnimateIdle();
+        }
 
         return view;
     }

@@ -544,4 +544,6 @@ public class R
      public const string C10Piece = "C10Piece";
      public const string E10Piece = "E10Piece";
      public const string AirShipView = "AirShipView";
+     public const string DestroyAirShipAnimation = "DestroyAirShipAnimation";
+     public const string SpawnAirShipAnimation = "SpawnAirShipAnimation";
 }

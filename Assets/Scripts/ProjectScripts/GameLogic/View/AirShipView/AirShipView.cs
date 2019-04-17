@@ -31,7 +31,7 @@ public class AirShipView : BoardElementView
 
     private void FixZ()
     {
-        SyncRendererLayers(new BoardPosition(Context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer));
+        SyncRendererLayers(GetCellForSyncLayers());
         for (var i = 0; i < pieceAnchors.Count; i++)
         {
             var anchor = pieceAnchors[i];
@@ -51,8 +51,13 @@ public class AirShipView : BoardElementView
             pieceView.transform.SetParent(anchor, false);
             pieceView.transform.localScale = Vector3.one;
             pieceView.transform.localPosition = Vector3.zero;
-            pieceView.SyncRendererLayers(new BoardPosition(Context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer));
+            pieceView.SyncRendererLayers(GetCellForSyncLayers());
         }
+    }
+
+    private BoardPosition GetCellForSyncLayers()
+    {
+        return new BoardPosition(Context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer);
     }
 
     /// <summary>
@@ -207,7 +212,32 @@ public class AirShipView : BoardElementView
 
     public void AnimateSpawn()
     {
+        var manipulator = BoardService.Current.FirstBoard.Manipulator.CameraManipulator;
+            
+        if (manipulator.CameraMove.IsLocked == false)
+        {
+            float DURATION = 0.4f;
+            manipulator.MoveTo(transform.position, true, DURATION, Ease.OutCubic);
+        }
         
+        body.localScale = Vector3.zero;
+
+        DOTween.Sequence()
+               .SetId(body)
+               .Append(body.DOScale(Vector3.one, 0.6f).SetEase(Ease.OutBack))
+               .OnComplete(AnimateIdle);
+        
+        var animView = Context.CreateBoardElementAt<AnimationView>(R.SpawnAirShipAnimation, GetCellForSyncLayers());
+        animView.SyncRendererLayers(GetCellForSyncLayers());
+
+        animView.transform.position = transform.position;
+        
+        animView.OnComplete += () =>
+        {
+             AnimateIdle();
+        };
+
+        animView.Play(null);
     }
 
     public void AnimateDeath()
