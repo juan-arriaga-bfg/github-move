@@ -83,8 +83,6 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
 
     private Vector2 GetFreePlaceToSpawn()
     {
-        int pieceLayer = BoardLayer.Piece.Layer;
-        
         var boardDef = context.Context.BoardDef;
 
         var cam = context.Context.BoardDef.ViewCamera;
@@ -95,8 +93,8 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
         BoardPosition cellUnderCamera = boardDef.GetSectorPosition(targetPosition);
         Vector3 cellUnderCameraPos = boardDef.GetSectorCenterWorldPosition(cellUnderCamera.X, cellUnderCamera.Y, 0);
         
-        var cell1 = context.Context.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell, new BoardPosition(cellUnderCamera.X, cellUnderCamera.Y, BoardLayer.MAX.Layer));
-        cell1.SetText("(!)");
+        // var cell1 = context.Context.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell, new BoardPosition(cellUnderCamera.X, cellUnderCamera.Y, BoardLayer.MAX.Layer));
+        // cell1.SetText("(!)");
         
         if (IsCellAvailable(cellUnderCamera))
         {
@@ -125,19 +123,19 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
                     currentPos.X += scanDirection.X;
                     currentPos.Y += scanDirection.Y;
 
-                    var cell = context.Context.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell, new BoardPosition(currentPos.X, currentPos.Y, BoardLayer.MAX.Layer));
-                    cell.SetText($"{distance}:{counter++}");
+                    // var cell = context.Context.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell, new BoardPosition(currentPos.X, currentPos.Y, BoardLayer.MAX.Layer));
+                    // cell.SetText($"{distance}:{counter++}");
 
                     if (IsCellAvailable(currentPos))
                     {
-                        goto END;
+                        return boardDef.GetSectorCenterWorldPosition(currentPos.X, currentPos.Y, 0);
                     }
                 }
             }
         }
         
-        END:
-        return boardDef.GetSectorCenterWorldPosition(currentPos.X, currentPos.Y, 0);
+        // fallback
+        return cellUnderCameraPos;
     }
 
     private bool IsCellAvailable(BoardPosition pos)
