@@ -10,6 +10,7 @@
 
         if (def == null) return piece;
         
+        piece.RegisterComponent(new TutorialLockerComponent {Step = TutorialBuilder.FogStepIndex});
         piece.RegisterComponent(new ResourceStorageComponent {Resources = def.SpawnResources});
 
         piece.RegisterComponent(new TouchReactionComponent()

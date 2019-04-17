@@ -5,6 +5,7 @@ using Quests;
 
 public static class TutorialBuilder
 {
+    public const int FogStepIndex = 4;
     public const int WorkerStepIndex = 10;
     public const int LockPRStepIndex = 12;
     public const int LockMarketStepIndex = 15;
@@ -93,6 +94,8 @@ public static class TutorialBuilder
             }
             case 4: // tutorial 3 - clear fog
             {
+                if (FogStepIndex != index) Debug.LogError("Tutorial Error: FogStepIndex != index");
+                
                 step = new HighlightFogTutorialStep
                 {
                     Delay = 0,
