@@ -77,7 +77,7 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
         OnStart?.Invoke();
     }
 
-    public void Add(int value)
+    public void Add(int value, float duration = 0)
     {
         if (Delay == 0 || IsStarted == false) return;
 
@@ -87,25 +87,31 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
         var animationTime = StartTime;
         
         StartTime = StartTime.AddSeconds(value);
-        
-        DOTween
-            .To(() => value, (v) => { value = v; }, 0, 1.5f)
-            .OnStart(() => View.Attention())
-            .OnUpdate(() =>
-            {
-                var step = then - value;
-                
-                then = value;
-                animationTime = animationTime.AddSeconds(step);
-                CompleteTime = animationTime.AddSeconds(Delay);
-                OnTimeChanged?.Invoke();
-            })
-            .OnComplete(() => { IsPaused = false; });
+
+        var sequence = DOTween.Sequence();
+
+        sequence.AppendInterval(duration);
+        sequence.AppendCallback(() =>
+        {
+            DOTween
+                .To(() => value, (v) => { value = v; }, 0, 1.5f)
+                .OnStart(() => View.Attention())
+                .OnUpdate(() =>
+                {
+                    var step = then - value;
+
+                    then = value;
+                    animationTime = animationTime.AddSeconds(step);
+                    CompleteTime = animationTime.AddSeconds(Delay);
+                    OnTimeChanged?.Invoke();
+                })
+                .OnComplete(() => { IsPaused = false; });
+        });
     }
 
-    public void Subtract(int value)
+    public void Subtract(int value, float duration = 0)
     {
-        Add(-Mathf.Min(Delay, value));
+        Add(-Mathf.Min(Delay, value), duration);
     }
 
     public void Reset()
