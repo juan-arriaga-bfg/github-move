@@ -134,6 +134,11 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
                 material
                     .DOFloat(alpha, propName, duration)
                     .SetId(rend)
+                    .OnUpdate(() =>
+                    {
+                        var currentAlpha = material.GetFloat(propName);
+                        Debug.LogWarning($"currentAlpha:{currentAlpha}");
+                    })
                     .OnComplete(() =>
                     {
                         if (alpha >= 1f) rend.ResetDefaultMaterial();
