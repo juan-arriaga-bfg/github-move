@@ -6,14 +6,6 @@ using UnityEngine.Rendering;
 
 public class AirShipView : BoardElementView
 {
-    private enum AirShipState
-    {
-        Unknown,
-        Idle,
-        Drop,
-        Death
-    }
-    
     [SerializeField] private Transform body;
     [SerializeField] private List<Transform> pieceAnchors;
     
@@ -49,35 +41,24 @@ public class AirShipView : BoardElementView
 
     private void CreatePieces()
     {
-        NormilizePieces();
-        
-        int currentSlot = -1;
+        NormalizePiecesList();
 
-        foreach (var pair in pieces)
+        for (int i = 0; i < pieceAnchors.Count && i < normalizedPieces.Count; i++)
         {
-            var pieceId = pair.Key;
-            var count = pair.Value;
-            
-            for (var i = 0; i < count; i++)
-            {
-                currentSlot++;
-                if (currentSlot > pieceAnchors.Count - 1)
-                {
-                    return;
-                }
-                
-                var anchor = pieceAnchors[currentSlot];
-                var id = pieceId;
-                PieceBoardElementView pieceView = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceOutsideOfBoard(id);
-                pieceView.transform.SetParent(anchor, false);
-                pieceView.transform.localScale = Vector3.one;
-                pieceView.transform.localPosition = Vector3.zero;
-                pieceView.SyncRendererLayers(new BoardPosition(Context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer));
-            }
+            var anchor = pieceAnchors[i];
+            var id = normalizedPieces[i];
+            PieceBoardElementView pieceView = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceOutsideOfBoard(id);
+            pieceView.transform.SetParent(anchor, false);
+            pieceView.transform.localScale = Vector3.one;
+            pieceView.transform.localPosition = Vector3.zero;
+            pieceView.SyncRendererLayers(new BoardPosition(Context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer));
         }
     }
 
-    private void NormilizePieces()
+    /// <summary>
+    /// Convert dictionary into sorted list
+    /// </summary>
+    private void NormalizePiecesList()
     {
         normalizedPieces = new List<int>();
         
@@ -92,6 +73,8 @@ public class AirShipView : BoardElementView
                 normalizedPieces.Add(id);
             }
         }
+        
+        normalizedPieces.Sort((id1, id2) => id2 - id1);
     }
 
     public override void OnFastInstantiate()
