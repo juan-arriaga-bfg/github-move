@@ -44,4 +44,9 @@ public class DebugCellView : BoardElementView
         }
             
     }
+
+    public void SetText(string text)
+    {
+        label.Text = text;
+    }
 }

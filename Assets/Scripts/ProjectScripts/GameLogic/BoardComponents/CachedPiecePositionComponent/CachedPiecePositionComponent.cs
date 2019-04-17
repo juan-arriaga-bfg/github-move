@@ -16,7 +16,10 @@
 
 	public void OnAddToBoard(BoardPosition position, Piece context = null)
 	{
-		contextPiece?.Context.BoardLogic.PositionsCache.AddPosition(contextPiece.PieceType, position);
+		if (contextPiece == null) return;
+		
+		contextPiece.CachedPosition = position;
+		AddPositionToDefaultCache(position, context);
 	}
 
 	public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
@@ -26,12 +29,33 @@
 
 	public void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
 	{
-		contextPiece?.Context.BoardLogic.PositionsCache.RemovePosition(contextPiece.PieceType, from);
-		contextPiece?.Context.BoardLogic.PositionsCache.AddPosition(contextPiece.PieceType, to);
+		if (contextPiece != null) contextPiece.CachedPosition = to;
+		
+		if(context == null) return; 
+		
+		RemovePositionFromDefaultCache(from, context);
+		AddPositionToDefaultCache(to, context);
 	}
 
 	public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
 	{
-		contextPiece?.Context.BoardLogic.PositionsCache.RemovePosition(contextPiece.PieceType, position);
+		RemovePositionFromDefaultCache(position, context);
+		RemovePositionFromPathfindCache();
+	}
+
+	private void RemovePositionFromDefaultCache(BoardPosition position, Piece context)
+	{
+		context?.Context.BoardLogic.PositionsCache.RemovePosition(context.PieceType, position);
+	}
+
+	private void AddPositionToDefaultCache(BoardPosition position, Piece context)
+	{
+		context.Context.BoardLogic.PositionsCache.AddPosition(context.PieceType, position);
+	}
+
+	private void RemovePositionFromPathfindCache()
+	{
+		var target = contextPiece?.Context.AreaAccessController?.AvailiablePositions;
+		contextPiece?.Context.PathfindLocker?.RemoveFromCache(contextPiece);
 	}
 }

@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8beeef0f8df5e3a4b9b27d49ce3fa7da, type: 3}
   m_Name: googleLoader.settings.res
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   configLinks:
   - Key: chests
     Link: 1SnYRNQBmFgpeb5BJmQ5rwUWKHYBwPFNrFHzeW4OxWXs
@@ -26,11 +26,11 @@ MonoBehaviour:
     Route: parse
     Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"ProductionAmount":{"Min":0,"Max":0},"CharactersAmount":{"Min":0,"Max":0},"ExtrasAmount":{"Min":0,"Max":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestId":""}]'
   - Key: field
-    Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
+    Link: 1vEw99EkdaMpRq3V1OAv5bbO7yJoHCS626l7FJyM_WxQ
     Route: parseField
     Pattern: '{"Uid":"","Position":{"X":0,"Y":0}}'
   - Key: fogs
-    Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
+    Link: 1vEw99EkdaMpRq3V1OAv5bbO7yJoHCS626l7FJyM_WxQ
     Route: parseFogs
     Pattern: '{"Uid":"","Level":0,"Condition":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"IsActive":false,"Hero":""}'
   - Key: pieces
@@ -90,7 +90,7 @@ MonoBehaviour:
     Route: parse
     Pattern: '[{"Id":"","ConversationCharacters" : {}, "Bubbles":[{"CharacterId":"","Emotion":"","Message":""}]}]'
   - Key: layout
-    Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
+    Link: 1vEw99EkdaMpRq3V1OAv5bbO7yJoHCS626l7FJyM_WxQ
     Route: parseLayout
     Pattern: '{}'
   - Key: daily
