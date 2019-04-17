@@ -95,7 +95,10 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
         {
             DOTween
                 .To(() => value, (v) => { value = v; }, 0, 1.5f)
-                .OnStart(() => View.Attention())
+                .OnStart(() =>
+                {
+                    if (View != null) View.Attention();
+                })
                 .OnUpdate(() =>
                 {
                     var step = then - value;
