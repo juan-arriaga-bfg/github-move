@@ -43,14 +43,14 @@ public class ObstacleProgressView : UIBoardView
     
     public override void UpdateVisibility(bool isVisible)
     {   
-        if (isVisible)
-        {
-            Context.Context.HintCooldown.Pause(this);
-        }
-        else
-        {
-            Context.Context.HintCooldown.Resume(this);
-        }
+//        if (isVisible)
+//        {
+//            Context.Context.HintCooldown.Pause(this);
+//        }
+//        else
+//        {
+//            Context.Context.HintCooldown.Resume(this);
+//        }
 
         base.UpdateVisibility(isVisible);
         
