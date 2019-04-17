@@ -185,7 +185,7 @@ public class PartPiecesLogicComponent : IECSComponent
         
         var result = Context.BoardLogic.GetPieceAt(positions[0])?.PieceState;
             
-        result?.Timer.Subtract(GameDataService.Current.ConstantsManager.ExtraWorkerDelay);
+        result?.Timer.Subtract(GameDataService.Current.ConstantsManager.ExtraWorkerDelay, 1.5f);
 
         return true;
     }

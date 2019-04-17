@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public struct PartHint
 {
@@ -187,9 +188,10 @@ public class CellHintsComponent : IECSComponent
     
     private List<BoardPosition> GetHintList(int id, List<List<int>> pattern, BoardLogicComponent logic, BoardPosition target, BoardPosition start, out int weight)
     {
+        var ignore = new List<Type> {typeof(DragAndCheckMatchAction)};
         weight = 0;
         
-        if(logic.IsLockedCell(start) || logic.IsPointValid(start) == false) return null;
+        if(logic.IsLockedCell(start, ignore) || logic.IsPointValid(start) == false) return null;
         
         var positions = new List<BoardPosition>();
             
@@ -201,7 +203,7 @@ public class CellHintsComponent : IECSComponent
             {
                 var pos = new BoardPosition(start.X + i, start.Y + j, start.Z);
                 
-                if(logic.IsLockedCell(pos) || logic.IsPointValid(pos) == false) return null;
+                if(logic.IsLockedCell(pos, ignore) || logic.IsPointValid(pos) == false) return null;
                 
                 positions.Add(pos);
                 

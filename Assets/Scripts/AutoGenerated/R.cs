@@ -549,6 +549,7 @@ public class R
      public const string H9Piece = "H9Piece";
      public const string I9Piece = "I9Piece";
      public const string J9Piece = "J9Piece";
+     public const string ObstacleProgressView = "ObstacleProgressView";
      public const string BorderWallRight1 = "BorderWallRight1";
      public const string BorderWallTop1 = "BorderWallTop1";
      public const string BorderWallTopRight1 = "BorderWallTopRight1";
