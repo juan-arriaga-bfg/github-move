@@ -84,9 +84,7 @@ public class AirShipView : BoardElementView
     public override void OnFastDestroy()
     {
         StopAnimation();
-        
-        DOTween.Kill(CachedTransform);
-        
+
         Context.Context.BoardLogic.AirShipLogic.Remove(this);
         CachedTransform.localScale = Vector3.one;
 
@@ -192,16 +190,16 @@ public class AirShipView : BoardElementView
         float TIME = UnityEngine.Random.Range(1.8f, 2.2f);
         
         DOTween.Sequence()
-               .SetId(CachedTransform)
+               .SetId(body)
                 
-               .Append(CachedTransform.DOMove(Vector3.up * DIST, TIME)
+               .Append(body.DOMove(Vector3.up * DIST, TIME)
                                       .SetRelative(true)
-                                      .SetId(CachedTransform)
+                                      .SetId(body)
                                       .SetEase(Ease.InOutSine))
                 
-               .Append(CachedTransform.DOLocalMove(Vector3.down * DIST, TIME)
+               .Append(body.DOLocalMove(Vector3.down * DIST, TIME)
                                       .SetRelative(true)
-                                      .SetId(CachedTransform)
+                                      .SetId(body)
                                       .SetEase(Ease.InOutSine))
                 
                .SetLoops(-1);
@@ -219,7 +217,7 @@ public class AirShipView : BoardElementView
 
     public void StopAnimation()
     {
-        DOTween.Kill(CachedTransform); 
+        DOTween.Kill(body); 
     }
 
     private void OnDestroy()
