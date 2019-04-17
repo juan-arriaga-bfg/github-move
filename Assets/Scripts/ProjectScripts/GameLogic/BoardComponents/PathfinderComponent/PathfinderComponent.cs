@@ -152,23 +152,42 @@ public class PathfinderComponent:ECSEntity
         
         var baseTileDefId = GameDataService.Current.FieldManager.GetTileId(position.X, position.Y);
         var baseIsRelief = baseTileDefId != BoardTiles.WATER_TILE_ID && BoardTiles.GetDefs()[baseTileDefId].IsLock;
-            
+
+        if (baseIsRelief)
+        {
+            return new List<BoardPosition>();
+        }
+        
         var checkedNeigbours = new List<BoardPosition>();
         var count = uncheckedNeigbours.Count;
         for (var i = 0; i < count; i++)
         {
             var currentNeighbour = uncheckedNeigbours[i];
-            var targetPiece = board.BoardLogic.GetPieceAt(currentNeighbour);
             
             var currentTileDefId = GameDataService.Current.FieldManager.GetTileId(currentNeighbour.X, currentNeighbour.Y);
             var currentIsRelief = currentTileDefId != BoardTiles.WATER_TILE_ID && BoardTiles.GetDefs()[currentTileDefId].IsLock;
 
-            if (baseIsRelief && currentIsRelief)
+            if (baseIsRelief == false && currentIsRelief)
             {
-                unavailiable.Add(targetPiece.CachedPosition);
-                continue;
+                if (currentNeighbour.X > position.X)
+                {
+                    currentNeighbour.X++;
+                } 
+                else if (currentNeighbour.X < position.X)
+                {
+                    currentNeighbour.X--;
+                }
+                else if (currentNeighbour.Y > position.Y)
+                {
+                    currentNeighbour.Y++;
+                }
+                else if (currentNeighbour.Y < position.Y)
+                {
+                    currentNeighbour.Y--;
+                }
             }
             
+            var targetPiece = board.BoardLogic.GetPieceAt(currentNeighbour);
             if(!checkedPositions.Contains(currentNeighbour) && predicate.Invoke(currentNeighbour))
                 checkedNeigbours.Add(currentNeighbour); 
             else if(targetPiece != null && !unavailiable.Contains(targetPiece.CachedPosition))
