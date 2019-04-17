@@ -116,12 +116,14 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             if (rend.CachedRenderer == null) continue;
             if (rend.CachedRenderer.sharedMaterial == null) continue;
 
-            var material = rend.MaterialCopy;//rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial(BoardElementMaterialType.PiecesFadeMaterial));
+            var material = rend.MaterialCopy;
+            
             if (material.HasProperty(propName) == false)
             {
                 material = rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial(BoardElementMaterialType.PiecesDefaultMaterial));
+                material = rend.MaterialCopy;
             }
-
+            
             DOTween.Kill(rend);
             
             if (duration <= 0)
@@ -134,11 +136,6 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
                 material
                     .DOFloat(alpha, propName, duration)
                     .SetId(rend)
-                    .OnUpdate(() =>
-                    {
-                        var currentAlpha = material.GetFloat(propName);
-                        Debug.LogWarning($"currentAlpha:{currentAlpha}");
-                    })
                     .OnComplete(() =>
                     {
                         if (alpha >= 1f) rend.ResetDefaultMaterial();
