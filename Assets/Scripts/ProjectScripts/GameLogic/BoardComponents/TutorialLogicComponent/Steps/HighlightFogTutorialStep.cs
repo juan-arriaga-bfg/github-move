@@ -26,10 +26,27 @@ public class HighlightFogTutorialStep : LoopFingerTutorialStep
         var positionsHero = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Character);
         
         if (positionsHero.Count == 0) return;
+
+        var positionHero = positionsHero[0];
+        var positionMana = positionHero.Down;
+        var field = new List<BoardPosition>();
+
+        if (Context.Context.BoardLogic.IsEmpty(positionMana))
+        {
+            field.Add(positionMana);
+        }
+        else
+        {
+            Context.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(positionHero, field, 10);
+
+            field = field.FindAll(position => position.Y < positionHero.Y);
+            field = new List<BoardPosition>{field[0]};
+        }
         
         Context.Context.ActionExecutor.AddAction(new EjectionPieceAction
         {
-            From = positionsHero[0],
+            From = positionHero,
+            To = field,
             Pieces = new Dictionary<int, int> {{mana, 1}},
             OnComplete = () => { isSpawn = true; }
         });
