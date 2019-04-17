@@ -2,6 +2,7 @@
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class AirShipView : BoardElementView
 {
@@ -30,21 +31,45 @@ public class AirShipView : BoardElementView
         isClick = false;
 
         CreatePieces();
-        
-        SyncRendererLayers(new BoardPosition(context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer));
+
+        FixZ();
+    }
+
+    private void FixZ()
+    {
+        SyncRendererLayers(new BoardPosition(Context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer));
+        for (var i = 0; i < pieceAnchors.Count; i++)
+        {
+            var anchor = pieceAnchors[i];
+            anchor.gameObject.GetComponent<SortingGroup>().sortingOrder = pieceAnchors.Count - i;
+        }
     }
 
     private void CreatePieces()
     {
-        List<int> ids = pieces.Keys.ToList();
-        for (var i = 0; i < ids.Count && i < pieceAnchors.Count; i++)
+        int currentSlot = -1;
+
+        foreach (var pair in pieces)
         {
-            var id = ids[i];
-            PieceBoardElementView pieceView = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceOutsideOfBoard(id);
-            pieceView.transform.SetParent(pieceAnchors[i], false);
-            pieceView.transform.localScale = Vector3.one;
-            pieceView.transform.localPosition = Vector3.zero;
-            pieceView.SyncRendererLayers(new BoardPosition(Context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer));
+            var pieceId = pair.Key;
+            var count = pair.Value;
+            
+            for (var i = 0; i < count; i++)
+            {
+                currentSlot++;
+                if (currentSlot > pieceAnchors.Count - 1)
+                {
+                    return;
+                }
+                
+                var anchor = pieceAnchors[currentSlot];
+                var id = pieceId;
+                PieceBoardElementView pieceView = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceOutsideOfBoard(id);
+                pieceView.transform.SetParent(anchor, false);
+                pieceView.transform.localScale = Vector3.one;
+                pieceView.transform.localPosition = Vector3.zero;
+                pieceView.SyncRendererLayers(new BoardPosition(Context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer));
+            }
         }
     }
 
@@ -160,7 +185,7 @@ public class AirShipView : BoardElementView
         StopAnimation();
 
         const float DIST = 0.25f;
-        const float TIME = 2f;
+        float TIME = UnityEngine.Random.Range(1.8f, 2.2f);
         
         DOTween.Sequence()
                .SetId(CachedTransform)
