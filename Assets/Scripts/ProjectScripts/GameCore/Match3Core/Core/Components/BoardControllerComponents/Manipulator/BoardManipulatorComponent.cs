@@ -347,14 +347,21 @@ public class BoardManipulatorComponent : ECSEntity,
             if (selectedView != null && selectedView is PieceBoardElementView)
             {
                 var pieceView = selectedView as PieceBoardElementView;
-                if (pieceView != null && pieceView.Piece?.Draggable != null)
+                var pathfindLockListenerComponent = pieceView.Piece?.GetComponent<PathfindLockListenerComponent>(PathfindLockListenerComponent.ComponentGuid);
+                
+                if (pieceView != null && (pieceView.Piece?.Draggable != null && (pathfindLockListenerComponent != null && pathfindLockListenerComponent.IsHasPath() == true)))
                 {
                     cameraManipulator.CameraMove.Lock(dragTresholdId, true);
 
                     cachedViewOnDown = selectedView;
                 }
-
                 return true;
+            }
+            else if (context.BoardLogic.FireflyLogic.Check(selectedView))
+            {
+                cameraManipulator.CameraMove.Lock(dragTresholdId, true);
+
+                cachedViewOnDown = selectedView;
             }
             
             return true;

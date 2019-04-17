@@ -393,12 +393,15 @@ public static class TutorialBuilder
                 {
                     Targets = new List<int>{PieceType.RC_I.Id},
                     IsAnyStartCondition = true,
+                    IsAnyCompleteCondition = true,
                     OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("orderclick"),
                     OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("orderclick", currentStep.StartTime)
                 };
                 
                 step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.RC_I.Id, Amount = 1, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.RC_I.Id, Amount = 1, MoreThan = true, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.RC_I.Id, Amount = 0, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckPieceChangeTutorialCondition {Target = PieceType.RC_I.Id, Amount = -1, ConditionType = TutorialConditionType.Complete}, true);
                 break;
             }
             default:

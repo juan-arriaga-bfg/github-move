@@ -148,6 +148,8 @@ public class PiecePositionsCacheComponent : IECSComponent
 
 	public void AddPosition(int pieceType, BoardPosition position)
 	{
+		if (pieceType == PieceType.Empty.Id || pieceType == PieceType.None.Id) return;
+		
 		if (cache.TryGetValue(pieceType, out var list) == false)
 		{
 			list = new List<BoardPosition>();

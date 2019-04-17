@@ -76,6 +76,8 @@ public class BoardArrowTutorialStep : BaseTutorialStep, IBoardEventListener
             if (Context.Context.BoardLogic.IsLockedCell(position)) continue;
             
             var element = Context.Context.BoardLogic.GetPieceAt(position).ActorView;
+
+            if (element == null) continue;
             
             element.UpdateArrow();
             element.AddArrow();

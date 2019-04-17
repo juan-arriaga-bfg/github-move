@@ -177,7 +177,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         var def = PieceType.GetDefById(target.PieceType);
 
         if (CheckLock(target) == false || target.PieceType != PieceType.Boost_CR.Id && def.Filter.Has(PieceTypeFilter.Workplace) == false) return false;
-        if (CheckPieceState(target) == false && context.PartPiecesLogic.Work(target, true) == false) return false;
+        if (CheckPieceState(target) == false && context.PartPiecesLogic.Work(targetPosition, true) == false) return false;
         
         return true;
     }
