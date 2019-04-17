@@ -5,6 +5,8 @@ public class CharacterPieceBuilder : GenericPieceBuilder
 		var piece = base.Build(pieceType, context);
 		
 		CreateViewComponent(piece);
+		
+		AddPathfindLockObserver(piece, true);
 
 		piece.RegisterComponent(new TimerComponent());
 		
@@ -24,6 +26,9 @@ public class CharacterPieceBuilder : GenericPieceBuilder
 				.RegisterDefinition(new TouchReactionDefinitionOpenWindow {WindowType = UIWindowType.OrdersWindow})
 				.RegisterDefinition(new TouchReactionDefinitionSpawnShop()))
 			.RegisterComponent(new TouchReactionConditionCharacter()));
+		
+		piece.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
+				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
 		
 		return piece;
 	}

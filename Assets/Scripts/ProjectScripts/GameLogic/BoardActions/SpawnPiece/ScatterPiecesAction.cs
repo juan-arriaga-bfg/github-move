@@ -128,7 +128,7 @@ public class ScatterPiecesAction : IBoardAction
 
 			if (Pieces.Count == 0)
 			{
-				if (IsTargetReplace && PieceType.GetDefById(target.PieceType).Filter.HasFlag(PieceTypeFilter.Obstacle)) gameBoardController.PathfindLocker?.RecalcCacheOnPieceRemoved(target);
+				if (IsTargetReplace && PieceType.GetDefById(target.PieceType).Filter.HasFlag(PieceTypeFilter.Obstacle)) target.PathfindLockObserver.RemoveRecalculate(From);
 				
 				rewardsStore.IsComplete = false;
 				return;

@@ -7,13 +7,13 @@
         var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
 
         if (def == null) return piece;
-
+        
         piece.RegisterComponent(new ResourceStorageComponent {Resources = def.SpawnResources});
 
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionCollectResource())
             .RegisterComponent(new TouchReactionConditionComponent()));
-
+        
         return piece;
     }
 }

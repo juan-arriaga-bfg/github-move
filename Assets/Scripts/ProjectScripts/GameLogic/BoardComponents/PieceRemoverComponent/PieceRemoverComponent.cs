@@ -168,7 +168,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
             {
                 if (pathRecalc)
                 {
-                    piece?.Context?.PathfindLocker?.RecalcCacheOnPieceRemoved(piece);
+                    piece?.PathfindLockObserver?.RemoveRecalculate(position);
                 }
             }
         });

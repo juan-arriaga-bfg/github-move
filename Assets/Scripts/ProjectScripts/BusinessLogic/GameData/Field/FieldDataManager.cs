@@ -86,7 +86,7 @@ public class FieldDataManager : IECSComponent, IDataManager
         });
     }
 
-    public int GetTileId(int x, int y)
+    public int GetCellType(int x, int y)
     {
         return LayoutData[x * LayoutW + y];
     }

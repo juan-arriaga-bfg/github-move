@@ -29,6 +29,8 @@ public class CollapseFogToAction : IBoardAction
         {
             posByMask.Add(FogObserver.GetPointInMask(context.CachedPosition, boardPosition));
         }
+
+        var pathObserver = context.PathfindLockObserver;
         
         gameBoardController.BoardLogic.RemovePiecesAt(Positions);
         
@@ -94,8 +96,9 @@ public class CollapseFogToAction : IBoardAction
             {
                 
                 gameBoardController.PathfindLocker.OnAddComplete(posByMask);
+                pathObserver.OnRemoveFromBoard(context.CachedPosition);
                 
-                gameBoardController.PathfindLocker?.RecalcCacheOnPieceRemoved(context);
+                context.PathfindLockObserver.RemoveRecalculate(context.CachedPosition);
                 var emptyCells = gameBoardController.PathfindLocker.CollectUnlockedEmptyCells();
                 foreach (var emptyCell in emptyCells)
                 {
