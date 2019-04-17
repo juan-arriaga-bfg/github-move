@@ -12,15 +12,17 @@ public class AirShipView : BoardElementView
     private bool isClick;
     private HintArrowView arrow;
 
-    private Dictionary<int, int> pieces;
+    private Dictionary<int, int> payload;
 
     private List<int> normalizedPieces;
+
+    public int Id;
     
-    public void Init(BoardRenderer context, Dictionary<int, int> pieces)
+    public void Init(BoardRenderer context, Dictionary<int, int> payload)
     {
         base.Init(context);
 
-        this.pieces = pieces;
+        this.payload = payload;
         
         isClick = false;
 
@@ -67,7 +69,7 @@ public class AirShipView : BoardElementView
     {
         normalizedPieces = new List<int>();
         
-        foreach (var pair in pieces)
+        foreach (var pair in payload)
         {
             var pieceId = pair.Key;
             var count = pair.Value;

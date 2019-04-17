@@ -4,6 +4,13 @@ using BfgAnalytics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public class AirShipDef
+{
+    public int Id;
+    public AirShipView View;
+    public Dictionary<int, int> Payload;
+}
+
 public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
@@ -11,15 +18,31 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
 	
 	private BoardLogicComponent context;
 
-	private readonly List<AirShipView> views = new List<AirShipView>();
-    public List<AirShipView> Views => views;
+	private readonly Dictionary<int, AirShipDef> defs = new Dictionary<int, AirShipDef>();
 
+    private int idCounter = 0;
+    
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		context = entity as BoardLogicComponent;
-	}
+        InitFromSave();
+    }
 
-	public override void OnUnRegisterEntity(ECSEntity entity)
+    private void InitFromSave()
+    {
+        var save = ProfileService.Current.GetComponent<AirShipSaveComponent>(AirShipSaveComponent.ComponentGuid);
+        if (save?.Items == null || save.Items.Count == 0)
+        {
+            return;
+        }
+
+        foreach (var item in save.Items)
+        {
+            Add(item.Payload, false, item.Position);
+        }
+    }
+
+    public override void OnUnRegisterEntity(ECSEntity entity)
     {
         context = null;
     }
@@ -62,18 +85,35 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
 
 	public void Remove(AirShipView view)
 	{
-		views.Remove(view);
-	}
+		defs.Remove(view.Id);
+    }
 
-
-    public AirShipView Add(Dictionary<int, int> pieces, bool animated)
+    public List<AirShipSaveItem> Save()
     {
-        Vector3 pos = GetFreePlaceToSpawn();
+        var ret = new List<AirShipSaveItem>();
+        foreach (var pair in defs)
+        {
+            var def = pair.Value;
+            AirShipSaveItem item = new AirShipSaveItem
+            {
+                Position = def.View.transform.position,
+                Payload = def.Payload
+            };
+            ret.Add(item);
+        }
+
+        return ret;
+    }
+	
+    public AirShipView Add(Dictionary<int, int> payload, bool animated, Vector2? position = null)
+    {
+        Vector3 pos = position ?? GetFreePlaceToSpawn();
         
         AirShipView view = context.Context.RendererContext.CreateBoardElement<AirShipView>((int) ViewType.AirShip);
-        view.Init(context.Context.RendererContext, pieces);
+        view.Init(context.Context.RendererContext, payload);
+        view.Id = ++idCounter;
         
-        views.Add(view);
+        defs.Add(idCounter, new AirShipDef {Id = idCounter, View = view, Payload = payload});
 
         view.PlaceTo(pos);
 
@@ -170,9 +210,9 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
         }
 
         // Do not place at the same place as other AirShip
-        foreach (var view in views)
+        foreach (var def in defs.Values)
         {
-            var viewWorldPos = view.transform.position;
+            var viewWorldPos = def.View.transform.position;
             viewWorldPos.z = 0;//cam.transform.position.z * -1;
             
             BoardPosition boardPos = boardDef.GetSectorPosition(viewWorldPos);
