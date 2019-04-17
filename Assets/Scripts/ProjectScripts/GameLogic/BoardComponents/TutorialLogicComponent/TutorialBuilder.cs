@@ -139,19 +139,16 @@ public static class TutorialBuilder
             }
             case 7: // tutorial 6 - create ingredient
             {
-                step = new SelectStorageTutorialStep<ObstacleBubbleView>
+                step = new BoardArrowTutorialStep
                 {
-                    Delay = 2, 
-                    IsFastStart = true, 
-                    Targets = new List<int>{PieceType.PR_A4.Id, PieceType.PR_B4.Id, PieceType.PR_C4.Id, PieceType.PR_D4.Id, PieceType.PR_E4.Id, PieceType.PR_F4.Id, PieceType.PR_G4.Id},
+                    Targets = new List<int>{PieceType.PR_A4.Id},
                     OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("harvest"),
                     OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("harvest", currentStep.StartTime)
                 };
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "7_CreatePiece_PR_A5", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "7_CreatePiece_PR_A5", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Hard}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "9_CreatePiece_PR_C5", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.PR_A5.Id, Amount = 2, MoreThan = true, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "7_CreatePiece_PR_A5", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }

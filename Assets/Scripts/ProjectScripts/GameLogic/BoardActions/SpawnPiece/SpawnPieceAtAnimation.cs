@@ -12,6 +12,8 @@ public class SpawnPieceAtAnimation : BoardAnimation
     public override void Animate(BoardRenderer context)
     {
         var boardElement = context.CreatePieceAt(CreatedPiece, At);
+        
+        ToggleView(false, CreatedPiece);
 
         if (boardElement == null)
         {
@@ -34,6 +36,8 @@ public class SpawnPieceAtAnimation : BoardAnimation
 
         sequence.OnComplete(() =>
         {
+            ToggleView(true, CreatedPiece);
+            
             CompleteAnimation(context);
         });
     }

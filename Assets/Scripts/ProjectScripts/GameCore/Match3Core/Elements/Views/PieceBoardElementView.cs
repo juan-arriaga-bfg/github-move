@@ -103,6 +103,11 @@ public class PieceBoardElementView : BoardElementView
 
         if (selectionView != null)
         {
+            var timeOffsetComponent = selectionView.gameObject.GetComponent<IWOffsetForTimeShaderAnimation>();
+            if (timeOffsetComponent == null)
+            {
+                selectionView.gameObject.AddComponent<IWOffsetForTimeShaderAnimation>();
+            }
             selectionSprite = selectionView.GetComponent<SpriteRenderer>();
         }
 

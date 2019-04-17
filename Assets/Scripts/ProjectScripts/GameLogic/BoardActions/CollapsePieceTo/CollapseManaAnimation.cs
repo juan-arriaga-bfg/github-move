@@ -20,6 +20,5 @@ public class CollapseManaAnimation : BoardAnimation
             .Insert(0.0f, targetTransform.DOJump(new Vector3(to.x, to.y, targetTransform.position.z), 1, 1, 0.4f).SetEase(Ease.InOutSine))
             .InsertCallback(0.0f, () => ParticleView.Show(R.MagicWandFlyParticle, From.SetZ(BoardLayer.FX.Layer)))
             .OnComplete(() => CompleteAnimation(context));
-   
     }
 }

@@ -151,7 +151,7 @@ public class CrystalPieceView : PieceBoardElementView
             {
                 cache[Character].Add(key, pair.Value);
             }
-            else if (key >= PieceType.EXT_E1.Id && key <= PieceType.EXT_Z9.Id)
+            else if (key >= PieceType.EXT_E1.Id && key <= PieceType.EXT_ZM.Id)
             {
                 cache[Extended].Add(key, pair.Value);
             }

@@ -30,11 +30,34 @@ SpriteAtlas:
       enableTightPacking: 0
     variantMultiplier: 1
     packables:
+    - {fileID: 21300000, guid: a9871511f68da4d4b88a104bf11faaa0, type: 3}
     - {fileID: 21300000, guid: 9fd95432270e96f4eb2dd119e98fae98, type: 3}
     - {fileID: 21300000, guid: 112090c1e38cc23439ee30550a8e9ed5, type: 3}
     - {fileID: 21300000, guid: 8f901b1e71230ec46b04624ff8ebb80d, type: 3}
+    - {fileID: 21300000, guid: 44e076d8bd631ea4190bf85e66133a1d, type: 3}
+    - {fileID: 21300000, guid: ae8bf403cc5e38f4e981075e2d15b271, type: 3}
+    - {fileID: 21300000, guid: 2e77d5f51cad90e4ab1d6d6491609098, type: 3}
+    - {fileID: 21300000, guid: 0a81b044ab50cb44a8aad9baa78037ed, type: 3}
     - {fileID: 21300000, guid: 1d816f45a87f4f6479c05c9c60c86518, type: 3}
     - {fileID: 21300000, guid: 4cf8f5b46cf4d5540bd17557b1338bc8, type: 3}
+    - {fileID: 21300000, guid: c14e2f0e1c816174a885bd84c8778227, type: 3}
+    - {fileID: 21300000, guid: 39b42b85266d3ad4b8f7ae83602a7cc2, type: 3}
+    - {fileID: 21300000, guid: f22d328e73cacf144ae6a25f6804f9a3, type: 3}
+    - {fileID: 21300000, guid: ac5851e25cb6e4944a8eb4cfe4aa771f, type: 3}
+    - {fileID: 21300000, guid: ec383a067d3979743a099a9069f8ba34, type: 3}
+    - {fileID: 21300000, guid: 3a07569e68ba2a241bb090eb2e5a1bd4, type: 3}
+    - {fileID: 21300000, guid: 4638408eab0f3a54393c6b37d8076fb0, type: 3}
+    - {fileID: 21300000, guid: 88ad82f3d80d2814e8a126bdebba6e15, type: 3}
+    - {fileID: 21300000, guid: cfe1654cc20be4e4b84e7e27ce86665e, type: 3}
+    - {fileID: 21300000, guid: 862a3458ab5e6f24b9c99c1f31b077bf, type: 3}
+    - {fileID: 21300000, guid: ac782c3d195b99046aa79130ccd96cce, type: 3}
+    - {fileID: 21300000, guid: f36db6f0c4eca9b498da3770a857f309, type: 3}
+    - {fileID: 21300000, guid: 1c016ca67f4d0fd4686ea0b9d747633a, type: 3}
+    - {fileID: 21300000, guid: 6462e2f691a5add42be914ff02b92620, type: 3}
+    - {fileID: 21300000, guid: 1cbd2cb9c2113ec438cfefc53c8c7fb8, type: 3}
+    - {fileID: 21300000, guid: e888d13e0fe47ad47ad0a1be1fdab9e2, type: 3}
+    - {fileID: 21300000, guid: 0504994b9deca3741a514c608dae1a61, type: 3}
+    - {fileID: 21300000, guid: fd74fd2640e695745ad78f1a1af17c8b, type: 3}
     - {fileID: 21300000, guid: 643ae8ebc67e97f4bb6efc2a81a44207, type: 3}
     - {fileID: 21300000, guid: f7d40aaec317b5a4d9caadc01e19653b, type: 3}
     - {fileID: 21300000, guid: 0f2ef7201aa6de049ad50cae153727f3, type: 3}
@@ -42,33 +65,79 @@ SpriteAtlas:
     - {fileID: 21300000, guid: f0f238cf0d568ba42a64911d7de328d1, type: 3}
     - {fileID: 21300000, guid: ff996768a17c809479f54c506d7b80d0, type: 3}
     - {fileID: 21300000, guid: 7241819afe16a0f4e9203487896ec796, type: 3}
-    totalSpriteSurfaceArea: 163440
+    totalSpriteSurfaceArea: 405380
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 0f2ef7201aa6de049ad50cae153727f3, type: 3}
+  - {fileID: 21300000, guid: f36db6f0c4eca9b498da3770a857f309, type: 3}
+  - {fileID: 21300000, guid: a9871511f68da4d4b88a104bf11faaa0, type: 3}
   - {fileID: 21300000, guid: 112090c1e38cc23439ee30550a8e9ed5, type: 3}
   - {fileID: 21300000, guid: 9fd95432270e96f4eb2dd119e98fae98, type: 3}
+  - {fileID: 21300000, guid: ac5851e25cb6e4944a8eb4cfe4aa771f, type: 3}
+  - {fileID: 21300000, guid: ae8bf403cc5e38f4e981075e2d15b271, type: 3}
+  - {fileID: 21300000, guid: 88ad82f3d80d2814e8a126bdebba6e15, type: 3}
+  - {fileID: 21300000, guid: 0a81b044ab50cb44a8aad9baa78037ed, type: 3}
   - {fileID: 21300000, guid: 4cf8f5b46cf4d5540bd17557b1338bc8, type: 3}
   - {fileID: 21300000, guid: 1d816f45a87f4f6479c05c9c60c86518, type: 3}
+  - {fileID: 21300000, guid: 39b42b85266d3ad4b8f7ae83602a7cc2, type: 3}
+  - {fileID: 21300000, guid: 2e77d5f51cad90e4ab1d6d6491609098, type: 3}
+  - {fileID: 21300000, guid: ec383a067d3979743a099a9069f8ba34, type: 3}
+  - {fileID: 21300000, guid: fd74fd2640e695745ad78f1a1af17c8b, type: 3}
+  - {fileID: 21300000, guid: 1c016ca67f4d0fd4686ea0b9d747633a, type: 3}
+  - {fileID: 21300000, guid: 6462e2f691a5add42be914ff02b92620, type: 3}
   - {fileID: 21300000, guid: 953e2547146681a4bb2d4a191f0cca06, type: 3}
+  - {fileID: 21300000, guid: 862a3458ab5e6f24b9c99c1f31b077bf, type: 3}
   - {fileID: 21300000, guid: ff996768a17c809479f54c506d7b80d0, type: 3}
+  - {fileID: 21300000, guid: 44e076d8bd631ea4190bf85e66133a1d, type: 3}
+  - {fileID: 21300000, guid: 1cbd2cb9c2113ec438cfefc53c8c7fb8, type: 3}
   - {fileID: 21300000, guid: 7241819afe16a0f4e9203487896ec796, type: 3}
+  - {fileID: 21300000, guid: 0504994b9deca3741a514c608dae1a61, type: 3}
   - {fileID: 21300000, guid: 643ae8ebc67e97f4bb6efc2a81a44207, type: 3}
+  - {fileID: 21300000, guid: cfe1654cc20be4e4b84e7e27ce86665e, type: 3}
+  - {fileID: 21300000, guid: ac782c3d195b99046aa79130ccd96cce, type: 3}
+  - {fileID: 21300000, guid: c14e2f0e1c816174a885bd84c8778227, type: 3}
   - {fileID: 21300000, guid: 8f901b1e71230ec46b04624ff8ebb80d, type: 3}
+  - {fileID: 21300000, guid: e888d13e0fe47ad47ad0a1be1fdab9e2, type: 3}
+  - {fileID: 21300000, guid: 4638408eab0f3a54393c6b37d8076fb0, type: 3}
+  - {fileID: 21300000, guid: f22d328e73cacf144ae6a25f6804f9a3, type: 3}
+  - {fileID: 21300000, guid: 3a07569e68ba2a241bb090eb2e5a1bd4, type: 3}
   - {fileID: 21300000, guid: f7d40aaec317b5a4d9caadc01e19653b, type: 3}
   - {fileID: 21300000, guid: f0f238cf0d568ba42a64911d7de328d1, type: 3}
   m_PackedSpriteNamesToIndex:
   - tile_grass_1
+  - map_stone1
+  - border_edge_short_tile
   - bottom_border_alpha
   - border_edge_tile
+  - right_border3_alpha
+  - left_border2_alpha_hole
+  - up_border_grass
+  - left_border3_alpha_hole
   - left_border_alpha_hole
   - left_border_alpha
+  - right_border2_alpha
+  - left_border3_alpha
+  - right_border3_alpha_hole
+  - wall_decoration_waterfall
+  - map_stone2
+  - map_tree1
   - tile_grass_2
+  - map_mashroom2
   - tile_sand_2
+  - left_border2_alpha
+  - wall_decoration_cave
   - tile_water
+  - wall_decoration_roots
   - tile_clay_1
+  - map_flower1
+  - map_mushroom1
+  - left_border_grass
   - bottom_border_alpha_hole
+  - wall_decoration_liana
+  - top_right_wall_height_1
+  - right_border2_alpha_hole
+  - right_border_grass
   - tile_clay_2
   - tile_sand_1
   m_Tag: tiles

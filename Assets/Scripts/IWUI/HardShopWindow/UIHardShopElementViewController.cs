@@ -41,7 +41,7 @@ public class UIHardShopElementViewController : UIShopElementViewController
         var contentEntity = entity as UIShopElementEntity;
 
         isOffer = contentEntity.Products.Count > 1;
-        claimName.Text = contentEntity.NameLabel;
+        claimName.Text = isOffer ? LocalizationService.Get("window.shop.offer.thank", "window.shop.offer.thank") : contentEntity.NameLabel;
         
         if (isOffer == false) return;
         
@@ -102,10 +102,18 @@ public class UIHardShopElementViewController : UIShopElementViewController
         CreateIcon(isLock || isClaimed ? lockAnchor : anchor, isLock ? PieceType.Empty.Abbreviations[0] : contentEntity.ContentId);
 
         if (isClaimed) Sepia = true;
-        if (offer != null) offer.SetActive(contentEntity.Products.Count > 1);
-        if (offerBack != null) offerBack.enabled = !isClaimed;
+        if (offer != null) {offer.SetActive(contentEntity.Products.Count > 1);}
 
         back.color = new Color(1, 1, 1, isClaimed ? 0.5f : 1);
+        if(offerBack != null) offerBack.color = new Color(1, 1, 1, isClaimed ? 0.75f : 1);
+        
+        if (productLabels != null)
+        {
+            foreach (var text in productLabels)
+            {
+                text.TextLabel.alpha = isClaimed ? 0.5f : 1;
+            }
+        }
     }
 
     protected override void OnPurchaseComplete()
@@ -115,6 +123,7 @@ public class UIHardShopElementViewController : UIShopElementViewController
             BoardService.Current.FirstBoard.MarketLogic.CompleteOffer();
             BoardService.Current.FirstBoard.TutorialLogic.UpdateHard();
             BoardService.Current.FirstBoard.MarketLogic.OfferTimer.OnTimeChanged -= UpdateTimer;
+            label.Text = LocalizationService.Get("common.message.sold", "common.message.sold");
         }
         
         base.OnPurchaseComplete();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public abstract class BoardAnimation 
 {
@@ -21,5 +22,44 @@ public abstract class BoardAnimation
 
 	public virtual void StopAnimation(BoardRenderer context)
 	{
+	}
+	
+	public void ToggleView(bool state, Piece targetPiece)
+	{
+		var nextPiece = targetPiece;
+
+		if (nextPiece?.ViewDefinition == null) return;
+
+		var pathfindLockListenerComponent = nextPiece?.GetComponent<PathfindLockListenerComponent>(PathfindLockListenerComponent.ComponentGuid);
+                
+		var views = nextPiece.ViewDefinition.GetViews();
+		for (int j = 0; j < views.Count; j++)
+		{
+			var view = views[j];
+			
+			if (pathfindLockListenerComponent != null && pathfindLockListenerComponent.IsHasPath() == false) continue;
+			
+			view.OnSwap(state);
+		}
+	}
+	
+	public void ToggleView(bool state, List<Piece> targetPieces)
+	{
+		if (targetPieces != null)
+		{
+			for (int i = 0; i < targetPieces.Count; i++)
+			{
+				var nextPiece = targetPieces[i];
+
+				if (nextPiece?.ViewDefinition == null) continue;
+                
+				var views = nextPiece.ViewDefinition.GetViews();
+				for (int j = 0; j < views.Count; j++)
+				{
+					var view = views[j];
+					view.OnSwap(state);
+				}
+			}
+		}
 	}
 }

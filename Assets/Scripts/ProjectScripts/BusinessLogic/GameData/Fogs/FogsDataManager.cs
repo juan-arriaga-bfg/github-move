@@ -336,10 +336,12 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         
         var observer = target.GetComponent<FogObserver>(FogObserver.ComponentGuid);
         
-        if (observer == null || observer.IsRemoved || observer.CanBeFilled() == false || observer.CanBeCleared() == false) return false;
+        if (observer == null || observer.IsRemoved || observer.CanBeFilled(piece, false) == false || observer.CanBeCleared() == false) return false;
         
         observer.Filling(def.SpawnResources.Amount, out var balance);
         observer.OnProgress(targetPosition);
+        observer.TempMana.Remove(piece);
+        
         if (balance <= 0)
         {
             piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction

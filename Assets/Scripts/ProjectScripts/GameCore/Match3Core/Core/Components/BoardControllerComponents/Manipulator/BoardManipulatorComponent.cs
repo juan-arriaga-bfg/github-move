@@ -213,8 +213,6 @@ public class BoardManipulatorComponent : ECSEntity,
 
         if (cachedViewForDrag == null)
         {
-//            var selectedView = GetSelectedBoardElementView();
-            
             if (selectedView == null) return;
             
             var pieceView = selectedView as PieceBoardElementView;
@@ -234,12 +232,9 @@ public class BoardManipulatorComponent : ECSEntity,
             cachedDragDownPos = pos + Vector2.up * 0.5f;
             cameraManipulator.CameraMove.Lock(this);
             isDrag = true;
-            
-            
         }
     }
     
-
     public bool OnSet(Vector2 startPos, Vector2 pos, float duration)
     {
         if (LeanTouch.Fingers.Count > 1)
@@ -343,7 +338,7 @@ public class BoardManipulatorComponent : ECSEntity,
             isTouch = true;
             isFullPass = true;
             
-            var selectedView = GetSelectedBoardElementView();
+            var selectedView = GetSelectedBoardElementView(0);
             if (selectedView != null && selectedView is PieceBoardElementView)
             {
                 var pieceView = selectedView as PieceBoardElementView;
@@ -480,7 +475,12 @@ public class BoardManipulatorComponent : ECSEntity,
         return false;
     }
     
-    protected virtual BoardElementView GetSelectedBoardElementView()
+    /// <summary>
+    /// Get selected view using filter: -1 (all);  0 (only draggable objects + firefly)
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
+    protected virtual BoardElementView GetSelectedBoardElementView(int filter = -1)
     {
         var touchableObjects = cameraManipulator.GetTouchable();
         
@@ -504,6 +504,14 @@ public class BoardManipulatorComponent : ECSEntity,
                 if(view.Piece.Context.BoardLogic.IsLockedCell(position)) continue;
                 
                 coef = position.X * context.BoardDef.Width - position.Y + position.Z;
+            }
+
+            if (filter == 0)
+            {
+                if (touchableObject is UIBoardView)
+                {
+                    coef = int.MinValue;
+                }
             }
 
             if (context.BoardLogic.FireflyLogic.Check(touchableObject as BoardElementView))

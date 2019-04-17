@@ -16,6 +16,8 @@ public class UIBoardView : BoardElementView
     
     private Transform content;
 
+    public LayerMask DefaultCameraLayer = 1;
+
     public virtual bool IsTop { get; set; }
     
     public Canvas GetCanvas()
@@ -84,6 +86,9 @@ public class UIBoardView : BoardElementView
         ResetAnimation();
         UpdateVisibility(false);
         controller = Context.ViewDefinition;
+        
+        DefaultCameraLayer = LayerMask.NameToLayer("Default");
+        CachedTransform.SetLayerRecursive(DefaultCameraLayer);
     }
 
     public override void ResetViewOnDestroy()
