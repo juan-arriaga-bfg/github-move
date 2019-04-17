@@ -4,13 +4,6 @@ using BfgAnalytics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class AirShipDef
-{
-    public int Id;
-    public AirShipView View;
-    public Dictionary<int, int> Payload;
-}
-
 public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
@@ -110,11 +103,13 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
         Vector3 pos = position ?? GetFreePlaceToSpawn();
         
         AirShipView view = context.Context.RendererContext.CreateBoardElement<AirShipView>((int) ViewType.AirShip);
-        view.Init(context.Context.RendererContext, payload);
         view.Id = ++idCounter;
         
-        defs.Add(idCounter, new AirShipDef {Id = idCounter, View = view, Payload = payload});
+        var airShipDef = new AirShipDef {Id = idCounter, View = view, Payload = payload};
+        defs.Add(idCounter, airShipDef);
 
+        view.Init(context.Context.RendererContext, airShipDef);
+        
         view.PlaceTo(pos);
 
         if (animated)
@@ -224,5 +219,26 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
         }
 
         return true;
+    }
+
+    public bool DropPayload(int id, out bool partialDrop, out AirShipDef airShipDef)
+    {
+        partialDrop = false;
+        airShipDef = defs[id];
+        
+        //todo: Drop payload
+        // if dropped all, just
+        // return true;
+        
+        // else if can't drop anything
+        // return false;
+        
+        
+        // else if dropped only part of payload
+        // airShipDef.Payload = xxx;
+        // partialDrop = true;
+        // return false;
+        
+        return false;
     }
 }

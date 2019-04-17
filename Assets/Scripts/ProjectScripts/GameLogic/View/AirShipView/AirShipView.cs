@@ -12,21 +12,15 @@ public class AirShipView : BoardElementView
     private bool isClick;
     private HintArrowView arrow;
 
-    private Dictionary<int, int> payload;
-
-    private List<int> normalizedPieces;
-
     public int Id;
     
-    public void Init(BoardRenderer context, Dictionary<int, int> payload)
+    public void Init(BoardRenderer context, AirShipDef def)
     {
         base.Init(context);
 
-        this.payload = payload;
-        
         isClick = false;
 
-        CreatePieces();
+        UpdatePayload(def);
 
         FixZ();
     }
@@ -41,14 +35,33 @@ public class AirShipView : BoardElementView
         }
     }
 
-    private void CreatePieces()
+    private void ClearPayload()
     {
-        NormalizePiecesList();
-
-        for (int i = 0; i < pieceAnchors.Count && i < normalizedPieces.Count; i++)
+        for (int i = 0; i < pieceAnchors.Count; i++)
         {
             var anchor = pieceAnchors[i];
-            var id = normalizedPieces[i];
+            if (anchor.childCount == 0)
+            {
+                continue;
+            }
+            
+            var child = anchor.GetChild(0);
+            if (child != null)
+            {
+                Context.DestroyElement(child.gameObject);
+            }
+        }
+    }
+    
+    private void UpdatePayload(AirShipDef def)
+    {
+        ClearPayload();
+
+        var list = def.SortedPayload;
+        for (int i = 0; i < pieceAnchors.Count && i < list.Count; i++)
+        {
+            var anchor = pieceAnchors[i];
+            var id = list[i];
             PieceBoardElementView pieceView = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceOutsideOfBoard(id);
             pieceView.transform.SetParent(anchor, false);
             pieceView.transform.localScale = Vector3.one;
@@ -62,28 +75,6 @@ public class AirShipView : BoardElementView
         return new BoardPosition(Context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer);
     }
 
-    /// <summary>
-    /// Convert dictionary into sorted list
-    /// </summary>
-    private void NormalizePiecesList()
-    {
-        normalizedPieces = new List<int>();
-        
-        foreach (var pair in payload)
-        {
-            var pieceId = pair.Key;
-            var count = pair.Value;
-            
-            for (var i = 0; i < count; i++)
-            {
-                var id = pieceId;
-                normalizedPieces.Add(id);
-            }
-        }
-        
-        normalizedPieces.Sort((id1, id2) => id2 - id1);
-    }
-
     public override void OnFastInstantiate()
     {
     }
@@ -95,6 +86,7 @@ public class AirShipView : BoardElementView
         Context.Context.BoardLogic.AirShipLogic.Remove(this);
         CachedTransform.localScale = Vector3.one;
 
+        ClearPayload();
 
         RemoveArrowImmediate();
     }
@@ -134,7 +126,59 @@ public class AirShipView : BoardElementView
 
     public void OnDragEnd()
     {
-        AnimateIdle();
+        if (!FixPosIfNearTheWorldEnd())
+        {
+            AnimateIdle(); 
+        }
+    }
+
+    private bool FixPosIfNearTheWorldEnd()
+    {
+        const float SAFE_ZONE = 1.5f;
+        
+        var manipulator = Context.Context.Manipulator.CameraManipulator;
+        var bounds = manipulator.CurrentCameraSettings.CameraClampRegion;
+        var pos = transform.position;
+
+        bounds.x += SAFE_ZONE;
+        bounds.y += SAFE_ZONE;
+        bounds.width  -= SAFE_ZONE * 2;
+        bounds.height -= SAFE_ZONE * 2;
+
+        if (bounds.Contains(pos))
+        {
+            return false;
+        }
+        
+        Vector2 delta = new Vector2();
+        if (pos.x < bounds.x)
+        {
+            delta.x = bounds.x - pos.x;
+        }
+        
+        if (pos.y < bounds.y)
+        {
+            delta.y = bounds.y - pos.y;
+        }
+        
+        if (pos.x > bounds.x + bounds.width )
+        {
+            delta.x = (bounds.x + bounds.width) - pos.x;
+        }
+        
+        if (pos.y > bounds.y + bounds.height )
+        {
+            delta.y = (bounds.y + bounds.height) - pos.y;
+        }
+
+        DOTween.Kill(CachedTransform);
+
+        CachedTransform.DOMove(delta, 0.5f)
+                       .SetRelative(true)
+                       .SetId(CachedTransform)
+                       .OnComplete(AnimateIdle);
+
+        return true;
     }
 
     public void OnClick()
@@ -143,47 +187,29 @@ public class AirShipView : BoardElementView
 
         isClick = true;
         
-        var boardPos = Context.Context.BoardDef.GetSectorPosition(CachedTransform.position);
-        boardPos.Z = BoardLayer.Piece.Layer;
-        
-        var free = Context.Context.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(boardPos, 1, 100);
-        
-        DOTween.Kill(CachedTransform);
-        
-        if (free.Count == 0)
-        {
-            DOTween.Sequence()
-                .Append(body.DOLocalMoveY(-0.07f, 0.06f))
-                .Append(body.DOLocalMoveY(0.07f, 0.06f))
-                .SetLoops(6)
-                .OnComplete(() =>
-                {
-                    isClick = false;
-                    Move();
-                });
-            
-            return;
-        }
-
-        CurrencyHelper.Purchase(Currency.Firefly.Name, 1);
         RemoveArrowImmediate();
-        
-        Context.Context.ActionExecutor.AddAction(new AirShipPieceSpawnAction
+
+        if (Context.Context.BoardLogic.AirShipLogic.DropPayload(Id, out bool partialDrop, out AirShipDef updatedDef))
         {
-            PieceId = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name).GetNext().Piece,
-            At = free[0],
-            View = this
-        });
-    }
+            AnimateDeath();
+        }
+        else
+        {
+            isClick = false;
 
-    private void Move()
-    {
-        // CachedTransform.DOMove(to, lenght / (GameDataService.Current.ConstantsManager.SpeedFirefly / 10f))
-        //     .SetEase(Ease.Linear)
-        //     .SetId(CachedTransform)
-        //     .OnComplete(() => { Context.DestroyElement(gameObject); });
+            if (partialDrop)
+            {
+                // Remove dropped pieces from cabin
+                UIErrorWindowController.AddError(LocalizationService.Get("Some cool animation for air ship here", "Some cool animation for air ship here"));
+                UpdatePayload(updatedDef);
+            }
+            else // Nothing dropped
+            {
+                UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
+            }
+        }
     }
-
+    
     public void PlaceTo(Vector2 position)
     {
         CachedTransform.position = position;
@@ -192,29 +218,42 @@ public class AirShipView : BoardElementView
     public void AnimateIdle()
     {
         StopAnimation();
-
+        
         const float DIST = 0.25f;
         float TIME = UnityEngine.Random.Range(1.8f, 2.2f);
-        
+
+        var distFromZero = body.localPosition.y;
+        var normalizedDistFromZero = distFromZero / DIST; 
+       
+        // At the first, we should return body to initial position to avoid jitter
         DOTween.Sequence()
                .SetId(body)
+               .Append(body.DOLocalMove(Vector3.zero, TIME * normalizedDistFromZero)
+                           .SetId(body)
+                           .SetEase(Ease.InOutSine))
+               .OnComplete(() =>
+                {
+                    // And then floating animation
+                    DOTween.Sequence()
+                           .SetId(body)
                 
-               .Append(body.DOMove(Vector3.up * DIST, TIME)
-                                      .SetRelative(true)
-                                      .SetId(body)
-                                      .SetEase(Ease.InOutSine))
+                           .Append(body.DOMove(Vector3.up * DIST, TIME)
+                                       .SetRelative(true)
+                                       .SetId(body)
+                                       .SetEase(Ease.InOutSine))
                 
-               .Append(body.DOLocalMove(Vector3.down * DIST, TIME)
-                                      .SetRelative(true)
-                                      .SetId(body)
-                                      .SetEase(Ease.InOutSine))
+                           .Append(body.DOLocalMove(Vector3.down * DIST, TIME)
+                                       .SetRelative(true)
+                                       .SetId(body)
+                                       .SetEase(Ease.InOutSine))
                 
-               .SetLoops(-1);
+                           .SetLoops(-1);
+                });
     }
 
     public void AnimateSpawn()
     {
-        var manipulator = BoardService.Current.FirstBoard.Manipulator.CameraManipulator;
+        var manipulator = Context.Context.Manipulator.CameraManipulator;
             
         if (manipulator.CameraMove.IsLocked == false)
         {
@@ -244,11 +283,12 @@ public class AirShipView : BoardElementView
 
     public void AnimateDeath()
     {
-        
+       // todo: add some animation 
     }
 
     public void StopAnimation()
     {
+        DOTween.Kill(CachedTransform);
         DOTween.Kill(body); 
     }
 
