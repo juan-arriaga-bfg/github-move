@@ -138,6 +138,19 @@ public class DevTools : UIContainerElementViewController
         Debug.Log("OnSpawnFireFlyClick");
         BoardService.Current.FirstBoard.BoardLogic.FireflyLogic.Execute();
     }
+    
+    public void OnSpawnAirShipClick()
+    {
+        Debug.Log("OnSpawnAirShipClick");
+        var pieces = new Dictionary<int, int>
+        {
+            { PieceType.Parse("A2"), 1 },
+            { PieceType.Parse("B3"), 2 },
+            { PieceType.Parse("C4"), 3 },
+        };
+        
+        BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Add(pieces);        
+    }
 
     private void ShowQuestWindow(List<QuestEntity> quests, int index)
     {
@@ -275,7 +288,10 @@ public class DevTools : UIContainerElementViewController
     public void OnDebug2Click()
     {
         Debug.Log("OnDebug2Click");
-       
+
+        OnSpawnAirShipClick();
+        return;
+        
         GameDataService.Current.QuestsManager.StartNewDailyQuest();
         return;
         

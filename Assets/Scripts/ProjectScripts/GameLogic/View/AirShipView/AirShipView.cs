@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
@@ -17,22 +18,44 @@ public class AirShipView : BoardElementView
     
     private bool isClick;
     private HintArrowView arrow;
+
+    private Dictionary<int, int> pieces;
     
-    public void Init(BoardRenderer context, List<int> pieces)
+    public void Init(BoardRenderer context, Dictionary<int, int> pieces)
     {
         base.Init(context);
 
+        this.pieces = pieces;
+        
         isClick = false;
 
+        CreatePieces();
+        
         SyncRendererLayers(new BoardPosition(context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer));
     }
-    
+
+    private void CreatePieces()
+    {
+        List<int> ids = pieces.Keys.ToList();
+        for (var i = 0; i < ids.Count && i < pieceAnchors.Count; i++)
+        {
+            var id = ids[i];
+            PieceBoardElementView pieceView = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceOutsideOfBoard(id);
+            pieceView.transform.SetParent(pieceAnchors[i], false);
+            pieceView.transform.localScale = Vector3.one;
+            pieceView.transform.localPosition = Vector3.zero;
+            pieceView.SyncRendererLayers(new BoardPosition(Context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer));
+        }
+    }
+
     public override void OnFastInstantiate()
     {
     }
     
     public override void OnFastDestroy()
     {
+        StopAnimation();
+        
         DOTween.Kill(CachedTransform);
         
         Context.Context.BoardLogic.AirShipLogic.Remove(this);
@@ -72,22 +95,12 @@ public class AirShipView : BoardElementView
 
     public void OnDragStart()
     {
-        StopFly();
-    }
-
-    public void StopFly()
-    {
-
-    }
-
-    public void StartFly()
-    {
-
+        StopAnimation();
     }
 
     public void OnDragEnd()
     {
-        StartFly();
+        AnimateIdle();
     }
 
     public void OnClick()
@@ -135,5 +148,53 @@ public class AirShipView : BoardElementView
         //     .SetEase(Ease.Linear)
         //     .SetId(CachedTransform)
         //     .OnComplete(() => { Context.DestroyElement(gameObject); });
+    }
+
+    public void PlaceTo(Vector2 position)
+    {
+        CachedTransform.position = position;
+    }
+
+    public void AnimateIdle()
+    {
+        StopAnimation();
+
+        const float DIST = 0.25f;
+        const float TIME = 2f;
+        
+        DOTween.Sequence()
+               .SetId(CachedTransform)
+                
+               .Append(CachedTransform.DOMove(Vector3.up * DIST, TIME)
+                                      .SetRelative(true)
+                                      .SetId(CachedTransform)
+                                      .SetEase(Ease.InOutSine))
+                
+               .Append(CachedTransform.DOLocalMove(Vector3.down * DIST, TIME)
+                                      .SetRelative(true)
+                                      .SetId(CachedTransform)
+                                      .SetEase(Ease.InOutSine))
+                
+               .SetLoops(-1);
+    }
+
+    public void AnimateSpawn()
+    {
+        
+    }
+
+    public void AnimateDeath()
+    {
+        
+    }
+
+    public void StopAnimation()
+    {
+        DOTween.Kill(CachedTransform); 
+    }
+
+    private void OnDestroy()
+    {
+        StopAnimation();
     }
 }

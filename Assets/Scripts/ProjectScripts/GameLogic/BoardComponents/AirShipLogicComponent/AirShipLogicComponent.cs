@@ -66,11 +66,15 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
 	}
 
 
-    public void Add(List<int> pieces)
+    public void Add(Dictionary<int, int> pieces)
     {
         var view = context.Context.RendererContext.CreateBoardElement<AirShipView>((int) ViewType.AirShip);
         view.Init(context.Context.RendererContext, pieces);
         
         views.Add(view);
+        
+        var pos = BoardService.Current.FirstBoard.BoardDef.GetSectorCenterWorldPosition(20, 12, 1);
+        view.PlaceTo(pos);
+        view.AnimateIdle();
     }
 }

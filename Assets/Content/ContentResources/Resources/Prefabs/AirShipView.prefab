@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 114902888694543006}
   - component: {fileID: 1801659329957999438}
   m_Layer: 0
-  m_Name: AirShip
+  m_Name: AirShipView
   m_TagString: Untagged
   m_Icon: {fileID: 4660412927644837186, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -225,7 +225,12 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   body: {fileID: 4923283119704706}
-  Plume: {fileID: 0}
+  pieceAnchors:
+  - {fileID: 7783655497773909304}
+  - {fileID: 4328909624590540852}
+  - {fileID: 3105337572017806225}
+  - {fileID: 9036005512453816728}
+  - {fileID: 80895375664848106}
 --- !u!1 &1964630885382908170
 GameObject:
   m_ObjectHideFlags: 0

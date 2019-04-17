@@ -945,6 +945,21 @@ public partial class BoardRenderer : ECSEntity
         return elementView;
     }
 
+    public BoardElementView CreateElementOutsideOfBoard(int elementType)
+    {
+        var elementView = CreateBoardElement<BoardElementView>(elementType);
+
+        if (elementView != null)
+        {
+            elementView.CachedTransform.SetParent(ViewRoot);
+            elementView.CachedTransform.localPosition = Vector3.zero;
+            elementView.CachedTransform.localRotation = Quaternion.identity;
+            elementView.CachedTransform.localScale = Vector3.one * context.BoardDef.GlobalPieceScale;
+        }
+
+        return elementView;
+    }
+
     public virtual void RegisterElement(BoardElementView boardElementView, BoardPosition boardPosition)
     {
         if (cachedViewMatrix.ContainsKey(boardPosition) == false)

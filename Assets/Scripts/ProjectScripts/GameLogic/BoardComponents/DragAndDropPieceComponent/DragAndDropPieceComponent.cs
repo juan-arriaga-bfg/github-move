@@ -109,19 +109,39 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
         {
             fakeBoardElement.Init(context.Context.RendererContext, fakePiece);
 
-            var particleSystems = fakeBoardElement.GetComponentsInChildren<ParticleSystem>();
-            for (int i = 0; i < particleSystems.Length; i++)
-            {
-                var particleSystem = particleSystems[i];
-                var emission = particleSystem.emission;
-                emission.enabled = false;
-            }
-            
-            var touchRegion = fakeBoardElement.GetComponent<TouchRegion>();
-            if (touchRegion != null) touchRegion.enabled = false;
+            DisableTouchAndParticlesForElement(fakeBoardElement);
         }
 
         return fakeBoardElement;
+    }
+    
+    public virtual PieceBoardElementView CreateFakePieceOutsideOfBoard(int targetPieceId)
+    {
+        var fakePiece = context.Context.CreatePieceFromType(targetPieceId);
+        var fakeBoardElement = context.Context.RendererContext.CreateElementOutsideOfBoard(fakePiece.PieceType) as PieceBoardElementView;
+
+        if (fakeBoardElement != null)
+        {
+            fakeBoardElement.Init(context.Context.RendererContext, fakePiece);
+
+            DisableTouchAndParticlesForElement(fakeBoardElement);
+        }
+
+        return fakeBoardElement;
+    }
+
+    private static void DisableTouchAndParticlesForElement(PieceBoardElementView fakeBoardElement)
+    {
+        var particleSystems = fakeBoardElement.GetComponentsInChildren<ParticleSystem>();
+        for (int i = 0; i < particleSystems.Length; i++)
+        {
+            var particleSystem = particleSystems[i];
+            var emission = particleSystem.emission;
+            emission.enabled = false;
+        }
+
+        var touchRegion = fakeBoardElement.GetComponent<TouchRegion>();
+        if (touchRegion != null) touchRegion.enabled = false;
     }
 
     public virtual PieceBoardElementView CreateFakePiece(int targetPieceId, BoardPosition fakePosition)
