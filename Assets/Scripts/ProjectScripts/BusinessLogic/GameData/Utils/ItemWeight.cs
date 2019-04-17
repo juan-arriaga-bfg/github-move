@@ -8,7 +8,6 @@ public class ItemWeight
     
     public string Uid { get; set; }
     public int Weight { get; set; }
-    public bool Override { get; set; }
     
     public int Piece => pieceType == -1 ? (pieceType = PieceType.Parse(Uid)) : pieceType;
 
@@ -19,7 +18,7 @@ public class ItemWeight
 
     public override string ToString()
     {
-        return $"Uid: {Uid} - Weight: {Weight} - Override: {Override}";
+        return $"Uid: {Uid} - Weight: {Weight}";
     }
     
     public static ItemWeight GetRandomItem(List<ItemWeight> weights)
@@ -40,31 +39,6 @@ public class ItemWeight
         }
         
         return null;
-    }
-    
-    public static Dictionary<int, int> GetRandomPieces(int amount, List<ItemWeight> weights, bool isExclude = false)
-    {
-        var cash = new List<ItemWeight>(weights);
-        var result = new Dictionary<int, int>();
-        
-        for (var i = amount - 1; i >= 0; i--)
-        {
-            var item = GetRandomItem(cash);
-            
-            if (item == null) continue;
-
-            if (isExclude) cash.Remove(item);
-            
-            if (result.ContainsKey(item.Piece) == false)
-            {
-                result.Add(item.Piece, 1);
-                continue;
-            }
-            
-            result[item.Piece]++;
-        }
-        
-        return result;
     }
     
     public static int GetRandomItemIndex(List<ItemWeight> weights)
@@ -96,41 +70,25 @@ public class ItemWeight
     
     public static List<ItemWeight> ReplaceWeights(List<ItemWeight> oldWeights, List<ItemWeight> nextWeights)
     {
-        if (oldWeights == null) return nextWeights == null ? new List<ItemWeight>() : new List<ItemWeight>(nextWeights);
-        if (nextWeights == null) return new List<ItemWeight>(oldWeights);
-        
         var weights = new List<ItemWeight>();
-
-        foreach (var weight in oldWeights)
-        {
-            var next = nextWeights.Find(w => w.Uid == weight.Uid);
-
-            if (next == null)
-            {
-                weights.Add(weight.Copy());
-                continue;
-            }
-            
-            if (next.Override)
-            {
-                if(next.Weight > 0) weights.Add(next.Copy());
-                continue;
-            }
-            
-            var newWeight = weight.Copy();
-
-            newWeight.Weight += next.Weight;
-
-            weights.Add(newWeight);
-        }
         
-        foreach (var weight in nextWeights)
+        if (oldWeights == null) oldWeights = new List<ItemWeight>();
+        if (nextWeights == null) nextWeights = new List<ItemWeight>();
+        
+        foreach (var item in oldWeights)
         {
-            var old = oldWeights.Find(w => w.Uid == weight.Uid);
+            var next = nextWeights.Find(w => w.Uid == item.Uid);
+
+            if (next != null) continue;
             
-            if(old != null) continue;
+            weights.Add(item.Copy());
+        }
+
+        foreach (var item in nextWeights)
+        {
+            if (item.Weight == 0) continue;
             
-            weights.Add(weight.Copy());
+            weights.Add(item.Copy());
         }
         
         return weights;
