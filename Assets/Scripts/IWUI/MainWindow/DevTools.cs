@@ -143,17 +143,17 @@ public class DevTools : UIContainerElementViewController
     public void OnSpawnAirShipClick()
     {
         Debug.Log("OnSpawnAirShipClick");
-        //
-        // var pieces1 = new Dictionary<int, int>
-        // {
-        //     { PieceType.Parse("A1"), 1 },
-        //     { PieceType.Parse("B3"), 1 },
-        //     { PieceType.Parse("A2"), 1 },
-        //     { PieceType.Parse("B5"), 1 },
-        // };
-        //
-        // BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Add(pieces1);        
-        // return;
+        
+        var pieces1 = new Dictionary<int, int>
+        {
+            { PieceType.Parse("A1"), 1 },
+            { PieceType.Parse("B3"), 1 },
+            { PieceType.Parse("A2"), 1 },
+            { PieceType.Parse("B5"), 1 },
+        };
+        
+        BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Add(pieces1);        
+        return;
         
         var allIds = PieceType.GetAllIds();
         
