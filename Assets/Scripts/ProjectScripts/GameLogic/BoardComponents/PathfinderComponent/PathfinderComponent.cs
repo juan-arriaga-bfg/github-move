@@ -18,6 +18,13 @@ public class PathfinderComponent:ECSEntity
     {
         var boardLogic = board.BoardLogic;
         
+        var tileDefId = GameDataService.Current.FieldManager.GetTileId(position.X, position.Y);
+        var isRelief = tileDefId != BoardTiles.WATER_TILE_ID && BoardTiles.GetDefs()[tileDefId].IsLock;
+        if (isRelief)
+        {
+            return true;
+        }
+        
         if (!position.IsValidFor(board.BoardDef.Width, board.BoardDef.Height) || boardLogic.IsLockedCell(position, new List<Type>
         {
             typeof(DragAndCheckMatchAction),
@@ -143,12 +150,25 @@ public class PathfinderComponent:ECSEntity
     {
         var uncheckedNeigbours = position.Neighbors();
         
+        var baseTileDefId = GameDataService.Current.FieldManager.GetTileId(position.X, position.Y);
+        var baseIsRelief = baseTileDefId != BoardTiles.WATER_TILE_ID && BoardTiles.GetDefs()[baseTileDefId].IsLock;
+            
         var checkedNeigbours = new List<BoardPosition>();
         var count = uncheckedNeigbours.Count;
         for (var i = 0; i < count; i++)
         {
             var currentNeighbour = uncheckedNeigbours[i];
             var targetPiece = board.BoardLogic.GetPieceAt(currentNeighbour);
+            
+            var currentTileDefId = GameDataService.Current.FieldManager.GetTileId(currentNeighbour.X, currentNeighbour.Y);
+            var currentIsRelief = currentTileDefId != BoardTiles.WATER_TILE_ID && BoardTiles.GetDefs()[currentTileDefId].IsLock;
+
+            if (baseIsRelief && currentIsRelief)
+            {
+                unavailiable.Add(targetPiece.CachedPosition);
+                continue;
+            }
+            
             if(!checkedPositions.Contains(currentNeighbour) && predicate.Invoke(currentNeighbour))
                 checkedNeigbours.Add(currentNeighbour); 
             else if(targetPiece != null && !unavailiable.Contains(targetPiece.CachedPosition))
