@@ -13,11 +13,6 @@
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionBuilding())
 			.RegisterComponent(new TouchReactionConditionComponent()));
-        
-		piece.RegisterComponent(new PiecePathfindBoardCondition(piece.Context, piece)
-			.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
-        
-		AddPathfindLockObserver(piece, true);
 		
 		return piece;
 	}

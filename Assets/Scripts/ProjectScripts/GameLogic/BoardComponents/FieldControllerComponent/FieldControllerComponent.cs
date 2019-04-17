@@ -96,7 +96,14 @@ public class FieldControllerComponent : IECSComponent
                 controller.BoardLogic.PieceFlyer.Locker.Unlock(controller);
                 
                 controller.AreaAccessController?.FullRecalculate();
-                PathfindLockObserver.LoadPathfindLock();
+
+                var fogPositions = controller.BoardLogic.PositionsCache.GetPiecePositionsByType(PieceType.Fog.Id);
+                foreach (var fog in fogPositions)
+                {
+                    var fogPiece = controller.BoardLogic.GetPieceAt(fog);
+                    controller.PathfindLocker.RecalcCacheOnPieceAdded(controller.AreaAccessController.AvailiablePositions, fogPiece.CachedPosition, fogPiece);
+                }
+                
                 controller.PathfindLocker.OnAddComplete(BoardPosition.GetRect(BoardPosition.Zero(), context.BoardDef.Width, context.BoardDef.Height));
                 
                 var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);

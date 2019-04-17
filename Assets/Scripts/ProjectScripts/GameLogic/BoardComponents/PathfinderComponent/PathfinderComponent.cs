@@ -14,14 +14,36 @@ public class PathfinderComponent:ECSEntity
         board = entity as BoardController;
     }
 
-    public Predicate<BoardPosition> GetCondition(Piece piece)
+    private bool Check(Piece context, BoardPosition position)
     {
-        var boardCondition = piece?.BoardCondition;
-        if (boardCondition == null)
-            return (_) => true;
-        return boardCondition.Check;
+        var boardLogic = board.BoardLogic;
+        
+        if (!position.IsValidFor(board.BoardDef.Width, board.BoardDef.Height) || boardLogic.IsLockedCell(position, new List<Type>
+        {
+            typeof(DragAndCheckMatchAction),
+            typeof(ModificationPiecesAction)
+        })) return false;
+        
+        var pieceInCurrentPos = boardLogic.GetPieceAt(position);
+
+        if (pieceInCurrentPos == null || pieceInCurrentPos == context)
+        {
+            return true;
+        }
+
+        var ignorablePieceTypes = PathfindIgnores.GetIgnoreList(context.PieceType);
+        if (context.PieceType == PieceType.Fog.Id)
+        {
+            return !boardLogic.IsLockedCell(position) && ignorablePieceTypes.Contains(pieceInCurrentPos.PieceType);
+        }
+
+        return ignorablePieceTypes.Contains(pieceInCurrentPos.PieceType);
     }
     
+    public Predicate<BoardPosition> GetCondition(Piece piece)
+    {
+        return (pos) => Check(piece, pos);
+    }
     
     //A* pathfinding algorithm
     public virtual bool HasPath(BoardPosition from, HashSet<BoardPosition> to, out List<BoardPosition> blockagePositions,
