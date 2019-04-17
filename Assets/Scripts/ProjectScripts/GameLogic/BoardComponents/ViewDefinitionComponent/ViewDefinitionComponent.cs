@@ -34,6 +34,15 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         OnRemoveFromBoard(CachedPosition, thisContext);
     }
 
+    public void SetFade(float alpha, float duration)
+    {
+        if (container == null) return;
+        
+        DOTween.Kill(container);
+        var canvasGroup = container.GetCanvasGroup();
+        canvasGroup.DOFade(alpha, duration).SetId(container);
+    }
+
     public bool Visible
     {
         get => container != null && container.GetCanvasGroup().alpha > 0;

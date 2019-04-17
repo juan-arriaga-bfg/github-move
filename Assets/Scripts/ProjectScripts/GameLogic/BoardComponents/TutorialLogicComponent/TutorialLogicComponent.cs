@@ -210,7 +210,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
                 
             var pieceView = Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
 
-            if (pieceEntity.ViewDefinition != null) pieceEntity.ViewDefinition.Visible = alpha >= 1;
+            if (pieceEntity.ViewDefinition != null) pieceEntity.ViewDefinition.SetFade(alpha > 0.99f ? 1f : 0f, 1f);
             
             if (pieceView != null) pieceView.SetFade(alpha, 1f);
         }

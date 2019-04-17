@@ -133,13 +133,17 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             }
             else
             {
-                material
-                    .DOFloat(alpha, propName, duration)
-                    .SetId(rend)
-                    .OnComplete(() =>
-                    {
-                        if (alpha >= 1f) rend.ResetDefaultMaterial();
-                    });
+                if (material.HasProperty(propName))
+                {
+                    material
+                        .DOFloat(alpha, propName, duration)
+                        .SetId(rend)
+                        .OnComplete(() =>
+                        {
+                            if (alpha >= 1f) rend.ResetDefaultMaterial();
+                        });
+                }
+                
             }
         }
     }
