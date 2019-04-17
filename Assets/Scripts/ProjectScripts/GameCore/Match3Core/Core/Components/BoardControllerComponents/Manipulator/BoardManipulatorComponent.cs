@@ -174,8 +174,6 @@ public class BoardManipulatorComponent : ECSEntity,
         if (pieceView != null && context.BoardLogic.IsLockedCell(pieceView.Piece.CachedPosition) == false && pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero()) == false)
         {
             pieceView.OnTap(pieceView.Piece.CachedPosition, pos);
-
-            pieceView.SetFade(tapCount > 1 ? 1f : 0.5f, 1f);
             
             if (pieceView.AvailiableLockTouchMessage() && !context.PathfindLocker.HasPath(pieceView.Piece))
             {
