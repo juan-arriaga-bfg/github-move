@@ -109,7 +109,7 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
         {
             fakeBoardElement.Init(context.Context.RendererContext, fakePiece);
 
-            DisableTouchAndParticlesForElement(fakeBoardElement);
+            DisableTouchAndEffectsForElement(fakeBoardElement);
         }
 
         return fakeBoardElement;
@@ -124,13 +124,13 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
         {
             fakeBoardElement.Init(context.Context.RendererContext, fakePiece);
 
-            DisableTouchAndParticlesForElement(fakeBoardElement);
+            DisableTouchAndEffectsForElement(fakeBoardElement);
         }
 
         return fakeBoardElement;
     }
 
-    private static void DisableTouchAndParticlesForElement(PieceBoardElementView fakeBoardElement)
+    private static void DisableTouchAndEffectsForElement(PieceBoardElementView fakeBoardElement)
     {
         var particleSystems = fakeBoardElement.GetComponentsInChildren<ParticleSystem>();
         for (int i = 0; i < particleSystems.Length; i++)
@@ -139,6 +139,8 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
             var emission = particleSystem.emission;
             emission.enabled = false;
         }
+        
+        fakeBoardElement.StopAllAnimations();
 
         var touchRegion = fakeBoardElement.GetComponent<TouchRegion>();
         if (touchRegion != null) touchRegion.enabled = false;
