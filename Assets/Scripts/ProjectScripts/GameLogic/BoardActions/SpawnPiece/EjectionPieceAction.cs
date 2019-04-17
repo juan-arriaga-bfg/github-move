@@ -8,6 +8,7 @@ public class EjectionPieceAction : IBoardAction
 
 	public BoardPosition? From;
 	public Func<BoardPosition> GetFrom;
+	public List<BoardPosition> To;
 	
 	public Dictionary<int, int> Pieces { get; set; }
 	
@@ -26,11 +27,14 @@ public class EjectionPieceAction : IBoardAction
 		
 		foreach (var pair in Pieces)
 		{
-			var field = new List<BoardPosition>();
-        
-			if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From.Value, field, pair.Value) == false)
+			var field = To ?? new List<BoardPosition>();
+
+			if (field.Count < pair.Value)
 			{
-				break;
+				if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From.Value, field, pair.Value) == false)
+				{
+					continue;
+				}
 			}
 			
 			foreach (var pos in field)
