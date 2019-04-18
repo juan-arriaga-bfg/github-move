@@ -550,4 +550,5 @@ public class R
      public const string I9Piece = "I9Piece";
      public const string J9Piece = "J9Piece";
      public const string ObstacleProgressView = "ObstacleProgressView";
+     public const string DebugId = "DebugId";
 }

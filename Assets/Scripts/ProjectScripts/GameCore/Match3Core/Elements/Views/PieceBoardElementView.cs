@@ -81,6 +81,8 @@ public class PieceBoardElementView : BoardElementView
     }
     
     [SerializeField] private HintArrowView arrow;
+
+    private DebugTextView labelId;
     
     public virtual void Init(BoardRenderer context, Piece piece)
     {
@@ -119,6 +121,30 @@ public class PieceBoardElementView : BoardElementView
         CacheDefaultMaterials();
         
         CheckLock();
+        
+#if DEBUG
+        if (DevTools.IsIdsEnabled) ShowId(true);
+#endif
+
+    }
+    
+    public void ShowId(bool isShow)
+    {
+        if (isShow)
+        {
+            labelId = Context.CreateElement((int) ViewType.DebugId).GetComponent<DebugTextView>();
+            labelId.SetId(Piece.PieceType);
+            labelId.transform.SetParent(CachedTransform, false);
+            AddToLayerCache(labelId.gameObject);
+            SyncRendererLayers(Piece.CachedPosition);
+            return;
+        }
+        
+        if(labelId == null) return;
+        
+        RemoveFromLayerCache(labelId.gameObject);
+        Context.DestroyElement(labelId.gameObject);
+        labelId = null;
     }
 
     public Vector2 GetUIPosition(ViewType key)
@@ -430,6 +456,10 @@ public class PieceBoardElementView : BoardElementView
         
         DestroyDropEffect();
         RemoveArrow();
+        
+#if DEBUG
+        ShowId(false);
+#endif
         
         base.ResetViewOnDestroy();
     }

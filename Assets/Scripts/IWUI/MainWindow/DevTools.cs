@@ -31,7 +31,9 @@ public class DevTools : UIContainerElementViewController
     private static bool isTutorialDisabled = true;
     private static bool isRemoverDebugDisabled = true;
 #endif
+    
     private bool isEnabled = false;
+    public static bool IsIdsEnabled = false;
     
     public override void OnViewInit(IWUIWindowView context)
     {
@@ -91,7 +93,7 @@ public class DevTools : UIContainerElementViewController
         UIService.Get.ShowWindow(UIWindowType.QuestCheatSheetWindow);
     }
     
-    private List<DebugCellView> cells = new List<DebugCellView>();
+    private List<DebugTextView> cells = new List<DebugTextView>();
     
     public void OnToggleCells(bool isChecked)
     {
@@ -104,7 +106,7 @@ public class DevTools : UIContainerElementViewController
                 board.RendererContext.DestroyElement(cell);
             }
             
-            cells = new List<DebugCellView>();
+            cells = new List<DebugTextView>();
             return;
         }
         
@@ -114,9 +116,32 @@ public class DevTools : UIContainerElementViewController
             {
                 //if(board.BoardLogic.IsLockedCell(new BoardPosition(i, j, 1))) continue;
                 
-                var cell = board.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell, new BoardPosition(i, j, BoardLayer.MAX.Layer));
+                var cell = board.RendererContext.CreateBoardElementAt<DebugTextView>(R.DebugCell, new BoardPosition(i, j, BoardLayer.MAX.Layer));
                 cell.SetIndex(i, j);
                 cells.Add(cell);
+            }
+        }
+    }
+
+    public void OnToggleIds(bool isChecked)
+    {
+        IsIdsEnabled = !isChecked;
+        
+        var logic = BoardService.Current.FirstBoard.BoardLogic;
+        var cache = new Dictionary<int, List<BoardPosition>>(logic.PositionsCache.Cache);
+
+        cache.Remove(PieceType.Fog.Id);
+        cache.Remove(PieceType.LockedEmpty.Id);
+
+        foreach (var positions in cache.Values)
+        {
+            foreach (var position in positions)
+            {
+                var piece = logic.GetPieceAt(position);
+
+                if (piece?.ActorView == null) continue;
+                
+                piece.ActorView.ShowId(IsIdsEnabled);
             }
         }
     }

@@ -22,4 +22,5 @@
     FogProgress = -1018,
     MineProgress = -1019,
     ObstacleProgress = -1020,
+    DebugId = -1021,
 }
