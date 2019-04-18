@@ -1272,9 +1272,13 @@ public partial class BoardRenderer : ECSEntity
         
         public override string ToString()
         {
-            // return $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)} BL:{BoolToString(neighborBL)}</mspace>";
-            return $"<mspace=1.5em>id:{tileId} T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
-            //return $"<mspace=1.5em>L:{floorDiffT}\nB:{floorDiffR}</mspace>";  
+            // return $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
+            // // return $"<mspace=1.5em>id:{tileId} T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
+            // //return $"<mspace=1.5em>L:{floorDiffT}\nB:{floorDiffR}</mspace>";  
+            
+            var str1 = $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
+            var str2 = $"<mspace=1.5em>id:{tileId} T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
+            return $"{str1}\n{str2}";
         }
     }
     
@@ -1477,6 +1481,19 @@ public partial class BoardRenderer : ECSEntity
                         CreateBorder(x, y, meta.neighborBL ? R.BorderLeft2Hole : R.BorderLeft2);
                     }
                 }
+
+#if DEBUG
+                if (!meta.neighborT && !meta.neighborTR && meta.floorDiffR > 0)
+                {
+                    string scheme =
+                        "WRONG:    |   CORRECT: \n" +
+                        "10  10    |   10  10   \n" +
+                        "21  302   |   10  302  \n" +
+                        "21  302   |   21  302  \n";
+
+                    IW.Logger.LogError($"[BoardRenderer] => CreateBorders: Unsupported case for tile {x},{y}. Use 'ladder' here!\n{scheme}");
+                }
+#endif
             }
         }
     }
