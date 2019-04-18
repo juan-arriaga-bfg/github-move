@@ -1249,8 +1249,9 @@ public partial class BoardRenderer : ECSEntity
         GameObject water = (GameObject) GameObject.Instantiate(waterPrefab);
     }
 
-    private struct Meta 
+    private struct Meta
     {
+        public int tileId;
         public bool neighborR ;
         public bool neighborL ;
         public bool neighborT ;
@@ -1272,7 +1273,7 @@ public partial class BoardRenderer : ECSEntity
         public override string ToString()
         {
             // return $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)} BL:{BoolToString(neighborBL)}</mspace>";
-            return $"<mspace=1.5em>T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
+            return $"<mspace=1.5em>id:{tileId} T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
             //return $"<mspace=1.5em>L:{floorDiffT}\nB:{floorDiffR}</mspace>";  
         }
     }
@@ -1298,37 +1299,37 @@ public partial class BoardRenderer : ECSEntity
         
         Dictionary<string, string[]> props = new Dictionary<string, string[]>
         {
-            {
-                R.BorderWallRight1, new[]
-                {
-                    R.BorderWallRight1_Prop_1,
-                    R.BorderWallRight1_Prop_2,
-                    R.BorderWallRight1_Prop_3,
-                    R.BorderWallRight1_Prop_4,
-                    R.BorderWallRight1_Prop_5,
-                }
-            },
-            {
-                R.BorderWallTop1, new[]
-                {
-                    R.BorderWallTop1_Prop_1,
-                    R.BorderWallTop1_Prop_2,
-                    R.BorderWallTop1_Prop_3,
-                    null
-                }
-            },
-            {
-                R.BorderWallBottomLeft1, new[]
-                {
-                    R.BorderWallBottomLeft1_Prop_1,
-                }
-            },
-            {
-                R.BorderWallTopRight1, new[]
-                {
-                    R.BorderWallTopRight1_Prop_1,
-                }
-            }
+            // {
+            //     R.BorderWallRight1, new[]
+            //     {
+            //         R.BorderWallRight1_Prop_1,
+            //         R.BorderWallRight1_Prop_2,
+            //         R.BorderWallRight1_Prop_3,
+            //         R.BorderWallRight1_Prop_4,
+            //         R.BorderWallRight1_Prop_5,
+            //     }
+            // },
+            // {
+            //     R.BorderWallTop1, new[]
+            //     {
+            //         R.BorderWallTop1_Prop_1,
+            //         R.BorderWallTop1_Prop_2,
+            //         R.BorderWallTop1_Prop_3,
+            //         null
+            //     }
+            // },
+            // {
+            //     R.BorderWallBottomLeft1, new[]
+            //     {
+            //         R.BorderWallBottomLeft1_Prop_1,
+            //     }
+            // },
+            // {
+            //     R.BorderWallTopRight1, new[]
+            //     {
+            //         R.BorderWallTopRight1_Prop_1,
+            //     }
+            // }
         };
 
         void CreateBorder(int x, int y, string item)
@@ -1373,7 +1374,7 @@ public partial class BoardRenderer : ECSEntity
                     continue;
                 }
 
-                Meta meta = new Meta();
+                Meta meta = new Meta {tileId = titleId};
 
                 int currentHeight = tilesDefs[titleId].Height;
 
@@ -1399,8 +1400,8 @@ public partial class BoardRenderer : ECSEntity
                 meta.floorDiffBL = tilesDefs[idBL].Height - currentHeight;
                 meta.floorDiffTR = tilesDefs[idTR].Height - currentHeight;
                 
-                // DebugCellView debugView = BoardService.Current.FirstBoard.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell2, new BoardPosition(x, y, BoardLayer.MAX.Layer));
-                // debugView.SetText(meta.ToString());
+                DebugCellView debugView = BoardService.Current.FirstBoard.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell2, new BoardPosition(x, y, BoardLayer.MAX.Layer));
+                debugView.SetText(meta.ToString());
 
                 // Walls
                 if (meta.neighborT && meta.neighborR && meta.floorDiffT == 1 && meta.floorDiffR == 1)
