@@ -551,4 +551,7 @@ public class R
      public const string J9Piece = "J9Piece";
      public const string ObstacleProgressView = "ObstacleProgressView";
      public const string DebugId = "DebugId";
+     public const string AirShipView = "AirShipView";
+     public const string DestroyAirShipAnimation = "DestroyAirShipAnimation";
+     public const string SpawnAirShipAnimation = "SpawnAirShipAnimation";
 }

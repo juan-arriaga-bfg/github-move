@@ -61,13 +61,13 @@ public class EmptyCellsFinderComponent : IECSComponent
 		return result;
 	}
 	
-	public bool FindNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius = 3)
+	public bool FindNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int amount, int radius = 3)
 	{
 		for (var i = 0; i < radius; i++)
 		{
-			FindRingWithPointInCenter(point, field, count, i);
+			FindRingWithPointInCenter(point, field, amount, i);
 				
-			if (field.Count >= count) return true;
+			if (field.Count >= amount) return true;
 		}
 		
 		return field.Count != 0;
@@ -159,7 +159,7 @@ public class EmptyCellsFinderComponent : IECSComponent
 
 		return resultCollection;
 	}
-
+	
 	public bool CheckFreeSpaceNearPosition(BoardPosition position, int amount)
 	{
 		if (amount == 0) return true;
@@ -170,7 +170,7 @@ public class EmptyCellsFinderComponent : IECSComponent
 		
 		return free.Count >= amount;
 	}
-
+	
 	public bool CheckFreeSpaceReward(int amount, bool isMessageShow, out BoardPosition target)
 	{
 		var board = BoardService.Current.FirstBoard;
@@ -186,7 +186,7 @@ public class EmptyCellsFinderComponent : IECSComponent
 
 		foreach (var position in positions)
 		{
-			if(CheckFreeSpaceNearPosition(position, amount) == false) continue;
+			if (CheckFreeSpaceNearPosition(position, amount) == false) continue;
 			
 			target = position;
 			return true;
@@ -309,7 +309,13 @@ public class EmptyCellsFinderComponent : IECSComponent
 
 	private bool AddIsEmpty(BoardPosition point, List<BoardPosition> field, int count)
 	{
-		if (point.IsValidFor(context.Context.BoardDef.Width, context.Context.BoardDef.Height) && context.IsLockedCell(point) == false && context.IsEmpty(point)) field.Add(point);
+		if (point.IsValidFor(context.Context.BoardDef.Width, context.Context.BoardDef.Height)
+		    && context.IsLockedCell(point) == false
+		    && context.IsEmpty(point)
+		    && field.IndexOf(point) == -1)
+		{
+			field.Add(point);
+		}
 		
 		return field.Count == count;
 	}

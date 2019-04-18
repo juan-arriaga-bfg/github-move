@@ -5423,5 +5423,20 @@
     "Uid": "DebugId",
     "ResourcePath": "Prefabs\\BoardUI/DebugId",
     "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "AirShipView",
+    "ResourcePath": "Prefabs/AirShipView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "DestroyAirShipAnimation",
+    "ResourcePath": "Prefabs\\Animations/DestroyAirShipAnimation",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "SpawnAirShipAnimation",
+    "ResourcePath": "Prefabs\\Animations/SpawnAirShipAnimation",
+    "IsGenerateAutoName": true
   }
 ]

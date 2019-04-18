@@ -63,4 +63,9 @@ public class HighlightedPieceView : PieceBoardElementView
         
         StartAnimation();
     }
+
+    public override void StopAllAnimations()
+    {
+        DOTween.Kill(body);
+    }
 }

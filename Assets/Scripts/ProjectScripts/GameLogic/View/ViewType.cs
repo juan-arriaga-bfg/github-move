@@ -23,4 +23,5 @@
     MineProgress = -1019,
     ObstacleProgress = -1020,
     DebugId = -1021,
+    AirShip = -1022,
 }

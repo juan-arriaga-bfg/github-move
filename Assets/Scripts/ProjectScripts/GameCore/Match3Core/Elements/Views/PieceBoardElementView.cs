@@ -625,4 +625,9 @@ public class PieceBoardElementView : BoardElementView
     {
         return true;
     }
+
+    public virtual void StopAllAnimations()
+    {
+        
+    }
 }

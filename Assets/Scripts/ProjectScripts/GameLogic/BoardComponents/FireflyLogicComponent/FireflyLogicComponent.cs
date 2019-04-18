@@ -4,7 +4,7 @@ using BfgAnalytics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
+public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IDraggableFlyingObjectLogic
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
