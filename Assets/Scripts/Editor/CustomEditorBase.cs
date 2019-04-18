@@ -35,6 +35,15 @@ public class CustomEditorBase:EditorWindow
         EditorGUILayout.EndScrollView();
     }
 
+    protected void HorizontalArea(Action body)
+    {   
+        EditorGUILayout.BeginHorizontal();
+        EditorGUI.indentLevel++;
+        body?.Invoke();
+        EditorGUI.indentLevel--;
+        EditorGUILayout.EndHorizontal();
+    }
+
     protected void ToggleGroup([NotNull] object id, out bool currentStatus, string label, Action body)
     {
         if (toggleGroupValues == null)
