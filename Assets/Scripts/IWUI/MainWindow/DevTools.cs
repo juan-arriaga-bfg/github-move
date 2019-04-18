@@ -387,8 +387,6 @@ public class DevTools : UIContainerElementViewController
     public void OnDebug2Click()
     {
         Debug.Log("OnDebug2Click");
-
-        OnSpawnAirShipClick();
         return;
         
         GameDataService.Current.QuestsManager.StartNewDailyQuest();
