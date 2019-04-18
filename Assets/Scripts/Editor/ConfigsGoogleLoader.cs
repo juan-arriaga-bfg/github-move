@@ -41,6 +41,28 @@ public class ConfigsGoogleLoader
         UpdateWithGoogle(false);
     }
 
+    public static void UpdateTarget(List<string> configNames, bool forceUpdate)
+    {
+        update = new List<KeyValuePair<string, GoogleLink>>();
+
+        foreach (var path in NSConfigsSettings.Instance.ConfigNames)
+        {
+            var key = path.Substring(path.LastIndexOf("/") + 1);
+            key = key.Substring(0, key.IndexOf("."));
+            
+            var gLink = GoogleLoaderSettings.Instance.ConfigLinks.Find(link => link.Key == key);
+
+            if (gLink == null || configNames.Contains(gLink.Key) == false) continue;
+            
+            update.Add(new KeyValuePair<string, GoogleLink>(path, gLink));
+        }
+        
+        index = update.Count;
+        filesToCheckCount = index;
+        
+        CheckNeedToUpdate(forceUpdate);
+    }
+    
     private static void UpdateWithGoogle(bool forceUpdate)
     {
         update = new List<KeyValuePair<string, GoogleLink>>();
@@ -61,6 +83,94 @@ public class ConfigsGoogleLoader
         filesToCheckCount = index;
         
         CheckNeedToUpdate(forceUpdate);
+    }
+
+    public static Dictionary<string, bool> GetConfigsStatus(List<string> configNames)
+    {
+        var results = new Dictionary<string, bool>();
+        
+        update = new List<KeyValuePair<string, GoogleLink>>();
+
+        foreach (var path in NSConfigsSettings.Instance.ConfigNames)
+        {
+            var key = path.Substring(path.LastIndexOf("/") + 1);
+            key = key.Substring(0, key.IndexOf("."));
+            
+            var gLink = GoogleLoaderSettings.Instance.ConfigLinks.Find(link => link.Key == key);
+
+            if (gLink == null || configNames.Contains(gLink.Key) == false) continue;
+            
+            update.Add(new KeyValuePair<string, GoogleLink>(path, gLink));
+        }
+        
+        index = update.Count;
+        filesToCheckCount = index;
+        
+        var idsArray = update.Select(e => e.Value.Link).ToArray();
+        HashSet<string> uniqIds = new HashSet<string>(idsArray);
+        var idsStr = string.Join(",", uniqIds);
+
+        //var gLink = update[index].Value;
+        var req = new WebRequestData(GetUrl("getLastUpdated", "ids=" + idsStr));
+        
+        EditorUtility.DisplayProgressBar("Configs refresh...", "Validating...", 0);
+        
+        WebHelper.MakeRequest(req, (response) =>
+        {
+            EditorUtility.ClearProgressBar();
+            if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
+            {
+                Debug.LogErrorFormat("Can't check last updated. Response.IsOk = {1}. Error: {2}", response.IsOk, response.Error);
+                return;
+            }
+                
+            var root = JObject.Parse(response.Result);
+            var result = root["result"];
+
+            Dictionary<string, long> timestamps = new Dictionary<string, long>();
+
+            var timeStamp = result.First;
+            while (timeStamp != null)
+            {
+                timestamps.Add(timeStamp["id"].ToString(), timeStamp["date"].Value<long>());
+                timeStamp = timeStamp.Next;
+            }
+            
+            for (int i = update.Count - 1; i >= 0; i--)
+            {
+                var item = update[i];
+                var gLink = item.Value;
+
+                results.Add(gLink.Key, true);
+                
+                if (!timestamps.ContainsKey(gLink.Link))
+                {
+                    Debug.LogWarningFormat("Config {0} need to update", gLink.Key);
+                    continue;
+                }
+                
+                if (EditorPrefs.HasKey(gLink.Key) == false)
+                {
+                    Debug.LogWarningFormat("Config {0} need to update", gLink.Key);
+                    continue;
+                }
+
+                var then = long.Parse(EditorPrefs.GetString(gLink.Key));
+                var now = timestamps[gLink.Link];
+                
+                if (then < now)
+                {
+                    Debug.LogWarningFormat("Config {0} need to update. then {1} < now {2}", gLink.Key, then, now);
+                }
+                else
+                {
+                    Debug.LogWarningFormat("Config {0} is up to date", gLink.Key);
+                    results[gLink.Key] = false;
+                }
+            }
+        });
+
+        return results;
     }
     
     private static void CheckNeedToUpdate(bool forceUpdate)
@@ -98,7 +208,6 @@ public class ConfigsGoogleLoader
             {
                 timestamps.Add(timeStamp["id"].ToString(), timeStamp["date"].Value<long>());
                 timeStamp = timeStamp.Next;
-
             }
             
             for (int i = update.Count - 1; i >= 0; i--)
