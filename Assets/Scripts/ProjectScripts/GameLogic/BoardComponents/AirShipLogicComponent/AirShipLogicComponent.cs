@@ -76,9 +76,9 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
 		return true;
 	}
 
-	public void Remove(AirShipView view)
+	private void Remove(int id)
 	{
-		defs.Remove(view.Id);
+		defs.Remove(id);
     }
 
     public List<AirShipSaveItem> Save()
@@ -97,13 +97,19 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
 
         return ret;
     }
-	
-    public AirShipView Add(Dictionary<int, int> payload, bool animated, Vector2? position = null)
+
+    public AirShipView Spawn(Dictionary<int, int> payload)
+    {
+        return Add(payload, true);
+    }
+    
+    private AirShipView Add(Dictionary<int, int> payload, bool animated, Vector2? position = null)
     {
         Vector3 pos = position ?? GetFreePlaceToSpawn();
+
+        idCounter++;
         
         AirShipView view = context.Context.RendererContext.CreateBoardElement<AirShipView>((int) ViewType.AirShip);
-        view.Id = ++idCounter;
         
         var airShipDef = new AirShipDef {Id = idCounter, View = view, Payload = payload};
         defs.Add(idCounter, airShipDef);
@@ -226,15 +232,15 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
         partialDrop = false;
         airShipDef = defs[id];
         
-        //todo: Drop payload
-        // if dropped all, just
+        // Тут надо дропнуть фигурки
+        // Если дропнули все:
+        // Remove(id);
         // return true;
         
-        // else if can't drop anything
+        // Если места нет и дропнуть ничего нельзя:
         // return false;
         
-        
-        // else if dropped only part of payload
+        // Если дропнули часть, обновляем список фигурок (удаляем дропнутые)
         // airShipDef.Payload = xxx;
         // partialDrop = true;
         // return false;

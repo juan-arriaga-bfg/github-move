@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
@@ -12,12 +13,14 @@ public class AirShipView : BoardElementView
     private bool isClick;
     private HintArrowView arrow;
 
-    public int Id;
-    
+    public int Id { get; private set; }
+
     public void Init(BoardRenderer context, AirShipDef def)
     {
         base.Init(context);
 
+        Id = def.Id;
+        
         isClick = false;
 
         UpdatePayload(def);
@@ -83,7 +86,6 @@ public class AirShipView : BoardElementView
     {
         StopAnimation();
 
-        Context.Context.BoardLogic.AirShipLogic.Remove(this);
         CachedTransform.localScale = Vector3.one;
 
         ClearPayload();
@@ -134,7 +136,7 @@ public class AirShipView : BoardElementView
 
     private bool FixPosIfNearTheWorldEnd()
     {
-        const float SAFE_ZONE = 1.5f;
+        const float SAFE_ZONE = 4.5f;
         
         var manipulator = Context.Context.Manipulator.CameraManipulator;
         var bounds = manipulator.CurrentCameraSettings.CameraClampRegion;
@@ -179,35 +181,6 @@ public class AirShipView : BoardElementView
                        .OnComplete(AnimateIdle);
 
         return true;
-    }
-
-    public void OnClick()
-    {
-        if(isClick) return;
-
-        isClick = true;
-        
-        RemoveArrowImmediate();
-
-        if (Context.Context.BoardLogic.AirShipLogic.DropPayload(Id, out bool partialDrop, out AirShipDef updatedDef))
-        {
-            AnimateDeath();
-        }
-        else
-        {
-            isClick = false;
-
-            if (partialDrop)
-            {
-                // Remove dropped pieces from cabin
-                UIErrorWindowController.AddError(LocalizationService.Get("Some cool animation for air ship here", "Some cool animation for air ship here"));
-                UpdatePayload(updatedDef);
-            }
-            else // Nothing dropped
-            {
-                UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
-            }
-        }
     }
     
     public void PlaceTo(Vector2 position)
@@ -281,11 +254,6 @@ public class AirShipView : BoardElementView
         animView.Play(null);
     }
 
-    public void AnimateDeath()
-    {
-       // todo: add some animation 
-    }
-
     public void StopAnimation()
     {
         DOTween.Kill(CachedTransform);
@@ -295,5 +263,40 @@ public class AirShipView : BoardElementView
     private void OnDestroy()
     {
         StopAnimation();
+    }
+    
+    public void OnClick()
+    {
+        if(isClick) return;
+
+        isClick = true;
+        
+        RemoveArrowImmediate();
+
+        if (Context.Context.BoardLogic.AirShipLogic.DropPayload(Id, out bool partialDrop, out AirShipDef updatedDef))
+        {
+            AnimateDeath();
+        }
+        else
+        {
+            isClick = false;
+
+            if (partialDrop)
+            {
+                // Remove dropped pieces from cabin
+                UIErrorWindowController.AddError(LocalizationService.Get("Some cool animation for air ship here", "Some cool animation for air ship here"));
+                UpdatePayload(updatedDef);
+            }
+            else // Nothing dropped
+            {
+                UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
+            }
+        }
+    }
+    
+    public void AnimateDeath()
+    {
+        // todo: add some animation and remove view from the board
+        UIErrorWindowController.AddError(LocalizationService.Get("Some death animation", "Some death animation"));
     }
 }
