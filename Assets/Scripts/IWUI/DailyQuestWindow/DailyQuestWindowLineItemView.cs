@@ -37,7 +37,13 @@ public class DailyQuestWindowLineItemView : IWUIWindowViewController
                 fill.SetActive(!fill.activeSelf);
             });
             sequence.AppendInterval(interval);
-            sequence.SetLoops(-1);
+            sequence.SetLoops(8);
+
+            sequence.OnComplete(() =>
+            {
+                fillHiglhlight.SetActive(true);
+                fill.SetActive(false);
+            });
         }
         else
         {
