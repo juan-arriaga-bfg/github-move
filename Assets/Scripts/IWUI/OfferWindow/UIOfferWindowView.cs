@@ -151,6 +151,8 @@ public class UIOfferWindowView : UIGenericPopupWindowView
     {
         BoardService.Current.FirstBoard.MarketLogic.CompleteOffer();
         
+        ProfileService.Instance.Manager.UploadCurrentProfile(true);
+        
         Analytics.SendPurchase($"shop_{Currency.Offer.Name.ToLower()}",
             $"item{ProfileService.Current.GetStorageItem(Currency.Offer.Name).Amount}",
             new List<CurrencyPair> {offer.Price},

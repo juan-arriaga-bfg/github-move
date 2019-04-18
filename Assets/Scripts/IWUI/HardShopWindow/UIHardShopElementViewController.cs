@@ -116,7 +116,7 @@ public class UIHardShopElementViewController : UIShopElementViewController
         }
     }
 
-    protected override void OnPurchaseComplete()
+    protected override void OnPurchaseComplete(bool isIap)
     {
         if (isOffer)
         {
@@ -126,7 +126,7 @@ public class UIHardShopElementViewController : UIShopElementViewController
             label.Text = LocalizationService.Get("common.message.sold", "common.message.sold");
         }
         
-        base.OnPurchaseComplete();
+        base.OnPurchaseComplete(isIap);
         
         var contentEntity = entity as UIShopElementEntity;
 

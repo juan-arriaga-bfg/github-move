@@ -135,9 +135,9 @@ public class UIEnergyShopElementViewController : UIHardShopElementViewController
         }
     }
 
-    protected override void OnPurchaseComplete()
+    protected override void OnPurchaseComplete(bool isIap)
     {
-	    base.OnPurchaseComplete();
+	    base.OnPurchaseComplete(isIap);
 
         if (isFree)
         {
