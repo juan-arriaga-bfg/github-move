@@ -604,19 +604,13 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
                 .SetId(animationUid)
                 .AppendInterval(delay)
                 .OnComplete(() =>
-               {
-                   if (Context != null)
-                   {
-                       Context.DestroyElement(this);
-                   }
-               });
+                {
+                    Context?.DestroyElement(this);
+                });
         }
         else
         {
-            if (Context != null)
-            {
-                Context.DestroyElement(this);
-            }
+            Context?.DestroyElement(this);
         }
 
         return this;

@@ -40,35 +40,32 @@ public class AirShipView : BoardElementView
 
     private void ClearPayload()
     {
-        for (int i = 0; i < pieceAnchors.Count; i++)
+        foreach (var anchor in pieceAnchors)
         {
-            var anchor = pieceAnchors[i];
-            if (anchor.childCount == 0)
-            {
-                continue;
-            }
+            if (anchor.childCount == 0) continue;
             
-            var child = anchor.GetChild(0);
-            if (child != null)
-            {
-                Context.DestroyElement(child.gameObject);
-            }
+            var child = anchor.GetChild(0).GetComponent<PieceBoardElementView>();
+            
+            if (child != null) Context.Context.BoardLogic.DragAndDrop.DestroyFakePiece(child);
         }
     }
     
-    private void UpdatePayload(AirShipDef def)
+    public void UpdatePayload(AirShipDef def)
     {
         ClearPayload();
 
         var list = def.SortedPayload;
-        for (int i = 0; i < pieceAnchors.Count && i < list.Count; i++)
+        
+        for (var i = 0; i < pieceAnchors.Count && i < list.Count; i++)
         {
             var anchor = pieceAnchors[i];
             var id = list[i];
-            PieceBoardElementView pieceView = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceOutsideOfBoard(id);
-            pieceView.transform.SetParent(anchor, false);
-            pieceView.transform.localScale = Vector3.one;
-            pieceView.transform.localPosition = Vector3.zero;
+            
+            var pieceView = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceOutsideOfBoard(id);
+            
+            pieceView.CachedTransform.SetParent(anchor, false);
+            pieceView.CachedTransform.localScale = Vector3.one;
+            pieceView.CachedTransform.localPosition = Vector3.zero;
             pieceView.SyncRendererLayers(GetCellForSyncLayers());
         }
     }
@@ -140,7 +137,7 @@ public class AirShipView : BoardElementView
         
         var manipulator = Context.Context.Manipulator.CameraManipulator;
         var bounds = manipulator.CurrentCameraSettings.CameraClampRegion;
-        var pos = transform.position;
+        var pos = CachedTransform.position;
 
         bounds.x += SAFE_ZONE;
         bounds.y += SAFE_ZONE;
@@ -187,6 +184,26 @@ public class AirShipView : BoardElementView
     {
         CachedTransform.position = position;
     }
+    
+    public void OnClick()
+    {
+        if (isClick) return;
+
+        isClick = true;
+        
+        RemoveArrowImmediate();
+
+        if (Context.Context.BoardLogic.AirShipLogic.DropPayload(Id, out var partialDrop)) return;
+        
+        if (partialDrop)
+        {
+            isClick = false;
+            return;
+        }
+        
+        // Nothing dropped
+        AnimateError();
+    }
 
     public void AnimateIdle()
     {
@@ -231,7 +248,7 @@ public class AirShipView : BoardElementView
         if (manipulator.CameraMove.IsLocked == false)
         {
             float DURATION = 0.4f;
-            manipulator.MoveTo(transform.position, true, DURATION, Ease.OutCubic);
+            manipulator.MoveTo(CachedTransform.position, true, DURATION, Ease.OutCubic);
         }
         
         body.localScale = Vector3.zero;
@@ -240,63 +257,57 @@ public class AirShipView : BoardElementView
                .SetId(body)
                .Append(body.DOScale(Vector3.one, 0.6f).SetEase(Ease.OutBack))
                .OnComplete(AnimateIdle);
-        
-        var animView = Context.CreateBoardElementAt<AnimationView>(R.SpawnAirShipAnimation, GetCellForSyncLayers());
-        animView.SyncRendererLayers(GetCellForSyncLayers());
 
-        animView.transform.position = transform.position;
+        var position = GetCellForSyncLayers();
+        var animView = Context.CreateBoardElementAt<AnimationView>(R.SpawnAirShipAnimation, position);
         
-        animView.OnComplete += () =>
-        {
-             AnimateIdle();
-        };
+        animView.SyncRendererLayers(position);
+        animView.transform.position = CachedTransform.position;
+        animView.Play(null);
+    }
+    
+    public void AnimateDeath()
+    {
+        StopAnimation();
 
+        DOTween.Sequence()
+            .SetId(body)
+            .Append(body.DOScale(Vector3.zero, 0.6f).SetEase(Ease.InBack))
+            .OnComplete(() => Context.DestroyElement(this));
+        
+        var position = GetCellForSyncLayers();
+        var animView = Context.CreateBoardElementAt<AnimationView>(R.SpawnAirShipAnimation, position);
+        
+        animView.SyncRendererLayers(position);
+        animView.transform.position = CachedTransform.position;
         animView.Play(null);
     }
 
+    private void AnimateError()
+    {
+        StopAnimation();
+        UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
+        
+        DOTween.Sequence()
+            .SetId(body)
+            .Append(body.DOLocalMoveX(-0.05f, 0.06f))
+            .Append(body.DOLocalMoveX(0.05f, 0.06f))
+            .SetLoops(5)
+            .OnComplete(() =>
+            {
+                isClick = false;
+                AnimateIdle();
+            });
+    }
+    
     public void StopAnimation()
     {
         DOTween.Kill(CachedTransform);
         DOTween.Kill(body); 
     }
-
+    
     private void OnDestroy()
     {
         StopAnimation();
-    }
-    
-    public void OnClick()
-    {
-        if(isClick) return;
-
-        isClick = true;
-        
-        RemoveArrowImmediate();
-
-        if (Context.Context.BoardLogic.AirShipLogic.DropPayload(Id, out bool partialDrop, out AirShipDef updatedDef))
-        {
-            AnimateDeath();
-        }
-        else
-        {
-            isClick = false;
-
-            if (partialDrop)
-            {
-                // Remove dropped pieces from cabin
-                UIErrorWindowController.AddError(LocalizationService.Get("Some cool animation for air ship here", "Some cool animation for air ship here"));
-                UpdatePayload(updatedDef);
-            }
-            else // Nothing dropped
-            {
-                UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
-            }
-        }
-    }
-    
-    public void AnimateDeath()
-    {
-        // todo: add some animation and remove view from the board
-        UIErrorWindowController.AddError(LocalizationService.Get("Some death animation", "Some death animation"));
     }
 }

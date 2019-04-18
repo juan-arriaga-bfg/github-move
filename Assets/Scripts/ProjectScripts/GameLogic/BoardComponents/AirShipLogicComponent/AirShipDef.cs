@@ -4,9 +4,10 @@ public class AirShipDef
 {
     public int Id;
     public AirShipView View;
-    public Dictionary<int, int> payload;
+    
     public List<int> SortedPayload { get; private set; }
 
+    private Dictionary<int, int> payload;
     public Dictionary<int, int> Payload
     {
         get => payload;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BfgAnalytics;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -75,12 +76,7 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
         
 		return true;
 	}
-
-	private void Remove(int id)
-	{
-		defs.Remove(id);
-    }
-
+	
     public List<AirShipSaveItem> Save()
     {
         var ret = new List<AirShipSaveItem>();
@@ -227,24 +223,61 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
         return true;
     }
 
-    public bool DropPayload(int id, out bool partialDrop, out AirShipDef airShipDef)
+    public bool DropPayload(int id, out bool partialDrop)
     {
         partialDrop = false;
-        airShipDef = defs[id];
         
-        // Тут надо дропнуть фигурки
-        // Если дропнули все:
-        // Remove(id);
-        // return true;
+        var airShipDef = defs[id];
+        var view = airShipDef.View;
         
-        // Если места нет и дропнуть ничего нельзя:
-        // return false;
+        var payload = new Dictionary<int, int>(airShipDef.Payload);
+        var amountAll = payload.Sum(pair => pair.Value);
+        var pieces = new Dictionary<BoardPosition, int>();
         
-        // Если дропнули часть, обновляем список фигурок (удаляем дропнутые)
-        // airShipDef.Payload = xxx;
-        // partialDrop = true;
-        // return false;
+        var boardPos = context.Context.BoardDef.GetSectorPosition(view.CachedTransform.position);
+        boardPos.Z = BoardLayer.Piece.Layer;
         
+        var free = context.Context.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(boardPos, amountAll, 10);
+        
+        if (free.Count == 0) return false;
+        
+        foreach (var key in airShipDef.SortedPayload)
+        {
+            if (free.Count == 0) break;
+            if (payload.TryGetValue(key, out var amount) == false) continue;
+
+            for (; amount > 0; amount--)
+            {
+                if (free.Count == 0) break;
+                
+                pieces.Add(free[0], key);
+                free.RemoveAt(0);
+            }
+
+            if (amount == 0) payload.Remove(key);
+            else payload[key] = amount;
+        }
+        
+        var action = new AirShipEjectionPieceAction
+        {
+            From = view.CachedTransform.position,
+            BoardElement = view,
+            Pieces = pieces,
+        };
+        
+        context.Context.ActionExecutor.AddAction(action);
+        
+        airShipDef.Payload = payload;
+        view.UpdatePayload(airShipDef);
+        
+        if (payload.Count == 0)
+        {
+            defs.Remove(id);
+            view.AnimateDeath();
+            return true;
+        }
+        
+        partialDrop = true;
         return false;
     }
 }

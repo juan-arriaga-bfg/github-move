@@ -21,35 +21,31 @@ public class EjectionPieceAction : IBoardAction
 	{
 		if (From == null) From = GetFrom?.Invoke();
 		if (From == null) return false;
-		
+
+		var logic = gameBoardController.BoardLogic;
 		var pieces = new Dictionary<BoardPosition, Piece>();
 		
 		foreach (var pair in Pieces)
 		{
 			var field = new List<BoardPosition>();
         
-			if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From.Value, field, pair.Value) == false)
-			{
-				break;
-			}
+			if (logic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From.Value, field, pair.Value) == false) break;
 			
 			foreach (var pos in field)
 			{
 				var piece = gameBoardController.CreatePieceFromType(pair.Key);
 
-				if (gameBoardController.BoardLogic.AddPieceToBoard(pos.X, pos.Y, piece) == false)
-				{
-					continue;
-				}
-			
+				if (logic.AddPieceToBoard(pos.X, pos.Y, piece) == false) continue;
+				
 				pieces.Add(pos, piece);
-				gameBoardController.BoardLogic.LockCell(pos, this);
+				logic.LockCell(pos, this);
 			}
 		}
 		
-		gameBoardController.BoardLogic.LockCell(From.Value, this);
-		if (AnimationResourceSearch == null)
-			AnimationResourceSearch = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnMultiSpawn);
+		logic.LockCell(From.Value, this);
+		
+		if (AnimationResourceSearch == null) AnimationResourceSearch = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnMultiSpawn);
+		
 		var animation = new ReproductionPieceAnimation
 		{
 			From = From.Value,
@@ -59,11 +55,11 @@ public class EjectionPieceAction : IBoardAction
 
 		animation.OnCompleteEvent += (_) =>
 		{
-			gameBoardController.BoardLogic.UnlockCell(From.Value, this);
+			logic.UnlockCell(From.Value, this);
 
 			foreach (var pair in pieces)
 			{
-				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);
+				logic.UnlockCell(pair.Key, this);
 			}
 
 			OnComplete?.Invoke();
