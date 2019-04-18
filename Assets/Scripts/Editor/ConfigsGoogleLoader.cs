@@ -85,9 +85,9 @@ public class ConfigsGoogleLoader
         CheckNeedToUpdate(forceUpdate);
     }
 
-    public static Dictionary<string, bool> GetConfigsStatus(List<string> configNames)
+    public static List<ConfigElementInfo> GetConfigsStatus(List<string> configNames)
     {
-        var results = new Dictionary<string, bool>();
+        var results = new List<ConfigElementInfo>();
         
         update = new List<KeyValuePair<string, GoogleLink>>();
 
@@ -141,7 +141,11 @@ public class ConfigsGoogleLoader
                 var item = update[i];
                 var gLink = item.Value;
 
-                results.Add(gLink.Key, true);
+                results.Add(new ConfigElementInfo()
+                {
+                    Name = gLink.Key,
+                    State = LoadState.NeedUpdate
+                });
                 
                 if (!timestamps.ContainsKey(gLink.Link))
                 {
@@ -165,7 +169,7 @@ public class ConfigsGoogleLoader
                 else
                 {
                     Debug.LogWarningFormat("Config {0} is up to date", gLink.Key);
-                    results[gLink.Key] = false;
+                    results.Last().State = LoadState.LastVersion;
                 }
             }
         });

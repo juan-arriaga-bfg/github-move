@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -6,16 +7,33 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
 
+public enum LoadState
+{
+    Unknown,
+    LastVersion,
+    NeedUpdate,
+    Load
+}
+public class ConfigElementInfo
+{
+    public string Name;
+    public LoadState State;
+}
+
 public class ConfigManager: CustomEditorBase
 {
-    private Dictionary<string, GoogleLink> cachedConfigLinks = new Dictionary<string, GoogleLink>();
-    private HashSet<string> selectedConfigs = new HashSet<string>();
-    private Dictionary<string, bool> configsStatus = new Dictionary<string, bool>();
+    private List<GoogleLink> cachedConfigLinks = new List<GoogleLink>();
+    private List<string> selectedConfigs = new List<string>();
+    private List<ConfigElementInfo> configsStatus = new List<ConfigElementInfo>();
 
     private bool isInitComplete = false;
+    private bool IsSelectAll => cachedConfigLinks.Count > 0 && cachedConfigLinks.Any(link => selectedConfigs.Contains(link.Key) && IsVisible(link.Key));
+
+    private string filter;
     
     private GUIStyle waitUpdateTextStyle;
     private GUIStyle lastVersionTextStyle;
+    private GUIStyle loadTextStyle;
     
     [MenuItem("Tools/Configs/Manager", false, 50)]
     public static void Create()
@@ -36,15 +54,23 @@ public class ConfigManager: CustomEditorBase
         
         HorizontalArea(() =>
         {
-            Button("Refresh list", RefreshElements);
+            Button("Refresh", RefreshElements);
             Button("Update all (force)", UpdateConfigsForce);
             Button("Update all", UpdateConfigsDefault);
             Button("Update selected", UpdateSelected);    
         });
+        
+        HorizontalArea(() =>
+        {
+            SelectAllToggle(); 
+            filter = EditorGUILayout.TextField(filter);
+        });
+        Separator();
+
         ScrollArea(this, () =>
         {
            ShowConfigList(); 
-        });
+        });       
     }
 
 #region WindowUI
@@ -56,6 +82,9 @@ public class ConfigManager: CustomEditorBase
         
         lastVersionTextStyle = new GUIStyle();
         lastVersionTextStyle.normal.textColor = Color.grey;
+        
+        loadTextStyle = new GUIStyle();
+        loadTextStyle.normal.textColor = Color.blue;
     }
     
     private void ConfigElement(string configName)
@@ -63,60 +92,96 @@ public class ConfigManager: CustomEditorBase
         HorizontalArea(() =>
         {
             ConfigElementToggle(configName);
-            VerticalArea(() =>
-            {
-                EditorGUILayout.TextField(configName);
-                ConfigStatusLabel(configName);
-            });
-            
+
+            EditorGUILayout.TextField(configName);
+            ConfigStatusLabel(configName);
+
             Button("Update", () => UpdateTarget(configName));
-//            Button("More", null);
         });
-        Separator();
     }
 
     private void ConfigStatusLabel(string configName)
     {
-        var isWaitUpdate = configsStatus.ContainsKey(configName) ? (bool?)configsStatus[configName] : null;
-        if (isWaitUpdate == null)
+        var selected = configsStatus.Where(config => config.Name == configName);
+
+        var widthStyle = GUILayout.MaxWidth(130f);
+        var fontStyle = waitUpdateTextStyle;
+        
+        if (selected.Count() < 0)
         {
-            EditorGUILayout.LabelField("Status: unknown", waitUpdateTextStyle);
+            EditorGUILayout.LabelField($"status: {LoadState.Unknown}", fontStyle, widthStyle);
         }
-        else if (isWaitUpdate == true)
+        
+        var targetConfig = selected.First();
+        string message = Enum.GetName(typeof(LoadState), targetConfig.State);
+
+        if (targetConfig.State == LoadState.Load)
         {
-            EditorGUILayout.LabelField("Status: wait update", waitUpdateTextStyle);   
+            fontStyle = loadTextStyle;
         }
-        else
+        else if (targetConfig.State == LoadState.LastVersion)
         {
-            EditorGUILayout.LabelField("Status: last version", lastVersionTextStyle);
+            fontStyle = lastVersionTextStyle;
         }
+        
+        EditorGUILayout.LabelField($"status: {message}", fontStyle, widthStyle);
     }
 
     private void ConfigElementToggle(string configName)
     {
         var isSelected = selectedConfigs.Contains(configName);
 
-        if (EditorGUILayout.Toggle(isSelected, GUILayout.MaxWidth(EditorGUIUtility.fieldWidth * 0.5f)))
+        var toggleState = EditorGUILayout.Toggle(isSelected, GUILayout.MaxWidth(EditorGUIUtility.fieldWidth * 0.75f));
+        if (toggleState != isSelected)
         {
-            selectedConfigs.Add(configName);
-        }
-        else
-        {
-            selectedConfigs.Remove(configName);
+            if (toggleState)
+            {
+                selectedConfigs.Add(configName);
+            }
+            else
+            {
+                selectedConfigs.Remove(configName);
+            }
         }
     }
 
     private void ShowConfigList()
     {
-        foreach (var configLink in cachedConfigLinks.Values)
+        foreach (var configLink in cachedConfigLinks)
         {
-            ConfigElement(configLink.Key);
+            if (IsVisible(configLink.Key))
+            {
+                ConfigElement(configLink.Key);    
+            }
         }
+    }
+
+    private void SelectAllToggle()
+    {
+        var isSelectAll = IsSelectAll;
+        if (EditorGUILayout.Toggle(isSelectAll, GUILayout.MaxWidth(EditorGUIUtility.fieldWidth * 0.75f)) != isSelectAll)
+        {
+            selectedConfigs.RemoveAll(elem => IsVisible(elem));
+            if (!isSelectAll)
+            {
+                foreach (var configLink in cachedConfigLinks.Where(link => IsVisible(link.Key)))
+                {
+                    selectedConfigs.Add(configLink.Key);    
+                }
+            }
+        }
+    }
+    
+    private bool IsVisible(string configName)
+    {
+        return cachedConfigLinks.Any(elem => elem.Key == configName) && string.IsNullOrWhiteSpace(filter) || Regex.IsMatch(configName, $"^{filter}");
     }
     
 #endregion
 
 #region WindowLogic
+
+    
 
     private void RefreshElements()
     {
@@ -130,10 +195,12 @@ public class ConfigManager: CustomEditorBase
     
             if (gLink == null) continue;
                 
-            cachedConfigLinks.Add(path, gLink);
+            cachedConfigLinks.Add(gLink);
         }
 
-        configsStatus = ConfigsGoogleLoader.GetConfigsStatus(cachedConfigLinks.Select(elem => elem.Value.Key).ToList());
+        cachedConfigLinks = cachedConfigLinks.OrderBy(elem => elem.Key).ToList();
+        
+        configsStatus = ConfigsGoogleLoader.GetConfigsStatus(cachedConfigLinks.Select(elem => elem.Key).ToList());
     }
 
     private void UpdateConfigsForce()
