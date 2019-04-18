@@ -38,6 +38,7 @@ public class AirShipEjectionPieceAction : IBoardAction
             StartPosition = From,
             BoardElement = BoardElement,
             Pieces = pieces,
+            RewardEffect = true,
             AnimationResourceSearch = AnimationResourceSearch
         };
         

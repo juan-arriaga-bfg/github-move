@@ -45,15 +45,18 @@ public class AirShipView : BoardElementView
             if (anchor.childCount == 0) continue;
             
             var child = anchor.GetChild(0).GetComponent<PieceBoardElementView>();
-            
-            if (child != null) Context.Context.BoardLogic.DragAndDrop.DestroyFakePiece(child);
+
+            if (child != null)
+            {
+                Context.Context.BoardLogic.DragAndDrop.DestroyFakePiece(child);
+            }
         }
     }
     
     public void UpdatePayload(AirShipDef def)
     {
         ClearPayload();
-
+        
         var list = def.SortedPayload;
         
         for (var i = 0; i < pieceAnchors.Count && i < list.Count; i++)

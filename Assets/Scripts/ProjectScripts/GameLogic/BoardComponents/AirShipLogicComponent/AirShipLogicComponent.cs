@@ -237,9 +237,9 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
         var boardPos = context.Context.BoardDef.GetSectorPosition(view.CachedTransform.position);
         boardPos.Z = BoardLayer.Piece.Layer;
         
-        var free = context.Context.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(boardPos, amountAll, 10);
+        var free = new List<BoardPosition>();
         
-        if (free.Count == 0) return false;
+        if (context.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(boardPos, free, amountAll, 0.1f) == false) return false;
         
         foreach (var key in airShipDef.SortedPayload)
         {

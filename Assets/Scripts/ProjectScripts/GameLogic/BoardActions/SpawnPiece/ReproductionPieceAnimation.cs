@@ -14,6 +14,8 @@ public class ReproductionPieceAnimation : BoardAnimation
 
     public Func<int, string> AnimationResourceSearch;
     
+    public bool RewardEffect = false;
+    
     public override void Animate(BoardRenderer context)
     {
         var boardElement = BoardElement ? BoardElement : context.GetElementAt(From);
@@ -48,6 +50,17 @@ public class ReproductionPieceAnimation : BoardAnimation
             
             sequence.Insert(delay, element.CachedTransform.DOJump(new Vector3(to.x, to.y, element.CachedTransform.position.z), 1, 1, 0.4f).SetEase(Ease.InOutSine));
             sequence.InsertCallback(0.4f, () => context.ResetBoardElement(element, position));
+            
+            if (RewardEffect)
+            {
+                sequence.InsertCallback(0.0f, () =>
+                {
+                    var particle = ParticleView.Show(R.RewardDropParticles, position).transform;
+                        
+                    particle.SetParent(element.transform, false);
+                    particle.localPosition = Vector3.zero;
+                });
+            }
             
             sequence.Insert(delay, element.CachedTransform.DOScale(Vector3.one * 1.3f, 0.2f));
             sequence.Insert(delay + 0.2f, element.CachedTransform.DOScale(Vector3.one, 0.2f));

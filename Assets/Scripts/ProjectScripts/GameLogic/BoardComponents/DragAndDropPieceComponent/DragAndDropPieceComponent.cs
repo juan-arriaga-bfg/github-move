@@ -169,8 +169,11 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
         var touchRegion = fakePieceView.GetComponent<TouchRegion>();
         if (touchRegion != null) touchRegion.enabled = true;
         
-        fakePieceView.ToggleSelection(false);  
-        context.Context.RendererContext.RemoveElement(fakePieceView);
+        fakePieceView.ToggleSelection(false);
+
+        if (context.Context.RendererContext.RemoveElement(fakePieceView) == fakePieceView) return;
+        
+        context.Context.RendererContext.DestroyElement(fakePieceView);
     }
 
     public bool IsValidPoint(BoardPosition boardPosition)
