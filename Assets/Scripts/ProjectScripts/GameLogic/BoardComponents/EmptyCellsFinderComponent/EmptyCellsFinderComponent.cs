@@ -61,13 +61,13 @@ public class EmptyCellsFinderComponent : IECSComponent
 		return result;
 	}
 	
-	public bool FindNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius = 3)
+	public bool FindNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int amount, int radius = 3)
 	{
 		for (var i = 0; i < radius; i++)
 		{
-			FindRingWithPointInCenter(point, field, count, i);
+			FindRingWithPointInCenter(point, field, amount, i);
 				
-			if (field.Count >= count) return true;
+			if (field.Count >= amount) return true;
 		}
 		
 		return field.Count != 0;

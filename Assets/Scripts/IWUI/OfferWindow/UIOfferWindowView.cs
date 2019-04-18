@@ -126,7 +126,9 @@ public class UIOfferWindowView : UIGenericPopupWindowView
             return;
         }
         // END
-
+        
+        CurrencyHelper.FlyPosition = GetCanvas().worldCamera.WorldToScreenPoint(btnBuy.transform.position);
+        
         SellForCashService.Current.Purchase(offer.PurchaseKey, (isOk, productId) =>
         {
             isClick = false;
@@ -140,8 +142,10 @@ public class UIOfferWindowView : UIGenericPopupWindowView
     private void OnPurchase()
     {
         var flyPosition = GetComponentInChildren<Canvas>().worldCamera.WorldToScreenPoint(btnBuy.transform.position);
+        var piecesReward = CurrencyHelper.FiltrationRewards(offer.Products, out var currenciesReward);
 
-        CurrencyHelper.PurchaseAsyncOnlyCurrency(offer.Products, flyPosition, null);
+        if (piecesReward.Count == 0) CurrencyHelper.PurchaseAsyncOnlyCurrency(currenciesReward, flyPosition, null);
+        else CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, null, null, null, false, true);
 	    
         isClick = false;
         PurchaseComplete();
