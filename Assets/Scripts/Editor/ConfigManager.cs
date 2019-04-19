@@ -102,17 +102,18 @@ public class ConfigManager: CustomEditorBase
 
     private void ConfigStatusLabel(string configName)
     {
-        var selected = configsStatus.Where(config => config.Name == configName);
+        var selected = configsStatus.Where(config => config.Name == configName).ToList();
 
         var widthStyle = GUILayout.MaxWidth(130f);
         var fontStyle = waitUpdateTextStyle;
         
-        if (selected.Count() < 0)
+        if (selected.Count == 0)
         {
             EditorGUILayout.LabelField($"status: {LoadState.Unknown}", fontStyle, widthStyle);
+            return;
         }
         
-        var targetConfig = selected.First();
+        var targetConfig = selected[0];
         string message = Enum.GetName(typeof(LoadState), targetConfig.State);
 
         if (targetConfig.State == LoadState.Load)
