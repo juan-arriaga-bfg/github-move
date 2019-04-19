@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Dws;
 using Newtonsoft.Json;
@@ -149,7 +150,7 @@ public class ConfigsGoogleLoader
         {
             if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
             {
-                Debug.LogErrorFormat("Can't check last updated. Response.IsOk = {1}. Error: {2}", response.IsOk, response.Error);
+                Debug.LogErrorFormat("Can't check last updated. Response.IsOk = {0}. Error: {1}", response.IsOk, response.Error);
                 return;
             }
                 
@@ -226,8 +227,9 @@ public class ConfigsGoogleLoader
         foreach (var configName in update.Select(elem => elem.Value.Key))
         {
             var configStatus = GetConfigInfo(configName);
-            if (configStatus.State == LoadState.Load)
+            if (configStatus.State == LoadState.Load || configStatus.State == LoadState.Validate)
             {
+                update.RemoveAll(elem => elem.Key == configName);
                 continue;
             }
 
@@ -239,17 +241,12 @@ public class ConfigsGoogleLoader
             foreach (var configName in update.Select(elem => elem.Value.Key))
             {
                 var configStatus = GetConfigInfo(configName);
-                if (configStatus.State == LoadState.Load)
-                {
-                    continue;
-                }
-
                 configStatus.State = LoadState.LastVersion;
             }
             
             if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
             {
-                Debug.LogErrorFormat("Can't check last updated. Response.IsOk = {1}. Error: {2}", response.IsOk, response.Error);
+                Debug.LogErrorFormat("Can't check last updated. Response.IsOk = {0}. Error: {1}", response.IsOk, response.Error);
                 return;
             }
                 
@@ -354,7 +351,7 @@ public class ConfigsGoogleLoader
                 sw.Stop();
             
                 Debug.LogFormat($"Request '{gLink.Key}' completed in {sw.Elapsed.TotalSeconds:F}s");
-
+                
                 if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
                 {
                     Debug.LogErrorFormat("Can't load data {0}. response.IsOk = {1}. Error: {2}", gLink.Key, response.IsOk, response.Error);
