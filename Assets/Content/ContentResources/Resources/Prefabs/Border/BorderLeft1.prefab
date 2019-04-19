@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4023092637272936}
-  - component: {fileID: 114955801041818516}
   - component: {fileID: 3086090032500291335}
   m_Layer: 0
   m_Name: BorderLeft1
@@ -33,21 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -24.144001, y: 30.092001, z: 0.003}
---- !u!114 &114955801041818516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254380551073046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c52489d105baf4ce9b54380fbc38458b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cachedSortingGroup: {fileID: 0}
-  IsFading: 0
-  FadeValue: 0
 --- !u!114 &3086090032500291335
 MonoBehaviour:
   m_ObjectHideFlags: 0
