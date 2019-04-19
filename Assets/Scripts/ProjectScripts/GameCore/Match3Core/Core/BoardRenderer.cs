@@ -1272,15 +1272,20 @@ public partial class BoardRenderer : ECSEntity
         public bool neighborL ;
         public bool neighborT ;
         public bool neighborB ;
+        
         public bool neighborBL;
         public bool neighborBR;        
         public bool neighborTL;
         public bool neighborTR;
+        
         public int floorDiffR;
         public int floorDiffL;
         public int floorDiffT;
         public int floorDiffB;
+        
         public int floorDiffBL;
+        public int floorDiffBR;        
+        public int floorDiffTL;
         public int floorDiffTR;
         // ReSharper restore InconsistentNaming
         
@@ -1291,14 +1296,57 @@ public partial class BoardRenderer : ECSEntity
         
         public override string ToString()
         {
-            // return $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
-            // // return $"<mspace=1.5em>id:{tileId} T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
+            return $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
+            // return $"<mspace=1.5em>T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}\nBR:{(floorDiffBR)} TL:{(floorDiffTL)}</mspace>";
             // //return $"<mspace=1.5em>L:{floorDiffT}\nB:{floorDiffR}</mspace>";  
             
-            var str1 = $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
-            var str2 = $"<mspace=1.5em>id:{tileId} T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
-            return $"{str1}\n{str2}";
+            // var str1 = $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
+            // var str2 = $"<mspace=1.5em>id:{tileId} T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
+            // return $"{str1}\n{str2}";
         }
+    }
+
+    private Dictionary<string, List<string>> GetAddonsList()
+    {
+        // Value in dict is a count of NULL, added as addons. More nulls - more tiles without any addons
+        Dictionary<string, int> data = new Dictionary<string, int>
+        {
+            {R.BorderBottom1,         0},
+            {R.BorderBottom2,         0},
+            {R.BorderLeft1,           0},
+            {R.BorderLeft2,           0},
+            {R.BorderWallBottomLeft1, 0},
+            {R.BorderWallRight1,      0},
+            {R.BorderWallTop1,        0},
+            {R.BorderWallTopRight1,   0},
+        };
+
+        var contentService = ContentService.Current;
+        Dictionary<string, List<string>> addons = new Dictionary<string, List<string>>();
+        foreach (var pair in data)
+        {
+            string borderId = pair.Key;
+            List<string> addonsForBorder = new List<string>();
+            for (int i = 1; i < 100; i++)
+            {
+                string addonId = $"{borderId}_Addon_{i}";
+                if (!contentService.IsObjectRegistered(addonId))
+                {
+                    break;
+                }
+                
+                addonsForBorder.Add(addonId);
+            }
+
+            for (int i = 0; i < pair.Value; i++)
+            {
+                addonsForBorder.Add(null);
+            }
+            
+            addons.Add(borderId, addonsForBorder);
+        }
+
+        return addons;
     }
     
     public void CreateBorders()
@@ -1319,49 +1367,16 @@ public partial class BoardRenderer : ECSEntity
         {
             return x >= 0 && y >= 0 && x < w && y < h;
         }
-        
-        Dictionary<string, string[]> props = new Dictionary<string, string[]>
-        {
-            {
-                R.BorderWallRight1, new[]
-                {
-                    R.BorderWallRight1_Prop_1,
-                    R.BorderWallRight1_Prop_2,
-                    R.BorderWallRight1_Prop_3,
-                    R.BorderWallRight1_Prop_4,
-                    R.BorderWallRight1_Prop_5,
-                }
-            },
-            {
-                R.BorderWallTop1, new[]
-                {
-                    R.BorderWallTop1_Prop_1,
-                    R.BorderWallTop1_Prop_2,
-                    R.BorderWallTop1_Prop_3,
-                    null
-                }
-            },
-            {
-                R.BorderWallBottomLeft1, new[]
-                {
-                    R.BorderWallBottomLeft1_Prop_1,
-                }
-            },
-            {
-                R.BorderWallTopRight1, new[]
-                {
-                    R.BorderWallTopRight1_Prop_1,
-                }
-            }
-        };
+
+        var addons = GetAddonsList();
 
         void CreateBorder(int x, int y, string item)
         {
             InstantiateItem(x, y, item);
 
-            if (props.TryGetValue(item, out string[] availableProps))
+            if (addons.TryGetValue(item, out List<string> availableProps))
             {
-                int len = availableProps.Length;
+                int len = availableProps.Count;
                 int index = random.Next(0, len);
                 string prop = availableProps[index];
 
@@ -1405,6 +1420,7 @@ public partial class BoardRenderer : ECSEntity
                 int idL  = fieldManager.GetTileId(x + 0, y - 1);
                 int idT  = fieldManager.GetTileId(x - 1, y + 0);
                 int idB  = fieldManager.GetTileId(x + 1, y + 0);
+                
                 int idBL = fieldManager.GetTileId(x + 1, y - 1);
                 int idTR = fieldManager.GetTileId(x - 1, y + 1);
                 int idBR = fieldManager.GetTileId(x + 1, y + 1);
@@ -1416,6 +1432,7 @@ public partial class BoardRenderer : ECSEntity
                 meta.neighborL  = /*IsCellExists(x + 0, y - 1) && */idL  != waterId;              
                 meta.neighborT  = /*IsCellExists(x - 1, y + 0) && */idT  != waterId;
                 meta.neighborB  = /*IsCellExists(x + 1, y + 0) && */idB  != waterId;
+                
                 meta.neighborBL = /*IsCellExists(x + 1, y - 1) && */idBL != waterId;
                 meta.neighborBR = /*IsCellExists(x - 1, y + 1) && */idBR != waterId;
                 meta.neighborTR = /*IsCellExists(x - 1, y + 1) && */idTR != waterId;
@@ -1425,10 +1442,13 @@ public partial class BoardRenderer : ECSEntity
                 meta.floorDiffL  = tilesDefs[idL ].Height - currentHeight;                
                 meta.floorDiffT  = tilesDefs[idT ].Height - currentHeight;
                 meta.floorDiffB  = tilesDefs[idB ].Height - currentHeight;
+                
                 meta.floorDiffBL = tilesDefs[idBL].Height - currentHeight;
                 meta.floorDiffTR = tilesDefs[idTR].Height - currentHeight;
+                meta.floorDiffBR = tilesDefs[idBR].Height - currentHeight;
+                meta.floorDiffTL = tilesDefs[idTL].Height - currentHeight;
                 
-                // DebugCellView debugView = BoardService.Current.FirstBoard.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell2, new BoardPosition(x, y, BoardLayer.MAX.Layer));
+                // DebugTextView debugView = BoardService.Current.FirstBoard.RendererContext.CreateBoardElementAt<DebugTextView>(R.DebugCell2, new BoardPosition(x, y, BoardLayer.MAX.Layer));
                 // debugView.SetText(meta.ToString());
 
 #region WALLS
@@ -1449,6 +1469,7 @@ public partial class BoardRenderer : ECSEntity
                     CreateBorder(x, y, R.BorderWallTop1);
                 }
 #endregion
+                
 #region COAST                
                 if (!meta.neighborT)
                 {
@@ -1523,38 +1544,46 @@ public partial class BoardRenderer : ECSEntity
 #region OUTER CORNERS
                 if (!meta.neighborT && !meta.neighborR)
                 {
-                    CreateBorder(x, y, R.BorderTopRightOuterCorner0);
+                    string id = "BorderTopRightOuterCorner" + Mathf.Abs(meta.floorDiffTR);                    
+                    CreateBorder(x, y, id);
                 }
-                else if (!meta.neighborT && !meta.neighborL)
+                if (!meta.neighborT && !meta.neighborL)
                 {
-                    CreateBorder(x, y, R.BorderTopLeftOuterCorner0);
+                    string id = "BorderTopLeftOuterCorner" + Mathf.Abs(meta.floorDiffTL); 
+                    CreateBorder(x, y, id);
                 }
-                else if (!meta.neighborB && !meta.neighborR)
+                if (!meta.neighborB && !meta.neighborR)
                 {
-                    CreateBorder(x, y, R.BorderBottomRightOuterCorner0);
+                    string id = "BorderBottomRightOuterCorner" + Mathf.Abs(meta.floorDiffBR); 
+                    CreateBorder(x, y, id);
                 }
-                else if (!meta.neighborB && !meta.neighborL)
+                if (!meta.neighborB && !meta.neighborL)
                 {
-                    CreateBorder(x, y, R.BorderBottomLeftOuterCorner0);
+                    string id = "BorderBottomLeftOuterCorner" + Mathf.Abs(meta.floorDiffBL); 
+                    CreateBorder(x, y, id);
                 } 
 #endregion
                 
 #region INNER CORNERS
-                if (meta.neighborT && meta.neighborR && !meta.neighborTR)
+                if (meta.neighborT && meta.neighborR && !meta.neighborTR && meta.floorDiffT == meta.floorDiffR)
                 {
-                    CreateBorder(x, y, R.BorderTopRightInnerCorner0);
+                    string id = "BorderBottomLeftInnerCorner" + Mathf.Abs(meta.floorDiffTR);                    
+                    CreateBorder(x, y, id);
                 }
-                else if (meta.neighborT && meta.neighborL && !meta.neighborTL)
+                if (meta.neighborT && meta.neighborL && !meta.neighborTL && meta.floorDiffT == meta.floorDiffL)
                 {
-                    CreateBorder(x, y, R.BorderTopLeftInnerCorner0);
+                    string id = "BorderBottomRightInnerCorner" + Mathf.Abs(meta.floorDiffTL); 
+                    CreateBorder(x, y, id);
                 }
-                else if (meta.neighborB && meta.neighborR && !meta.neighborBR)
+                if (meta.neighborB && meta.neighborR && !meta.neighborBR && meta.floorDiffB == meta.floorDiffR)
                 {
-                    CreateBorder(x, y, R.BorderBottomRightInnerCorner0);
+                    string id = "BorderTopLeftInnerCorner" + Mathf.Abs(meta.floorDiffBR); 
+                    CreateBorder(x, y, id);
                 }
-                else if (meta.neighborB && meta.neighborL && !meta.neighborBL)
+                if (meta.neighborB && meta.neighborL && !meta.neighborBL && meta.floorDiffB == meta.floorDiffL)
                 {
-                    CreateBorder(x, y, R.BorderBottomLeftInnerCorner0);
+                    string id = "BorderTopRightInnerCorner" + Mathf.Abs(meta.floorDiffBL); 
+                    CreateBorder(x, y, id);
                 } 
 #endregion
             }

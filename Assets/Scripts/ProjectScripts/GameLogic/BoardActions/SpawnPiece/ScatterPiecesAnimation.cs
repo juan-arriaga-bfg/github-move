@@ -37,14 +37,20 @@ public class ScatterPiecesAnimation : BoardAnimation
                 var element = context.CreatePieceAt(pair.Value, position);
                 
                 var delay = 0.1f + index * 0.02f;
+                var maxDelay = 0.1f + (Pieces.Count - 1) * 0.02f;
+                var jumpDuration = 0.4f + maxDelay - delay;
             
                 element.CachedTransform.localScale = Vector3.zero;
                 element.CachedTransform.localPosition = startPosition;
             
                 element.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
-            
-                sequence.Insert(delay, element.CachedTransform.DOJump(new Vector3(to.x, to.y, element.CachedTransform.position.z), 1, 1, 0.4f).SetEase(Ease.InOutSine));
-                sequence.InsertCallback(0.4f, () => context.ResetBoardElement(element, position));
+                
+                sequence.Insert(delay, element.CachedTransform.DOJump(new Vector3(to.x, to.y, element.CachedTransform.position.z), 1, 1, jumpDuration).SetEase(Ease.InOutSine));
+                sequence.InsertCallback(delay + jumpDuration, () =>
+                {
+//                    Debug.LogError($"ScatterPiecesAnimation:{Time.time}: jump completed");
+                    context.ResetBoardElement(element, position);
+                });
 
                 if (RewardEffect)
                 {
@@ -57,23 +63,49 @@ public class ScatterPiecesAnimation : BoardAnimation
                     });
                 }
                 
-                sequence.Insert(delay, element.CachedTransform.DOScale(Vector3.one * 1.3f, 0.2f));
-                sequence.Insert(delay + 0.2f, element.CachedTransform.DOScale(Vector3.one, 0.2f));
+                sequence.Insert(delay, element.CachedTransform.DOScale(Vector3.one * 1.3f, jumpDuration * 0.5f));
+                sequence.Insert(delay + jumpDuration * 0.5f, element.CachedTransform.DOScale(Vector3.one, 0.2f));
             
-                sequence.Insert(delay + 0.4f, element.CachedTransform.DOScale(new Vector3(1f, 0.8f, 1f), 0.1f));
-                sequence.Insert(delay + 0.5f, element.CachedTransform.DOScale(new Vector3(0.9f, 1.1f, 1f), 0.1f));
-                sequence.Insert(delay + 0.6f, element.CachedTransform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack));
+                sequence.Insert(delay + jumpDuration, element.CachedTransform.DOScale(new Vector3(1f, 0.8f, 1f), 0.1f));
+                sequence.Insert(delay + jumpDuration + 0.1f, element.CachedTransform.DOScale(new Vector3(0.9f, 1.1f, 1f), 0.1f));
+                sequence.Insert(delay + jumpDuration + 0.2f, element.CachedTransform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack));
             
                 index++;
             }
         }
+
+        sequence.AppendCallback(() =>
+        {
+//            Debug.LogError($"ScatterPiecesAnimation:{Time.time}: completed drop");
+        });
         
         if (Replace != null)
         {
-            CollapseSourcePiece(sequence, target, context);
+            var maxDelay = 0.1f + (Pieces.Count - 1) * 0.02f;
+            var jumpDuration = 0.4f;
+            float replaceDuration = 0.4f;
+            float replaceDelay = jumpDuration + maxDelay + 0.3f - replaceDuration;
             
-            sequence.AppendCallback(() =>
+            var targetPiece = target as PieceBoardElementView;
+            if (targetPiece != null)
             {
+                var animationResource = AnimationResourceSearchOnRemove?.Invoke(targetPiece.Piece.PieceType);
+                if (string.IsNullOrEmpty(animationResource) == false)
+                {
+                    sequence.InsertCallback(replaceDelay, () =>
+                    {
+                        var animView = context.CreateBoardElementAt<AnimationView>(animationResource, From);
+                        animView.Play(targetPiece);
+                    });
+                }    
+            }
+        
+            sequence.Insert(replaceDelay, target.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
+            
+            sequence.InsertCallback(replaceDelay, () =>
+            {
+//                Debug.LogError($"ScatterPiecesAnimation:{Time.time}: start replace"); 
+                
                 context.RemoveElementAt(From);
                 
                 foreach (var pair in Replace)
@@ -81,15 +113,17 @@ public class ScatterPiecesAnimation : BoardAnimation
                     var next = context.CreatePieceAt(pair.Value, pair.Key);
                     if (RewardEffect) ParticleView.Show(R.RewardDropParticles, pair.Key);
                     next.CachedTransform.localScale = Vector3.zero;
-                    next.CachedTransform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack);
+                    next.CachedTransform.DOScale(Vector3.one, replaceDuration).SetEase(Ease.OutBack);
                 }
             });
-
-            sequence.AppendInterval(0.4f);
+  
+//            sequence.AppendInterval(0.4f);
         }
         
         sequence.OnComplete(() =>
         {
+//            Debug.LogError($"ScatterPiecesAnimation:{Time.time}: global complete");
+            
             foreach (var pair in Pieces)
             {
                 context.Context.BoardLogic.AddPieceToBoard(pair.Key.X, pair.Key.Y, pair.Value);
@@ -109,27 +143,6 @@ public class ScatterPiecesAnimation : BoardAnimation
         });
     }
 
-    private void CollapseSourcePiece(Sequence sequence, BoardElementView target, BoardRenderer context)
-    {
-        var targetPiece = target as PieceBoardElementView;
-        if (targetPiece != null)
-        {
-            var animationResource = AnimationResourceSearchOnRemove?.Invoke(targetPiece.Piece.PieceType);
-            if (string.IsNullOrEmpty(animationResource) == false)
-            {
-                sequence.AppendCallback(() =>
-                {
-                    var animView = context.CreateBoardElementAt<AnimationView>(animationResource, From);
-                    animView.Play(targetPiece);
-                });
-                sequence.AppendInterval(0.3f);
-                return;
-            }    
-        }
-        
-        sequence.Append(target.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
-    }
-    
     private void PlaysSound()
     {
         NSAudioService.Current.Play(SoundId.DropObject);

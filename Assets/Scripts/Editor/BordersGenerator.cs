@@ -97,31 +97,40 @@ public class ObjectBuilderEditor : Editor
             var src = generatorPath;
             var dst = $"{dir}/{itemName}.prefab";
             File.Copy(src, dst);
-            
-            AssetDatabase.ImportAsset(src);
-            
-            // Fix item
-            GameObject newGo = PrefabUtility.LoadPrefabContents(dst);
-            count = newGo.transform.childCount;
-            for (int i = count - 1; i >= 0; i--)
-            {
-                Transform t = newGo.transform.GetChild(i);
-                if (t.name != itemName)
-                {
-                    DestroyImmediate(t.gameObject);
-                }
-                else
-                {
-                    t.gameObject.SetActive(true);
-                }
-            }
-
-            PrefabUtility.SaveAsPrefabAsset(newGo, dst);
         }
         
         AssetDatabase.Refresh();
         
+        foreach (string itemName in itemsToCreate)
+        {
+            var dst = $"{dir}/{itemName}.prefab";
+            
+            FixPrefab(dst, itemName);
+        }
+        
         Debug.LogWarning("Done!");
+    }
+
+    private static void FixPrefab(string dst, string itemName)
+    {
+        int count;
+        // Fix item
+        GameObject newGo = PrefabUtility.LoadPrefabContents(dst);
+        count = newGo.transform.childCount;
+        for (int i = count - 1; i >= 0; i--)
+        {
+            Transform t = newGo.transform.GetChild(i);
+            if (t.name != itemName)
+            {
+                DestroyImmediate(t.gameObject);
+            }
+            else
+            {
+                t.gameObject.SetActive(true);
+            }
+        }
+
+        PrefabUtility.SaveAsPrefabAsset(newGo, dst);
     }
 }
 

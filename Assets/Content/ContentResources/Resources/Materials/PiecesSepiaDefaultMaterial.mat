@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: PiecesSepiaDefaultMaterial
   m_Shader: {fileID: 4800000, guid: 691763b5f2cfaeb4c9178becb776d1ab, type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA USEVERTEXCOLOR_ON
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA USESEPIA_ON USEVERTEXCOLOR_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -65,7 +65,7 @@ Material:
     - USEBLICK: 0
     - USEGRAYSCALE: 0
     - USEHIGHLIGHT: 0
-    - USESEPIA: 0
+    - USESEPIA: 1
     - USEVERTEXCOLOR: 1
     - _AlphaCoef: 1
     - _BlendMaskRotation: 0
@@ -85,7 +85,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _SepiaIntensity: 1
+    - _SepiaIntensity: 0.79
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
