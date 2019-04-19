@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 
 public class AirShipDef
 {
@@ -23,34 +22,27 @@ public class AirShipDef
     {
         SortedPayload = new List<int>();
 
-        var definition = BoardService.Current.FirstBoard.BoardLogic.MatchDefinition;
-        var branches = new Dictionary<int, List<int>>();
+        var data = GameDataService.Current.PiecesManager;
+        var scores = new List<KeyValuePair<int, int>>();
         
         foreach (var pair in payload)
         {
-            var key = definition.GetFirst(pair.Key);
-
-            if (branches.TryGetValue(key, out var branch) == false)
-            {
-                branch = new List<int>();
-                branches.Add(key, branch);
-            }
+            var def = data.GetPieceDef(pair.Key);
+            var experience = def?.CreateRewards?.Find(reward => reward.Currency == Currency.Experience.Name);
             
-            for (var i = 0; i < pair.Value; i++)
-            {
-                branch.Add(pair.Key);
-            }
+            scores.Add(new KeyValuePair<int, int>(pair.Key, experience?.Amount ?? 0));
         }
 
-        var keys = branches.Keys.ToList();
-        keys.Sort((a, b) => a.CompareTo(b));
+        scores.Sort((a, b) => -a.Value.CompareTo(b.Value));
 
-        foreach (var key in keys)
+        foreach (var score in scores)
         {
-            var pieces = branches[key];
+            if (payload.TryGetValue(score.Key, out var amount) == false) continue;
             
-            pieces.Sort((a, b) => -a.CompareTo(b));
-            SortedPayload.AddRange(pieces);
+            for (var i = 0; i < amount; i++)
+            {
+                SortedPayload.Add(score.Key);
+            }
         }
     }
 }
