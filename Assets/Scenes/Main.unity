@@ -249,6 +249,7 @@ MonoBehaviour:
   GuiLayers:
     serializedVersion: 2
     m_Bits: 4294967291
+  Center: {x: 1152, y: 594}
   RecordFingers: 1
   RecordThreshold: 5
   RecordLimit: 10
@@ -736,6 +737,7 @@ MonoBehaviour:
   ZoomMax: 10
   cameraManipulator: {fileID: 1931227307}
   Dampening: 10
+  startPinchCameraOffset: {x: 0, y: 0}
 --- !u!114 &1931227306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,10 +775,10 @@ MonoBehaviour:
   cameraSettings:
     cameraClampRegion:
       serializedVersion: 2
-      x: 23.41
-      y: -16.8
-      width: 55.2
-      height: 33.9
+      x: 13.58
+      y: -24
+      width: 67.43
+      height: 42.6
     smoothTime: 0.05
     moveThreshold: 0.001
     sensitive: 1
