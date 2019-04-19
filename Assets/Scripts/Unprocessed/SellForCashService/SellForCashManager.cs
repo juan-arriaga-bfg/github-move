@@ -138,11 +138,7 @@ public class SellForCashManager: ECSEntity
             return;
         }
         
-        var piecesReward = CurrencyHelper.FiltrationRewards(def.Products, out var currenciesReward);
-
-        if (piecesReward.Count == 0) CurrencyHelper.PurchaseAsyncOnlyCurrency(currenciesReward, CurrencyHelper.FlyPosition, null);
-        else CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, null, null, null, false, true);
-        
+        CurrencyHelper.PurchaseAndProvideSpawn(def.Products, null, null, CurrencyHelper.FlyPosition, null, false, true);
         IapService.Current.IapProvidedToPlayer(productId);
     }
 

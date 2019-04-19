@@ -72,14 +72,21 @@ public static partial class CurrencyHelper
         });
     }
 
-    public static void PurchaseAndProvideSpawn(List<CurrencyPair> products, CurrencyPair price = null, BoardPosition? position = null, Action onComplete = null, bool topHighlight = false, bool bottomHighlight = false)
+    public static void PurchaseAndProvideSpawn(List<CurrencyPair> products, CurrencyPair price, BoardPosition? position, Vector3 flyPosition, Action onComplete = null, bool topHighlight = false, bool bottomHighlight = false)
     {
         var piecesReward = FiltrationRewards(products, out var currenciesReward);
-        PurchaseAndProvideSpawn(piecesReward, currenciesReward, price, position, onComplete, topHighlight, bottomHighlight);
+        
+        if (piecesReward.Count == 0) PurchaseAsyncOnlyCurrency(currenciesReward, flyPosition, success => onComplete?.Invoke());
+        else PurchaseAndProvideSpawn(piecesReward, currenciesReward, price, position, onComplete, topHighlight, bottomHighlight);
     }
-
-    public static void PurchaseAndProvideSpawn(Dictionary<int, int> piecesReward, List<CurrencyPair> currenciesReward,
-        CurrencyPair price = null, BoardPosition? position = null, Action onComplete = null, bool topHighlight = false, bool bottomHighlight = false)
+    
+    public static void PurchaseAndProvideSpawn(Dictionary<int, int> piecesReward, List<CurrencyPair> currenciesReward, CurrencyPair price, BoardPosition? position, Vector3 flyPosition, Action onComplete = null, bool topHighlight = false, bool bottomHighlight = false)
+    {
+        if (piecesReward.Count == 0) PurchaseAsyncOnlyCurrency(currenciesReward, flyPosition, success => onComplete?.Invoke());
+        else PurchaseAndProvideSpawn(piecesReward, currenciesReward, price, position, onComplete, topHighlight, bottomHighlight);
+    } 
+        
+    public static void PurchaseAndProvideSpawn(Dictionary<int, int> piecesReward, List<CurrencyPair> currenciesReward, CurrencyPair price = null, BoardPosition? position = null, Action onComplete = null, bool topHighlight = false, bool bottomHighlight = false)
     {
         if (GetAllData(currenciesReward, price, position, out var point, out var transactions) == false) return;
         
