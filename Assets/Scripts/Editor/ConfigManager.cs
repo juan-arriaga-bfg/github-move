@@ -12,7 +12,9 @@ public enum LoadState
     Unknown,
     LastVersion,
     NeedUpdate,
-    Load
+    Validate,
+    Load,
+    Error
 }
 public class ConfigElementInfo
 {
@@ -24,7 +26,6 @@ public class ConfigManager: CustomEditorBase
 {
     private List<GoogleLink> cachedConfigLinks = new List<GoogleLink>();
     private List<string> selectedConfigs = new List<string>();
-    private List<ConfigElementInfo> configsStatus = new List<ConfigElementInfo>();
 
     private bool isInitComplete = false;
     private bool IsSelectAll => cachedConfigLinks.Count > 0 && cachedConfigLinks.Any(link => selectedConfigs.Contains(link.Key) && IsVisible(link.Key));
@@ -48,7 +49,7 @@ public class ConfigManager: CustomEditorBase
     {
         if (isInitComplete == false)
         {
-            InitUI();
+            InitStyles();
             isInitComplete = true;
         }
         
@@ -72,10 +73,15 @@ public class ConfigManager: CustomEditorBase
            ShowConfigList(); 
         });       
     }
+    
+    void  OnInspectorUpdate()
+    {
+        Repaint();
+    }
 
 #region WindowUI
 
-    private void InitUI()
+    private void InitStyles()
     {
         waitUpdateTextStyle = new GUIStyle();
         waitUpdateTextStyle.normal.textColor = Color.red;
@@ -102,7 +108,7 @@ public class ConfigManager: CustomEditorBase
 
     private void ConfigStatusLabel(string configName)
     {
-        var selected = configsStatus.Where(config => config.Name == configName).ToList();
+        var selected = ConfigsGoogleLoader.ConfigsStatus.Where(config => config.Name == configName).ToList();
 
         var widthStyle = GUILayout.MaxWidth(130f);
         var fontStyle = waitUpdateTextStyle;
@@ -116,7 +122,7 @@ public class ConfigManager: CustomEditorBase
         var targetConfig = selected[0];
         string message = Enum.GetName(typeof(LoadState), targetConfig.State);
 
-        if (targetConfig.State == LoadState.Load)
+        if (targetConfig.State == LoadState.Load || targetConfig.State == LoadState.Validate)
         {
             fontStyle = loadTextStyle;
         }
@@ -182,8 +188,6 @@ public class ConfigManager: CustomEditorBase
 
 #region WindowLogic
 
-    
-
     private void RefreshElements()
     {
         cachedConfigLinks.Clear();
@@ -201,7 +205,7 @@ public class ConfigManager: CustomEditorBase
 
         cachedConfigLinks = cachedConfigLinks.OrderBy(elem => elem.Key).ToList();
         
-        configsStatus = ConfigsGoogleLoader.GetConfigsStatus(cachedConfigLinks.Select(elem => elem.Key).ToList());
+        ConfigsGoogleLoader.UpdateStatus(cachedConfigLinks.Select(elem => elem.Key).ToList());
     }
 
     private void UpdateConfigsForce()
