@@ -67,7 +67,7 @@ public class ConfigsGoogleLoader
     {
         HashSet<string> alwaysUpdate = new HashSet<string>
         {
-            //"conversations"
+            "layout"
         };
         
         var idsArray = update.Select(e => e.Value.Link).ToArray();

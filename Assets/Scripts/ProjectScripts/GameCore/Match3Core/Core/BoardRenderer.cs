@@ -3,7 +3,6 @@ using System.Diagnostics;
 using UnityEngine;
 using Debug = IW.Logger;
 
-
 public partial class BoardRenderer : ECSEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
@@ -1111,7 +1110,7 @@ public partial class BoardRenderer : ECSEntity
         viewRoot.localPosition = new Vector3(52f, 61f, 0f);
     }
     
-    public Transform GenerateField(int width, int height, float size, List<string> tiles, string backgroundTile = null, IList<BoardPosition> ignorablePositions = null)
+    public Transform GenerateField(int width, int height, float size, Dictionary<int, BoardTileDef> tileDefs)
     {
          SectorsContainer = new GameObject("Sectors.Container").transform;
          SectorsContainer.localPosition = new Vector3(0f, 0f, 0f);
@@ -1120,7 +1119,7 @@ public partial class BoardRenderer : ECSEntity
 
          var layout = GameDataService.Current.FieldManager.LayoutData;
          
-         var sectorsMesh = GenerateMesh(width, height, size, layout, tiles);
+         var sectorsMesh = GenerateMesh(width, height, size, layout, tileDefs);
          
          var meshGO = new GameObject("_cells");
          var meshTransform = meshGO.transform;
@@ -1136,17 +1135,14 @@ public partial class BoardRenderer : ECSEntity
                  
          // load texture
          Sprite tileSprite = null;
-         int index = 0;
-         do
+         foreach (var def in tileDefs.Values)
          {
-             string id = tiles[index];
+             string id = def.SpriteName;
              if (!string.IsNullOrEmpty(id))
              {
                  tileSprite = IconService.Current.GetSpriteById(id);
              }
-             index++;
-         } 
-         while (tileSprite == null && index < tiles.Count);
+         }
          
          var tileTexture = tileSprite == null ? null : tileSprite.texture;
          
@@ -1162,7 +1158,7 @@ public partial class BoardRenderer : ECSEntity
          return SectorsContainer.transform;
      }
 
-    private Mesh GenerateMesh(int width, int height, float size, int[] layout, List<string> tiles)
+    private Mesh GenerateMesh(int width, int height, float size, int[] layout, Dictionary<int, BoardTileDef> tileDefs)
     {
 #if DEBUG
         var sw = new Stopwatch();
@@ -1177,19 +1173,20 @@ public partial class BoardRenderer : ECSEntity
         float borderWidth = size;
         var defaultColor = new Color(1f, 1f, 1f, 1f);
         
+        // todo: implement index-based cache for sprites access instead of dictionary? 
         // Cache sprites
-        Sprite[] tilesSprites = new Sprite[tiles.Count];
-        for (var i = 0; i < tiles.Count; i++)
-        {
-            var tile = tiles[i];
-            if (string.IsNullOrEmpty(tile))
-            {
-                continue;
-            }
-            
-            Sprite sprite = IconService.Current.GetSpriteById(tile);
-            tilesSprites[i] = sprite;
-        }
+        // Sprite[] tilesSprites = new Sprite[tiles.Count];
+        // for (var i = 0; i < tiles.Count; i++)
+        // {
+        //     var tile = tiles[i];
+        //     if (string.IsNullOrEmpty(tile))
+        //     {
+        //         continue;
+        //     }
+        //     
+        //     Sprite sprite = IconService.Current.GetSpriteById(tile);
+        //     tilesSprites[i] = sprite;
+        // }
 
         // Build layout
         int layoutIndex = 0;
@@ -1197,7 +1194,26 @@ public partial class BoardRenderer : ECSEntity
         {
             for (int y = 0; y < height; y++)
             {
-                Sprite sprite = tilesSprites[layout[layoutIndex]];
+                int tileId = layout[layoutIndex];
+#if DEBUG
+                if (!tileDefs.TryGetValue(tileId, out BoardTileDef tileDef))
+                {
+                    IW.Logger.LogError($"[BoardRenderer] => GenerateMesh: Unknown tile id: {tileId}");
+                }
+#else
+                BoardTileDef tileDef = tileDefs[tileId];    
+#endif
+
+                Sprite sprite;
+                if (tileDef.SpriteChess != null && (x + y) % 2 == 0)
+                {
+                    sprite = tileDef.SpriteChess;
+                }
+                else
+                {
+                    sprite = tileDef.Sprite; 
+                }
+
                 if (sprite != null)
                 {
                     vertices.Add(new Vector3(x * borderWidth,       (y + 1) * borderWidth, 0));
@@ -1248,8 +1264,38 @@ public partial class BoardRenderer : ECSEntity
         GameObject water = (GameObject) GameObject.Instantiate(waterPrefab);
     }
 
+    private struct Meta 
+    {
+        public bool neighborR ;
+        public bool neighborL ;
+        public bool neighborT ;
+        public bool neighborB ;
+        public bool neighborBL;
+        public bool neighborTR;
+        public int floorDiffR;
+        public int floorDiffL;
+        public int floorDiffT;
+        public int floorDiffB;
+        public int floorDiffBL;
+        public int floorDiffTR;
+        
+        private string BoolToString(bool v)
+        {
+            return v ? "1" : "0";
+        }
+        
+        public override string ToString()
+        {
+            // return $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)} BL:{BoolToString(neighborBL)}</mspace>";
+            return $"<mspace=1.5em>T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
+            //return $"<mspace=1.5em>L:{floorDiffT}\nB:{floorDiffR}</mspace>";  
+        }
+    }
+    
     public void CreateBorders()
     {
+        System.Random random = new System.Random();
+        
         var boardDef = context.BoardDef;
         
         var fieldManager = GameDataService.Current.FieldManager;
@@ -1264,48 +1310,186 @@ public partial class BoardRenderer : ECSEntity
         {
             return x >= 0 && y >= 0 && x < w && y < h;
         }
+        
+        Dictionary<string, string[]> props = new Dictionary<string, string[]>
+        {
+            {
+                R.BorderWallRight1, new[]
+                {
+                    R.BorderWallRight1_Prop_1,
+                    R.BorderWallRight1_Prop_2,
+                    R.BorderWallRight1_Prop_3,
+                    R.BorderWallRight1_Prop_4,
+                    R.BorderWallRight1_Prop_5,
+                }
+            },
+            {
+                R.BorderWallTop1, new[]
+                {
+                    R.BorderWallTop1_Prop_1,
+                    R.BorderWallTop1_Prop_2,
+                    R.BorderWallTop1_Prop_3,
+                    null
+                }
+            },
+            {
+                R.BorderWallBottomLeft1, new[]
+                {
+                    R.BorderWallBottomLeft1_Prop_1,
+                }
+            },
+            {
+                R.BorderWallTopRight1, new[]
+                {
+                    R.BorderWallTopRight1_Prop_1,
+                }
+            }
+        };
 
-        void Create(int x, int y, string item)
+        void CreateBorder(int x, int y, string item)
+        {
+            InstantiateItem(x, y, item);
+
+            if (props.TryGetValue(item, out string[] availableProps))
+            {
+                int len = availableProps.Length;
+                int index = random.Next(0, len);
+                string prop = availableProps[index];
+
+                if (prop != null)
+                {
+                    InstantiateItem(x, y, prop);
+                }
+            }
+        }
+            
+        void InstantiateItem(int x, int y, string item)
         {
             var prefab = ContentService.Current.GetObjectByName(item);
+            if (prefab == null)
+            {
+                IW.Logger.LogError($"InstantiateItem: Prefab Not found: {item}");
+            }
+            
             GameObject go = (GameObject) Object.Instantiate(prefab, root.transform, true);
             go.transform.position = boardDef.GetPiecePosition(x, y);
         }
 
+        int waterId = BoardTiles.WATER_TILE_ID;
+        Dictionary<int, BoardTileDef> tilesDefs = BoardTiles.GetDefs();
+        
         for (int x = 0; x < w; x++)
         {
             for (int y = 0; y < h; y++)
             {
-                int cellVal = fieldManager.GetCellType(x, y);
-                if (cellVal == 1)
+                int titleId = fieldManager.GetTileId(x, y);
+                if (titleId == waterId)
                 {
                     continue;
                 }
 
-                bool neighborR  = IsCellExists(x + 0, y + 1) && fieldManager.GetCellType(x + 0, y + 1) > 1;
-                bool neighborL  = IsCellExists(x + 0, y - 1) && fieldManager.GetCellType(x + 0, y - 1) > 1;              
-                bool neighborT  = IsCellExists(x - 1, y + 0) && fieldManager.GetCellType(x - 1, y + 0) > 1;
-                bool neighborB  = IsCellExists(x + 1, y + 0) && fieldManager.GetCellType(x + 1, y + 0) > 1;
-                bool neighborBL = IsCellExists(x + 1, y - 1) && fieldManager.GetCellType(x + 1, y - 1) > 1;
+                Meta meta = new Meta();
+
+                int currentHeight = tilesDefs[titleId].Height;
+
+                int idR  = fieldManager.GetTileId(x + 0, y + 1);
+                int idL  = fieldManager.GetTileId(x + 0, y - 1);
+                int idT  = fieldManager.GetTileId(x - 1, y + 0);
+                int idB  = fieldManager.GetTileId(x + 1, y + 0);
+                int idBL = fieldManager.GetTileId(x + 1, y - 1);
+                int idTR = fieldManager.GetTileId(x - 1, y + 1);
                 
-                if (!neighborT)
+                // IsCellExists NOT required until we have any non-water tiles place on borders of the field
+                meta.neighborR  = /*IsCellExists(x + 0, y + 1) && */idR  != waterId;
+                meta.neighborL  = /*IsCellExists(x + 0, y - 1) && */idL  != waterId;              
+                meta.neighborT  = /*IsCellExists(x - 1, y + 0) && */idT  != waterId;
+                meta.neighborB  = /*IsCellExists(x + 1, y + 0) && */idB  != waterId;
+                meta.neighborBL = /*IsCellExists(x + 1, y - 1) && */idBL != waterId;
+                meta.neighborTR = /*IsCellExists(x - 1, y + 1) && */idTR != waterId;
+
+                meta.floorDiffR  = tilesDefs[idR ].Height - currentHeight;
+                meta.floorDiffL  = tilesDefs[idL ].Height - currentHeight;                
+                meta.floorDiffT  = tilesDefs[idT ].Height - currentHeight;
+                meta.floorDiffB  = tilesDefs[idB ].Height - currentHeight;
+                meta.floorDiffBL = tilesDefs[idBL].Height - currentHeight;
+                meta.floorDiffTR = tilesDefs[idTR].Height - currentHeight;
+                
+                // DebugCellView debugView = BoardService.Current.FirstBoard.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell2, new BoardPosition(x, y, BoardLayer.MAX.Layer));
+                // debugView.SetText(meta.ToString());
+
+                // Walls
+                if (meta.neighborT && meta.neighborR && meta.floorDiffT == 1 && meta.floorDiffR == 1)
                 {
-                    Create(x, y, R.BorderTop);
+                    CreateBorder(x, y, R.BorderWallBottomLeft1);
+                }
+                else if (meta.neighborTR && meta.floorDiffTR == 1 && meta.floorDiffT == 0 && meta.floorDiffR == 0)
+                {
+                    CreateBorder(x, y, R.BorderWallTopRight1);
+                }
+                else if (meta.neighborR && meta.floorDiffR == 1)
+                {
+                    CreateBorder(x, y, R.BorderWallRight1);
+                }
+                else if (meta.neighborT && meta.floorDiffT == 1)
+                {
+                    CreateBorder(x, y, R.BorderWallTop1);
                 }
                 
-                if (!neighborB)
+                // Coast
+                if (!meta.neighborT)
                 {
-                    Create(x, y, neighborBL ? R.BorderBottomHole : R.BorderBottom);
+                    if (meta.neighborR && meta.floorDiffR == 1)
+                    {
+                        CreateBorder(x, y, R.BorderTop0Short);   
+                    }
+                    else
+                    {
+                        CreateBorder(x, y, R.BorderTop0);
+                    }
                 }
                 
-                if (!neighborL)
+                if (!meta.neighborR)
                 {
-                    Create(x, y, neighborBL ? R.BorderLeftHole : R.BorderLeft);
+                    if (meta.neighborT && meta.floorDiffT == 1)
+                    {
+                        CreateBorder(x, y, R.BorderRight0Short);   
+                    }
+                    else
+                    {
+                        CreateBorder(x, y, R.BorderRight0);
+                    }
                 }
                 
-                if (!neighborR)
+                if (!meta.neighborB)
                 {
-                    Create(x, y, R.BorderRight);
+                    if (meta.floorDiffB == 0)
+                    {
+                        CreateBorder(x, y, meta.neighborBL ? R.BorderBottom0Hole : R.BorderBottom0);
+                    }
+                    else if (meta.floorDiffB == -1)
+                    {
+                        CreateBorder(x, y, meta.neighborBL ? R.BorderBottom1Hole : R.BorderBottom1);
+                    }
+                    else if (meta.floorDiffB == -2)
+                    {
+                        CreateBorder(x, y, meta.neighborBL ? R.BorderBottom2Hole : R.BorderBottom2);
+                    }
+                }
+                
+                if (!meta.neighborL)
+                {
+                    if (meta.floorDiffL == 0)
+                    {
+                        CreateBorder(x, y, meta.neighborBL ? R.BorderLeft0Hole : R.BorderLeft0);
+                    }
+                    else if (meta.floorDiffL == -1)
+                    {
+                        CreateBorder(x, y, meta.neighborBL ? R.BorderLeft1Hole : R.BorderLeft1);
+                    }
+                    else if (meta.floorDiffL == -2)
+                    {
+                        CreateBorder(x, y, meta.neighborBL ? R.BorderLeft2Hole : R.BorderLeft2);
+                    }
                 }
             }
         }

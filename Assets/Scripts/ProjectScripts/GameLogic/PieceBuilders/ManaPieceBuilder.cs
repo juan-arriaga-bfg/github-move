@@ -17,11 +17,6 @@
             .RegisterComponent(new TouchReactionDefinitionCollectMana())
             .RegisterComponent(new TouchReactionConditionMana()));
         
-        piece.RegisterComponent(new PiecePathfindBoardCondition(piece.Context, piece)
-            .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
-        
-        AddPathfindLockObserver(piece, true);
-        
         return piece;
     }
 }

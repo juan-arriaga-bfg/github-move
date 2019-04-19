@@ -14,14 +14,43 @@ public class PathfinderComponent:ECSEntity
         board = entity as BoardController;
     }
 
-    public Predicate<BoardPosition> GetCondition(Piece piece)
+    private bool Check(Piece context, BoardPosition position)
     {
-        var boardCondition = piece?.BoardCondition;
-        if (boardCondition == null)
-            return (_) => true;
-        return boardCondition.Check;
+        var boardLogic = board.BoardLogic;
+        
+        var tileDefId = GameDataService.Current.FieldManager.GetTileId(position.X, position.Y);
+        var isRelief = tileDefId != BoardTiles.WATER_TILE_ID && BoardTiles.GetDefs()[tileDefId].IsLock;
+        if (isRelief)
+        {
+            return true;
+        }
+        
+        if (!position.IsValidFor(board.BoardDef.Width, board.BoardDef.Height) || boardLogic.IsLockedCell(position, new List<Type>
+        {
+            typeof(DragAndCheckMatchAction),
+            typeof(ModificationPiecesAction)
+        })) return false;
+        
+        var pieceInCurrentPos = boardLogic.GetPieceAt(position);
+
+        if (pieceInCurrentPos == null || pieceInCurrentPos == context)
+        {
+            return true;
+        }
+
+        var ignorablePieceTypes = PathfindIgnores.GetIgnoreList(context.PieceType);
+        if (context.PieceType == PieceType.Fog.Id)
+        {
+            return !boardLogic.IsLockedCell(position) && ignorablePieceTypes.Contains(pieceInCurrentPos.PieceType);
+        }
+
+        return ignorablePieceTypes.Contains(pieceInCurrentPos.PieceType);
     }
     
+    public Predicate<BoardPosition> GetCondition(Piece piece)
+    {
+        return (pos) => Check(piece, pos);
+    }
     
     //A* pathfinding algorithm
     public virtual bool HasPath(BoardPosition from, HashSet<BoardPosition> to, out List<BoardPosition> blockagePositions,
@@ -121,11 +150,43 @@ public class PathfinderComponent:ECSEntity
     {
         var uncheckedNeigbours = position.Neighbors();
         
+        var baseTileDefId = GameDataService.Current.FieldManager.GetTileId(position.X, position.Y);
+        var baseIsRelief = baseTileDefId != BoardTiles.WATER_TILE_ID && BoardTiles.GetDefs()[baseTileDefId].IsLock;
+
+        if (baseIsRelief)
+        {
+            return new List<BoardPosition>();
+        }
+        
         var checkedNeigbours = new List<BoardPosition>();
         var count = uncheckedNeigbours.Count;
         for (var i = 0; i < count; i++)
         {
             var currentNeighbour = uncheckedNeigbours[i];
+            
+            var currentTileDefId = GameDataService.Current.FieldManager.GetTileId(currentNeighbour.X, currentNeighbour.Y);
+            var currentIsRelief = currentTileDefId != BoardTiles.WATER_TILE_ID && BoardTiles.GetDefs()[currentTileDefId].IsLock;
+
+            if (baseIsRelief == false && currentIsRelief)
+            {
+                if (currentNeighbour.X > position.X)
+                {
+                    currentNeighbour.X++;
+                } 
+                else if (currentNeighbour.X < position.X)
+                {
+                    currentNeighbour.X--;
+                }
+                else if (currentNeighbour.Y > position.Y)
+                {
+                    currentNeighbour.Y++;
+                }
+                else if (currentNeighbour.Y < position.Y)
+                {
+                    currentNeighbour.Y--;
+                }
+            }
+            
             var targetPiece = board.BoardLogic.GetPieceAt(currentNeighbour);
             if(!checkedPositions.Contains(currentNeighbour) && predicate.Invoke(currentNeighbour))
                 checkedNeigbours.Add(currentNeighbour); 
