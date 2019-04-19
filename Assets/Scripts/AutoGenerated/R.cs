@@ -583,4 +583,8 @@ public class R
      public const string BorderBottomRightOuterCorner0 = "BorderBottomRightOuterCorner0";
      public const string BorderTopRightOuterCorner0 = "BorderTopRightOuterCorner0";
      public const string BorderTopLeftOuterCorner0 = "BorderTopLeftOuterCorner0";
+     public const string BorderBottomRightInnerCorner0 = "BorderBottomRightInnerCorner0";
+     public const string BorderTopLeftInnerCorner0 = "BorderTopLeftInnerCorner0";
+     public const string BorderTopRightInnerCorner0 = "BorderTopRightInnerCorner0";
+     public const string BorderBottomLeftInnerCorner0 = "BorderBottomLeftInnerCorner0";
 }

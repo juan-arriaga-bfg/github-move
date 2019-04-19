@@ -1266,12 +1266,15 @@ public partial class BoardRenderer : ECSEntity
 
     private struct Meta
     {
+        // ReSharper disable InconsistentNaming
         public int tileId;
         public bool neighborR ;
         public bool neighborL ;
         public bool neighborT ;
         public bool neighborB ;
         public bool neighborBL;
+        public bool neighborBR;        
+        public bool neighborTL;
         public bool neighborTR;
         public int floorDiffR;
         public int floorDiffL;
@@ -1279,6 +1282,7 @@ public partial class BoardRenderer : ECSEntity
         public int floorDiffB;
         public int floorDiffBL;
         public int floorDiffTR;
+        // ReSharper restore InconsistentNaming
         
         private string BoolToString(bool v)
         {
@@ -1396,13 +1400,16 @@ public partial class BoardRenderer : ECSEntity
                 Meta meta = new Meta {tileId = titleId};
 
                 int currentHeight = tilesDefs[titleId].Height;
-
+                // ReSharper disable InconsistentNaming
                 int idR  = fieldManager.GetTileId(x + 0, y + 1);
                 int idL  = fieldManager.GetTileId(x + 0, y - 1);
                 int idT  = fieldManager.GetTileId(x - 1, y + 0);
                 int idB  = fieldManager.GetTileId(x + 1, y + 0);
                 int idBL = fieldManager.GetTileId(x + 1, y - 1);
                 int idTR = fieldManager.GetTileId(x - 1, y + 1);
+                int idBR = fieldManager.GetTileId(x + 1, y + 1);
+                int idTL = fieldManager.GetTileId(x - 1, y - 1);
+                // ReSharper restore InconsistentNaming
                 
                 // IsCellExists NOT required until we have any non-water tiles place on borders of the field
                 meta.neighborR  = /*IsCellExists(x + 0, y + 1) && */idR  != waterId;
@@ -1410,7 +1417,9 @@ public partial class BoardRenderer : ECSEntity
                 meta.neighborT  = /*IsCellExists(x - 1, y + 0) && */idT  != waterId;
                 meta.neighborB  = /*IsCellExists(x + 1, y + 0) && */idB  != waterId;
                 meta.neighborBL = /*IsCellExists(x + 1, y - 1) && */idBL != waterId;
+                meta.neighborBR = /*IsCellExists(x - 1, y + 1) && */idBR != waterId;
                 meta.neighborTR = /*IsCellExists(x - 1, y + 1) && */idTR != waterId;
+                meta.neighborTL = /*IsCellExists(x - 1, y + 1) && */idTL != waterId;
 
                 meta.floorDiffR  = tilesDefs[idR ].Height - currentHeight;
                 meta.floorDiffL  = tilesDefs[idL ].Height - currentHeight;                
@@ -1510,7 +1519,8 @@ public partial class BoardRenderer : ECSEntity
                 }
 #endif
 #endregion
-#region CORNERS LEVEL 0
+                
+#region OUTER CORNERS
                 if (!meta.neighborT && !meta.neighborR)
                 {
                     CreateBorder(x, y, R.BorderTopRightOuterCorner0);
@@ -1526,6 +1536,25 @@ public partial class BoardRenderer : ECSEntity
                 else if (!meta.neighborB && !meta.neighborL)
                 {
                     CreateBorder(x, y, R.BorderBottomLeftOuterCorner0);
+                } 
+#endregion
+                
+#region INNER CORNERS
+                if (meta.neighborT && meta.neighborR && !meta.neighborTR)
+                {
+                    CreateBorder(x, y, R.BorderTopRightInnerCorner0);
+                }
+                else if (meta.neighborT && meta.neighborL && !meta.neighborTL)
+                {
+                    CreateBorder(x, y, R.BorderTopLeftInnerCorner0);
+                }
+                else if (meta.neighborB && meta.neighborR && !meta.neighborBR)
+                {
+                    CreateBorder(x, y, R.BorderBottomRightInnerCorner0);
+                }
+                else if (meta.neighborB && meta.neighborL && !meta.neighborBL)
+                {
+                    CreateBorder(x, y, R.BorderBottomLeftInnerCorner0);
                 } 
 #endregion
             }
