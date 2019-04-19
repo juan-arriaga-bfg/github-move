@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 public class AirShipDef
 {
@@ -21,20 +22,35 @@ public class AirShipDef
     private void NormalizeAndSortPayload()
     {
         SortedPayload = new List<int>();
+
+        var definition = BoardService.Current.FirstBoard.BoardLogic.MatchDefinition;
+        var branches = new Dictionary<int, List<int>>();
         
         foreach (var pair in payload)
         {
-            var pieceId = pair.Key;
-            var count = pair.Value;
-            
-            for (var i = 0; i < count; i++)
+            var key = definition.GetFirst(pair.Key);
+
+            if (branches.TryGetValue(key, out var branch) == false)
             {
-                var id = pieceId;
-                SortedPayload.Add(id);
+                branch = new List<int>();
+                branches.Add(key, branch);
+            }
+            
+            for (var i = 0; i < pair.Value; i++)
+            {
+                branch.Add(pair.Key);
             }
         }
-        
-        // todo: Fix sorting
-        SortedPayload.Sort((id1, id2) => id2 - id1);
+
+        var keys = branches.Keys.ToList();
+        keys.Sort((a, b) => a.CompareTo(b));
+
+        foreach (var key in keys)
+        {
+            var pieces = branches[key];
+            
+            pieces.Sort((a, b) => -a.CompareTo(b));
+            SortedPayload.AddRange(pieces);
+        }
     }
 }
