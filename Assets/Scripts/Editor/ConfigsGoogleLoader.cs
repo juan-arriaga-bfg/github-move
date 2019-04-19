@@ -63,7 +63,7 @@ public class ConfigsGoogleLoader
         index = update.Count;
         filesToCheckCount = index;
         
-        CheckNeedToUpdate(forceUpdate);
+        CheckNeedToUpdate(forceUpdate, update);
     }
     
     private static void UpdateWithGoogle(bool forceUpdate)
@@ -85,7 +85,7 @@ public class ConfigsGoogleLoader
         index = update.Count;
         filesToCheckCount = index;
         
-        CheckNeedToUpdate(forceUpdate);
+        CheckNeedToUpdate(forceUpdate, update);
     }
 
     private static ConfigElementInfo GetConfigInfo(string configName)
@@ -209,7 +209,7 @@ public class ConfigsGoogleLoader
         });
     }
     
-    private static void CheckNeedToUpdate(bool forceUpdate)
+    private static void CheckNeedToUpdate(bool forceUpdate, List<KeyValuePair<string, GoogleLink>> update)
     {
         HashSet<string> alwaysUpdate = new HashSet<string>
         {
@@ -302,7 +302,7 @@ public class ConfigsGoogleLoader
             Debug.LogWarning("Check for the need to update the configs completed!");
             index = update.Count;
 
-            Load();
+            Load(update);
         });
     }
 
@@ -315,7 +315,7 @@ public class ConfigsGoogleLoader
         }
     }
     
-    private static void Load()
+    private static void Load(List<KeyValuePair<string, GoogleLink>> update)
     {
         DevTools.IsSequenceReset = true;
 
@@ -328,7 +328,7 @@ public class ConfigsGoogleLoader
         var gLink = update[0].Value;
         update.RemoveAt(0);
         
-        Load();
+        Load(update);
         
         var configStatus = GetConfigInfo(gLink.Key);
         if (configStatus.State == LoadState.Load)
