@@ -34,4 +34,9 @@ public class DebugTextView : BoardElementView
         label.Text = $"{position.X}:{position.Y}{(markEnable ? "*" : "")}";
         label.TextLabel.alpha = markEnable ? 0.5f : 0.25f;
     }
+
+    public void SetText(string text)
+    {
+        label.Text = text;
+    }
 }
