@@ -13,7 +13,6 @@ public class R
      public const string FogPiece = "FogPiece";
      public const string DefaultWorker = "DefaultWorker";
      public const string ExtraWorker = "ExtraWorker";
-     public const string Firefly = "Firefly";
      public const string A1Piece = "A1Piece";
      public const string A2Piece = "A2Piece";
      public const string A3Piece = "A3Piece";
@@ -587,4 +586,6 @@ public class R
      public const string BorderTopLeftInnerCorner0 = "BorderTopLeftInnerCorner0";
      public const string BorderTopRightInnerCorner0 = "BorderTopRightInnerCorner0";
      public const string BorderBottomLeftInnerCorner0 = "BorderBottomLeftInnerCorner0";
+     public const string FireflyProduction = "FireflyProduction";
+     public const string FireflyEvent = "FireflyEvent";
 }

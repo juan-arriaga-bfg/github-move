@@ -6,7 +6,7 @@ public class FireflyDataManager : IECSComponent, IDataManager, IDataLoader<List<
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
     
-    public Dictionary<FireflyType, FireflyDef> Defs;
+    public Dictionary<FireflyLogicType, FireflyDef> Defs;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -19,7 +19,7 @@ public class FireflyDataManager : IECSComponent, IDataManager, IDataLoader<List<
 
     public void Reload()
     {
-        Defs = new Dictionary<FireflyType, FireflyDef>();
+        Defs = new Dictionary<FireflyLogicType, FireflyDef>();
         LoadData(new ResourceConfigDataMapper<List<FireflyDef>>("configs/firefly.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 	

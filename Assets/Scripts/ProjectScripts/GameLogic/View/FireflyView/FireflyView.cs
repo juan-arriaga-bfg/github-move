@@ -1,10 +1,17 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
+public enum FireflyType
+{
+    Production,
+    Event,
+}
+
 public class FireflyView : BoardElementView
 {
     [SerializeField] private Transform body;
     [SerializeField] private FireflyType fireflyType;
+    [SerializeField] private float speedFirefly = 5f;
     
     public ParticleSystem Plume;
     
@@ -13,16 +20,12 @@ public class FireflyView : BoardElementView
     
     private bool isClick;
     private HintArrowView arrow;
-
-    private float speed;
     
     public void Init(BoardRenderer context, Vector2 start, Vector2 finish)
     {
         base.Init(context);
 
         isClick = false;
-
-        speed = GameDataService.Current.FireflyManager.Defs[fireflyType].Speed;
         
         to = Context.Context.BoardLogic.FireflyLogic.Cross(start, finish);
         CachedTransform.position = start;
@@ -136,11 +139,15 @@ public class FireflyView : BoardElementView
 
         CurrencyHelper.Purchase(Currency.Firefly.Name, 1);
         RemoveArrowImmediate();
+
+        var rewardId = fireflyType == FireflyType.Production
+            ? GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name).GetNext().Piece
+            : PieceType.Soft1.Id;
         
         Plume.gameObject.SetActive(true);
         Context.Context.ActionExecutor.AddAction(new FireflyPieceSpawnAction
         {
-            PieceId = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name).GetNext().Piece,
+            PieceId = rewardId,
             At = free[0],
             View = this
         });
@@ -150,7 +157,7 @@ public class FireflyView : BoardElementView
     {
         var lenght = Vector2.Distance(CachedTransform.position, to);
         
-        CachedTransform.DOMove(to, lenght / (speed / 10f))
+        CachedTransform.DOMove(to, lenght / (speedFirefly / 10f))
             .SetEase(Ease.Linear)
             .SetId(CachedTransform)
             .OnComplete(() => { Context.DestroyElement(gameObject); });

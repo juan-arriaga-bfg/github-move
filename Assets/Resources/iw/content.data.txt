@@ -65,11 +65,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "Firefly",
-    "ResourcePath": "Prefabs/Firefly",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "A1Piece",
     "ResourcePath": "Prefabs\\Pieces\\A/A1Piece",
     "IsGenerateAutoName": true
@@ -5602,6 +5597,16 @@
   {
     "Uid": "BorderBottomLeftInnerCorner0",
     "ResourcePath": "Prefabs\\Border/BorderBottomLeftInnerCorner0",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "FireflyProduction",
+    "ResourcePath": "Prefabs\\Firefly/FireflyProduction",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "FireflyEvent",
+    "ResourcePath": "Prefabs\\Firefly/FireflyEvent",
     "IsGenerateAutoName": true
   }
 ]

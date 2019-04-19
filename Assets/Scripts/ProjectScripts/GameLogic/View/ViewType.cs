@@ -11,7 +11,7 @@
     Warning = -1007,
     Lock = -1008,
     OrderBubble = -1009,
-    Firefly = -1010,
+    FireflyProduction = -1010,
     DefaultWorker = -1011,
     ExtraWorker = -1012,
     TutorialMergeFinger = -1013,
@@ -24,4 +24,5 @@
     ObstacleProgress = -1020,
     DebugId = -1021,
     AirShip = -1022,
+    FireflyEvent = -1023,
 }

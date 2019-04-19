@@ -18,7 +18,7 @@ public class ElementsResourcesBuilder
         dict.Add((int) ViewType.Warning, R.Warning);
         dict.Add((int) ViewType.Lock, R.LockView);
         dict.Add((int) ViewType.OrderBubble, R.OrderBubbleView);
-        dict.Add((int) ViewType.Firefly, R.Firefly);
+        dict.Add((int) ViewType.FireflyProduction, R.FireflyProduction);
         dict.Add((int) ViewType.DefaultWorker, R.DefaultWorker);
         dict.Add((int) ViewType.ExtraWorker, R.ExtraWorker);
         dict.Add((int) ViewType.TutorialMergeFinger, R.TutorialMergeFinger);
@@ -31,6 +31,7 @@ public class ElementsResourcesBuilder
         dict.Add((int) ViewType.ObstacleProgress, R.ObstacleProgressView);
         dict.Add((int) ViewType.DebugId, R.DebugId);
         dict.Add((int) ViewType.AirShip, R.AirShipView);
+        dict.Add((int) ViewType.FireflyEvent, R.FireflyEvent);
         
 #endregion
         

@@ -1,18 +1,15 @@
-﻿public enum FireflyType
+﻿public enum FireflyLogicType
 {
-    Production,
+    Normal,
     Event,
-    Other,
 }
 
 public class FireflyDef
 {
-    public FireflyType Uid;
-
-    public int Level;
-    public float Speed;
+    public FireflyLogicType Uid;
     
-    public AmountRange Amount;
+    public AmountRange AmountProduction;
+    public AmountRange AmountEvent;
     public AmountRange DelayFirstSpawn;
     public AmountRange DelaySpawn;
     

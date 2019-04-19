@@ -1,11 +1,13 @@
 ﻿[
   {
-    "Uid": "Production",
-    "Level": 6,
-    "Speed": 5,
-    "Amount": {
+    "Uid": "Normal",
+    "AmountProduction": {
       "Min": 2,
       "Max": 5
+    },
+    "AmountEvent": {
+      "Min": 0,
+      "Max": 0
     },
     "DelayFirstSpawn": {
       "Min": 10,
@@ -20,30 +22,13 @@
   },
   {
     "Uid": "Event",
-    "Level": 6,
-    "Speed": 5,
-    "Amount": {
+    "AmountProduction": {
       "Min": 2,
-      "Max": 5
+      "Max": 3
     },
-    "DelayFirstSpawn": {
-      "Min": 10,
-      "Max": 60
-    },
-    "DelaySpawn": {
-      "Min": 10,
-      "Max": 20
-    },
-    "SleepDelay": 1800,
-    "TapDelay": 30
-  },
-  {
-    "Uid": "Other",
-    "Level": 6,
-    "Speed": 5,
-    "Amount": {
-      "Min": 2,
-      "Max": 5
+    "AmountEvent": {
+      "Min": 1,
+      "Max": 2
     },
     "DelayFirstSpawn": {
       "Min": 10,

@@ -17,6 +17,8 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     public int MinDelayBounceBubble;
     public int MaxDelayBounceBubble;
     
+    public int StartLevelFirefly;
+    
     public int MaxOrders;
 
     public int FreeTimeLimit;

@@ -11,14 +11,11 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, ID
 	
 	private LockerComponent locker;
 	public LockerComponent Locker => locker ?? GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
-
-	public FireflyType FireflyType;
 	
 	private BoardLogicComponent context;
 	private FireflyDef Def;
-
-	private List<Vector2> slots = new List<Vector2>();
-    
+	
+	private readonly List<Vector2> slots = new List<Vector2>();
 	private readonly List<FireflyView> views = new List<FireflyView>();
     public List<FireflyView> Views => views;
 	
@@ -43,24 +40,24 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, ID
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		context = entity as BoardLogicComponent;
-
-		Def = GameDataService.Current.FireflyManager.Defs[FireflyType];
 		
 		locker = new LockerComponent();
 		RegisterComponent(locker);
+		Locker.Lock(this);
 
-		restartTimer = new TimerComponent {Delay = Def.SleepDelay, OnComplete = () =>
+		restartTimer = new TimerComponent
 		{
-			index = 1;
-			isClick = false;
-			OnMatch();
-			restartTimer.Start();
-			IW.Logger.Log($"[FireflyLogicComponent] => restart session!");
-		}};
+			OnComplete = () =>
+			{
+				index = 1;
+				isClick = false;
+				OnMatch();
+				restartTimer.Start();
+				IW.Logger.Log($"[FireflyLogicComponent] => restart session!");
+			}
+		};
 		
 		RegisterComponent(restartTimer);
-		
-		Locker.Lock(this);
 		
 		UIService.Get.OnShowWindowEvent += OnShowWindow;
 		UIService.Get.OnCloseWindowEvent += OnCloseWindow;
@@ -89,8 +86,16 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, ID
 		bottom = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, 0);
 		right = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, context.Context.BoardDef.Height + 5);
 
-		delay = Def.DelayFirstSpawn.Range();
-		startTime = DateTime.UtcNow;
+		ResetLogic(FireflyLogicType.Normal);
+	}
+	
+	public override void OnUnRegisterEntity(ECSEntity entity)
+	{
+		UIService.Get.OnShowWindowEvent -= OnShowWindow;
+		UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
+		ShopService.Current.OnPurchasedEvent -= UpdateFirefly;
+
+		restartTimer.OnComplete = null;
 	}
 
 	public void ResetTutorialStartTime()
@@ -103,13 +108,16 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, ID
 		restartTimer.Reset();
 	}
 
-	public override void OnUnRegisterEntity(ECSEntity entity)
+	public void ResetLogic(FireflyLogicType logicType)
 	{
-		UIService.Get.OnShowWindowEvent -= OnShowWindow;
-		UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
-		ShopService.Current.OnPurchasedEvent -= UpdateFirefly;
+		Def = GameDataService.Current.FireflyManager.Defs[logicType];
 
-		restartTimer.OnComplete = null;
+		restartTimer.Delay = Def.SleepDelay;
+		
+		delay = Def.DelayFirstSpawn.Range();
+		startTime = DateTime.UtcNow;
+		
+		ResetSession();
 	}
 	
 	private void OnShowWindow(IWUIWindow window)
@@ -162,7 +170,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, ID
 	
 	public void Execute()
 	{
-		var amount = Def.Amount.Range();
+		var amount = Def.AmountProduction.Range() + Def.AmountEvent.Range();
 		
 		slots.Shuffle();
 		
@@ -175,18 +183,18 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, ID
 			
 			Vector2 start = context.Context.BoardDef.ViewCamera.ScreenToWorldPoint(slots[i]);
 			Vector2 finish = context.Context.BoardDef.ViewCamera.ScreenToWorldPoint(positionFinish);
+
+			var firefly = (int) (i < Def.AmountProduction.Value ? ViewType.FireflyProduction : ViewType.FireflyEvent);
+			var view = context.Context.RendererContext.CreateBoardElement<FireflyView>(firefly);
+			view.Init(context.Context.RendererContext, start, finish);
 			
-			var firefly = context.Context.RendererContext.CreateBoardElement<FireflyView>((int) ViewType.Firefly);
-			firefly.Init(context.Context.RendererContext, start, finish);
-			
-			views.Add(firefly);
+			views.Add(view);
 		}
 
-		if (isTutorialActive)
-		{
-			views[0].AddArrow();
-			ResetTutorialStartTime();
-		}
+		if (!isTutorialActive) return;
+		
+		views[0].AddArrow();
+		ResetTutorialStartTime();
 	}
 	
 	public bool IsExecuteable()

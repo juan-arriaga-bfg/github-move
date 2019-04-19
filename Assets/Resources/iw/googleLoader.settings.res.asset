@@ -100,4 +100,4 @@ MonoBehaviour:
   - Key: firefly
     Link: 1Xt-OoTWMGhVnOGoyium-ooqAKGeniXNdONzcuL5QUOU
     Route: parse
-    Pattern: '[{"Uid":"","Level":0,"Speed":0,"Amount":{"Min":0,"Max":0},"DelayFirstSpawn":{"Min":0,"Max":0},"DelaySpawn":{"Min":0,"Max":0},"SleepDelay":0,"TapDelay":0}]'
+    Pattern: '[{"Uid":"","AmountProduction":{"Min":0,"Max":0},"AmountEvent":{"Min":0,"Max":0},"DelayFirstSpawn":{"Min":0,"Max":0},"DelaySpawn":{"Min":0,"Max":0},"SleepDelay":0,"TapDelay":0}]'
