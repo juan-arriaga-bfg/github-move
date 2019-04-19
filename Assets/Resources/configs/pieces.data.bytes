@@ -2469,7 +2469,7 @@
   },
   {
     "Uid": "E3",
-    "Delay": 15,
+    "Delay": 45,
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2493,7 +2493,7 @@
   },
   {
     "Uid": "E4",
-    "Delay": 60,
+    "Delay": 300,
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2501,7 +2501,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 5
+        "Amount": 3
       }
     ],
     "UnlockBonus": [
@@ -2517,7 +2517,7 @@
   },
   {
     "Uid": "E5",
-    "Delay": 180,
+    "Delay": 900,
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2525,7 +2525,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 15
+        "Amount": 5
       }
     ],
     "UnlockBonus": [
@@ -2541,7 +2541,7 @@
   },
   {
     "Uid": "E6",
-    "Delay": 300,
+    "Delay": 1800,
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2549,7 +2549,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 25
+        "Amount": 10
       }
     ],
     "UnlockBonus": [
@@ -2565,7 +2565,7 @@
   },
   {
     "Uid": "E7",
-    "Delay": 900,
+    "Delay": 7200,
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2585,7 +2585,7 @@
   },
   {
     "Uid": "E8",
-    "Delay": 1800,
+    "Delay": 18000,
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2605,7 +2605,7 @@
   },
   {
     "Uid": "E9",
-    "Delay": 3600,
+    "Delay": 18000,
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2625,7 +2625,7 @@
   },
   {
     "Uid": "EM",
-    "Delay": 3600,
+    "Delay": 86400,
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2677,7 +2677,7 @@
   },
   {
     "Uid": "F3",
-    "Delay": 15,
+    "Delay": 45,
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2701,7 +2701,7 @@
   },
   {
     "Uid": "F4",
-    "Delay": 60,
+    "Delay": 300,
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2709,7 +2709,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 5
+        "Amount": 3
       }
     ],
     "UnlockBonus": [
@@ -2725,7 +2725,7 @@
   },
   {
     "Uid": "F5",
-    "Delay": 180,
+    "Delay": 900,
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2733,7 +2733,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 15
+        "Amount": 5
       }
     ],
     "UnlockBonus": [
@@ -2749,7 +2749,7 @@
   },
   {
     "Uid": "F6",
-    "Delay": 300,
+    "Delay": 1800,
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2757,7 +2757,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 25
+        "Amount": 10
       }
     ],
     "UnlockBonus": [
@@ -2773,7 +2773,7 @@
   },
   {
     "Uid": "F7",
-    "Delay": 900,
+    "Delay": 7200,
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2781,7 +2781,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 50
+        "Amount": 25
       }
     ],
     "UnlockBonus": [
@@ -2793,7 +2793,7 @@
   },
   {
     "Uid": "F8",
-    "Delay": 1800,
+    "Delay": 18000,
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2801,7 +2801,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 75
+        "Amount": 50
       }
     ],
     "UnlockBonus": [
@@ -2813,15 +2813,15 @@
   },
   {
     "Uid": "F9",
-    "Delay": 1800,
+    "Delay": 18000,
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 25
+        "Amount": 50
       },
       {
         "Currency": "Experience",
-        "Amount": 75
+        "Amount": 150
       }
     ],
     "UnlockBonus": [
@@ -2833,15 +2833,15 @@
   },
   {
     "Uid": "FM",
-    "Delay": 3600,
+    "Delay": 86400,
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 50
+        "Amount": 75
       },
       {
         "Currency": "Experience",
-        "Amount": 100
+        "Amount": 250
       }
     ],
     "UnlockBonus": [
@@ -4656,6 +4656,25 @@
     ]
   },
   {
+    "Uid": "NPC_C6",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
     "Uid": "NPC_D1",
     "UnlockBonus": [
       {
@@ -4742,6 +4761,44 @@
   },
   {
     "Uid": "NPC_D6",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_D7",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_D8",
     "CreateRewards": [
       {
         "Currency": "Coins",
