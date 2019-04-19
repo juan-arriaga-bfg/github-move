@@ -1,7 +1,7 @@
 {
   "Fogs": [
     {
-      "Uid": "Fog 1",
+      "Uid": "Fog 2_1",
       "Level": "2",
       "Condition": {
         "Currency": "Mana",
@@ -60,7 +60,7 @@
       }
     },
     {
-      "Uid": "Fog 2",
+      "Uid": "Fog 3_1",
       "Level": "3",
       "Condition": {
         "Currency": "Mana",
@@ -211,7 +211,7 @@
       }
     },
     {
-      "Uid": "Fog 3",
+      "Uid": "Fog 4_1",
       "Level": "4",
       "Condition": {
         "Currency": "Mana",
@@ -548,7 +548,7 @@
       }
     },
     {
-      "Uid": "Fog 4",
+      "Uid": "Fog 5_1",
       "Level": "5",
       "Condition": {
         "Currency": "Mana",
@@ -677,7 +677,7 @@
       }
     },
     {
-      "Uid": "Fog 5",
+      "Uid": "Fog 6_1",
       "Level": "6",
       "Condition": {
         "Currency": "Mana",
@@ -1051,7 +1051,7 @@
       }
     },
     {
-      "Uid": "Fog 6",
+      "Uid": "Fog 7_1",
       "Level": "7",
       "Condition": {
         "Currency": "Mana",
@@ -1268,7 +1268,7 @@
       }
     },
     {
-      "Uid": "Fog 7",
+      "Uid": "Fog 8_1",
       "Level": "8",
       "Condition": {
         "Currency": "Mana",
@@ -1454,7 +1454,7 @@
             "Y": 11
           }
         ],
-        "PR_A4": [
+        "PR_C4": [
           {
             "X": 13,
             "Y": 10
@@ -1473,7 +1473,7 @@
       }
     },
     {
-      "Uid": "Fog 8",
+      "Uid": "Fog 9_1",
       "Level": "9",
       "Condition": {
         "Currency": "Mana",
@@ -1483,6 +1483,7 @@
         "Currency": "Experience",
         "Amount": 50
       },
+      "IsActive": true,
       "Positions": [
         {
           "X": 7,
@@ -1537,14 +1538,83 @@
           "Y": 12
         }
       ],
-      "Pieces": {},
+      "Pieces": {
+        "OB5_A": [
+          {
+            "X": 7,
+            "Y": 10
+          },
+          {
+            "X": 9,
+            "Y": 12
+          }
+        ],
+        "CH_Free": [
+          {
+            "X": 7,
+            "Y": 11
+          }
+        ],
+        "OB7_A": [
+          {
+            "X": 8,
+            "Y": 11
+          },
+          {
+            "X": 13,
+            "Y": 12
+          }
+        ],
+        "Boost_WR": [
+          {
+            "X": 9,
+            "Y": 11
+          }
+        ],
+        "Boost_CR1": [
+          {
+            "X": 10,
+            "Y": 12
+          }
+        ],
+        "B3": [
+          {
+            "X": 12,
+            "Y": 12
+          }
+        ],
+        "SK1_PR": [
+          {
+            "X": 14,
+            "Y": 12
+          }
+        ],
+        "OB6_A": [
+          {
+            "X": 15,
+            "Y": 12
+          }
+        ],
+        "OB3_A": [
+          {
+            "X": 16,
+            "Y": 12
+          }
+        ],
+        "OB9_A": [
+          {
+            "X": 17,
+            "Y": 12
+          }
+        ]
+      },
       "Center": {
         "X": 16,
         "Y": 12
       }
     },
     {
-      "Uid": "Fog 9",
+      "Uid": "Fog 10_1",
       "Level": "10",
       "Condition": {
         "Currency": "Mana",
@@ -1554,6 +1624,8 @@
         "Currency": "Experience",
         "Amount": 50
       },
+      "IsActive": true,
+      "Hero": "NPC_C",
       "Positions": [
         {
           "X": 11,
@@ -1568,26 +1640,79 @@
           "Y": 14
         },
         {
+          "X": 13,
+          "Y": 15
+        },
+        {
           "X": 14,
           "Y": 14
+        },
+        {
+          "X": 14,
+          "Y": 15
         },
         {
           "X": 15,
           "Y": 14
         },
         {
+          "X": 15,
+          "Y": 15
+        },
+        {
           "X": 16,
           "Y": 14
+        },
+        {
+          "X": 16,
+          "Y": 15
         }
       ],
-      "Pieces": {},
+      "Pieces": {
+        "SK2_PR": [
+          {
+            "X": 11,
+            "Y": 14
+          }
+        ],
+        "OB5_A": [
+          {
+            "X": 12,
+            "Y": 14
+          }
+        ],
+        "MN_C": [
+          {
+            "X": 13,
+            "Y": 14
+          }
+        ],
+        "OB4_A": [
+          {
+            "X": 15,
+            "Y": 14
+          }
+        ],
+        "CH1_B": [
+          {
+            "X": 15,
+            "Y": 15
+          }
+        ],
+        "OB3_A": [
+          {
+            "X": 16,
+            "Y": 15
+          }
+        ]
+      },
       "Center": {
         "X": 14,
         "Y": 14
       }
     },
     {
-      "Uid": "Fog 10",
+      "Uid": "Fog 11_1",
       "Level": "11",
       "Condition": {
         "Currency": "Mana",
@@ -1599,28 +1724,12 @@
       },
       "Positions": [
         {
-          "X": 13,
-          "Y": 15
-        },
-        {
-          "X": 14,
-          "Y": 15
-        },
-        {
-          "X": 15,
-          "Y": 15
-        },
-        {
           "X": 15,
           "Y": 16
         },
         {
           "X": 15,
           "Y": 17
-        },
-        {
-          "X": 16,
-          "Y": 15
         },
         {
           "X": 16,
@@ -1650,7 +1759,7 @@
       }
     },
     {
-      "Uid": "Fog 11",
+      "Uid": "Fog 12_1",
       "Level": "12",
       "Condition": {
         "Currency": "Mana",
@@ -1689,7 +1798,7 @@
       }
     },
     {
-      "Uid": "Fog 12",
+      "Uid": "Fog 13_1",
       "Level": "13",
       "Condition": {
         "Currency": "Mana",
@@ -1780,7 +1889,7 @@
       }
     },
     {
-      "Uid": "Fog 13",
+      "Uid": "Fog 14_1",
       "Level": "14",
       "Condition": {
         "Currency": "Mana",
@@ -1839,7 +1948,7 @@
       }
     },
     {
-      "Uid": "Fog 14",
+      "Uid": "Fog 15_1",
       "Level": "15",
       "Condition": {
         "Currency": "Mana",
