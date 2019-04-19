@@ -4656,6 +4656,25 @@
     ]
   },
   {
+    "Uid": "NPC_C6",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
     "Uid": "NPC_D1",
     "UnlockBonus": [
       {
@@ -4742,6 +4761,44 @@
   },
   {
     "Uid": "NPC_D6",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_D7",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_D8",
     "CreateRewards": [
       {
         "Currency": "Coins",
