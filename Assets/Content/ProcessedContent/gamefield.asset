@@ -346,6 +346,7 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 7956a7d9fb57c2a4e8e420f8f2fa1a8b, type: 3}
     - {fileID: 21300000, guid: 050b55c2cbaa5b94ab22b41eede981f6, type: 3}
     - {fileID: 21300000, guid: bbe4c540b4674d244a00b01ccf8f86f8, type: 3}
+    - {fileID: 21300000, guid: cd225e0fcdbbd374a8878de0e3c8b26d, type: 3}
     - {fileID: 21300000, guid: 7993e909e3ba26745941c48c44d529e3, type: 3}
     - {fileID: 21300000, guid: 9193256c317b4d54cbe1e296e1532070, type: 3}
     - {fileID: 21300000, guid: 3df9c8014a91ab04f94b474971df4ff9, type: 3}
@@ -423,7 +424,7 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 75a76f3ef9cd4cb489f17edf428c73fb, type: 3}
     - {fileID: 21300000, guid: f596fcc0659312c40a7a37ad00d2234e, type: 3}
     - {fileID: 21300000, guid: d131040c24f4bd741b0fe3e0e8a89a2a, type: 3}
-    totalSpriteSurfaceArea: 9008736
+    totalSpriteSurfaceArea: 9057448
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -792,6 +793,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 54876eee67954914daed90a47489e2d8, type: 3}
   - {fileID: 21300000, guid: e2d739feb2d5db048855a6fb66705434, type: 3}
   - {fileID: 21300000, guid: f149adfecb19e924e9338dbd41a83c54, type: 3}
+  - {fileID: 21300000, guid: cd225e0fcdbbd374a8878de0e3c8b26d, type: 3}
   - {fileID: 21300000, guid: c75e9e0f9fc9ceb4e9fb2207fbc415b8, type: 3}
   - {fileID: 21300000, guid: e6d1231faced0c14496d2bd9ac5bad52, type: 3}
   - {fileID: 21300000, guid: 2922a62fd5a1a114f889cc459145d841, type: 3}
@@ -1175,6 +1177,7 @@ SpriteAtlas:
   - HM
   - NPC_F8
   - NPC_N3
+  - lockedSubstrate
   - NPC_M7
   - PR_E4_lock
   - C8

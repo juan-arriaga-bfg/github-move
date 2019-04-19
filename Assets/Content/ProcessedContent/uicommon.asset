@@ -98,8 +98,8 @@ SpriteAtlas:
     - {fileID: 21300000, guid: ba6862c5508135446a082d5cd2950aa5, type: 3}
     - {fileID: 21300000, guid: c588767692bd3124b9f70f2e2a3d4e89, type: 3}
     - {fileID: 21300000, guid: 36938820236f30342b884da59eea7576, type: 3}
-    - {fileID: 21300000, guid: 3aa0e5d11e5d52f4ab5a6b4ee69eb528, type: 3}
     - {fileID: 21300000, guid: 8ae190f17bfb953469ffda980e900302, type: 3}
+    - {fileID: 21300000, guid: 3aa0e5d11e5d52f4ab5a6b4ee69eb528, type: 3}
     - {fileID: 21300000, guid: 521a71fa4b1e65d44bf73d385f59e42c, type: 3}
     - {fileID: 21300000, guid: 146bbdd8e924b604699aaa5c515283d1, type: 3}
     - {fileID: 21300000, guid: f8ef91050d75d2d40bb09ea282dc07b9, type: 3}
@@ -242,6 +242,7 @@ SpriteAtlas:
     - {fileID: 21300000, guid: ba3ea0c016d51a84496bb59be5f5c217, type: 3}
     - {fileID: 21300000, guid: f5664a6a53e62a3458b8e8046e8d7acf, type: 3}
     - {fileID: 21300000, guid: 87465007f13b53341813d1e7123101c2, type: 3}
+    - {fileID: 21300000, guid: 830e9eb324b098a41a1100dfccabc7eb, type: 3}
     - {fileID: 21300000, guid: 3c64c612825515a479c52543829525c5, type: 3}
     - {fileID: 21300000, guid: 4ff396954743dc44484406980b13e671, type: 3}
     - {fileID: 21300000, guid: 5832f9e0854f963418aa0a5c75975dc2, type: 3}
@@ -288,7 +289,7 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 88710e6b7e3607e4aad348b5befc7ed1, type: 3}
     - {fileID: 21300000, guid: 4dbe30d396e6e354b8eb80842bbfc1dc, type: 3}
     - {fileID: 21300000, guid: 2f28d7bc463a37743b1ae10e4b4453fe, type: 3}
-    totalSpriteSurfaceArea: 3891976
+    totalSpriteSurfaceArea: 3867144
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -356,6 +357,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 8f193e33701f2194698de0800397cc75, type: 3}
   - {fileID: 21300000, guid: e4d8e9431902b3146bafb2ab7480841b, type: 3}
   - {fileID: 21300000, guid: 9e5a42735ef350046bf7bd77c101a2a7, type: 3}
+  - {fileID: 21300000, guid: 830e9eb324b098a41a1100dfccabc7eb, type: 3}
   - {fileID: 21300000, guid: 4dbe30d396e6e354b8eb80842bbfc1dc, type: 3}
   - {fileID: 21300000, guid: 6b0b02d321233aa4d80f72ff56a2c66f, type: 3}
   - {fileID: 21300000, guid: 6d7476d3fc8d85240b525809f86bd13e, type: 3}
@@ -575,10 +577,10 @@ SpriteAtlas:
   - offer_2
   - flagEnglish
   - Hero_ramka_not_active
-  - NPC_E_Icon
+  - NPC_F_Icon
   - bubbleFullScreenHero
   - bigSlot
-  - NPC_F_Icon
+  - NPC_E_Icon
   - icon_Worker
   - miniProgressBarBlue
   - lineProgressLine
@@ -604,6 +606,7 @@ SpriteAtlas:
   - codexScrollGradientBottom
   - NPC_P_Icon
   - hard_currency_2
+  - dailyIndicatorEmpty
   - traceryBottomFrameWindow
   - quest_icon_open_chest
   - quest_back
