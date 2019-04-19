@@ -1296,13 +1296,13 @@ public partial class BoardRenderer : ECSEntity
         
         public override string ToString()
         {
-            return $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
+            // return $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
             // return $"<mspace=1.5em>T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}\nBR:{(floorDiffBR)} TL:{(floorDiffTL)}</mspace>";
             // //return $"<mspace=1.5em>L:{floorDiffT}\nB:{floorDiffR}</mspace>";  
             
-            // var str1 = $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
-            // var str2 = $"<mspace=1.5em>id:{tileId} T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
-            // return $"{str1}\n{str2}";
+            var str1 = $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
+            var str2 = $"<mspace=1.5em>id:{tileId} T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
+            return $"{str1}\n{str2}";
         }
     }
 
@@ -1311,10 +1311,10 @@ public partial class BoardRenderer : ECSEntity
         // Value in dict is a count of NULL, added as addons. More nulls - more tiles without any addons
         Dictionary<string, int> data = new Dictionary<string, int>
         {
-            {R.BorderBottom1,         1},
-            {R.BorderBottom2,         1},
-            {R.BorderLeft1,           1},
-            {R.BorderLeft2,           1},
+            {R.BorderBottom1,         4},
+            {R.BorderBottom2,         4},
+            {R.BorderLeft1,           4},
+            {R.BorderLeft2,           4},
             {R.BorderWallBottomLeft1, 1},
             {R.BorderWallRight1,      1},
             {R.BorderWallTop1,        1},
@@ -1351,7 +1351,12 @@ public partial class BoardRenderer : ECSEntity
     
     public void CreateBorders()
     {
-        System.Random random = new System.Random();
+#if DEBUG
+        var sw = new Stopwatch();
+        sw.Start();
+#endif
+        
+        System.Random random = new System.Random(100);
         
         var boardDef = context.BoardDef;
         
@@ -1473,7 +1478,8 @@ public partial class BoardRenderer : ECSEntity
 #region COAST                
                 if (!meta.neighborT)
                 {
-                    if (meta.neighborR && meta.floorDiffR == 1)
+                    if (meta.neighborR && meta.floorDiffR == 1 
+                     || !meta.neighborT && !meta.neighborR && !meta.neighborTR)
                     {
                         CreateBorder(x, y, R.BorderTop0Short);   
                     }
@@ -1485,7 +1491,8 @@ public partial class BoardRenderer : ECSEntity
                 
                 if (!meta.neighborR)
                 {
-                    if (meta.neighborT && meta.floorDiffT == 1)
+                    if (meta.neighborT && meta.floorDiffT == 1
+                     || !meta.neighborT && !meta.neighborR && !meta.neighborTR)
                     {
                         CreateBorder(x, y, R.BorderRight0Short);   
                     }
@@ -1586,7 +1593,18 @@ public partial class BoardRenderer : ECSEntity
                     CreateBorder(x, y, id);
                 } 
 #endregion
+                                
+#region INTERSECTION CORNERS
+                if (!meta.neighborBL && meta.neighborL && meta.neighborB && meta.floorDiffL == -1 && meta.floorDiffB == 0 && meta.floorDiffBL == -1)
+                {                  
+                    CreateBorder(x, y, R.BorderTopRightIntersectionCorner0);
+                }
+#endregion
             }
         }
+#if DEBUG
+        sw.Stop();
+        Debug.LogFormat($"[BoardRenderer] => CreateBorders: Done in {sw.ElapsedMilliseconds}");
+#endif
     }
 }

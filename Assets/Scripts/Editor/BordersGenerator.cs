@@ -30,7 +30,7 @@ public class ObjectBuilderEditor : Editor
 
     private void Generate()
     {
-        const string TARGET = "BordersGenerator";
+        const string TARGET = "!BordersGenerator";
 
         string generatorPath = null;
         
