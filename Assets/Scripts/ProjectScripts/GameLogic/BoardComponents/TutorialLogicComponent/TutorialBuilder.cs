@@ -323,8 +323,8 @@ public static class TutorialBuilder
                 };
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckLevelTutorialCondition {Target = GameDataService.Current.ConstantsManager.StartLevelFirefly, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckLevelTutorialCondition {Target = GameDataService.Current.ConstantsManager.StartLevelFirefly, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition {Target = GameDataService.Current.FireflyManager.Defs[FireflyType.Production].Level, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition {Target = GameDataService.Current.FireflyManager.Defs[FireflyType.Production].Level, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }

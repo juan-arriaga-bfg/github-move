@@ -1,6 +1,13 @@
-﻿public class FireflyDef
+﻿public enum FireflyType
 {
-    public string Uid;
+    Production,
+    Event,
+    Other,
+}
+
+public class FireflyDef
+{
+    public FireflyType Uid;
 
     public int Level;
     public float Speed;
