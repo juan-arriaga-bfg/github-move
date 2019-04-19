@@ -575,4 +575,8 @@ public class R
      public const string BorderWallTop1_Prop_3 = "BorderWallTop1_Prop_3";
      public const string BorderWallBottomLeft1_Prop_1 = "BorderWallBottomLeft1_Prop_1";
      public const string BorderWallTopRight1_Prop_1 = "BorderWallTopRight1_Prop_1";
+     public const string BorderBottomLeftOuterCorner0 = "BorderBottomLeftOuterCorner0";
+     public const string BorderBottomRightOuterCorner0 = "BorderBottomRightOuterCorner0";
+     public const string BorderTopLeftOuterCorner0 = "BorderTopLeftOuterCorner0";
+     public const string BorderTopRightOuterCorner0 = "BorderTopRightOuterCorner0";
 }

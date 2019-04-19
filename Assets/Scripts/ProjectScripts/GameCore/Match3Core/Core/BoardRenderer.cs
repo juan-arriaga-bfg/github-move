@@ -1303,37 +1303,37 @@ public partial class BoardRenderer : ECSEntity
         
         Dictionary<string, string[]> props = new Dictionary<string, string[]>
         {
-            // {
-            //     R.BorderWallRight1, new[]
-            //     {
-            //         R.BorderWallRight1_Prop_1,
-            //         R.BorderWallRight1_Prop_2,
-            //         R.BorderWallRight1_Prop_3,
-            //         R.BorderWallRight1_Prop_4,
-            //         R.BorderWallRight1_Prop_5,
-            //     }
-            // },
-            // {
-            //     R.BorderWallTop1, new[]
-            //     {
-            //         R.BorderWallTop1_Prop_1,
-            //         R.BorderWallTop1_Prop_2,
-            //         R.BorderWallTop1_Prop_3,
-            //         null
-            //     }
-            // },
-            // {
-            //     R.BorderWallBottomLeft1, new[]
-            //     {
-            //         R.BorderWallBottomLeft1_Prop_1,
-            //     }
-            // },
-            // {
-            //     R.BorderWallTopRight1, new[]
-            //     {
-            //         R.BorderWallTopRight1_Prop_1,
-            //     }
-            // }
+            {
+                R.BorderWallRight1, new[]
+                {
+                    R.BorderWallRight1_Prop_1,
+                    R.BorderWallRight1_Prop_2,
+                    R.BorderWallRight1_Prop_3,
+                    R.BorderWallRight1_Prop_4,
+                    R.BorderWallRight1_Prop_5,
+                }
+            },
+            {
+                R.BorderWallTop1, new[]
+                {
+                    R.BorderWallTop1_Prop_1,
+                    R.BorderWallTop1_Prop_2,
+                    R.BorderWallTop1_Prop_3,
+                    null
+                }
+            },
+            {
+                R.BorderWallBottomLeft1, new[]
+                {
+                    R.BorderWallBottomLeft1_Prop_1,
+                }
+            },
+            {
+                R.BorderWallTopRight1, new[]
+                {
+                    R.BorderWallTopRight1_Prop_1,
+                }
+            }
         };
 
         void CreateBorder(int x, int y, string item)
@@ -1404,10 +1404,10 @@ public partial class BoardRenderer : ECSEntity
                 meta.floorDiffBL = tilesDefs[idBL].Height - currentHeight;
                 meta.floorDiffTR = tilesDefs[idTR].Height - currentHeight;
                 
-                DebugCellView debugView = BoardService.Current.FirstBoard.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell2, new BoardPosition(x, y, BoardLayer.MAX.Layer));
-                debugView.SetText(meta.ToString());
+                // DebugCellView debugView = BoardService.Current.FirstBoard.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell2, new BoardPosition(x, y, BoardLayer.MAX.Layer));
+                // debugView.SetText(meta.ToString());
 
-                // Walls
+#region WALLS
                 if (meta.neighborT && meta.neighborR && meta.floorDiffT == 1 && meta.floorDiffR == 1)
                 {
                     CreateBorder(x, y, R.BorderWallBottomLeft1);
@@ -1424,8 +1424,8 @@ public partial class BoardRenderer : ECSEntity
                 {
                     CreateBorder(x, y, R.BorderWallTop1);
                 }
-                
-                // Coast
+#endregion
+#region COAST                
                 if (!meta.neighborT)
                 {
                     if (meta.neighborR && meta.floorDiffR == 1)
@@ -1494,6 +1494,25 @@ public partial class BoardRenderer : ECSEntity
                     IW.Logger.LogError($"[BoardRenderer] => CreateBorders: Unsupported case for tile {x},{y}. Use 'ladder' here!\n{scheme}");
                 }
 #endif
+#endregion
+#region CORNERS LEVEL 0
+                if (!meta.neighborT && !meta.neighborR)
+                {
+                    CreateBorder(x, y, R.BorderTopRightOuterCorner0);
+                }
+                else if (!meta.neighborT && !meta.neighborL)
+                {
+                    CreateBorder(x, y, R.BorderTopLeftOuterCorner0);
+                }
+                else if (!meta.neighborB && !meta.neighborR)
+                {
+                    CreateBorder(x, y, R.BorderBottomRightOuterCorner0);
+                }
+                else if (!meta.neighborB && !meta.neighborL)
+                {
+                    CreateBorder(x, y, R.BorderBottomLeftOuterCorner0);
+                } 
+#endregion
             }
         }
     }
