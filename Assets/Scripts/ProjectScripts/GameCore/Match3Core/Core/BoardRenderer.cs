@@ -1264,8 +1264,9 @@ public partial class BoardRenderer : ECSEntity
         GameObject water = (GameObject) GameObject.Instantiate(waterPrefab);
     }
 
-    private struct Meta 
+    private struct Meta
     {
+        public int tileId;
         public bool neighborR ;
         public bool neighborL ;
         public bool neighborT ;
@@ -1286,9 +1287,13 @@ public partial class BoardRenderer : ECSEntity
         
         public override string ToString()
         {
-            // return $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)} BL:{BoolToString(neighborBL)}</mspace>";
-            return $"<mspace=1.5em>T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
-            //return $"<mspace=1.5em>L:{floorDiffT}\nB:{floorDiffR}</mspace>";  
+            // return $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
+            // // return $"<mspace=1.5em>id:{tileId} T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
+            // //return $"<mspace=1.5em>L:{floorDiffT}\nB:{floorDiffR}</mspace>";  
+            
+            var str1 = $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
+            var str2 = $"<mspace=1.5em>id:{tileId} T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
+            return $"{str1}\n{str2}";
         }
     }
     
@@ -1388,7 +1393,7 @@ public partial class BoardRenderer : ECSEntity
                     continue;
                 }
 
-                Meta meta = new Meta();
+                Meta meta = new Meta {tileId = titleId};
 
                 int currentHeight = tilesDefs[titleId].Height;
 
@@ -1417,7 +1422,7 @@ public partial class BoardRenderer : ECSEntity
                 // DebugCellView debugView = BoardService.Current.FirstBoard.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell2, new BoardPosition(x, y, BoardLayer.MAX.Layer));
                 // debugView.SetText(meta.ToString());
 
-                // Walls
+#region WALLS
                 if (meta.neighborT && meta.neighborR && meta.floorDiffT == 1 && meta.floorDiffR == 1)
                 {
                     CreateBorder(x, y, R.BorderWallBottomLeft1);
@@ -1434,8 +1439,8 @@ public partial class BoardRenderer : ECSEntity
                 {
                     CreateBorder(x, y, R.BorderWallTop1);
                 }
-                
-                // Coast
+#endregion
+#region COAST                
                 if (!meta.neighborT)
                 {
                     if (meta.neighborR && meta.floorDiffR == 1)
@@ -1491,6 +1496,38 @@ public partial class BoardRenderer : ECSEntity
                         CreateBorder(x, y, meta.neighborBL ? R.BorderLeft2Hole : R.BorderLeft2);
                     }
                 }
+
+#if DEBUG
+                if (!meta.neighborT && !meta.neighborTR && meta.floorDiffR > 0)
+                {
+                    string scheme =
+                        "WRONG:    |   CORRECT: \n" +
+                        "10  10    |   10  10   \n" +
+                        "21  302   |   10  302  \n" +
+                        "21  302   |   21  302  \n";
+
+                    IW.Logger.LogError($"[BoardRenderer] => CreateBorders: Unsupported case for tile {x},{y}. Use 'ladder' here!\n{scheme}");
+                }
+#endif
+#endregion
+#region CORNERS LEVEL 0
+                if (!meta.neighborT && !meta.neighborR)
+                {
+                    CreateBorder(x, y, R.BorderTopRightOuterCorner0);
+                }
+                else if (!meta.neighborT && !meta.neighborL)
+                {
+                    CreateBorder(x, y, R.BorderTopLeftOuterCorner0);
+                }
+                else if (!meta.neighborB && !meta.neighborR)
+                {
+                    CreateBorder(x, y, R.BorderBottomRightOuterCorner0);
+                }
+                else if (!meta.neighborB && !meta.neighborL)
+                {
+                    CreateBorder(x, y, R.BorderBottomLeftOuterCorner0);
+                } 
+#endregion
             }
         }
     }
