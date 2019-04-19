@@ -565,16 +565,6 @@ public class R
      public const string DebugCell2 = "DebugCell2";
      public const string BorderRight0Short = "BorderRight0Short";
      public const string BorderTop0Short = "BorderTop0Short";
-     public const string BorderWallRight1_Prop_1 = "BorderWallRight1_Prop_1";
-     public const string BorderWallRight1_Prop_2 = "BorderWallRight1_Prop_2";
-     public const string BorderWallRight1_Prop_3 = "BorderWallRight1_Prop_3";
-     public const string BorderWallRight1_Prop_4 = "BorderWallRight1_Prop_4";
-     public const string BorderWallRight1_Prop_5 = "BorderWallRight1_Prop_5";
-     public const string BorderWallTop1_Prop_1 = "BorderWallTop1_Prop_1";
-     public const string BorderWallTop1_Prop_2 = "BorderWallTop1_Prop_2";
-     public const string BorderWallTop1_Prop_3 = "BorderWallTop1_Prop_3";
-     public const string BorderWallBottomLeft1_Prop_1 = "BorderWallBottomLeft1_Prop_1";
-     public const string BorderWallTopRight1_Prop_1 = "BorderWallTopRight1_Prop_1";
      public const string DebugId = "DebugId";
      public const string AirShipView = "AirShipView";
      public const string DestroyAirShipAnimation = "DestroyAirShipAnimation";
@@ -603,4 +593,19 @@ public class R
      public const string BorderTopLeftOuterCorner2 = "BorderTopLeftOuterCorner2";
      public const string BorderTopRightInnerCorner2 = "BorderTopRightInnerCorner2";
      public const string BorderTopRightOuterCorner2 = "BorderTopRightOuterCorner2";
+     public const string BorderBottom1_Addon_1 = "BorderBottom1_Addon_1";
+     public const string BorderBottom1_Addon_2 = "BorderBottom1_Addon_2";
+     public const string BorderBottom1_Addon_3 = "BorderBottom1_Addon_3";
+     public const string BorderBottom2_Addon_1 = "BorderBottom2_Addon_1";
+     public const string BorderLeft1_Addon_1 = "BorderLeft1_Addon_1";
+     public const string BorderLeft1_Addon_2 = "BorderLeft1_Addon_2";
+     public const string BorderLeft1_Addon_3 = "BorderLeft1_Addon_3";
+     public const string BorderLeft2_Addon_1 = "BorderLeft2_Addon_1";
+     public const string BorderWallBottomLeft1_Addon_1 = "BorderWallBottomLeft1_Addon_1";
+     public const string BorderWallRight1_Addon_1 = "BorderWallRight1_Addon_1";
+     public const string BorderWallRight1_Addon_2 = "BorderWallRight1_Addon_2";
+     public const string BorderWallTop1_Addon_1 = "BorderWallTop1_Addon_1";
+     public const string BorderWallTop1_Addon_2 = "BorderWallTop1_Addon_2";
+     public const string BorderWallTopRight1_Addon_1 = "BorderWallTopRight1_Addon_1";
+     public const string BorderWallTop1_Addon_3 = "BorderWallTop1_Addon_3";
 }

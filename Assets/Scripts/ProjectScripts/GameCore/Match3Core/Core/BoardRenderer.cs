@@ -1305,6 +1305,49 @@ public partial class BoardRenderer : ECSEntity
             // return $"{str1}\n{str2}";
         }
     }
+
+    private Dictionary<string, List<string>> GetAddonsList()
+    {
+        // Value in dict is a count of NULL, added as addons. More nulls - more tiles without any addons
+        Dictionary<string, int> data = new Dictionary<string, int>
+        {
+            {R.BorderBottom1,         0},
+            {R.BorderBottom2,         0},
+            {R.BorderLeft1,           0},
+            {R.BorderLeft2,           0},
+            {R.BorderWallBottomLeft1, 0},
+            {R.BorderWallRight1,      0},
+            {R.BorderWallTop1,        0},
+            {R.BorderWallTopRight1,   0},
+        };
+
+        var contentService = ContentService.Current;
+        Dictionary<string, List<string>> addons = new Dictionary<string, List<string>>();
+        foreach (var pair in data)
+        {
+            string borderId = pair.Key;
+            List<string> addonsForBorder = new List<string>();
+            for (int i = 1; i < 100; i++)
+            {
+                string addonId = $"{borderId}_Addon_{i}";
+                if (!contentService.IsObjectRegistered(addonId))
+                {
+                    break;
+                }
+                
+                addonsForBorder.Add(addonId);
+            }
+
+            for (int i = 0; i < pair.Value; i++)
+            {
+                addonsForBorder.Add(null);
+            }
+            
+            addons.Add(borderId, addonsForBorder);
+        }
+
+        return addons;
+    }
     
     public void CreateBorders()
     {
@@ -1324,49 +1367,16 @@ public partial class BoardRenderer : ECSEntity
         {
             return x >= 0 && y >= 0 && x < w && y < h;
         }
-        
-        Dictionary<string, string[]> props = new Dictionary<string, string[]>
-        {
-            {
-                R.BorderWallRight1, new[]
-                {
-                    R.BorderWallRight1_Prop_1,
-                    R.BorderWallRight1_Prop_2,
-                    R.BorderWallRight1_Prop_3,
-                    R.BorderWallRight1_Prop_4,
-                    R.BorderWallRight1_Prop_5,
-                }
-            },
-            {
-                R.BorderWallTop1, new[]
-                {
-                    R.BorderWallTop1_Prop_1,
-                    R.BorderWallTop1_Prop_2,
-                    R.BorderWallTop1_Prop_3,
-                    null
-                }
-            },
-            {
-                R.BorderWallBottomLeft1, new[]
-                {
-                    R.BorderWallBottomLeft1_Prop_1,
-                }
-            },
-            {
-                R.BorderWallTopRight1, new[]
-                {
-                    R.BorderWallTopRight1_Prop_1,
-                }
-            }
-        };
+
+        var addons = GetAddonsList();
 
         void CreateBorder(int x, int y, string item)
         {
             InstantiateItem(x, y, item);
 
-            if (props.TryGetValue(item, out string[] availableProps))
+            if (addons.TryGetValue(item, out List<string> availableProps))
             {
-                int len = availableProps.Length;
+                int len = availableProps.Count;
                 int index = random.Next(0, len);
                 string prop = availableProps[index];
 
