@@ -26,11 +26,11 @@ MonoBehaviour:
     Route: parse
     Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"ProductionAmount":{"Min":0,"Max":0},"CharactersAmount":{"Min":0,"Max":0},"ExtrasAmount":{"Min":0,"Max":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestId":""}]'
   - Key: field
-    Link: 1vEw99EkdaMpRq3V1OAv5bbO7yJoHCS626l7FJyM_WxQ
+    Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseField
     Pattern: '{"Uid":"","Position":{"X":0,"Y":0}}'
   - Key: fogs
-    Link: 1vEw99EkdaMpRq3V1OAv5bbO7yJoHCS626l7FJyM_WxQ
+    Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseFogs
     Pattern: '{"Uid":"","Level":0,"Condition":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"IsActive":false,"Hero":""}'
   - Key: pieces
@@ -90,7 +90,7 @@ MonoBehaviour:
     Route: parse
     Pattern: '[{"Id":"","ConversationCharacters" : {}, "Bubbles":[{"CharacterId":"","Emotion":"","Message":""}]}]'
   - Key: layout
-    Link: 1vEw99EkdaMpRq3V1OAv5bbO7yJoHCS626l7FJyM_WxQ
+    Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseLayout
     Pattern: '{}'
   - Key: daily
