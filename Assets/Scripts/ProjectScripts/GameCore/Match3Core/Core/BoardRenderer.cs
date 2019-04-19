@@ -1311,14 +1311,14 @@ public partial class BoardRenderer : ECSEntity
         // Value in dict is a count of NULL, added as addons. More nulls - more tiles without any addons
         Dictionary<string, int> data = new Dictionary<string, int>
         {
-            {R.BorderBottom1,         0},
-            {R.BorderBottom2,         0},
-            {R.BorderLeft1,           0},
-            {R.BorderLeft2,           0},
-            {R.BorderWallBottomLeft1, 0},
-            {R.BorderWallRight1,      0},
-            {R.BorderWallTop1,        0},
-            {R.BorderWallTopRight1,   0},
+            {R.BorderBottom1,         1},
+            {R.BorderBottom2,         1},
+            {R.BorderLeft1,           1},
+            {R.BorderLeft2,           1},
+            {R.BorderWallBottomLeft1, 1},
+            {R.BorderWallRight1,      1},
+            {R.BorderWallTop1,        1},
+            {R.BorderWallTopRight1,   1},
         };
 
         var contentService = ContentService.Current;
