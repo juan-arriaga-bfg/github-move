@@ -1484,6 +1484,7 @@
         "Amount": 50
       },
       "IsActive": true,
+      "Hero": "NPC_C",
       "Positions": [
         {
           "X": 7,
@@ -1496,6 +1497,10 @@
         {
           "X": 8,
           "Y": 11
+        },
+        {
+          "X": 8,
+          "Y": 12
         },
         {
           "X": 9,
@@ -1565,6 +1570,12 @@
             "Y": 12
           }
         ],
+        "CH_NPC": [
+          {
+            "X": 8,
+            "Y": 12
+          }
+        ],
         "Boost_WR": [
           {
             "X": 9,
@@ -1625,8 +1636,11 @@
         "Amount": 50
       },
       "IsActive": true,
-      "Hero": "NPC_C",
       "Positions": [
+        {
+          "X": 10,
+          "Y": 14
+        },
         {
           "X": 11,
           "Y": 14
@@ -1669,6 +1683,12 @@
         }
       ],
       "Pieces": {
+        "Boost_CR1": [
+          {
+            "X": 10,
+            "Y": 14
+          }
+        ],
         "SK2_PR": [
           {
             "X": 11,
@@ -1722,6 +1742,8 @@
         "Currency": "Experience",
         "Amount": 50
       },
+      "IsActive": true,
+      "Hero": "NPC_D",
       "Positions": [
         {
           "X": 15,
@@ -1769,6 +1791,8 @@
         "Currency": "Experience",
         "Amount": 50
       },
+      "IsActive": true,
+      "Hero": "NPC_D",
       "Positions": [
         {
           "X": 21,
@@ -1808,6 +1832,7 @@
         "Currency": "Experience",
         "Amount": 50
       },
+      "IsActive": true,
       "Positions": [
         {
           "X": 24,
@@ -1899,6 +1924,8 @@
         "Currency": "Experience",
         "Amount": 10
       },
+      "IsActive": true,
+      "Hero": "NPC_E",
       "Positions": [
         {
           "X": 23,
@@ -1958,6 +1985,7 @@
         "Currency": "Experience",
         "Amount": 10
       },
+      "IsActive": true,
       "Positions": [
         {
           "X": 16,
