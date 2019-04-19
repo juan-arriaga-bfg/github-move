@@ -1540,21 +1540,21 @@ public partial class BoardRenderer : ECSEntity
 #endregion
                 
 #region INNER CORNERS
-                if (meta.neighborT && meta.neighborR && !meta.neighborTR)
+                if (meta.neighborT && meta.neighborR && !meta.neighborTR && meta.floorDiffT == meta.floorDiffR)
                 {
-                    CreateBorder(x, y, R.BorderTopRightInnerCorner0);
+                    CreateBorder(x, y, R.BorderBottomLeftInnerCorner0);
                 }
-                else if (meta.neighborT && meta.neighborL && !meta.neighborTL)
-                {
-                    CreateBorder(x, y, R.BorderTopLeftInnerCorner0);
-                }
-                else if (meta.neighborB && meta.neighborR && !meta.neighborBR)
+                else if (meta.neighborT && meta.neighborL && !meta.neighborTL && meta.floorDiffT == meta.floorDiffL)
                 {
                     CreateBorder(x, y, R.BorderBottomRightInnerCorner0);
                 }
-                else if (meta.neighborB && meta.neighborL && !meta.neighborBL)
+                else if (meta.neighborB && meta.neighborR && !meta.neighborBR && meta.floorDiffB == meta.floorDiffR)
                 {
-                    CreateBorder(x, y, R.BorderBottomLeftInnerCorner0);
+                    CreateBorder(x, y, R.BorderTopLeftInnerCorner0);
+                }
+                else if (meta.neighborB && meta.neighborL && !meta.neighborBL && meta.floorDiffB == meta.floorDiffL)
+                {
+                    CreateBorder(x, y, R.BorderTopRightInnerCorner0);
                 } 
 #endregion
             }

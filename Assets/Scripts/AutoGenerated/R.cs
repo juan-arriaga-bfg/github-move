@@ -587,4 +587,20 @@ public class R
      public const string BorderTopLeftInnerCorner0 = "BorderTopLeftInnerCorner0";
      public const string BorderTopRightInnerCorner0 = "BorderTopRightInnerCorner0";
      public const string BorderBottomLeftInnerCorner0 = "BorderBottomLeftInnerCorner0";
+     public const string BorderBottomLeftInnerCorner1 = "BorderBottomLeftInnerCorner1";
+     public const string BorderBottomLeftOuterCorner1 = "BorderBottomLeftOuterCorner1";
+     public const string BorderBottomRightInnerCorner1 = "BorderBottomRightInnerCorner1";
+     public const string BorderBottomRightOuterCorner1 = "BorderBottomRightOuterCorner1";
+     public const string BorderTopLeftInnerCorner1 = "BorderTopLeftInnerCorner1";
+     public const string BorderTopLeftOuterCorner1 = "BorderTopLeftOuterCorner1";
+     public const string BorderTopRightInnerCorner1 = "BorderTopRightInnerCorner1";
+     public const string BorderTopRightOuterCorner1 = "BorderTopRightOuterCorner1";
+     public const string BorderBottomLeftInnerCorner2 = "BorderBottomLeftInnerCorner2";
+     public const string BorderBottomLeftOuterCorner2 = "BorderBottomLeftOuterCorner2";
+     public const string BorderBottomRightInnerCorner2 = "BorderBottomRightInnerCorner2";
+     public const string BorderBottomRightOuterCorner2 = "BorderBottomRightOuterCorner2";
+     public const string BorderTopLeftInnerCorner2 = "BorderTopLeftInnerCorner2";
+     public const string BorderTopLeftOuterCorner2 = "BorderTopLeftOuterCorner2";
+     public const string BorderTopRightInnerCorner2 = "BorderTopRightInnerCorner2";
+     public const string BorderTopRightOuterCorner2 = "BorderTopRightOuterCorner2";
 }
