@@ -101,3 +101,7 @@ MonoBehaviour:
     Link: 1Xt-OoTWMGhVnOGoyium-ooqAKGeniXNdONzcuL5QUOU
     Route: parse
     Pattern: '[{"Uid":"","AmountProduction":{"Min":0,"Max":0},"AmountEvent":{"Min":0,"Max":0},"DelayFirstSpawn":{"Min":0,"Max":0},"DelaySpawn":{"Min":0,"Max":0},"SleepDelay":0,"TapDelay":0}]'
+  - Key: event
+    Link: 1AWIGmKrwWJZCl0gv5-Qmg6t5L3KrCFC43N5phnvX6Is
+    Route: parse
+    Pattern: '[{"Step":"","Prices":[{"Currency":"","Amount":0}],"NormalRewards":[{"Currency":"","Amount":0}],"PaidRewards":[{"Currency":"","Amount":0}]}]'
