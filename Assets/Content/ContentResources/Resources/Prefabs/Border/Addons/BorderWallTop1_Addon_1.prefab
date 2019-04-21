@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3556722677971436672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -12}
   m_LocalScale: {x: 1.36, y: 1.36, z: 1.36}
   m_Children:
   - {fileID: 6270018336808328640}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 6270018336808328640}
   - component: {fileID: 7317939095394192412}
   m_Layer: 0
-  m_Name: wall_decoration_stone_4
+  m_Name: wall_decoration_stone_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,8 +56,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7395753973895184191}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.251, y: 0.205, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.124, y: 0.104, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6597238862615769164}
   m_RootOrder: 0
@@ -98,8 +98,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3976123575dd30d47b313781b352d726, type: 3}
+  m_SortingOrder: -32767
+  m_Sprite: {fileID: 21300000, guid: 7eaa6938d3ba45b4381f60aebc5df9d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -122,6 +122,7 @@ public class AirShipView : BoardElementView
     public void OnDragStart()
     {
         StopAnimation();
+        isClick = false;
     }
 
     public void OnDragEnd()

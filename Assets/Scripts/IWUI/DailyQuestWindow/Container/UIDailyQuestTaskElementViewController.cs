@@ -216,27 +216,18 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
             return;
         }
         
-        var board = BoardService.Current.FirstBoard;
-        
-        if (board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceReward(piecesAmount, true, out var position) == false)
-        {
-            return;
-        }
-        
         taskButton.Disable();
         task.SetClaimedState();
         ToggleActive(false, true);
         
-        CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, null, position, null, true, true);
+        var flyPosition = (context as UIBaseWindowView).GetCanvas().worldCamera.WorldToScreenPoint(taskButton.transform.position);
+        CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, null, null, flyPosition, null, true, true);
         
         ProfileService.Instance.Manager.UploadCurrentProfile(false);
         
         Analytics.SendPurchase("screen_daily", "item1", null, new List<CurrencyPair>(currenciesReward), false, false);
 
-        if (isCurrentTaskClearAll)
-        {
-            targetEntity.WindowController.CloseCurrentWindow();
-        }
+        if (isCurrentTaskClearAll) targetEntity.WindowController.CloseCurrentWindow();
     }
     
     private void ToggleActive(bool enabled, bool animated)

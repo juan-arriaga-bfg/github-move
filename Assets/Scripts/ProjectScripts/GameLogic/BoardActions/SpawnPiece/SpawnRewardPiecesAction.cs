@@ -31,7 +31,7 @@ public class SpawnRewardPiecesAction : IBoardAction
 		{
 			var field = new List<BoardPosition>();
         
-			if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From.Value, field, pair.Value) == false)
+			if (gameBoardController.BoardLogic.EmptyCellsFinder.CheckInFrontOrFindRandomNear(From.Value, field, pair.Value) == false)
 			{
 				break;
 			}

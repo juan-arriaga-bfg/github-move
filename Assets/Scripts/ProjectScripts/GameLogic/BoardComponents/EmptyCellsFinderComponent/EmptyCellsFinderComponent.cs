@@ -18,6 +18,37 @@ public class EmptyCellsFinderComponent : IECSComponent
 	public void OnUnRegisterEntity(ECSEntity entity)
 	{
 	}
+
+	public bool CheckInFrontOrFindRandomNear(BoardPosition point, List<BoardPosition> field, int amount)
+	{
+		if (amount == 1)
+		{
+			var pos = point.Down;
+
+			if (context.IsEmpty(pos))
+			{
+				field.Add(pos);
+				return true;
+			}
+		}
+		
+		if (context.EmptyCellsFinder.FindRandomNearWithPointInCenter(point, field, amount * 4) == false) return false;
+
+		var inFront = field.FindAll(position => position.Y < point.Y);
+
+		if (inFront.Count >= amount)
+		{
+			inFront.RemoveRange(amount, inFront.Count - amount);
+			field.Clear();
+			field.AddRange(inFront);
+		}
+		else if (field.Count > amount)
+		{
+			field.RemoveRange(amount, field.Count - amount);
+		}
+		
+		return field.Count > 0;
+	}
 	
 	public bool FindRandomNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int amount, float extraSpacePercent = 0)
 	{

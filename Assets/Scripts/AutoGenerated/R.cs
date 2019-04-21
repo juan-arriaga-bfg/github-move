@@ -607,6 +607,7 @@ public class R
      public const string BorderWallTop1_Addon_2 = "BorderWallTop1_Addon_2";
      public const string BorderWallTopRight1_Addon_1 = "BorderWallTopRight1_Addon_1";
      public const string BorderWallTop1_Addon_3 = "BorderWallTop1_Addon_3";
+     public const string BorderTopRightIntersectionCorner0 = "BorderTopRightIntersectionCorner0";
      public const string FireflyProduction = "FireflyProduction";
      public const string FireflyEvent = "FireflyEvent";
 }
