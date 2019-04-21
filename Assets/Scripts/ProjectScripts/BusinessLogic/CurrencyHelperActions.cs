@@ -94,7 +94,7 @@ public static partial class CurrencyHelper
         var amount = piecesReward.Sum(pair => pair.Value);
         var free = new List<BoardPosition>();
 
-        if (board.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(point, free, amount, 10) == false || free.Count < amount)
+        if (board.BoardLogic.EmptyCellsFinder.CheckInFrontOrFindRandomNear(point, free, amount) == false || free.Count < amount)
         {
             amount = amount - free.Count;
 
