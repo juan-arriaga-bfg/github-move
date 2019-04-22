@@ -27,10 +27,10 @@ public class ConfigManager: CustomEditorBase
     private GUIStyle lastVersionTextStyle;
     private GUIStyle loadTextStyle;
 
-    private int asyncCountAll;
-    private int asyncCountNow;
-    private ProgressState progressState;
-    private bool isAsyncStateChanged;
+    private static int asyncCountAll;
+    private static int asyncCountNow;
+    private static ProgressState progressState;
+    private static bool isAsyncStateChanged;
     
     [MenuItem("Tools/Configs/Manager", false, 50)]
     public static void Create()
@@ -101,7 +101,7 @@ public class ConfigManager: CustomEditorBase
         });
     }
     
-    void  OnInspectorUpdate()
+    void OnInspectorUpdate()
     {
         Repaint();
     }
@@ -183,7 +183,7 @@ public class ConfigManager: CustomEditorBase
     {
         var isSelected = selectedConfigs.Contains(configName);
 
-        var toggleState = EditorGUILayout.Toggle(isSelected, GUILayout.MaxWidth(EditorGUIUtility.fieldWidth * 0.75f));
+        var toggleState = EditorGUILayout.Toggle(isSelected, GUILayout.MaxWidth(EditorGUIUtility.fieldWidth * 0.4f), GUILayout.MinWidth(30f));
         if (toggleState != isSelected)
         {
             if (toggleState)
@@ -211,7 +211,7 @@ public class ConfigManager: CustomEditorBase
     private void SelectAllToggle()
     {
         var isSelectAll = IsSelectAll;
-        if (EditorGUILayout.Toggle(isSelectAll, GUILayout.MaxWidth(EditorGUIUtility.fieldWidth * 0.75f)) != isSelectAll)
+        if (EditorGUILayout.Toggle(isSelectAll, GUILayout.MaxWidth(EditorGUIUtility.fieldWidth * 0.4f), GUILayout.MinWidth(30f)) != isSelectAll)
         {
             selectedConfigs.RemoveAll(elem => IsVisible(elem));
             if (!isSelectAll)
@@ -231,47 +231,29 @@ public class ConfigManager: CustomEditorBase
 
     public static void AsyncProgressStart()
     {
-        var window = GetWindow(typeof(ConfigManager)) as ConfigManager;
-        if (window == null)
-        {
-            return;
-        }
-        window.asyncCountAll = 1;
-        window.asyncCountNow = 0;
-        window.progressState = ProgressState.Start;
-        window.isAsyncStateChanged = true;
+        asyncCountAll = 1;
+        asyncCountNow = 0;
+        progressState = ProgressState.Start;
+        isAsyncStateChanged = true;
     }
 
     public static void AsyncProgressValidateStepComplete(int count)
     {
-        var window = GetWindow(typeof(ConfigManager)) as ConfigManager;
-        if (window == null)
-        {
-            return;
-        }
-        window.asyncCountAll = count;
-        window.progressState = ProgressState.Progress;
-        window.isAsyncStateChanged = true;
+        asyncCountAll = count;
+        progressState = ProgressState.Progress;
+        isAsyncStateChanged = true;
     }
     
     public static void AsyncProgressLoadStepComplete()
     {
-        var window = GetWindow(typeof(ConfigManager)) as ConfigManager;
-        if (window == null)
-        {
-            return;
-        }
-
-        window.asyncCountNow++;
-        window.isAsyncStateChanged = true;
+        asyncCountNow++;
+        isAsyncStateChanged = true;
     }
     
     public static void AsyncProgressEnd()
     {
-        var window = GetWindow(typeof(ConfigManager)) as ConfigManager;
-        
-        window.progressState = ProgressState.None;
-        window.isAsyncStateChanged = true;
+        progressState = ProgressState.None;
+        isAsyncStateChanged = true;
     }
     
 #endregion
