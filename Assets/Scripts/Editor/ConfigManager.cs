@@ -5,28 +5,16 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
 
-public enum LoadState
+public enum ProgressState
 {
-    Unknown,
-    LastVersion,
-    NeedUpdate,
-    Validate,
-    Load,
-    Error
-}
-
-[Serializable]
-public class ConfigElementInfo
-{
-    public string Name;
-    public LoadState State;
+    None,
+    Start,
+    Progress,
 }
 
 public class ConfigManager: CustomEditorBase
 {
-    public  List<ConfigElementInfo> configsStatus = new List<ConfigElementInfo>();
     private List<GoogleLink> cachedConfigLinks = new List<GoogleLink>();
     private List<string> selectedConfigs = new List<string>();
 
@@ -38,6 +26,11 @@ public class ConfigManager: CustomEditorBase
     private GUIStyle waitUpdateTextStyle;
     private GUIStyle lastVersionTextStyle;
     private GUIStyle loadTextStyle;
+
+    private int asyncCountAll;
+    private int asyncCountNow;
+    private ProgressState progressState;
+    private bool isAsyncStateChanged;
     
     [MenuItem("Tools/Configs/Manager", false, 50)]
     public static void Create()
@@ -50,7 +43,26 @@ public class ConfigManager: CustomEditorBase
             window.RefreshElements();    
         }
     }
-    
+
+    private void OnEnable()
+    {
+        EditorApplication.playModeStateChanged += OnPlayStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        EditorApplication.playModeStateChanged -= OnPlayStateChanged;
+    }
+
+    private void OnPlayStateChanged(PlayModeStateChange state)
+    {
+        asyncCountAll = 0;
+        asyncCountNow = 0;
+        progressState = ProgressState.None;
+        isAsyncStateChanged = false;
+        EditorUtility.ClearProgressBar();
+    }
+
     protected virtual void OnGUI()
     {
         if (isInitComplete == false)
@@ -58,26 +70,35 @@ public class ConfigManager: CustomEditorBase
             InitStyles();
             isInitComplete = true;
         }
-        
-        HorizontalArea(() =>
-        {
-            Button("Refresh", RefreshElements);
-            Button("Update all (force)", UpdateConfigsForce);
-            Button("Update all", UpdateConfigsDefault);
-            Button("Update selected", UpdateSelected);    
-        });
-        
-        HorizontalArea(() =>
-        {
-            SelectAllToggle(); 
-            filter = EditorGUILayout.TextField(filter);
-        });
-        Separator();
 
-        ScrollArea(this, () =>
+        if (isAsyncStateChanged)
         {
-           ShowConfigList(); 
-        });       
+            OnAsyncStateChanged();
+            isAsyncStateChanged = false;
+        }
+
+        BeginDisableArea(progressState != ProgressState.None, () =>
+        {
+            HorizontalArea(() =>
+            {
+                Button("Refresh", RefreshElements);
+                Button("Update all (force)", UpdateConfigsForce);
+                Button("Update all", UpdateConfigsDefault);
+                Button("Update selected", UpdateSelected);    
+            });
+        
+            HorizontalArea(() =>
+            {
+                SelectAllToggle(); 
+                filter = EditorGUILayout.TextField(filter);
+            });
+            Separator();
+
+            ScrollArea(this, () =>
+            {
+                ShowConfigList(); 
+            });    
+        });
     }
     
     void  OnInspectorUpdate()
@@ -86,6 +107,24 @@ public class ConfigManager: CustomEditorBase
     }
 
 #region WindowUI
+
+    private void OnAsyncStateChanged()
+    {
+        var title = "update configs...";
+        
+        if (progressState == ProgressState.None)
+        {
+            EditorUtility.ClearProgressBar();
+        }
+        else if (progressState == ProgressState.Start)
+        {
+            EditorUtility.DisplayProgressBar(title, "Validate", 0);
+        }
+        else
+        {
+            EditorUtility.DisplayProgressBar(title, $"Download: {asyncCountNow}/{asyncCountAll}", asyncCountNow/(float)asyncCountAll);
+        }
+    }
 
     private void InitStyles()
     {
@@ -188,6 +227,51 @@ public class ConfigManager: CustomEditorBase
     private bool IsVisible(string configName)
     {
         return cachedConfigLinks.Any(elem => elem.Key == configName) && string.IsNullOrWhiteSpace(filter) || Regex.IsMatch(configName, $"^{filter}");
+    }
+
+    public static void AsyncProgressStart()
+    {
+        var window = GetWindow(typeof(ConfigManager)) as ConfigManager;
+        if (window == null)
+        {
+            return;
+        }
+        window.asyncCountAll = 1;
+        window.asyncCountNow = 0;
+        window.progressState = ProgressState.Start;
+        window.isAsyncStateChanged = true;
+    }
+
+    public static void AsyncProgressValidateStepComplete(int count)
+    {
+        var window = GetWindow(typeof(ConfigManager)) as ConfigManager;
+        if (window == null)
+        {
+            return;
+        }
+        window.asyncCountAll = count;
+        window.progressState = ProgressState.Progress;
+        window.isAsyncStateChanged = true;
+    }
+    
+    public static void AsyncProgressLoadStepComplete()
+    {
+        var window = GetWindow(typeof(ConfigManager)) as ConfigManager;
+        if (window == null)
+        {
+            return;
+        }
+
+        window.asyncCountNow++;
+        window.isAsyncStateChanged = true;
+    }
+    
+    public static void AsyncProgressEnd()
+    {
+        var window = GetWindow(typeof(ConfigManager)) as ConfigManager;
+        
+        window.progressState = ProgressState.None;
+        window.isAsyncStateChanged = true;
     }
     
 #endregion

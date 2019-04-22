@@ -51,6 +51,13 @@ public class CustomEditorBase:EditorWindow
         EditorGUILayout.EndVertical();
     }
 
+    protected void BeginDisableArea(bool disable, Action body)
+    {
+        EditorGUI.BeginDisabledGroup(disable);
+        body?.Invoke();
+        EditorGUI.EndDisabledGroup();
+    }
+
     protected void ToggleGroup([NotNull] object id, out bool currentStatus, string label, Action body)
     {
         if (toggleGroupValues == null)

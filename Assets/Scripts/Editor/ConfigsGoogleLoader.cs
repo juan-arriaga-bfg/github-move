@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Dws;
 using Newtonsoft.Json;
@@ -13,6 +12,22 @@ using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
 using Debug = IW.Logger;
+
+public enum LoadState
+{
+    Unknown,
+    LastVersion,
+    NeedUpdate,
+    Validate,
+    Load,
+    Error
+}
+
+public class ConfigElementInfo
+{
+    public string Name;
+    public LoadState State;
+}
 
 public class ConfigsGoogleLoader
 {
@@ -217,6 +232,8 @@ public class ConfigsGoogleLoader
             configStatus.State = LoadState.Validate;
         }
         
+        ConfigManager.AsyncProgressStart();
+        
         WebHelper.MakeRequest(req, (response) =>
         {
             foreach (var configName in update.Select(elem => elem.Value.Key))
@@ -278,7 +295,14 @@ public class ConfigsGoogleLoader
             }
 
             Debug.LogWarning("Check for the need to update the configs completed!");
-
+            
+            ConfigManager.AsyncProgressValidateStepComplete(update.Count);
+            if (update.Count == 0)
+            {
+                ConfigManager.AsyncProgressEnd();
+                return;
+            }
+            
             Load(update);
         });
     }
@@ -287,6 +311,7 @@ public class ConfigsGoogleLoader
     {
         Debug.LogWarning("Configs load data complete!");
         NSConfigEncription.EncryptConfigs();
+        ConfigManager.AsyncProgressEnd();
     }
     
     private static void Load(List<KeyValuePair<string, GoogleLink>> update)
@@ -328,6 +353,8 @@ public class ConfigsGoogleLoader
                 sw.Stop();
             
                 Debug.LogFormat($"Request '{gLink.Key}' completed in {sw.Elapsed.TotalSeconds:F}s");
+                
+                ConfigManager.AsyncProgressLoadStepComplete();
                 
                 if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
                 {
