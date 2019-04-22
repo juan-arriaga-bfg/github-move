@@ -16,12 +16,15 @@ import com.bigfishgames.bfglib.NSNotificationCenter;
 import com.bigfishgames.bfglib.bfgGdpr.bfgPolicyListener;
 import com.bigfishgames.bfglib.bfgreporting.bfgRave;
 import com.bigfishgames.bfglib.bfgreporting.bfgReporting;
+import com.bigfishgames.bfglib.deeplinking.bfgDeepLinkListener;
+import com.bigfishgames.bfglib.deeplinking.bfgDeepLinkTracker;
 import com.bigfishgames.bfglib.deeplinking.bfgDeferredDeepLinkListener;
 import com.bigfishgames.bfglib.deeplinking.bfgDeferredDeepLinkTracker;
 import com.bigfishgames.bfglib.bfgActivity;
 import com.bigfishgames.bfglib.bfgManager;
 import com.bigfishgames.bfglib.bfgSettings;
 import com.bigfishgames.bfglib.bfgpurchase.bfgPurchase;
+import com.bigfishgames.bfgunityandroid.bfgDelegateWrapper.BfgDeeplinkListenerWrapper;
 import com.bigfishgames.bfgunityandroid.bfgDelegateWrapper.BfgRaveADKDelegate;
 
 import com.bigfishgames.bfgunityandroid.NotificationCenterUnityWrapper;
@@ -41,12 +44,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-// Neskinsoft
-import com.bigfishgames.bfgunityandroid.custom.SplashDialog;
 import com.bigfishgames.bfgunityandroid.custom.ResourcesHelper;
-// End
+import com.bigfishgames.bfgunityandroid.custom.SplashDialog;
 
-public class BFGUnityPlayerNativeActivity extends bfgActivity implements bfgDeferredDeepLinkListener {
+public class BFGUnityPlayerNativeActivity extends bfgActivity {
 
     protected UnityPlayer mUnityPlayer = null;
 
@@ -97,11 +98,9 @@ public class BFGUnityPlayerNativeActivity extends bfgActivity implements bfgDefe
         OnCreate_UnityPlayer();
 
         bfgPolicyListenerInstance = new BfgPolicyDelegate();
+        bfgDeepLinkTracker.getInstance().setDeepLinkListener(BfgDeeplinkListenerWrapper.sharedInstance());
         bfgManager.initializeWithActivity(this, savedInstanceState);
         bfgRave.sharedInstance().setDelegate(new RaveDelegate());
-        bfgDeferredDeepLinkTracker.getInstance().setDeferredDeepLinkListener(this);
-
-
     }
 
     protected void OnCreate_UnityPlayer()
@@ -349,30 +348,4 @@ public class BFGUnityPlayerNativeActivity extends bfgActivity implements bfgDefe
             NotificationCenterUnityWrapper.GetInstance().HandleNotification(notification);
         }
     }
-
-    @Override
-    public void didReceiveDeferredDeepLink(String deepLink, String error, int providerId, long timeSinceLaunchInMillis) {
-        String provider = "";
-        Map<String, String> deepLinkMap = new HashMap<String, String>();
-        switch (providerId) {
-            case bfgReporting.BFG_REPORTING_TRACKER_ID_TUNE:
-                provider = "TUNE";
-                break;
-            case bfgReporting.BFG_REPORTING_TRACKER_ID_BIG_FISH:
-                provider = "BIGFISH";
-                break;
-            case bfgReporting.BFG_REPORTING_TRACKER_ID_ALL:
-                provider = "ALL - You should never see this text - possible bug!!!";
-                break;
-            default:
-                break;
-        }
-        String DDLInfo = "Deferred Deep Link Listener:\nProvider: " + provider + "\nDeep Link: " + ((null != deepLink) ? deepLink : "None") + "\nError: " + ((null != error) ? error : "None") + "TimeInMilli: " + Long.toString(timeSinceLaunchInMillis);
-        Log.d("DeferredDeepLink", DDLInfo);
-        deepLinkMap.put("provider", (provider != null) ? provider : "");
-        deepLinkMap.put("deepLinkString", (deepLink != null) ? deepLink : "");
-        NSNotification notification = (NSNotification.notificationWithName("NOTIFICATION_DEFERREDDEEPLINK_DIDRECEIVEDEFERREDDEEPLINK", deepLinkMap));
-        NotificationCenterUnityWrapper.GetInstance().HandleNotification(notification);
-    }
-
 }

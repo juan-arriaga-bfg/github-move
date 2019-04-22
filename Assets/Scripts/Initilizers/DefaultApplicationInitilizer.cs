@@ -16,7 +16,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         
         Application.targetFrameRate = 60;
 
-        DOTween.SetTweensCapacity(200, 125);
+        DOTween.SetTweensCapacity(200, 312);
 
         // wait for Editor version update
 #if UNITY_EDITOR

@@ -22,6 +22,7 @@
 #import <bfg_iOS_sdk/bfgReporting.h>
 
 @protocol bfgDeferredDeepLinkDelegate;
+@protocol bfgDeepLinkListener;
 @protocol bfgPlacementDelegate;
 
 typedef NS_OPTIONS(NSUInteger, bfgUATrackerId) {
@@ -46,43 +47,42 @@ typedef NS_OPTIONS(NSUInteger, bfgUATrackerId) {
 ///
 @interface bfgGameReporting : NSObject
 
-
 ///
 /// \details Called each time the Main Menu is shown.
 ///
 + (void)logMainMenuShown;
-
 
 ///
 /// \details Called each time Rate from the Main Menu is canceled.
 ///
 + (void)logRateMainMenuCanceled;
 
-
 ///
 /// \details Called each time the Options Menu is shown.
 ///
 + (void)logOptionsShown;
 
-
 ///
 /// \details Called each time purchase from the Main Menu is shown.
+/// \deprecated Deprecated since SDK 6.4
 ///
 + (void)logPurchaseMainMenuShown __deprecated_msg("Unused since 6.4 [Big Fish Premium]");
 
 ///
 /// \details Called each time purchase from the Main Menu is closed.
+/// \deprecated Deprecated since SDK 6.4
 ///
 + (void)logPurchaseMainMenuClosed __deprecated_msg("Unused since 6.4 [Big Fish Premium]");
 
 ///
 /// \details Called each time a non-mainmenu purchase paywall is shown with an identifier for the paywall.
+/// \deprecated Deprecated since SDK 6.4
 ///
 + (void)logPurchasePayWallShown:(NSString * _Nullable)paywallID __deprecated_msg("Unused since 6.4 [Big Fish Premium]");
 
-
 ///
 /// \details Called each time a non-mainmenu purchase paywall is closed with an identifier for the paywall.
+/// \deprecated Deprecated since SDK 6.4
 ///
 + (void)logPurchasePayWallClosed:(NSString * _Nullable)paywallID __deprecated_msg("Unused since 6.4 [Big Fish Premium]");
 
@@ -196,10 +196,10 @@ typedef NS_OPTIONS(NSUInteger, bfgUATrackerId) {
 /// can be added as a dictionary. This *must* be
 /// a flat dictionary containing only NSString * as keys and values.
 /// \param
-/// error Used for indicating KT is disabled or that the payload is invalid for any of these three reasons:
+/// error Used for indicating Kontagent is disabled or that the payload is invalid for any of these three reasons:
 ///       1) Payload is too big, over 2000 characters.
 ///       2) Use of invalid characters (like spaces) in name, details1, details2 or details3.
-///       3) details2 is set but there is no details1 or details3 is set but there is no details2.
+///       3) details2 is set but there is no details1, or details3 is set but there is no details2.
 ///
 /// \since 5.11
 /// \return
@@ -273,10 +273,10 @@ typedef NS_OPTIONS(NSUInteger, bfgUATrackerId) {
 /// can be added as a dictionary. This *must* be
 /// a flat dictionary containing only NSString * as keys and values.
 /// \param
-/// error Used for indicating KT is disabled or that the payload is invalid for any of these 3 reasons:
+/// error Used for indicating Kontagent is disabled or that the payload is invalid for any of these 3 reasons:
 ///       1) Payload is too big, over 2000 characters.
 ///       2) Use of invalid characters (like spaces) in name, details1, details2 or details3.
-///       3) details2 is set but there is no details1 or details3 is set but there is no details2.
+///       3) details2 is set but there is no details1, or details3 is set but there is no details2.
 ///
 /// \since 5.11
 /// \return
@@ -308,6 +308,7 @@ typedef NS_OPTIONS(NSUInteger, bfgUATrackerId) {
 ///
 /// Note: Frequency capping will not be respected for placements that are custom loaded.
 ///
+/// \deprecated Deprecated since SDK 6.8.
 + (void)preloadCustomPlacement:(NSString * _Nullable)placementName __deprecated_msg("Deprecated since iOS SDK 6.8");
 
 ///
@@ -349,8 +350,8 @@ typedef NS_OPTIONS(NSUInteger, bfgUATrackerId) {
 + (void)logSurveyEvent;
 
 /// \details If it would be inappropriate for a placement ad to appear over the game in the moment,
-///   set suppressPlacements to YES. As soon as it is ok to show placements again, be sure to set
-///   it back to no.
+///   set suppressPlacements to YES. As soon as it is all right to show placements again, be sure to set
+///   it back to NO.
 ///
 /// \since 5.10
 ///
@@ -369,9 +370,16 @@ typedef NS_OPTIONS(NSUInteger, bfgUATrackerId) {
 /// \param delegate The delegate is informed when deferred deep links succeed or fail.
 ///
 /// \since 5.10
-/// \deprecated Deprecated since iOS SDK 6.9
-/// \note This method has been deprecated but the replacement method will not be implemented until SDK 6.9.1.  Please continue using this method until SDK 6.9.1 is released.
+/// \deprecated Deprecated since iOS SDK 6.9. This method has been replaced by bfgGameReporting#setDeepLinkListener:
 + (void)setDeferredDeepLinkDelegate:(id<bfgDeferredDeepLinkDelegate> _Nonnull)delegate __deprecated_msg("Deprecated since iOS SDK 6.9.");
+
+/// \details Set this before initializing bfgManager to receive notifications if you received a
+/// deep link.
+///
+/// \param listener The listener is informed when deep links succeed or fail.
+///
+/// \since 6.9.1
++ (void)setDeepLinkListener:(id<bfgDeepLinkListener> _Nonnull)listener;
 
 /// \details Calling this method will report that a rewarded video has been fully watched.
 ///
@@ -422,6 +430,35 @@ typedef NS_OPTIONS(NSUInteger, bfgUATrackerId) {
 ///
 + (NSString * _Nullable)lastLevelPlayed;
 
+///
+/// \details Set custom data fields to be added to all Zendesk requests. Each field is defined using a Zendesk-specific ID number and a string value.
+///   The string values should be consistently formatted for display, depending on data type, as follows: <br>
+///      * <b>text:</b>  Text strings can be formattted as the developer thinks appropriate or as otherwise specified. <br>
+///      * <b>Numeric:</b>  The numeric value can consist of only integers.  Commas and other separators are not allowed. <br>
+///      * <b>Decimal:</b>  Floating point values.  Commas and other seperators (other than the decimal point) are not allowed. <br>
+///      * <b>Boolean:</b>  "true" or "false" <br>
+///      * <b>Date:</b>  ISO 8601 date format string, such as YYYY-MM-DD (2018-12-06). Time can optionally be included and should include a timezone. <br>
+///      * <b>DropDown:</b>  String that matches the tag for the corresponding value.  For example, sdk_vip_# such as "sdk_vip_11" for VIP 11. <br>
+///
+/// To remove the custom fields pass nil into this method.
+///
+/// \param customData A collection of ID/Value pairs to provide to Zendesk as extra, game-specific data. The IDs are defined in Zendesk, specifically
+///   by each game that requires them and uniquely identifies the corresponding value.  For example, an ID/Value pair of 123456789 and "123.45"
+///   could be used to specify the total recent purchase amount as $123.45, and give a corresponding custom field with an id of 123456789.
+///
+/// \since 6.9.1
+///
++ (void)setCustomData:(NSDictionary<NSNumber*,NSString*>* _Nullable)customData;
+
+///
+/// \details Gets the custom data (provided using the setCustomData method) that gets added to each Zendesk request.
+///
+/// \return The custom data dictionary or null if not set.
+///
+/// \since 6.9.1
+///
++ (NSDictionary<NSNumber*,NSString*>* _Nullable)getCustomData;
+
 @end
 
 
@@ -429,10 +466,9 @@ typedef NS_OPTIONS(NSUInteger, bfgUATrackerId) {
 // ***********************************************************************************************
 // * DEFERRED DEEPLINK DELEGATION
 
+/// \brief (DEPRECATED) Provides games with a method of receiving deep link info.
 /// \since 5.10
-/// \deprecated Deprecated since iOS SDK 6.9
-/// \note This protocol has been deprecated but the replacement protocol will not be introduced until SDK 6.9.1.  Please continue using this protocol until SDK 6.9.1 is released.
-__deprecated_msg("Deprecated since iOS SDK 6.9.")
+/// \deprecated Deprecated since iOS SDK 6.9. This delegate has been replaced by bfgDeepLinkListener
 @protocol bfgDeferredDeepLinkDelegate <NSObject>
 
 @optional
@@ -442,16 +478,47 @@ __deprecated_msg("Deprecated since iOS SDK 6.9.")
 /// \param deepLinkString Stringified deep link URL. nil on error or if none present.
 /// \param error Error retrieving deep link. May be nil if there simply is no deep link.
 /// \param provider The service that is reporting the deep link.
-/// \param timeSinceLaunch Elapsed seconds between the app launching and deferred deep
-/// link arriving.
+/// \param timeSinceLaunch Elapsed seconds between the app launching and deferred deep link arriving.
 ///
 /// \since 5.10
-/// \deprecated Deprecated since iOS SDK 6.9
-/// \note This method has been deprecated but the replacement method will not be introduced until SDK 6.9.1.  Please continue to use this method until SDK 6.9.1 is released.
+/// \deprecated This method has been deprecated and replaced by onDeepLinkReceived:conversionData:error
+///
 - (void)didReceiveDeferredDeepLink:(NSString * _Nullable)deepLinkString error:(NSError * _Nullable)error provider:(bfgUATrackerId)provider timeSinceLaunch:(NSTimeInterval)timeSinceLaunch __deprecated_msg("Deprecated since iOS SDK 6.9.");
 
 @end
 
+#pragma mark - bfgDeepLinkListener
+// ***********************************************************************************************
+// * DEEPLINK DELEGATION
+
+/// \brief This protocol provides games with a callback for receiving deep link information.  The listener
+/// needs to be set before initializing the BFG SDK to insure deep links aren't lost on app launch.
+/// Deep links from all BFG SDK supported providers and registered URI schemes will trigger the
+/// listener. For more information on deep linking see the deep linking documentation:
+/// For more information on deep linking see the <a href="https://developer.bigfishgames.com/ios_v6_9_html/reference_deep_linking.html">Deep Linking documentation</a>.
+/// \since 6.9.1
+@protocol bfgDeepLinkListener <NSObject>
+
+@optional
+
+/// \details Called when an attempt to receive a deep link completes. After the callback is received,
+/// the deepLinkString needs to be parsed in order to retrieve the information that is relevant to
+/// the game, however, if the deep link is coming from a Facebook campaign the deepLinkString will be
+/// nil and further inspection of the conversionData dictionary becomes necessary.
+///
+/// For implementation details see <a href="https://developer.bigfishgames.com/ios_v6_9_html/reference_deep_linking.html#deeplinkImplement">Implementing Deep Linking</a>.
+///
+/// \param deepLinkString Stringified deep link URL. For Facebook deep links this will be nil, and the conversionData dictionary needs to be inspected.
+/// \param conversionData Dictionary containing all information associated with the deep link (will be nil for Tune deep links)
+/// \param error Error retrieving deep link. May be nil if there simply is no deep link.
+///
+/// \since 6.9.1
+///
+- (void)onDeepLinkReceived:(NSString * _Nullable)deepLinkString
+            conversionData:(NSDictionary<NSString*,NSString*> * _Nullable)conversionData
+                     error:(NSError * _Nullable)error;
+
+@end
 
 #pragma mark - bfgPlacementDelegate
 // ***********************************************************************************************
@@ -514,37 +581,20 @@ __deprecated_msg("Deprecated since iOS SDK 6.9.")
 
 /// \brief An interstitial has delivered a data payload to your game.
 ///
-/// \param dataString the data content in string format
-/// \param scenarioId the interstitial id that delivered the data
+/// \param dataString The data content in string format.
+/// \param scenarioId The interstitial id that delivered the data.
 ///
-/// \return YES if your delegate handled the data payload, NO otherwise
+/// \return YES if your delegate handled the data payload, NO otherwise.
 ///
 /// \since 6.1
 ///
 - (BOOL)bfgPlacementDidReceiveDataString:(NSString * _Nullable)dataString
                       scenarioId:(NSString * _Nullable)scenarioId;
 
-/// \brief A placement will be opening in front of the game.
-///
-/// \since 5.10
-///
-- (void)bfgPlacementContentWillOpen:(NSString * _Nullable)placementKey __deprecated_msg("Use bfgManagerPauseResumeDelegate");
-
-/// \brief A placement has closed and is no longer displaying.
-///
-/// \since 5.10
-///
-- (void)bfgPlacementContentDidDismiss:(NSString * _Nullable)placementKey __deprecated_msg("Use bfgManagerPauseResumeDelegate");
-
-/// \brief A placement has been opened and is displaying in front of the game.
-///
-/// \since 5.10
-///
-- (void)bfgPlacementContentDidOpen:(NSString * _Nullable)placementKey __deprecated_msg("Use bfgManagerPauseResumeDelegate");
-
 /// \brief A placement will close.
 ///
 /// \since 5.10
+/// \deprecated Use bfgManagerPauseResumeDelegate
 ///
 - (void)bfgPlacementContentWillDismiss:(NSString * _Nullable)placementKey __deprecated_msg("Use bfgManagerPauseResumeDelegate");
 

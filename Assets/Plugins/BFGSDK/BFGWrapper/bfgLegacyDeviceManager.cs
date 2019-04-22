@@ -4,10 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-public class bfgLegacyDeviceManager
+namespace BFGSDK
 {
+    public class bfgLegacyDeviceManager
+    {
 #if UNITY_EDITOR
-	// Nothing to see here.
+        // Nothing to see here.
 #elif UNITY_IOS || UNITY_IPHONE
     [DllImport("__Internal")]
     private static extern bool __bfgLegacyDeviceManager__checkForDeviceGeneration();
@@ -21,52 +23,53 @@ public class bfgLegacyDeviceManager
 #endif
 
 
-//
-// ---------------------------------------
-//
+        //
+        // ---------------------------------------
+        //
 
-    public static bool checkForDeviceGeneration()
-    {
-		#if UNITY_EDITOR
-			return false;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static bool checkForDeviceGeneration()
+        {
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_IOS || UNITY_IPHONE
 	        return __bfgLegacyDeviceManager__checkForDeviceGeneration();
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return false;
-		#endif
-    }
+#endif
+        }
 
-    public static bool checkForDeviceGenerationDisplayAlert(
-        bool displayAlert,
-        string title,
-        string message,
-        string dismissButtonTitle )
-    {
-		#if UNITY_EDITOR
-			return false;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static bool checkForDeviceGenerationDisplayAlert(
+            bool displayAlert,
+            string title,
+            string message,
+            string dismissButtonTitle)
+        {
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_IOS || UNITY_IPHONE
 	        return __bfgLegacyDeviceManager__checkForDeviceGenerationDisplayAlert( displayAlert, title, message, dismissButtonTitle );
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return false;
-		#endif
-    }
+#endif
+        }
 
-    public static int commonDeviceNameForIdentifier(
-        string returnDeviceName,
-        int bufferSize )
-    {
-		#if UNITY_EDITOR
-			return 0;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static int commonDeviceNameForIdentifier(
+            string returnDeviceName,
+            int bufferSize)
+        {
+#if UNITY_EDITOR
+            return 0;
+#elif UNITY_IOS || UNITY_IPHONE
 	        return __bfgLegacyDeviceManager__commonDeviceNameForIdentifier( returnDeviceName, bufferSize );
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return 0;
-		#endif
+#endif
+        }
     }
 }
