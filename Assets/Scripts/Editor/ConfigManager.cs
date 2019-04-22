@@ -16,6 +16,8 @@ public enum LoadState
     Load,
     Error
 }
+
+[Serializable]
 public class ConfigElementInfo
 {
     public string Name;
@@ -24,6 +26,7 @@ public class ConfigElementInfo
 
 public class ConfigManager: CustomEditorBase
 {
+    public  List<ConfigElementInfo> configsStatus = new List<ConfigElementInfo>();
     private List<GoogleLink> cachedConfigLinks = new List<GoogleLink>();
     private List<string> selectedConfigs = new List<string>();
 
@@ -41,8 +44,11 @@ public class ConfigManager: CustomEditorBase
     {
         var window = GetWindow(typeof(ConfigManager)) as ConfigManager;
         window.Show();
-        
-        window.RefreshElements();
+
+        if (window.cachedConfigLinks.Count == 0)
+        {
+            window.RefreshElements();    
+        }
     }
     
     protected virtual void OnGUI()

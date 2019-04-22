@@ -16,10 +16,6 @@ using Debug = IW.Logger;
 
 public class ConfigsGoogleLoader
 {
-    private static int index;
-    private static List<KeyValuePair<string, GoogleLink>> update;
-    private static int filesToCheckCount;
-
     public static List<ConfigElementInfo> ConfigsStatus = new List<ConfigElementInfo>();
     
     [MenuItem("Tools/Configs/GenerateLinkSettings")]
@@ -47,29 +43,26 @@ public class ConfigsGoogleLoader
 
     public static void UpdateTarget(List<string> configNames, bool forceUpdate)
     {
-        update = new List<KeyValuePair<string, GoogleLink>>();
+        var update = new List<KeyValuePair<string, GoogleLink>>();
 
         foreach (var path in NSConfigsSettings.Instance.ConfigNames)
         {
             var key = path.Substring(path.LastIndexOf("/") + 1);
             key = key.Substring(0, key.IndexOf("."));
-            
+
             var gLink = GoogleLoaderSettings.Instance.ConfigLinks.Find(link => link.Key == key);
 
             if (gLink == null || configNames.Contains(gLink.Key) == false) continue;
-            
+
             update.Add(new KeyValuePair<string, GoogleLink>(path, gLink));
         }
-        
-        index = update.Count;
-        filesToCheckCount = index;
-        
+
         CheckNeedToUpdate(forceUpdate, update);
     }
     
     private static void UpdateWithGoogle(bool forceUpdate)
     {
-        update = new List<KeyValuePair<string, GoogleLink>>();
+        var update = new List<KeyValuePair<string, GoogleLink>>();
 
         foreach (var path in NSConfigsSettings.Instance.ConfigNames)
         {
@@ -82,9 +75,6 @@ public class ConfigsGoogleLoader
             
             update.Add(new KeyValuePair<string, GoogleLink>(path, gLink));
         }
-        
-        index = update.Count;
-        filesToCheckCount = index;
         
         CheckNeedToUpdate(forceUpdate, update);
     }
@@ -116,23 +106,15 @@ public class ConfigsGoogleLoader
     {
         var update = new List<GoogleLink>();
 
-        foreach (var configName in configNames)
+        foreach (var currentConfigName in configNames)
         {
-            var gLink = GoogleLoaderSettings.Instance.ConfigLinks.Find(link => link.Key == configName);
-
+            var gLink = GoogleLoaderSettings.Instance.ConfigLinks.Find(link => link.Key == currentConfigName);
             if (gLink == null) continue;
             
             update.Add(gLink);
         }
         
-        index = update.Count;
-        filesToCheckCount = index;
-        
-        var idsArray = update.Select(e => e.Link).ToArray();
-        HashSet<string> uniqIds = new HashSet<string>(idsArray);
-        var idsStr = string.Join(",", uniqIds);
-
-        //var gLink = update[index].Value;
+        var idsStr = string.Join(",", update.Select(e => e.Link).Distinct());
         var req = new WebRequestData(GetUrl("getLastUpdated", "ids=" + idsStr));
         
         foreach (var configName in update.Select(elem => elem.Key))
@@ -177,10 +159,7 @@ public class ConfigsGoogleLoader
                     continue;
                 }
                 
-                if (configInfo.State == LoadState.Unknown)
-                {
-                    configInfo.State = LoadState.NeedUpdate;
-                }
+                configInfo.State = LoadState.NeedUpdate;
                 
                 if (!timestamps.ContainsKey(gLink.Link))
                 {
@@ -204,7 +183,7 @@ public class ConfigsGoogleLoader
                 else
                 {
                     Debug.LogWarningFormat("Config {0} is up to date", gLink.Key);
-                    GetConfigInfo(gLink.Key).State = LoadState.LastVersion;
+                    configInfo.State = LoadState.LastVersion;
                 }
             }
         });
@@ -212,10 +191,10 @@ public class ConfigsGoogleLoader
     
     private static void CheckNeedToUpdate(bool forceUpdate, List<KeyValuePair<string, GoogleLink>> update)
     {
-        HashSet<string> alwaysUpdate = new HashSet<string>
-        {
-            "layout"
-        };
+//        HashSet<string> alwaysUpdate = new HashSet<string>
+//        {
+//            "layout"
+//        };
         
         var idsArray = update.Select(e => e.Value.Link).ToArray();
         HashSet<string> uniqIds = new HashSet<string>(idsArray);
@@ -282,7 +261,7 @@ public class ConfigsGoogleLoader
                 var then = long.Parse(EditorPrefs.GetString(gLink.Key));
                 var now = timestamps[gLink.Link];
                 
-                if (then < now || alwaysUpdate.Contains(gLink.Key))
+                if (then < now)
                 {
                     Debug.LogWarningFormat("Config {0} need to update. then {1} < now {2}", gLink.Key, then, now);
                 }
@@ -297,7 +276,6 @@ public class ConfigsGoogleLoader
             }
 
             Debug.LogWarning("Check for the need to update the configs completed!");
-            index = update.Count;
 
             Load(update);
         });
@@ -306,10 +284,7 @@ public class ConfigsGoogleLoader
     private static void OnLoadComplete()
     {
         Debug.LogWarning("Configs load data complete!");
-        if (update.Count != 0)
-        {
-            NSConfigEncription.EncryptConfigs();
-        }
+        NSConfigEncription.EncryptConfigs();
     }
     
     private static void Load(List<KeyValuePair<string, GoogleLink>> update)
