@@ -1919,7 +1919,7 @@
     "$type": "TaskMatchEntity, GameAssembly",
     "Id": "Daily_Quest_1",
     "Group": "Permanent",
-    "TargetValue": 20,
+    "TargetValue": 15,
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
@@ -2041,7 +2041,7 @@
     "Id": "Daily_Quest_7",
     "Group": "Normal",
     "PieceUid": "Coins",
-    "TargetValue": 550,
+    "TargetValue": 450,
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
@@ -2081,13 +2081,13 @@
     "Id": "Daily_Quest_10",
     "Group": "Hard",
     "PieceUid": "Coins",
-    "TargetValue": 850,
+    "TargetValue": 600,
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
           {
             "Currency": "Crystals",
-            "Amount": 15
+            "Amount": 10
           }
         ]
       },
@@ -2101,13 +2101,13 @@
     "Id": "Daily_Quest_11",
     "Group": "Hard",
     "PieceUid": "Crystals",
-    "TargetValue": 10,
+    "TargetValue": 7,
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
           {
             "Currency": "Crystals",
-            "Amount": 15
+            "Amount": 10
           }
         ]
       },
