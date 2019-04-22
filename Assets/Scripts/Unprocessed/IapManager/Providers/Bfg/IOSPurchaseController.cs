@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SimpleJSON;
 using System;
+using BFGSDK;
 
 public class IOSPurchaseController : APurchaseController
 {

@@ -20,7 +20,7 @@ public class BfgServerTimeProvider : IServerTimeProvider
     
     public void GetServerTime(Action<bool, long> onComplete)
     {
-        Debug.Log($"[BfgServerTimeProvider] => GetServerTime...");
+        Debug.Log($"[BfgServerTimeProvider] => GetServerTime at '{Url}'");
 
         // Uncomment to debug FAIL case
         // DOTween.Sequence()

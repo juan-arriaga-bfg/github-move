@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BfgAnalytics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -97,17 +98,16 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		if (!(entity is UIMarketElementEntity contentEntity) || isClick == false || isReward == false || rewardPosition == null) return;
 		
 		contentEntity.Def.State = MarketItemState.Claimed;
+		
+		var piecesReward = CurrencyHelper.FiltrationRewards(new List<CurrencyPair> {contentEntity.Def.Reward}, out var currenciesReward);
 
-		CurrencyHelper.PurchaseAndProvideSpawn(new List<CurrencyPair> {contentEntity.Def.Reward},
-			null,
-			rewardPosition,
-			() =>
-			{
-				ProfileService.Instance.Manager.UploadCurrentProfile(false);
-				BoardService.Current.FirstBoard.TutorialLogic.Update();
-			},
-			false,
-			true);
+		void Complete()
+		{
+			ProfileService.Instance.Manager.UploadCurrentProfile(false);
+			BoardService.Current.FirstBoard.TutorialLogic.Update();
+		}
+		
+		CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, null, rewardPosition, Complete, false, true);
 	}
 	
 	private void ChangeButtons()

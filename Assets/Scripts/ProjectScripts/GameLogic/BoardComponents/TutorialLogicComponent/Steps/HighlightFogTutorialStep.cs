@@ -28,20 +28,9 @@ public class HighlightFogTutorialStep : LoopFingerTutorialStep
         if (positionsHero.Count == 0) return;
 
         var positionHero = positionsHero[0];
-        var positionMana = positionHero.Down;
         var field = new List<BoardPosition>();
 
-        if (Context.Context.BoardLogic.IsEmpty(positionMana))
-        {
-            field.Add(positionMana);
-        }
-        else
-        {
-            Context.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(positionHero, field, 10);
-
-            field = field.FindAll(position => position.Y < positionHero.Y);
-            field = new List<BoardPosition>{field[0]};
-        }
+        Context.Context.BoardLogic.EmptyCellsFinder.CheckInFrontOrFindRandomNear(positionHero, field, 1);
         
         Context.Context.ActionExecutor.AddAction(new EjectionPieceAction
         {

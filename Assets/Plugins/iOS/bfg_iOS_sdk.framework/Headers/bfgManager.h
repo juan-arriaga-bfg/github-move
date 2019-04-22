@@ -242,7 +242,17 @@ typedef void (^bfgManagerOnPoliciesCompletedBlock)(void);
 /// for your application, you should update bfgManager.
 ///
 + (void)setParentViewController:(UIViewController * _Nonnull)parent;
-+ (UIViewController * _Nonnull)getParentViewController __deprecated;
+
+/// \details Gets the parent view controller.
+/// \deprecated Use the bfgManager#parentViewController method.
+/// \returns Returns the parent view controller.
+///
++ (UIViewController * _Nonnull)getParentViewController __deprecated_msg("Use the parentViewController method.");
+
+///
+/// \details Gets the parent view controller.
+/// \returns Returns the parent view controller.
+///
 + (UIViewController * _Nonnull)parentViewController;
 
 
@@ -260,24 +270,25 @@ typedef void (^bfgManagerOnPoliciesCompletedBlock)(void);
 
 ///
 /// \details Returns enum value for the current UI displayed by the SDK.
+/// \deprecated Deprecated since SDK 6.4.  There is no longer any use for this value.
 /// \return A number between 0 and 3
 /// \ref BFGDASH_UI_TYPE
 ///
 ///    \ref BFGDASH_UI_TYPE_NONE = 0
 ///
-///    \retVal BFGDASH_UI_TYPE_DASHFULL = 1
+///    \retval BFGDASH_UI_TYPE_DASHFULL = 1
 ///
-///    \retVal BFGDASH_UI_TYPE_DASHWIN = 2
+///    \retval BFGDASH_UI_TYPE_DASHWIN = 2
 ///
-///    \retVal BFGDASH_UI_TYPE_MOREGAMES = 3
+///    \retval BFGDASH_UI_TYPE_MOREGAMES = 3
 
 + (BFGDASH_UI_TYPE)currentUIType __deprecated_msg("Since 6.4 -- no public use for this value");
 
 
-#define BFG_LAUNCH_ISPLASH                      @"bfg_launch_isplash"
-#define BFG_LAUNCH_MORE_GAMES                   @"bfg_launch_more_games"
-#define BFG_LAUNCH_LOGIN                        @"bfg_launch_login"
-#define BFG_LAUNCH_WEBBROWSER                   @"bfg_launch_webbrowser"
+#define BFG_LAUNCH_ISPLASH                      @"bfg_launch_isplash"       //deprecated as of 6.9.1
+#define BFG_LAUNCH_MORE_GAMES                   @"bfg_launch_more_games"    //deprecated as of 6.9.1
+#define BFG_LAUNCH_LOGIN                        @"bfg_launch_login"         //deprecated as of 6.9.1
+#define BFG_LAUNCH_WEBBROWSER                   @"bfg_launch_webbrowser"    //deprecated as of 6.9.1
 
 ///
 ///
@@ -322,6 +333,7 @@ typedef void (^bfgManagerOnPoliciesCompletedBlock)(void);
 /// \retval NO The SDK did not act upon the App Link.
 ///
 /// \since 5.10
+/// \deprecated Deprecated since iOS SDK 6.9.  Use bfgManager#applicationOpenURL:options:
 + (BOOL)applicationOpenURL:(NSURL * _Nonnull)url sourceApplication:(NSString * _Nullable)sourceApplication annotation:(id _Nullable)annotation __deprecated_msg("Deprecated since iOS SDK 6.9");
 
 ///

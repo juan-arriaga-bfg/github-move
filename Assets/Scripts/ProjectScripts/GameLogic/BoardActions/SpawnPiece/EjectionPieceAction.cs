@@ -29,8 +29,8 @@ public class EjectionPieceAction : IBoardAction
 		foreach (var pair in Pieces)
 		{
 			var field = To ?? new List<BoardPosition>();
-        
-			if (logic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From.Value, field, pair.Value) == false) break;
+
+			if (logic.EmptyCellsFinder.CheckInFrontOrFindRandomNear(From.Value, field, pair.Value) == false) break;
 			
 			foreach (var pos in field)
 			{

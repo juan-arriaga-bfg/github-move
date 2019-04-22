@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-public class bfgSettings
+namespace BFGSDK
 {
+    public class bfgSettings
+    {
 #if (UNITY_IOS || UNITY_IPHONE) && !UNITY_EDITOR
     [DllImport("__Internal")]
     private static extern bool __bfgSettings__getBoolean(string key, bool withDefault);
@@ -22,14 +24,14 @@ public class bfgSettings
     private static readonly int BFG_SETTING = 300;
 #endif
 
-    //
-    // ---------------------------------------
-    //
+        //
+        // ---------------------------------------
+        //
 
-    public static bool getBoolean (string key, bool withDefault)
-	{
-		#if UNITY_EDITOR
-		return true;
+        public static bool getBoolean(string key, bool withDefault)
+        {
+#if UNITY_EDITOR
+            return true;
 #elif UNITY_IOS || UNITY_IPHONE
 			return __bfgSettings__getBoolean(key, withDefault);
 #elif UNITY_ANDROID
@@ -39,12 +41,12 @@ public class bfgSettings
 #else
 			return false;
 #endif
-    }
+        }
 
-    public static double getDouble (string key, double withDefault)
-	{
-		#if UNITY_EDITOR
-		return 0;
+        public static double getDouble(string key, double withDefault)
+        {
+#if UNITY_EDITOR
+            return 0;
 #elif UNITY_IOS || UNITY_IPHONE
 			return __bfgSettings__getDouble(key, withDefault);
 #elif UNITY_ANDROID
@@ -54,12 +56,12 @@ public class bfgSettings
 #else
 			return 0;
 #endif
-    }
+        }
 
-    public static int getInteger (string key, int withDefault)
-	{
-		#if UNITY_EDITOR
-		return 0;
+        public static int getInteger(string key, int withDefault)
+        {
+#if UNITY_EDITOR
+            return 0;
 #elif UNITY_IOS || UNITY_IPHONE
 			return __bfgSettings__getInteger(key, withDefault);
 #elif UNITY_ANDROID
@@ -69,12 +71,12 @@ public class bfgSettings
 #else
 			return 0;
 #endif
-    }
+        }
 
-    public static long getLong (string key, long withDefault)
-	{
-		#if UNITY_EDITOR
-		return 0;
+        public static long getLong(string key, long withDefault)
+        {
+#if UNITY_EDITOR
+            return 0;
 #elif UNITY_IOS || UNITY_IPHONE
 			return __bfgSettings__getLong(key, withDefault);
 #elif UNITY_ANDROID
@@ -84,12 +86,12 @@ public class bfgSettings
 #else
 			return 0;
 #endif
-    }
+        }
 
-    public static string getString (string key, string withDefault)
-	{
+        public static string getString(string key, string withDefault)
+        {
 #if UNITY_EDITOR
-		return withDefault;
+            return withDefault;
 #elif UNITY_IOS || UNITY_IPHONE
       StringBuilder returnSetting = new StringBuilder(bfgSettings.BFG_SETTING);
 			__bfgSettings__getString(key, withDefault, returnSetting);
@@ -101,5 +103,6 @@ public class bfgSettings
 #else
 			return null;
 #endif
+        }
     }
 }
