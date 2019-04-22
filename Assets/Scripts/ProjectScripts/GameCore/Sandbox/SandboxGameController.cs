@@ -58,8 +58,8 @@ public class SandboxGameController : MonoBehaviour
                 .RegisterBuilder(new MineMatchActionBuilder())
                 .RegisterBuilder(new CharacterMatchActionBuilder())));
 
-        boardController.RegisterComponent(new AreaAccessControllerComponent());
         boardController.RegisterComponent(new PathfindLockerComponent());
+        boardController.RegisterComponent(new AreaAccessControllerComponent());
         boardController.RegisterComponent(new BoardRandomComponent()); // random
         boardController.RegisterComponent(new MarketLogicComponent());
         boardController.RegisterComponent(new HintCooldownComponent()
@@ -117,16 +117,11 @@ public class SandboxGameController : MonoBehaviour
             boardController.BoardDef.Width,
             boardController.BoardDef.Height,
             boardController.BoardDef.UnitSize,
-            new List<string>
-            {
-                null,            // 0
-                null,            // 1
-                "tile_grass_1",  // 2
-                "tile_grass_2"   // 3
-            }
+            BoardTiles.GetDefs()
         );
         
         boardController.BoardLogic.RegisterComponent(new FireflyLogicComponent());
+        boardController.BoardLogic.RegisterComponent(new AirShipLogicComponent());
         boardController.RegisterComponent(new TutorialLogicComponent().RegisterComponent(new LockerComponent()));
         boardController.RendererContext.CreateBorders();
         
@@ -166,6 +161,8 @@ public class SandboxGameController : MonoBehaviour
         //     "background_tile",
         //     GetAllBoardPositions(boardController, pos => pos.RightAtDistance(shift/2).UpAtDistance(shift/2))
         // );
+
+        
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
 

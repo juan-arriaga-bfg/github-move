@@ -5,16 +5,21 @@ using UnityEngine;
 
 public class ReproductionPieceAnimation : BoardAnimation
 {
-    public BoardElementView BoardElement;
     public BoardPosition From;
+    public Vector3? StartPosition;
+    
+    public BoardElementView BoardElement;
+    
     public Dictionary<BoardPosition, Piece> Pieces;
 
     public Func<int, string> AnimationResourceSearch;
     
+    public bool RewardEffect = false;
+    
     public override void Animate(BoardRenderer context)
     {
         var boardElement = BoardElement ? BoardElement : context.GetElementAt(From);
-        var startPosition = context.Context.BoardDef.GetPiecePosition(From.X, From.Y);
+        var startPosition = StartPosition ?? context.Context.BoardDef.GetPiecePosition(From.X, From.Y);
         
         var sequence = DOTween.Sequence().SetId(animationUid);
         
@@ -35,6 +40,7 @@ public class ReproductionPieceAnimation : BoardAnimation
             var to = context.Context.BoardDef.GetPiecePosition(position.X, position.Y);
             var element = context.CreatePieceAt(pair.Value, position);
             var delay = 0.1f + index * 0.02f;
+            
             index++;
 
             element.CachedTransform.localScale = Vector3.zero;
@@ -45,15 +51,27 @@ public class ReproductionPieceAnimation : BoardAnimation
             sequence.Insert(delay, element.CachedTransform.DOJump(new Vector3(to.x, to.y, element.CachedTransform.position.z), 1, 1, 0.4f).SetEase(Ease.InOutSine));
             sequence.InsertCallback(0.4f, () => context.ResetBoardElement(element, position));
             
+            if (RewardEffect)
+            {
+                sequence.InsertCallback(0.0f, () =>
+                {
+                    var particle = ParticleView.Show(R.RewardDropParticles, position).transform;
+                        
+                    particle.SetParent(element.transform, false);
+                    particle.localPosition = Vector3.zero;
+                });
+            }
+            
             sequence.Insert(delay, element.CachedTransform.DOScale(Vector3.one * 1.3f, 0.2f));
             sequence.Insert(delay + 0.2f, element.CachedTransform.DOScale(Vector3.one, 0.2f));
 
-            var AnimationResource = AnimationResourceSearch?.Invoke(element.Piece.PieceType);
-            if (string.IsNullOrEmpty(AnimationResource) == false)
+            var animationResource = AnimationResourceSearch?.Invoke(element.Piece.PieceType);
+            
+            if (string.IsNullOrEmpty(animationResource) == false)
             {
                 sequence.InsertCallback(delay + 0.4f, () =>
                 {
-                    var animView = context.CreateBoardElementAt<AnimationView>(AnimationResource, position);
+                    var animView = context.CreateBoardElementAt<AnimationView>(animationResource, position);
                     animView.Play(element);
                 });
 
@@ -63,8 +81,6 @@ public class ReproductionPieceAnimation : BoardAnimation
             sequence.Insert(delay + 0.4f, element.CachedTransform.DOScale(new Vector3(1f, 0.8f, 1f), 0.1f));
             sequence.Insert(delay + 0.5f, element.CachedTransform.DOScale(new Vector3(0.9f, 1.1f, 1f), 0.1f));
             sequence.Insert(delay + 0.6f, element.CachedTransform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack));
-
-
         }
 
         sequence.OnComplete(() =>

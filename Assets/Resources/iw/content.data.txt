@@ -965,23 +965,23 @@
     "IsGenerateAutoName": false
   },
   {
-    "Uid": "BorderBottom",
-    "ResourcePath": "Prefabs\\Border/BorderBottom",
+    "Uid": "BorderBottom0",
+    "ResourcePath": "Prefabs\\Border/BorderBottom0",
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "BorderLeft",
-    "ResourcePath": "Prefabs\\Border/BorderLeft",
+    "Uid": "BorderLeft0",
+    "ResourcePath": "Prefabs\\Border/BorderLeft0",
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "BorderRight",
-    "ResourcePath": "Prefabs\\Border/BorderRight",
+    "Uid": "BorderRight0",
+    "ResourcePath": "Prefabs\\Border/BorderRight0",
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "BorderTop",
-    "ResourcePath": "Prefabs\\Border/BorderTop",
+    "Uid": "BorderTop0",
+    "ResourcePath": "Prefabs\\Border/BorderTop0",
     "IsGenerateAutoName": true
   },
   {
@@ -3195,13 +3195,13 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "BorderLeftHole",
-    "ResourcePath": "Prefabs\\Border/BorderLeftHole",
+    "Uid": "BorderLeft0Hole",
+    "ResourcePath": "Prefabs\\Border/BorderLeft0Hole",
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "BorderBottomHole",
-    "ResourcePath": "Prefabs\\Border/BorderBottomHole",
+    "Uid": "BorderBottom0Hole",
+    "ResourcePath": "Prefabs\\Border/BorderBottom0Hole",
     "IsGenerateAutoName": true
   },
   {
@@ -5420,8 +5420,298 @@
     "IsGenerateAutoName": true
   },
   {
+    "Uid": "BorderWallRight1",
+    "ResourcePath": "Prefabs\\Border/BorderWallRight1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderWallTop1",
+    "ResourcePath": "Prefabs\\Border/BorderWallTop1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderWallTopRight1",
+    "ResourcePath": "Prefabs\\Border/BorderWallTopRight1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottom1",
+    "ResourcePath": "Prefabs\\Border/BorderBottom1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderLeft1",
+    "ResourcePath": "Prefabs\\Border/BorderLeft1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderLeft1Hole",
+    "ResourcePath": "Prefabs\\Border/BorderLeft1Hole",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottom1Hole",
+    "ResourcePath": "Prefabs\\Border/BorderBottom1Hole",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderWallBottomLeft1",
+    "ResourcePath": "Prefabs\\Border/BorderWallBottomLeft1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottom2",
+    "ResourcePath": "Prefabs\\Border/BorderBottom2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottom2Hole",
+    "ResourcePath": "Prefabs\\Border/BorderBottom2Hole",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderLeft2",
+    "ResourcePath": "Prefabs\\Border/BorderLeft2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderLeft2Hole",
+    "ResourcePath": "Prefabs\\Border/BorderLeft2Hole",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "DebugCell2",
+    "ResourcePath": "Prefabs\\BoardUI/DebugCell2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderRight0Short",
+    "ResourcePath": "Prefabs\\Border/BorderRight0Short",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTop0Short",
+    "ResourcePath": "Prefabs\\Border/BorderTop0Short",
+    "IsGenerateAutoName": true
+  },
+  {
     "Uid": "DebugId",
     "ResourcePath": "Prefabs\\BoardUI/DebugId",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "AirShipView",
+    "ResourcePath": "Prefabs/AirShipView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "DestroyAirShipAnimation",
+    "ResourcePath": "Prefabs\\Animations/DestroyAirShipAnimation",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "SpawnAirShipAnimation",
+    "ResourcePath": "Prefabs\\Animations/SpawnAirShipAnimation",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottomLeftOuterCorner0",
+    "ResourcePath": "Prefabs\\Border/BorderBottomLeftOuterCorner0",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottomRightOuterCorner0",
+    "ResourcePath": "Prefabs\\Border/BorderBottomRightOuterCorner0",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTopRightOuterCorner0",
+    "ResourcePath": "Prefabs\\Border/BorderTopRightOuterCorner0",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTopLeftOuterCorner0",
+    "ResourcePath": "Prefabs\\Border/BorderTopLeftOuterCorner0",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottomRightInnerCorner0",
+    "ResourcePath": "Prefabs\\Border/BorderBottomRightInnerCorner0",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTopLeftInnerCorner0",
+    "ResourcePath": "Prefabs\\Border/BorderTopLeftInnerCorner0",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTopRightInnerCorner0",
+    "ResourcePath": "Prefabs\\Border/BorderTopRightInnerCorner0",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottomLeftInnerCorner0",
+    "ResourcePath": "Prefabs\\Border/BorderBottomLeftInnerCorner0",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottomLeftInnerCorner1",
+    "ResourcePath": "Prefabs\\Border/BorderBottomLeftInnerCorner1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottomLeftOuterCorner1",
+    "ResourcePath": "Prefabs\\Border/BorderBottomLeftOuterCorner1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottomRightInnerCorner1",
+    "ResourcePath": "Prefabs\\Border/BorderBottomRightInnerCorner1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottomRightOuterCorner1",
+    "ResourcePath": "Prefabs\\Border/BorderBottomRightOuterCorner1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTopLeftInnerCorner1",
+    "ResourcePath": "Prefabs\\Border/BorderTopLeftInnerCorner1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTopLeftOuterCorner1",
+    "ResourcePath": "Prefabs\\Border/BorderTopLeftOuterCorner1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTopRightInnerCorner1",
+    "ResourcePath": "Prefabs\\Border/BorderTopRightInnerCorner1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTopRightOuterCorner1",
+    "ResourcePath": "Prefabs\\Border/BorderTopRightOuterCorner1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottomLeftInnerCorner2",
+    "ResourcePath": "Prefabs\\Border/BorderBottomLeftInnerCorner2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottomLeftOuterCorner2",
+    "ResourcePath": "Prefabs\\Border/BorderBottomLeftOuterCorner2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottomRightInnerCorner2",
+    "ResourcePath": "Prefabs\\Border/BorderBottomRightInnerCorner2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottomRightOuterCorner2",
+    "ResourcePath": "Prefabs\\Border/BorderBottomRightOuterCorner2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTopLeftInnerCorner2",
+    "ResourcePath": "Prefabs\\Border/BorderTopLeftInnerCorner2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTopLeftOuterCorner2",
+    "ResourcePath": "Prefabs\\Border/BorderTopLeftOuterCorner2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTopRightInnerCorner2",
+    "ResourcePath": "Prefabs\\Border/BorderTopRightInnerCorner2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTopRightOuterCorner2",
+    "ResourcePath": "Prefabs\\Border/BorderTopRightOuterCorner2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottom1_Addon_1",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderBottom1_Addon_1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottom1_Addon_2",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderBottom1_Addon_2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottom1_Addon_3",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderBottom1_Addon_3",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderBottom2_Addon_1",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderBottom2_Addon_1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderLeft1_Addon_1",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderLeft1_Addon_1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderLeft1_Addon_2",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderLeft1_Addon_2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderLeft1_Addon_3",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderLeft1_Addon_3",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderLeft2_Addon_1",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderLeft2_Addon_1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderWallBottomLeft1_Addon_1",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderWallBottomLeft1_Addon_1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderWallRight1_Addon_1",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderWallRight1_Addon_1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderWallRight1_Addon_2",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderWallRight1_Addon_2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderWallTop1_Addon_1",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderWallTop1_Addon_1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderWallTop1_Addon_2",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderWallTop1_Addon_2",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderWallTopRight1_Addon_1",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderWallTopRight1_Addon_1",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderWallTop1_Addon_3",
+    "ResourcePath": "Prefabs\\Border\\Addons/BorderWallTop1_Addon_3",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTopRightIntersectionCorner0",
+    "ResourcePath": "Prefabs\\Border/BorderTopRightIntersectionCorner0",
     "IsGenerateAutoName": true
   }
 ]

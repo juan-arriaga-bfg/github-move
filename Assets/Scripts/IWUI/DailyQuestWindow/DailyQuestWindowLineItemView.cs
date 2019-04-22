@@ -27,7 +27,7 @@ public class DailyQuestWindowLineItemView : IWUIWindowViewController
         if (state == State.Fill)
         {
             var interval = 0.5f;
-            var sequence = DOTween.Sequence();
+            var sequence = DOTween.Sequence().SetId(this);
             
             fill.SetActive(true);
             fillHiglhlight.SetActive(false);

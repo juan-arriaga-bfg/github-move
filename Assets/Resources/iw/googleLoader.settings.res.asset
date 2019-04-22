@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8beeef0f8df5e3a4b9b27d49ce3fa7da, type: 3}
   m_Name: googleLoader.settings.res
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   configLinks:
   - Key: chests
     Link: 1SnYRNQBmFgpeb5BJmQ5rwUWKHYBwPFNrFHzeW4OxWXs
@@ -72,7 +72,7 @@ MonoBehaviour:
   - Key: orders
     Link: 1MakAUEhU8pxDDasINjyEBIXVEZ3oPr3PMrisNbH650I
     Route: parse
-    Pattern: '[{"Uid":"","":"","Delay":0,"Prices":[{"Currency":"","Amount":0}],"Rewards":[{"Currency":"","Amount":0}]}]'
+    Pattern: '[{"Uid":"","":"","Delay":0,"Prices":[{"Currency":"","Amount":0}],"NormalRewards":[{"Currency":"","Amount":0}],"EventRewards":[{"Currency":"","Amount":0}]}]'
   - Key: quests
     Link: 1Y6MtoZhcHKgmmL96-rYsTV7Lp4LPYNm21jYc_xNPHXc
     Route: parse

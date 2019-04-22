@@ -1,6 +1,7 @@
 using Debug = IW.Logger;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BfgAnalytics;
 using CodeStage.AntiCheat.ObscuredTypes;
 using DG.Tweening;
@@ -163,6 +164,92 @@ public class DevTools : UIContainerElementViewController
         Debug.Log("OnSpawnFireFlyClick");
         BoardService.Current.FirstBoard.BoardLogic.FireflyLogic.Execute();
     }
+    
+    public void OnSpawnAirShipClick()
+    {
+        Debug.Log("OnSpawnAirShipClick");
+        
+        var pieces1 = new Dictionary<int, int>
+        {
+            { PieceType.Parse("A1"), 1 },
+            { PieceType.Parse("B3"), 1 },
+            { PieceType.Parse("A2"), 1 },
+            { PieceType.Parse("B5"), 1 },
+        };
+        
+        BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Spawn(pieces1);        
+        return;
+        
+        var allIds = PieceType.GetAllIds();
+        
+        for (int i = allIds.Count - 1; i >=0 ; i--)
+        {
+            var id = allIds[i];
+            var def = PieceType.GetDefById(id);
+            if (def.Filter.Has(PieceTypeFilter.Fake)
+            || def.Filter.Has(PieceTypeFilter.Multicellular)
+            || def.Filter.Has(PieceTypeFilter.Mine)
+            || def.Filter.Has(PieceTypeFilter.Obstacle)
+            || def.Filter.Has(PieceTypeFilter.Character)
+            || def.Filter.Has(PieceTypeFilter.ProductionField)                
+            || (def.Abbreviations[0].Contains("NPC") && id > 2000501)                
+                )
+            {
+                allIds.RemoveAt(i);
+            }
+        }
+
+        for (int i = 0; i < 1000; i++)
+        {
+            int PIECES_COUNT = UnityEngine.Random.Range(1, 5);
+            var pieces = new Dictionary<int, int>();
+            for (int i1 = 0; i1 < PIECES_COUNT; i1++)
+            {
+                int index = UnityEngine.Random.Range(0, allIds.Count);
+
+                int id = allIds[index];
+                // var def = PieceType.GetDefById(id);
+                
+                if (i % 5 == 0)
+                {
+                    if (pieces.Count > 0)
+                    {
+                        pieces[pieces.Keys.First()]++;
+                    }
+                    else
+                    {
+                        pieces.Add(id, 1);
+                    } 
+                }
+                else
+                {
+                    if (pieces.ContainsKey(id))
+                    {
+                        pieces[id]++;
+                    }
+                    else
+                    {
+                        pieces.Add(id, 1);
+                    } 
+                }
+
+                if (i % 7 == 0)
+                {
+                    break;
+                }
+            }
+
+            try
+            {
+                var view = BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Spawn(pieces);
+                view.PlaceTo(new Vector2(17 + i * 3f, view.transform.position.y + 10));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }        
+    }
 
     private void ShowQuestWindow(List<QuestEntity> quests, int index)
     {
@@ -227,6 +314,9 @@ public class DevTools : UIContainerElementViewController
     
     public void OnDebug1Click()
     {
+        OnSpawnAirShipClick();
+        return;
+        
         UIService.Get.ShowWindow(UIWindowType.DailyRewardWindow);
         return;
         
@@ -300,7 +390,8 @@ public class DevTools : UIContainerElementViewController
     public void OnDebug2Click()
     {
         Debug.Log("OnDebug2Click");
-       
+        return;
+        
         GameDataService.Current.QuestsManager.StartNewDailyQuest();
         return;
         

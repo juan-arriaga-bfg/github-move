@@ -30,6 +30,7 @@ public class ElementsResourcesBuilder
         dict.Add((int) ViewType.MineProgress, R.MineProgressView);
         dict.Add((int) ViewType.ObstacleProgress, R.ObstacleProgressView);
         dict.Add((int) ViewType.DebugId, R.DebugId);
+        dict.Add((int) ViewType.AirShip, R.AirShipView);
         
 #endregion
         
