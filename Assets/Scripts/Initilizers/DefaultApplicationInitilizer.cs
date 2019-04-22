@@ -93,14 +93,19 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
 
     void OnApplicationPause(bool pauseStatus)
     {
-        Debug.Log($"OnApplicationPause: {(pauseStatus ? "PAUSE" : "UNPAUSE")}");
+        bool isGameLoaded = AsyncInitService.Current?.IsAllComponentsInited() ?? false;
         
+        Debug.Log($"OnApplicationPause: {(pauseStatus ? "PAUSE" : "UNPAUSE")} Loaded: {isGameLoaded}");
+
         var energyLogic = BoardService.Current?.FirstBoard?.GetComponent<EnergyCurrencyLogicComponent>(EnergyCurrencyLogicComponent.ComponentGuid);
         if (pauseStatus)
         {
             if (ProfileService.Instance != null && ProfileService.Instance.Manager != null)
             {
-                ProfileService.Instance.Manager.UploadCurrentProfile(true);
+                if (isGameLoaded)
+                {
+                    ProfileService.Instance.Manager.UploadCurrentProfile(true);
+                }
 
                 LocalNotificationsService.Current.ScheduleNotifications();
             }
