@@ -1,6 +1,7 @@
 #if BFG_PURCHASES
 using Debug = IW.Logger;
 using System;
+using BFGSDK;
 using DG.Tweening;
 using UnityEngine;
 

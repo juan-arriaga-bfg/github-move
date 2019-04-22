@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using BFGSDK;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 public class BfgSdkUnityMessageHandlerInitComponent : AsyncInitComponentBase
