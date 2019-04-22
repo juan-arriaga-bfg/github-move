@@ -27,8 +27,8 @@ public class NetworkUtils
         {
             ClientPlatform = Application.platform.ToString(),
             Protocol = "v3",
-            // Host = "http://134.17.4.143/nodejs101",
-            Host = "https://f2p-qa.bigfishgames.com/nodejs101",
+            Host = "http://134.17.4.143/nodejs101",
+            // Host = "https://f2p-qa.bigfishgames.com/nodejs101",
             GameVersion = IWVersion.Get.CurrentVersion
         };
     }
