@@ -4,6 +4,7 @@ using System;
 using IW.SimpleJSON;
 using JetBrains.Annotations;
 using UnityEngine;
+using BFGSDK;
 
 namespace BfgAnalytics
 {

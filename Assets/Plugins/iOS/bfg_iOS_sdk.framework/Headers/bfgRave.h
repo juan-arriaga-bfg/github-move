@@ -131,7 +131,6 @@ typedef void (^bfgRaveProfilePictureCompletionBlock)(UIImage * _Nullable image);
 /// \returns YES if the current user is a guest, NO if authenticated or they have personalized their profile.
 ///
 /// \since 6.0
-///
 /// \deprecated Deprecated since iOS SDK 6.3
 ///
 + (BOOL)isCurrentGuest __deprecated_msg("Deprecated since iOS SDK 6.3");

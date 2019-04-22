@@ -74,7 +74,7 @@ typedef NS_OPTIONS(NSUInteger, BFGPushProvider) {
 
 /// \brief The delegate will be called when a push notification arrives.
 ///
-/// \param delegate Your delegate implementation
+/// \param delegate Your delegate implementation.
 ///
 /// \since 5.10
 ///

@@ -4,12 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-// To enable debug message logging define "UNITY_DEBUG" as described in http://docs.unity3d.com/Manual/PlatformDependentCompilation.html
-
-public class bfgAppManager
+namespace BFGSDK
 {
+    public class bfgAppManager
+    {
 #if UNITY_EDITOR
-	// Nothing to see here.
+        // Nothing to see here.
 
 #elif UNITY_IOS || UNITY_IPHONE
 	// Declarations for iOS only.
@@ -56,190 +56,191 @@ public class bfgAppManager
 
 #endif
 
-	//
-	// ---------------------------------------
-	//
+        //
+        // ---------------------------------------
+        //
 
-	public static bool launchApp(string bundleIdentifier)
-	{
-		#if UNITY_EDITOR
-			return false;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static bool launchApp(string bundleIdentifier)
+        {
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_IOS || UNITY_IPHONE
 			bool result = __bfgAppManager__launchApp(bundleIdentifier);
 
-			#if UNITY_DEBUG
+#if UNITY_DEBUG
 				Debug.Log("bfgAppManager.__bfgAppManager__launchApp(" + bundleIdentifier + ") returned " + result);
-			#endif
+#endif
 
 			return result;
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return false;
-		#endif
-	}
+#endif
+        }
 
-	public static bool launchAppWithParams(string bundleIdentifier, string parameterString)
-	{
-		#if UNITY_EDITOR
-			return false;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static bool launchAppWithParams(string bundleIdentifier, string parameterString)
+        {
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_IOS || UNITY_IPHONE
 			bool result = __bfgAppManager__launchAppWithParams(bundleIdentifier, parameterString);
 
-			#if UNITY_DEBUG
+#if UNITY_DEBUG
 				Debug.Log("bfgAppManager.__bfgAppManager__launchAppWithParams(" + bundleIdentifier + ", " + parameterString + ") returned " + result);
-			#endif
+#endif
 
 			return result;
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return false;
-		#endif
-	}
+#endif
+        }
 
-	public static bool isAppInstalled(string bundleIdentifier)
-	{
-		#if UNITY_EDITOR
-			return false;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static bool isAppInstalled(string bundleIdentifier)
+        {
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_IOS || UNITY_IPHONE
 			return __bfgAppManager__isAppInstalled(bundleIdentifier);
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return false;
-		#endif
-	}
+#endif
+        }
 
-	public static void launchStoreWithApp(string appID)
-	{
-		#if UNITY_EDITOR
-			return;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static void launchStoreWithApp(string appID)
+        {
+#if UNITY_EDITOR
+            return;
+#elif UNITY_IOS || UNITY_IPHONE
 			__bfgAppManager__launchStoreWithApp(appID);
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
 
-	public static bool isBigFishGamesAppInstalled()
-	{
-		#if UNITY_EDITOR
-			return false;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static bool isBigFishGamesAppInstalled()
+        {
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_IOS || UNITY_IPHONE
 			return __bfgAppManager__isBigFishGamesAppInstalled();
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return false;
-		#endif
-	}
+#endif
+        }
 
-	public static void launchStoreWithBigFishGamesApp()
-	{
-		#if UNITY_EDITOR
-			return;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static void launchStoreWithBigFishGamesApp()
+        {
+#if UNITY_EDITOR
+            return;
+#elif UNITY_IOS || UNITY_IPHONE
 			__bfgAppManager__launchStoreWithBigFishGamesApp();
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
 
-	public static bool launchOrInstallBigFishGamesApp()
-	{
-		#if UNITY_EDITOR
-			return false;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static bool launchOrInstallBigFishGamesApp()
+        {
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_IOS || UNITY_IPHONE
 			return __bfgAppManager__launchOrInstallBigFishGamesApp();
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return false;
-		#endif
-	}
+#endif
+        }
 
-	public static bool launchBigFishGamesAppStrategyGuideWithWrappingID(string wrappingID)
-	{
-		#if UNITY_EDITOR
-			return false;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static bool launchBigFishGamesAppStrategyGuideWithWrappingID(string wrappingID)
+        {
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_IOS || UNITY_IPHONE
 			return __bfgAppManager__launchBigFishGamesAppStrategyGuideWithWrappingID(wrappingID);
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return false;
-		#endif
-	}
+#endif
+        }
 
-	public static bool launchBigFishGamesAppStrategyGuideWithWrappingIDChapterIndexPageIndex(string wrappingID, uint chapterIndex, uint pageIndex)
-	{
-		#if UNITY_EDITOR
-			return false;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static bool launchBigFishGamesAppStrategyGuideWithWrappingIDChapterIndexPageIndex(string wrappingID, uint chapterIndex, uint pageIndex)
+        {
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_IOS || UNITY_IPHONE
 			return __bfgAppManager__launchBigFishGamesAppStrategyGuideWithWrappingIDChapterIndexPageIndex(wrappingID, chapterIndex, pageIndex);
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return false;
-		#endif
-	}
+#endif
+        }
 
-	public static bool openReferralURL(string url)
-	{
-		#if UNITY_EDITOR
-			return false;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static bool openReferralURL(string url)
+        {
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_IOS || UNITY_IPHONE
 			return __bfgAppManager__openReferralURL(url);
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return false;
-		#endif
-	}
+#endif
+        }
 
-	public static void cancelCurrentReferral()
-	{
-		#if UNITY_EDITOR
-			return;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static void cancelCurrentReferral()
+        {
+#if UNITY_EDITOR
+            return;
+#elif UNITY_IOS || UNITY_IPHONE
 			__bfgAppManager__cancelCurrentReferral();
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
 
-    // Big Fish iOS SDK 5.10
+        // Big Fish iOS SDK 5.10
 
-	public static bool launchBigFishGamesAppWithForum()
-	{
-		#if UNITY_EDITOR
-			return false;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static bool launchBigFishGamesAppWithForum()
+        {
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_IOS || UNITY_IPHONE
 			return __bfgAppManager__launchBigFishGamesAppWithForum();
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return false;
-		#endif
-	}
+#endif
+        }
 
-	public static bool launchBigFishGamesAppWithForum(string id)
-	{
-		#if UNITY_EDITOR
-			return false;
-		#elif UNITY_IOS || UNITY_IPHONE
+        public static bool launchBigFishGamesAppWithForum(string id)
+        {
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_IOS || UNITY_IPHONE
 			return __bfgAppManager__launchBigFishGamesAppWithForumId(id);
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			throw new NotImplementedException();
-		#else
+#else
 			return false;
-		#endif
-	}
+#endif
+        }
+    }
 }

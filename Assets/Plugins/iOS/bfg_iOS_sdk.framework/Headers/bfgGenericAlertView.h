@@ -14,6 +14,7 @@
 
 #import <UIKit/UIKit.h>
 
+/// \deprecated Deprecated as of 6.9.  This feature will continue to function but will be replaced in a future SDK release.
 __deprecated_msg("This feature will continue to function for SDK 6.9 but will be replaced in the next SDK release.")
 @interface bfgGenericAlertView : NSObject
 

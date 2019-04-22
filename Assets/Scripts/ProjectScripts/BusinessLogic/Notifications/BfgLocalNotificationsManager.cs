@@ -2,6 +2,7 @@ using Debug = IW.Logger;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using BFGSDK;
 
 public class BfgLocalNotificationsManagerBase : LocalNotificationsManagerBase
 {
