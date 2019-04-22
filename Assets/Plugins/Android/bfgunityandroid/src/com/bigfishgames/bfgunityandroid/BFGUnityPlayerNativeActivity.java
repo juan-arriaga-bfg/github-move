@@ -44,6 +44,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.bigfishgames.bfgunityandroid.custom.ResourcesHelper;
+import com.bigfishgames.bfgunityandroid.custom.SplashDialog;
+
 public class BFGUnityPlayerNativeActivity extends bfgActivity {
 
     protected UnityPlayer mUnityPlayer = null;
