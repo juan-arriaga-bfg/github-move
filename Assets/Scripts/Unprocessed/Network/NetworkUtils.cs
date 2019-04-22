@@ -4,6 +4,7 @@ using Backend;
 using BestHTTP;
 using BestHTTP.Forms;
 using UnityEngine;
+using BFGSDK;
 
 public struct BackendSettings
 {
