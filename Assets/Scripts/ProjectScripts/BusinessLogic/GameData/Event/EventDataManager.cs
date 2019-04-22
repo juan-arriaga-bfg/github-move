@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<EventStepyDef>>
+public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<EventStepDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
     
-    public List<EventStepyDef> Defs;
+    public List<EventStepDef> Defs;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -19,11 +19,11 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
 
     public void Reload()
     {
-        Defs = new List<EventStepyDef>();
-        LoadData(new ResourceConfigDataMapper<List<EventStepyDef>>("configs/event.data", NSConfigsSettings.Instance.IsUseEncryption));
+        Defs = new List<EventStepDef>();
+        LoadData(new ResourceConfigDataMapper<List<EventStepDef>>("configs/event.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 	
-    public void LoadData(IDataMapper<List<EventStepyDef>> dataMapper)
+    public void LoadData(IDataMapper<List<EventStepDef>> dataMapper)
     {
         dataMapper.LoadData((data, error) =>
         {

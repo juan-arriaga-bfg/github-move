@@ -29,6 +29,7 @@
         profile.RegisterComponent(new BaseInformationSaveComponent());
         profile.RegisterComponent(new FogSaveComponent());
         profile.RegisterComponent(new AirShipSaveComponent());
+        profile.RegisterComponent(new EventSaveComponent());
     }
     
     public void SetDefaultSettings(UserProfile profile)
