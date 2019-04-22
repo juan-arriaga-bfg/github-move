@@ -702,8 +702,6 @@ public static partial class PieceType
   
 #region Chests
     
-    
-    
     public static readonly PieceTypeDef CH1_A   = new PieceTypeDef{Id = 5000101, Abbreviations = new List<string>{ "CH1_A" },   Branch = PieceTypeBranch.A, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef CH2_A   = new PieceTypeDef{Id = 5000102, Abbreviations = new List<string>{ "CH2_A" },   Branch = PieceTypeBranch.A, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef CH3_A   = new PieceTypeDef{Id = 5000103, Abbreviations = new List<string>{ "CH3_A" },   Branch = PieceTypeBranch.A, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
