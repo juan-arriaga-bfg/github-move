@@ -32,15 +32,15 @@ public class ConfigsGoogleLoader
     [MenuItem("Tools/Configs/Update configs with Google (force)", false, 50)]
     public static void ForceUpdateWithGoogleClick()
     {
-        UpdateWithGoogle(true);
         ConfigManager.Create();
+        UpdateWithGoogle(true);
     }
 
     [MenuItem("Tools/Configs/Update configs with Google", false, 50)]
     public static void UpdateWithGoogleClick()
     {
-        UpdateWithGoogle(false);
         ConfigManager.Create();
+        UpdateWithGoogle(false);
     }
 
     public static void UpdateTarget(List<string> configNames, bool forceUpdate)
