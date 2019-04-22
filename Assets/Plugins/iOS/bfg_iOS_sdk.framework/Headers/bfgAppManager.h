@@ -146,6 +146,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// \updated 5.9
 ///
 /// \param bundleIdentifier Bundle identifier of app to check. Example: \@"com.bigfishgames.gamefinder"
+/// \param error Will return an error if the target app is not whitelisted. See LSApplicationQueriesSchemes
 ///
 /// \retval YES if the app is installed.
 /// \retval NO if the app is not installed.

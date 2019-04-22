@@ -195,7 +195,7 @@ FOUNDATION_EXPORT NSString * const kMGCUpsellBackgroundImage;
 /// \param key The key for the value to be retrieved.
 /// \param type The desired object type of the retrieved value.
 ///
-/// \return The value from settings, or nil if the object type of the retreived value and
+/// \return The value from settings, or nil if the object type of the  value and
 /// passed in type parameter do not match.
 ///
 + (id)get:(NSString*)key ofType:(Class)type;
@@ -208,9 +208,9 @@ FOUNDATION_EXPORT NSString * const kMGCUpsellBackgroundImage;
 /// \param key The key for the value to be retrieved.
 /// \param type The desired object type of the retrieved value.
 /// \param defaultValue The default value to be returned when no value is set for the key
-/// or the retreived values' object type does not match the passed in type parameter.
+/// or the retrieved values' object type does not match the passed in type parameter.
 ///
-/// \return The value from settings, or defaultValue if either the object type of the retreived
+/// \return The value from settings, or defaultValue if either the object type of the retrieved
 /// value and type parameter do not match or if no value is set for the key.
 ///
 /// \since 6.0
@@ -225,10 +225,10 @@ FOUNDATION_EXPORT NSString * const kMGCUpsellBackgroundImage;
 /// \param key The key for the value to be retrieved.
 /// \param type The desired object type of the retrieved value.
 /// \param defaultValue The default value to be returned when no value is set for the key
-/// or the retreived value's object type does not match the passed in type parameter.
+/// or the retrieved value's object type does not match the passed in type parameter.
 /// \param storageType The medium on which to persist the values (plist, local keychain, etc.).
 ///
-/// \return The value from settings, or defaultValue if either the object type of the retreived
+/// \return The value from settings, or defaultValue if either the object type of the retrieved
 /// value and type parameter do not match or if no value is set for the key.
 ///
 /// \since 6.0
@@ -243,7 +243,7 @@ FOUNDATION_EXPORT NSString * const kMGCUpsellBackgroundImage;
 /// \param type The desired object type of the retrieved value.
 /// \param storageType The medium on which to persist the values (plist, local keychain, etc.).
 ///
-/// \return The value from settings, or nil if the object type of the retreived value and
+/// \return The value from settings, or nil if the object type of the retrieved value and
 /// the passed in type parameter do not match.
 ///
 /// \since 6.0
@@ -254,13 +254,13 @@ FOUNDATION_EXPORT NSString * const kMGCUpsellBackgroundImage;
 ///
 /// \details Gets a settings value for a key from the requested store, checks the
 /// type of the retrieved value against the passed in type parameter, and allows for a
-/// default value if the key does not exist in the store.  In additin, this method sets
+/// default value if the key does not exist in the store.  In addition, this method sets
 /// the passed in NSError** when there is a type mismatch.
 ///
 /// \param key The key for the value to be retrieved.
 /// \param type The desired object type of the retrieved value.
-/// \param defaultValue the default value to be returned when no value is set for the key
-/// or the retreived value's object type does not match the passed in type parameter.
+/// \param defaultValue The default value to be returned when no value is set for the key,
+/// or the retrieved value's object type does not match the passed in type parameter.
 /// \param storageType The medium on which to persist the value.
 /// \param error The NSError object that will be populated if the a type mismatch is
 /// detected.
@@ -271,7 +271,7 @@ FOUNDATION_EXPORT NSString * const kMGCUpsellBackgroundImage;
 /// \param key The key used to write and retreive the value from the persisted store.
 /// \return The file path for the resource or nil if the resouce cannot be found.
 ///
-/// \sincd 6.6
+/// \since 6.6
 + (NSString*)filePathforDiskMappedResource:(NSString*)key;
 
 @end
@@ -399,4 +399,3 @@ FOUNDATION_EXPORT NSString * const kMGCUpsellBackgroundImage;
 
 /// \since 6.9
 #define BFG_SETTING_APPSFLYER                           @"appsflyer"
-
