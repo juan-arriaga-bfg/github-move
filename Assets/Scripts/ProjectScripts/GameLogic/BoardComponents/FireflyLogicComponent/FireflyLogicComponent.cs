@@ -86,7 +86,10 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, ID
 		bottom = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, 0);
 		right = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, context.Context.BoardDef.Height + 5);
 
-		ResetLogic(FireflyLogicType.Normal);
+		ResetLogic(GameDataService.Current.EventManager.IsStarted(EventName.OrderSoftLaunch) ? FireflyLogicType.Event : FireflyLogicType.Normal);
+		
+		GameDataService.Current.EventManager.OnStart += OnStartEvent;
+		GameDataService.Current.EventManager.OnStop += OnStopEvent;
 	}
 	
 	public override void OnUnRegisterEntity(ECSEntity entity)
@@ -94,6 +97,9 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, ID
 		UIService.Get.OnShowWindowEvent -= OnShowWindow;
 		UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
 		ShopService.Current.OnPurchasedEvent -= UpdateFirefly;
+		
+		GameDataService.Current.EventManager.OnStart -= OnStartEvent;
+		GameDataService.Current.EventManager.OnStop -= OnStopEvent;
 
 		restartTimer.OnComplete = null;
 	}
@@ -106,6 +112,20 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, ID
 	public void ResetSession()
 	{
 		restartTimer.Reset();
+	}
+
+	private void OnStartEvent(EventName name)
+	{
+		if(name != EventName.OrderSoftLaunch) return;
+		
+		ResetLogic(FireflyLogicType.Event);
+	}
+
+	private void OnStopEvent(EventName name)
+	{
+		if(name != EventName.OrderSoftLaunch) return;
+		
+		ResetLogic(FireflyLogicType.Normal);
 	}
 
 	public void ResetLogic(FireflyLogicType logicType)
