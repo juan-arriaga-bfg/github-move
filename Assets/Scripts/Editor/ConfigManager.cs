@@ -216,12 +216,12 @@ public class ConfigManager: CustomEditorBase
 
     private void UpdateConfigsForce()
     {
-        ConfigsGoogleLoader.ForceUpdateWithGoogleClick();
+        ConfigsGoogleLoader.UpdateWithGoogle(true);
     }
 
     private void UpdateConfigsDefault()
     {
-        ConfigsGoogleLoader.UpdateWithGoogleClick();
+        ConfigsGoogleLoader.UpdateWithGoogle(false);
     }
 
     private void UpdateTarget(string configName)
