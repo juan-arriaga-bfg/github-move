@@ -2,6 +2,7 @@ using Debug = IW.Logger;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using BFGSDK;
 using UnityEngine;
 
 public class AmazonPurchaseController : APurchaseController

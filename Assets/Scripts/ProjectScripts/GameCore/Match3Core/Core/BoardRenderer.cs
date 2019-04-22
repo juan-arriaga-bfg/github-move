@@ -1604,7 +1604,7 @@ public partial class BoardRenderer : ECSEntity
         }
 #if DEBUG
         sw.Stop();
-        Debug.LogFormat($"[BoardRenderer] => CreateBorders: Done in {sw.ElapsedMilliseconds}");
+        Debug.LogFormat($"[BoardRenderer] => CreateBorders: Done in {sw.ElapsedMilliseconds}ms");
 #endif
     }
 }

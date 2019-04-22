@@ -2,28 +2,32 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class bfgDiskUtils {
+namespace BFGSDK
+{
+    public class bfgDiskUtils
+    {
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
         // Nothing to see here.
-    #elif UNITY_IOS || UNITY_IPHONE
+#elif UNITY_IOS || UNITY_IPHONE
         [DllImport("__Internal")]
         private static extern long __bfgDiskUtils__availableDiskSpace();
-    #endif
+#endif
 
-    public static long availableDiskSpace()
-    {
-        long availableSpace;
-        #if UNITY_EDITOR
+        public static long availableDiskSpace()
+        {
+            long availableSpace;
+#if UNITY_EDITOR
             availableSpace = 0;
-        #elif UNITY_IOS || UNITY_IPHONE
+#elif UNITY_IOS || UNITY_IPHONE
             availableSpace = __bfgDiskUtils__availableDiskSpace();
-        #elif UNITY_ANDROID                           
+#elif UNITY_ANDROID
             using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgDiskUtilsUnityWrapper")) {availableSpace = ajc.CallStatic<long>("availableDiskSpace");}
-        #else
+#else
             availableSpace = 0;
-        #endif
-        return availableSpace;
-    }
+#endif
+            return availableSpace;
+        }
 
+    }
 }

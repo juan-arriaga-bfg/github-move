@@ -29,10 +29,33 @@ public class CustomEditorBase:EditorWindow
         }
         
         scrollValues[id] = EditorGUILayout.BeginScrollView(scrollValues[id]);
+        body?.Invoke();
+        EditorGUILayout.EndScrollView();
+    }
+
+    protected void HorizontalArea(Action body)
+    {   
+        EditorGUILayout.BeginHorizontal();
         EditorGUI.indentLevel++;
         body?.Invoke();
         EditorGUI.indentLevel--;
-        EditorGUILayout.EndScrollView();
+        EditorGUILayout.EndHorizontal();
+    }
+
+    protected void VerticalArea(Action body)
+    {
+        EditorGUILayout.BeginVertical();
+        EditorGUI.indentLevel++;
+        body?.Invoke();
+        EditorGUI.indentLevel--;
+        EditorGUILayout.EndVertical();
+    }
+
+    protected void BeginDisableArea(bool disable, Action body)
+    {
+        EditorGUI.BeginDisabledGroup(disable);
+        body?.Invoke();
+        EditorGUI.EndDisabledGroup();
     }
 
     protected void ToggleGroup([NotNull] object id, out bool currentStatus, string label, Action body)
