@@ -123,6 +123,7 @@ public class ConfigManager: CustomEditorBase
         else
         {
             EditorUtility.DisplayProgressBar(title, $"Download: {asyncCountNow}/{asyncCountAll}", asyncCountNow/(float)asyncCountAll);
+            NSConfigEncription.EncryptConfigs();
         }
     }
 
@@ -145,9 +146,8 @@ public class ConfigManager: CustomEditorBase
             ConfigElementToggle(configName);
 
             EditorGUILayout.TextField(configName);
-            ConfigStatusLabel(configName);
-
             Button("Update", () => UpdateTarget(configName));
+            ConfigStatusLabel(configName);
         });
     }
 
