@@ -81,6 +81,7 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<ManaPieceBuilder>(PieceType.Mana1.Id, PieceType.Mana6.Id, dict);
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Soft1.Id, PieceType.Soft8.Id, dict);
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Hard1.Id, PieceType.Hard6.Id, dict);
+        dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Token1.Id, PieceType.Token3.Id, dict);
         
         dict.Add(PieceType.CH_Free.Id, new ChestPieceBuilder());
         dict.Add(PieceType.CH_NPC.Id, new ChestPieceBuilder());

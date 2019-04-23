@@ -772,6 +772,10 @@ public static partial class PieceType
     public static readonly PieceTypeDef Soft7 = new PieceTypeDef{Id = 7200107, Abbreviations = new List<string>{ "Soft7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     public static readonly PieceTypeDef Soft8 = new PieceTypeDef{Id = 7200108, Abbreviations = new List<string>{ "Soft8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};    
     
+    public static readonly PieceTypeDef Token1 = new PieceTypeDef{Id = 7500101, Abbreviations = new List<string>{ "Token1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Token2 = new PieceTypeDef{Id = 7500102, Abbreviations = new List<string>{ "Token2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Token3 = new PieceTypeDef{Id = 7500103, Abbreviations = new List<string>{ "Token3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    
 #endregion
 
 #region Boosters
