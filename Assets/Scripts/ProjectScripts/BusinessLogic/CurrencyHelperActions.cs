@@ -116,7 +116,7 @@ public static partial class CurrencyHelper
                 break;
             }
             
-            board.BoardLogic.AirShipLogic.Spawn(payload);       
+            board.BoardLogic.AirShipLogic.Add(payload);       
         }
         
         board.ActionExecutor.PerformAction(new SpawnRewardPiecesAction
