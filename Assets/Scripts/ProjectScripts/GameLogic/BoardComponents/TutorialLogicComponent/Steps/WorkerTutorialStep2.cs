@@ -30,7 +30,7 @@ public class WorkerTutorialStep2 : LoopFingerTutorialStep
     {
         if (IsPerform) return;
 
-        completeCondition.Amount = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(PieceType.Boost_WR.Id).Count - 1;
+        completeCondition.Amount = Context.Context.BoardLogic.PositionsCache.GetUnlockedPiecePositionsByType(PieceType.Boost_WR.Id).Count - 1;
         
         base.Perform();
     }
