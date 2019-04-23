@@ -1,7 +1,7 @@
 ﻿[
   {
     "Uid": "PR_A4",
-    "Delay": 9000,
+    "Delay": 10800,
     "Limit": 3,
     "StepReward": {
       "Currency": "Experience",
@@ -10,13 +10,13 @@
     "ReproductionId": "PR_A5",
     "ReproductionRange": {
       "Min": 4,
-      "Max": 6
+      "Max": 5
     },
     "Obstacle": "OB_PR_A"
   },
   {
     "Uid": "PR_B4",
-    "Delay": 14400,
+    "Delay": 9000,
     "Limit": 3,
     "StepReward": {
       "Currency": "Experience",
@@ -24,14 +24,14 @@
     },
     "ReproductionId": "PR_B5",
     "ReproductionRange": {
-      "Min": 4,
-      "Max": 6
+      "Min": 3,
+      "Max": 5
     },
     "Obstacle": "OB_PR_B"
   },
   {
     "Uid": "PR_C4",
-    "Delay": 10800,
+    "Delay": 14400,
     "Limit": 3,
     "StepReward": {
       "Currency": "Experience",
@@ -46,7 +46,7 @@
   },
   {
     "Uid": "PR_D4",
-    "Delay": 14400,
+    "Delay": 16800,
     "Limit": 3,
     "StepReward": {
       "Currency": "Experience",
@@ -54,7 +54,7 @@
     },
     "ReproductionId": "PR_D5",
     "ReproductionRange": {
-      "Min": 4,
+      "Min": 5,
       "Max": 6
     },
     "Obstacle": "OB_PR_D"
@@ -84,7 +84,7 @@
     },
     "ReproductionId": "PR_F5",
     "ReproductionRange": {
-      "Min": 4,
+      "Min": 5,
       "Max": 6
     },
     "Obstacle": "OB_PR_F"
