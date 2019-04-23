@@ -82,6 +82,11 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
     
     public void RegisterNotifier(Notifier notifier)
     {
+        if (notifier.Timer == null)
+        {
+            Debug.LogWarning($"[LocalNotificationService] => RegisterNotifier: timer == null");
+            return;
+        }
         Debug.Log($"[LocalNotificationService] => Register(NotifyType.Id:{notifier.NotifyType.Id})");
         notifiers.Add(notifier);
     }
@@ -154,7 +159,7 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
         foreach (var type in notifierTypes)
         {
             var selector = type.NotifySelector;
-            var notifierList = this.notifiers.Where(elem => elem.NotifyType == type && elem.Timer.IsExecuteable()).ToList();
+            var notifierList = notifiers.Where(elem => elem.NotifyType == type && elem.Timer.IsExecuteable()).ToList();
             if (selector != null)
             {
                 notifierList = selector(notifierList);
