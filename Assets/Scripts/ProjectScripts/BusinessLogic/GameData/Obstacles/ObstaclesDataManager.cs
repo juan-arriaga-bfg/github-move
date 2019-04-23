@@ -96,7 +96,7 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
         
         reward = character.GetNextDict(def.CharactersAmount.Range(), reward);
         reward = extras.GetNextDict(def.ExtrasAmount.Range(), reward);
-        reward = GetOtherPieces(def.OtherAmount.Range(), reward);
+        if(def.OtherAmount != null) reward = GetOtherPieces(def.OtherAmount.Range(), reward);
         reward = sequence.GetNextDict(def.PieceAmount, reward);
         
         return reward;
