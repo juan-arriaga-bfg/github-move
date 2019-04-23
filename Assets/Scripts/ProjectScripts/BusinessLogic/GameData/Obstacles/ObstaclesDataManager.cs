@@ -110,7 +110,7 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
         var positionsCache = board.BoardLogic.PositionsCache;
         var definition = board.BoardLogic.MatchDefinition;
         
-        var idsMine = PieceType.GetIdsByFilter(PieceTypeFilter.Mine, PieceTypeFilter.Fake);
+        var idsMine = PieceType.GetIdsByFilter(PieceTypeFilter.Mine);
         var idsObstacle = PieceType.GetIdsByFilter(PieceTypeFilter.Obstacle | PieceTypeFilter.Tree);
         var typeBranches = PieceTypeBranch.Default;
 
