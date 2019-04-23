@@ -41,6 +41,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.AddRange(GetPieceIds(PieceType.Mana1.Id, PieceType.Mana5.Id));
                 ids.AddRange(GetPieceIds(PieceType.Soft1.Id, PieceType.Soft8.Id));
                 ids.AddRange(GetPieceIds(PieceType.Hard1.Id, PieceType.Hard6.Id));
+                ids.AddRange(GetPieceIds(PieceType.Token1.Id, PieceType.Token3.Id));
                 break;
             case "Mines":
                 ids.AddRange(GetPieceIds(PieceType.MN_A.Id, PieceType.MN_A3.Id));
