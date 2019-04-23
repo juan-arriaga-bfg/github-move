@@ -382,13 +382,6 @@ public class DevTools : UIContainerElementViewController
         new HighlightTaskPointToEnergyPlusButton().Highlight(null);
     }
 
-    public static void UpdateFogSectorsDebug()    
-    {
-        var view = new FogSectorsView();
-        view.Init(BoardService.Current.FirstBoard.RendererContext);
-        view.UpdateFogSectorsMesh();
-    }
-
     public void OnDebug2Click()
     {
         Debug.Log("OnDebug2Click");

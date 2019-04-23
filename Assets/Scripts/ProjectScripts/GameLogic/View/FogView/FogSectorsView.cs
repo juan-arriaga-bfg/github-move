@@ -86,4 +86,11 @@ public class FogSectorsView// : BoardElementView
 
         newRenderer.material.DOFade(1, 0.5f);
     }
+
+    public static void Rebuild(BoardRenderer context)
+    {
+        var view = new FogSectorsView();
+        view.Init(context);
+        view.UpdateFogSectorsMesh();
+    }
 }
