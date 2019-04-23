@@ -1105,6 +1105,57 @@
     ]
   },
   {
+    "Uid": "Token1",
+    "SpawnResources": {
+      "Currency": "Token",
+      "Amount": 1
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Token2",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Token",
+      "Amount": 3
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 7
+      }
+    ]
+  },
+  {
+    "Uid": "Token3",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Token",
+      "Amount": 10
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 9
+      }
+    ]
+  },
+  {
     "Uid": "CH_Free",
     "UnlockBonus": [
       {
