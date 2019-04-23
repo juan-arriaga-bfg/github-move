@@ -134,7 +134,7 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
             typeBranches = typeBranches.Remove(def.Branch);
         }
         
-        var idsMonument = PieceType.GetIdsByBranch(typeBranches, PieceTypeFilter.Multicellular, PieceTypeFilter.Fake | PieceTypeFilter.Mine);
+        var idsMonument = PieceType.GetIdsByFilterAndBranch(PieceTypeFilter.Multicellular, PieceTypeFilter.Fake | PieceTypeFilter.Mine, typeBranches);
 
         foreach (var id in idsMonument)
         {
@@ -145,7 +145,7 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
             typeBranches = typeBranches.Remove(def.Branch);
         }
 
-        var idsResult = PieceType.GetIdsByBranch(typeBranches, PieceTypeFilter.Simple | PieceTypeFilter.Removable);
+        var idsResult = PieceType.GetIdsByFilterAndBranch(PieceTypeFilter.Simple | PieceTypeFilter.Removable, typeBranches);
 
         if (idsResult.Count == 0) return result;
         

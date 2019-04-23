@@ -310,7 +310,6 @@ public class ConfigsGoogleLoader
     private static void OnLoadComplete()
     {
         Debug.LogWarning("Configs load data complete!");
-        NSConfigEncription.EncryptConfigs();
         ConfigManager.AsyncProgressEnd();
     }
     

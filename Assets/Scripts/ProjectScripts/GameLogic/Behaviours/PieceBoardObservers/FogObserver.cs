@@ -273,7 +273,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             OnComplete = () =>
             {
                 ProfileService.Instance.Manager.UploadCurrentProfile(false);
-                DevTools.UpdateFogSectorsDebug();
+                FogSectorsView.Rebuild(Context.Context.RendererContext);
             }
         });
     }

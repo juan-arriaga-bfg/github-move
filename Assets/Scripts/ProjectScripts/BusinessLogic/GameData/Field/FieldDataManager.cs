@@ -19,6 +19,7 @@ public class FieldDataManager : IECSComponent, IDataManager
     public int LayoutW;
     public int LayoutH;
     public int[] LayoutData;
+    public List<BoardPosition> LockedCells;
 	
 	public void OnRegisterEntity(ECSEntity entity)
 	{
@@ -60,6 +61,8 @@ public class FieldDataManager : IECSComponent, IDataManager
         {
             if (string.IsNullOrEmpty(error))
             {
+                LockedCells = new List<BoardPosition>();
+                
                 LayoutW = data.Width;
                 LayoutH = data.Height;
 
@@ -74,9 +77,15 @@ public class FieldDataManager : IECSComponent, IDataManager
                 }
                 
                 LayoutData = new int[size];
-                for (int i = 0; i < idsStr.Length; i++)
+                int len = idsStr.Length;
+                for (int i = 0; i < len; i++)
                 {
-                    LayoutData[i] = int.Parse(idsStr[i]);
+                    // Working code to get x/y coords if needed
+                    // int x = i / LayoutW;
+                    // int y = i % LayoutW;
+                    
+                    var tileId = int.Parse(idsStr[i]);
+                    LayoutData[i] = tileId;
                 }
             }
             else
@@ -88,6 +97,12 @@ public class FieldDataManager : IECSComponent, IDataManager
 
     public int GetTileId(int x, int y)
     {
+        int index = x * LayoutW + y;
+        if (index < 0 || index >= LayoutData.Length)
+        {
+            return -1;
+        }
+        
         return LayoutData[x * LayoutW + y];
     }
 }
