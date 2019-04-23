@@ -1313,8 +1313,13 @@ public partial class BoardRenderer : ECSEntity
         var sw = new Stopwatch();
         sw.Start();
 #endif
+        // int seed = UnityEngine.Random.Range(0, 10000);
+        // IW.Logger.Log($"Seed: {seed}");
+
+        int seed = 8322;
         
-        System.Random random = new System.Random(100);
+        System.Random random = new System.Random(seed);
+        
         
         var boardDef = context.BoardDef;
         
