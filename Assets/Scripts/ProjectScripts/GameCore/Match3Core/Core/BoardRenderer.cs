@@ -1488,7 +1488,11 @@ public partial class BoardRenderer : ECSEntity
                         CreateBorder(x, y, R.BorderTop0);
                     }
                 }
-                
+                else if (!meta.neighborTL && meta.neighborT && meta.floorDiffT == -1 && meta.neighborTR && meta.floorDiffTR == 0)
+                {
+                    CreateBorder(x, y, R.BorderTop0);
+                }
+ 
                 if (!meta.neighborR)
                 {
                     if (meta.neighborT && meta.floorDiffT == 1
@@ -1554,7 +1558,7 @@ public partial class BoardRenderer : ECSEntity
                     string id = "BorderTopRightOuterCorner" + Mathf.Abs(meta.floorDiffTR);                    
                     CreateBorder(x, y, id);
                 }
-                if (!meta.neighborT && !meta.neighborL)
+                if ((!meta.neighborT || meta.neighborT && meta.floorDiffT < 0) && !meta.neighborL)
                 {
                     string id = "BorderTopLeftOuterCorner" + Mathf.Abs(meta.floorDiffTL); 
                     CreateBorder(x, y, id);
@@ -1564,7 +1568,7 @@ public partial class BoardRenderer : ECSEntity
                     string id = "BorderBottomRightOuterCorner" + Mathf.Abs(meta.floorDiffBR); 
                     CreateBorder(x, y, id);
                 }
-                if (!meta.neighborB && !meta.neighborL)
+                if ((!meta.neighborB || meta.neighborB && meta.floorDiffB < 0) && !meta.neighborL)
                 {
                     string id = "BorderBottomLeftOuterCorner" + Mathf.Abs(meta.floorDiffBL); 
                     CreateBorder(x, y, id);
@@ -1577,7 +1581,7 @@ public partial class BoardRenderer : ECSEntity
                     string id = "BorderBottomLeftInnerCorner" + Mathf.Abs(meta.floorDiffTR);                    
                     CreateBorder(x, y, id);
                 }
-                if (meta.neighborT && meta.neighborL && !meta.neighborTL && meta.floorDiffT == meta.floorDiffL)
+                if (meta.neighborT && meta.neighborL && (!meta.neighborTL || meta.neighborTL && meta.floorDiffTL < 0) && meta.floorDiffT == meta.floorDiffL)
                 {
                     string id = "BorderBottomRightInnerCorner" + Mathf.Abs(meta.floorDiffTL); 
                     CreateBorder(x, y, id);
@@ -1599,6 +1603,12 @@ public partial class BoardRenderer : ECSEntity
                 {                  
                     CreateBorder(x, y, R.BorderTopRightIntersectionCorner0);
                 }
+                
+                if (!meta.neighborL && meta.neighborB && !meta.neighborBL && meta.floorDiffB == -1 && meta.floorDiffBL == -1 && meta.floorDiffL == -1)
+                {                  
+                    CreateBorder(x, y, R.BorderTopIntersectionCorner0);
+                }
+
 #endregion
             }
         }
