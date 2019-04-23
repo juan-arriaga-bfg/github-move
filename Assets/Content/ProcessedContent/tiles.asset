@@ -83,12 +83,14 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 359385040a816c64b94c9d7a1bf52384, type: 3}
     - {fileID: 21300000, guid: 643ae8ebc67e97f4bb6efc2a81a44207, type: 3}
     - {fileID: 21300000, guid: f7d40aaec317b5a4d9caadc01e19653b, type: 3}
+    - {fileID: 21300000, guid: 2d5a34dde5d883d45a9f93e415ea817e, type: 3}
+    - {fileID: 21300000, guid: 784ca37d49362af499d9af85f35e25a3, type: 3}
     - {fileID: 21300000, guid: 0f2ef7201aa6de049ad50cae153727f3, type: 3}
     - {fileID: 21300000, guid: 953e2547146681a4bb2d4a191f0cca06, type: 3}
     - {fileID: 21300000, guid: f0f238cf0d568ba42a64911d7de328d1, type: 3}
     - {fileID: 21300000, guid: ff996768a17c809479f54c506d7b80d0, type: 3}
     - {fileID: 21300000, guid: 7241819afe16a0f4e9203487896ec796, type: 3}
-    totalSpriteSurfaceArea: 536020
+    totalSpriteSurfaceArea: 558108
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -143,7 +145,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: da3b7b0d054fb9a4888d67532a4fdabc, type: 3}
   - {fileID: 21300000, guid: ac782c3d195b99046aa79130ccd96cce, type: 3}
   - {fileID: 21300000, guid: 80e63f6def4c6d1498e47015c618407e, type: 3}
+  - {fileID: 21300000, guid: 784ca37d49362af499d9af85f35e25a3, type: 3}
   - {fileID: 21300000, guid: 9a424ead46649d847b3df8f23301aa85, type: 3}
+  - {fileID: 21300000, guid: 2d5a34dde5d883d45a9f93e415ea817e, type: 3}
   - {fileID: 21300000, guid: e888d13e0fe47ad47ad0a1be1fdab9e2, type: 3}
   - {fileID: 21300000, guid: f7d40aaec317b5a4d9caadc01e19653b, type: 3}
   - {fileID: 21300000, guid: 766c8d5fe1410fc45ba781598d60ed10, type: 3}
@@ -202,7 +206,9 @@ SpriteAtlas:
   - BorderBottomRightOuterCorner2
   - map_mushroom1
   - BorderTopLeftInnerCorner1
+  - tile_foliage_2
   - BorderLeft1Hole
+  - tile_foliage_1
   - wall_decoration_liana
   - tile_clay_2
   - BorderBottom0

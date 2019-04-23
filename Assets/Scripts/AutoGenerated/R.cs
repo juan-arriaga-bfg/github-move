@@ -609,4 +609,8 @@ public class R
      public const string BorderWallTopRight1_Addon_1 = "BorderWallTopRight1_Addon_1";
      public const string BorderWallTop1_Addon_3 = "BorderWallTop1_Addon_3";
      public const string BorderTopRightIntersectionCorner0 = "BorderTopRightIntersectionCorner0";
+     public const string Token1Piece = "Token1Piece";
+     public const string Token2Piece = "Token2Piece";
+     public const string Token3Piece = "Token3Piece";
+     public const string DestroyTokenCurrencyAnimation = "DestroyTokenCurrencyAnimation";
 }
