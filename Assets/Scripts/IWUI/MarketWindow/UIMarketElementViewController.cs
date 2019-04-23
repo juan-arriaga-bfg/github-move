@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BfgAnalytics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -138,7 +139,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 
 	private void OnClick()
 	{
-		if(isClick) return;
+		if (isClick) return;
 		
 		isClick = true;
 		
@@ -242,17 +243,19 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		var contentEntity = entity as UIMarketElementEntity;
 		var board = BoardService.Current.FirstBoard;
 		
-		if (board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceReward(contentEntity.Def.Reward.Amount, true, out var position) == false)
+		context.Controller.CloseCurrentWindow();
+		
+		var piecesReward = CurrencyHelper.FiltrationRewards(new List<CurrencyPair> {contentEntity.Def.Reward}, out _);
+		
+		if (board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceReward(piecesReward.Sum(pair => pair.Value), false, out var position) == false)
 		{
-			isClick = false;
-			contentEntity.Def.State = MarketItemState.Saved;
-			ChangeButtons();
+			contentEntity.Def.State = MarketItemState.Claimed;
+			BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Add(piecesReward);
 			return;
 		}
 
 		rewardPosition = position;
 		isReward = true;
-		context.Controller.CloseCurrentWindow();
 	}
 	
 	protected virtual int GetIndex()
