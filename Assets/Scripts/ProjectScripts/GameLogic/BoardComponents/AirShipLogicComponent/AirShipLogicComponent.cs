@@ -29,7 +29,7 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
 
         foreach (var item in save.Items)
         {
-            Add(item.Payload, false, item.Position);
+            Add(item.Payload, item.Position).AnimateIdle();
         }
     }
 
@@ -91,35 +91,30 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
         return ret;
     }
 
-    public AirShipView Spawn(Dictionary<int, int> payload)
+    public void SpawnAll()
     {
-        return Add(payload, true);
+        foreach (var ship in defs.Values)
+        {
+            if(ship.View.isShow) continue;
+            
+            ship.View.AnimateSpawn();
+        }
     }
     
-    private AirShipView Add(Dictionary<int, int> payload, bool animated, Vector2? position = null)
+    public AirShipView Add(Dictionary<int, int> payload, Vector2? position = null)
     {
         Vector3 pos = position ?? GetFreePlaceToSpawn();
 
         idCounter++;
         
-        AirShipView view = context.Context.RendererContext.CreateBoardElement<AirShipView>((int) ViewType.AirShip);
-        
+        var view = context.Context.RendererContext.CreateBoardElement<AirShipView>((int) ViewType.AirShip);
         var airShipDef = new AirShipDef {Id = idCounter, View = view, Payload = payload};
+        
         defs.Add(idCounter, airShipDef);
 
         view.Init(context.Context.RendererContext, airShipDef);
-        
         view.PlaceTo(pos);
-
-        if (animated)
-        {            
-            view.AnimateSpawn(); 
-        }
-        else
-        {
-            view.AnimateIdle();
-        }
-
+        
         return view;
     }
 

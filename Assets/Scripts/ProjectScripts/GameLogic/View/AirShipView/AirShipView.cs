@@ -8,6 +8,7 @@ public class AirShipView : BoardElementView
     [SerializeField] private Transform body;
     [SerializeField] private List<Transform> pieceAnchors;
     
+    public bool isShow;
     private bool isClick;
     private HintArrowView arrow;
 
@@ -19,6 +20,7 @@ public class AirShipView : BoardElementView
 
         Id = def.Id;
         
+        isShow = false;
         isClick = false;
 
         UpdatePayload(def);
@@ -185,6 +187,7 @@ public class AirShipView : BoardElementView
     public void PlaceTo(Vector2 position)
     {
         CachedTransform.position = position;
+        body.localScale = Vector3.zero;
     }
     
     public void OnClick()
@@ -210,9 +213,12 @@ public class AirShipView : BoardElementView
     public void AnimateIdle()
     {
         StopAnimation();
+
+        isShow = true;
+        body.localScale = Vector3.one;
         
         const float DIST = 0.25f;
-        float TIME = UnityEngine.Random.Range(1.8f, 2.2f);
+        var TIME = Random.Range(1.8f, 2.2f);
 
         var distFromZero = body.localPosition.y;
         var normalizedDistFromZero = distFromZero / DIST; 
