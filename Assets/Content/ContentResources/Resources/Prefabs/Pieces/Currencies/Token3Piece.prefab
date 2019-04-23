@@ -268,7 +268,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1924086398574114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e94db1dff9a4341a9922139f675b17, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a7f8f944ad444408748921dcc025a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cachedSortingGroup: {fileID: 0}
@@ -285,6 +285,7 @@ MonoBehaviour:
   highlightPieceMaterial: {fileID: 2100000, guid: 8df69b780d2d9354c8ffb9b8293c73ad,
     type: 2}
   arrow: {fileID: 0}
+  body: {fileID: 4837408307622380}
 --- !u!114 &114101510669842026
 MonoBehaviour:
   m_ObjectHideFlags: 0
