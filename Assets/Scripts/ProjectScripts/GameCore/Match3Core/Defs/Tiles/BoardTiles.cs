@@ -23,6 +23,13 @@ public static class BoardTiles
         defs = new Dictionary<int, BoardTileDef>
         {
             {
+                -1, new BoardTileDef // Cell outside of border
+                {
+                    Height = 0,
+                    IsLock = true,
+                }
+            },
+            {
                 10, new BoardTileDef // Water
                 {
                     Height = 0,

@@ -1264,48 +1264,6 @@ public partial class BoardRenderer : ECSEntity
         GameObject water = (GameObject) GameObject.Instantiate(waterPrefab);
     }
 
-    private struct Meta
-    {
-        // ReSharper disable InconsistentNaming
-        public int tileId;
-        public bool neighborR ;
-        public bool neighborL ;
-        public bool neighborT ;
-        public bool neighborB ;
-        
-        public bool neighborBL;
-        public bool neighborBR;        
-        public bool neighborTL;
-        public bool neighborTR;
-        
-        public int floorDiffR;
-        public int floorDiffL;
-        public int floorDiffT;
-        public int floorDiffB;
-        
-        public int floorDiffBL;
-        public int floorDiffBR;        
-        public int floorDiffTL;
-        public int floorDiffTR;
-        // ReSharper restore InconsistentNaming
-        
-        private string BoolToString(bool v)
-        {
-            return v ? "1" : "0";
-        }
-        
-        public override string ToString()
-        {
-            // return $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
-            // return $"<mspace=1.5em>T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}\nBR:{(floorDiffBR)} TL:{(floorDiffTL)}</mspace>";
-            // //return $"<mspace=1.5em>L:{floorDiffT}\nB:{floorDiffR}</mspace>";  
-            
-            var str1 = $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
-            var str2 = $"<mspace=1.5em>id:{tileId} T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
-            return $"{str1}\n{str2}";
-        }
-    }
-
     private Dictionary<string, List<string>> GetAddonsList()
     {
         // Value in dict is a count of NULL, added as addons. More nulls - more tiles without any addons
@@ -1411,15 +1369,9 @@ public partial class BoardRenderer : ECSEntity
         {
             for (int y = h - 1; y >= 0; y--)// Reversed for proper z orders!
             {
-                int titleId = fieldManager.GetTileId(x, y);
-                if (titleId == waterId)
-                {
-                    continue;
-                }
+                int tileId = fieldManager.GetTileId(x, y);                
 
-                Meta meta = new Meta {tileId = titleId};
-
-                int currentHeight = tilesDefs[titleId].Height;
+                int currentHeight = tilesDefs[tileId].Height;
                 // ReSharper disable InconsistentNaming
                 int idR  = fieldManager.GetTileId(x + 0, y + 1);
                 int idL  = fieldManager.GetTileId(x + 0, y - 1);
@@ -1432,16 +1384,32 @@ public partial class BoardRenderer : ECSEntity
                 int idTL = fieldManager.GetTileId(x - 1, y - 1);
                 // ReSharper restore InconsistentNaming
                 
-                // IsCellExists NOT required until we have any non-water tiles place on borders of the field
-                meta.neighborR  = /*IsCellExists(x + 0, y + 1) && */idR  != waterId;
-                meta.neighborL  = /*IsCellExists(x + 0, y - 1) && */idL  != waterId;              
-                meta.neighborT  = /*IsCellExists(x - 1, y + 0) && */idT  != waterId;
-                meta.neighborB  = /*IsCellExists(x + 1, y + 0) && */idB  != waterId;
+                LayoutTileMeta meta = new LayoutTileMeta {tileId = tileId};
                 
-                meta.neighborBL = /*IsCellExists(x + 1, y - 1) && */idBL != waterId;
-                meta.neighborBR = /*IsCellExists(x - 1, y + 1) && */idBR != waterId;
-                meta.neighborTR = /*IsCellExists(x - 1, y + 1) && */idTR != waterId;
-                meta.neighborTL = /*IsCellExists(x - 1, y + 1) && */idTL != waterId;
+                // IsCellExists NOT required until we have any non-water tiles place on borders of the field
+                meta.neighborR  = /*IsCellExists(x + 0, y + 1) && */idR  > waterId;
+                meta.neighborL  = /*IsCellExists(x + 0, y - 1) && */idL  > waterId;              
+                meta.neighborT  = /*IsCellExists(x - 1, y + 0) && */idT  > waterId;
+                meta.neighborB  = /*IsCellExists(x + 1, y + 0) && */idB  > waterId;
+                
+                // for fogs
+                if (meta.neighborB || meta.neighborL || meta.neighborR || meta.neighborT)
+                {
+                    if (tilesDefs[tileId].IsLock)
+                    {
+                        fieldManager.LockedCells.Add(new BoardPosition(x, y));
+                    } 
+                }
+                
+                if (tileId == waterId)
+                {
+                    continue;
+                }
+                
+                meta.neighborBL = /*IsCellExists(x + 1, y - 1) && */idBL > waterId;
+                meta.neighborBR = /*IsCellExists(x - 1, y + 1) && */idBR > waterId;
+                meta.neighborTR = /*IsCellExists(x - 1, y + 1) && */idTR > waterId;
+                meta.neighborTL = /*IsCellExists(x - 1, y + 1) && */idTL > waterId;
 
                 meta.floorDiffR  = tilesDefs[idR ].Height - currentHeight;
                 meta.floorDiffL  = tilesDefs[idL ].Height - currentHeight;                

@@ -265,10 +265,13 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 
             ret.Add(area);
         }
+
+        var lockedArea = GetFogAreaForPositions(GameDataService.Current.FieldManager.LockedCells.ToList(), true);
+        ret.Add(lockedArea);
         
         //Starting field
         List<BoardPosition> startPositions = new List<BoardPosition>();
-        for (int x = 18; x <= 22; x++)
+        for (int x = 18; x <= 21; x++)
         {
             for (int y = 11; y <= 14; y++)
             {
@@ -276,9 +279,8 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
             }
         }
         
-        // startPositions.Add(new BoardPosition(19, 9));
-        // startPositions.Add(new BoardPosition(20, 9));
-        // startPositions.Add(new BoardPosition(21, 9));
+        startPositions.Add(new BoardPosition(22, 13));
+        startPositions.Add(new BoardPosition(22, 14));
 
         ret.Add(GetFogAreaForPositions(startPositions, true));
         

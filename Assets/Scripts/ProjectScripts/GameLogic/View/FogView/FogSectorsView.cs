@@ -21,10 +21,10 @@ public class FogSectorsView// : BoardElementView
     {
         GameObject oldFogSectors = fogSectors;
         
-        Sprite lineSprite    = IconService.Current.GetSpriteById("LINE");
-        Sprite corner2Sprite = IconService.Current.GetSpriteById("CORNER_0_1");
-        Sprite corner3Sprite = IconService.Current.GetSpriteById("CORNER_0_1_2");
-        Sprite corner4Sprite = IconService.Current.GetSpriteById("CORNER_0_1_2_3");
+        Sprite lineSprite    = IconService.Current.GetSpriteById("FogSectorLine");
+        Sprite corner2Sprite = IconService.Current.GetSpriteById("FogSectorCorner2");
+        Sprite corner3Sprite = IconService.Current.GetSpriteById("FogSectorCorner3");
+        Sprite corner4Sprite = IconService.Current.GetSpriteById("FogSectorCorner4");
         
         var boardDef = BoardService.Current.FirstBoard.BoardDef;
         int boardW   = boardDef.Width;
