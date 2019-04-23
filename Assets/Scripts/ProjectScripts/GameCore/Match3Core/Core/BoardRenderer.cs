@@ -1453,8 +1453,8 @@ public partial class BoardRenderer : ECSEntity
                 meta.floorDiffBR = tilesDefs[idBR].Height - currentHeight;
                 meta.floorDiffTL = tilesDefs[idTL].Height - currentHeight;
                 
-                DebugTextView debugView = BoardService.Current.FirstBoard.RendererContext.CreateBoardElementAt<DebugTextView>(R.DebugCell2, new BoardPosition(x, y, BoardLayer.MAX.Layer));
-                debugView.SetText(meta.ToString());
+                // DebugTextView debugView = BoardService.Current.FirstBoard.RendererContext.CreateBoardElementAt<DebugTextView>(R.DebugCell2, new BoardPosition(x, y, BoardLayer.MAX.Layer));
+                // debugView.SetText(meta.ToString());
 
 #region WALLS
                 if (meta.neighborT && meta.neighborR && meta.floorDiffT == 1 && meta.floorDiffR == 1)
@@ -1558,7 +1558,7 @@ public partial class BoardRenderer : ECSEntity
                     string id = "BorderTopRightOuterCorner" + Mathf.Abs(meta.floorDiffTR);                    
                     CreateBorder(x, y, id);
                 }
-                if (!meta.neighborT || (meta.neighborT && meta.floorDiffT < 0) && !meta.neighborL)
+                if ((!meta.neighborT || meta.neighborT && meta.floorDiffT < 0) && !meta.neighborL)
                 {
                     string id = "BorderTopLeftOuterCorner" + Mathf.Abs(meta.floorDiffTL); 
                     CreateBorder(x, y, id);
@@ -1602,6 +1602,11 @@ public partial class BoardRenderer : ECSEntity
                 if (!meta.neighborBL && meta.neighborL && meta.neighborB && meta.floorDiffL == -1 && meta.floorDiffB == 0 && meta.floorDiffBL == -1)
                 {                  
                     CreateBorder(x, y, R.BorderTopRightIntersectionCorner0);
+                }
+                
+                if (!meta.neighborL && meta.neighborB && !meta.neighborBL && meta.floorDiffB == -1 && meta.floorDiffBL == -1 && meta.floorDiffL == -1)
+                {                  
+                    CreateBorder(x, y, R.BorderTopIntersectionCorner0);
                 }
 
 #endregion
