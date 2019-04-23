@@ -612,4 +612,5 @@ public class R
      public const string Token1Piece = "Token1Piece";
      public const string Token2Piece = "Token2Piece";
      public const string Token3Piece = "Token3Piece";
+     public const string DestroyTokenCurrencyAnimation = "DestroyTokenCurrencyAnimation";
 }
