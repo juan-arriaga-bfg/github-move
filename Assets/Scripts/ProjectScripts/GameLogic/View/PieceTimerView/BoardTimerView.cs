@@ -105,11 +105,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         
         label.Text = timer.CompleteTime.GetTimeLeftText();
         
-        if (timer.CompleteTime.GetTimeLeft().TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit)
-        {
-            SetState(TimerViewSate.Free);
-        }
-        
+        if (timer.IsFree()) SetState(TimerViewSate.Free);
         if (smallButton.activeSelf) price.Text = timerState == TimerViewSate.Free ? LocalizationService.Get("common.button.free", "common.button.free") : timer.GetPrice().ToStringIcon();
     }
     
