@@ -314,11 +314,6 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
                 quest.ConnectToBoard();
             }
         }
-
-        if (DailyQuest != null)
-        {
-            LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
-        }
         
         ConnectedToBoard = true;
     }
@@ -495,6 +490,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         else if (quest is DailyQuestEntity)
         {
             DailyQuest = (DailyQuestEntity) quest;
+            LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
         }
 
         // To handle Pending -> New transition for listeners

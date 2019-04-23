@@ -105,6 +105,7 @@ public class MarketLogicComponent : ECSEntity
 
     private void UpdateEnergyTimers()
     {
+        LocalNotificationsService.Current.UnRegisterNotifier(ClaimEnergyTimer);
         if (!FirstFreeEnergyClaimed)
         {
             ResetEnergyTimer.Stop();
@@ -132,6 +133,8 @@ public class MarketLogicComponent : ECSEntity
                 case EnergySlotState.WaitForClaim:
                     IW.Logger.Log($"[MarketLogicComponent] => UpdateEnergyTimers: WaitForClaim");
 
+                    LocalNotificationsService.Current.RegisterNotifier(new Notifier(ClaimEnergyTimer, NotifyType.FreeEnergyTimeout));
+                    
                     ResetEnergyTimer.Stop();
                     ClaimEnergyTimer.Delay = claimDelay;
                     ClaimEnergyTimer.Start();

@@ -13,6 +13,11 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
     public readonly TimeSpan NightEndTime   = new TimeSpan(8, 0, 0);
     public readonly TimeSpan MinimalTimeout = new TimeSpan(0,  30,0);
 
+    public LocalNotificationsManagerBase()
+    {
+        RegisterNotifier(new Notifier(new NowTimer(), NotifyType.ComeBackToGame));
+    }
+    
 #if DEBUG
     private bool isDebugSchedule = false;
 #endif

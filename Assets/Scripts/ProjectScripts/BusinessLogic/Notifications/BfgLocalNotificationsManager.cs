@@ -6,11 +6,6 @@ using BFGSDK;
 
 public class BfgLocalNotificationsManagerBase : LocalNotificationsManagerBase
 {
-    public BfgLocalNotificationsManagerBase()
-    {
-        RegisterNotifier(new Notifier(new NowTimer(), NotifyType.ComeBackToGame));
-    }
-
     
 #if UNITY_EDITOR
     

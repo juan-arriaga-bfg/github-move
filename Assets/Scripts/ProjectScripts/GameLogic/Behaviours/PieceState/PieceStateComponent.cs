@@ -85,7 +85,9 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         Timer.OnComplete += OnComplete;
         Timer.OnStart += OnStart;
 
-        if (Timer != null && thisContext.Multicellular != null)
+        var pieceDef = PieceType.GetDefById(thisContext.PieceType);
+        var isMonument = pieceDef.Filter.Has(PieceTypeFilter.Multicellular) && pieceDef.Filter.Has(PieceTypeFilter.Mine) == false;
+        if (Timer != null && thisContext.Multicellular != null && isMonument)
         {
             LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.MonumentBuild));
         }
