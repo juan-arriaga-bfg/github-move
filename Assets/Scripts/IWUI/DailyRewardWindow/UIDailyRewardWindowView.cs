@@ -30,6 +30,12 @@ public class UIDailyRewardWindowView : UIGenericPopupWindowView
         InitButtonBase(btnMaskRight, Controller.CloseCurrentWindow);
     }
 
+    public override void OnViewCloseCompleted()
+    {
+        base.OnViewCloseCompleted();
+        BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.SpawnAll();
+    }
+
     protected virtual List<IUIContainerElementEntity> UpdateEntities(List<DailyRewardDef> entities)
     {
         var views = new List<IUIContainerElementEntity>(entities.Count);

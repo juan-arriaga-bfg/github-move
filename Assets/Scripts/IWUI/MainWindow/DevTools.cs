@@ -177,7 +177,7 @@ public class DevTools : UIContainerElementViewController
             { PieceType.Parse("B5"), 1 },
         };
         
-        BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Spawn(pieces1);        
+        BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Add(pieces1).AnimateSpawn();        
         return;
         
         var allIds = PieceType.GetAllIds();
@@ -241,8 +241,10 @@ public class DevTools : UIContainerElementViewController
 
             try
             {
-                var view = BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Spawn(pieces);
+                var view = BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Add(pieces);
+                
                 view.PlaceTo(new Vector2(17 + i * 3f, view.transform.position.y + 10));
+                view.AnimateSpawn();
             }
             catch (Exception e)
             {
@@ -378,13 +380,6 @@ public class DevTools : UIContainerElementViewController
         new HighlightTaskPointToOrdersButton().Highlight(null);
         new HighlightTaskPointToMarketButton().Highlight(null);
         new HighlightTaskPointToEnergyPlusButton().Highlight(null);
-    }
-
-    public static void UpdateFogSectorsDebug()    
-    {
-        var view = new FogSectorsView();
-        view.Init(BoardService.Current.FirstBoard.RendererContext);
-        view.UpdateFogSectorsMesh();
     }
 
     public void OnDebug2Click()

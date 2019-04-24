@@ -109,6 +109,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
     {
         base.OnViewCloseCompleted();
         TackleBoxEvents.SendMarketClosed();
+        BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.SpawnAll();
     }
 
     private void UpdateLabel()

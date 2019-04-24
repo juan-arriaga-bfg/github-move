@@ -29,7 +29,10 @@ public class ClearBoardAction : IBoardAction
                     Positions = new List<BoardPosition> {piece.CachedPosition},
                     FogObserver = fogObserver,
                     IsIgnoreSpawn = true,
-                    OnComplete = DevTools.UpdateFogSectorsDebug
+                    OnComplete = () =>
+                    {
+                        FogSectorsView.Rebuild(piece.Context.RendererContext);
+                    }
                 });
                 
                 gameBoardController.ActionExecutor.AddAction(this, BoardActionMode.SingleMode, 100);

@@ -81,22 +81,10 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     {
         if (Delay == 0 || IsStarted == false) return;
 
-        IsPaused = true;
-        StartTime = StartTime.AddSeconds(value);
-
-        if (duration <= 0)
-        {
-            CompleteTime = StartTime.AddSeconds(Delay);
-            IsPaused = false;
-            return;
-        }
-        
         var then = value;
         var animationTime = StartTime;
-        var sequence = DOTween.Sequence();
-
-        sequence.AppendInterval(duration);
-        sequence.AppendCallback(() =>
+        
+        void Callback()
         {
             DOTween
                 .To(() => value, (v) => { value = v; }, 0, 1.5f)
@@ -114,7 +102,21 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
                     OnTimeChanged?.Invoke();
                 })
                 .OnComplete(() => { IsPaused = false; });
-        });
+        }
+        
+        IsPaused = true;
+        StartTime = StartTime.AddSeconds(value);
+
+        if (duration > 0)
+        {
+            DOTween.Sequence()
+                .AppendInterval(duration)
+                .AppendCallback(Callback);
+            
+            return;
+        }
+
+        Callback();
     }
 
     public void Subtract(int value, float duration = 0)
@@ -142,9 +144,8 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     public void Execute()
     {
         OnExecute?.Invoke();
-
-        var elapsedTime = StartTime.GetTime(UseUTC);
-        var elapsedSeconds = (int) elapsedTime.TotalSeconds;
+        
+        var elapsedSeconds = (int) StartTime.GetTime(UseUTC).TotalSeconds;
 
         if (lastProcessedSecond < 0 || lastProcessedSecond != elapsedSeconds)
         {
@@ -229,6 +230,6 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     
     public bool IsFree()
     {
-        return CompleteTime.GetTimeLeft(UseUTC).TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit;
+        return (int)StartTime.GetTime(UseUTC).TotalSeconds < Delay && CompleteTime.GetTimeLeft(UseUTC).TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit;
     }
 }

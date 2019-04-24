@@ -96,9 +96,84 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
         
         reward = character.GetNextDict(def.CharactersAmount.Range(), reward);
         reward = extras.GetNextDict(def.ExtrasAmount.Range(), reward);
+        if(def.OtherAmount != null) reward = GetOtherPieces(def.OtherAmount.Range(), reward);
         reward = sequence.GetNextDict(def.PieceAmount, reward);
         
         return reward;
+    }
+    
+    private Dictionary<int, int> GetOtherPieces(int amount, Dictionary<int, int> dict = null)
+    {
+        var result = dict ?? new Dictionary<int, int>();
+
+        var board = BoardService.Current.FirstBoard;
+        var positionsCache = board.BoardLogic.PositionsCache;
+        var definition = board.BoardLogic.MatchDefinition;
+        
+        var idsMine = PieceType.GetIdsByFilter(PieceTypeFilter.Mine);
+        var idsObstacle = PieceType.GetIdsByFilter(PieceTypeFilter.Obstacle | PieceTypeFilter.Tree);
+        var typeBranches = PieceTypeBranch.Default;
+
+        foreach (var id in idsMine)
+        {
+            if (positionsCache.Cache.TryGetValue(id, out var cache) == false || cache.Count == 0) continue;
+            
+            var def = PieceType.GetDefById(id);
+
+            if (typeBranches.Has(def.Branch)) continue;
+
+            typeBranches = typeBranches.Add(def.Branch);
+        }
+        
+        foreach (var id in idsObstacle)
+        {
+            var def = PieceType.GetDefById(id);
+
+            if (typeBranches.Has(def.Branch) == false) continue;
+
+            typeBranches = typeBranches.Remove(def.Branch);
+        }
+        
+        var idsMonument = PieceType.GetIdsByFilterAndBranch(PieceTypeFilter.Multicellular, PieceTypeFilter.Fake | PieceTypeFilter.Mine, typeBranches);
+
+        foreach (var id in idsMonument)
+        {
+            if (GameDataService.Current.CodexManager.IsPieceUnlocked(id) == false) continue;
+            
+            var def = PieceType.GetDefById(id);
+            
+            typeBranches = typeBranches.Remove(def.Branch);
+        }
+
+        var idsResult = PieceType.GetIdsByFilterAndBranch(PieceTypeFilter.Simple | PieceTypeFilter.Removable, typeBranches);
+
+        if (idsResult.Count == 0) return result;
+        
+        var idsFirst = new List<int>();
+        var idsSecond = new List<int>();
+
+        foreach (var id in idsResult)
+        {
+            if (id == definition.GetFirst(id))
+            {
+                idsFirst.Add(id);
+                continue;
+            }
+            
+            idsSecond.Add(id);
+        }
+        
+        for (var i = 0; i < amount; i++)
+        {
+            var isFirst = Random.Range(0, 4) != 0;
+            var id = isFirst ? idsFirst[Random.Range(0, idsFirst.Count)] : idsSecond[Random.Range(0, idsSecond.Count)];
+            
+            if (result.ContainsKey(id) == false) result.Add(id, 0);
+            
+            result[id]++;
+        }
+        
+        return result;
     }
     
     public Dictionary<int, int> GetPiecesByLastStep(int piece, int step)

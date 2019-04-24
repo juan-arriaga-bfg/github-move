@@ -329,6 +329,10 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Hard5.Id, R.Hard5Piece);
         dict.Add(PieceType.Hard6.Id, R.Hard6Piece);
         
+        dict.Add(PieceType.Token1.Id, R.Token1Piece);
+        dict.Add(PieceType.Token2.Id, R.Token2Piece);
+        dict.Add(PieceType.Token3.Id, R.Token3Piece);
+        
 #endregion
         
 #region Mines

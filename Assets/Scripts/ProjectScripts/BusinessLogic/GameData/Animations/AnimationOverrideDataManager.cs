@@ -84,6 +84,11 @@ public class AnimationOverrideDataManager
             OnDestroyFromBoard = R.DestroyHardCurrencyAnimation
         });
         
+        AddPieceChain(defs, PieceType.Token1.Id, PieceType.Token3.Id, new AnimationDef()
+        {
+            OnDestroyFromBoard = R.DestroyTokenCurrencyAnimation
+        });
+        
         AddByFilter(defs, PieceTypeFilter.Obstacle, new AnimationDef
         {
             OnDestroyFromBoard = R.DestroyObstacleAnimation

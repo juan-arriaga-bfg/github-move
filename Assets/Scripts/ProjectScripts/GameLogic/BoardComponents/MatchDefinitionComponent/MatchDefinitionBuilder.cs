@@ -274,6 +274,10 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.Hard5.Id, new PieceMatchDef {Next = PieceType.Hard6.Id, Previous = PieceType.Hard4.Id, Amount = 3});
         dict.Add(PieceType.Hard6.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Hard5.Id});
         
+        dict.Add(PieceType.Token1.Id, new PieceMatchDef {Next = PieceType.Token2.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.Token2.Id, new PieceMatchDef {Next = PieceType.Token3.Id, Previous = PieceType.Token1.Id, Amount = 3});
+        dict.Add(PieceType.Token3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Token2.Id});
+        
 #endregion
         
 #region Obstacles

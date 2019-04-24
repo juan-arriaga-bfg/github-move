@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BfgAnalytics;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum DailyRewardState
 {
@@ -26,9 +23,6 @@ public class UIDailyRewardElementViewController : UISimpleScrollElementViewContr
     
     private bool isClick;
 
-    private Dictionary<int, int> piecesReward;
-    private List<CurrencyPair> currenciesReward;
-    
     public override void Init()
     {
         base.Init();
@@ -37,8 +31,6 @@ public class UIDailyRewardElementViewController : UISimpleScrollElementViewContr
 
         isClick = false;
         
-        piecesReward = CurrencyHelper.FiltrationRewards(contentEntity.Rewards, out currenciesReward);
-
         unlockObj.SetActive(contentEntity.State == DailyRewardState.Current);
         lockObj.SetActive(contentEntity.State != DailyRewardState.Current);
         lockBack.SetActive(contentEntity.State == DailyRewardState.Claimed);
@@ -61,35 +53,16 @@ public class UIDailyRewardElementViewController : UISimpleScrollElementViewContr
             .OnClick(OnClick);
     }
 
-    public override void OnViewCloseCompleted()
-    {
-        base.OnViewCloseCompleted();
-
-        if (!(entity is UIDailyRewardElementEntity contentEntity) || contentEntity.State != DailyRewardState.Current) return;
-        
-        var board = BoardService.Current.FirstBoard;
-        var amount = piecesReward.Sum(pair => pair.Value);
-
-        board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceReward(amount, true, out var position);
-        
-        CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, new List<CurrencyPair>(), null, position, null, true, true);
-    }
-
     private void OnClick()
     {
         if (isClick) return;
 
         isClick = true;
         
+        var contentEntity = entity as UIDailyRewardElementEntity;
         var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(btnClaim.transform.position);
-	    
-        CurrencyHelper.PurchaseAsyncOnlyCurrency(currenciesReward, flyPosition, success =>
-        {
-            if (success == false) return;
-            ProfileService.Instance.Manager.UploadCurrentProfile(false);
-        });
-        
-        Analytics.SendPurchase("screen_dailyreward", $"item{transform.GetSiblingIndex()}", null, new List<CurrencyPair>(currenciesReward), false, true);
+
+        CurrencyHelper.PurchaseAndProvideSpawn(contentEntity.Rewards, new CurrencyPair(), null, flyPosition);
         context.Controller.CloseCurrentWindow();
     }
 }

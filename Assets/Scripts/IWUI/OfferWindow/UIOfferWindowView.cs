@@ -104,6 +104,12 @@ public class UIOfferWindowView : UIGenericPopupWindowView
             .OnClick(OnClick);
     }
 
+    public override void OnViewCloseCompleted()
+    {
+        base.OnViewCloseCompleted();
+        BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.SpawnAll();
+    }
+
     private void OnClick()
     {
         if (isClick) return;

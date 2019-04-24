@@ -12,6 +12,7 @@ public class CrystalPieceView : PieceBoardElementView
     private const string Hard = "Hard";
     private const string Mana = "Mana";
     private const string Soft = "Soft";
+    private const string Token = "Token";
     private const string Extended = "Extended";
     
     private readonly ViewAnimationUid AnimationId = new ViewAnimationUid();
@@ -113,6 +114,7 @@ public class CrystalPieceView : PieceBoardElementView
             {Hard,       new Dictionary<int, List<BoardPosition>>()}, // Hard
             {Mana,       new Dictionary<int, List<BoardPosition>>()}, // Mana
             {Soft,       new Dictionary<int, List<BoardPosition>>()}, // Soft
+            {Token,      new Dictionary<int, List<BoardPosition>>()}, // Token
             {Extended,   new Dictionary<int, List<BoardPosition>>()}, // Extended: EXT_A .. EXT_Z
         };
 
@@ -147,6 +149,10 @@ public class CrystalPieceView : PieceBoardElementView
             {
                 cache[Soft].Add(key, pair.Value);
             }
+            else if (key >= PieceType.Token1.Id && key <= PieceType.Token3.Id)
+            {
+                cache[Token].Add(key, pair.Value);
+            }
             else if (key >= PieceType.NPC_B1.Id && key <= PieceType.NPC_Z8.Id)
             {
                 cache[Character].Add(key, pair.Value);
@@ -168,6 +174,7 @@ public class CrystalPieceView : PieceBoardElementView
             && CheckBest(cache[Hard], 1, out bestPosition) == false
             && CheckBest(cache[Mana], 1, out bestPosition) == false
             && CheckBest(cache[Soft], 3, out bestPosition) == false
+            && CheckBest(cache[Token], 1, out bestPosition) == false
             && CheckBest(cache[Extended], 3, out bestPosition) == false
             && CheckBest(cache[Simple], 3, out bestPosition) == false)
         {
