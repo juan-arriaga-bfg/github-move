@@ -635,7 +635,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
 
         if (ConnectedToBoard)
         {
-            LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.FreeEnergyTimeout));    
+            LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
         }
     }
 

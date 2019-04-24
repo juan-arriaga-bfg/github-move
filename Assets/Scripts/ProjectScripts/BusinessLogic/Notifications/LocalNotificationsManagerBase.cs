@@ -16,6 +16,11 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
 #if DEBUG
     private bool isDebugSchedule = false;
 #endif
+
+    public LocalNotificationsManagerBase()
+    {
+        RegisterNotifier(new Notifier(new NowTimer(), NotifyType.ComeBackToGame));
+    }
     
     public void DebugSchedule()
     {

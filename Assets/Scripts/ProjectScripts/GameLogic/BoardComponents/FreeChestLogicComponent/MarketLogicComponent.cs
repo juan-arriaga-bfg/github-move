@@ -40,6 +40,7 @@ public class MarketLogicComponent : ECSEntity
 	public TimerComponent OfferTimer { get; } = new TimerComponent();
 	
 	public TimerComponent FreeEnergyServiceTimer { get; } = new TimerComponent {Tag = "FreeEnergyServiceTimer"};
+	public TimerComponent FreeEnergyExpireServiceTimer { get; } = new TimerComponent {Tag = "FreeEnergyExpireServiceTimer"};
 
     public DateTime FreeEnergyClaimTime { get; private set; } = UnixTimeHelper.UnixTimestampToDateTime(0);
 
@@ -50,6 +51,8 @@ public class MarketLogicComponent : ECSEntity
 
     private bool isFreeEnergyNotifierRegistered;
 
+    private GameDataManager contextManager;
+    
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		RegisterComponent(ResetMarketTimer, true);
@@ -57,6 +60,9 @@ public class MarketLogicComponent : ECSEntity
 		RegisterComponent(ClaimEnergyTimer, true);
 		RegisterComponent(OfferTimer, true);
 		RegisterComponent(FreeEnergyServiceTimer, true);
+		RegisterComponent(FreeEnergyExpireServiceTimer, true);
+		
+		contextManager = entity as GameDataManager;
 		
 		LocalNotificationsService.Current.RegisterNotifier(new Notifier(ResetMarketTimer, NotifyType.MarketRefresh));
 	
@@ -112,12 +118,22 @@ public class MarketLogicComponent : ECSEntity
             ClaimEnergyTimer.Start();
             
             FreeEnergyServiceTimer.Delay = int.MaxValue;
+            FreeEnergyExpireServiceTimer.Delay = int.MaxValue;
         }
         else
         {
             EnergySlotState state = CheckEnergySlot(out int resetDelay, out int claimDelay);
             
             FreeEnergyServiceTimer.Delay = resetDelay;
+            
+            FreeEnergyExpireServiceTimer.Delay = claimDelay;
+            if (claimDelay == -1)
+            {
+                int delayForClaim = contextManager.ConstantsManager.DelayToClaimFreeEnergy;
+                FreeEnergyExpireServiceTimer.Delay = resetDelay + delayForClaim;
+            }
+            
+            IW.Logger.LogError($"ResetDelay {resetDelay}; ClaimDelay {claimDelay}; DelayForClaim {contextManager.ConstantsManager.DelayToClaimFreeEnergy}");
             
             switch (state)
             {
@@ -132,19 +148,26 @@ public class MarketLogicComponent : ECSEntity
                 case EnergySlotState.WaitForClaim:
                     IW.Logger.Log($"[MarketLogicComponent] => UpdateEnergyTimers: WaitForClaim");
 
-                    ResetEnergyTimer.Stop();
                     ClaimEnergyTimer.Delay = claimDelay;
+                    ResetEnergyTimer.Stop();
                     ClaimEnergyTimer.Start();
                     break;
             }
         }
 
         FreeEnergyServiceTimer.Start();
+        FreeEnergyExpireServiceTimer.Start();
 
+        RegisterNotifiers();
+    }
+
+    private void RegisterNotifiers()
+    {
         if (!isFreeEnergyNotifierRegistered && FirstFreeEnergyClaimed)
         {
             isFreeEnergyNotifierRegistered = true;
             LocalNotificationsService.Current.RegisterNotifier(new Notifier(FreeEnergyServiceTimer, NotifyType.FreeEnergyRefill));
+            LocalNotificationsService.Current.RegisterNotifier(new Notifier(FreeEnergyExpireServiceTimer, NotifyType.FreeEnergyTimeout));
         }
     }
     
@@ -162,6 +185,8 @@ public class MarketLogicComponent : ECSEntity
         
         ResetEnergyTimer.Delay = resetDelay;
         ResetEnergyTimer.Start();
+        
+        RegisterNotifiers();
     }
 
     private int GetSecondsElapsedFromStartOfDay()
@@ -303,6 +328,7 @@ public class MarketLogicComponent : ECSEntity
         if (isFreeEnergyNotifierRegistered)
         {
             LocalNotificationsService.Current.UnRegisterNotifier(FreeEnergyServiceTimer);
+            LocalNotificationsService.Current.UnRegisterNotifier(FreeEnergyExpireServiceTimer);
         }
         
         base.OnUnRegisterEntity(entity);
