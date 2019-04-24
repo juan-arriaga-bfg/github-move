@@ -208,7 +208,8 @@
     "Conditions": [
       {
         "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
-        "Id": "FogCleared"
+        "Id": "FogCleared",
+        "Value": "Fog 9_1"
       }
     ]
   },
