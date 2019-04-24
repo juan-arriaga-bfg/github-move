@@ -121,8 +121,8 @@ public class SandboxGameController : MonoBehaviour
         );
         
         boardController.BoardLogic.RegisterComponent(new FireflyLogicComponent());
-        boardController.BoardLogic.RegisterComponent(new AirShipLogicComponent());
         boardController.RegisterComponent(new TutorialLogicComponent().RegisterComponent(new LockerComponent()));
+        boardController.BoardLogic.RegisterComponent(new AirShipLogicComponent());
         boardController.RendererContext.CreateBorders();
         
         // var widthShift = boardController.BoardDef.Width / 4;
