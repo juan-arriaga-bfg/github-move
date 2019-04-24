@@ -50,8 +50,6 @@ public class MarketLogicComponent : ECSEntity
 	public ShopDef Offer;
 
     private bool isFreeEnergyNotifierRegistered;
-
-    private GameDataManager contextManager;
     
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
@@ -60,9 +58,7 @@ public class MarketLogicComponent : ECSEntity
 		RegisterComponent(ClaimEnergyTimer, true);
 		RegisterComponent(OfferTimer, true);
 		RegisterComponent(FreeEnergyServiceTimer, true);
-		RegisterComponent(FreeEnergyExpireServiceTimer, true);
-		
-		contextManager = entity as GameDataManager;
+        RegisterComponent(FreeEnergyExpireServiceTimer, true);
 		
 		LocalNotificationsService.Current.RegisterNotifier(new Notifier(ResetMarketTimer, NotifyType.MarketRefresh));
 	
@@ -129,11 +125,9 @@ public class MarketLogicComponent : ECSEntity
             FreeEnergyExpireServiceTimer.Delay = claimDelay;
             if (claimDelay == -1)
             {
-                int delayForClaim = contextManager.ConstantsManager.DelayToClaimFreeEnergy;
+                int delayForClaim = GameDataService.Current.ConstantsManager.DelayToClaimFreeEnergy;
                 FreeEnergyExpireServiceTimer.Delay = resetDelay + delayForClaim;
             }
-            
-            IW.Logger.LogError($"ResetDelay {resetDelay}; ClaimDelay {claimDelay}; DelayForClaim {contextManager.ConstantsManager.DelayToClaimFreeEnergy}");
             
             switch (state)
             {
