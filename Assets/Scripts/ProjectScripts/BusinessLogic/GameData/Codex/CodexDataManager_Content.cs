@@ -157,11 +157,6 @@ public partial class CodexDataManager
                     },
                     new CodexChainDef
                     {
-                        Name = LocalizationService.Get("window.codex.branch.Token", "window.codex.branch.Token"),
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Token1.Id)),
-                    },
-                    new CodexChainDef
-                    {
                         Name = LocalizationService.Get("window.codex.branch.Boost_CR", "window.codex.branch.Boost_CR"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Boost_CR1.Id)),
                     },
