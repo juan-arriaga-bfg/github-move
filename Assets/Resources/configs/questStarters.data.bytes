@@ -203,14 +203,12 @@
     "Id": 23,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "26_UseMine",
       "87_KillTree"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
-        "Id": "FogCleared",
-        "Value": "Fog 9_1"
+        "Id": "FogCleared"
       }
     ]
   },
@@ -898,7 +896,8 @@
     "Id": 74,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "85_OpenChest_CH_A"
+      "85_OpenChest_CH_A",
+      "26_UseMine"
     ],
     "Conditions": [
       {
