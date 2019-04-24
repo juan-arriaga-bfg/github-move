@@ -77,6 +77,18 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
     
     public void RegisterNotifier(Notifier notifier)
     {
+        if (notifier.Timer == null)
+        {
+            Debug.LogWarning($"[LocalNotificationService] => UnRegisterNotifier: timer == null");
+            return;
+        }
+
+        if (notifiers.Any(currentNotifier => currentNotifier.Timer == notifier.Timer && currentNotifier.NotifyType == notifier.NotifyType))
+        {
+            Debug.LogWarning($"[LocalNotificationService] => notifier with id {notifier.NotifyType.Id} already registered with same timer");
+            return;
+        }
+        
         Debug.Log($"[LocalNotificationService] => Register(NotifyType.Id:{notifier.NotifyType.Id})");
         notifiers.Add(notifier);
     }
