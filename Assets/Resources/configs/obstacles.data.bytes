@@ -479,7 +479,7 @@
     },
     "OtherAmount": {
       "Min": 0,
-      "Max": 0
+      "Max": 1
     },
     "PieceAmount": 3,
     "PieceWeights": [
@@ -521,7 +521,7 @@
     },
     "OtherAmount": {
       "Min": 0,
-      "Max": 0
+      "Max": 1
     },
     "PieceAmount": 4,
     "PieceWeights": [
@@ -563,7 +563,7 @@
     },
     "OtherAmount": {
       "Min": 0,
-      "Max": 0
+      "Max": 1
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -613,7 +613,7 @@
     },
     "OtherAmount": {
       "Min": 0,
-      "Max": 0
+      "Max": 2
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -663,7 +663,7 @@
     },
     "OtherAmount": {
       "Min": 0,
-      "Max": 0
+      "Max": 2
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -712,8 +712,8 @@
       "Max": 0
     },
     "OtherAmount": {
-      "Min": 0,
-      "Max": 0
+      "Min": 1,
+      "Max": 2
     },
     "PieceAmount": 6,
     "PieceWeights": [
@@ -1167,12 +1167,12 @@
     },
     "OtherAmount": {
       "Min": 0,
-      "Max": 0
+      "Max": 1
     },
     "PieceAmount": 2,
     "PieceWeights": [
       {
-        "Uid": "E1",
+        "Uid": "G1",
         "Weight": 1
       }
     ]
@@ -1204,16 +1204,16 @@
     },
     "OtherAmount": {
       "Min": 0,
-      "Max": 0
+      "Max": 1
     },
     "PieceAmount": 4,
     "PieceWeights": [
       {
-        "Uid": "E1",
+        "Uid": "G1",
         "Weight": 3
       },
       {
-        "Uid": "E2",
+        "Uid": "G2",
         "Weight": 1
       }
     ],
@@ -1245,17 +1245,17 @@
       "Max": 0
     },
     "OtherAmount": {
-      "Min": 0,
-      "Max": 0
+      "Min": 1,
+      "Max": 2
     },
     "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": "E1",
+        "Uid": "G1",
         "Weight": 1
       },
       {
-        "Uid": "E2",
+        "Uid": "G2",
         "Weight": 1
       },
       {
@@ -1291,17 +1291,17 @@
       "Max": 0
     },
     "OtherAmount": {
-      "Min": 0,
-      "Max": 0
+      "Min": 1,
+      "Max": 2
     },
     "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": "E1",
+        "Uid": "G1",
         "Weight": 1
       },
       {
-        "Uid": "E2",
+        "Uid": "G2",
         "Weight": 2
       },
       {
