@@ -311,6 +311,7 @@ public class ConfigsGoogleLoader
     {
         Debug.LogWarning("Configs load data complete!");
         ConfigManager.AsyncProgressEnd();
+        EditorMainThreadSync.Execute(NSConfigEncription.EncryptConfigs);
     }
     
     private static void Load(List<KeyValuePair<string, GoogleLink>> update)

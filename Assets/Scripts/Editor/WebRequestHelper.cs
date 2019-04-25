@@ -3,12 +3,15 @@ using System;
 using Debug = IW.Logger;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
+using BestHTTP;
 
 namespace Dws
 {
@@ -67,6 +70,11 @@ namespace Dws
     /// </summary>
     public static class WebHelper
     {
+        static WebHelper()
+        {
+            HTTPManager.Setup();
+        }
+        
         public delegate void WebRequestCallback(WebResponseData response);
 
         /// <summary>
@@ -86,11 +94,34 @@ namespace Dws
             {
                 try
                 {
-                    HttpWebRequest request = (HttpWebRequest) WebRequest.Create(requestData.Url);
-                    request.Method = requestData.Method;
-                    request.Timeout = 120000;
-                    request.AllowAutoRedirect = false; // Automatic redirects not working with google!
+                    HTTPRequest httpRequest = new HTTPRequest(new Uri(requestData.Url), (request, response) =>
+                    {
+                        //PrintHeadersToLog(response);
 
+                        // Redirect!
+                        // todo: handle redirection loop
+                        if ((int) response.StatusCode >= 300 && (int) response.StatusCode <= 399)
+                        {
+                            var redirectUrl = response.Headers["Location"];
+                            WebRequestData newRequestData = new WebRequestData(redirectUrl.First(), requestData.Method);
+                            MakeRequest(newRequestData, callback);
+                            return;
+                        }
+
+                        var statusCode = (HttpStatusCode)response.StatusCode;
+
+                        EditorMainThreadSync.Execute(() =>
+                        {
+                            string resultText = response.DataAsText;
+                            Debug.Log("WebHelper: MakeRequest: Return: " + resultText);
+                            callback(new WebResponseData(statusCode, resultText, null));
+                        });
+                        
+                    });
+                    httpRequest.Timeout = TimeSpan.FromSeconds(120);
+                    httpRequest.MethodType = HTTPMethods.Get;
+                    httpRequest.Send();
+                    
                     if (requestData.Headers != null && requestData.Headers.Length > 0)
                     {
                         foreach (var header in requestData.Headers)
@@ -100,52 +131,23 @@ namespace Dws
                                 throw new Exception(string.Format("WebHelper: MakeRequest: Header '{0}' should contains ':'", header));
                             }
 
-                            request.Headers.Add(header);
+                            var splitHeader = header.Split(':');
+                            httpRequest.AddHeader(splitHeader[0], splitHeader[1]);
                         }
                     }
 
-                    if (!string.IsNullOrEmpty(requestData.Body))
-                    {
-                        request.ContentType = "application/x-www-form-urlencoded";
-
-                        byte[] postData = Encoding.UTF8.GetBytes(requestData.Body);
-                        request.ContentLength = postData.Length;
-
-                        Stream requestStream = request.GetRequestStream();
-                        requestStream.Write(postData, 0, postData.Length);
-                        requestStream.Close();
-                    }
-
-                    using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
-                    {
-                        //PrintHeadersToLog(response);
-
-                        // Redirect!
-                        // todo: handle redirection loop
-                        if ((int) response.StatusCode >= 300 && (int) response.StatusCode <= 399)
-                        {
-                            var redirectUrl = response.Headers["Location"];
-                            WebRequestData newRequestData = new WebRequestData(redirectUrl, requestData.Method);
-                            MakeRequest(newRequestData, callback);
-                            return;
-                        }
-
-                        // Read response
-                        using (Stream stream = response.GetResponseStream())
-                        {
-                            using (StreamReader reader = new StreamReader(stream))
-                            {
-                                var statusCode = response.StatusCode;
-                                string resultText = reader.ReadToEnd();
-
-                                EditorMainThreadSync.Execute(() =>
-                                {
-                                    Debug.Log("WebHelper: MakeRequest: Return: " + resultText);
-                                    callback(new WebResponseData(statusCode, resultText, null));
-                                });
-                            }
-                        }
-                    }
+//                    if (!string.IsNullOrEmpty(requestData.Body))
+//                    {
+//                        request.ContentType = "application/x-www-form-urlencoded";
+//
+//                        request.
+//                        byte[] postData = Encoding.UTF8.GetBytes(requestData.Body);
+//                        request.ContentLength = postData.Length;
+//
+//                        Stream requestStream = request.GetRequestStream();
+//                        requestStream.Write(postData, 0, postData.Length);
+//                        requestStream.Close();
+//                    }
                 }
                 catch (WebException ex)
                 {

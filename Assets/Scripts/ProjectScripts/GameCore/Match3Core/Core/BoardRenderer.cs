@@ -1427,12 +1427,26 @@ public partial class BoardRenderer : ECSEntity
                 meta.floorDiffTL = tilesDefs[idTL].Height - currentHeight;
                 
                 // DebugTextView debugView = BoardService.Current.FirstBoard.RendererContext.CreateBoardElementAt<DebugTextView>(R.DebugCell2, new BoardPosition(x, y, BoardLayer.MAX.Layer));
-                // debugView.SetText(meta.ToString());
+                // debugView.SetText($"<color=#{((x ) % 2 == 0 ? "FFFFFF" : "000000")}>{meta.ToString()}</color>"); 
 
-#region WALLS
-                if (meta.neighborT && meta.neighborR && meta.floorDiffT == 1 && meta.floorDiffR == 1)
+#region WALLS & FALLS
+                //
+                if (meta.neighborT && meta.neighborL && meta.neighborB && meta.neighborR && meta.floorDiffT == 1 && meta.floorDiffL == 1)
                 {
-                    CreateBorder(x, y, R.BorderWallBottomLeft1);
+                    CreateBorder(x, y, R.BorderFallTopLeft1);
+                }
+                else if (meta.neighborT && meta.neighborL && meta.neighborB && meta.neighborR && meta.floorDiffB == 1 && meta.floorDiffL == 1)
+                {
+                    CreateBorder(x, y, R.BorderFallBottomLeft1);
+                }                
+                else if (meta.neighborT && meta.neighborL && meta.neighborB && meta.neighborR && meta.floorDiffB == 1 && meta.floorDiffR == 1)
+                {
+                    CreateBorder(x, y, R.BorderFallBottomRight1);
+                }
+                //
+                else if (meta.neighborT && meta.neighborR && meta.floorDiffT == 1 && meta.floorDiffR == 1)
+                {
+                    CreateBorder(x, y, R.BorderFallTopRight1);
                 }
                 else if (meta.neighborTR && meta.floorDiffTR == 1 && meta.floorDiffT == 0 && meta.floorDiffR == 0)
                 {
@@ -1445,6 +1459,28 @@ public partial class BoardRenderer : ECSEntity
                 else if (meta.neighborT && meta.floorDiffT == 1)
                 {
                     CreateBorder(x, y, R.BorderWallTop1);
+                }
+                //
+                else if (meta.neighborB && meta.neighborBR && meta.neighborR && meta.floorDiffBR == 1 && meta.floorDiffB == 0 && meta.floorDiffR == 0)
+                {
+                    CreateBorder(x, y, R.BorderWallBottomRight1);
+                }
+                else if (meta.neighborL && meta.neighborTL && meta.neighborT && meta.floorDiffTL == 1 && meta.floorDiffT == 0 && meta.floorDiffL == 0)
+                {
+                    CreateBorder(x, y, R.BorderWallTopLeft1);
+                }
+                else if (meta.neighborL && meta.neighborBL && meta.neighborB && meta.floorDiffBL == 1 && meta.floorDiffB == 0 && meta.floorDiffL == 0)
+                {
+                    CreateBorder(x, y, R.BorderWallBottomLeft1);
+                }  
+                //
+                else if (meta.neighborB && meta.floorDiffB == 1 && meta.floorDiffL == 0 && meta.floorDiffR == 0)
+                {
+                    CreateBorder(x, y, R.BorderFallBottom1);
+                }
+                else if (meta.neighborL && meta.floorDiffL == 1 && meta.floorDiffT == 0 && meta.floorDiffB == 0)
+                {
+                    CreateBorder(x, y, R.BorderFallLeft1);
                 }
 #endregion
                 
@@ -1554,7 +1590,7 @@ public partial class BoardRenderer : ECSEntity
                     string id = "BorderBottomLeftInnerCorner" + Mathf.Abs(meta.floorDiffTR);                    
                     CreateBorder(x, y, id);
                 }
-                if (meta.neighborT && meta.neighborL && (!meta.neighborTL || meta.neighborTL && meta.floorDiffTL < 0) && meta.floorDiffT == meta.floorDiffL)
+                if (meta.neighborT && meta.neighborL && (!meta.neighborTL || meta.neighborTL && meta.floorDiffTL < 0) && meta.floorDiffT == meta.floorDiffL && meta.floorDiffT == 0)
                 {
                     string id = "BorderBottomRightInnerCorner" + Mathf.Abs(meta.floorDiffTL); 
                     CreateBorder(x, y, id);
