@@ -4,7 +4,7 @@
 [TaskHighlight(typeof(HighlightTaskPointToRandomDeadProductionField), new[] {typeof(HighlightConditionPieceIdNotSpecified)})]
 [TaskHighlight(typeof(HighlightTaskFindProductionFieldForPieceType))]
 [TaskHighlight(typeof(HighlightTaskPointToPredecessor))]
-[TaskHighlight(typeof(HighlightTaskPointToRandomChest))]
+[TaskHighlight(typeof(HighlightTaskPointToRandomChestExcludingFreeAndNpc))]
 [TaskHighlight(typeof(HighlightTaskPointToRandomBranchATree))]
 [TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
