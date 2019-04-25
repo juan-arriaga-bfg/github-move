@@ -1,6 +1,7 @@
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Contexts;
 
-public class LoadSilenceComponent: IECSComponent, IECSSystem
+public class LoadSilenceComponent: IECSComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
@@ -13,35 +14,16 @@ public class LoadSilenceComponent: IECSComponent, IECSSystem
 
         cachedSound = ProfileService.Current.Settings.GetVolume("Sound");
         ProfileService.Current.Settings.SetVolume("Sound", 0f);
-        IW.Logger.LogError("LogLogLog");
     }
 
     public virtual void OnUnRegisterEntity(ECSEntity entity)
     {
-//        OnLoadComplete();
-    }
-
-    public bool IsExecuteable()
-    {
-        return true;
-    }
-
-    public void Execute()
-    {
-        bool isGameLoaded = AsyncInitService.Current?.IsAllComponentsInited() ?? false;
-        if (isGameLoaded)
-        {
-            context.UnRegisterComponent(this);
-        }
-    }
-
-    public object GetDependency()
-    {
-        return null;
     }
 
     public void OnLoadComplete()
     {
+        IW.Logger.LogError("Complete");
         ProfileService.Current.Settings.SetVolume("Sound", cachedSound);
+        context.UnRegisterComponent(this);
     }
 }
