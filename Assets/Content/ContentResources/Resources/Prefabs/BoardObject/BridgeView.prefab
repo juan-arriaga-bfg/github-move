@@ -52,7 +52,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4494721755256994}
-  - component: {fileID: 5065183671858102705}
+  - component: {fileID: 5956918129375886713}
+  - component: {fileID: 5892010029853510777}
   m_Layer: 0
   m_Name: BridgeView
   m_TagString: Untagged
@@ -75,7 +76,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -24.144001, y: 30.092001, z: 0.003}
---- !u!114 &5065183671858102705
+--- !u!114 &5956918129375886713
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84,12 +85,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 1879734854354758}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c52489d105baf4ce9b54380fbc38458b, type: 3}
+  m_Script: {fileID: 11500000, guid: 351cdf8c3948f2a4c8fb0b5523a5d0b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cachedSortingGroup: {fileID: 210844005359531110}
   IsFading: 0
   FadeValue: 0
+--- !u!95 &5892010029853510777
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879734854354758}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c7dabd9d5fe2fe4fa4535e888ebbd9b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3881684154616084498
 GameObject:
   m_ObjectHideFlags: 0

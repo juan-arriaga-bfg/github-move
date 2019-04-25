@@ -43,21 +43,19 @@ public class IslandFogElementView : AnimatedBoardElementView
         fogItem.SetActive(false);
     }
 
-    public override void PlayHide()
+    public override void PlayHide(float duration = 0)
     {
         foreach (var position in size)
         {
             Context.Context.BoardLogic.UnlockCell(position.SetZ(BoardLayer.Piece.Layer), this);
         }
         
-        var sequence = DOTween.Sequence().SetId(animationUid);
-        
         foreach (var sprite in fogSprites)
         {
-            sequence.Insert(0f, sprite.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InSine));
+            sprite.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InSine);
         }
-        
-        sequence.InsertCallback(0.5f, () => base.PlayHide());
+
+        base.PlayHide(0.5f);
     }
 
     private string CheckBorder(int x, int y)

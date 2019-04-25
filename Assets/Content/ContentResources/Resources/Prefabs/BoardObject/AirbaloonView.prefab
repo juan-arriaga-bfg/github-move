@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1093208419284794}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.48, y: 1.13, z: 0}
+  m_LocalPosition: {x: 1.48, y: 6.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6354067290299420654}
@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 4494721755256994}
   - component: {fileID: 114902888694543006}
   - component: {fileID: 6721594027157039978}
+  - component: {fileID: 6696250614826482026}
   m_Layer: 0
   m_Name: AirbaloonView
   m_TagString: Untagged
@@ -111,8 +112,25 @@ MonoBehaviour:
   cachedSortingGroup: {fileID: 210844005359531110}
   IsFading: 0
   FadeValue: 0
-  lockView: {fileID: 0}
-  unlockView: {fileID: 0}
+--- !u!95 &6696250614826482026
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879734854354758}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 630a7999174e3a74eb966dcd523d1c5e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1402122206753404457
 GameObject:
   m_ObjectHideFlags: 0

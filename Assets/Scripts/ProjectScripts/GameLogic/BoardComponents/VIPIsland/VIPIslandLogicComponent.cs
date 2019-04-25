@@ -33,6 +33,8 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
     
     private readonly BoardPosition boardPosition = new BoardPosition(10, 13, BoardLayer.Piece.Layer);
     private Vector3 localPosition;
+
+    private bool isClick;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -43,7 +45,7 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
     {
         localPosition = context.Context.BoardDef.GetPiecePosition(boardPosition.X, boardPosition.Y);
 
-        CreateView(ViewType.Coast, boardPosition, false);
+        CreateView(ViewType.Coast, boardPosition);
         UpdateView(VIPIslandState.Fog, false);
     }
     
@@ -71,7 +73,15 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
 
     public bool OnClick(BoardElementView view)
     {
-        return Check(view);
+        var isCheck = Check(view);
+
+        if (isCheck && isClick) return isCheck;
+
+        isClick = true;
+
+        UIMessageWindowController.CreateMessage("aaaaaaaaa", "oooooooooooooo", null, () => UpdateView(VIPIslandState.Paid, true));
+        
+        return isCheck;
     }
 
     public void UpdateView(VIPIslandState state, bool animation)
@@ -79,12 +89,12 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
         switch (state)
         {
             case VIPIslandState.Fog:
-                CreateView(ViewType.FogBridge, boardPosition.Down, false);
-                CreateView(ViewType.IslandFog, boardPosition,false);
+                CreateView(ViewType.FogBridge, boardPosition.Down);
+                CreateView(ViewType.IslandFog, boardPosition);
                 break;
             case VIPIslandState.Broken:
                 RemoveView(ViewType.FogBridge);
-                CreateView(ViewType.BrokenBridge, boardPosition, false);
+                CreateView(ViewType.BrokenBridge, boardPosition);
                 CreateView(ViewType.Airbaloon, boardPosition, animation);
 
                 if (animation == false) break;
@@ -93,18 +103,18 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
                 
                 break;
             case VIPIslandState.Paid:
+                RemoveView(ViewType.BrokenBridge);
                 CreateView(ViewType.Bridge, boardPosition, animation);
                 
                 if (animation == false) break;
                 
-                (views[ViewType.BrokenBridge] as AnimatedBoardElementView).PlayHide();
-                (views[ViewType.Airbaloon] as AnimatedBoardElementView).PlayHide();
+                (views[ViewType.Airbaloon] as AnimatedBoardElementView).PlayHide(2f);
                 
                 break;
         }
     }
 
-    private void CreateView(ViewType id, BoardPosition position, bool animation)
+    private void CreateView(ViewType id, BoardPosition position, bool animation = false)
     {
         var view = context.Context.RendererContext.CreateBoardElement<BoardElementView>((int)id);
         var animView = view as AnimatedBoardElementView;
