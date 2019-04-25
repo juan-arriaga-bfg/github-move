@@ -10,9 +10,9 @@
 
 // Other
 [TaskHighlight(typeof(HighlightTaskPointToPredecessor))]
+[TaskHighlight(typeof(HighlightTaskFindChestForPieceType))]
 [TaskHighlight(typeof(HighlightTaskFindObstacleForPieceType))]
 [TaskHighlight(typeof(HighlightTaskFindMineForPieceType))]
-[TaskHighlight(typeof(HighlightTaskFindChestForPieceType))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 
 // ReSharper disable once RedundantExtendsListEntry
