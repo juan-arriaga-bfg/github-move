@@ -110,8 +110,6 @@ public static partial class CurrencyHelper
                 NSAudioService.Current.Play(SoundId.GetSoftCurr, false, 1);
             if (resource.Currency == Currency.Energy.Name)
                 NSAudioService.Current.Play(SoundId.GetEnergy, false, 1);
-            if(resource.Currency == Currency.Mana.Name)
-                NSAudioService.Current.Play(SoundId.GetMagic, false, 1);
             if(resource.Currency == Currency.Crystals.Name)
                 NSAudioService.Current.Play(SoundId.GetHardCurr, false, 1);
         };
