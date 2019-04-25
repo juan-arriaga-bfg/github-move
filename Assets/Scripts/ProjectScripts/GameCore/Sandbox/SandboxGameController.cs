@@ -31,6 +31,8 @@ public class SandboxGameController : MonoBehaviour
         {
             ElementsResourcesDef = new ElementsResourcesBuilder().Build()
         };
+
+        boardController.RegisterComponent(new LoadSilenceComponent());
         
         boardController
             .RegisterComponent(new ActionExecuteComponent()

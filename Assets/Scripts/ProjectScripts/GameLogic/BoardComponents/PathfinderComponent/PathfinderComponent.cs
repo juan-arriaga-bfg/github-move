@@ -28,7 +28,8 @@ public class PathfinderComponent:ECSEntity
         if (!position.IsValidFor(board.BoardDef.Width, board.BoardDef.Height) || boardLogic.IsLockedCell(position, new List<Type>
         {
             typeof(DragAndCheckMatchAction),
-            typeof(ModificationPiecesAction)
+            typeof(ModificationPiecesAction),
+            typeof(ManaCangeAction)
         })) return false;
         
         var pieceInCurrentPos = boardLogic.GetPieceAt(position);

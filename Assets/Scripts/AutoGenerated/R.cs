@@ -614,6 +614,14 @@ public class R
      public const string Token3Piece = "Token3Piece";
      public const string DestroyTokenCurrencyAnimation = "DestroyTokenCurrencyAnimation";
      public const string BorderTopIntersectionCorner0 = "BorderTopIntersectionCorner0";
+     public const string BorderFallBottom1 = "BorderFallBottom1";
+     public const string BorderFallBottomLeft1 = "BorderFallBottomLeft1";
+     public const string BorderFallBottomRight1 = "BorderFallBottomRight1";
+     public const string BorderFallLeft1 = "BorderFallLeft1";
+     public const string BorderFallTopLeft1 = "BorderFallTopLeft1";
+     public const string BorderFallTopRight1 = "BorderFallTopRight1";
+     public const string BorderWallBottomRight1 = "BorderWallBottomRight1";
+     public const string BorderWallTopLeft1 = "BorderWallTopLeft1";
      public const string BridgeView = "BridgeView";
      public const string AirbaloonView = "AirbaloonView";
      public const string BrokenBridgeView = "BrokenBridgeView";
