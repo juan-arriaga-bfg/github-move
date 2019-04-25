@@ -22,7 +22,6 @@ public class LoadSilenceComponent: IECSComponent
 
     public void OnLoadComplete()
     {
-        IW.Logger.LogError("Complete");
         ProfileService.Current.Settings.SetVolume("Sound", cachedSound);
         context.UnRegisterComponent(this);
     }
