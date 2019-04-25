@@ -120,7 +120,7 @@ public class HighlightTaskUseWorker : TaskHighlightUsingArrow
             {
                 if (life.IsDead)
                 {
-                    Debug.LogError($"WorkplaceLifeComponent is dead at {position}");
+                    Debug.Log($"WorkplaceLifeComponent is dead at {position}");
                     continue;
                 }
 
@@ -202,13 +202,13 @@ public class HighlightTaskUseWorker : TaskHighlightUsingArrow
 
             if (unfinished == null)
             {
-                Debug.LogError($"PieceStateComponent not found for pos {position}");
+                Debug.LogError($"PieceStateComponent not found at {position}");
                 continue;
             }
 
             if (unfinished.State == BuildingState.InProgress || unfinished.State == BuildingState.Complete)
             {
-                Debug.LogError($"PieceStateComponent InProgress for pos {position}");
+                Debug.Log($"PieceStateComponent InProgress at {position}");
                 continue;
             }
             
