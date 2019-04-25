@@ -619,4 +619,5 @@ public class R
      public const string BrokenBridgeView = "BrokenBridgeView";
      public const string CoastView = "CoastView";
      public const string IslandFogView = "IslandFogView";
+     public const string BrokenBridgeAndFogView = "BrokenBridgeAndFogView";
 }

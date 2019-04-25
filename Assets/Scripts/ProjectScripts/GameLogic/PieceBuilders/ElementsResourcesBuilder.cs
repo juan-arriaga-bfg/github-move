@@ -32,6 +32,7 @@ public class ElementsResourcesBuilder
         dict.Add((int) ViewType.DebugId, R.DebugId);
         dict.Add((int) ViewType.AirShip, R.AirShipView);
         dict.Add((int) ViewType.Bridge, R.BridgeView);
+        dict.Add((int) ViewType.FogBridge, R.BrokenBridgeAndFogView);
         dict.Add((int) ViewType.BrokenBridge, R.BrokenBridgeView);
         dict.Add((int) ViewType.Airbaloon, R.AirbaloonView);
         dict.Add((int) ViewType.Coast, R.CoastView);

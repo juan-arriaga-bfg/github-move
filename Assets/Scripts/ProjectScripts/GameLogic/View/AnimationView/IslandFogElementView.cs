@@ -1,18 +1,20 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class IslandFogElementView : AnimatedBoardElementView
 {
     [SerializeField] private GameObject fogItem;
-    [SerializeField] private BoardPosition center;
     [SerializeField] private List<BoardPosition> size;
     
     private readonly List<SpriteRenderer> fogSprites = new List<SpriteRenderer>();
     
     public override void Init(BoardRenderer context)
     {
-        center = center.SetZ(BoardLayer.PieceUP1.Layer);
+        base.Init(context);
+        
+        CachedTransform.localPosition = Vector3.zero;
         
         foreach (var position in size)
         {
@@ -33,16 +35,31 @@ public class IslandFogElementView : AnimatedBoardElementView
             
             cachedSpriteSortingGroup.sortingOrder = GetLayerIndexBy(positionUp);
             fog.transform.position = Context.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, 0);
+            
+            Context.Context.BoardLogic.LockCell(position.SetZ(BoardLayer.Piece.Layer), this);
         }
-	    
-        ClearCacheLayers();
-        SyncRendererLayers(center);
         
+        ClearCacheLayers();
         fogItem.SetActive(false);
-	    
-        base.Init(context);
     }
-    
+
+    public override void PlayHide()
+    {
+        foreach (var position in size)
+        {
+            Context.Context.BoardLogic.UnlockCell(position.SetZ(BoardLayer.Piece.Layer), this);
+        }
+        
+        var sequence = DOTween.Sequence().SetId(animationUid);
+        
+        foreach (var sprite in fogSprites)
+        {
+            sequence.Insert(0f, sprite.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InSine));
+        }
+        
+        sequence.InsertCallback(0.5f, () => base.PlayHide());
+    }
+
     private string CheckBorder(int x, int y)
     {
         var right = new BoardPosition(x+1, y, BoardLayer.Piece.Layer);

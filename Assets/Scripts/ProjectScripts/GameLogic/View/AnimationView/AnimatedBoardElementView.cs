@@ -10,5 +10,6 @@
 
     public virtual void PlayHide()
     {
+        Context.DestroyElement(this);
     }
 }

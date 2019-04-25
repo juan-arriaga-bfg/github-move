@@ -37,10 +37,13 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
     public override void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as BoardLogicComponent;
-        
+    }
+
+    public void Init()
+    {
         localPosition = context.Context.BoardDef.GetPiecePosition(boardPosition.X, boardPosition.Y);
 
-        CreateView(ViewType.Coast, false);
+        CreateView(ViewType.Coast, boardPosition, false);
         UpdateView(VIPIslandState.Fog, false);
     }
     
@@ -71,16 +74,18 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
         return Check(view);
     }
 
-    private void UpdateView(VIPIslandState state, bool animation)
+    public void UpdateView(VIPIslandState state, bool animation)
     {
         switch (state)
         {
             case VIPIslandState.Fog:
-                CreateView(ViewType.IslandFog, false);
+                CreateView(ViewType.FogBridge, boardPosition.Down, false);
+                CreateView(ViewType.IslandFog, boardPosition,false);
                 break;
             case VIPIslandState.Broken:
-                CreateView(ViewType.BrokenBridge, animation);
-                CreateView(ViewType.Airbaloon, animation);
+                RemoveView(ViewType.FogBridge);
+                CreateView(ViewType.BrokenBridge, boardPosition, false);
+                CreateView(ViewType.Airbaloon, boardPosition, animation);
 
                 if (animation == false) break;
                 
@@ -88,7 +93,7 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
                 
                 break;
             case VIPIslandState.Paid:
-                CreateView(ViewType.Bridge, animation);
+                CreateView(ViewType.Bridge, boardPosition, animation);
                 
                 if (animation == false) break;
                 
@@ -99,18 +104,26 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
         }
     }
 
-    private void CreateView(ViewType id, bool animation)
+    private void CreateView(ViewType id, BoardPosition position, bool animation)
     {
         var view = context.Context.RendererContext.CreateBoardElement<BoardElementView>((int)id);
         var animView = view as AnimatedBoardElementView;
         
-        view.Init(context.Context.RendererContext);
         view.CachedTransform.localPosition = localPosition;
-        view.SyncRendererLayers(boardPosition);
+        view.Init(context.Context.RendererContext);
+        view.SyncRendererLayers(position);
 
         if (animation) animView.PlayShow();
         else if (animView != null) animView.PlayIdle();
         
         views.Add(id, view);
+    }
+
+    private void RemoveView(ViewType id)
+    {
+        if (views.TryGetValue(id, out var view) == false) return;
+
+        views.Remove(id);
+        context.Context.RendererContext.DestroyElement(view);
     }
 }

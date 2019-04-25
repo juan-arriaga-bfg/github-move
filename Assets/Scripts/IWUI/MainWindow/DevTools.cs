@@ -316,7 +316,8 @@ public class DevTools : UIContainerElementViewController
     
     public void OnDebug1Click()
     {
-        OnSpawnAirShipClick();
+        BoardService.Current.FirstBoard.BoardLogic.VIPIslandLogic.UpdateView(VIPIslandState.Broken, true);
+        
         return;
         
         UIService.Get.ShowWindow(UIWindowType.DailyRewardWindow);
