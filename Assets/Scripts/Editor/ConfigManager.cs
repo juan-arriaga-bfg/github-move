@@ -82,9 +82,14 @@ public class ConfigManager: CustomEditorBase
             HorizontalArea(() =>
             {
                 Button("Refresh", RefreshElements);
+                Button("Update selected", UpdateSelected);
+            });
+            
+            HorizontalArea(() =>
+            {
                 Button("Update all (force)", UpdateConfigsForce);
                 Button("Update all", UpdateConfigsDefault);
-                Button("Update selected", UpdateSelected);    
+                Button("Update localization", UpdateLocalization);
             });
         
             HorizontalArea(() =>
@@ -277,6 +282,12 @@ public class ConfigManager: CustomEditorBase
         cachedConfigLinks = cachedConfigLinks.OrderBy(elem => elem.Key).ToList();
         
         ConfigsGoogleLoader.UpdateStatus(cachedConfigLinks.Select(elem => elem.Key).ToList());
+    }
+
+    private void UpdateLocalization()
+    {
+        NSLocalizationLoader.LoadLocalization();
+        NSConfigEncription.EncryptConfigs();
     }
 
     private void UpdateConfigsForce()
