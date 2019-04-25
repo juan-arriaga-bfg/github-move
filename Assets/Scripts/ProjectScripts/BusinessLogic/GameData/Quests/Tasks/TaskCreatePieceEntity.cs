@@ -1,6 +1,7 @@
 // Product branch
 [TaskHighlight(typeof(HighlightTaskPointToPiece),                             new[] {typeof(HighlightConditionPieceFromProductBranch)})]
 [TaskHighlight(typeof(HighlightTaskPointToPredecessor),                       new[] {typeof(HighlightConditionPieceFromProductBranch)})]
+[TaskHighlight(typeof(HighlightTaskAnyBag),                                   new[] {typeof(HighlightConditionPieceFromProductBranch)})]
 [TaskHighlight(typeof(HighlightTaskPointToRandomChest),                       new[] {typeof(HighlightConditionPieceFromProductBranch)})]
 [TaskHighlight(typeof(HighlightTaskFindDeadProductionFieldForPieceType),      new[] {typeof(HighlightConditionPieceFromProductBranch)})]
 [TaskHighlight(typeof(HighlightTaskFindObstacleOfAnyTypeExcludingProduction), new[] {typeof(HighlightConditionPieceFromProductBranch)})]
