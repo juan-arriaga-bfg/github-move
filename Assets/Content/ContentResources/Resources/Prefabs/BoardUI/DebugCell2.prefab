@@ -117,9 +117,7 @@ MonoBehaviour:
 
     TL: 1
 
-    TR: 0
-
-    SUKA'
+    TR: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 3e59aa505c1fd16488e087d3149c642d, type: 2}
@@ -188,12 +186,12 @@ MonoBehaviour:
   m_margin: {x: -0.5009527, y: -0.47651613, z: -0.4968801, w: -0.5946269}
   m_textInfo:
     textComponent: {fileID: 114591537277629106}
-    characterCount: 22
+    characterCount: 17
     spriteCount: 0
-    spaceCount: 6
-    wordCount: 7
+    spaceCount: 5
+    wordCount: 6
     linkCount: 0
-    lineCount: 4
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -239,7 +237,7 @@ GameObject:
   - component: {fileID: 4674004793685946}
   - component: {fileID: 114692837304791620}
   m_Layer: 0
-  m_Name: DebugCell
+  m_Name: DebugCell2
   m_TagString: Untagged
   m_Icon: {fileID: 4660412927644837186, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -276,7 +274,6 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   label: {fileID: 114079873783396576}
-  textMesh: {fileID: 114591537277629106}
 --- !u!1 &1785955684820656
 GameObject:
   m_ObjectHideFlags: 0
