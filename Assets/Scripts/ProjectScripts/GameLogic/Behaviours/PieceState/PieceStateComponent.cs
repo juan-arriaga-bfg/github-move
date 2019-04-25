@@ -220,13 +220,13 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         var typeDef = PieceType.GetDefById(thisContext.PieceType);
 
-        if (typeDef.Filter.HasFlag(PieceTypeFilter.Fake))
-        {
-            NSAudioService.Current.Play(SoundId.BuildMain);
-        }
-        else
+        if (typeDef.Filter.HasFlag(PieceTypeFilter.Multicellular) && typeDef.Filter.HasFlag(PieceTypeFilter.Fake) && typeDef.Filter.HasFlag(PieceTypeFilter.Mine) == false)
         {
             NSAudioService.Current.Play(SoundId.BuildCastle);
+        } 
+        else if (typeDef.Filter.HasFlag(PieceTypeFilter.Fake))
+        {
+            NSAudioService.Current.Play(SoundId.BuildMain);
         }
     }
     

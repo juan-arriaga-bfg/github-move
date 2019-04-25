@@ -101,6 +101,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         ProfileService.Current.QueueComponent.Run();
         BoardService.Current.FirstBoard.TutorialLogic.Run();
 
+        ProfileService.Current.Settings.SetVolume("Sound", ProfileService.Current.Settings.GetVolume("BackupSound"));
         if (!hotReload)
         {
             NSAudioService.Current.Play(SoundId.Ambient1Music, true, 1)
