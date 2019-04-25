@@ -120,6 +120,7 @@ public class SandboxGameController : MonoBehaviour
             BoardTiles.GetDefs()
         );
         
+        boardController.BoardLogic.RegisterComponent(new VIPIslandLogicComponent());
         boardController.BoardLogic.RegisterComponent(new FireflyLogicComponent());
         boardController.BoardLogic.RegisterComponent(new AirShipLogicComponent());
         boardController.RegisterComponent(new TutorialLogicComponent().RegisterComponent(new LockerComponent()));

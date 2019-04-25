@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
+public class AirShipLogicComponent : ECSEntity, ITouchableBoardObjectLogic
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
@@ -12,6 +12,8 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
 	private readonly Dictionary<int, AirShipDef> defs = new Dictionary<int, AirShipDef>();
 
     private int idCounter = 0;
+    
+    public bool IsDraggable => true;
     
 	public override void OnRegisterEntity(ECSEntity entity)
 	{

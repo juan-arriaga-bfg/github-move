@@ -614,4 +614,9 @@ public class R
      public const string Token3Piece = "Token3Piece";
      public const string DestroyTokenCurrencyAnimation = "DestroyTokenCurrencyAnimation";
      public const string BorderTopIntersectionCorner0 = "BorderTopIntersectionCorner0";
+     public const string BridgeView = "BridgeView";
+     public const string AirbaloonView = "AirbaloonView";
+     public const string BrokenBridgeView = "BrokenBridgeView";
+     public const string CoastView = "CoastView";
+     public const string IslandFogView = "IslandFogView";
 }
