@@ -17,6 +17,7 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
 	{
 		context = entity as BoardLogicComponent;
         InitFromSave();
+        UIService.Get.OnCloseWindowEvent += OnCloseWindow;
     }
 
     private void InitFromSave()
@@ -36,6 +37,24 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
     public override void OnUnRegisterEntity(ECSEntity entity)
     {
         context = null;
+        UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
+    }
+    
+    private void OnCloseWindow(IWUIWindow window)
+    {
+        foreach (var showedWindow in UIService.Get.ShowedWindows)
+        {
+            if (UIWindowType.IsIgnore(showedWindow.WindowName)) continue;
+            
+            return;
+        }
+        
+        foreach (var ship in defs.Values)
+        {
+            if(ship.View.isShow) continue;
+            
+            ship.View.AnimateSpawn();
+        }
     }
 	
 	public bool OnDragStart(BoardElementView view)
@@ -89,16 +108,6 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
         }
 
         return ret;
-    }
-
-    public void SpawnAll()
-    {
-        foreach (var ship in defs.Values)
-        {
-            if(ship.View.isShow) continue;
-            
-            ship.View.AnimateSpawn();
-        }
     }
     
     public AirShipView Add(Dictionary<int, int> payload, Vector2? position = null)
