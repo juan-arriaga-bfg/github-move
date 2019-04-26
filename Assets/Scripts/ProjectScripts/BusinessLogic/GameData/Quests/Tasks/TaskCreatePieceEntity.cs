@@ -8,6 +8,12 @@
 [TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType),                       new[] {typeof(HighlightConditionPieceFromProductBranch)})]
 [TaskHighlight(typeof(HighlightTaskNextFog),                                  new[] {typeof(HighlightConditionPieceFromProductBranch)})]
 
+// NPC
+[TaskHighlight(typeof(HighlightTaskPointToPredecessor),                       new[] {typeof(HighlightConditionPieceIsNpc)})]
+[TaskHighlight(typeof(HighlightTaskPointToNpcChest),                          new[] {typeof(HighlightConditionPieceIsNpc)})]
+[TaskHighlight(typeof(HighlightTaskPointToRandomLevel3Chest),                 new[] {typeof(HighlightConditionPieceIsNpc)})]
+[TaskHighlight(typeof(HighlightTaskPointToMarketButton),                      new[] {typeof(HighlightConditionPieceIsNpc)})]
+
 // Other
 [TaskHighlight(typeof(HighlightTaskPointToPredecessor))]
 [TaskHighlight(typeof(HighlightTaskFindChestForPieceType))]
