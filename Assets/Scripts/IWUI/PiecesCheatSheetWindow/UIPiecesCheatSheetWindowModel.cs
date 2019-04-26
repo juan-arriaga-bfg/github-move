@@ -35,6 +35,8 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
             case "Boosters":
                 ids.AddRange(GetPieceIds(PieceType.Boost_CR1.Id, PieceType.Boost_CR3.Id));
                 ids.Add(PieceType.Boost_CR.Id);
+                
+                ids.AddRange(GetPieceIds(PieceType.Boost_WR1.Id, PieceType.Boost_WR3.Id));
                 ids.Add(PieceType.Boost_WR.Id);
                 break;
             case "Currencies":
