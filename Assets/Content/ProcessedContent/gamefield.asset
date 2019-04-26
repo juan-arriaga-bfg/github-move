@@ -96,6 +96,9 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 54e0795a145cd7343a45cdd435bd3fe5, type: 3}
     - {fileID: 21300000, guid: 048b0fa43217c2d48a035aa8c1eb2b86, type: 3}
     - {fileID: 21300000, guid: f9288265bce3e48439f05a2bcb73a4c8, type: 3}
+    - {fileID: 21300000, guid: c70bc79bc35274349b21d95ec7108ff5, type: 3}
+    - {fileID: 21300000, guid: 3a9e94d43f0656647a013cb6654d6000, type: 3}
+    - {fileID: 21300000, guid: debc8b4009cffc34a854c8917e447959, type: 3}
     - {fileID: 21300000, guid: cf1385b6b46b9f8498318c26bc54536f, type: 3}
     - {fileID: 21300000, guid: df8c121a86fb80c41bb8c3634bffd0c0, type: 3}
     - {fileID: 21300000, guid: 1bac3920ae45d3e4b8e1fc8c5d62ff58, type: 3}
@@ -424,7 +427,7 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 75a76f3ef9cd4cb489f17edf428c73fb, type: 3}
     - {fileID: 21300000, guid: f596fcc0659312c40a7a37ad00d2234e, type: 3}
     - {fileID: 21300000, guid: d131040c24f4bd741b0fe3e0e8a89a2a, type: 3}
-    totalSpriteSurfaceArea: 9057448
+    totalSpriteSurfaceArea: 9072989
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -435,6 +438,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: bbe4c540b4674d244a00b01ccf8f86f8, type: 3}
   - {fileID: 21300000, guid: 598b674033640444f9a831d2c5ccd41d, type: 3}
   - {fileID: 21300000, guid: 2dd44a405645f6848806753a91143b30, type: 3}
+  - {fileID: 21300000, guid: debc8b4009cffc34a854c8917e447959, type: 3}
   - {fileID: 21300000, guid: bd73f25059d8553409a9d69c33b24dc1, type: 3}
   - {fileID: 21300000, guid: 93b777603a016da43868c8782f98386e, type: 3}
   - {fileID: 21300000, guid: 49010b6031e5aec48ab8d4af987e93ca, type: 3}
@@ -541,6 +545,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 048b0fa43217c2d48a035aa8c1eb2b86, type: 3}
   - {fileID: 21300000, guid: 663a86c4694f7fa40a27742b63d9cfb2, type: 3}
   - {fileID: 21300000, guid: e326dac48705927498d5c53b2d72d2d6, type: 3}
+  - {fileID: 21300000, guid: 3a9e94d43f0656647a013cb6654d6000, type: 3}
   - {fileID: 21300000, guid: 216f69e4d8f95ab43900680781d80567, type: 3}
   - {fileID: 21300000, guid: 9fe802f439742c24aa53abfb299d37ff, type: 3}
   - {fileID: 21300000, guid: ed44bb05a487ee646a0e89a982b460a0, type: 3}
@@ -716,6 +721,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d246b57b01f73224e8cddc29366065d5, type: 3}
   - {fileID: 21300000, guid: cce7ae7bdee1c5146bacc2fe20fdee7e, type: 3}
   - {fileID: 21300000, guid: 6756b49b14c1fe842a57486c7723fa02, type: 3}
+  - {fileID: 21300000, guid: c70bc79bc35274349b21d95ec7108ff5, type: 3}
   - {fileID: 21300000, guid: b3c8d0ab5936b504faff12bd58121f42, type: 3}
   - {fileID: 21300000, guid: 19dd6babdc72d3f41bdd6d0b48494981, type: 3}
   - {fileID: 21300000, guid: 57deb2bb79e730e49adbad47cd12be6f, type: 3}
@@ -819,6 +825,7 @@ SpriteAtlas:
   - grass
   - NPC_C8
   - NPC_Q7
+  - Token3
   - NPC_G3
   - F1
   - NPC_E3
@@ -925,6 +932,7 @@ SpriteAtlas:
   - Soft7
   - Mana3
   - EXT_B7
+  - Token2
   - I2
   - C7
   - E5
@@ -1100,6 +1108,7 @@ SpriteAtlas:
   - PR_D4_lock
   - NPC_O7
   - H1
+  - Token1
   - OB6_A
   - NPC_R2
   - EXT_E2
