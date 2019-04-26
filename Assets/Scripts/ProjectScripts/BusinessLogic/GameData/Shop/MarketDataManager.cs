@@ -53,8 +53,12 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
 
                 var gameDataManager = (GameDataManager) context;
                 
+                foreach (var item in Defs)
+                {
+                    item.GameDataManager = gameDataManager;
+                }
+                
                 var save = gameDataManager.UserProfile.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
-
                 if (save?.Slots == null || save.Slots.Count == 0) return;
 
                 foreach (var item in Defs)
@@ -63,7 +67,7 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
 
                     if (slot == null) continue;
                     
-                    item.Init(gameDataManager, slot.ItemIndex, slot.Piece, slot.Amount, slot.State);
+                    item.Init(slot.ItemIndex, slot.Piece, slot.Amount, slot.State);
                 }
             }
             else
