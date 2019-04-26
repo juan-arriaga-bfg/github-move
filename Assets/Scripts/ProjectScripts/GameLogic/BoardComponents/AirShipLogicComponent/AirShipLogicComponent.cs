@@ -19,6 +19,7 @@ public class AirShipLogicComponent : ECSEntity, ITouchableBoardObjectLogic
 	{
 		context = entity as BoardLogicComponent;
         InitFromSave();
+        UIService.Get.OnCloseWindowEvent += OnCloseWindow;
     }
 
     private void InitFromSave()
@@ -38,6 +39,24 @@ public class AirShipLogicComponent : ECSEntity, ITouchableBoardObjectLogic
     public override void OnUnRegisterEntity(ECSEntity entity)
     {
         context = null;
+        UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
+    }
+    
+    private void OnCloseWindow(IWUIWindow window)
+    {
+        foreach (var showedWindow in UIService.Get.ShowedWindows)
+        {
+            if (UIWindowType.IsIgnore(showedWindow.WindowName)) continue;
+            
+            return;
+        }
+        
+        foreach (var ship in defs.Values)
+        {
+            if(ship.View.isShow) continue;
+            
+            ship.View.AnimateSpawn();
+        }
     }
 	
 	public bool OnDragStart(BoardElementView view)
@@ -91,16 +110,6 @@ public class AirShipLogicComponent : ECSEntity, ITouchableBoardObjectLogic
         }
 
         return ret;
-    }
-
-    public void SpawnAll()
-    {
-        foreach (var ship in defs.Values)
-        {
-            if(ship.View.isShow) continue;
-            
-            ship.View.AnimateSpawn();
-        }
     }
     
     public AirShipView Add(Dictionary<int, int> payload, Vector2? position = null)
@@ -272,6 +281,21 @@ public class AirShipLogicComponent : ECSEntity, ITouchableBoardObjectLogic
         }
         
         partialDrop = true;
+        return false;
+    }
+
+    public bool CheckPayload(int piece)
+    {
+        foreach (var ship in defs.Values)
+        {
+            foreach (var key in ship.Payload.Keys)
+            {
+                if(key != piece) continue;
+
+                return true;
+            }
+        }
+
         return false;
     }
 }

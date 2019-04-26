@@ -3,7 +3,67 @@
     "Uid": "Empty"
   },
   {
+    "Uid": "Boost_WR1",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      }
+    ]
+  },
+  {
+    "Uid": "Boost_WR2",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "Boost_WR3",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 4
+      }
+    ]
+  },
+  {
+    "Uid": "Boost_WR4",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 4
+      }
+    ]
+  },
+  {
     "Uid": "Boost_WR",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
     "UnlockBonus": [
       {
         "Currency": "Coins",

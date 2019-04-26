@@ -87,6 +87,7 @@ SpriteAtlas:
     - {fileID: 21300000, guid: f98f2217ed23a44bbb39076eeef672dc, type: 3}
     - {fileID: 21300000, guid: 3f780085b29854679aa0939edea1f5ce, type: 3}
     - {fileID: 21300000, guid: b0c561d4d91dad64781f4ce46332cf94, type: 3}
+    - {fileID: 21300000, guid: b9c6407863abd5c4c81b017bd7f651ac, type: 3}
     - {fileID: 21300000, guid: 6032e11ae1c1da84aa0e07d5e0ec550b, type: 3}
     - {fileID: 21300000, guid: 452af8016d7a3034f82a26275d708041, type: 3}
     - {fileID: 21300000, guid: 56dfdbf136ab7fd44b745aa30e4caa34, type: 3}
@@ -289,7 +290,7 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 88710e6b7e3607e4aad348b5befc7ed1, type: 3}
     - {fileID: 21300000, guid: 4dbe30d396e6e354b8eb80842bbfc1dc, type: 3}
     - {fileID: 21300000, guid: 2f28d7bc463a37743b1ae10e4b4453fe, type: 3}
-    totalSpriteSurfaceArea: 3867144
+    totalSpriteSurfaceArea: 3871544
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -438,6 +439,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 02e0ba380a99b544280a861e8f454109, type: 3}
   - {fileID: 21300000, guid: 11f515482397cdc429a96bb27d5520e5, type: 3}
   - {fileID: 21300000, guid: 058a1268318ea9a418ee2a335345f4ad, type: 3}
+  - {fileID: 21300000, guid: b9c6407863abd5c4c81b017bd7f651ac, type: 3}
   - {fileID: 21300000, guid: e32784785980fb84fb6f18282afe9ee8, type: 3}
   - {fileID: 21300000, guid: bcc0c478bb22746418a77b841674a7f1, type: 3}
   - {fileID: 21300000, guid: ad47787854e55c64e9ba7c0f65dfc8b0, type: 3}
@@ -687,6 +689,7 @@ SpriteAtlas:
   - button_upgrade
   - quest_messege
   - buttonShadow
+  - icon_Token
   - lockFog_down
   - handIconCodex
   - Card_SpecialOffer
