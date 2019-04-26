@@ -80,7 +80,7 @@ public class TaskUseMineEntity : TaskEventCounterEntity
             for (int i = chain.Count - 1; i >= 0; i--)
             {
                 PieceTypeDef def = PieceType.GetDefById(chain[i]);
-                if (!def.Filter.Has(PieceTypeFilter.Mine) || def.Filter.Has(PieceTypeFilter.Fake))
+                if (!def.Filter.Has(PieceTypeFilter.Mine)/* || def.Filter.Has(PieceTypeFilter.Fake)*/)
                 {
                     chain.RemoveAt(i); 
                 }
@@ -104,6 +104,6 @@ public class TaskUseMineEntity : TaskEventCounterEntity
             return baseIco;
         }
         
-        return PieceType.Parse(Chain[0]);
+        return PieceType.Parse(Chain[1]);
     }
 }

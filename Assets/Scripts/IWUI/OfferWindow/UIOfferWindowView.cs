@@ -103,7 +103,7 @@ public class UIOfferWindowView : UIGenericPopupWindowView
             .ToState(GenericButtonState.Active)
             .OnClick(OnClick);
     }
-
+    
     private void OnClick()
     {
         if (isClick) return;

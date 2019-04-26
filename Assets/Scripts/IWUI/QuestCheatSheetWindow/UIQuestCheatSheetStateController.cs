@@ -151,6 +151,7 @@ public class UIQuestCheatSheetStateController : IWUIWindowViewController
         
         var model = UIService.Get.GetCachedModel<UIQuestCheatSheetWindowModel>(UIWindowType.QuestCheatSheetWindow);
         model.Refresh();
+        UIService.Get.GetShowedView<UIQuestCheatSheetWindowView>(UIWindowType.QuestCheatSheetWindow).OnFilterUpdated();
         
         OnApplyChanges?.Invoke();
     }

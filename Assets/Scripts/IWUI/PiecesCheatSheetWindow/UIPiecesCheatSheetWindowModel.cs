@@ -35,12 +35,15 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
             case "Boosters":
                 ids.AddRange(GetPieceIds(PieceType.Boost_CR1.Id, PieceType.Boost_CR3.Id));
                 ids.Add(PieceType.Boost_CR.Id);
+                
+                ids.AddRange(GetPieceIds(PieceType.Boost_WR1.Id, PieceType.Boost_WR4.Id));
                 ids.Add(PieceType.Boost_WR.Id);
                 break;
             case "Currencies":
                 ids.AddRange(GetPieceIds(PieceType.Mana1.Id, PieceType.Mana5.Id));
                 ids.AddRange(GetPieceIds(PieceType.Soft1.Id, PieceType.Soft8.Id));
                 ids.AddRange(GetPieceIds(PieceType.Hard1.Id, PieceType.Hard6.Id));
+                ids.AddRange(GetPieceIds(PieceType.Token1.Id, PieceType.Token3.Id));
                 break;
             case "Mines":
                 ids.AddRange(GetPieceIds(PieceType.MN_A.Id, PieceType.MN_A3.Id));

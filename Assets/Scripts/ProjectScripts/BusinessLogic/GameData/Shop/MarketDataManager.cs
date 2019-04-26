@@ -50,9 +50,15 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
 					
                     item.AddDef(def);
                 }
-                
-                var save = ((GameDataManager)context).UserProfile.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
 
+                var gameDataManager = (GameDataManager) context;
+                
+                foreach (var item in Defs)
+                {
+                    item.GameDataManager = gameDataManager;
+                }
+                
+                var save = gameDataManager.UserProfile.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
                 if (save?.Slots == null || save.Slots.Count == 0) return;
 
                 foreach (var item in Defs)

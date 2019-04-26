@@ -30,10 +30,12 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
             {
                 data.Sort((a, b) => a.Piece.CompareTo(b.Piece));
 
+                var dataManager = (GameDataManager) context;
+                
                 foreach (var def in data)
                 {
                     Obstacles.Add(def.Piece, def);
-                    AddToBranch(GameDataService.Current.MatchDefinition.GetFirst(def.Piece), def);
+                    AddToBranch(dataManager.MatchDefinition.GetFirst(def.Piece), def);
                     AddSequence(def.Uid, def.PieceWeights);
                 }
             }
@@ -96,7 +98,7 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
         
         reward = character.GetNextDict(def.CharactersAmount.Range(), reward);
         reward = extras.GetNextDict(def.ExtrasAmount.Range(), reward);
-        reward = GetOtherPieces(def.OtherAmount.Range(), reward);
+        if(def.OtherAmount != null) reward = GetOtherPieces(def.OtherAmount.Range(), reward);
         reward = sequence.GetNextDict(def.PieceAmount, reward);
         
         return reward;
@@ -110,7 +112,7 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
         var positionsCache = board.BoardLogic.PositionsCache;
         var definition = board.BoardLogic.MatchDefinition;
         
-        var idsMine = PieceType.GetIdsByFilter(PieceTypeFilter.Mine, PieceTypeFilter.Fake);
+        var idsMine = PieceType.GetIdsByFilter(PieceTypeFilter.Mine);
         var idsObstacle = PieceType.GetIdsByFilter(PieceTypeFilter.Obstacle | PieceTypeFilter.Tree);
         var typeBranches = PieceTypeBranch.Default;
 
@@ -134,7 +136,7 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
             typeBranches = typeBranches.Remove(def.Branch);
         }
         
-        var idsMonument = PieceType.GetIdsByBranch(typeBranches, PieceTypeFilter.Multicellular, PieceTypeFilter.Fake | PieceTypeFilter.Mine);
+        var idsMonument = PieceType.GetIdsByFilterAndBranch(PieceTypeFilter.Multicellular, PieceTypeFilter.Fake | PieceTypeFilter.Mine, typeBranches);
 
         foreach (var id in idsMonument)
         {
@@ -145,7 +147,7 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
             typeBranches = typeBranches.Remove(def.Branch);
         }
 
-        var idsResult = PieceType.GetIdsByBranch(typeBranches, PieceTypeFilter.Simple | PieceTypeFilter.Removable);
+        var idsResult = PieceType.GetIdsByFilterAndBranch(PieceTypeFilter.Simple | PieceTypeFilter.Removable, typeBranches);
 
         if (idsResult.Count == 0) return result;
         

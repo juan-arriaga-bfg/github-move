@@ -122,6 +122,8 @@ public class FireflyView : BoardElementView
         
         DOTween.Kill(CachedTransform);
         
+        NSAudioService.Current.Play(SoundId.FireflyTap);
+        
         if (free.Count == 0)
         {
             DOTween.Sequence()

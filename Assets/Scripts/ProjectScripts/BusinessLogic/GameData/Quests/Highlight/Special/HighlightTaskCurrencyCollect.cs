@@ -24,7 +24,7 @@ public class HighlightTaskCurrencyCollect : ITaskHighlight
         
         if (currencyTask.CurrencyName == Currency.Crystals.Name)
         {
-            return new HighlightTaskNotImplemented().Highlight(currencyTask);
+            return new HighlightTaskPointToMarketButton().Highlight(task);
         }
         
         if (currencyTask.CurrencyName == Currency.Mana.Name)

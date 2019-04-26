@@ -202,7 +202,7 @@ public class EmptyCellsFinderComponent : IECSComponent
 		return free.Count >= amount;
 	}
 	
-	public bool CheckFreeSpaceReward(int amount, bool isMessageShow, out BoardPosition target)
+	public bool CheckFreeSpaceReward(int amount, out BoardPosition target)
 	{
 		var board = BoardService.Current.FirstBoard;
 		var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
@@ -222,13 +222,7 @@ public class EmptyCellsFinderComponent : IECSComponent
 			target = position;
 			return true;
 		}
-
-		if (isMessageShow == false) return false;
 		
-		UIMessageWindowController.CreateMessage(
-			LocalizationService.Get("window.daily.error.title", "window.daily.error.title"),
-			LocalizationService.Get("window.daily.error.free.space", "window.daily.error.free.space"));
-			
 		return false;
 	}
 	

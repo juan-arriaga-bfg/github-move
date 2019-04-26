@@ -203,7 +203,6 @@
     "Id": 23,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "26_UseMine",
       "87_KillTree"
     ],
     "Conditions": [
@@ -509,7 +508,7 @@
       {
         "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
         "Id": "FogCleared",
-        "Value": "Fog 11_1"
+        "Value": "Fog 12_1"
       }
     ]
   },
@@ -567,7 +566,7 @@
       {
         "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
         "Id": "FogCleared",
-        "Value": "Fog 13_1"
+        "Value": "Fog 14_1"
       }
     ]
   },
@@ -609,7 +608,7 @@
       {
         "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
         "Id": "FogCleared",
-        "Value": "Fog 14_1"
+        "Value": "Fog 15_1"
       }
     ]
   },
@@ -898,7 +897,8 @@
     "Id": 74,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "85_OpenChest_CH_A"
+      "85_OpenChest_CH_A",
+      "26_UseMine"
     ],
     "Conditions": [
       {
@@ -1045,7 +1045,7 @@
       {
         "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
         "Id": "FogCleared",
-        "Value": "Fog 12_1"
+        "Value": "Fog 13_1"
       }
     ]
   },

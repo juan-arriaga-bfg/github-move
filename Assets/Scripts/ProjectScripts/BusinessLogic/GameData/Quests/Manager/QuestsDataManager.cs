@@ -67,6 +67,8 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     public bool ConnectedToBoard { get; private set; }
 
     private ECSEntity context;
+
+    private long? pendingDailyTimer;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -140,10 +142,10 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
                 startedQuests.Add(quest);
             }
         }
-
+        
         if (DailyQuest != null)
         {
-            StartDailyTimer(DateTimeExtension.UnixTimeToDateTime(questSave.DailyTimerStart));
+            pendingDailyTimer = questSave.DailyTimerStart;
         }
 
         // Handle migration - case when target is changed
@@ -317,6 +319,12 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
 
         if (DailyQuest != null)
         {
+            if (pendingDailyTimer.HasValue)
+            {
+                StartDailyTimer(DateTimeExtension.UnixTimeToDateTime(pendingDailyTimer.Value));
+                pendingDailyTimer = null;
+            }
+            
             LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
         }
         
@@ -511,11 +519,15 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
             OnActiveQuestsListChanged?.Invoke();
         }
 
+        // Commented out: looks unsafe when loading foreign profile in sync window
+        
         // Recreate daily quest if we lost all the tasks due to migration
-        if (DailyQuest != null && DailyQuest.ActiveTasks.Count == 1)
-        {
-            StartNewDailyQuest();
-        }
+        // if (DailyQuest != null && DailyQuest.ActiveTasks.Count == 1)
+        // {
+        //     StartNewDailyQuest();
+        // }
+        
+        // end
 
         return quest;
     }

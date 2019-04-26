@@ -129,5 +129,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         ProfileService.Instance.Manager.UploadCurrentProfile(true);
 
         LocalNotificationsService.Current.ScheduleNotifications();
+        
+        BoardService.Current.FirstBoard.GetComponent<LoadSilenceComponent>(LoadSilenceComponent.ComponentGuid)?.OnLoadComplete();
     }
 }

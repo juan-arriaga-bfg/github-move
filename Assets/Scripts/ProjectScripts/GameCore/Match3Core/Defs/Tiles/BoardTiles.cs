@@ -23,6 +23,13 @@ public static class BoardTiles
         defs = new Dictionary<int, BoardTileDef>
         {
             {
+                -1, new BoardTileDef // Cell outside of border
+                {
+                    Height = 0,
+                    IsLock = true,
+                }
+            },
+            {
                 10, new BoardTileDef // Water
                 {
                     Height = 0,
@@ -71,6 +78,15 @@ public static class BoardTiles
                     SpriteName = "tile_clay_1",
                     SpriteNameChess = "tile_clay_2"
                 }
+            },            
+            {
+                103, new BoardTileDef
+                {
+                    Height = 0,
+                    IsLock = false,
+                    SpriteName = "tile_foliage_1",
+                    SpriteNameChess = "tile_foliage_2"
+                }
             },
 
             // HEIGHT 1  
@@ -100,6 +116,15 @@ public static class BoardTiles
                     SpriteName = "tile_clay_1",
                     SpriteNameChess = "tile_clay_2"
                 }
+            },            
+            {
+                203, new BoardTileDef
+                {
+                    Height = 1,
+                    IsLock = false,
+                    SpriteName = "tile_foliage_1",
+                    SpriteNameChess = "tile_foliage_2"
+                }
             },
 
             // HEIGHT 2 
@@ -128,6 +153,15 @@ public static class BoardTiles
                     IsLock = false,
                     SpriteName = "tile_clay_1",
                     SpriteNameChess = "tile_clay_2"
+                }
+            },
+            {
+                303, new BoardTileDef
+                {
+                    Height = 2,
+                    IsLock = false,
+                    SpriteName = "tile_foliage_1",
+                    SpriteNameChess = "tile_foliage_2"
                 }
             }
         };

@@ -608,6 +608,23 @@ public class R
      public const string BorderWallTopRight1_Addon_1 = "BorderWallTopRight1_Addon_1";
      public const string BorderWallTop1_Addon_3 = "BorderWallTop1_Addon_3";
      public const string BorderTopRightIntersectionCorner0 = "BorderTopRightIntersectionCorner0";
+     public const string Token1Piece = "Token1Piece";
+     public const string Token2Piece = "Token2Piece";
+     public const string Token3Piece = "Token3Piece";
+     public const string DestroyTokenCurrencyAnimation = "DestroyTokenCurrencyAnimation";
+     public const string BorderTopIntersectionCorner0 = "BorderTopIntersectionCorner0";
+     public const string BorderFallBottom1 = "BorderFallBottom1";
+     public const string BorderFallBottomLeft1 = "BorderFallBottomLeft1";
+     public const string BorderFallBottomRight1 = "BorderFallBottomRight1";
+     public const string BorderFallLeft1 = "BorderFallLeft1";
+     public const string BorderFallTopLeft1 = "BorderFallTopLeft1";
+     public const string BorderFallTopRight1 = "BorderFallTopRight1";
+     public const string BorderWallBottomRight1 = "BorderWallBottomRight1";
+     public const string BorderWallTopLeft1 = "BorderWallTopLeft1";
+     public const string Boost_WR1Piece = "Boost_WR1Piece";
+     public const string Boost_WR2Piece = "Boost_WR2Piece";
+     public const string Boost_WR3Piece = "Boost_WR3Piece";
+     public const string Boost_WR4Piece = "Boost_WR4Piece";
      public const string FireflyProduction = "FireflyProduction";
      public const string FireflyEvent = "FireflyEvent";
 }

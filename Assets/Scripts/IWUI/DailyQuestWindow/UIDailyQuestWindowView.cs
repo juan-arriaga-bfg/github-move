@@ -65,7 +65,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         base.OnViewShowCompleted();
     }
-
+    
     private void SetSequenceHeader(UIDailyQuestWindowModel model)
     {
         string allClearText = model.AllClearTaskName;

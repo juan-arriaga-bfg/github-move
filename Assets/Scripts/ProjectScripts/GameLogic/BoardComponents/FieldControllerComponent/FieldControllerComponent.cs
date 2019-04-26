@@ -119,7 +119,7 @@ public class FieldControllerComponent : IECSComponent
                     view.UpdateResource(0);
                 }
                 
-                DevTools.UpdateFogSectorsDebug();
+                FogSectorsView.Rebuild(context.RendererContext);
                 context.Manipulator.CameraManipulator.CameraMove.UnLock(context);
             }
         });

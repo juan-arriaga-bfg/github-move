@@ -19,6 +19,7 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddSimplePiece(Dictionary<int, IPieceBuilder> dict)
     {
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Boost_WR1.Id, PieceType.Boost_WR4.Id, dict);
         dict.Add(PieceType.Boost_WR.Id, new SimplePieceBuilder());
         
         dict.Add(PieceType.NPC_SleepingBeautyPlaid.Id, new SimplePieceBuilder());
@@ -81,6 +82,7 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<ManaPieceBuilder>(PieceType.Mana1.Id, PieceType.Mana6.Id, dict);
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Soft1.Id, PieceType.Soft8.Id, dict);
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Hard1.Id, PieceType.Hard6.Id, dict);
+        dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Token1.Id, PieceType.Token3.Id, dict);
         
         dict.Add(PieceType.CH_Free.Id, new ChestPieceBuilder());
         dict.Add(PieceType.CH_NPC.Id, new ChestPieceBuilder());

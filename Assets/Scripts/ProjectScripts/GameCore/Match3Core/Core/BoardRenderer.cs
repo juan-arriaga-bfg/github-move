@@ -1264,48 +1264,6 @@ public partial class BoardRenderer : ECSEntity
         GameObject water = (GameObject) GameObject.Instantiate(waterPrefab);
     }
 
-    private struct Meta
-    {
-        // ReSharper disable InconsistentNaming
-        public int tileId;
-        public bool neighborR ;
-        public bool neighborL ;
-        public bool neighborT ;
-        public bool neighborB ;
-        
-        public bool neighborBL;
-        public bool neighborBR;        
-        public bool neighborTL;
-        public bool neighborTR;
-        
-        public int floorDiffR;
-        public int floorDiffL;
-        public int floorDiffT;
-        public int floorDiffB;
-        
-        public int floorDiffBL;
-        public int floorDiffBR;        
-        public int floorDiffTL;
-        public int floorDiffTR;
-        // ReSharper restore InconsistentNaming
-        
-        private string BoolToString(bool v)
-        {
-            return v ? "1" : "0";
-        }
-        
-        public override string ToString()
-        {
-            // return $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
-            // return $"<mspace=1.5em>T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}\nBR:{(floorDiffBR)} TL:{(floorDiffTL)}</mspace>";
-            // //return $"<mspace=1.5em>L:{floorDiffT}\nB:{floorDiffR}</mspace>";  
-            
-            var str1 = $"<mspace=1.5em>T:{BoolToString(neighborT)} R:{BoolToString(neighborR)}\nB:{BoolToString(neighborB)} L:{BoolToString(neighborL)}\nBL:{BoolToString(neighborBL)} TR:{BoolToString(neighborTR)}</mspace>";
-            var str2 = $"<mspace=1.5em>id:{tileId} T:{(floorDiffT)} R:{(floorDiffR)}\nB:{(floorDiffB)} L:{(floorDiffL)}\nBL:{(floorDiffBL)} TR:{(floorDiffTR)}</mspace>";
-            return $"{str1}\n{str2}";
-        }
-    }
-
     private Dictionary<string, List<string>> GetAddonsList()
     {
         // Value in dict is a count of NULL, added as addons. More nulls - more tiles without any addons
@@ -1355,8 +1313,13 @@ public partial class BoardRenderer : ECSEntity
         var sw = new Stopwatch();
         sw.Start();
 #endif
+        // int seed = UnityEngine.Random.Range(0, 10000);
+        // IW.Logger.Log($"Seed: {seed}");
+
+        int seed = 8322;
         
-        System.Random random = new System.Random(100);
+        System.Random random = new System.Random(seed);
+        
         
         var boardDef = context.BoardDef;
         
@@ -1411,15 +1374,9 @@ public partial class BoardRenderer : ECSEntity
         {
             for (int y = h - 1; y >= 0; y--)// Reversed for proper z orders!
             {
-                int titleId = fieldManager.GetTileId(x, y);
-                if (titleId == waterId)
-                {
-                    continue;
-                }
+                int tileId = fieldManager.GetTileId(x, y);                
 
-                Meta meta = new Meta {tileId = titleId};
-
-                int currentHeight = tilesDefs[titleId].Height;
+                int currentHeight = tilesDefs[tileId].Height;
                 // ReSharper disable InconsistentNaming
                 int idR  = fieldManager.GetTileId(x + 0, y + 1);
                 int idL  = fieldManager.GetTileId(x + 0, y - 1);
@@ -1432,16 +1389,32 @@ public partial class BoardRenderer : ECSEntity
                 int idTL = fieldManager.GetTileId(x - 1, y - 1);
                 // ReSharper restore InconsistentNaming
                 
-                // IsCellExists NOT required until we have any non-water tiles place on borders of the field
-                meta.neighborR  = /*IsCellExists(x + 0, y + 1) && */idR  != waterId;
-                meta.neighborL  = /*IsCellExists(x + 0, y - 1) && */idL  != waterId;              
-                meta.neighborT  = /*IsCellExists(x - 1, y + 0) && */idT  != waterId;
-                meta.neighborB  = /*IsCellExists(x + 1, y + 0) && */idB  != waterId;
+                LayoutTileMeta meta = new LayoutTileMeta {tileId = tileId};
                 
-                meta.neighborBL = /*IsCellExists(x + 1, y - 1) && */idBL != waterId;
-                meta.neighborBR = /*IsCellExists(x - 1, y + 1) && */idBR != waterId;
-                meta.neighborTR = /*IsCellExists(x - 1, y + 1) && */idTR != waterId;
-                meta.neighborTL = /*IsCellExists(x - 1, y + 1) && */idTL != waterId;
+                // IsCellExists NOT required until we have any non-water tiles place on borders of the field
+                meta.neighborR  = /*IsCellExists(x + 0, y + 1) && */idR  > waterId;
+                meta.neighborL  = /*IsCellExists(x + 0, y - 1) && */idL  > waterId;              
+                meta.neighborT  = /*IsCellExists(x - 1, y + 0) && */idT  > waterId;
+                meta.neighborB  = /*IsCellExists(x + 1, y + 0) && */idB  > waterId;
+                
+                // for fogs
+                if (meta.neighborB || meta.neighborL || meta.neighborR || meta.neighborT)
+                {
+                    if (tilesDefs[tileId].IsLock)
+                    {
+                        fieldManager.LockedCells.Add(new BoardPosition(x, y));
+                    } 
+                }
+                
+                if (tileId == waterId)
+                {
+                    continue;
+                }
+                
+                meta.neighborBL = /*IsCellExists(x + 1, y - 1) && */idBL > waterId;
+                meta.neighborBR = /*IsCellExists(x - 1, y + 1) && */idBR > waterId;
+                meta.neighborTR = /*IsCellExists(x - 1, y + 1) && */idTR > waterId;
+                meta.neighborTL = /*IsCellExists(x - 1, y + 1) && */idTL > waterId;
 
                 meta.floorDiffR  = tilesDefs[idR ].Height - currentHeight;
                 meta.floorDiffL  = tilesDefs[idL ].Height - currentHeight;                
@@ -1454,12 +1427,26 @@ public partial class BoardRenderer : ECSEntity
                 meta.floorDiffTL = tilesDefs[idTL].Height - currentHeight;
                 
                 // DebugTextView debugView = BoardService.Current.FirstBoard.RendererContext.CreateBoardElementAt<DebugTextView>(R.DebugCell2, new BoardPosition(x, y, BoardLayer.MAX.Layer));
-                // debugView.SetText(meta.ToString());
+                // debugView.SetText($"<color=#{((x ) % 2 == 0 ? "FFFFFF" : "000000")}>{meta.ToString()}</color>"); 
 
-#region WALLS
-                if (meta.neighborT && meta.neighborR && meta.floorDiffT == 1 && meta.floorDiffR == 1)
+#region WALLS & FALLS
+                //
+                if (meta.neighborT && meta.neighborL && meta.neighborB && meta.neighborR && meta.floorDiffT == 1 && meta.floorDiffL == 1)
                 {
-                    CreateBorder(x, y, R.BorderWallBottomLeft1);
+                    CreateBorder(x, y, R.BorderFallTopLeft1);
+                }
+                else if (meta.neighborT && meta.neighborL && meta.neighborB && meta.neighborR && meta.floorDiffB == 1 && meta.floorDiffL == 1)
+                {
+                    CreateBorder(x, y, R.BorderFallBottomLeft1);
+                }                
+                else if (meta.neighborT && meta.neighborL && meta.neighborB && meta.neighborR && meta.floorDiffB == 1 && meta.floorDiffR == 1)
+                {
+                    CreateBorder(x, y, R.BorderFallBottomRight1);
+                }
+                //
+                else if (meta.neighborT && meta.neighborR && meta.floorDiffT == 1 && meta.floorDiffR == 1)
+                {
+                    CreateBorder(x, y, R.BorderFallTopRight1);
                 }
                 else if (meta.neighborTR && meta.floorDiffTR == 1 && meta.floorDiffT == 0 && meta.floorDiffR == 0)
                 {
@@ -1472,6 +1459,28 @@ public partial class BoardRenderer : ECSEntity
                 else if (meta.neighborT && meta.floorDiffT == 1)
                 {
                     CreateBorder(x, y, R.BorderWallTop1);
+                }
+                //
+                else if (meta.neighborB && meta.neighborBR && meta.neighborR && meta.floorDiffBR == 1 && meta.floorDiffB == 0 && meta.floorDiffR == 0)
+                {
+                    CreateBorder(x, y, R.BorderWallBottomRight1);
+                }
+                else if (meta.neighborL && meta.neighborTL && meta.neighborT && meta.floorDiffTL == 1 && meta.floorDiffT == 0 && meta.floorDiffL == 0)
+                {
+                    CreateBorder(x, y, R.BorderWallTopLeft1);
+                }
+                else if (meta.neighborL && meta.neighborBL && meta.neighborB && meta.floorDiffBL == 1 && meta.floorDiffB == 0 && meta.floorDiffL == 0)
+                {
+                    CreateBorder(x, y, R.BorderWallBottomLeft1);
+                }  
+                //
+                else if (meta.neighborB && meta.floorDiffB == 1 && meta.floorDiffL == 0 && meta.floorDiffR == 0)
+                {
+                    CreateBorder(x, y, R.BorderFallBottom1);
+                }
+                else if (meta.neighborL && meta.floorDiffL == 1 && meta.floorDiffT == 0 && meta.floorDiffB == 0)
+                {
+                    CreateBorder(x, y, R.BorderFallLeft1);
                 }
 #endregion
                 
@@ -1488,7 +1497,11 @@ public partial class BoardRenderer : ECSEntity
                         CreateBorder(x, y, R.BorderTop0);
                     }
                 }
-                
+                else if (!meta.neighborTL && meta.neighborT && meta.floorDiffT == -1 && meta.neighborTR && meta.floorDiffTR == 0)
+                {
+                    CreateBorder(x, y, R.BorderTop0);
+                }
+ 
                 if (!meta.neighborR)
                 {
                     if (meta.neighborT && meta.floorDiffT == 1
@@ -1554,7 +1567,7 @@ public partial class BoardRenderer : ECSEntity
                     string id = "BorderTopRightOuterCorner" + Mathf.Abs(meta.floorDiffTR);                    
                     CreateBorder(x, y, id);
                 }
-                if (!meta.neighborT && !meta.neighborL)
+                if ((!meta.neighborT || meta.neighborT && meta.floorDiffT < 0) && !meta.neighborL)
                 {
                     string id = "BorderTopLeftOuterCorner" + Mathf.Abs(meta.floorDiffTL); 
                     CreateBorder(x, y, id);
@@ -1564,7 +1577,7 @@ public partial class BoardRenderer : ECSEntity
                     string id = "BorderBottomRightOuterCorner" + Mathf.Abs(meta.floorDiffBR); 
                     CreateBorder(x, y, id);
                 }
-                if (!meta.neighborB && !meta.neighborL)
+                if ((!meta.neighborB || meta.neighborB && meta.floorDiffB < 0) && !meta.neighborL)
                 {
                     string id = "BorderBottomLeftOuterCorner" + Mathf.Abs(meta.floorDiffBL); 
                     CreateBorder(x, y, id);
@@ -1577,7 +1590,7 @@ public partial class BoardRenderer : ECSEntity
                     string id = "BorderBottomLeftInnerCorner" + Mathf.Abs(meta.floorDiffTR);                    
                     CreateBorder(x, y, id);
                 }
-                if (meta.neighborT && meta.neighborL && !meta.neighborTL && meta.floorDiffT == meta.floorDiffL)
+                if (meta.neighborT && meta.neighborL && (!meta.neighborTL || meta.neighborTL && meta.floorDiffTL < 0) && meta.floorDiffT == meta.floorDiffL && meta.floorDiffT == 0)
                 {
                     string id = "BorderBottomRightInnerCorner" + Mathf.Abs(meta.floorDiffTL); 
                     CreateBorder(x, y, id);
@@ -1599,6 +1612,12 @@ public partial class BoardRenderer : ECSEntity
                 {                  
                     CreateBorder(x, y, R.BorderTopRightIntersectionCorner0);
                 }
+                
+                if (!meta.neighborL && meta.neighborB && !meta.neighborBL && meta.floorDiffB == -1 && meta.floorDiffBL == -1 && meta.floorDiffL == -1)
+                {                  
+                    CreateBorder(x, y, R.BorderTopIntersectionCorner0);
+                }
+
 #endregion
             }
         }
