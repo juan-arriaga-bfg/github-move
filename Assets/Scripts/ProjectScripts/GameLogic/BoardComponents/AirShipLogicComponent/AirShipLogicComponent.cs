@@ -281,4 +281,19 @@ public class AirShipLogicComponent : ECSEntity, IDraggableFlyingObjectLogic
         partialDrop = true;
         return false;
     }
+
+    public bool CheckPayload(int piece)
+    {
+        foreach (var ship in defs.Values)
+        {
+            foreach (var key in ship.Payload.Keys)
+            {
+                if(key != piece) continue;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

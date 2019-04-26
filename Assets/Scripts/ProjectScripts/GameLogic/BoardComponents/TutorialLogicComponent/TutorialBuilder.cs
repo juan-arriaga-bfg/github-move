@@ -353,7 +353,7 @@ public static class TutorialBuilder
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "21_OpenChest", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.CH_Free.Id, Amount = 1, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.CH_Free.Id, Amount = 1, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckPieceInAirShipTutorialCondition {Target = PieceType.CH_Free.Id, ConditionType = TutorialConditionType.Hard}, true);
                 break;
             }
             case 24: // daily quest tutorial
