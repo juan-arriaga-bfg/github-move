@@ -249,8 +249,9 @@ public class MatchDefinitionBuilder
         
         dict.Add(PieceType.Boost_WR1.Id, new PieceMatchDef {Next = PieceType.Boost_WR2.Id, Previous = PieceType.None.Id,   Amount = 3});
         dict.Add(PieceType.Boost_WR2.Id, new PieceMatchDef {Next = PieceType.Boost_WR3.Id,  Previous = PieceType.Boost_WR1.Id, Amount = 3});
-        dict.Add(PieceType.Boost_WR3.Id, new PieceMatchDef {Next = PieceType.Boost_WR.Id,  Previous = PieceType.Boost_WR2.Id, Amount = 3});
-        dict.Add(PieceType.Boost_WR.Id,  new PieceMatchDef {Next = PieceType.None.Id,   Previous = PieceType.Boost_WR3.Id });
+        dict.Add(PieceType.Boost_WR3.Id, new PieceMatchDef {Next = PieceType.Boost_WR4.Id,  Previous = PieceType.Boost_WR2.Id, Amount = 3});
+        dict.Add(PieceType.Boost_WR4.Id, new PieceMatchDef {Next = PieceType.Boost_WR.Id,  Previous = PieceType.Boost_WR3.Id, Amount = 3});
+        dict.Add(PieceType.Boost_WR.Id,  new PieceMatchDef {Next = PieceType.None.Id,   Previous = PieceType.Boost_WR4.Id });
 #endregion
         
 #region Currencies

@@ -543,6 +543,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef Boost_WR1 = new PieceTypeDef{Id = 9000201, Abbreviations = new List<string>{ "Boost_WR1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
     public static readonly PieceTypeDef Boost_WR2 = new PieceTypeDef{Id = 9000202, Abbreviations = new List<string>{ "Boost_WR2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
     public static readonly PieceTypeDef Boost_WR3 = new PieceTypeDef{Id = 9000203, Abbreviations = new List<string>{ "Boost_WR3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef Boost_WR4 = new PieceTypeDef{Id = 9000204, Abbreviations = new List<string>{ "Boost_WR4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
     
 #endregion
 

@@ -625,7 +625,5 @@ public class R
      public const string Boost_WR1Piece = "Boost_WR1Piece";
      public const string Boost_WR2Piece = "Boost_WR2Piece";
      public const string Boost_WR3Piece = "Boost_WR3Piece";
-     public const string Boost_WR1 = "Boost_WR1";
-     public const string Boost_WR2 = "Boost_WR2";
-     public const string Boost_WR3 = "Boost_WR3";
+     public const string Boost_WR4Piece = "Boost_WR4Piece";
 }
