@@ -16,6 +16,6 @@ public class HighlightTaskFindMineForPieceType : TaskHighlightUsingArrow
         }
 
         var sourceFilter = PieceTypeFilter.Mine;
-        return HighlightTaskPointToPieceSourceHelper.PointToPieceSource(pieceTask, sourceFilter, PieceTypeFilter.Fake);
+        return HighlightTaskPointToPieceSourceHelper.PointToPieceSource(pieceTask, sourceFilter);
     }
 }
