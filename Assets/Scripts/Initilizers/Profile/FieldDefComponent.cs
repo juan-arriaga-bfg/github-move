@@ -32,11 +32,20 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
 
+	private int vipIslandState;
+	
 	private List<PieceSaveItem> pieces;
 	private List<RewardsSaveItem> rewards;
 	private List<LifeSaveItem> lives;
 	private List<LoopSaveItem> loops;
 	private List<BuildingSaveItem> buildings;
+	
+	[JsonProperty]
+	public int VIPIslandState
+	{
+		get { return vipIslandState; }
+		set { vipIslandState = value; }
+	}
 	
 	[JsonProperty]
 	public List<PieceSaveItem> Pieces
@@ -84,6 +93,8 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 		
 		var board = BoardService.Current.FirstBoard;
 		var cache = board.BoardLogic.PositionsCache.Cache;
+
+		vipIslandState = (int) board.BoardLogic.VIPIslandLogic.State;
 		
 		if(cache.Count == 0) return;
 		

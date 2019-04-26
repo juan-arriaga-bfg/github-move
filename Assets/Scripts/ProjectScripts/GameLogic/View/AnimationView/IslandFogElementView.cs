@@ -6,7 +6,6 @@ using UnityEngine.Rendering;
 public class IslandFogElementView : AnimatedBoardElementView
 {
     [SerializeField] private GameObject fogItem;
-    [SerializeField] private List<BoardPosition> size;
     
     private readonly List<SpriteRenderer> fogSprites = new List<SpriteRenderer>();
     
@@ -16,7 +15,7 @@ public class IslandFogElementView : AnimatedBoardElementView
         
         CachedTransform.localPosition = Vector3.zero;
         
-        foreach (var position in size)
+        foreach (var position in Context.Context.BoardLogic.VIPIslandLogic.Island)
         {
             var fog = Instantiate(fogItem, fogItem.transform.parent);
             var sprite = fog.GetComponent<SpriteRenderer>();
@@ -35,8 +34,6 @@ public class IslandFogElementView : AnimatedBoardElementView
             
             cachedSpriteSortingGroup.sortingOrder = GetLayerIndexBy(positionUp);
             fog.transform.position = Context.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, 0);
-            
-            Context.Context.BoardLogic.LockCell(position.SetZ(BoardLayer.Piece.Layer), this);
         }
         
         ClearCacheLayers();
@@ -45,11 +42,6 @@ public class IslandFogElementView : AnimatedBoardElementView
 
     public override void PlayHide(float duration = 0)
     {
-        foreach (var position in size)
-        {
-            Context.Context.BoardLogic.UnlockCell(position.SetZ(BoardLayer.Piece.Layer), this);
-        }
-        
         foreach (var sprite in fogSprites)
         {
             sprite.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InSine);

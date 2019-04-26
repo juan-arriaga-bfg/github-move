@@ -32,11 +32,34 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
     private readonly Dictionary<ViewType, BoardElementView> views = new Dictionary<ViewType, BoardElementView>();
     
     private readonly BoardPosition boardPosition = new BoardPosition(10, 13, BoardLayer.Piece.Layer);
+    
+    public readonly List<BoardPosition> Island = new List<BoardPosition>
+    {
+        new BoardPosition(7,11,BoardLayer.Piece.Layer),
+        new BoardPosition(8,11,BoardLayer.Piece.Layer),
+        new BoardPosition(6,12,BoardLayer.Piece.Layer),
+        new BoardPosition(7,12,BoardLayer.Piece.Layer),
+        new BoardPosition(8,12,BoardLayer.Piece.Layer),
+        new BoardPosition(9,12,BoardLayer.Piece.Layer),
+        new BoardPosition(6,13,BoardLayer.Piece.Layer),
+        new BoardPosition(7,13,BoardLayer.Piece.Layer),
+        new BoardPosition(8,13,BoardLayer.Piece.Layer),
+        new BoardPosition(9,13,BoardLayer.Piece.Layer),
+        new BoardPosition(6,14,BoardLayer.Piece.Layer),
+        new BoardPosition(7,14,BoardLayer.Piece.Layer),
+        new BoardPosition(8,14,BoardLayer.Piece.Layer),
+        new BoardPosition(9,14,BoardLayer.Piece.Layer),
+        new BoardPosition(7,15,BoardLayer.Piece.Layer),
+        new BoardPosition(8,15,BoardLayer.Piece.Layer)
+    };
+    
     private Vector3 localPosition;
 
     private bool isClick;
 
     private CurrencyPair price;
+
+    public VIPIslandState State;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -50,10 +73,16 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
 
     public void Init()
     {
-        localPosition = context.Context.BoardDef.GetPiecePosition(boardPosition.X, boardPosition.Y);
+        var save = ProfileService.Current.FieldDef;
 
+        if (save != null) State = (VIPIslandState) save.VIPIslandState;
+        else State = VIPIslandState.Fog;
+        
+        localPosition = context.Context.BoardDef.GetPiecePosition(boardPosition.X, boardPosition.Y);
+        context.LockCells(Island, this);
+        
         CreateView(ViewType.Coast, boardPosition);
-        UpdateView(VIPIslandState.Fog, false);
+        UpdateView(State, false);
     }
     
     public bool OnDragStart(BoardElementView view)
@@ -136,6 +165,7 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
                 
                 break;
             case VIPIslandState.Paid:
+                context.UnlockCells(Island, this);
                 RemoveView(ViewType.BrokenBridge);
                 CreateView(ViewType.Bridge, boardPosition, animation);
                 
@@ -145,6 +175,8 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
                 
                 break;
         }
+
+        State = state;
     }
 
     private void CreateView(ViewType id, BoardPosition position, bool animation = false)
