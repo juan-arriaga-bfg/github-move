@@ -16,7 +16,7 @@ public class UIEventPreviewWindowView : UIGenericPopupWindowView
 
         btnAcceptLabel.Text = windowModel.ButtonText;
 
-//        windowModel.Countdown.OnTimeChanged += OnTimeChanged;
+        windowModel.Countdown.OnTimeChanged += OnTimeChanged;
         OnTimeChanged();
     }
 
