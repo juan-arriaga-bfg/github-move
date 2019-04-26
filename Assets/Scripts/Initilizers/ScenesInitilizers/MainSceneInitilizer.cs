@@ -32,6 +32,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.OfferWindow,
             UIWindowType.CharacterUnlockedWindow,
             UIWindowType.EventPreviewWindow,
+            UIWindowType.EventSubscriptionWindow,
 #if DEBUG
             UIWindowType.CurrencyCheatSheetWindow,
             UIWindowType.PiecesCheatSheetWindow,
