@@ -35,10 +35,17 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
     private Vector3 localPosition;
 
     private bool isClick;
+
+    private CurrencyPair price;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as BoardLogicComponent;
+        price = new CurrencyPair
+        {
+            Currency = Currency.Crystals.Name,
+            Amount = GameDataService.Current.ConstantsManager.PremiumIslandPrice
+        };
     }
 
     public void Init()
@@ -84,19 +91,30 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
         model.Title = LocalizationService.Get("window.island.title", "window.island.title");
         model.Message = LocalizationService.Get("window.island.message", "window.island.message");
         model.Prefab = "VIPIsland";
-        model.AcceptLabel = string.Format(LocalizationService.Get("common.button.buy", "common.button.buy"), new CurrencyPair{Currency = Currency.Crystals.Name, Amount = 600}.ToStringIcon());
+        model.AcceptLabel = string.Format(LocalizationService.Get("common.button.buy", "common.button.buy"), price.ToStringIcon());
         
         model.IsBuy = true;
         model.IsTopMessage = true;
         model.IsShine = true;
         model.ButtonSize = 280;
 
-        model.OnAccept = () => UpdateView(VIPIslandState.Paid, true);
+        model.OnAccept = Purchase;
         model.OnClose = () => { isClick = false; };
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
         
         return isCheck;
+    }
+
+    private void Purchase()
+    {
+        if (CurrencyHelper.IsCanPurchase(price, true) == false)
+        {
+            isClick = false;
+            return;
+        }
+        
+        UpdateView(VIPIslandState.Paid, true);
     }
 
     public void UpdateView(VIPIslandState state, bool animation)
