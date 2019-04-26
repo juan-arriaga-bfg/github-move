@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UIMessageWindowView : UIGenericPopupWindowView
 {
+    [IWUIBinding("#MessageTop")] protected NSText messageTop;
     [IWUIBinding("#ButtonAcceptLabel")] protected NSText buttonAcceptLabel;
     [IWUIBinding("#ButtonBuyLabel")] protected NSText buttonBuyLabel;
     [IWUIBinding("#ButtonCancelLabel")] protected NSText buttonCancelLabel;
@@ -23,6 +24,7 @@ public class UIMessageWindowView : UIGenericPopupWindowView
     [IWUIBinding("#ButtonAcceptBack")] protected Image btnAcceptBack;
     [IWUIBinding("#ButtonCancelBack")] protected Image btnCancelBack;
     
+    [IWUIBinding("#DelimiterImageAndTextTop")] protected GameObject delimiterImageAndTextTop;
     [IWUIBinding("#DelimiterImageAndText")] protected GameObject delimiterImageAndText;
     [IWUIBinding("#DelimiterTextAndButtons")] protected GameObject delimiterTextAndButtons;
     [IWUIBinding("#DelimiterTimerAndButtons")] protected GameObject delimiterTimerAndButtons;
@@ -56,6 +58,8 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
+
+        messageTop.Text = windowModel.Message;
         
         btnAcceptBack.sprite = IconService.Current.GetSpriteById($"button{windowModel.AcceptColor}");
         btnCancelBack.sprite = IconService.Current.GetSpriteById($"button{windowModel.CancelColor}");
@@ -66,7 +70,8 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         btnCancel.CachedTransform.SetSiblingIndex(windowModel.IsAcceptLeft ? 2 : 0);
         
         image.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Image));
-        message.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Message));
+        message.gameObject.SetActive(!windowModel.IsTopMessage && !string.IsNullOrEmpty(windowModel.Message));
+        messageTop.gameObject.SetActive(windowModel.IsTopMessage);
         anchor.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Prefab));
         
         btnAccept.gameObject.SetActive(windowModel.IsBuy == false && windowModel.OnAccept != null);
@@ -74,7 +79,8 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         btnCancel.gameObject.SetActive(windowModel.OnCancel != null);
         timer.SetActive(windowModel.Timer != null);
         
-        delimiterImageAndText.SetActive((!string.IsNullOrEmpty(windowModel.Image) || !string.IsNullOrEmpty(windowModel.Prefab)) && !string.IsNullOrEmpty(windowModel.Message));
+        delimiterImageAndTextTop.SetActive(windowModel.IsTopMessage);
+        delimiterImageAndText.SetActive(windowModel.IsTopMessage == false && (!string.IsNullOrEmpty(windowModel.Image) || !string.IsNullOrEmpty(windowModel.Prefab)) && !string.IsNullOrEmpty(windowModel.Message));
         delimiterTextAndButtons.SetActive(true);
         delimiterTimerAndButtons.SetActive(windowModel.Timer != null);
 

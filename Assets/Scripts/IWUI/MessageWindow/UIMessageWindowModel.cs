@@ -22,6 +22,7 @@ public class UIMessageWindowModel : IWWindowModel
     
     public bool IsHardAccept { get; set; }
     public bool IsBuy { get; set; }
+    public bool IsTopMessage { get; set; }
     
     public bool IsAcceptLeft { get; set; }
     
@@ -56,6 +57,7 @@ public class UIMessageWindowModel : IWWindowModel
         IsHardAccept = false;
         IsBuy = false;
         IsAcceptLeft = false;
+        IsTopMessage = false;
         
         AcceptColor = ButtonColor.Green;
         CancelColor = ButtonColor.Red;
