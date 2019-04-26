@@ -23,6 +23,10 @@ public class UIMessageWindowModel : IWWindowModel
     public bool IsHardAccept { get; set; }
     public bool IsBuy { get; set; }
     public bool IsTopMessage { get; set; }
+    public bool IsShine { get; set; }
+
+    public int ShineSize = 700;
+    public int ButtonSize = 260;
     
     public bool IsAcceptLeft { get; set; }
     
@@ -58,6 +62,10 @@ public class UIMessageWindowModel : IWWindowModel
         IsBuy = false;
         IsAcceptLeft = false;
         IsTopMessage = false;
+        IsShine = false;
+        
+        ShineSize = 700;
+        ButtonSize = 260;
         
         AcceptColor = ButtonColor.Green;
         CancelColor = ButtonColor.Red;

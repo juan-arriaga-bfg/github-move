@@ -84,10 +84,12 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
         model.Title = LocalizationService.Get("window.island.title", "window.island.title");
         model.Message = LocalizationService.Get("window.island.message", "window.island.message");
         model.Prefab = "VIPIsland";
-        model.AcceptLabel = string.Format(LocalizationService.Get("common.button.buy", "common.button.buy"), new CurrencyPair{Currency = Currency.Crystals.Name, Amount = 60}.ToStringIcon());
+        model.AcceptLabel = string.Format(LocalizationService.Get("common.button.buy", "common.button.buy"), new CurrencyPair{Currency = Currency.Crystals.Name, Amount = 600}.ToStringIcon());
         
         model.IsBuy = true;
         model.IsTopMessage = true;
+        model.IsShine = true;
+        model.ButtonSize = 280;
 
         model.OnAccept = () => UpdateView(VIPIslandState.Paid, true);
         model.OnClose = () => { isClick = false; };
