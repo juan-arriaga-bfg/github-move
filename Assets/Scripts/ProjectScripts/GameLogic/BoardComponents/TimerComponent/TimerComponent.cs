@@ -230,7 +230,6 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     
     public bool IsFree()
     {
-        var start = (int) StartTime.GetTime(UseUTC).TotalSeconds;
-        return start > 0 && start < Delay && CompleteTime.GetTimeLeft(UseUTC).TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit;
+        return (int) StartTime.GetTime(UseUTC).TotalSeconds < Delay && CompleteTime.GetTimeLeft(UseUTC).TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit;
     }
 }
