@@ -622,4 +622,10 @@ public class R
      public const string BorderFallTopRight1 = "BorderFallTopRight1";
      public const string BorderWallBottomRight1 = "BorderWallBottomRight1";
      public const string BorderWallTopLeft1 = "BorderWallTopLeft1";
+     public const string Boost_WR1Piece = "Boost_WR1Piece";
+     public const string Boost_WR2Piece = "Boost_WR2Piece";
+     public const string Boost_WR3Piece = "Boost_WR3Piece";
+     public const string Boost_WR1 = "Boost_WR1";
+     public const string Boost_WR2 = "Boost_WR2";
+     public const string Boost_WR3 = "Boost_WR3";
 }

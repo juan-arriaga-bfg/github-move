@@ -294,7 +294,9 @@ public class ElementsResourcesBuilder
 #endregion
         
 #region Boosters
-        
+        dict.Add(PieceType.Boost_WR1.Id, R.Boost_WR1Piece);
+        dict.Add(PieceType.Boost_WR2.Id, R.Boost_WR2Piece);
+        dict.Add(PieceType.Boost_WR3.Id, R.Boost_WR3Piece);
         dict.Add(PieceType.Boost_WR.Id, R.Boost_WRPiece);
         
         dict.Add(PieceType.Boost_CR1.Id, R.Boost_CR1Piece);
