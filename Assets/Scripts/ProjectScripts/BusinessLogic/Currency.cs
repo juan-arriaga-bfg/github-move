@@ -36,7 +36,7 @@ public static partial class Currency
                           public static readonly CurrencyDef Character   = new CurrencyDef { Id = 150, Name = "Character",   IsConsumable = true };
                           public static readonly CurrencyDef Offer       = new CurrencyDef { Id = 160, Name = "Offer",       IsConsumable = true };
                           
-                          public static readonly CurrencyDef Token       = new CurrencyDef { Id = 170, Name = "Token",       IsConsumable = true };
+    [IncludeToCheatSheet] public static readonly CurrencyDef Token       = new CurrencyDef { Id = 170, Name = "Token",       IsConsumable = true };
     
                           public static readonly CurrencyDef Resources   = new CurrencyDef { Id = 1000, Name = "Resources",  IsConsumable = true };
                           
@@ -49,6 +49,4 @@ public static partial class Currency
     [IncludeToCheatSheet] public static readonly CurrencyDef PR_G5       = new CurrencyDef { Id = 1007, Name = "PR_G5",      IsConsumable = true, Icon = "PR_G5" };
     
                           public static readonly CurrencyDef Extra       = new CurrencyDef { Id = 1100, Name = "Extra",      IsConsumable = true };
-                          
-    [IncludeToCheatSheet] public static readonly CurrencyDef Token       = new CurrencyDef { Id = 1200, Name = "Token",     IsConsumable = true };
 }
