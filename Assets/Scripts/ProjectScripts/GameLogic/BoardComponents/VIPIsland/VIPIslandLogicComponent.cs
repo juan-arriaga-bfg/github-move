@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public interface IVIPIslandLogicComponent
@@ -111,7 +110,7 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
     {
         var isCheck = Check(view);
 
-        if (isCheck && isClick) return isCheck;
+        if (isCheck == false || isClick) return isCheck;
 
         isClick = true;
         
@@ -132,7 +131,7 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
         
-        return isCheck;
+        return true;
     }
 
     private void Purchase()
