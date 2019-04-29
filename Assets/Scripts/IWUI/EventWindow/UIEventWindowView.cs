@@ -1,5 +1,9 @@
+using System.Collections.Generic;
+
 public class UIEventWindowView : UIGenericPopupWindowView 
 {
+    [IWUIBinding("#Content")] private UIContainerViewController content;
+    
     [IWUIBinding("#MainTimerLabel")] private NSText timerLabel;
     [IWUIBinding("#ButtonShowLabel")] private NSText btnShowLabel;
     
@@ -16,8 +20,10 @@ public class UIEventWindowView : UIGenericPopupWindowView
 
         btnShowLabel.Text = windowModel.ButtonText;
         
-        windowModel.Timer.OnTimeChanged += OnTimeChanged;
+        if(windowModel.Timer != null) windowModel.Timer.OnTimeChanged += OnTimeChanged;
         OnTimeChanged();
+        
+        Fill(UpdateEntities(), content);
     }
 
     public override void OnViewShowCompleted()
@@ -31,9 +37,31 @@ public class UIEventWindowView : UIGenericPopupWindowView
     {
         var windowModel = Model as UIEventWindowModel;
         
-        windowModel.Timer.OnTimeChanged -= OnTimeChanged;
+        if(windowModel.Timer != null) windowModel.Timer.OnTimeChanged -= OnTimeChanged;
         
         base.OnViewCloseCompleted();
+    }
+    
+    private List<IUIContainerElementEntity> UpdateEntities()
+    {
+        var defs = GameDataService.Current.EventManager.Defs[EventName.OrderSoftLaunch];
+        var views = new List<IUIContainerElementEntity>(defs.Count);
+        
+        for (var i = 0; i < defs.Count; i++)
+        {
+            var def = defs[i];
+            
+            var entity = new UIEventElementEntity
+            {
+                Step = def,
+                OnSelectEvent = null,
+                OnDeselectEvent = null
+            };
+            
+            views.Add(entity);
+        }
+        
+        return views;
     }
 
     private void OnShow()
@@ -45,6 +73,6 @@ public class UIEventWindowView : UIGenericPopupWindowView
     {
         var windowModel = Model as UIEventPreviewWindowModel;
 
-        timerLabel.Text = windowModel.TimerText;
+//        timerLabel.Text = windowModel.TimerText;
     }
 }

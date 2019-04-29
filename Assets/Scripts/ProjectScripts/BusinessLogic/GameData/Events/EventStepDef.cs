@@ -51,7 +51,7 @@ public class EventSaveItemJsonConverter : JsonConverter
     }
 }
 
-[JsonConverter(typeof(EventSaveItemJsonConverter))]
+//[JsonConverter(typeof(EventSaveItemJsonConverter))]
 public class EventStepDef
 {
     public string Step;
