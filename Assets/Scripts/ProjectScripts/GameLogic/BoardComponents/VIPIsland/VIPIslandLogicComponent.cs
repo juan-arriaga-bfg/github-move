@@ -157,7 +157,7 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
                 RemoveView(ViewType.FogBridge);
                 CreateView(ViewType.BrokenBridge, boardPosition);
                 CreateView(ViewType.Airbaloon, boardPosition, animation);
-
+                
                 if (animation == false) break;
                 
                 (views[ViewType.IslandFog] as AnimatedBoardElementView).PlayHide();
@@ -177,6 +177,18 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
         }
 
         State = state;
+        
+        UpdateLockState();
+    }
+
+    public void UpdateLockState()
+    {
+        var isLocked = State == VIPIslandState.Broken;
+        foreach (var position in Island)
+        {
+            var view = context.Context.RendererContext.GetElementAt(position) as PieceBoardElementView;
+            view?.ToggleLockView(isLocked);
+        }
     }
 
     private void CreateView(ViewType id, BoardPosition position, bool animation = false)

@@ -103,6 +103,8 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
 
         BoardService.Current.FirstBoard.GetComponent<LoadSilenceComponent>(LoadSilenceComponent.ComponentGuid)?.OnLoadComplete();
         
+        BoardService.Current.FirstBoard.BoardLogic.VIPIslandLogic.UpdateLockState();
+        
         if (!hotReload)
         {
             NSAudioService.Current.Play(SoundId.Ambient1Music, true, 1)
