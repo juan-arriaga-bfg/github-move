@@ -162,6 +162,7 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
                 
                 (views[ViewType.IslandFog] as AnimatedBoardElementView).PlayHide();
                 
+                ParticleView.Show(R.FogProgressCompleteParticle, new BoardPosition(8,13,BoardLayer.FX.Layer));
                 break;
             case VIPIslandState.Paid:
                 context.UnlockCells(Island, this);
