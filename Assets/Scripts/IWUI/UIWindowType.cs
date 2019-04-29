@@ -63,6 +63,10 @@ public class UIWindowType
     public const string EventPreviewWindow = "EventPreviewWindow";
     
     public const string EventSubscriptionWindow = "EventSubscriptionWindow";
+    
+    public const string EventAlmostWindow = "EventAlmostWindow";
+    
+    public const string EventWindow = "EventWindow";
 
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {

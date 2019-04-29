@@ -9,7 +9,7 @@ public class UIEventPreviewWindowModel : IWWindowModel
     {
         get
         {
-            var description = LocalizationService.Get("window.event.preview.timer", "window.event.preview.timer {0}");
+            var description = LocalizationService.Get("window.event.preview.timer", "window.event.preview.timer");
             var time = Countdown != null && Countdown.IsStarted 
                 ? Countdown.CompleteTime.GetTimeLeftText(Countdown.UseUTC, true, null, true, 2.5f)
                 : DateTime.UtcNow.GetTimeLeftText(true, true, null, true, 2.5f);

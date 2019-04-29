@@ -31,8 +31,10 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.EnergyShopWindow,
             UIWindowType.OfferWindow,
             UIWindowType.CharacterUnlockedWindow,
+            UIWindowType.EventWindow,
             UIWindowType.EventPreviewWindow,
             UIWindowType.EventSubscriptionWindow,
+            UIWindowType.EventAlmostWindow,
 #if DEBUG
             UIWindowType.CurrencyCheatSheetWindow,
             UIWindowType.PiecesCheatSheetWindow,
