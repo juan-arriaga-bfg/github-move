@@ -1,11 +1,11 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.Diagnostics;
 
-using Org.BouncyCastle.Crypto.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Utilities;
 
-namespace Org.BouncyCastle.Math.Raw
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Math.Raw
 {
     internal abstract class Nat
     {
@@ -197,6 +197,64 @@ namespace Org.BouncyCastle.Math.Raw
             return c == 0 ? 0 : IncAt(len, z, zOff, 1);
         }
 
+        public static uint CAdd(int len, int mask, uint[] x, uint[] y, uint[] z)
+        {
+            uint MASK = (uint)-(mask & 1);
+
+            ulong c = 0;
+            for (int i = 0; i < len; ++i)
+            {
+                c += (ulong)x[i] + (y[i] & MASK);
+                z[i] = (uint)c;
+                c >>= 32;
+            }
+            return (uint)c;
+        }
+
+        public static void CMov(int len, int mask, uint[] x, int xOff, uint[] z, int zOff)
+        {
+            uint MASK = (uint)-(mask & 1);
+
+            for (int i = 0; i < len; ++i)
+            {
+                uint z_i = z[zOff + i], diff = z_i ^ x[xOff + i];
+                z_i ^= (diff & MASK);
+                z[zOff + i] = z_i;
+            }
+
+            //uint half = 0x55555555U, rest = half << (-(int)MASK);
+
+            //for (int i = 0; i < len; ++i)
+            //{
+            //    uint z_i = z[zOff + i], diff = z_i ^ x[xOff + i];
+            //    z_i ^= (diff & half);
+            //    z_i ^= (diff & rest);
+            //    z[zOff + i] = z_i;
+            //}
+        }
+
+        public static void CMov(int len, int mask, int[] x, int xOff, int[] z, int zOff)
+        {
+            mask = -(mask & 1);
+
+            for (int i = 0; i < len; ++i)
+            {
+                int z_i = z[zOff + i], diff = z_i ^ x[xOff + i];
+                z_i ^= (diff & mask);
+                z[zOff + i] = z_i;
+            }
+
+            //int half = 0x55555555, rest = half << (-mask);
+
+            //for (int i = 0; i < len; ++i)
+            //{
+            //    int z_i = z[zOff + i], diff = z_i ^ x[xOff + i];
+            //    z_i ^= (diff & half);
+            //    z_i ^= (diff & rest);
+            //    z[zOff + i] = z_i;
+            //}
+        }
+
         public static void Copy(int len, uint[] x, uint[] z)
         {
             Array.Copy(x, 0, z, 0, len);
@@ -207,6 +265,11 @@ namespace Org.BouncyCastle.Math.Raw
             uint[] z = new uint[len];
             Array.Copy(x, 0, z, 0, len);
             return z;
+        }
+
+        public static void Copy(int len, uint[] x, int xOff, uint[] z, int zOff)
+        {
+            Array.Copy(x, xOff, z, zOff, len);
         }
 
         public static uint[] Create(int len)
@@ -427,22 +490,59 @@ namespace Org.BouncyCastle.Math.Raw
 
         public static void Mul(int len, uint[] x, uint[] y, uint[] zz)
         {
-            zz[len] = (uint)MulWord(len, x[0], y, zz);
+            zz[len] = MulWord(len, x[0], y, zz);
 
             for (int i = 1; i < len; ++i)
             {
-                zz[i + len] = (uint)MulWordAddTo(len, x[i], y, 0, zz, i);
+                zz[i + len] = MulWordAddTo(len, x[i], y, 0, zz, i);
             }
         }
 
         public static void Mul(int len, uint[] x, int xOff, uint[] y, int yOff, uint[] zz, int zzOff)
         {
-            zz[zzOff + len] = (uint)MulWord(len, x[xOff], y, yOff, zz, zzOff);
+            zz[zzOff + len] = MulWord(len, x[xOff], y, yOff, zz, zzOff);
 
             for (int i = 1; i < len; ++i)
             {
-                zz[zzOff + i + len] = (uint)MulWordAddTo(len, x[xOff + i], y, yOff, zz, zzOff + i);
+                zz[zzOff + i + len] = MulWordAddTo(len, x[xOff + i], y, yOff, zz, zzOff + i);
             }
+        }
+
+        public static void Mul(uint[] x, int xOff, int xLen, uint[] y, int yOff, int yLen, uint[] zz, int zzOff)
+        {
+            zz[zzOff + yLen] = MulWord(yLen, x[xOff], y, yOff, zz, zzOff);
+
+            for (int i = 1; i < xLen; ++i)
+            {
+                zz[zzOff + i + yLen] = MulWordAddTo(yLen, x[xOff + i], y, yOff, zz, zzOff + i);
+            }
+        }
+
+        public static uint MulAddTo(int len, uint[] x, uint[] y, uint[] zz)
+        {
+            ulong zc = 0;
+            for (int i = 0; i < len; ++i)
+            {
+                ulong c = MulWordAddTo(len, x[i], y, 0, zz, i) & M;
+                c += zc + (zz[i + len] & M);
+                zz[i + len] = (uint)c;
+                zc = c >> 32;
+            }
+            return (uint)zc;
+        }
+
+        public static uint MulAddTo(int len, uint[] x, int xOff, uint[] y, int yOff, uint[] zz, int zzOff)
+        {
+            ulong zc = 0;
+            for (int i = 0; i < len; ++i)
+            {
+                ulong c = MulWordAddTo(len, x[xOff + i], y, yOff, zz, zzOff) & M;
+                c += zc + (zz[zzOff + len] & M);
+                zz[zzOff + len] = (uint)c;
+                zc = c >> 32;
+                ++zzOff;
+            }
+            return (uint)zc;
         }
 
         public static uint Mul31BothAdd(int len, uint a, uint[] x, uint b, uint[] y, uint[] z, int zOff)
@@ -1053,5 +1153,5 @@ namespace Org.BouncyCastle.Math.Raw
         }
     }
 }
-
+#pragma warning restore
 #endif

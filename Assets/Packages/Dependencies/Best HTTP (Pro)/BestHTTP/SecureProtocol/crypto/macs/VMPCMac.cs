@@ -1,10 +1,10 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters;
 
-namespace Org.BouncyCastle.Crypto.Macs
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Macs
 {
 	public class VmpcMac
 		: IMac
@@ -168,10 +168,10 @@ namespace Org.BouncyCastle.Crypto.Macs
 
 			for (int i = 0; i < len; i++)
 			{
-				Update(input[i]);
+				Update(input[inOff + i]);
 			}
 		}
 	}
 }
-
+#pragma warning restore
 #endif

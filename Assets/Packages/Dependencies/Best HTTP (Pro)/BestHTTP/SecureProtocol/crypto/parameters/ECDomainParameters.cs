@@ -1,12 +1,12 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Math.EC;
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Parameters
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters
 {
     public class ECDomainParameters
     {
@@ -15,12 +15,13 @@ namespace Org.BouncyCastle.Crypto.Parameters
         internal ECPoint     g;
         internal BigInteger  n;
         internal BigInteger  h;
+        internal BigInteger  hInv;
 
         public ECDomainParameters(
             ECCurve     curve,
             ECPoint     g,
             BigInteger  n)
-            : this(curve, g, n, BigInteger.One)
+            : this(curve, g, n, BigInteger.One, null)
         {
         }
 
@@ -46,11 +47,10 @@ namespace Org.BouncyCastle.Crypto.Parameters
                 throw new ArgumentNullException("g");
             if (n == null)
                 throw new ArgumentNullException("n");
-            if (h == null)
-                throw new ArgumentNullException("h");
+            // we can't check for h == null here as h is optional in X9.62 as it is not required for ECDSA
 
             this.curve = curve;
-            this.g = g.Normalize();
+            this.g = Validate(curve, g);
             this.n = n;
             this.h = h;
             this.seed = Arrays.Clone(seed);
@@ -76,6 +76,21 @@ namespace Org.BouncyCastle.Crypto.Parameters
             get { return h; }
         }
 
+        public BigInteger HInv
+        {
+            get
+            {
+                lock (this)
+                {
+                    if (hInv == null)
+                    {
+                        hInv = h.ModInverse(n);
+                    }
+                    return hInv;
+                }
+            }
+        }
+
         public byte[] GetSeed()
         {
             return Arrays.Clone(seed);
@@ -95,26 +110,43 @@ namespace Org.BouncyCastle.Crypto.Parameters
             return Equals(other);
         }
 
-        protected bool Equals(
+        protected virtual bool Equals(
             ECDomainParameters other)
         {
             return curve.Equals(other.curve)
                 &&	g.Equals(other.g)
                 &&	n.Equals(other.n)
-                &&	h.Equals(other.h)
-                &&	Arrays.AreEqual(seed, other.seed);
+                &&  h.Equals(other.h);
         }
 
         public override int GetHashCode()
         {
-            return curve.GetHashCode()
-                ^	g.GetHashCode()
-                ^	n.GetHashCode()
-                ^	h.GetHashCode()
-                ^	Arrays.GetHashCode(seed);
+            int hc = curve.GetHashCode();
+            hc *= 37;
+            hc ^= g.GetHashCode();
+            hc *= 37;
+            hc ^= n.GetHashCode();
+            hc *= 37;
+            hc ^= h.GetHashCode();
+            return hc;
+        }
+
+        internal static ECPoint Validate(ECCurve c, ECPoint q)
+        {
+            if (q == null)
+                throw new ArgumentException("Point has null value", "q");
+
+            q = ECAlgorithms.ImportPoint(c, q).Normalize();
+
+            if (q.IsInfinity)
+                throw new ArgumentException("Point at infinity", "q");
+
+            if (!q.IsValid())
+                throw new ArgumentException("Point not on curve", "q");
+
+            return q;
         }
     }
-
 }
-
+#pragma warning restore
 #endif

@@ -1,14 +1,26 @@
 ﻿#if !BESTHTTP_DISABLE_SOCKETIO
 
 using System;
-using System.Collections.Generic;
 using System.Text;
+
+using PlatformSupport.Collections.ObjectModel;
+
+#if !NETFX_CORE
+    using PlatformSupport.Collections.Specialized;
+#else
+    using System.Collections.Specialized;
+#endif
 
 namespace BestHTTP.SocketIO
 {
     public sealed class SocketOptions
     {
         #region Properties
+
+        /// <summary>
+        /// The SocketManager will try to connect with this transport.
+        /// </summary>
+        public Transports.TransportTypes ConnectWith { get; set; }
 
         /// <summary>
         /// Whether to reconnect automatically after a disconnect (default true)
@@ -49,13 +61,32 @@ namespace BestHTTP.SocketIO
         public bool AutoConnect { get; set; }
 
         /// <summary>
-        /// Additional query parameters that will be passed for the handsake uri. If the value is null, or an empty string it will be not appended to the query only the key.
+        /// Additional query parameters that will be passed for the handshake uri. If the value is null, or an empty string it will be not appended to the query only the key.
         /// <remarks>The keys and values must be escaped properly, as the plugin will not escape these. </remarks>
         /// </summary>
-        public Dictionary<string, string> AdditionalQueryParams { get; set; }
+        public ObservableDictionary<string, string> AdditionalQueryParams
+        {
+            get { return additionalQueryParams; }
+            set
+            {
+                // Unsubscribe from previous dictionary's events
+                if (additionalQueryParams != null)
+                    additionalQueryParams.CollectionChanged -= AdditionalQueryParams_CollectionChanged;
+
+                additionalQueryParams = value;
+
+                // Clear out the cached value
+                BuiltQueryParams = null;
+
+                // Subscribe to the collection changed event
+                if (value != null)
+                    value.CollectionChanged += AdditionalQueryParams_CollectionChanged;
+            }
+        }
+        private ObservableDictionary<string, string> additionalQueryParams;
 
         /// <summary>
-        /// If it's false, the parmateres in the AdditionalQueryParams will be passed for all http requests. Its default value is true.
+        /// If it's false, the parameters in the AdditionalQueryParams will be passed for all HTTP requests. Its default value is true.
         /// </summary>
         public bool QueryParamsOnlyForHandshake { get; set; }
 
@@ -71,6 +102,7 @@ namespace BestHTTP.SocketIO
         /// </summary>
         public SocketOptions()
         {
+            ConnectWith = Transports.TransportTypes.Polling;
             Reconnection = true;
             ReconnectionAttempts = int.MaxValue;
             ReconnectionDelay = TimeSpan.FromMilliseconds(1000);
@@ -100,7 +132,7 @@ namespace BestHTTP.SocketIO
             {
                 sb.Append("&");
                 sb.Append(kvp.Key);
-                
+
                 if (!string.IsNullOrEmpty(kvp.Value))
                 {
                     sb.Append("=");
@@ -109,6 +141,14 @@ namespace BestHTTP.SocketIO
             }
 
             return BuiltQueryParams = sb.ToString();
+        }
+
+        /// <summary>
+        /// This event will be called when the AdditonalQueryPrams dictionary changed. We have to reset the cached values.
+        /// </summary>
+        private void AdditionalQueryParams_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            BuiltQueryParams = null;
         }
 
         #endregion

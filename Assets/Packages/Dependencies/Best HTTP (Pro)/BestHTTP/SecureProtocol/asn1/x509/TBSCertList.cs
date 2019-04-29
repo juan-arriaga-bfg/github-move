@@ -1,10 +1,12 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Utilities.Collections;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Collections;
 
-namespace Org.BouncyCastle.Asn1.X509
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X509
 {
 	public class CrlEntry
 		: Asn1Encodable
@@ -156,7 +158,7 @@ namespace Org.BouncyCastle.Asn1.X509
                 return new TbsCertificateList((Asn1Sequence) obj);
             }
 
-			throw new ArgumentException("unknown object in factory: " + obj.GetType().Name, "obj");
+            throw new ArgumentException("unknown object in factory: " + BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.GetTypeName(obj), "obj");
         }
 
 		internal TbsCertificateList(
@@ -273,5 +275,5 @@ namespace Org.BouncyCastle.Asn1.X509
         }
     }
 }
-
+#pragma warning restore
 #endif

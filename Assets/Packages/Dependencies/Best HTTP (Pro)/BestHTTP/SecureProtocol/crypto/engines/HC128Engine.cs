@@ -1,11 +1,12 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Crypto.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Engines
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Engines
 {
 	/**
 	* HC-128 is a software-efficient stream cipher created by Hongjun Wu. It
@@ -108,7 +109,8 @@ namespace Org.BouncyCastle.Crypto.Engines
 			if (key.Length != 16)
 				throw new ArgumentException("The key must be 128 bits long");
 
-			cnt = 0;
+            idx = 0;
+            cnt = 0;
 
 			uint[] w = new uint[1280];
 
@@ -182,7 +184,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 			else
 			{
 				throw new ArgumentException(
-					"Invalid parameter passed to HC128 init - " + parameters.GetType().Name,
+					"Invalid parameter passed to HC128 init - " + BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.GetTypeName(parameters),
 					"parameters");
 			}
 
@@ -224,7 +226,6 @@ namespace Org.BouncyCastle.Crypto.Engines
 
         public virtual void Reset()
 		{
-			idx = 0;
 			Init();
 		}
 
@@ -234,5 +235,5 @@ namespace Org.BouncyCastle.Crypto.Engines
 		}
 	}
 }
-
+#pragma warning restore
 #endif

@@ -1,8 +1,8 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-namespace Org.BouncyCastle.Math.EC.Multiplier
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC.Multiplier
 {
     /**
     * Class implementing the WNAF (Window Non-Adjacent Form) multiplication
@@ -60,7 +60,7 @@ namespace Org.BouncyCastle.Math.EC.Multiplier
 
                     zeroes -= scale;
 
-                    //System.Diagnostics.Debug.WriteLine("Optimized: 2^" + scale + " * " + n + " = " + i1 + " + " + i2);
+                    //Console.WriteLine("Optimized: 2^" + scale + " * " + n + " = " + i1 + " + " + i2);
                 }
                 else
                 {
@@ -98,5 +98,5 @@ namespace Org.BouncyCastle.Math.EC.Multiplier
         }
     }
 }
-
+#pragma warning restore
 #endif

@@ -1,17 +1,17 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.Collections;
 using System.IO;
 using System.Text;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Crypto.Signers;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Security;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Signers;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Security;
 
-namespace Org.BouncyCastle.Crypto.Signers
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Signers
 {
 	public class Gost3410DigestSigner
 		: ISigner
@@ -145,5 +145,5 @@ namespace Org.BouncyCastle.Crypto.Signers
 		}
 	}
 }
-
+#pragma warning restore
 #endif

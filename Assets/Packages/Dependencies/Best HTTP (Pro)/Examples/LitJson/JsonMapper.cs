@@ -100,7 +100,7 @@ namespace LitJson
     public delegate IJsonWrapper WrapperFactory ();
 
 
-    public class JsonMapper
+    public sealed class JsonMapper
     {
         #region Fields
         private static int max_nesting_depth;
@@ -171,6 +171,15 @@ namespace LitJson
                 if (type1.FullName == name)
                     return true;
             return false;
+#elif NET_4_6
+            Type[] interfaces = type.GetInterfaces();
+            foreach (var iface in interfaces)
+            {
+                if (iface.FullName.Equals(name, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+
+            return false;
 #else
             return type.GetInterface(name, true) != null;
 #endif
@@ -239,7 +248,7 @@ namespace LitJson
             if (HasInterface(type, "System.Collections.IDictionary"))
                 data.IsDictionary = true;
 
-            data.Properties = new Dictionary<string, PropertyMetadata> ();
+            data.Properties = new Dictionary<string, PropertyMetadata> (StringComparer.OrdinalIgnoreCase);
 
             foreach (PropertyInfo p_info in GetPublicInstanceProperties(type))
             {
@@ -275,7 +284,8 @@ namespace LitJson
                 p_data.IsField = true;
                 p_data.Type = f_info.FieldType;
 
-                data.Properties.Add (f_info.Name, p_data);
+                if (!data.Properties.ContainsKey(f_info.Name))
+                    data.Properties.Add (f_info.Name, p_data);
             }
 
             lock (object_metadata_lock) {
@@ -457,7 +467,7 @@ namespace LitJson
                     list = (IList) Activator.CreateInstance (inst_type);
                     elem_type = t_data.ElementType;
                 } else {
-                    list = new System.Collections.ArrayList ();
+                    list = new System.Collections.Generic.List<object>();
                     elem_type = inst_type.GetElementType ();
                 }
 
@@ -946,6 +956,13 @@ namespace LitJson
             JsonReader reader = new JsonReader (json);
 
             return (T) ReadValue (typeof (T), reader);
+        }
+
+        public static object ToObject(Type toType, string json)
+        {
+            JsonReader reader = new JsonReader(json);
+
+            return ReadValue(toType, reader);
         }
 
         public static IJsonWrapper ToWrapper (WrapperFactory factory,

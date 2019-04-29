@@ -1,7 +1,10 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 
-namespace Org.BouncyCastle.Asn1
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
+
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1
 {
     public class DerBoolean
         : Asn1Object
@@ -24,7 +27,7 @@ namespace Org.BouncyCastle.Asn1
                 return (DerBoolean) obj;
             }
 
-            throw new ArgumentException("illegal object in GetInstance: " + obj.GetType().Name);
+            throw new ArgumentException("illegal object in GetInstance: " + BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.GetTypeName(obj));
         }
 
         /**
@@ -121,5 +124,5 @@ namespace Org.BouncyCastle.Asn1
         }
     }
 }
-
+#pragma warning restore
 #endif

@@ -1,9 +1,10 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Asn1;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Asn1.Ocsp
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Ocsp
 {
     public class OcspResponse
         : Asn1Encodable
@@ -31,7 +32,7 @@ namespace Org.BouncyCastle.Asn1.Ocsp
 				return new OcspResponse((Asn1Sequence)obj);
 			}
 
-			throw new ArgumentException("unknown object in factory: " + obj.GetType().Name, "obj");
+            throw new ArgumentException("unknown object in factory: " + BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.GetTypeName(obj), "obj");
 		}
 
 		public OcspResponse(
@@ -89,5 +90,5 @@ namespace Org.BouncyCastle.Asn1.Ocsp
         }
     }
 }
-
+#pragma warning restore
 #endif

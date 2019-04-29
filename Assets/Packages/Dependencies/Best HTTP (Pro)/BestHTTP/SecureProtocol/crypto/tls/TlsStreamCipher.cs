@@ -1,13 +1,13 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.IO;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Crypto.Tls;
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Tls;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Tls
 {
     public class TlsStreamCipher
         :   TlsCipher
@@ -99,12 +99,6 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         public virtual byte[] EncodePlaintext(long seqNo, byte type, byte[] plaintext, int offset, int len)
         {
-            /*
-             * draft-josefsson-salsa20-tls-04 2.1 Note that Salsa20 requires a 64-bit nonce. That
-             * nonce is updated on the encryption of every TLS record, and is set to be the 64-bit TLS
-             * record sequence number. In case of DTLS the 64-bit nonce is formed as the concatenation
-             * of the 16-bit epoch with the 48-bit sequence number.
-             */
             if (usesNonce)
             {
                 UpdateIV(encryptCipher, true, seqNo);
@@ -123,12 +117,6 @@ namespace Org.BouncyCastle.Crypto.Tls
         /// <exception cref="IOException"></exception>
         public virtual byte[] DecodeCiphertext(long seqNo, byte type, byte[] ciphertext, int offset, int len)
         {
-            /*
-             * draft-josefsson-salsa20-tls-04 2.1 Note that Salsa20 requires a 64-bit nonce. That
-             * nonce is updated on the encryption of every TLS record, and is set to be the 64-bit TLS
-             * record sequence number. In case of DTLS the 64-bit nonce is formed as the concatenation
-             * of the 16-bit epoch with the 48-bit sequence number.
-             */
             if (usesNonce)
             {
                 UpdateIV(decryptCipher, false, seqNo);
@@ -164,5 +152,5 @@ namespace Org.BouncyCastle.Crypto.Tls
         }
     }
 }
-
+#pragma warning restore
 #endif

@@ -1,9 +1,10 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Asn1
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1
 {
     /**
      * ASN.1 TaggedObject - in ASN.1 notation this is any object preceded by
@@ -13,6 +14,16 @@ namespace Org.BouncyCastle.Asn1
     public abstract class Asn1TaggedObject
 		: Asn1Object, Asn1TaggedObjectParser
     {
+        internal static bool IsConstructed(bool isExplicit, Asn1Object obj)
+        {
+            if (isExplicit || obj is Asn1Sequence || obj is Asn1Set)
+                return true;
+            Asn1TaggedObject tagged = obj as Asn1TaggedObject;
+            if (tagged == null)
+                return false;
+            return IsConstructed(tagged.IsExplicit(), tagged.GetObject());
+        }
+
         internal int            tagNo;
 //        internal bool           empty;
         internal bool           explicitly = true;
@@ -38,7 +49,7 @@ namespace Org.BouncyCastle.Asn1
 				return (Asn1TaggedObject) obj;
 			}
 
-			throw new ArgumentException("Unknown object in GetInstance: " + obj.GetType().FullName, "obj");
+			throw new ArgumentException("Unknown object in GetInstance: " + BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.GetTypeName(obj), "obj");
 		}
 
 		/**
@@ -81,7 +92,7 @@ namespace Org.BouncyCastle.Asn1
 			return this.tagNo == other.tagNo
 //				&& this.empty == other.empty
 				&& this.explicitly == other.explicitly   // TODO Should this be part of equality?
-				&& Platform.Equals(GetObject(), other.GetObject());
+				&& BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.Equals(GetObject(), other.GetObject());
 		}
 
 		protected override int Asn1GetHashCode()
@@ -168,7 +179,7 @@ namespace Org.BouncyCastle.Asn1
 				return GetObject();
 			}
 
-			throw Platform.CreateNotImplementedException("implicit tagging for tag: " + tag);
+			throw BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateNotImplementedException("implicit tagging for tag: " + tag);
 		}
 
 		public override string ToString()
@@ -177,5 +188,5 @@ namespace Org.BouncyCastle.Asn1
 		}
 	}
 }
-
+#pragma warning restore
 #endif

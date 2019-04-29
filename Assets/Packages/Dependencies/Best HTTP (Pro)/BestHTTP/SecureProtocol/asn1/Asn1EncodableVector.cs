@@ -1,15 +1,16 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Asn1
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1
 {
     public class Asn1EncodableVector
 		: IEnumerable
     {
-        private IList v = Platform.CreateArrayList();
+        private IList v = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateArrayList();
 
 		public static Asn1EncodableVector FromEnumerable(
 			IEnumerable e)
@@ -92,5 +93,5 @@ namespace Org.BouncyCastle.Asn1
 		}
 	}
 }
-
+#pragma warning restore
 #endif

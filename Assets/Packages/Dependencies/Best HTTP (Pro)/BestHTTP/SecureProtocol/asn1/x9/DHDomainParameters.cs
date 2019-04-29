@@ -1,8 +1,11 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 using System.Collections;
 
-namespace Org.BouncyCastle.Asn1.X9
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
+
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X9
 {
 	public class DHDomainParameters
 		: Asn1Encodable
@@ -23,7 +26,7 @@ namespace Org.BouncyCastle.Asn1.X9
 			if (obj is Asn1Sequence)
 				return new DHDomainParameters((Asn1Sequence)obj);
 
-			throw new ArgumentException("Invalid DHDomainParameters: " + obj.GetType().FullName, "obj");
+			throw new ArgumentException("Invalid DHDomainParameters: " + BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.GetTypeName(obj), "obj");
 		}
 
 		public DHDomainParameters(DerInteger p, DerInteger g, DerInteger q, DerInteger j,
@@ -115,5 +118,5 @@ namespace Org.BouncyCastle.Asn1.X9
 		}
 	}
 }
-
+#pragma warning restore
 #endif
