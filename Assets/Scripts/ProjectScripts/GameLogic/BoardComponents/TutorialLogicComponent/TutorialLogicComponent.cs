@@ -12,16 +12,14 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     public virtual LockerComponent Locker => locker ?? (locker = GetComponent<LockerComponent>(LockerComponent.ComponentGuid));
     
     public BoardController Context;
-    public List<int> SaveCompleted;
-    public List<int> SaveStarted;
+
+    private TutorialDataManager tutorialDataManager;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Context = entity as BoardController;
-        
-        var tutorialSave = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid);
-        SaveCompleted = tutorialSave?.Complete ?? new List<int>();
-        SaveStarted = tutorialSave?.Started ?? new List<int>();
+
+        tutorialDataManager = GameDataService.Current.TutorialDataManager;
         
         UnlockFirefly(false);
         UnlockOrders(false);
@@ -39,7 +37,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     {
         for (var i = 0;; i++)
         {
-            if(SaveCompleted.Contains(i)) continue;
+            if(tutorialDataManager.IsCompeted(i)) continue;
 
             var tutorial = TutorialBuilder.BuildTutorial(i, Context);
 
@@ -148,7 +146,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             
             UnRegisterComponent(condition);
             components.Remove(condition);
-            SaveCompleted.Add(condition.Id);
+            tutorialDataManager.SetCompleted(condition.Id);
         }
         
         for (var i = components.Count - 1; i >= 0; i--)
@@ -237,7 +235,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     
     private void UnlockFirefly(bool isRun)
     {
-        if (isRun == false && SaveCompleted.Contains(TutorialBuilder.LockFireflyStepIndex) == false) return;
+        if (isRun == false && tutorialDataManager.IsCompeted(TutorialBuilder.LockFireflyStepIndex) == false) return;
         
         var firefly = Context.BoardLogic.FireflyLogic;
         firefly.Locker.Unlock(firefly);
@@ -245,29 +243,9 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     
     private void UnlockOrders(bool isRun)
     {
-        if (isRun == false && CheckLockOrders() == false) return;
+        if (isRun == false && tutorialDataManager.CheckLockOrders() == false) return;
         
         var orders = GameDataService.Current.OrdersManager;
         orders.Locker.Unlock(orders);
-    }
-    
-    public bool CheckUnlockWorker()
-    {
-        return SaveCompleted.Contains(TutorialBuilder.WorkerStepIndex);
-    }
-    
-    public bool CheckLockOrders()
-    {
-        return SaveCompleted.Contains(TutorialBuilder.LockOrderStepIndex);
-    }
-    
-    public bool CheckFirstOrder()
-    {
-        return SaveCompleted.Contains(TutorialBuilder.FirstOrderStepIndex);
-    }
-
-    public bool CheckMarket()
-    {
-        return SaveCompleted.Contains(TutorialBuilder.LockMarketStepIndex);
     }
 }

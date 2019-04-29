@@ -91,10 +91,11 @@ public class NotifyType
         NotifySelector = notifiers =>
         {
             var resultNotifiers = new List<Notifier>();
-      
-            var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
-            if (tutorialLogic.CheckMarket() == false)
+
+            if (GameDataService.Current.TutorialDataManager.CheckMarket() == false)
+            {
                 return resultNotifiers;
+            }
 
             return notifiers;
         },

@@ -4,6 +4,7 @@
     
     public override bool Check()
     {
-        return context.Context.SaveCompleted.Contains(Target);
+        var tutorialDataManager = GameDataService.Current.TutorialDataManager;
+        return tutorialDataManager.IsCompeted(Target);
     }
 }

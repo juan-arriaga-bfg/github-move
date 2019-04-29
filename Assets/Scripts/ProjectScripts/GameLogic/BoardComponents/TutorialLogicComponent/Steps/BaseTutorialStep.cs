@@ -27,16 +27,20 @@ public class BaseTutorialStep : ECSEntity
 	public Action<BaseTutorialStep> OnFirstStartCallback;
 	public Action<BaseTutorialStep> OnCompleteCallback;
 	
+    protected TutorialDataManager tutorialDataManager;
+	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		Context = entity as TutorialLogicComponent;
-	}
+        tutorialDataManager = GameDataService.Current.TutorialDataManager;
+    }
 
 	public override void OnUnRegisterEntity(ECSEntity entity)
 	{
 		base.OnUnRegisterEntity(entity);
         OnFirstStartCallback = null;
         OnCompleteCallback = null;
+        tutorialDataManager = null;
     }
 
 	public bool IsStart()
@@ -55,17 +59,13 @@ public class BaseTutorialStep : ECSEntity
 
 	protected virtual void OnFirstStart()
 	{
-		var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
-		var started = tutorialLogic.SaveStarted;
-		started.Add(Id);
+        tutorialDataManager.SetStarted(Id);
 		OnFirstStartCallback?.Invoke(this);
 	}
 	
 	protected bool IsFirstStartEvent()
 	{
-		var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
-		var started = tutorialLogic.SaveStarted;
-		var isFirst = started.Contains(Id) == false;
+		var isFirst = tutorialDataManager.IsStarted(Id) == false;
 		return isFirst;
 	}
 	
