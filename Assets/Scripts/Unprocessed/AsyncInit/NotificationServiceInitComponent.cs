@@ -4,7 +4,7 @@ public class NotificationServiceInitComponent : AsyncInitComponentBase
     {
         //init notificationmanager
         SimpleAndroidNotificationsLocalNotificationsManager notifyManager = new SimpleAndroidNotificationsLocalNotificationsManager();
-        notifyManager.CancelNotifications();
+        
         LocalNotificationsService.Instance.SetManager(notifyManager);
 
         isCompleted = true;

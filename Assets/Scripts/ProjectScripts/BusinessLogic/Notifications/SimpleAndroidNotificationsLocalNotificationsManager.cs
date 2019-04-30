@@ -25,14 +25,15 @@ public class SimpleAndroidNotificationsLocalNotificationsManager : LocalNotifica
         {
             Debug.LogWarning($"[SimpleAndroidNotificationsLocalNotificationsManager] => ScheduleAllOnDevice: notifyItems == null || notifyItems.Count == 0");
         }
-        
+
+        var notifyId = 0;
         foreach (var item in notifyItems)
         {
             var delay = item.NotifyTime - DateTime.UtcNow;
 #if !UNITY_EDITOR
             var notificationParams = new NotificationParams
             {
-                Id = item.Id,
+                Id = notifyId++,
                 Delay = delay,
                 Title = item.Title,
                 Message = item.Message,

@@ -1,9 +1,10 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Asn1;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Asn1.CryptoPro
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.CryptoPro
 {
     public class Gost3410PublicKeyAlgParameters
         : Asn1Encodable
@@ -23,16 +24,9 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
             object obj)
         {
             if (obj == null || obj is Gost3410PublicKeyAlgParameters)
-            {
-                return (Gost3410PublicKeyAlgParameters) obj;
-            }
+                return (Gost3410PublicKeyAlgParameters)obj;
 
-			if (obj is Asn1Sequence)
-            {
-                return new Gost3410PublicKeyAlgParameters((Asn1Sequence) obj);
-            }
-
-			throw new ArgumentException("Invalid GOST3410Parameter: " + obj.GetType().Name);
+            return new Gost3410PublicKeyAlgParameters(Asn1Sequence.GetInstance((obj)));
         }
 
 		public Gost3410PublicKeyAlgParameters(
@@ -98,5 +92,5 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
         }
     }
 }
-
+#pragma warning restore
 #endif

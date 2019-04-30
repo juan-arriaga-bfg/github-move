@@ -14,16 +14,6 @@ public static class TackleBoxEvents
 #endif  
     }
 
-    public static void SendCoinsOpen()
-    {
-        Send("coins_open");
-    }
-
-    public static void SendCoinsClosed()
-    {
-        Send("coins_closed");
-    }
-
     public static void SendCollectionOpen()
     {
         Send("collection_open");

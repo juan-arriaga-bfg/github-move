@@ -19,7 +19,12 @@ public class MarketItem
     
     private MarketItemState state;
 
-    public GameDataManager GameDataManager { get; set;}
+    private GameDataManager gameDataManager;
+    
+    public GameDataManager GameDataManager
+    {
+        set => gameDataManager = value;
+    }
     
     public MarketItemState State
     {
@@ -35,7 +40,7 @@ public class MarketItem
                 state = value;
             }
             
-            GameDataManager.MarketManager.UpdateState?.Invoke();
+            gameDataManager.MarketManager.UpdateState?.Invoke();
         }
     }
     
@@ -53,7 +58,7 @@ public class MarketItem
             if (string.IsNullOrEmpty(current?.Description)) return string.Format(LocalizationService.Get("window.market.description.lock", "window.market.description.lock {0}"), Level);
             if (current.Bundle != MarketItemBundle.Chests) return LocalizationService.Get(current.Description, current.Description);
             
-            var def = GameDataManager.ChestsManager.GetChest(PieceType.Parse(Reward.Currency));
+            var def = gameDataManager.ChestsManager.GetChest(PieceType.Parse(Reward.Currency));
             var min = int.MaxValue;
 
             foreach (var weight in def.PieceWeights)
@@ -78,7 +83,7 @@ public class MarketItem
         get
         {
             if (current == null) Update(Reward == null);
-            if (state < MarketItemState.Purchased && Level > GameDataManager.LevelsManager.Level) State = MarketItemState.Lock;
+            if (state < MarketItemState.Purchased && Level > gameDataManager.LevelsManager.Level) State = MarketItemState.Lock;
             
             return current;
         }
@@ -122,7 +127,7 @@ public class MarketItem
         
         foreach (var def in defs)
         {
-            if (def.UnlockLevel > GameDataManager.LevelsManager.Level) continue;
+            if (def.UnlockLevel > gameDataManager.LevelsManager.Level) continue;
             
             weights.Add(def.Weight);
         }
@@ -163,10 +168,10 @@ public class MarketItem
                 piece = GetRandomChest(2);
                 break;
             case MarketRandomType.NPCChests:
-                piece = GameDataManager.CharactersManager.Characters.Count == 0 ? string.Empty : def.Weight.Uid;
+                piece = gameDataManager.CharactersManager.Characters.Count == 0 ? string.Empty : def.Weight.Uid;
                 break;
             case MarketRandomType.Worker:
-                piece = BoardService.Current.FirstBoard.TutorialLogic.CheckUnlockWorker() == false ? string.Empty : def.Weight.Uid;
+                piece = gameDataManager.TutorialDataManager.CheckUnlockWorker() == false ? string.Empty : def.Weight.Uid;
                 break;
             default :
                 piece = def.Weight.Uid;
@@ -187,7 +192,7 @@ public class MarketItem
 
     private CurrencyPair GetPrice(string name)
     {
-        var def = GameDataManager.PiecesManager.GetPieceDef(PieceType.Parse(name));
+        var def = gameDataManager.PiecesManager.GetPieceDef(PieceType.Parse(name));
 
         return def?.ExchangePrice == null ? null : new CurrencyPair{Currency = def.ExchangePrice.Currency, Amount = def.ExchangePrice.Amount * Reward.Amount};
     }
@@ -195,19 +200,19 @@ public class MarketItem
     private string GetRandomPiece(int min, int max)
     {
         max -= 1;
-        
-        var definition = BoardService.Current?.FirstBoard?.BoardLogic?.MatchDefinition;
+
+        var definition = gameDataManager.MatchDefinition;
 
         if (definition == null) return string.Empty;
         
         var pieces = PieceType.GetIdsByFilter(PieceTypeFilter.Normal, PieceTypeFilter.Fake);
-        var used = GameDataManager.MarketManager.Defs.FindAll(def => def.current != null && def.current.Bundle == MarketItemBundle.Pieces);
+        var used = gameDataManager.MarketManager.Defs.FindAll(def => def.current != null && def.current.Bundle == MarketItemBundle.Pieces);
         
         pieces = pieces.FindAll(id =>
         {
             var index = definition.GetIndexInChain(id);
             
-            return index > min && GameDataManager.CodexManager.IsPieceUnlocked(id);
+            return index > min && gameDataManager.CodexManager.IsPieceUnlocked(id);
         });
 
         if (pieces.Count == 0) return null;
@@ -245,17 +250,17 @@ public class MarketItem
     
     private string GetRandomIngredient()
     {
-        var definition = BoardService.Current?.FirstBoard?.BoardLogic?.MatchDefinition;
+        var definition = gameDataManager.MatchDefinition;
 
         if (definition == null) return string.Empty;
 
-        var weights = new List<ItemWeight>(GameDataManager.LevelsManager.ResourcesWeights);
-        var used = GameDataManager.MarketManager.Defs.FindAll(def => def.current != null && def.current.Bundle == MarketItemBundle.Ingredients);
+        var weights = new List<ItemWeight>(gameDataManager.LevelsManager.ResourcesWeights);
+        var used = gameDataManager.MarketManager.Defs.FindAll(def => def.current != null && def.current.Bundle == MarketItemBundle.Ingredients);
         
         weights = weights.FindAll(weight =>
         {
             var prev = definition.GetPrevious(weight.Piece);
-            return GameDataManager.CodexManager.IsPieceUnlocked(prev);
+            return gameDataManager.CodexManager.IsPieceUnlocked(prev);
         });
         
         if (weights.Count > used.Count)
@@ -268,17 +273,17 @@ public class MarketItem
     
     private string GetRandomChest(int index)
     {
-        var definition = BoardService.Current?.FirstBoard?.BoardLogic?.MatchDefinition;
+        var definition = gameDataManager.MatchDefinition;
 
         if (definition == null) return string.Empty;
         
         var chests = PieceType.GetIdsByFilter(PieceTypeFilter.Chest, PieceTypeFilter.Bag);
-        var used = GameDataManager.MarketManager.Defs.FindAll(def => def.current != null && def.current.Bundle == MarketItemBundle.Chests);
+        var used = gameDataManager.MarketManager.Defs.FindAll(def => def.current != null && def.current.Bundle == MarketItemBundle.Chests);
 
         chests.Remove(PieceType.CH_Free.Id);
         chests.Remove(PieceType.CH_NPC.Id);
         
-        chests = chests.FindAll(id => definition.GetPrevious(id) == PieceType.None.Id && GameDataManager.CodexManager.IsPieceUnlocked(id));
+        chests = chests.FindAll(id => definition.GetPrevious(id) == PieceType.None.Id && gameDataManager.CodexManager.IsPieceUnlocked(id));
 
         if (chests.Count > used.Count)
         {

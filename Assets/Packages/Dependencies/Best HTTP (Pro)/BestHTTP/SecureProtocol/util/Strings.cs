@@ -1,9 +1,9 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.Text;
 
-namespace Org.BouncyCastle.Utilities
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities
 {
     /// <summary> General string utilities.</summary>
     public abstract class Strings
@@ -54,7 +54,7 @@ namespace Org.BouncyCastle.Utilities
         public static string FromAsciiByteArray(
             byte[] bytes)
         {
-#if SILVERLIGHT || NETFX_CORE || UNITY_WP8
+#if SILVERLIGHT || PORTABLE || NETFX_CORE
             // TODO Check for non-ASCII bytes in input?
             return Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 #else
@@ -65,7 +65,7 @@ namespace Org.BouncyCastle.Utilities
         public static byte[] ToAsciiByteArray(
             char[] cs)
         {
-#if SILVERLIGHT || NETFX_CORE || UNITY_WP8
+#if SILVERLIGHT || PORTABLE || NETFX_CORE
             // TODO Check for non-ASCII characters in input?
             return Encoding.UTF8.GetBytes(cs);
 #else
@@ -76,7 +76,7 @@ namespace Org.BouncyCastle.Utilities
         public static byte[] ToAsciiByteArray(
             string s)
         {
-#if SILVERLIGHT || NETFX_CORE || UNITY_WP8
+#if SILVERLIGHT || PORTABLE || NETFX_CORE
             // TODO Check for non-ASCII characters in input?
             return Encoding.UTF8.GetBytes(s);
 #else
@@ -103,5 +103,5 @@ namespace Org.BouncyCastle.Utilities
         }
     }
 }
-
+#pragma warning restore
 #endif

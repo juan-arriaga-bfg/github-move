@@ -1,19 +1,19 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.Collections;
 using System.IO;
 using System.Text;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Utilities;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Security.Certificates;
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.X509.Extension;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X509;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Security.Certificates;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.X509.Extension;
 
-namespace Org.BouncyCastle.X509
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.X509
 {
 	/**
 	 * The following extensions are listed in RFC 2459 as relevant to CRL Entries
@@ -137,7 +137,7 @@ namespace Org.BouncyCastle.X509
 		public override string ToString()
 		{
 			StringBuilder buf = new StringBuilder();
-			string nl = Platform.NewLine;
+			string nl = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.NewLine;
 
 			buf.Append("        userCertificate: ").Append(this.SerialNumber).Append(nl);
 			buf.Append("         revocationDate: ").Append(this.RevocationDate).Append(nl);
@@ -201,5 +201,5 @@ namespace Org.BouncyCastle.X509
 		}
 	}
 }
-
+#pragma warning restore
 #endif

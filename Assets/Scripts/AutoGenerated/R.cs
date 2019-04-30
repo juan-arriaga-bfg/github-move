@@ -625,6 +625,12 @@ public class R
      public const string Boost_WR2Piece = "Boost_WR2Piece";
      public const string Boost_WR3Piece = "Boost_WR3Piece";
      public const string Boost_WR4Piece = "Boost_WR4Piece";
+     public const string BridgeView = "BridgeView";
+     public const string AirbaloonView = "AirbaloonView";
+     public const string BrokenBridgeView = "BrokenBridgeView";
+     public const string CoastView = "CoastView";
+     public const string IslandFogView = "IslandFogView";
+     public const string BrokenBridgeAndFogView = "BrokenBridgeAndFogView";
      public const string FireflyProduction = "FireflyProduction";
      public const string FireflyEvent = "FireflyEvent";
 }

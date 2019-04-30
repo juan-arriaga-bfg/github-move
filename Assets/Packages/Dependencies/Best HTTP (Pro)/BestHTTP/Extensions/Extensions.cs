@@ -5,24 +5,19 @@ using System.Linq;
 using System.Text;
 
 #if NETFX_CORE
-	using Windows.Security.Cryptography;
-	using Windows.Security.Cryptography.Core;
-	using Windows.Storage.Streams;
-	using BestHTTP.PlatformSupport.IO;
-	
-	using FileStream = BestHTTP.PlatformSupport.IO.FileStream;
-#elif UNITY_WP8
-    using Cryptography = BestHTTP.PlatformSupport.Cryptography;
+    using Windows.Security.Cryptography;
+    using Windows.Security.Cryptography.Core;
+    using Windows.Storage.Streams;
 #else
-	using Cryptography = System.Security.Cryptography;
-	using FileStream = System.IO.FileStream;
+    using Cryptography = System.Security.Cryptography;
+    using FileStream = System.IO.FileStream;
 #endif
 
 namespace BestHTTP.Extensions
 {
     public static class Extensions
     {
-        #region ASCII Encoding (These are required becouse Windows Phone doesn't supports the Encoding.ASCII class.)
+        #region ASCII Encoding (These are required because Windows Phone doesn't supports the Encoding.ASCII class.)
 
         /// <summary>
         /// On WP8 platform there are no ASCII encoding.
@@ -40,7 +35,7 @@ namespace BestHTTP.Extensions
         /// </summary>
         public static byte[] GetASCIIBytes(this string str)
         {
-            byte[] result = new byte[str.Length];
+            byte[] result = VariableSizedBufferPool.Get(str.Length, false);
             for (int i = 0; i < str.Length; ++i)
             {
                 char ch = str[i];
@@ -64,28 +59,41 @@ namespace BestHTTP.Extensions
 
         #region FileSystem WriteLine function support
 
-        public static void WriteLine(this FileStream fs)
+        public static void WriteLine(this Stream fs)
         {
             fs.Write(HTTPRequest.EOL, 0, 2);
         }
 
-        public static void WriteLine(this FileStream fs, string line)
+        public static void WriteLine(this Stream fs, string line)
         {
             var buff = line.GetASCIIBytes();
             fs.Write(buff, 0, buff.Length);
             fs.WriteLine();
+            VariableSizedBufferPool.Release(buff);
         }
 
-        public static void WriteLine(this FileStream fs, string format, params object[] values)
+        public static void WriteLine(this Stream fs, string format, params object[] values)
         {
             var buff = string.Format(format, values).GetASCIIBytes();
             fs.Write(buff, 0, buff.Length);
             fs.WriteLine();
+            VariableSizedBufferPool.Release(buff);
         }
 
         #endregion
 
         #region Other Extensions
+
+        public static string GetRequestPathAndQueryURL(this Uri uri)
+        {
+            string requestPathAndQuery = uri.GetComponents(UriComponents.PathAndQuery, UriFormat.UriEscaped);
+
+            // http://forum.unity3d.com/threads/best-http-released.200006/page-26#post-2723250
+            if (string.IsNullOrEmpty(requestPathAndQuery))
+                requestPathAndQuery = "/";
+
+            return requestPathAndQuery;
+        }
 
         public static string[] FindOption(this string str, string option)
         {
@@ -98,6 +106,53 @@ namespace BestHTTP.Extensions
                     return options[i].Split(new char[] { '=' }, StringSplitOptions.RemoveEmptyEntries);
 
             return null;
+        }
+
+        public static void WriteArray(this Stream stream, byte[] array)
+        {
+            stream.Write(array, 0, array.Length);
+        }
+
+        /// <summary>
+        /// Returns true if the Uri's host is a valid IPv4 or IPv6 address.
+        /// </summary>
+        public static bool IsHostIsAnIPAddress(this Uri uri)
+        {
+            if (uri == null)
+                return false;
+
+            return IsIpV4AddressValid(uri.Host) || IsIpV6AddressValid(uri.Host);
+        }
+
+        // Original idea from: https://www.code4copy.com/csharp/c-validate-ip-address-string/
+        // Working regex: https://www.regular-expressions.info/ip.html
+        private static readonly System.Text.RegularExpressions.Regex validIpV4AddressRegex = new System.Text.RegularExpressions.Regex("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+        /// <summary>
+        /// Validates an IPv4 address.
+        /// </summary>
+        public static bool IsIpV4AddressValid(string address)
+        {
+            if (!string.IsNullOrEmpty(address))
+                return validIpV4AddressRegex.IsMatch(address.Trim());
+
+            return false;
+        }
+
+        /// <summary>
+        /// Validates an IPv6 address.
+        /// </summary>
+        public static bool IsIpV6AddressValid(string address)
+        {
+#if !NETFX_CORE
+            if (!string.IsNullOrEmpty(address))
+            {
+                System.Net.IPAddress ip;
+                if (System.Net.IPAddress.TryParse(address, out ip))
+                  return ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6;
+            }
+#endif
+            return false;
         }
 
         #endregion
@@ -164,7 +219,10 @@ namespace BestHTTP.Extensions
 
         public static string CalculateMD5Hash(this string input)
         {
-            return input.GetASCIIBytes().CalculateMD5Hash();
+            byte[] ascii = input.GetASCIIBytes();
+            var hash = ascii.CalculateMD5Hash();
+            VariableSizedBufferPool.Release(ascii);
+            return hash;
         }
 
         public static string CalculateMD5Hash(this byte[] input)
@@ -176,11 +234,14 @@ namespace BestHTTP.Extensions
             var res = CryptographicBuffer.EncodeToHexString(hashed);
             return res;
 #else
-            var hash = Cryptography.MD5.Create().ComputeHash(input);
-            var sb = new StringBuilder();
-            foreach (var b in hash)
-                sb.Append(b.ToString("x2"));
-            return sb.ToString();
+            using (var md5 = Cryptography.MD5.Create()) {
+                var hash = md5.ComputeHash(input);
+                var sb = new StringBuilder(hash.Length);
+                for (int i = 0; i < hash.Length; ++i)
+                    sb.Append(hash[i].ToString("x2"));
+                VariableSizedBufferPool.Release(hash);
+                return sb.ToString();
+            }
 #endif
         }
 
@@ -213,7 +274,7 @@ namespace BestHTTP.Extensions
             return result;
         }
 
-        internal static string ReadQuotedText(this string str, ref int pos)
+        internal static string ReadPossibleQuotedText(this string str, ref int pos)
         {
             string result = string.Empty;
             if (str == null)
@@ -233,7 +294,7 @@ namespace BestHTTP.Extensions
             }
             else
                 // It's not a quoted text, so we will read until the next option
-                result = str.Read(ref pos, ',');
+                result = str.Read(ref pos, (ch) => ch != ',' && ch != ';');
 
             return result;
         }
@@ -265,14 +326,22 @@ namespace BestHTTP.Extensions
             return new string(buffer, 0, length);
         }
 
+        internal static char? Peek(this string str, int pos)
+        {
+            if (pos < 0 || pos >= str.Length)
+                return null;
+
+            return str[pos];
+        }
+
         #endregion
 
         #region Specialized String Parsers
 
         //public, max-age=2592000
-        internal static List<KeyValuePair> ParseOptionalHeader(this string str)
+        internal static List<HeaderValue> ParseOptionalHeader(this string str)
         {
-            List<KeyValuePair> result = new List<KeyValuePair>();
+            List<HeaderValue> result = new List<HeaderValue>();
 
             if (str == null)
                 return result;
@@ -284,10 +353,10 @@ namespace BestHTTP.Extensions
             {
                 // Read key
                 string key = str.Read(ref idx, (ch) => ch != '=' && ch != ',').TrimAndLower();
-                KeyValuePair qp = new KeyValuePair(key);
+                HeaderValue qp = new HeaderValue(key);
 
                 if (str[idx - 1] == '=')
-                    qp.Value = str.ReadQuotedText(ref idx);
+                    qp.Value = str.ReadPossibleQuotedText(ref idx);
 
                 result.Add(qp);
             }
@@ -296,9 +365,9 @@ namespace BestHTTP.Extensions
         }
 
         //deflate, gzip, x-gzip, identity, *;q=0
-        internal static List<KeyValuePair> ParseQualityParams(this string str)
+        internal static List<HeaderValue> ParseQualityParams(this string str)
         {
-            List<KeyValuePair> result = new List<KeyValuePair>();
+            List<HeaderValue> result = new List<HeaderValue>();
 
             if (str == null)
                 return result;
@@ -308,7 +377,7 @@ namespace BestHTTP.Extensions
             {
                 string key = str.Read(ref idx, (ch) => ch != ',' && ch != ';').TrimAndLower();
 
-                KeyValuePair qp = new KeyValuePair(key);
+                HeaderValue qp = new HeaderValue(key);
 
                 if (str[idx - 1] == ';')
                 {
@@ -344,30 +413,43 @@ namespace BestHTTP.Extensions
             } while (count < buffer.Length);
         }
 
+        public static void ReadBuffer(this Stream stream, byte[] buffer, int length)
+        {
+            int count = 0;
+
+            do
+            {
+                int read = stream.Read(buffer, count, length - count);
+
+                if (read <= 0)
+                    throw ExceptionHelper.ServerClosedTCPStream();
+
+                count += read;
+            } while (count < length);
+        }
+
         #endregion
 
-        #region MemoryStream
+        #region BufferPoolMemoryStream
 
-        public static void WriteAll(this MemoryStream ms, byte[] buffer)
+        public static void WriteString(this BufferPoolMemoryStream ms, string str)
         {
-            ms.Write(buffer, 0, buffer.Length);
+            var byteCount = Encoding.UTF8.GetByteCount(str);
+            byte[] buffer = VariableSizedBufferPool.Get(byteCount, true);
+            Encoding.UTF8.GetBytes(str, 0, str.Length, buffer, 0);
+            ms.Write(buffer, 0, byteCount);
+            VariableSizedBufferPool.Release(buffer);
         }
 
-        public static void WriteString(this MemoryStream ms, string str)
+        public static void WriteLine(this BufferPoolMemoryStream ms)
         {
-            byte[] buffer = Encoding.UTF8.GetBytes(str);
-            ms.WriteAll(buffer);
+            ms.Write(HTTPRequest.EOL, 0, HTTPRequest.EOL.Length);
         }
 
-        public static void WriteLine(this MemoryStream ms)
-        {
-            ms.WriteAll(HTTPRequest.EOL);
-        }
-
-        public static void WriteLine(this MemoryStream ms, string str)
+        public static void WriteLine(this BufferPoolMemoryStream ms, string str)
         {
             ms.WriteString(str);
-            ms.WriteLine();
+            ms.Write(HTTPRequest.EOL, 0, HTTPRequest.EOL.Length);
         }
 
         #endregion

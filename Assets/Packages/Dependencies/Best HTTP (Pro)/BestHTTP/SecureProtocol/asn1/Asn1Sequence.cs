@@ -1,12 +1,13 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 using System.Collections;
 using System.IO;
 
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Collections;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Collections;
 
-namespace Org.BouncyCastle.Asn1
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1
 {
     public abstract class Asn1Sequence
         : Asn1Object, IEnumerable
@@ -51,7 +52,7 @@ namespace Org.BouncyCastle.Asn1
                 }
             }
 
-            throw new ArgumentException("Unknown object in GetInstance: " + obj.GetType().FullName, "obj");
+            throw new ArgumentException("Unknown object in GetInstance: " + BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.GetTypeName(obj), "obj");
         }
 
         /**
@@ -104,13 +105,13 @@ namespace Org.BouncyCastle.Asn1
                 return (Asn1Sequence) inner;
             }
 
-            throw new ArgumentException("Unknown object in GetInstance: " + obj.GetType().FullName, "obj");
+            throw new ArgumentException("Unknown object in GetInstance: " + BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.GetTypeName(obj), "obj");
         }
 
         protected internal Asn1Sequence(
             int capacity)
         {
-            seq = Platform.CreateArrayList(capacity);
+            seq = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateArrayList(capacity);
         }
 
         public virtual IEnumerator GetEnumerator()
@@ -267,5 +268,5 @@ namespace Org.BouncyCastle.Asn1
         }
     }
 }
-
+#pragma warning restore
 #endif

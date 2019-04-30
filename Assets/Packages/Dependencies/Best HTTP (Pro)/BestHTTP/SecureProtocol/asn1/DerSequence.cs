@@ -1,8 +1,12 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
+using System;
 using System.Collections;
 using System.IO;
 
-namespace Org.BouncyCastle.Asn1
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
+
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1
 {
 	public class DerSequence
 		: Asn1Sequence
@@ -76,13 +80,13 @@ namespace Org.BouncyCastle.Asn1
 				dOut.WriteObject(obj);
 			}
 
-			dOut.Dispose();
+            BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.Dispose(dOut);
 
-			byte[] bytes = bOut.ToArray();
+            byte[] bytes = bOut.ToArray();
 
 			derOut.WriteEncoded(Asn1Tags.Sequence | Asn1Tags.Constructed, bytes);
 		}
 	}
 }
-
+#pragma warning restore
 #endif

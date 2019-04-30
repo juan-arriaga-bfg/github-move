@@ -1,9 +1,9 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.IO;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Tls
 {
     internal class TlsStream
         : Stream
@@ -30,17 +30,22 @@ namespace Org.BouncyCastle.Crypto.Tls
             get { return !handler.IsClosed; }
         }
 
+#if PORTABLE || NETFX_CORE
         protected override void Dispose(bool disposing)
         {
-            try
+            if (disposing)
             {
                 handler.Close();
             }
-            finally
-            {
-                base.Dispose(disposing);
-            }
+            base.Dispose(disposing);
         }
+#else
+        public override void Close()
+        {
+            handler.Close();
+            base.Close();
+        }
+#endif
 
         public override void Flush()
         {
@@ -92,5 +97,5 @@ namespace Org.BouncyCastle.Crypto.Tls
         }
     }
 }
-
+#pragma warning restore
 #endif

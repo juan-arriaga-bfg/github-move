@@ -65,7 +65,6 @@ public partial class BoardLogicComponent : ECSEntity,
     protected FireflyLogicComponent fireflyLogic;
     public FireflyLogicComponent FireflyLogic => fireflyLogic ?? (fireflyLogic = GetComponent<FireflyLogicComponent>(FireflyLogicComponent.ComponentGuid));
     
-    
     protected AirShipLogicComponent airShipLogic;
     public AirShipLogicComponent AirShipLogic => airShipLogic ?? (airShipLogic = GetComponent<AirShipLogicComponent>(AirShipLogicComponent.ComponentGuid));
 

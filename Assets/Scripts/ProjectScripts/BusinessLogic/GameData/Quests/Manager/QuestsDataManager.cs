@@ -60,7 +60,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     public Action<QuestEntity, TaskEntity> OnQuestStateChanged;
     
     public List<QuestStarterEntity> QuestStarters;
-
+    
     /// <summary>
     /// Flag that indicates that all active quests and tasks are listening to BoardEvents
     /// </summary>
@@ -644,6 +644,11 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
                                                                                                                 
         RegisterComponent(DailyTimer);
         DailyTimer.Start(startTime);
+
+        if (ConnectedToBoard)
+        {
+            LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
+        }
     }
 
     private void StopDailyTimer()

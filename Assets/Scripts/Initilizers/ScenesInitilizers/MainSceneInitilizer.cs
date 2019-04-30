@@ -58,7 +58,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         {
             EventSystem.current.pixelDragThreshold = 12;
         }
-
+        
         // Hot reload?
         if (IWUIManager.Instance.IsComplete)
         {
@@ -106,6 +106,9 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         BoardService.Current.FirstBoard.TutorialLogic.Run();
 
         BoardService.Current.FirstBoard.GetComponent<LoadSilenceComponent>(LoadSilenceComponent.ComponentGuid)?.OnLoadComplete();
+        
+        LocalNotificationsService.Current.CancelNotifications();
+        BoardService.Current.FirstBoard.BoardLogic.VIPIslandLogic.UpdateLockState();
         
         if (!hotReload)
         {

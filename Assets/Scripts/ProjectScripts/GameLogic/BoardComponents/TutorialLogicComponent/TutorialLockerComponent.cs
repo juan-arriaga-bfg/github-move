@@ -16,7 +16,7 @@ public class TutorialLockerComponent : IECSComponent
     {
         context = entity as Piece;
         
-        if(context.Context.TutorialLogic.SaveCompleted.Contains(Step) == false) return;
+        if(GameDataService.Current.TutorialDataManager.IsCompeted(Step) == false) return;
 
         context.UnRegisterComponent(this);
     }

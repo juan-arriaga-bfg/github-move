@@ -1,20 +1,20 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Math.Raw;
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.Raw;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Math.EC.Custom.Sec
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC.Custom.Sec
 {
     internal class SecT113FieldElement
-        : ECFieldElement
+        : AbstractF2mFieldElement
     {
         protected internal readonly ulong[] x;
 
         public SecT113FieldElement(BigInteger x)
         {
-            if (x == null || x.SignValue < 0)
+            if (x == null || x.SignValue < 0 || x.BitLength > 113)
                 throw new ArgumentException("value invalid for SecT113FieldElement", "x");
 
             this.x = SecT113Field.FromBigInteger(x);
@@ -152,15 +152,23 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             return new SecT113FieldElement(z);
         }
 
+        public override int Trace()
+        {
+            return (int)SecT113Field.Trace(x);
+        }
+
         public override ECFieldElement Invert()
         {
-            return new SecT113FieldElement(
-                AbstractF2mCurve.Inverse(113, new int[]{ 9 }, ToBigInteger()));
+            ulong[] z = Nat128.Create64();
+            SecT113Field.Invert(x, z);
+            return new SecT113FieldElement(z);
         }
 
         public override ECFieldElement Sqrt()
         {
-            return SquarePow(M - 1);
+            ulong[] z = Nat128.Create64();
+            SecT113Field.Sqrt(x, z);
+            return new SecT113FieldElement(z);
         }
 
         public virtual int Representation
@@ -213,5 +221,5 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
         }
     }
 }
-
+#pragma warning restore
 #endif

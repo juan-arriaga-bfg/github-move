@@ -11,11 +11,16 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
 
     public readonly TimeSpan NightBeginTime = new TimeSpan(24, 00, 00);
     public readonly TimeSpan NightEndTime   = new TimeSpan(8, 0, 0);
-    public readonly TimeSpan MinimalTimeout = new TimeSpan(0,  30,0);
+    public readonly TimeSpan MinimalTimeout = new TimeSpan(0, 2,0);
 
 #if DEBUG
     private bool isDebugSchedule = false;
 #endif
+
+    public LocalNotificationsManagerBase()
+    {
+        RegisterNotifier(new Notifier(new NowTimer(), NotifyType.ComeBackToGame));
+    }
     
     public void DebugSchedule()
     {
@@ -77,6 +82,18 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
     
     public void RegisterNotifier(Notifier notifier)
     {
+        if (notifier.Timer == null)
+        {
+            Debug.LogWarning($"[LocalNotificationService] => UnRegisterNotifier: timer == null");
+            return;
+        }
+
+        if (notifiers.Any(currentNotifier => currentNotifier.Timer == notifier.Timer && currentNotifier.NotifyType == notifier.NotifyType))
+        {
+            Debug.LogWarning($"[LocalNotificationService] => notifier with id {notifier.NotifyType.Id} already registered with same timer");
+            return;
+        }
+        
         Debug.Log($"[LocalNotificationService] => Register(NotifyType.Id:{notifier.NotifyType.Id})");
         notifiers.Add(notifier);
     }
@@ -126,7 +143,7 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
 
     public virtual void ScheduleNotifications()
     {
-        Debug.Log($"[LocalNotificationService] => ScheduleNotifications (CurrentTime: {DateTime.Now})");
+        Debug.Log($"[LocalNotificationService] => ScheduleNotifications (local time: {DateTime.Now}, UTC time: {DateTime.UtcNow})");
 
 #if DEBUG
         if (isDebugSchedule)
@@ -219,7 +236,7 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
     {
         foreach (var item in notifyItems)
         {
-            Debug.Log($"[LocalNotificationService] => Notification(Title: {item.Title}, Message: {item.Message}, NotifyTime: UTC {item.NotifyTime})");
+            Debug.Log($"[LocalNotificationService] => Notification(Title: {item.Title}, Message: {item.Message}, NotifyTime: UTC {item.NotifyTime} | Local {item.NotifyTime.ToLocalTime()})");
         } 
     }
 

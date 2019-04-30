@@ -1,4 +1,4 @@
-﻿#if !BESTHTTP_DISABLE_COOKIES && (!UNITY_WEBGL || UNITY_EDITOR)
+﻿#if !BESTHTTP_DISABLE_COOKIES
 
 using System;
 using System.Collections.Generic;
@@ -37,14 +37,14 @@ namespace BestHTTP.Cookies
         public DateTime LastAccess { get; set; }
 
         /// <summary>
-        /// The Expires attribute indicates the maximum lifetime of the cookie, represented as the date and time at which the cookie expires. 
-        /// The user agent is not required to retain the cookie until the specified date has passed. 
+        /// The Expires attribute indicates the maximum lifetime of the cookie, represented as the date and time at which the cookie expires.
+        /// The user agent is not required to retain the cookie until the specified date has passed.
         /// In fact, user agents often evict cookies due to memory pressure or privacy concerns.
         /// </summary>
         public DateTime Expires { get; private set; }
 
         /// <summary>
-        /// The Max-Age attribute indicates the maximum lifetime of the cookie, represented as the number of seconds until the cookie expires. 
+        /// The Max-Age attribute indicates the maximum lifetime of the cookie, represented as the number of seconds until the cookie expires.
         /// The user agent is not required to retain the cookie for the specified duration.
         /// In fact, user agents often evict cookies due to memory pressure or privacy concerns.
         /// </summary>
@@ -71,7 +71,7 @@ namespace BestHTTP.Cookies
 
         /// <summary>
         /// The Secure attribute limits the scope of the cookie to "secure" channels (where "secure" is defined by the user agent).
-        /// When a cookie has the Secure attribute, the user agent will include the cookie in an HTTP request only if the request is 
+        /// When a cookie has the Secure attribute, the user agent will include the cookie in an HTTP request only if the request is
         /// transmitted over a secure channel (typically HTTP over Transport Layer Security (TLS)).
         /// </summary>
         public bool IsSecure { get; private set; }
@@ -124,7 +124,7 @@ namespace BestHTTP.Cookies
 
         internal Cookie()
         {
-            // If a cookie has neither the Max-Age nor the Expires attribute, the user agent will retain the cookie 
+            // If a cookie has neither the Max-Age nor the Expires attribute, the user agent will retain the cookie
             //  until "the current session is over" (as defined by the user agent).
             IsSession = true;
             MaxAge = -1;
@@ -138,7 +138,7 @@ namespace BestHTTP.Cookies
                 return true;
 
             // If a cookie has both the Max-Age and the Expires attribute, the Max-Age attribute has precedence and controls the expiration date of the cookie.
-            return MaxAge != -1 ? 
+            return MaxAge != -1 ?
                     Math.Max(0, (long)(DateTime.UtcNow - Date).TotalSeconds) < MaxAge :
                     Expires > DateTime.UtcNow;
         }
@@ -179,7 +179,7 @@ namespace BestHTTP.Cookies
                             if (string.IsNullOrEmpty(kvp.Value))
                                 return null;
 
-                            // If the first character of the attribute-value string is %x2E ("."): 
+                            // If the first character of the attribute-value string is %x2E ("."):
                             //  Let cookie-domain be the attribute-value without the leading %x2E (".") character.
                             cookie.Domain = kvp.Value.StartsWith(".") ? kvp.Value.Substring(1) : kvp.Value;
                             break;
@@ -209,7 +209,7 @@ namespace BestHTTP.Cookies
                     }
                 }
 
-                // Some user agents provide users the option of preventing persistent storage of cookies across sessions. 
+                // Some user agents provide users the option of preventing persistent storage of cookies across sessions.
                 // When configured thusly, user agents MUST treat all received cookies as if the persistent-flag were set to false.
                 if (HTTPManager.EnablePrivateBrowsing)
                     cookie.IsSession = true;
@@ -221,16 +221,17 @@ namespace BestHTTP.Cookies
                     cookie.Domain = defaultDomain.Host;
 
                 // http://tools.ietf.org/html/rfc6265#section-5.3 section 7:
-                // If the cookie-attribute-list contains an attribute with an attribute-name of "Path", 
-                // set the cookie's path to attribute-value of the last attribute in the cookie-attribute-list with an attribute-name of "Path". 
+                // If the cookie-attribute-list contains an attribute with an attribute-name of "Path",
+                // set the cookie's path to attribute-value of the last attribute in the cookie-attribute-list with an attribute-name of "Path".
                 // __Otherwise, set the cookie's path to the default-path of the request-uri.__
                 if (string.IsNullOrEmpty(cookie.Path))
                     cookie.Path = defaultDomain.AbsolutePath;
 
                 cookie.Date = cookie.LastAccess = DateTime.UtcNow;
             }
-            catch
+            catch (Exception ex)
             {
+                HTTPManager.Logger.Warning("Cookie", "Parse - Couldn't parse header: " + header + " exception: " + ex.ToString() + " " + ex.StackTrace);
             }
             return cookie;
         }
@@ -295,7 +296,7 @@ namespace BestHTTP.Cookies
                 return true;
 
             return this.Name.Equals(cookie.Name, StringComparison.Ordinal) &&
-                ((this.Domain == null && cookie.Domain == null) || this.Domain.Equals(cookie.Domain, StringComparison.Ordinal)) && 
+                ((this.Domain == null && cookie.Domain == null) || this.Domain.Equals(cookie.Domain, StringComparison.Ordinal)) &&
                 ((this.Path == null && cookie.Path == null) || this.Path.Equals(cookie.Path, StringComparison.Ordinal));
         }
 
@@ -317,9 +318,9 @@ namespace BestHTTP.Cookies
             return str.Read(ref pos, ';');
         }
 
-        private static List<KeyValuePair> ParseCookieHeader(string str)
+        private static List<HeaderValue> ParseCookieHeader(string str)
         {
-            List<KeyValuePair> result = new List<KeyValuePair>();
+            List<HeaderValue> result = new List<HeaderValue>();
 
             if (str == null)
                 return result;
@@ -331,7 +332,7 @@ namespace BestHTTP.Cookies
             {
                 // Read key
                 string key = str.Read(ref idx, (ch) => ch != '=' && ch != ';').Trim();
-                KeyValuePair qp = new KeyValuePair(key);
+                HeaderValue qp = new HeaderValue(key);
 
                 if (idx < str.Length && str[idx - 1] == '=')
                     qp.Value = ReadValue(str, ref idx);

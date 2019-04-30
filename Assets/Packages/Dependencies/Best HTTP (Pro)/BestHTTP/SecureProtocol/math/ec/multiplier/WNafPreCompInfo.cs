@@ -1,6 +1,6 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
-namespace Org.BouncyCastle.Math.EC.Multiplier
+#pragma warning disable
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC.Multiplier
 {
     /**
     * Class holding precomputation data for the WNAF (Window Non-Adjacent Form)
@@ -46,5 +46,5 @@ namespace Org.BouncyCastle.Math.EC.Multiplier
         }
     }
 }
-
+#pragma warning restore
 #endif

@@ -1,13 +1,13 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Math.EC.Multiplier;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC.Multiplier;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Security;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Generators
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Generators
 {
     internal class DHParametersHelper
     {
@@ -46,10 +46,10 @@ namespace Org.BouncyCastle.Crypto.Generators
 
                     p = q.ShiftLeft(1).Add(BigInteger.One);
 
-                    if (!p.IsProbablePrime(certainty))
+                    if (!p.IsProbablePrime(certainty, true))
                         continue;
 
-                    if (certainty > 2 && !q.IsProbablePrime(certainty - 2))
+                    if (certainty > 2 && !q.IsProbablePrime(certainty, true))
                         continue;
 
                     break;
@@ -94,15 +94,15 @@ namespace Org.BouncyCastle.Crypto.Generators
                     if (q.BitLength != qLength)
                         continue;
 
-                    if (!q.RabinMillerTest(2, random))
+                    if (!q.RabinMillerTest(2, random, true))
                         continue;
 
                     p = q.ShiftLeft(1).Add(BigInteger.One);
 
-                    if (!p.RabinMillerTest(certainty, random))
+                    if (!p.RabinMillerTest(certainty, random, true))
                         continue;
 
-                    if (certainty > 2 && !q.RabinMillerTest(certainty - 2, random))
+                    if (certainty > 2 && !q.RabinMillerTest(certainty - 2, random, true))
                         continue;
 
                     /*
@@ -156,5 +156,5 @@ namespace Org.BouncyCastle.Crypto.Generators
         }
     }
 }
-
+#pragma warning restore
 #endif

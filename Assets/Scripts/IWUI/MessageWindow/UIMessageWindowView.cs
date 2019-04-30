@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UIMessageWindowView : UIGenericPopupWindowView
 {
+    [IWUIBinding("#MessageTop")] protected NSText messageTop;
     [IWUIBinding("#ButtonAcceptLabel")] protected NSText buttonAcceptLabel;
     [IWUIBinding("#ButtonBuyLabel")] protected NSText buttonBuyLabel;
     [IWUIBinding("#ButtonCancelLabel")] protected NSText buttonCancelLabel;
@@ -23,11 +24,13 @@ public class UIMessageWindowView : UIGenericPopupWindowView
     [IWUIBinding("#ButtonAcceptBack")] protected Image btnAcceptBack;
     [IWUIBinding("#ButtonCancelBack")] protected Image btnCancelBack;
     
+    [IWUIBinding("#DelimiterImageAndTextTop")] protected GameObject delimiterImageAndTextTop;
     [IWUIBinding("#DelimiterImageAndText")] protected GameObject delimiterImageAndText;
     [IWUIBinding("#DelimiterTextAndButtons")] protected GameObject delimiterTextAndButtons;
     [IWUIBinding("#DelimiterTimerAndButtons")] protected GameObject delimiterTimerAndButtons;
     
     [IWUIBinding("#ButtonCancel")] protected CanvasGroup btnCancelCanvas;
+    [IWUIBinding("#Shine")] protected RectTransform shine;
     
     private bool isAccept;
     private bool isCancel;
@@ -54,8 +57,14 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         isAccept = false;
         isCancel = false;
         
+        btnAccept.GetComponent<RectTransform>().sizeDelta = Vector2.one * windowModel.ButtonSize;
+        btnCancel.GetComponent<RectTransform>().sizeDelta = Vector2.one * windowModel.ButtonSize;
+        btnBuy.GetComponent<RectTransform>().sizeDelta = Vector2.one * windowModel.ButtonSize;
+        
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
+
+        messageTop.Text = windowModel.Message;
         
         btnAcceptBack.sprite = IconService.Current.GetSpriteById($"button{windowModel.AcceptColor}");
         btnCancelBack.sprite = IconService.Current.GetSpriteById($"button{windowModel.CancelColor}");
@@ -66,15 +75,20 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         btnCancel.CachedTransform.SetSiblingIndex(windowModel.IsAcceptLeft ? 2 : 0);
         
         image.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Image));
-        message.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Message));
+        message.gameObject.SetActive(!windowModel.IsTopMessage && !string.IsNullOrEmpty(windowModel.Message));
+        messageTop.gameObject.SetActive(windowModel.IsTopMessage);
         anchor.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Prefab));
         
         btnAccept.gameObject.SetActive(windowModel.IsBuy == false && windowModel.OnAccept != null);
         btnBuy.gameObject.SetActive(windowModel.IsBuy && windowModel.OnAccept != null);
         btnCancel.gameObject.SetActive(windowModel.OnCancel != null);
         timer.SetActive(windowModel.Timer != null);
+        shine.gameObject.SetActive(windowModel.IsShine);
         
-        delimiterImageAndText.SetActive((!string.IsNullOrEmpty(windowModel.Image) || !string.IsNullOrEmpty(windowModel.Prefab)) && !string.IsNullOrEmpty(windowModel.Message));
+        shine.sizeDelta = Vector2.one * windowModel.ShineSize;
+        
+        delimiterImageAndTextTop.SetActive(windowModel.IsTopMessage);
+        delimiterImageAndText.SetActive(windowModel.IsTopMessage == false && (!string.IsNullOrEmpty(windowModel.Image) || !string.IsNullOrEmpty(windowModel.Prefab)) && !string.IsNullOrEmpty(windowModel.Message));
         delimiterTextAndButtons.SetActive(true);
         delimiterTimerAndButtons.SetActive(windowModel.Timer != null);
 
@@ -96,6 +110,8 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         InitButtonBase(btnAccept, OnClickAccept);
         InitButtonBase(btnCancel, OnClickCancel);
         InitButtonBase(btnBuy, OnClickAccept);
+        
+        shine.localPosition = new Vector3(0, anchor.localPosition.y);
     }
 
     private IEnumerator UpdateLayoutCoroutine()

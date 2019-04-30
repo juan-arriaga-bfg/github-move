@@ -1,11 +1,11 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.Diagnostics;
 
-using Org.BouncyCastle.Crypto.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Utilities;
 
-namespace Org.BouncyCastle.Math.Raw
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Math.Raw
 {
     internal abstract class Nat128
     {
@@ -113,10 +113,24 @@ namespace Org.BouncyCastle.Math.Raw
             z[3] = x[3];
         }
 
+        public static void Copy(uint[] x, int xOff, uint[] z, int zOff)
+        {
+            z[zOff + 0] = x[xOff + 0];
+            z[zOff + 1] = x[xOff + 1];
+            z[zOff + 2] = x[xOff + 2];
+            z[zOff + 3] = x[xOff + 3];
+        }
+
         public static void Copy64(ulong[] x, ulong[] z)
         {
             z[0] = x[0];
             z[1] = x[1];
+        }
+
+        public static void Copy64(ulong[] x, int xOff, ulong[] z, int zOff)
+        {
+            z[zOff + 0] = x[xOff + 0];
+            z[zOff + 1] = x[xOff + 1];
         }
 
         public static uint[] Create()
@@ -628,8 +642,8 @@ namespace Org.BouncyCastle.Math.Raw
             }
 
             ulong x_3 = x[3];
-            ulong zz_5 = zz[5];
-            ulong zz_6 = zz[6];
+            ulong zz_5 = zz[5] + (zz_4 >> 32); zz_4 &= M;
+            ulong zz_6 = zz[6] + (zz_5 >> 32); zz_5 &= M;
             {
                 zz_3 += x_3 * x_0;
                 w = (uint)zz_3;
@@ -704,8 +718,8 @@ namespace Org.BouncyCastle.Math.Raw
             }
 
             ulong x_3 = x[xOff + 3];
-            ulong zz_5 = zz[zzOff + 5];
-            ulong zz_6 = zz[zzOff + 6];
+            ulong zz_5 = zz[zzOff + 5] + (zz_4 >> 32); zz_4 &= M;
+            ulong zz_6 = zz[zzOff + 6] + (zz_5 >> 32); zz_5 &= M;
             {
                 zz_3 += x_3 * x_0;
                 w = (uint)zz_3;
@@ -856,5 +870,5 @@ namespace Org.BouncyCastle.Math.Raw
         }
     }
 }
-
+#pragma warning restore
 #endif

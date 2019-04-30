@@ -1,13 +1,13 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Crypto.Utilities;
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Modes.Gcm
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Modes.Gcm
 {
-    public class Tables8kGcmMultiplier
+    public sealed class Tables8kGcmMultiplier
         : IGcmMultiplier
     {
         private byte[] H;
@@ -79,10 +79,11 @@ namespace Org.BouncyCastle.Crypto.Modes.Gcm
                 }
             }
         }
+        uint[] z = new uint[4];
 
         public void MultiplyH(byte[] x)
         {
-            uint[] z = new uint[4];
+            Array.Clear(z, 0, z.Length);
             for (int i = 15; i >= 0; --i)
             {
                 //GcmUtilities.Xor(z, M[i + i][x[i] & 0x0f]);
@@ -103,5 +104,5 @@ namespace Org.BouncyCastle.Crypto.Modes.Gcm
         }
     }
 }
-
+#pragma warning restore
 #endif

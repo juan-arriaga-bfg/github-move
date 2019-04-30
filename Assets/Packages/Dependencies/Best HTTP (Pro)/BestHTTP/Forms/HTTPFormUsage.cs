@@ -22,11 +22,10 @@ namespace BestHTTP.Forms
         /// </summary>
         Multipart,
 
-#if !BESTHTTP_DISABLE_UNITY_FORM
         /// <summary>
-        /// The legacy, Unity-based form sending.
+        /// Using this type of form, the plugin will send the data converted to a JSon string.
         /// </summary>
-        Unity
-#endif
+        RawJSon,
+
     }
 }

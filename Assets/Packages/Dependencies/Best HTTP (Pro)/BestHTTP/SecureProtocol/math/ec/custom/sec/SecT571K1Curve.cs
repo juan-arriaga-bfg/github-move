@@ -1,16 +1,18 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Math.EC.Multiplier;
-using Org.BouncyCastle.Utilities.Encoders;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC.Multiplier;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.Raw;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Encoders;
 
-namespace Org.BouncyCastle.Math.EC.Custom.Sec
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC.Custom.Sec
 {
     internal class SecT571K1Curve
         : AbstractF2mCurve
     {
-        private const int SecT571K1_DEFAULT_COORDS = COORD_LAMBDA_PROJECTIVE;
+        private const int SECT571K1_DEFAULT_COORDS = COORD_LAMBDA_PROJECTIVE;
+        private const int SECT571K1_FE_LONGS = 9;
 
         protected readonly SecT571K1Point m_infinity;
 
@@ -24,7 +26,7 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             this.m_order = new BigInteger(1, Hex.Decode("020000000000000000000000000000000000000000000000000000000000000000000000131850E1F19A63E4B391A8DB917F4138B630D84BE5D639381E91DEB45CFE778F637C1001"));
             this.m_cofactor = BigInteger.ValueOf(4);
 
-            this.m_coord = SecT571K1_DEFAULT_COORDS;
+            this.m_coord = SECT571K1_DEFAULT_COORDS;
         }
 
         protected override ECCurve CloneCurve()
@@ -78,98 +80,6 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             get { return true; }
         }
 
-        /**
-         * Decompresses a compressed point P = (xp, yp) (X9.62 s 4.2.2).
-         * 
-         * @param yTilde
-         *            ~yp, an indication bit for the decompression of yp.
-         * @param X1
-         *            The field element xp.
-         * @return the decompressed point.
-         */
-        protected override ECPoint DecompressPoint(int yTilde, BigInteger X1)
-        {
-            ECFieldElement x = FromBigInteger(X1), y = null;
-            if (x.IsZero)
-            {
-                y = B.Sqrt();
-            }
-            else
-            {
-                ECFieldElement beta = x.Square().Invert().Multiply(B).Add(A).Add(x);
-                ECFieldElement z = SolveQuadraticEquation(beta);
-                if (z != null)
-                {
-                    if (z.TestBitZero() != (yTilde == 1))
-                    {
-                        z = z.AddOne();
-                    }
-
-                    switch (this.CoordinateSystem)
-                    {
-                    case COORD_LAMBDA_AFFINE:
-                    case COORD_LAMBDA_PROJECTIVE:
-                    {
-                        y = z.Add(x);
-                        break;
-                    }
-                    default:
-                    {
-                        y = z.Multiply(x);
-                        break;
-                    }
-                    }
-                }
-            }
-
-            if (y == null)
-                throw new ArgumentException("Invalid point compression");
-
-            return this.CreateRawPoint(x, y, true);
-        }
-
-        /**
-         * Solves a quadratic equation <code>z<sup>2</sup> + z = beta</code>(X9.62
-         * D.1.6) The other solution is <code>z + 1</code>.
-         * 
-         * @param beta
-         *            The value to solve the quadratic equation for.
-         * @return the solution for <code>z<sup>2</sup> + z = beta</code> or
-         *         <code>null</code> if no solution exists.
-         */
-        private ECFieldElement SolveQuadraticEquation(ECFieldElement beta)
-        {
-            if (beta.IsZero)
-            {
-                return beta;
-            }
-
-            ECFieldElement zeroElement = FromBigInteger(BigInteger.Zero);
-
-            ECFieldElement z = null;
-            ECFieldElement gamma = null;
-
-            Random rand = new Random();
-            do
-            {
-                ECFieldElement t = FromBigInteger(new BigInteger(571, rand));
-                z = zeroElement;
-                ECFieldElement w = beta;
-                for (int i = 1; i < 571; i++)
-                {
-                    ECFieldElement w2 = w.Square();
-                    z = z.Square().Add(w2.Multiply(t));
-                    w = w2.Add(beta);
-                }
-                if (!w.IsZero)
-                    return null;
-                gamma = z.Square().Add(z);
-            }
-            while (gamma.IsZero);
-
-            return z;
-        }
-
         public virtual int M
         {
             get { return 571; }
@@ -194,7 +104,64 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
         {
             get { return 10; }
         }
+
+        public override ECLookupTable CreateCacheSafeLookupTable(ECPoint[] points, int off, int len)
+        {
+            ulong[] table = new ulong[len * SECT571K1_FE_LONGS * 2];
+            {
+                int pos = 0;
+                for (int i = 0; i < len; ++i)
+                {
+                    ECPoint p = points[off + i];
+                    Nat576.Copy64(((SecT571FieldElement)p.RawXCoord).x, 0, table, pos); pos += SECT571K1_FE_LONGS;
+                    Nat576.Copy64(((SecT571FieldElement)p.RawYCoord).x, 0, table, pos); pos += SECT571K1_FE_LONGS;
+                }
+            }
+
+            return new SecT571K1LookupTable(this, table, len);
+        }
+
+        private class SecT571K1LookupTable
+            : ECLookupTable
+        {
+            private readonly SecT571K1Curve m_outer;
+            private readonly ulong[] m_table;
+            private readonly int m_size;
+
+            internal SecT571K1LookupTable(SecT571K1Curve outer, ulong[] table, int size)
+            {
+                this.m_outer = outer;
+                this.m_table = table;
+                this.m_size = size;
+            }
+
+            public virtual int Size
+            {
+                get { return m_size; }
+            }
+
+            public virtual ECPoint Lookup(int index)
+            {
+                ulong[] x = Nat576.Create64(), y = Nat576.Create64();
+                int pos = 0;
+
+                for (int i = 0; i < m_size; ++i)
+                {
+                    ulong MASK = (ulong)(long)(((i ^ index) - 1) >> 31);
+
+                    for (int j = 0; j < SECT571K1_FE_LONGS; ++j)
+                    {
+                        x[j] ^= m_table[pos + j] & MASK;
+                        y[j] ^= m_table[pos + SECT571K1_FE_LONGS + j] & MASK;
+                    }
+
+                    pos += (SECT571K1_FE_LONGS * 2);
+                }
+
+                return m_outer.CreateRawPoint(new SecT571FieldElement(x), new SecT571FieldElement(y), false);
+            }
+        }
     }
 }
-
+#pragma warning restore
 #endif

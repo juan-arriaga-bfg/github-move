@@ -1,9 +1,10 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 using System.Collections;
 using System.IO;
 
-namespace Org.BouncyCastle.Asn1.X509
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X509
 {
     /**
      * The object that contains the public key stored in a certficate.
@@ -76,7 +77,7 @@ namespace Org.BouncyCastle.Asn1.X509
          */
         public Asn1Object GetPublicKey()
         {
-			return Asn1Object.FromByteArray(keyData.GetBytes());
+			return Asn1Object.FromByteArray(keyData.GetOctets());
         }
 
 		/**
@@ -101,5 +102,5 @@ namespace Org.BouncyCastle.Asn1.X509
         }
     }
 }
-
+#pragma warning restore
 #endif

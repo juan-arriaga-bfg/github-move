@@ -1,11 +1,12 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 using System.Globalization;
 using System.Text;
 
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Asn1
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1
 {
     /**
      * UTC time object.
@@ -28,7 +29,7 @@ namespace Org.BouncyCastle.Asn1
                 return (DerUtcTime)obj;
             }
 
-            throw new ArgumentException("illegal object in GetInstance: " + obj.GetType().Name);
+            throw new ArgumentException("illegal object in GetInstance: " + BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.GetTypeName(obj));
         }
 
         /**
@@ -87,10 +88,14 @@ namespace Org.BouncyCastle.Asn1
         public DerUtcTime(
             DateTime time)
         {
-            this.time = time.ToString("yyMMddHHmmss") + "Z";
+#if PORTABLE || NETFX_CORE
+            this.time = time.ToUniversalTime().ToString("yyMMddHHmmss", CultureInfo.InvariantCulture) + "Z";
+#else
+            this.time = time.ToString("yyMMddHHmmss", CultureInfo.InvariantCulture) + "Z";
+#endif
         }
 
-		internal DerUtcTime(
+        internal DerUtcTime(
             byte[] bytes)
         {
             //
@@ -262,5 +267,5 @@ namespace Org.BouncyCastle.Asn1
 		}
 	}
 }
-
+#pragma warning restore
 #endif

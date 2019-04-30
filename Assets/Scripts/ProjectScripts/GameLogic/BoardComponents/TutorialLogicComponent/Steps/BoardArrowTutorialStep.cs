@@ -11,9 +11,7 @@ public class BoardArrowTutorialStep : BaseTutorialStep, IBoardEventListener
 
     private void EmitFirstStartEvent()
     {
-        var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
-        var started = tutorialLogic.SaveStarted;
-        started.Add(Id);
+        tutorialDataManager.SetStarted(Id);
         OnFirstStartCallback?.Invoke(this);
     }
 
