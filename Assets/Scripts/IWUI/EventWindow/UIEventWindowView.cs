@@ -22,6 +22,7 @@ public class UIEventWindowView : UIGenericPopupWindowView
     [IWUIBinding("#ProgressLine")] private RectTransform secondLine;
 
     private readonly AmountRange mainProgressBorder = new AmountRange(10, 145);
+    private readonly AmountRange secondProgressBorder = new AmountRange(35, 100);
     
     public override void OnViewShow()
     {
@@ -41,12 +42,14 @@ public class UIEventWindowView : UIGenericPopupWindowView
         Fill(UpdateEntities(), content);
         
         var defs = GameDataService.Current.EventManager.Defs[EventName.OrderSoftLaunch];
-        var target = defs.Sum(def => def.Prices[0].Amount);
+        var target = defs[defs.Count - 1].RealPrices[0].Amount;
         var current = ProfileService.Current.GetStorageItem(Currency.Token.Name).Amount;
         var progress = Mathf.Clamp(mainProgressBorder.Max * (current / (float) target) + mainProgressBorder.Min, mainProgressBorder.Min, mainProgressBorder.Max);
+        var progressSecond = GameDataService.Current.EventManager.GetStepProgress(EventName.OrderSoftLaunch, secondProgressBorder.Max, secondProgressBorder.Min);
         
         progressLabel.Text = $"{current}/{target}";
         mainLine.sizeDelta = new Vector2(progress, mainLine.sizeDelta.y);
+        secondLine.sizeDelta = new Vector2(progressSecond, secondLine.sizeDelta.y);
         
         content.GetScrollRect().horizontalNormalizedPosition = 1;
     }
@@ -63,8 +66,8 @@ public class UIEventWindowView : UIGenericPopupWindowView
         
         foreach (UIEventElementViewController tab in content.Tabs)
         {
-            if (tab.IsComplete()) continue;
-
+            if (tab.IsComplete) continue;
+            
             Scroll(tab.Index);
             break;
         }

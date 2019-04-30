@@ -14,7 +14,7 @@ public class EventSaveItemJsonConverter : JsonConverter
         var targetValue = (EventStepDef) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
-        serializer.Serialize(writer, $"{targetValue.Step};{string.Join(",", targetValue.Prices)};{string.Join(",", targetValue.NormalRewards)};{string.Join(",", targetValue.PaidRewards)}");
+        serializer.Serialize(writer, $"{targetValue.Step};{string.Join(",", targetValue.Prices)};{string.Join(",", targetValue.NormalRewards)};{string.Join(",", targetValue.PremiumRewards)}");
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -27,7 +27,7 @@ public class EventSaveItemJsonConverter : JsonConverter
             Step = dataArray[0],
             Prices = ReadList(dataArray[1]),
             NormalRewards = ReadList(dataArray[2]),
-            PaidRewards = ReadList(dataArray[3]),
+            PremiumRewards = ReadList(dataArray[3]),
         };
         
         return targetValue;
@@ -55,9 +55,13 @@ public class EventSaveItemJsonConverter : JsonConverter
 public class EventStepDef
 {
     public string Step;
+
+    public bool IsNormalClaimed;
+    public bool IsPremiumClaimed;
     
     public List<CurrencyPair> Prices;
+    public List<CurrencyPair> RealPrices;
     
     public List<CurrencyPair> NormalRewards;
-    public List<CurrencyPair> PaidRewards;
+    public List<CurrencyPair> PremiumRewards;
 }

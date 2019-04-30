@@ -87,18 +87,19 @@ public static partial class CurrencyHelper
             return;
         }
         
-        if (GetAllData(currenciesReward, price, position, out var point, out var transactions) == false) return;
-        
         var board = BoardService.Current.FirstBoard;
+        var isDataFalse = GetAllData(currenciesReward, price, position, out var point, out var transactions) == false;
+        
         var amount = piecesReward.Sum(pair => pair.Value);
         var free = new List<BoardPosition>();
 
-        if (board.BoardLogic.EmptyCellsFinder.CheckInFrontOrFindRandomNear(point, free, amount) == false || free.Count < amount)
+        if (isDataFalse || board.BoardLogic.EmptyCellsFinder.CheckInFrontOrFindRandomNear(point, free, amount) == false || free.Count < amount)
         {
             board.BoardLogic.AirShipLogic.Add(new Dictionary<int, int>(piecesReward));
             PurchaseAsyncOnlyCurrency(currenciesReward, flyPosition, success => onComplete?.Invoke());
-            return;
         }
+
+        if (isDataFalse) return;
         
         board.ActionExecutor.PerformAction(new SpawnRewardPiecesAction
         {

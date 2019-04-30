@@ -5,19 +5,25 @@ using UnityEngine.UI;
 
 public class UIEventElementViewController : UIContainerElementViewController
 {
-    [IWUIBindingNullable("#Check")] private GameObject check;
+    [IWUIBinding("#Check")] private GameObject check;
     
-    [IWUIBindingNullable("#Normal")] private GameObject normal;
-    [IWUIBindingNullable("#Premium")] private GameObject premium;
+    [IWUIBinding("#Normal")] private GameObject normal;
+    [IWUIBinding("#Premium")] private GameObject premium;
     
-    [IWUIBindingNullable("#NormalShine")] private GameObject normalShine;
-    [IWUIBindingNullable("#PremiumShine")] private GameObject premiumShine;
+    [IWUIBinding("#NormalShine")] private GameObject normalShine;
+    [IWUIBinding("#PremiumShine")] private GameObject premiumShine;
     
-    [IWUIBindingNullable("#NormalAnchor")] private Transform normalAnchor;
-    [IWUIBindingNullable("#PremiumAnchor")] private Transform premiumAnchor;
+    [IWUIBinding("#NormalCheck")] private GameObject normalCheck;
+    [IWUIBinding("#PremiumCheck")] private GameObject premiumCheck;
     
-    [IWUIBindingNullable("#NormalLabel")] private NSText normalLabel;
-    [IWUIBindingNullable("#PremiumLabel")] private NSText premiumLabel;
+    [IWUIBinding("#NormalAnchor")] private Transform normalAnchor;
+    [IWUIBinding("#PremiumAnchor")] private Transform premiumAnchor;
+    
+    [IWUIBinding("#NormalLabel")] private NSText normalLabel;
+    [IWUIBinding("#PremiumLabel")] private NSText premiumLabel;
+    
+    [IWUIBinding("#NormalButton")] private UIButtonViewController btnNormal;
+    [IWUIBinding("#PremiumButton")] private UIButtonViewController btnPremium;
 
     private Transform normalIcon;
     private Transform premiumIcon;
@@ -27,6 +33,8 @@ public class UIEventElementViewController : UIContainerElementViewController
     
     private Material lockMaterial;
     private Material unlockMaterial;
+
+    public bool IsComplete;
     
     public override void Init()
     {
@@ -35,7 +43,8 @@ public class UIEventElementViewController : UIContainerElementViewController
         var contentEntity = entity as UIEventElementEntity;
 
         var isNormalActive = contentEntity.Step.NormalRewards != null && contentEntity.Step.NormalRewards.Count > 0;
-        var isPremiumActive = contentEntity.Step.PaidRewards != null && contentEntity.Step.PaidRewards.Count > 0;
+        var isPremiumActive = contentEntity.Step.PremiumRewards != null && contentEntity.Step.PremiumRewards.Count > 0;
+        var isPremiumPaid = GameDataService.Current.EventManager.IsPremium(EventName.OrderSoftLaunch);
         
         normal.SetActive(isNormalActive);
         premium.SetActive(isPremiumActive);
@@ -48,24 +57,35 @@ public class UIEventElementViewController : UIContainerElementViewController
         
         if (isPremiumActive)
         {
-            premiumLabel.Text = $"x{contentEntity.Step.PaidRewards[0].Amount}";
-            CreateIcon(ref premiumIcon, premiumAnchor, ref premiumSprites, contentEntity.Step.PaidRewards[0].Currency);
+            premiumLabel.Text = $"x{contentEntity.Step.PremiumRewards[0].Amount}";
+            CreateIcon(ref premiumIcon, premiumAnchor, ref premiumSprites, contentEntity.Step.PremiumRewards[0].Currency);
         }
         
-        SetProgress(0);
-
-        if (GameDataService.Current.EventManager.IsPremium(EventName.OrderSoftLaunch) == false) Sepia(premiumSprites, true);
-    }
-
-    public void SetProgress(int value)
-    {
-        var contentEntity = entity as UIEventElementEntity;
+        if (isPremiumPaid == false) Sepia(premiumSprites, true);
         
-        check.SetActive(false);
-        normalShine.SetActive(false);
-        premiumShine.SetActive(false);
+        var target = (float)contentEntity.Step.RealPrices[0].Amount;
+        var current = ProfileService.Current.GetStorageItem(Currency.Token.Name).Amount;
+        
+        IsComplete = current >= target;
+        
+        check.SetActive(IsComplete);
+        normalShine.SetActive(IsComplete && contentEntity.Step.IsNormalClaimed == false);
+        premiumShine.SetActive(isPremiumPaid && IsComplete && contentEntity.Step.IsPremiumClaimed == false);
+        
+        btnNormal.gameObject.SetActive(normalShine.activeSelf);
+        btnPremium.gameObject.SetActive(premiumShine.activeSelf);
+        
+        CheckClaim();
     }
-    
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
+        btnNormal.ToState(GenericButtonState.Active).OnClick(OnNormalClick);
+        btnPremium.ToState(GenericButtonState.Active).OnClick(OnPremiumClick);
+    }
+
     public override void OnViewCloseCompleted()
     {
         Return(ref normalIcon, ref normalSprites);
@@ -73,8 +93,46 @@ public class UIEventElementViewController : UIContainerElementViewController
         
         base.OnViewCloseCompleted();
     }
+
+    private void OnNormalClick()
+    {
+        var contentEntity = entity as UIEventElementEntity;
+        
+        contentEntity.Step.IsNormalClaimed = true;
+        Claim(contentEntity.Step.NormalRewards, btnNormal.transform.position);
+    }
     
-    protected void CreateIcon(ref Transform current, Transform parent, ref List<Image> sprites, string id)
+    private void OnPremiumClick()
+    {
+        var contentEntity = entity as UIEventElementEntity;
+        
+        contentEntity.Step.IsPremiumClaimed = true;
+        Claim(contentEntity.Step.PremiumRewards, btnPremium.transform.position);
+    }
+
+    private void Claim(List<CurrencyPair> reward, Vector3 position)
+    {
+        var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(position);
+        CurrencyHelper.PurchaseAndProvideSpawn(reward, null, null, flyPosition, null, false, true);
+        
+        CheckClaim();
+        context.Controller.CloseCurrentWindow();
+    }
+    
+    private void CheckClaim()
+    {
+        var contentEntity = entity as UIEventElementEntity;
+        var isNormalClaimed = contentEntity.Step.IsNormalClaimed;
+        var isPremiumClaimed = contentEntity.Step.IsPremiumClaimed;
+        
+        normalCheck.SetActive(isNormalClaimed);
+        premiumCheck.SetActive(isPremiumClaimed);
+        
+        if (isNormalClaimed) Sepia(normalSprites, true);
+        if (isPremiumClaimed) Sepia(premiumSprites, true);
+    }
+    
+    private void CreateIcon(ref Transform current, Transform parent, ref List<Image> sprites, string id)
     {
         if (current != null) Return(ref current, ref sprites);
         if (string.IsNullOrEmpty(id)) return;
@@ -95,6 +153,7 @@ public class UIEventElementViewController : UIContainerElementViewController
         foreach (var sprite in sprites)
         {
             sprite.material = value ? lockMaterial : unlockMaterial;
+            sprite.color = new Color(1, 1, 1, value ? 0.5f : 1); 
         }
     }
 
@@ -106,10 +165,5 @@ public class UIEventElementViewController : UIContainerElementViewController
         
         current = null;
         sprites = null;
-    }
-
-    public bool IsComplete()
-    {
-        return false;
     }
 }

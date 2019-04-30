@@ -23,6 +23,11 @@ public class CurrencyPair
     {
         return $"{Currency}{SaveSeparator}{Amount}";
     }
+
+    public CurrencyPair Copy()
+    {
+        return new CurrencyPair {Currency = this.Currency, Amount = this.Amount};
+    }
     
     public string ToStringIcon(bool noAmount = false, int iconSize = -1, int amountSize = -1)
     {
