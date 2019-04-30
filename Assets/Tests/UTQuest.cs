@@ -78,6 +78,12 @@ namespace UT
                 }
 
                 var questIds = starter.QuestToStartIds;
+                if (questIds == null || questIds.Count == 0)
+                {
+                    sb.AppendLine($"No QuestToStartIds specified in starter '{starter.Id}'");
+                    continue;
+                }
+                
                 foreach (var questId in questIds)
                 {
                     if (!ValidateId(questId))
@@ -166,6 +172,12 @@ namespace UT
                 startersCnt++;
 
                 var questIds = starter.QuestToStartIds;
+                if (questIds == null || questIds.Count == 0)
+                {
+                    sb.AppendLine($"No QuestToStartIds specified in starter '{starter.Id}'");
+                    continue;
+                }
+                
                 foreach (var questId in questIds)
                 {
                     if (!ValidateId(questId))
@@ -270,6 +282,12 @@ namespace UT
             foreach (var starterToCheck in starters)
             {
                 var idsToCheck = starterToCheck.QuestToStartIds;
+                if (idsToCheck == null || idsToCheck.Count == 0)
+                {
+                    sb.AppendLine($"No QuestToStartIds specified in starter '{starterToCheck.Id}'");
+                    continue;
+                }
+                
                 foreach (var id in idsToCheck)
                 {
                     foreach (var starterToCompare in starters)
@@ -280,6 +298,12 @@ namespace UT
                         }
 
                         var idsToCompare = starterToCompare.QuestToStartIds;
+                        if (idsToCompare == null || idsToCompare.Count == 0)
+                        {
+                            sb.AppendLine($"No QuestToStartIds specified in starter '{starterToCompare.Id}'");
+                            continue;
+                        }
+                        
                         if (idsToCompare.Contains(id))
                         {
                             if (!idsInMultiplyStarters.Add(id))
