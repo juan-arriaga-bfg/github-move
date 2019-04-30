@@ -91,24 +91,14 @@ public class BoardManipulatorComponent : ECSEntity,
 
     public override int Guid => ComponentGuid;
 
-    private IDraggableFlyingObjectLogic[] flyingObjectLogics;
-
-    private IDraggableFlyingObjectLogic[] FlyingObjectLogics {
-        get
+    private ITouchableBoardObjectLogic[] touchableBoardObjectLogics;
+    private ITouchableBoardObjectLogic[] TouchableBoardObjectLogics =>
+        touchableBoardObjectLogics ?? (touchableBoardObjectLogics = new ITouchableBoardObjectLogic[]
         {
-            if (flyingObjectLogics == null)
-            {
-                // Touch will be processed using order of elements in this list
-                flyingObjectLogics = new IDraggableFlyingObjectLogic[]
-                {
-                    context.BoardLogic.FireflyLogic,
-                    context.BoardLogic.AirShipLogic
-                };
-            }
-
-            return flyingObjectLogics;
-        }
-    }
+            context.BoardLogic.FireflyLogic,
+            context.BoardLogic.AirShipLogic,
+            context.BoardLogic.VIPIslandLogic,
+        });
 
     public bool IsExecuteable()
     {
@@ -187,9 +177,9 @@ public class BoardManipulatorComponent : ECSEntity,
             return false;
         }
 
-        foreach (var flyingObjectLogic in FlyingObjectLogics)
+        foreach (var touchableObjectLogic in TouchableBoardObjectLogics)
         {
-            if (flyingObjectLogic.OnClick(selectedView)) return true;
+            if (touchableObjectLogic.OnClick(selectedView)) return true;
         }
 
         var pieceView = selectedView as PieceBoardElementView;
@@ -231,34 +221,35 @@ public class BoardManipulatorComponent : ECSEntity,
         var start = context.BoardDef.GetSectorPosition(startPos);
         var current = context.BoardDef.GetSectorPosition(pos);
         
-        if (!start.Equals(current)) return;
-
-        if (cachedViewForDrag == null)
-        {
-            if (selectedView == null) return;
+        if (start.Equals(current) == false) return;
+        if (cachedViewForDrag != null) return;
+        if (selectedView == null) return;
             
-            var pieceView = selectedView as PieceBoardElementView;
-
-            foreach (var flyingObject in FlyingObjectLogics)
+        if (selectedView is PieceBoardElementView pieceView)
+        {
+            if (pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero())
+                || pieceView.Piece.Draggable == null
+                || pieceView.Piece.Draggable.IsDraggable(pieceView.Piece.CachedPosition) == false)
             {
-                if (flyingObject.OnDragStart(selectedView) == false && pieceView != null)
-                {
-                    if (pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero()) || pieceView.Piece.Draggable == null || pieceView.Piece.Draggable.IsDraggable(pieceView.Piece.CachedPosition) == false)
-                    {
-                        return;
-                    }
-                
-                    var boardPos = context.BoardDef.GetSectorPosition(pos);
-                    pieceView.OnDragStart(boardPos, pos);
-                    break;
-                }
+                return;
             }
-
-            cachedViewForDrag = selectedView;
-            cachedDragDownPos = pos + Vector2.up * 0.5f;
-            cameraManipulator.CameraMove.Lock(this);
-            isDrag = true;
+                
+            pieceView.OnDragStart(context.BoardDef.GetSectorPosition(pos), pos);
         }
+        else
+        {
+            foreach (var touchableObjectLogic in TouchableBoardObjectLogics)
+            {
+                if (touchableObjectLogic.OnDragStart(selectedView) == false) continue;
+            
+                break;
+            }
+        }
+        
+        cachedViewForDrag = selectedView;
+        cachedDragDownPos = pos + Vector2.up * 0.5f;
+        cameraManipulator.CameraMove.Lock(this);
+        isDrag = true;
     }
     
     public bool OnSet(Vector2 startPos, Vector2 pos, float duration)
@@ -294,13 +285,12 @@ public class BoardManipulatorComponent : ECSEntity,
 
         var targetPos = new Vector3(pos.x, pos.y, cachedViewForDrag.CachedTransform.position.z);
 
-        foreach (var flyingObjectLogic in FlyingObjectLogics)
+        foreach (var touchableObjectLogic in TouchableBoardObjectLogics)
         {
-            if (flyingObjectLogic.Check(cachedViewForDrag))
-            {
-                cachedViewForDrag.CachedTransform.localPosition = pos;
-                return true;
-            }
+            if (touchableObjectLogic.Check(cachedViewForDrag) == false) continue;
+            if (touchableObjectLogic.IsDraggable) cachedViewForDrag.CachedTransform.localPosition = pos;
+            
+            return true;
         }
 
         if (cachedViewForDrag is PieceBoardElementView)
@@ -382,15 +372,13 @@ public class BoardManipulatorComponent : ECSEntity,
                 return true;
             }
 
-            foreach (var flyingObjectLogic in FlyingObjectLogics)
+            foreach (var touchableObjectLogic in TouchableBoardObjectLogics)
             {
-                if (flyingObjectLogic.Check(selectedView))
-                {
-                    cameraManipulator.CameraMove.Lock(dragTresholdId, true);
+                if (touchableObjectLogic.Check(selectedView) == false) continue;
+                if (touchableObjectLogic.IsDraggable) cameraManipulator.CameraMove.Lock(dragTresholdId, true);
 
-                    cachedViewOnDown = selectedView;
-                    break;
-                }
+                cachedViewOnDown = selectedView;
+                break;
             }
 
             return true;
@@ -412,23 +400,21 @@ public class BoardManipulatorComponent : ECSEntity,
 
             StopDragAnimationInternal();
 
-            foreach (var flyingObjectLogic in FlyingObjectLogics)
+            foreach (var touchableObjectLogic in TouchableBoardObjectLogics)
             {
-                if (flyingObjectLogic.OnDragEnd(cachedViewForDrag))
-                {
-                    cachedViewForDrag = null;
-                    cameraManipulator.CameraMove.UnLock(this);
-                    context.TutorialLogic.Pause(false);
-                    context.TutorialLogic.Update();
-                    return true;
-                }
+                if (touchableObjectLogic.OnDragEnd(cachedViewForDrag) == false) continue;
+                
+                cachedViewForDrag = null;
+                cameraManipulator.CameraMove.UnLock(this);
+                context.TutorialLogic.Pause(false);
+                context.TutorialLogic.Update();
+                return true;
             }
 
-            if (cachedViewForDrag is PieceBoardElementView)
+            if (cachedViewForDrag is PieceBoardElementView pieceView)
             {
-                var pieceView = cachedViewForDrag as PieceBoardElementView;
                 var boardPos = context.BoardDef.GetSectorPosition(pos);
-                var fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
+                var fromPosition = context.RendererContext.GetBoardPosition(pieceView);
                 
                 pieceView.OnDragEnd(boardPos, pos);
 
@@ -551,12 +537,12 @@ public class BoardManipulatorComponent : ECSEntity,
                 }
             }
 
-            foreach (var flyingObjectLogic in FlyingObjectLogics)            {
-                if (flyingObjectLogic.Check(touchableObject as BoardElementView))
-                {
-                    coef = int.MaxValue;
-                    break;
-                }
+            foreach (var touchableObjectLogic in TouchableBoardObjectLogics)
+            {
+                if (touchableObjectLogic.Check(touchableObject as BoardElementView) == false) continue;
+                
+                coef = int.MaxValue;
+                break;
             }
 
             if (coef != null && coef > maxCoef)

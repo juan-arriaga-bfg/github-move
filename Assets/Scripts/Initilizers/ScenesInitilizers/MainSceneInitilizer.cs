@@ -104,6 +104,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         BoardService.Current.FirstBoard.GetComponent<LoadSilenceComponent>(LoadSilenceComponent.ComponentGuid)?.OnLoadComplete();
         
         LocalNotificationsService.Current.CancelNotifications();
+        BoardService.Current.FirstBoard.BoardLogic.VIPIslandLogic.UpdateLockState();
         
         if (!hotReload)
         {

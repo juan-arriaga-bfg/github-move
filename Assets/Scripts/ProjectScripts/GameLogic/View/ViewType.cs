@@ -24,4 +24,10 @@
     ObstacleProgress = -1020,
     DebugId = -1021,
     AirShip = -1022,
+    Bridge = -1023,
+    FogBridge = -1024,
+    BrokenBridge = -1025,
+    Airbaloon = -1026,
+    Coast = -1027,
+    IslandFog = -1028,
 }

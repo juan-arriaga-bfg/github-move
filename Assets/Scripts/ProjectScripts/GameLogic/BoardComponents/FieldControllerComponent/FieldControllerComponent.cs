@@ -121,6 +121,7 @@ public class FieldControllerComponent : IECSComponent
                 
                 FogSectorsView.Rebuild(context.RendererContext);
                 context.Manipulator.CameraManipulator.CameraMove.UnLock(context);
+                controller.BoardLogic.VIPIslandLogic.Init();
             }
         });
     }

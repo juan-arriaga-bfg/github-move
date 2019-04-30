@@ -404,6 +404,14 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckPieceChangeTutorialCondition {Target = PieceType.RC_I.Id, Amount = -1, ConditionType = TutorialConditionType.Complete}, true);
                 break;
             }
+            case 28: // vip island
+            {
+                step = new IslandStep {Target = new BoardPosition(10, 13), IsIgnoreDebug = false};
+                
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "87_KillTree", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "87_KillTree", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
+                break;
+            }
             default:
                 return null;
         }

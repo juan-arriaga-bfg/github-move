@@ -18,6 +18,7 @@ public class CollapseFogToAnimation : BoardAnimation
         fogPieceView = context.GetElementAt(points[0]) as FogPieceView;
         
         fogElements.Clear();
+        
         foreach (var point in points)
         {
             fogElements.Add(context.RemoveElementAt(point, false));
@@ -26,9 +27,6 @@ public class CollapseFogToAnimation : BoardAnimation
 
     public override void Animate(BoardRenderer context)
     {
-        var points = Action.Positions;
-        var to = context.Context.BoardDef.GetPiecePosition(Action.To.X, Action.To.Y);
-		
         NSAudioService.Current.Play(SoundId.FogOpen);
         
         var sequence = DOTween.Sequence().SetId(animationUid);
