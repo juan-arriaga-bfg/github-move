@@ -53,6 +53,8 @@ public class UIEventElementViewController : UIContainerElementViewController
         }
         
         SetProgress(0);
+
+        if (GameDataService.Current.EventManager.IsPremium(EventName.OrderSoftLaunch) == false) Sepia(premiumSprites, true);
     }
 
     public void SetProgress(int value)
@@ -104,5 +106,10 @@ public class UIEventElementViewController : UIContainerElementViewController
         
         current = null;
         sprites = null;
+    }
+
+    public bool IsComplete()
+    {
+        return false;
     }
 }

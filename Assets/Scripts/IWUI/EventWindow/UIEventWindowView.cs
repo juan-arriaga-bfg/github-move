@@ -1,21 +1,27 @@
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 public class UIEventWindowView : UIGenericPopupWindowView 
 {
     [IWUIBinding("#Content")] private UIContainerViewController content;
     
+    [IWUIBinding("#VIPLabel")] private NSText vipLabel;
     [IWUIBinding("#MainProgressLabel")] private NSText progressLabel;
     [IWUIBinding("#MainTimerLabel")] private NSText timerLabel;
     [IWUIBinding("#ButtonShowLabel")] private NSText btnShowLabel;
     
     [IWUIBinding("#ButtonShow")] private UIButtonViewController btnShow;
+    [IWUIBinding("#ButtonPremium")] private UIButtonViewController btnPremium;
+    
+    [IWUIBinding("#CloseMaskLeft")] private UIButtonViewController btnMaskLeft;
+    [IWUIBinding("#CloseMaskRight")] private UIButtonViewController btnMaskRight;
     
     [IWUIBinding("#MainProgressLine")] private RectTransform mainLine;
     [IWUIBinding("#ProgressLine")] private RectTransform secondLine;
 
-    private AmountRange mainProgressBorder = new AmountRange(10, 145);
+    private readonly AmountRange mainProgressBorder = new AmountRange(10, 145);
     
     public override void OnViewShow()
     {
@@ -26,6 +32,7 @@ public class UIEventWindowView : UIGenericPopupWindowView
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
 
+        vipLabel.Text = windowModel.VIPText;
         btnShowLabel.Text = windowModel.ButtonText;
         
         if(windowModel.Timer != null) windowModel.Timer.OnTimeChanged += OnTimeChanged;
@@ -40,13 +47,27 @@ public class UIEventWindowView : UIGenericPopupWindowView
         
         progressLabel.Text = $"{current}/{target}";
         mainLine.sizeDelta = new Vector2(progress, mainLine.sizeDelta.y);
+        
+        content.GetScrollRect().horizontalNormalizedPosition = 1;
     }
 
     public override void OnViewShowCompleted()
     {
         base.OnViewShowCompleted();
         
-        InitButtonBase(btnShow, OnShow);
+        InitButtonBase(btnShow, OnShowClick);
+        InitButtonBase(btnPremium, OnPremiumClick);
+        
+        InitButtonBase(btnMaskLeft, Controller.CloseCurrentWindow);
+        InitButtonBase(btnMaskRight, Controller.CloseCurrentWindow);
+        
+        foreach (UIEventElementViewController tab in content.Tabs)
+        {
+            if (tab.IsComplete()) continue;
+
+            Scroll(tab.Index);
+            break;
+        }
     }
     
     public override void OnViewCloseCompleted()
@@ -77,10 +98,37 @@ public class UIEventWindowView : UIGenericPopupWindowView
         
         return views;
     }
-
-    private void OnShow()
+    
+    private void Scroll(int index)
     {
+        DOTween.Kill(content);
         
+        var posX = Mathf.Clamp((-content.CachedRectTransform.sizeDelta.x / content.Tabs.size) * index, -content.CachedRectTransform.sizeDelta.x, 0);
+
+        if (Mathf.Abs(content.CachedRectTransform.anchoredPosition.x - posX) <= 0.01f) return;
+        
+        const float duration = 1.5f;
+        var percent = Mathf.Abs(content.CachedRectTransform.anchoredPosition.x / content.CachedRectTransform.sizeDelta.x);
+        
+        content.GetScrollRect().enabled = false;
+        content.CachedRectTransform.DOAnchorPosX(posX, duration*percent + duration*(1-percent))
+            .SetEase(Ease.InOutBack)
+            .SetId(content)
+            .OnComplete(() => { content.GetScrollRect().enabled = true; });
+    }
+
+    private void OnShowClick()
+    {
+        var model = UIService.Get.GetCachedModel<UIOrdersWindowModel>(UIWindowType.OrdersWindow);
+
+        if (model.Orders != null && model.Orders.Count > 0) model.Select = model.Orders[0];
+        
+        UIService.Get.ShowWindow(UIWindowType.OrdersWindow);
+    }
+
+    private void OnPremiumClick()
+    {
+        UIService.Get.ShowWindow(UIWindowType.EventSubscriptionWindow);
     }
     
     private void OnTimeChanged()

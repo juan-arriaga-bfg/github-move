@@ -63,4 +63,9 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
     {
         return false;
     }
+
+    public bool IsPremium(EventName name)
+    {
+        return false;
+    }
 }
