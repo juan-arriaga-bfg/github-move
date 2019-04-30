@@ -7,6 +7,12 @@ public class AmountRange
 
     private int value = -1;
 
+    public AmountRange(int min, int max)
+    {
+        Min = min;
+        Max = max;
+    }
+
     public int Value
     {
         get

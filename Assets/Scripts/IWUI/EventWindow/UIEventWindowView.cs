@@ -1,13 +1,21 @@
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class UIEventWindowView : UIGenericPopupWindowView 
 {
     [IWUIBinding("#Content")] private UIContainerViewController content;
     
+    [IWUIBinding("#MainProgressLabel")] private NSText progressLabel;
     [IWUIBinding("#MainTimerLabel")] private NSText timerLabel;
     [IWUIBinding("#ButtonShowLabel")] private NSText btnShowLabel;
     
     [IWUIBinding("#ButtonShow")] private UIButtonViewController btnShow;
+    
+    [IWUIBinding("#MainProgressLine")] private RectTransform mainLine;
+    [IWUIBinding("#ProgressLine")] private RectTransform secondLine;
+
+    private AmountRange mainProgressBorder = new AmountRange(10, 145);
     
     public override void OnViewShow()
     {
@@ -24,6 +32,14 @@ public class UIEventWindowView : UIGenericPopupWindowView
         OnTimeChanged();
         
         Fill(UpdateEntities(), content);
+        
+        var defs = GameDataService.Current.EventManager.Defs[EventName.OrderSoftLaunch];
+        var target = defs.Sum(def => def.Prices[0].Amount);
+        var current = ProfileService.Current.GetStorageItem(Currency.Token.Name).Amount;
+        var progress = Mathf.Clamp(mainProgressBorder.Max * (current / (float) target) + mainProgressBorder.Min, mainProgressBorder.Min, mainProgressBorder.Max);
+        
+        progressLabel.Text = $"{current}/{target}";
+        mainLine.sizeDelta = new Vector2(progress, mainLine.sizeDelta.y);
     }
 
     public override void OnViewShowCompleted()
@@ -47,10 +63,8 @@ public class UIEventWindowView : UIGenericPopupWindowView
         var defs = GameDataService.Current.EventManager.Defs[EventName.OrderSoftLaunch];
         var views = new List<IUIContainerElementEntity>(defs.Count);
         
-        for (var i = 0; i < defs.Count; i++)
+        foreach (var def in defs)
         {
-            var def = defs[i];
-            
             var entity = new UIEventElementEntity
             {
                 Step = def,

@@ -316,6 +316,9 @@ public class DevTools : UIContainerElementViewController
     
     public void OnDebug1Click()
     {
+        UIService.Get.ShowWindow(UIWindowType.EventWindow);
+        return;
+        
         OnSpawnAirShipClick();
         return;
         
