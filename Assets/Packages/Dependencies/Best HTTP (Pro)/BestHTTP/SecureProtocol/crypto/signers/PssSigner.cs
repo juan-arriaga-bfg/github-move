@@ -1,12 +1,12 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Security;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Security;
 
-namespace Org.BouncyCastle.Crypto.Signers
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Signers
 {
 	/// <summary> RSA-PSS as described in Pkcs# 1 v 2.1.
 	/// <p>
@@ -27,6 +27,7 @@ namespace Org.BouncyCastle.Crypto.Signers
 		private int hLen;
 		private int mgfhLen;
 		private int sLen;
+        private bool sSet;
 		private int emBits;
 		private byte[] salt;
 		private byte[] mDash;
@@ -37,7 +38,7 @@ namespace Org.BouncyCastle.Crypto.Signers
 			IAsymmetricBlockCipher	cipher,
 			IDigest					digest)
 		{
-			return new PssSigner(cipher, new NullDigest(), digest, digest, digest.GetDigestSize(), TrailerImplicit);
+			return new PssSigner(cipher, new NullDigest(), digest, digest, digest.GetDigestSize(), null, TrailerImplicit);
 		}
 
 		public static PssSigner CreateRawSigner(
@@ -47,7 +48,7 @@ namespace Org.BouncyCastle.Crypto.Signers
 			int						saltLen,
 			byte					trailer)
 		{
-			return new PssSigner(cipher, new NullDigest(), contentDigest, mgfDigest, saltLen, trailer);
+			return new PssSigner(cipher, new NullDigest(), contentDigest, mgfDigest, saltLen, null, trailer);
 		}
 
 		public PssSigner(
@@ -69,7 +70,19 @@ namespace Org.BouncyCastle.Crypto.Signers
 		{
 		}
 
-		public PssSigner(
+        /// <summary>Basic constructor</summary>
+        /// <param name="cipher">the asymmetric cipher to use.</param>
+        /// <param name="digest">the digest to use.</param>
+        /// <param name="salt">the fixed salt to be used.</param>
+        public PssSigner(
+            IAsymmetricBlockCipher cipher,
+            IDigest digest,
+            byte[] salt)
+            : this(cipher, digest, digest, digest, salt.Length, salt, TrailerImplicit)
+        {
+        }
+
+        public PssSigner(
 			IAsymmetricBlockCipher	cipher,
 			IDigest					contentDigest,
 			IDigest					mgfDigest,
@@ -78,7 +91,16 @@ namespace Org.BouncyCastle.Crypto.Signers
 		{
 		}
 
-		public PssSigner(
+        public PssSigner(
+            IAsymmetricBlockCipher cipher,
+            IDigest contentDigest,
+            IDigest mgfDigest,
+            byte[] salt)
+            : this(cipher, contentDigest, contentDigest, mgfDigest, salt.Length, salt, TrailerImplicit)
+        {
+        }
+
+        public PssSigner(
 			IAsymmetricBlockCipher	cipher,
 			IDigest					digest,
 			int						saltLen,
@@ -93,7 +115,7 @@ namespace Org.BouncyCastle.Crypto.Signers
 			IDigest					mgfDigest,
 			int						saltLen,
 			byte					trailer)
-			: this(cipher, contentDigest, contentDigest, mgfDigest, saltLen, trailer)
+			: this(cipher, contentDigest, contentDigest, mgfDigest, saltLen, null, trailer)
 		{
 		}
 
@@ -103,6 +125,7 @@ namespace Org.BouncyCastle.Crypto.Signers
 			IDigest					contentDigest2,
 			IDigest					mgfDigest,
 			int						saltLen,
+            byte[]                  salt,
 			byte					trailer)
 		{
 			this.cipher = cipher;
@@ -112,7 +135,15 @@ namespace Org.BouncyCastle.Crypto.Signers
 			this.hLen = contentDigest2.GetDigestSize();
 			this.mgfhLen = mgfDigest.GetDigestSize();
 			this.sLen = saltLen;
-			this.salt = new byte[saltLen];
+            this.sSet = salt != null;
+            if (sSet)
+            {
+                this.salt = salt;
+            }
+            else
+            {
+                this.salt = new byte[saltLen];
+            }
 			this.mDash = new byte[8 + saltLen + hLen];
 			this.trailer = trailer;
 		}
@@ -199,7 +230,10 @@ namespace Org.BouncyCastle.Crypto.Signers
 
 			if (sLen != 0)
 			{
-				random.NextBytes(salt);
+                if (!sSet)
+                {
+                    random.NextBytes(salt);
+                }
 				salt.CopyTo(mDash, mDash.Length - sLen);
 			}
 
@@ -272,7 +306,14 @@ namespace Org.BouncyCastle.Crypto.Signers
 				return false;
 			}
 
-			Array.Copy(block, block.Length - sLen - hLen - 1, mDash, mDash.Length - sLen, sLen);
+            if (sSet)
+            {
+                Array.Copy(salt, 0, mDash, mDash.Length - sLen, sLen);
+            }
+            else
+            {
+                Array.Copy(block, block.Length - sLen - hLen - 1, mDash, mDash.Length - sLen, sLen);
+            }
 
 			contentDigest2.BlockUpdate(mDash, 0, mDash.Length);
 			contentDigest2.DoFinal(mDash, mDash.Length - hLen);
@@ -345,5 +386,5 @@ namespace Org.BouncyCastle.Crypto.Signers
 		}
 	}
 }
-
+#pragma warning restore
 #endif

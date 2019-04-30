@@ -1,13 +1,15 @@
-﻿using BestHTTP.Authentication;
+﻿#if UNITY_WEBGL && !UNITY_EDITOR
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 
+using BestHTTP.Authentication;
+using BestHTTP.Extensions;
+
 namespace BestHTTP
 {
-#if UNITY_WEBGL && !UNITY_EDITOR
-
     delegate void OnWebGLRequestHandlerDelegate(int nativeId, int httpStatus, IntPtr pBuffer, int length, int zero);
     delegate void OnWebGLBufferDelegate(int nativeId, IntPtr pBuffer, int length);
     delegate void OnWebGLProgressDelegate(int nativeId, int downloaded, int total);
@@ -20,11 +22,13 @@ namespace BestHTTP
         static Dictionary<int, WebGLConnection> Connections = new Dictionary<int, WebGLConnection>(4);
 
         int NativeId;
-        MemoryStream Stream;
+        BufferPoolMemoryStream Stream;
 
         public WebGLConnection(string serverAddress)
             : base(serverAddress, false)
-        { }
+        {
+            XHR_SetLoglevel((byte)HTTPManager.Logger.Level);
+        }
 
         internal override void Abort(HTTPConnectionStates newState)
         {
@@ -42,52 +46,63 @@ namespace BestHTTP
         {
             // XmlHttpRequest setup
 
-            this.NativeId = XHR_Create(HTTPRequest.MethodNames[(byte)CurrentRequest.MethodType], 
-                                       CurrentRequest.CurrentUri.ToString(),
+            this.NativeId = XHR_Create(HTTPRequest.MethodNames[(byte)CurrentRequest.MethodType],
+                                       CurrentRequest.CurrentUri.OriginalString,
                                        CurrentRequest.Credentials != null ? CurrentRequest.Credentials.UserName : null,
-                                       CurrentRequest.Credentials != null ? CurrentRequest.Credentials.Password : null);
+                                       CurrentRequest.Credentials != null ? CurrentRequest.Credentials.Password : null,
+                                       CurrentRequest.WithCredentials ? 1 : 0);
+            Connections.Add(NativeId, this);
 
             CurrentRequest.EnumerateHeaders((header, values) =>
                 {
                     if (header != "Content-Length")
                         for (int i = 0; i < values.Count; ++i)
                             XHR_SetRequestHeader(NativeId, header, values[i]);
-                });
+                }, /*callBeforeSendCallback:*/ true);
 
             byte[] body = CurrentRequest.GetEntityBody();
 
             XHR_SetResponseHandler(NativeId, WebGLConnection.OnResponse, WebGLConnection.OnError, WebGLConnection.OnTimeout, WebGLConnection.OnAborted);
-            XHR_SetProgressHandler(NativeId, WebGLConnection.OnDownloadProgress, WebGLConnection.OnUploadProgress);
+            // Setting OnUploadProgress result in an addEventListener("progress", ...) call making the request non-simple.
+            // https://forum.unity.com/threads/best-http-released.200006/page-49#post-3696220
+            XHR_SetProgressHandler(NativeId, WebGLConnection.OnDownloadProgress, CurrentRequest.OnUploadProgress == null ? (OnWebGLProgressDelegate)null : WebGLConnection.OnUploadProgress);
 
             XHR_SetTimeout(NativeId, (uint)(CurrentRequest.ConnectTimeout.TotalMilliseconds + CurrentRequest.Timeout.TotalMilliseconds));
 
             XHR_Send(NativeId, body, body != null ? body.Length : 0);
-
-            Connections.Add(NativeId, this);
         }
 
-        #region Callback Implementations
+#region Callback Implementations
 
-        void OnResponse(int httpStatus, byte[] buffer)
+        void OnResponse(int httpStatus, byte[] buffer, int bufferLength)
         {
             try
             {
-                using (MemoryStream ms = new MemoryStream())
+                using (var ms = new BufferPoolMemoryStream())
                 {
                     Stream = ms;
 
                     XHR_GetStatusLine(NativeId, OnBufferCallback);
                     XHR_GetResponseHeaders(NativeId, OnBufferCallback);
 
-                    if (buffer != null && buffer.Length > 0)
-                        ms.Write(buffer, 0, buffer.Length);
+                    if (buffer != null && bufferLength > 0)
+                        ms.Write(buffer, 0, bufferLength);
 
                     ms.Seek(0L, SeekOrigin.Begin);
+
+                    var internalBuffer = ms.GetBuffer();
+                    string tmp = System.Text.Encoding.UTF8.GetString(internalBuffer);
+                    HTTPManager.Logger.Information(this.NativeId + " OnResponse - full response ", tmp);
 
                     SupportedProtocols protocol = CurrentRequest.ProtocolHandler == SupportedProtocols.Unknown ? HTTPProtocolFactory.GetProtocolFromUri(CurrentRequest.CurrentUri) : CurrentRequest.ProtocolHandler;
                     CurrentRequest.Response = HTTPProtocolFactory.Get(protocol, CurrentRequest, ms, CurrentRequest.UseStreaming, false);
 
-                    CurrentRequest.Response.Receive(buffer != null && buffer.Length > 0 ? (int)buffer.Length : -1, true);
+                    CurrentRequest.Response.Receive(buffer != null && bufferLength > 0 ? (int)bufferLength : -1, true);
+
+#if !BESTHTTP_DISABLE_COOKIES
+                    if (CurrentRequest.IsCookiesEnabled)
+                        BestHTTP.Cookies.CookieJar.Set(CurrentRequest.Response);
+#endif
                 }
             }
             catch (Exception e)
@@ -142,12 +157,13 @@ namespace BestHTTP
             }
         }
 
-        void OnBuffer(byte[] buffer)
+        void OnBuffer(byte[] buffer, int bufferLength)
         {
             if (Stream != null)
             {
-                Stream.Write(buffer, 0, buffer.Length);
-                Stream.Write(new byte[2] { HTTPResponse.CR, HTTPResponse.LF }, 0, 2);
+                Stream.Write(buffer, 0, bufferLength);
+                //Stream.Write(new byte[2] { HTTPResponse.CR, HTTPResponse.LF }, 0, 2);
+                Stream.Write(HTTPRequest.EOL, 0, HTTPRequest.EOL.Length);
             }
         }
 
@@ -235,9 +251,9 @@ namespace BestHTTP
             XHR_Release(NativeId);
         }
 
-        #endregion
+#endregion
 
-        #region WebGL Static Callbacks
+#region WebGL Static Callbacks
 
         [AOT.MonoPInvokeCallback(typeof(OnWebGLRequestHandlerDelegate))]
         static void OnResponse(int nativeId, int httpStatus, IntPtr pBuffer, int length, int err)
@@ -251,12 +267,14 @@ namespace BestHTTP
                 return;
             }
 
-            byte[] buffer = new byte[length];
+            byte[] buffer = VariableSizedBufferPool.Get(length, true);
 
             // Copy data from the 'unmanaged' memory to managed memory. Buffer will be reclaimed by the GC.
             Marshal.Copy(pBuffer, buffer, 0, length);
 
-            conn.OnResponse(httpStatus, buffer);
+            conn.OnResponse(httpStatus, buffer, length);
+
+            VariableSizedBufferPool.Release(buffer);
         }
 
         [AOT.MonoPInvokeCallback(typeof(OnWebGLBufferDelegate))]
@@ -269,12 +287,14 @@ namespace BestHTTP
                 return;
             }
 
-            byte[] buffer = new byte[length];
+            byte[] buffer = VariableSizedBufferPool.Get(length, true);
 
             // Copy data from the 'unmanaged' memory to managed memory. Buffer will be reclaimed by the GC.
             Marshal.Copy(pBuffer, buffer, 0, length);
 
-            conn.OnBuffer(buffer);
+            conn.OnBuffer(buffer, length);
+
+            VariableSizedBufferPool.Release(buffer);
         }
 
         [AOT.MonoPInvokeCallback(typeof(OnWebGLProgressDelegate))]
@@ -346,12 +366,12 @@ namespace BestHTTP
             conn.OnAborted();
         }
 
-        #endregion
+#endregion
 
-        #region WebGL Interface
+#region WebGL Interface
 
         [DllImport("__Internal")]
-        private static extern int XHR_Create(string method, string url, string userName, string passwd);
+        private static extern int XHR_Create(string method, string url, string userName, string passwd, int withCredentials);
 
         /// <summary>
         /// Is an unsigned long representing the number of milliseconds a request can take before automatically being terminated. A value of 0 (which is the default) means there is no timeout.
@@ -383,7 +403,11 @@ namespace BestHTTP
         [DllImport("__Internal")]
         private static extern void XHR_Release(int nativeId);
 
-        #endregion
+        [DllImport("__Internal")]
+        private static extern void XHR_SetLoglevel(int logLevel);
+
+#endregion
     }
-#endif
 }
+
+#endif

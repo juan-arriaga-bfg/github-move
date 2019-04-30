@@ -1,20 +1,20 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Math.Raw;
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.Raw;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Math.EC.Custom.Sec
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC.Custom.Sec
 {
     internal class SecT409FieldElement
-        : ECFieldElement
+        : AbstractF2mFieldElement
     {
-        protected ulong[] x;
+        protected internal readonly ulong[] x;
 
         public SecT409FieldElement(BigInteger x)
         {
-            if (x == null || x.SignValue < 0)
+            if (x == null || x.SignValue < 0 || x.BitLength > 409)
                 throw new ArgumentException("value invalid for SecT409FieldElement", "x");
 
             this.x = SecT409Field.FromBigInteger(x);
@@ -152,15 +152,23 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             return new SecT409FieldElement(z);
         }
 
+        public override int Trace()
+        {
+            return (int)SecT409Field.Trace(x);
+        }
+
         public override ECFieldElement Invert()
         {
-            return new SecT409FieldElement(
-                AbstractF2mCurve.Inverse(409, new int[] { 87 }, ToBigInteger()));
+            ulong[] z = Nat448.Create64();
+            SecT409Field.Invert(x, z);
+            return new SecT409FieldElement(z);
         }
 
         public override ECFieldElement Sqrt()
         {
-            return SquarePow(M - 1);
+            ulong[] z = Nat448.Create64();
+            SecT409Field.Sqrt(x, z);
+            return new SecT409FieldElement(z);
         }
 
         public virtual int Representation
@@ -213,5 +221,5 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
         }
     }
 }
-
+#pragma warning restore
 #endif

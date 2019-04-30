@@ -1,18 +1,18 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Security;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Security;
 
-namespace Org.BouncyCastle.Crypto.Signers
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Signers
 {
 	/**
 	 * Gost R 34.10-94 Signature Algorithm
 	 */
 	public class Gost3410Signer
-		: IDsa
+		: IDsaExt
 	{
 		private Gost3410KeyParameters key;
 		private SecureRandom random;
@@ -53,6 +53,11 @@ namespace Org.BouncyCastle.Crypto.Signers
 				this.key = (Gost3410PublicKeyParameters) parameters;
 			}
 		}
+
+        public virtual BigInteger Order
+        {
+            get { return key.Parameters.Q; }
+        }
 
 		/**
 		 * generate a signature for the given message using the key we were
@@ -132,5 +137,5 @@ namespace Org.BouncyCastle.Crypto.Signers
 		}
 	}
 }
-
+#pragma warning restore
 #endif

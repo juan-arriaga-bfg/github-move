@@ -1,22 +1,24 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Math.EC;
-using Org.BouncyCastle.Math.EC.Multiplier;
-using Org.BouncyCastle.Security;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC.Multiplier;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Security;
 
-namespace Org.BouncyCastle.Crypto.Signers
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Signers
 {
     /**
      * EC-DSA as described in X9.62
      */
     public class ECDsaSigner
-        : IDsa
+        : IDsaExt
     {
+        private static readonly BigInteger Eight = BigInteger.ValueOf(8);
+
         protected readonly IDsaKCalculator kCalculator;
 
         protected ECKeyParameters key = null;
@@ -73,6 +75,11 @@ namespace Org.BouncyCastle.Crypto.Signers
             }
 
             this.random = InitSecureRandom(forSigning && !kCalculator.IsDeterministic, providedRandom);
+        }
+
+        public virtual BigInteger Order
+        {
+            get { return key.Parameters.N; }
         }
 
         // 5.3 pg 28
@@ -151,13 +158,49 @@ namespace Org.BouncyCastle.Crypto.Signers
             ECPoint G = key.Parameters.G;
             ECPoint Q = ((ECPublicKeyParameters) key).Q;
 
-            ECPoint point = ECAlgorithms.SumOfTwoMultiplies(G, u1, Q, u2).Normalize();
+            ECPoint point = ECAlgorithms.SumOfTwoMultiplies(G, u1, Q, u2);
 
             if (point.IsInfinity)
                 return false;
 
-            BigInteger v = point.AffineXCoord.ToBigInteger().Mod(n);
+            /*
+             * If possible, avoid normalizing the point (to save a modular inversion in the curve field).
+             * 
+             * There are ~cofactor elements of the curve field that reduce (modulo the group order) to 'r'.
+             * If the cofactor is known and small, we generate those possible field values and project each
+             * of them to the same "denominator" (depending on the particular projective coordinates in use)
+             * as the calculated point.X. If any of the projected values matches point.X, then we have:
+             *     (point.X / Denominator mod p) mod n == r
+             * as required, and verification succeeds.
+             * 
+             * Based on an original idea by Gregory Maxwell (https://github.com/gmaxwell), as implemented in
+             * the libsecp256k1 project (https://github.com/bitcoin/secp256k1).
+             */
+            ECCurve curve = point.Curve;
+            if (curve != null)
+            {
+                BigInteger cofactor = curve.Cofactor;
+                if (cofactor != null && cofactor.CompareTo(Eight) <= 0)
+                {
+                    ECFieldElement D = GetDenominator(curve.CoordinateSystem, point);
+                    if (D != null && !D.IsZero)
+                    {
+                        ECFieldElement X = point.XCoord;
+                        while (curve.IsValidFieldElement(r))
+                        {
+                            ECFieldElement R = curve.FromBigInteger(r).Multiply(D);
+                            if (R.Equals(X))
+                            {
+                                return true;
+                            }
+                            r = r.Add(n);
+                        }
+                        return false;
+                    }
+                }
+            }
 
+            BigInteger v = point.Normalize().AffineXCoord.ToBigInteger().Mod(n);
             return v.Equals(r);
         }
 
@@ -179,11 +222,28 @@ namespace Org.BouncyCastle.Crypto.Signers
             return new FixedPointCombMultiplier();
         }
 
+        protected virtual ECFieldElement GetDenominator(int coordinateSystem, ECPoint p)
+        {
+            switch (coordinateSystem)
+            {
+                case ECCurve.COORD_HOMOGENEOUS:
+                case ECCurve.COORD_LAMBDA_PROJECTIVE:
+                case ECCurve.COORD_SKEWED:
+                    return p.GetZCoord(0);
+                case ECCurve.COORD_JACOBIAN:
+                case ECCurve.COORD_JACOBIAN_CHUDNOVSKY:
+                case ECCurve.COORD_JACOBIAN_MODIFIED:
+                    return p.GetZCoord(0).Square();
+                default:
+                    return null;
+            }
+        }
+
         protected virtual SecureRandom InitSecureRandom(bool needed, SecureRandom provided)
         {
             return !needed ? null : (provided != null) ? provided : new SecureRandom();
         }
     }
 }
-
+#pragma warning restore
 #endif

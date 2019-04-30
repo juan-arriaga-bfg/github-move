@@ -44,6 +44,7 @@ namespace BestHTTP.Decompression.Zlib
         protected internal bool _leaveOpen;
         protected internal byte[] _workingBuffer;
         protected internal int _bufferSize = ZlibConstants.WorkingBufferSizeDefault;
+        protected internal int windowBitsMax;
         protected internal byte[] _buf1 = new byte[1];
 
         protected internal System.IO.Stream _stream;
@@ -63,6 +64,15 @@ namespace BestHTTP.Decompression.Zlib
                               CompressionLevel level,
                               ZlibStreamFlavor flavor,
                               bool leaveOpen)
+            :this(stream, compressionMode, level, flavor,leaveOpen, ZlibConstants.WindowBitsDefault)
+        { }
+
+        public ZlibBaseStream(System.IO.Stream stream,
+                              CompressionMode compressionMode,
+                              CompressionLevel level,
+                              ZlibStreamFlavor flavor,
+                              bool leaveOpen,
+                              int windowBits)
             : base()
         {
             this._flushMode = FlushType.None;
@@ -72,6 +82,7 @@ namespace BestHTTP.Decompression.Zlib
             this._compressionMode = compressionMode;
             this._flavor = flavor;
             this._level = level;
+            this.windowBitsMax = windowBits;
             // workitem 7159
             if (flavor == ZlibStreamFlavor.GZIP)
             {
@@ -98,12 +109,12 @@ namespace BestHTTP.Decompression.Zlib
                     _z = new ZlibCodec();
                     if (this._compressionMode == CompressionMode.Decompress)
                     {
-                        _z.InitializeInflate(wantRfc1950Header);
+                        _z.InitializeInflate(this.windowBitsMax, wantRfc1950Header);
                     }
                     else
                     {
                         _z.Strategy = Strategy;
-                        _z.InitializeDeflate(this._level, wantRfc1950Header);
+                        _z.InitializeDeflate(this._level, this.windowBitsMax, wantRfc1950Header);
                     }
                 }
                 return _z;
@@ -117,7 +128,7 @@ namespace BestHTTP.Decompression.Zlib
             get
             {
                 if (_workingBuffer == null)
-                    _workingBuffer = new byte[_bufferSize];
+                    _workingBuffer = Extensions.VariableSizedBufferPool.Get(_bufferSize, true);
                 return _workingBuffer;
             }
         }
@@ -240,7 +251,7 @@ namespace BestHTTP.Decompression.Zlib
 
                         // Read and potentially verify the GZIP trailer:
                         // CRC32 and size mod 2^32
-                        byte[] trailer = new byte[8];
+                        byte[] trailer = Extensions.VariableSizedBufferPool.Get(8, true);
 
                         // workitems 8679 & 12554
                         if (_z.AvailableBytesIn < 8)
@@ -253,13 +264,14 @@ namespace BestHTTP.Decompression.Zlib
                                                          bytesNeeded);
                             if (bytesNeeded != bytesRead)
                             {
+                                Extensions.VariableSizedBufferPool.Release(trailer);
                                 throw new ZlibException(String.Format("Missing or incomplete GZIP trailer. Expected 8 bytes, got {0}.",
                                                                       _z.AvailableBytesIn + bytesRead));
                             }
                         }
                         else
                         {
-                            Array.Copy(_z.InputBuffer, _z.NextIn, trailer, 0, trailer.Length);
+                            Array.Copy(_z.InputBuffer, _z.NextIn, trailer, 0, 8);
                         }
 
                         Int32 crc32_expected = BitConverter.ToInt32(trailer, 0);
@@ -268,11 +280,17 @@ namespace BestHTTP.Decompression.Zlib
                         Int32 isize_actual = (Int32)(_z.TotalBytesOut & 0x00000000FFFFFFFF);
 
                         if (crc32_actual != crc32_expected)
+                        {
+                            Extensions.VariableSizedBufferPool.Release(trailer);
                             throw new ZlibException(String.Format("Bad CRC32 in GZIP trailer. (actual({0:X8})!=expected({1:X8}))", crc32_actual, crc32_expected));
+                        }
 
                         if (isize_actual != isize_expected)
+                        {
+                            Extensions.VariableSizedBufferPool.Release(trailer);
                             throw new ZlibException(String.Format("Bad size in GZIP trailer. (actual({0})!=expected({1}))", isize_actual, isize_expected));
-
+                        }
+                        Extensions.VariableSizedBufferPool.Release(trailer);
                     }
                     else
                     {
@@ -296,12 +314,14 @@ namespace BestHTTP.Decompression.Zlib
                 _z.EndInflate();
             }
             _z = null;
+            Extensions.VariableSizedBufferPool.Release(_workingBuffer);
+            _workingBuffer = null;
         }
 
 
-        public 
+        public
 #if !NETFX_CORE
-            override 
+            override
 #endif
             void Close()
         {
@@ -331,6 +351,7 @@ namespace BestHTTP.Decompression.Zlib
         public override void SetLength(System.Int64 value)
         {
             _stream.SetLength(value);
+            nomoreinput = false;
         }
 
 
@@ -377,18 +398,27 @@ namespace BestHTTP.Decompression.Zlib
         {
             int totalBytesRead = 0;
             // read the header on the first read
-            byte[] header = new byte[10];
-            int n = _stream.Read(header, 0, header.Length);
+            byte[] header = Extensions.VariableSizedBufferPool.Get(10, true);
+            int n = _stream.Read(header, 0, 10);
 
             // workitem 8501: handle edge case (decompress empty stream)
             if (n == 0)
+            {
+                Extensions.VariableSizedBufferPool.Release(header);
                 return 0;
+            }
 
             if (n != 10)
+            {
+                Extensions.VariableSizedBufferPool.Release(header);
                 throw new ZlibException("Not a valid GZIP stream.");
+            }
 
             if (header[0] != 0x1F || header[1] != 0x8B || header[2] != 8)
+            {
+                Extensions.VariableSizedBufferPool.Release(header);
                 throw new ZlibException("Bad GZIP header.");
+            }
 
             Int32 timet = BitConverter.ToInt32(header, 4);
             _GzipMtime = GZipStream._unixEpoch.AddSeconds(timet);
@@ -400,10 +430,14 @@ namespace BestHTTP.Decompression.Zlib
                 totalBytesRead += n;
 
                 Int16 extraLength = (Int16)(header[0] + header[1] * 256);
-                byte[] extra = new byte[extraLength];
-                n = _stream.Read(extra, 0, extra.Length);
+                byte[] extra = Extensions.VariableSizedBufferPool.Get(extraLength, true);
+                n = _stream.Read(extra, 0, extraLength);
                 if (n != extraLength)
+                {
+                    Extensions.VariableSizedBufferPool.Release(extra);
+                    Extensions.VariableSizedBufferPool.Release(header);
                     throw new ZlibException("Unexpected end-of-file reading GZIP header.");
+                }
                 totalBytesRead += n;
             }
             if ((header[3] & 0x08) == 0x08)
@@ -413,6 +447,7 @@ namespace BestHTTP.Decompression.Zlib
             if ((header[3] & 0x02) == 0x02)
                 Read(_buf1, 0, 1); // CRC16, ignore
 
+            Extensions.VariableSizedBufferPool.Release(header);
             return totalBytesRead;
         }
 
@@ -563,66 +598,6 @@ namespace BestHTTP.Decompression.Zlib
             Writer,
             Reader,
             Undefined,
-        }
-
-
-        public static void CompressString(String s, Stream compressor)
-        {
-            byte[] uncompressed = System.Text.Encoding.UTF8.GetBytes(s);
-            using (compressor)
-            {
-                compressor.Write(uncompressed, 0, uncompressed.Length);
-            }
-        }
-
-        public static void CompressBuffer(byte[] b, Stream compressor)
-        {
-            // workitem 8460
-            using (compressor)
-            {
-                compressor.Write(b, 0, b.Length);
-            }
-        }
-
-        public static String UncompressString(byte[] compressed, Stream decompressor)
-        {
-            // workitem 8460
-            byte[] working = new byte[1024];
-            var encoding = System.Text.Encoding.UTF8;
-            using (var output = new MemoryStream())
-            {
-                using (decompressor)
-                {
-                    int n;
-                    while ((n = decompressor.Read(working, 0, working.Length)) != 0)
-                    {
-                        output.Write(working, 0, n);
-                    }
-                }
-
-                // reset to allow read from start
-                output.Seek(0, SeekOrigin.Begin);
-                var sr = new StreamReader(output, encoding);
-                return sr.ReadToEnd();
-            }
-        }
-
-        public static byte[] UncompressBuffer(byte[] compressed, Stream decompressor)
-        {
-            // workitem 8460
-            byte[] working = new byte[1024];
-            using (var output = new MemoryStream())
-            {
-                using (decompressor)
-                {
-                    int n;
-                    while ((n = decompressor.Read(working, 0, working.Length)) != 0)
-                    {
-                        output.Write(working, 0, n);
-                    }
-                }
-                return output.ToArray();
-            }
         }
 
     }

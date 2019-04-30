@@ -108,9 +108,7 @@ public class HighlightPiecesTutorialStep : BaseTutorialStep, IBoardEventListener
         
         if (best.Count >= amountMatch && IsFirstStartEvent())
         {
-            var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
-            var started = tutorialLogic.SaveStarted;
-            started.Add(Id);
+            tutorialDataManager.SetStarted(Id);
             OnFirstStartCallback?.Invoke(this);
         }
     }

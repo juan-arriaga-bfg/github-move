@@ -3,8 +3,10 @@
 public class TouchReactionConditionCharacter : TouchReactionConditionComponent
 {
 	public override bool Check(BoardPosition position, Piece piece)
-	{
-		if (piece.Context.TutorialLogic.CheckLockOrders() == false)
+    {
+        var tutorialDataManager = GameDataService.Current.TutorialDataManager;
+        
+		if (tutorialDataManager.CheckLockOrders() == false)
 		{
 			var view = piece.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
 

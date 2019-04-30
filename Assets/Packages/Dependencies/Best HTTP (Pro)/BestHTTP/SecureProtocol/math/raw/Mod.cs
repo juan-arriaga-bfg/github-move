@@ -1,15 +1,18 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.Diagnostics;
 
-using Org.BouncyCastle.Crypto.Utilities;
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Security;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Math.Raw
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Math.Raw
 {
     internal abstract class Mod
     {
+        private static readonly SecureRandom RandomSource = new SecureRandom();
+
         public static void Invert(uint[] p, uint[] x, uint[] z)
         {
             int len = p.Length;
@@ -79,7 +82,6 @@ namespace Org.BouncyCastle.Math.Raw
         public static uint[] Random(uint[] p)
         {
             int len = p.Length;
-            Random rand = new Random();
             uint[] s = Nat.Create(len);
 
             uint m = p[len - 1];
@@ -92,7 +94,7 @@ namespace Org.BouncyCastle.Math.Raw
             do
             {
                 byte[] bytes = new byte[len << 2];
-                rand.NextBytes(bytes);
+                RandomSource.NextBytes(bytes);
                 Pack.BE_To_UInt32(bytes, 0, s);
                 s[len - 1] &= m;
             }
@@ -184,5 +186,5 @@ namespace Org.BouncyCastle.Math.Raw
         }
     }
 }
-
+#pragma warning restore
 #endif

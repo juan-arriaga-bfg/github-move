@@ -1,7 +1,8 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System.IO;
 
-namespace Org.BouncyCastle.Asn1
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1
 {
 	public abstract class Asn1Encodable
 		: IAsn1Convertible
@@ -77,5 +78,5 @@ namespace Org.BouncyCastle.Asn1
 		public abstract Asn1Object ToAsn1Object();
     }
 }
-
+#pragma warning restore
 #endif

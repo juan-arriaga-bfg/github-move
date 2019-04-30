@@ -1,12 +1,43 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-using Org.BouncyCastle.Asn1;
+#pragma warning disable
+using System;
 
-namespace Org.BouncyCastle.Asn1.X9
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1;
+
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X9
 {
     public class X962Parameters
         : Asn1Encodable, IAsn1Choice
     {
         private readonly Asn1Object _params;
+
+		public static X962Parameters GetInstance(
+			object obj)
+		{
+			if (obj == null || obj is X962Parameters) 
+			{
+				return (X962Parameters)obj;
+			}
+
+			if (obj is Asn1Object) 
+			{
+				return new X962Parameters((Asn1Object)obj);
+			}
+
+			if (obj is byte[])
+			{
+				try
+				{
+					return new X962Parameters(Asn1Object.FromByteArray((byte[])obj));
+				}
+				catch (Exception e)
+				{
+					throw new ArgumentException("unable to parse encoded data: " + e.Message, e);
+				}
+			}
+
+			throw new ArgumentException("unknown object in getInstance()");
+		}
 
 		public X962Parameters(
             X9ECParameters ecParameters)
@@ -31,6 +62,11 @@ namespace Org.BouncyCastle.Asn1.X9
 			get { return (_params is DerObjectIdentifier); }
         }
 
+		public bool IsImplicitlyCA
+        {
+			get { return (_params is Asn1Null); }
+        }
+
 		public Asn1Object Parameters
         {
             get { return _params; }
@@ -52,5 +88,5 @@ namespace Org.BouncyCastle.Asn1.X9
         }
     }
 }
-
+#pragma warning restore
 #endif

@@ -1,22 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#if NETFX_CORE
-    using FileStream = BestHTTP.PlatformSupport.IO.FileStream;
-    using FileMode = BestHTTP.PlatformSupport.IO.FileMode;
-
-    using Directory = BestHTTP.PlatformSupport.IO.Directory;
-    using File = BestHTTP.PlatformSupport.IO.File;
-#else
-    using FileStream = System.IO.FileStream;
-    using FileMode = System.IO.FileMode;
-#endif
-
 using BestHTTP.Extensions;
+using BestHTTP.PlatformSupport.FileSystem;
 
 namespace BestHTTP
 {
-    sealed class StreamList : System.IO.Stream
+    public sealed class StreamList : System.IO.Stream
     {
         private System.IO.Stream[] Streams;
         private int CurrentIdx;
@@ -32,7 +22,7 @@ namespace BestHTTP
             get {
                 if (CurrentIdx >= Streams.Length)
                     return false;
-                return Streams[CurrentIdx].CanRead; 
+                return Streams[CurrentIdx].CanRead;
             }
         }
 
@@ -99,6 +89,7 @@ namespace BestHTTP
             byte[] bytes = str.GetASCIIBytes();
 
             this.Write(bytes, 0, bytes.Length);
+            VariableSizedBufferPool.Release(bytes);
         }
 
         protected override void Dispose(bool disposing)
@@ -144,7 +135,7 @@ namespace BestHTTP
 
     /*public static class AndroidFileHelper
     {
-        // AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer"); 
+        // AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         // AndroidJavaObject jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
 
         public static Stream GetAPKFileStream(string path)
@@ -253,9 +244,9 @@ namespace BestHTTP
                 // Step 4 : create a HTTPResponse object
                 // Step 5 : call the Receive function of the response object
 
-                using (FileStream fs = new FileStream(this.CurrentRequest.CurrentUri.LocalPath, FileMode.Open))
+                using (System.IO.Stream fs = HTTPManager.IOService.CreateFileStream(this.CurrentRequest.CurrentUri.LocalPath, FileStreamModes.Open))
                 //using (Stream fs = AndroidFileHelper.GetAPKFileStream(this.CurrentRequest.CurrentUri.LocalPath))
-                    using (StreamList stream = new StreamList(new System.IO.MemoryStream(), fs))
+                    using (StreamList stream = new StreamList(new BufferPoolMemoryStream(), fs))
                     {
                         // This will write to the MemoryStream
                         stream.Write("HTTP/1.1 200 Ok\r\n");

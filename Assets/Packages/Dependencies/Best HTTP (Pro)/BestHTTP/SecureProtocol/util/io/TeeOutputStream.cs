@@ -1,10 +1,10 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace Org.BouncyCastle.Utilities.IO
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.IO
 {
     public class TeeOutputStream
 		: BaseOutputStream
@@ -20,20 +20,26 @@ namespace Org.BouncyCastle.Utilities.IO
 			this.tee = tee;
 		}
 
-        protected override void Dispose(bool isDisposing)
+#if PORTABLE || NETFX_CORE
+        protected override void Dispose(bool disposing)
         {
-            try
+            if (disposing)
             {
-                output.Dispose();
-                tee.Dispose();
+                BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.Dispose(output);
+                BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.Dispose(tee);
             }
-            finally
-            {
-                base.Dispose(isDisposing);
-            }
+            base.Dispose(disposing);
         }
+#else
+        public override void Close()
+		{
+            BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.Dispose(output);
+            BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.Dispose(tee);
+            base.Close();
+		}
+#endif
 
-		public override void Write(byte[] buffer, int offset, int count)
+        public override void Write(byte[] buffer, int offset, int count)
 		{
 			output.Write(buffer, offset, count);
 			tee.Write(buffer, offset, count);
@@ -46,5 +52,5 @@ namespace Org.BouncyCastle.Utilities.IO
 		}
 	}
 }
-
+#pragma warning restore
 #endif

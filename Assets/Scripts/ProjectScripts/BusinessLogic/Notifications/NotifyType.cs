@@ -91,10 +91,11 @@ public class NotifyType
         NotifySelector = notifiers =>
         {
             var resultNotifiers = new List<Notifier>();
-      
-            var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
-            if (tutorialLogic.CheckMarket() == false)
+
+            if (GameDataService.Current.TutorialDataManager.CheckMarket() == false)
+            {
                 return resultNotifiers;
+            }
 
             return notifiers;
         },
@@ -131,5 +132,14 @@ public class NotifyType
         TitleKey = "notifications.free.energy.title", 
         MessageKey = "notifications.free.energy.message",  
         NotifySelector = null,
+    };
+    
+    public static readonly NotifyType FreeEnergyTimeout = new NotifyType
+    {
+        Id = 7, 
+        TitleKey = "notifications.free.energy.expires.title", 
+        MessageKey = "notifications.free.energy.expires.message",  
+        NotifySelector = null,
+        TimeCorrector = notifyDate => notifyDate.Subtract(new TimeSpan(0, 0, 15, 0))
     };
 }

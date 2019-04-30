@@ -1882,6 +1882,18 @@
     }
   },
   {
+    "$type": "TaskOpenChestEntity, GameAssembly",
+    "Id": "164_OpenChest_CH_NPC",
+    "PieceUid": "CH_NPC",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.open.chest.title",
+        "Message": "quest.open.chest.message"
+      }
+    }
+  },
+  {
     "$type": "TaskCompleteDailyTaskEntity, GameAssembly",
     "Id": "Daily_ClearAll",
     "ComponentsCache": {

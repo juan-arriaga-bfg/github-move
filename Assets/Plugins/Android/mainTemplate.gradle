@@ -37,6 +37,9 @@ dependencies {
     implementation (name: 'UnityAds', ext: 'aar')
     implementation project(':bfgunityandroid')
 	implementation (name: 'simple-android-notifications', ext:'aar')
+	
+	// Added to fix Zendesk - https://extsvn.bigfishgames.com/jira/projects/SHER/issues/SHER-66
+    implementation 'com.android.support:design:26.1.0' 
 }
 
 android {
@@ -51,7 +54,7 @@ android {
         multiDexEnabled true
         targetSdkVersion 26
         minSdkVersion 21
-		versionCode 1
+		versionCode 1231
     }
 
     lintOptions {

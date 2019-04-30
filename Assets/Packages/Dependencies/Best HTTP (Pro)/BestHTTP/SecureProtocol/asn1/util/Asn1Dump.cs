@@ -1,17 +1,18 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 using System.Collections;
 using System.IO;
 using System.Text;
 
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Encoders;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Encoders;
 
-namespace Org.BouncyCastle.Asn1.Utilities
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Utilities
 {
     public sealed class Asn1Dump
     {
-        private static readonly string NewLine = Platform.NewLine;
+        private static readonly string NewLine = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.NewLine;
 
         private Asn1Dump()
         {
@@ -199,6 +200,14 @@ namespace Org.BouncyCastle.Asn1.Utilities
             {
                 buf.Append(indent + "T61String(" + ((DerT61String)obj).GetString() + ") " + NewLine);
             }
+            else if (obj is DerGraphicString)
+            {
+                buf.Append(indent + "GraphicString(" + ((DerGraphicString)obj).GetString() + ") " + NewLine);
+            }
+            else if (obj is DerVideotexString)
+            {
+                buf.Append(indent + "VideotexString(" + ((DerVideotexString)obj).GetString() + ") " + NewLine);
+            }
             else if (obj is DerUtcTime)
             {
                 buf.Append(indent + "UTCTime(" + ((DerUtcTime)obj).TimeString + ") " + NewLine);
@@ -372,5 +381,5 @@ namespace Org.BouncyCastle.Asn1.Utilities
         }
     }
 }
-
+#pragma warning restore
 #endif

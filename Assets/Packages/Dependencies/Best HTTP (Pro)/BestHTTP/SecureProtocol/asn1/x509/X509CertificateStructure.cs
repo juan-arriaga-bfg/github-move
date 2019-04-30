@@ -1,9 +1,10 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Asn1.Pkcs;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Pkcs;
 
-namespace Org.BouncyCastle.Asn1.X509
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X509
 {
     /**
      * an X509Certificate structure.
@@ -120,11 +121,16 @@ namespace Org.BouncyCastle.Asn1.X509
             get { return sig; }
         }
 
+        public byte[] GetSignatureOctets()
+        {
+            return sig.GetOctets();
+        }
+
         public override Asn1Object ToAsn1Object()
         {
             return new DerSequence(tbsCert, sigAlgID, sig);
         }
     }
 }
-
+#pragma warning restore
 #endif

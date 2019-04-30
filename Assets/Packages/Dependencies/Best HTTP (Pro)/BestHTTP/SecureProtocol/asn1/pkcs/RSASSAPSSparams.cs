@@ -1,10 +1,12 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Asn1.Oiw;
-using Org.BouncyCastle.Asn1.X509;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Oiw;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X509;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Asn1.Pkcs
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Pkcs
 {
 	public class RsassaPssParameters
 		: Asn1Encodable
@@ -32,7 +34,7 @@ namespace Org.BouncyCastle.Asn1.Pkcs
 				return new RsassaPssParameters((Asn1Sequence)obj);
 			}
 
-			throw new ArgumentException("Unknown object in factory: " + obj.GetType().FullName, "obj");
+			throw new ArgumentException("Unknown object in factory: " + BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.GetTypeName(obj), "obj");
 		}
 
 		/**
@@ -164,5 +166,5 @@ namespace Org.BouncyCastle.Asn1.Pkcs
 		}
 	}
 }
-
+#pragma warning restore
 #endif

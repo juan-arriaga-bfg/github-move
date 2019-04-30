@@ -1,10 +1,11 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Crypto.Digests;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Prng
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Prng
 {
 	/**
 	 * Random generation based on the digest with counter. Calling AddSeedMaterial will
@@ -110,15 +111,12 @@ namespace Org.BouncyCastle.Crypto.Prng
 
 		private void DigestAddCounter(long seedVal)
 		{
-			ulong seed = (ulong)seedVal;
-			for (int i = 0; i != 8; i++)
-			{
-				digest.Update((byte)seed);
-				seed >>= 8;
-			}
+            byte[] bytes = new byte[8];
+            Pack.UInt64_To_LE((ulong)seedVal, bytes);
+            digest.BlockUpdate(bytes, 0, bytes.Length);
 		}
 
-		private void DigestUpdate(byte[] inSeed)
+        private void DigestUpdate(byte[] inSeed)
 		{
 			digest.BlockUpdate(inSeed, 0, inSeed.Length);
 		}
@@ -129,5 +127,5 @@ namespace Org.BouncyCastle.Crypto.Prng
 		}
 	}
 }
-
+#pragma warning restore
 #endif

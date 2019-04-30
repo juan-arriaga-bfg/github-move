@@ -11,6 +11,14 @@ using BestHTTP.SignalR.Transports;
 using BestHTTP.SignalR.JsonEncoders;
 using BestHTTP.SignalR.Authentication;
 
+using PlatformSupport.Collections.ObjectModel;
+
+#if !NETFX_CORE
+    using PlatformSupport.Collections.Specialized;
+#else
+    using System.Collections.Specialized;
+#endif
+
 namespace BestHTTP.SignalR
 {
     public delegate void OnNonHubMessageDelegate(Connection connection, object data);
@@ -60,7 +68,12 @@ namespace BestHTTP.SignalR
         /// <summary>
         /// The default Json encode/decoder that will be used to encode/decode the event arguments.
         /// </summary>
-        public static IJsonEncoder DefaultEncoder = new DefaultJsonEncoder();
+        public static IJsonEncoder DefaultEncoder =
+#if BESTHTTP_SIGNALR_WITH_JSONDOTNET
+            new JSonDotnetEncoder();
+#else
+            new DefaultJsonEncoder();
+#endif
 
         /// <summary>
         /// The base url endpoint where the SignalR service can be found.
@@ -85,7 +98,7 @@ namespace BestHTTP.SignalR
         private ConnectionStates _state;
 
         /// <summary>
-        /// Result of the nogotiation request from the server.
+        /// Result of the negotiation request from the server.
         /// </summary>
         public NegotiationData NegotiationResult { get; private set; }
 
@@ -100,13 +113,37 @@ namespace BestHTTP.SignalR
         public TransportBase Transport { get; private set; }
 
         /// <summary>
-        /// Additional query parameters that will be passed for the handsake uri. If the value is null, or an empty string it will be not appended to the query only the key.
-        /// <remarks>The keys and values must be escaped properly, as the plugin will not escape these. </remarks>
+        /// Current client protocol in use.
         /// </summary>
-        public Dictionary<string, string> AdditionalQueryParams { get; set; }
+        public ProtocolVersions Protocol { get; private set; }
 
         /// <summary>
-        /// If it's false, the parmateres in the AdditionalQueryParams will be passed for all http requests. Its default value is true.
+        /// Additional query parameters that will be passed for the handshake uri. If the value is null, or an empty string it will be not appended to the query only the key.
+        /// <remarks>The keys and values must be escaped properly, as the plugin will not escape these. </remarks>
+        /// </summary>
+        public ObservableDictionary<string, string> AdditionalQueryParams
+        {
+            get { return additionalQueryParams; }
+            set
+            {
+                // Unsubscribe from previous dictionary's events
+                if (additionalQueryParams != null)
+                    additionalQueryParams.CollectionChanged -= AdditionalQueryParams_CollectionChanged;
+
+                additionalQueryParams = value;
+
+                // Clear out the cached value
+                BuiltQueryParams = null;
+
+                // Subscribe to the collection changed event
+                if (value != null)
+                    value.CollectionChanged += AdditionalQueryParams_CollectionChanged;
+            }
+        }
+        private ObservableDictionary<string, string> additionalQueryParams;
+
+        /// <summary>
+        /// If it's false, the parameters in the AdditionalQueryParams will be passed for all http requests. Its default value is true.
         /// </summary>
         public bool QueryParamsOnlyForHandshake { get; set; }
 
@@ -119,6 +156,16 @@ namespace BestHTTP.SignalR
         /// An IAuthenticationProvider implementation that will be used to authenticate the connection.
         /// </summary>
         public IAuthenticationProvider AuthenticationProvider { get; set; }
+
+        /// <summary>
+        /// How much time we have to wait between two pings.
+        /// </summary>
+        public TimeSpan PingInterval { get; set; }
+
+        /// <summary>
+        /// Wait time before the plugin should do a reconnect attempt. Its default value is 5 seconds.
+        /// </summary>
+        public TimeSpan ReconnectDelay { get; set; }
 
         #endregion
 
@@ -191,11 +238,6 @@ namespace BestHTTP.SignalR
             }
         }
 
-        /// <summary>
-        /// Current client protocol in use.
-        /// </summary>
-        public ProtocolVersions Protocol { get; private set; }
-
         #endregion
 
         #region Internals
@@ -255,6 +297,8 @@ namespace BestHTTP.SignalR
         /// </summary>
         private DateTime ReconnectStartedAt;
 
+        private DateTime ReconnectDelayStartedAt;
+
         /// <summary>
         /// True, if the reconnect process started.
         /// </summary>
@@ -264,11 +308,6 @@ namespace BestHTTP.SignalR
         /// When the last ping request sent out.
         /// </summary>
         private DateTime LastPingSentAt;
-
-        /// <summary>
-        /// How mutch time we have to wait between two pings.
-        /// </summary>
-        private TimeSpan PingInterval;
 
         /// <summary>
         /// Reference to the ping request.
@@ -392,6 +431,8 @@ namespace BestHTTP.SignalR
 
             // Expected protocol
             this.Protocol = ProtocolVersions.Protocol_2_2;
+
+            this.ReconnectDelay = TimeSpan.FromSeconds(5);
         }
 
         #endregion
@@ -421,12 +462,13 @@ namespace BestHTTP.SignalR
         }
 
         /// <summary>
-        /// Called when the authentication succeded.
+        /// Called when the authentication succeeded.
         /// </summary>
         /// <param name="provider"></param>
         private void OnAuthenticationSucceded(IAuthenticationProvider provider)
         {
             provider.OnAuthenticationSucceded -= OnAuthenticationSucceded;
+            provider.OnAuthenticationFailed -= OnAuthenticationFailed;
 
             StartImpl();
         }
@@ -436,6 +478,7 @@ namespace BestHTTP.SignalR
         /// </summary>
         private void OnAuthenticationFailed(IAuthenticationProvider provider, string reason)
         {
+            provider.OnAuthenticationSucceded -= OnAuthenticationSucceded;
             provider.OnAuthenticationFailed -= OnAuthenticationFailed;
 
             (this as IConnection).Error(reason);
@@ -476,7 +519,7 @@ namespace BestHTTP.SignalR
 
             this.Protocol = (ProtocolVersions)protocolIdx;
 
-#if !BESTHTTP_DISABLE_WEBSOCKET
+            #if !BESTHTTP_DISABLE_WEBSOCKET
             if (data.TryWebSockets)
             {
                 Transport = new WebSocketTransport(this);
@@ -488,7 +531,7 @@ namespace BestHTTP.SignalR
                 #endif
             }
             else
-#endif
+            #endif
             {
                 #if !BESTHTTP_DISABLE_SERVERSENT_EVENTS
                     Transport = new ServerSentEventsTransport(this);
@@ -520,6 +563,8 @@ namespace BestHTTP.SignalR
         #endregion
 
         #endregion
+
+        #region Public Interface
 
         /// <summary>
         /// Closes the connection and shuts down the transport.
@@ -653,6 +698,8 @@ namespace BestHTTP.SignalR
 
             return true;
         }
+
+        #endregion
 
         #region IManager Functions
 
@@ -818,16 +865,28 @@ namespace BestHTTP.SignalR
             if (this.State == ConnectionStates.Closed)
                 return;
 
+            // If we are just quitting, don't try to reconnect.
+            if (HTTPManager.IsQuitting)
+            {
+                Close();
+                return;
+            }
+
             HTTPManager.Logger.Error("SignalR Connection", reason);
 
-            //ReconnectStartedAt = null;
             ReconnectStarted = false;
 
             if (OnError != null)
                 OnError(this, reason);
-            
+
             if (this.State == ConnectionStates.Connected || this.State == ConnectionStates.Reconnecting)
-                Reconnect();
+            {
+                this.ReconnectDelayStartedAt = DateTime.UtcNow;
+                if (this.State != ConnectionStates.Reconnecting)
+                    this.ReconnectStartedAt = DateTime.UtcNow;
+
+                //Reconnect();
+            }
             else
             {
                 // Fall back if possible
@@ -882,11 +941,22 @@ namespace BestHTTP.SignalR
 
                     case RequestTypes.Poll:
                         uriBuilder.Path += "poll";
+
                         if (this.LastReceivedMessage != null)
                         {
                             queryBuilder.Append("messageId=");
                             queryBuilder.Append(this.LastReceivedMessage.MessageId);
                         }
+
+                        if (!string.IsNullOrEmpty(GroupsToken))
+                        {
+                            if (queryBuilder.Length > 0)
+                                queryBuilder.Append("&");
+
+                            queryBuilder.Append("groupsToken=");
+                            queryBuilder.Append(GroupsToken);
+                        }
+
                         goto default;
 
                     case RequestTypes.Send:
@@ -1034,7 +1104,22 @@ namespace BestHTTP.SignalR
 
                     if (PingRequest == null && DateTime.UtcNow - LastPingSentAt >= PingInterval)
                         Ping();
-                    
+
+                    break;
+
+                case ConnectionStates.Reconnecting:
+                    if ( DateTime.UtcNow - ReconnectStartedAt >= NegotiationResult.DisconnectTimeout)
+                    {
+                        HTTPManager.Logger.Warning("SignalR Connection", "OnHeartbeatUpdate - Failed to reconnect in the given time!");
+
+                        Close();
+                    }
+                    else if (DateTime.UtcNow - ReconnectDelayStartedAt >= ReconnectDelay)
+                    {
+                        if (HTTPManager.Logger.Level <= Logger.Loglevels.Warning)
+                          HTTPManager.Logger.Warning("SignalR Connection", this.ReconnectStarted.ToString() + " " + this.ReconnectStartedAt.ToString() + " " + NegotiationResult.DisconnectTimeout.ToString());
+                        Reconnect();
+                    }
                     break;
 
                 default:
@@ -1047,12 +1132,6 @@ namespace BestHTTP.SignalR
                         (this as IConnection).Error("Transport failed to connect in the given time!");
                     }
 
-                    if (ReconnectStarted && DateTime.UtcNow - ReconnectStartedAt >= NegotiationResult.DisconnectTimeout)
-                    {
-                        HTTPManager.Logger.Warning("SignalR Connection", "OnHeartbeatUpdate - Failed to reconnect in the given time!");
-
-                        Close();
-                    }
                     break;
             }
         }
@@ -1106,6 +1185,12 @@ namespace BestHTTP.SignalR
 
                 switch(NextProtocolToTry)
                 {
+#if !BESTHTTP_DISABLE_WEBSOCKET
+                    case SupportedProtocols.WebSocket:
+                        Transport = new WebSocketTransport(this);
+                        break;
+#endif
+
 #if !BESTHTTP_DISABLE_SERVERSENT_EVENTS
                     case SupportedProtocols.ServerSentEvents:
                         Transport = new ServerSentEventsTransport(this);
@@ -1121,7 +1206,7 @@ namespace BestHTTP.SignalR
                     case SupportedProtocols.Unknown:
                         return false;
                 }
-                
+
                 TransportConnectionStartedAt = DateTime.UtcNow;
 
                 Transport.Connect();
@@ -1133,6 +1218,14 @@ namespace BestHTTP.SignalR
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// This event will be called when the AdditonalQueryPrams dictionary changed. We have to reset the cached values.
+        /// </summary>
+        private void AdditionalQueryParams_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            BuiltQueryParams = null;
         }
 
         #endregion
@@ -1148,6 +1241,9 @@ namespace BestHTTP.SignalR
 
             PingRequest = new HTTPRequest((this as IConnection).BuildUri(RequestTypes.Ping), OnPingRequestFinished);
             PingRequest.ConnectTimeout = PingInterval;
+
+            (this as IConnection).PrepareRequest(PingRequest, RequestTypes.Ping);
+
             PingRequest.Send();
 
             LastPingSentAt = DateTime.UtcNow;
@@ -1188,7 +1284,7 @@ namespace BestHTTP.SignalR
                     reason = "Ping - Request Finished with Error! " + (req.Exception != null ? (req.Exception.Message + "\n" + req.Exception.StackTrace) : "No Exception");
                     break;
 
-                // Ceonnecting to the server is timed out.
+                // Connecting to the server is timed out.
                 case HTTPRequestStates.ConnectionTimedOut:
                     reason = "Ping - Connection Timed Out!";
                     break;
