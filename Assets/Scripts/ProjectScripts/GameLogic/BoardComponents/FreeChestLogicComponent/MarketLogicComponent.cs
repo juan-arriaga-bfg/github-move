@@ -60,7 +60,7 @@ public class MarketLogicComponent : ECSEntity
 		RegisterComponent(FreeEnergyServiceTimer, true);
         RegisterComponent(FreeEnergyExpireServiceTimer, true);
 		
-		LocalNotificationsService.Current.RegisterNotifier(new Notifier(ResetMarketTimer, NotifyType.MarketRefresh));
+		LocalNotificationsService.Current.RegisterNotifier(new Notifier(ResetMarketTimer, NotifyType.MarketRefreshComplete));
 	
         InitResetMarketTimer();
 
@@ -160,7 +160,7 @@ public class MarketLogicComponent : ECSEntity
         if (!isFreeEnergyNotifierRegistered && FirstFreeEnergyClaimed)
         {
             isFreeEnergyNotifierRegistered = true;
-            LocalNotificationsService.Current.RegisterNotifier(new Notifier(FreeEnergyServiceTimer, NotifyType.FreeEnergyRefill));
+            LocalNotificationsService.Current.RegisterNotifier(new Notifier(FreeEnergyServiceTimer, NotifyType.FreeEnergyRefreshComplete));
             LocalNotificationsService.Current.RegisterNotifier(new Notifier(FreeEnergyExpireServiceTimer, NotifyType.FreeEnergyTimeout));
         }
     }

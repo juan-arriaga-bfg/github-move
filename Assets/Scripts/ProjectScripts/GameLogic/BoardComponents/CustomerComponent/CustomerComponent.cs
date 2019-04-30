@@ -31,6 +31,8 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         Debug.Log($"[CustomerComponent] => OnRegisterEntity: Start cooldown: delay: {delay}");
         
         RegisterComponent(Cooldown);
+        
+        LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.OrderComplete));
     }
 
     public override void OnUnRegisterEntity(ECSEntity entity)
@@ -39,6 +41,8 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         Cooldown.OnComplete = null;
         
         base.OnUnRegisterEntity(entity);
+        
+        LocalNotificationsService.Current.UnRegisterNotifier(Timer);
     }
 
     public void OnAddToBoard(BoardPosition position, Piece context = null)

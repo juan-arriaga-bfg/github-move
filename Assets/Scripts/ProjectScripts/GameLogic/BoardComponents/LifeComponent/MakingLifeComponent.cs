@@ -36,7 +36,7 @@ public class MakingLifeComponent : WorkplaceLifeComponent
 
         if (Context.Multicellular != null)
         {
-            LocalNotificationsService.Current.RegisterNotifier(new Notifier(TimerMain, NotifyType.MonumentRefresh));   
+            LocalNotificationsService.Current.RegisterNotifier(new Notifier(TimerMain, NotifyType.MonumentRefreshComplete));   
         }
     }
 

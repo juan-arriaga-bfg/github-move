@@ -11,7 +11,7 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
 
     public readonly TimeSpan NightBeginTime = new TimeSpan(24, 00, 00);
     public readonly TimeSpan NightEndTime   = new TimeSpan(8, 0, 0);
-    public readonly TimeSpan MinimalTimeout = new TimeSpan(0,  30,0);
+    public readonly TimeSpan MinimalTimeout = new TimeSpan(0, 2,0);
 
 #if DEBUG
     private bool isDebugSchedule = false;
@@ -143,7 +143,7 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
 
     public virtual void ScheduleNotifications()
     {
-        Debug.Log($"[LocalNotificationService] => ScheduleNotifications (CurrentTime: {DateTime.Now})");
+        Debug.Log($"[LocalNotificationService] => ScheduleNotifications (local time: {DateTime.Now}, UTC time: {DateTime.UtcNow})");
 
 #if DEBUG
         if (isDebugSchedule)
@@ -236,7 +236,7 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
     {
         foreach (var item in notifyItems)
         {
-            Debug.Log($"[LocalNotificationService] => Notification(Title: {item.Title}, Message: {item.Message}, NotifyTime: UTC {item.NotifyTime})");
+            Debug.Log($"[LocalNotificationService] => Notification(Title: {item.Title}, Message: {item.Message}, NotifyTime: UTC {item.NotifyTime} | Local {item.NotifyTime.ToLocalTime()})");
         } 
     }
 
