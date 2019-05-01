@@ -43,6 +43,11 @@ public class WorkerTutorialStep2 : LoopFingerTutorialStep
 
         foreach (var wrPosition in wrs)
         {
+            if (Context.Context.BoardLogic.IsLockedCell(wrPosition))
+            {
+                continue;
+            }
+            
             var positions = cache.GetUnlockedNearestByFilter(PieceTypeFilter.Fake | PieceTypeFilter.Workplace, wrPosition, 3);
             var nearest = CheckNearestState(positions);
 
