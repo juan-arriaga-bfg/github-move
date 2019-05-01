@@ -14,7 +14,9 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
     public int Guid => ComponentGuid;
     
     public Dictionary<EventName, List<EventStepDef>> Defs;
-
+    
+    public int Step => context.UserProfile.GetStorageItem(Currency.EventStep.Name).Amount;
+    
     public Action<EventName> OnStart;
     public Action<EventName> OnStop;
 
@@ -87,6 +89,11 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
     {
         var name = (EventName)Enum.Parse(typeof(EventName), id);
         OnStop?.Invoke(name);
+    }
+    
+    public int Price(EventName name)
+    {
+        return Defs[name][Step].Prices[0].Amount;
     }
 
     public bool IsStarted(EventName name)
