@@ -80,11 +80,7 @@
     public void DataReceived(IECSComponent sender, object receivedData)
     {
         data.Remove(sender.Guid);
-
-        if (receivedData != null)
-        {
-            data.Add(sender.Guid, receivedData);
-        }
+        data.Add(sender.Guid, receivedData);
 
         OnDataReceived(sender.Guid, receivedData);
     }

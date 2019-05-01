@@ -108,7 +108,6 @@ public abstract class ServerSideConfigLoaderBase: IECSComponent
 
                         callback(null, data);
                         return;
-                        
                     }
                     catch (Exception e)
                     {
@@ -124,7 +123,7 @@ public abstract class ServerSideConfigLoaderBase: IECSComponent
                     IW.Logger.Log("ServerSideLoaderBase: SendRequestAsync: Error: " + result.ErrorAsText);
                 }
                 
-                callback("fail", default);
+                callback("fail", null);
             }
         );
     }

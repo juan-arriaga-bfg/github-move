@@ -39,7 +39,7 @@ public class GameEventServerSideConfigLoader : ServerSideConfigLoaderBase
     
     protected override object ParseResponse(JSONNode data)
     {
-        List<GameEventServerConfig> ret = null;
+        List<GameEventServerConfig> ret = new List<GameEventServerConfig>();
 
         JSONNode.ValueEnumerator arr = data.AsArray.Values;
         foreach (JSONNode itemJson in arr)
@@ -53,11 +53,6 @@ public class GameEventServerSideConfigLoader : ServerSideConfigLoaderBase
                 End   = DateTime.Parse(itemJson["end"],   CultureInfo.InvariantCulture).ToUniversalTime(),
             };
 
-            if (ret == null)
-            {
-                ret = new List<GameEventServerConfig>();
-            }
-            
             ret.Add(item);
         }
 
