@@ -943,5 +943,39 @@
         "Message": "conversation.quest.complete8"
       }
     ]
+  },
+  {
+    "Id": 23,
+    "ConversationCharacters": {
+      "LeftInner": "PussInBoots",
+      "RightInner": "GnomeWorker"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.34.message1"
+      },
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
+        "Message": "conversation.34.message2"
+      },
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.34.message3"
+      }
+    ]
+  },
+  {
+    "Id": "87_KillTree",
+    "Bubbles": [
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
+        "Message": "conversation.quest.complete33"
+      }
+    ]
   }
 ]
