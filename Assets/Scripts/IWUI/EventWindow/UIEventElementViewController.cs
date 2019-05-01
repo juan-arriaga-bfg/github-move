@@ -127,6 +127,15 @@ public class UIEventElementViewController : UIContainerElementViewController
         
         if (isNormalClaimed) Sepia(normalSprites, true);
         if (isPremiumClaimed) Sepia(premiumSprites, true);
+        
+        var views = ResourcesViewManager.Instance.GetViewsById(Currency.Token.Name);
+
+        if (views == null) return;
+        
+        foreach (UITokensPanelViewController carrierView in views)
+        {
+            if (carrierView != null) carrierView.UpdateMark();
+        }
     }
     
     private void CreateIcon(ref Transform current, Transform parent, ref List<Image> sprites, string id)

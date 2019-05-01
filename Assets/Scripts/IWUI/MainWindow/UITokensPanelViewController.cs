@@ -8,6 +8,8 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
 {
     [SerializeField] private RectTransform progress;
     [SerializeField] private Transform dot;
+    [SerializeField] private GameObject shine;
+    [SerializeField] private GameObject exclamationMark;
     
     private AmountRange progressBorder = new AmountRange(12, 220);
 
@@ -29,10 +31,12 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
 
         for (var i = 1; i < amount; i++)
         {
-            var item = Instantiate(dot, dot.parent);
+            Instantiate(dot, dot.parent);
         }
 
         dots = dot.parent.GetComponentsInChildren<Toggle>().ToList();
+        
+        UpdateMark();
         
         base.OnViewShow(context);
     }
@@ -71,16 +75,39 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
 
         CurrencyHelper.Purchase(Currency.EventStep.Name, 1, itemUid, manager.IsLastStep(EventName.OrderSoftLaunch) ? 0 : price);
         UpdateDots();
+        UpdateMark();
     }
 
     private void UpdateDots()
     {
-        var current = ProfileService.Current.Purchases.GetStorageItem(Currency.EventStep.Name).Amount;
+        var manager = GameDataService.Current.EventManager;
+        var current = manager.Step;
 
         for (var i = 0; i < dots.Count; i++)
         {
             dots[i].isOn = i < current;
         }
+    }
+
+    public void UpdateMark()
+    {
+        var manager = GameDataService.Current.EventManager;
+        var step = manager.Step;
+        var defs = manager.Defs[EventName.OrderSoftLaunch];
+
+        for (var i = 0; i < step; i++)
+        {
+            var def = defs[i];
+            
+            if(def.IsNormalClaimed && (manager.IsPremium(EventName.OrderSoftLaunch) == false || def.IsPremiumClaimed)) continue;
+            
+            shine.SetActive(true);
+            exclamationMark.SetActive(true);
+            return;
+        }
+        
+        shine.SetActive(false);
+        exclamationMark.SetActive(false);
     }
     
     private void SetLabelText(int value)

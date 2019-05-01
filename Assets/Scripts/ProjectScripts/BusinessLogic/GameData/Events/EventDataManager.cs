@@ -84,10 +84,19 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
         {
             if (string.IsNullOrEmpty(error))
             {
+                var save = context.UserProfile?.EventSave?.Steps ?? new List<EventSaveItem>();
+                
                 for (var i = 0; i < data.Count; i++)
                 {
                     var def = data[i];
+                    var saveStep = save.Find(item => item.Step == def.Step);
                     var previous = i == 0 ? new List<CurrencyPair>() : data[i - 1].RealPrices;
+
+                    if (saveStep != null)
+                    {
+                        def.IsNormalClaimed = saveStep.IsNormalClaimed;
+                        def.IsPremiumClaimed = saveStep.IsPremiumClaimed;
+                    }
                     
                     def.RealPrices = new List<CurrencyPair>();
                     
