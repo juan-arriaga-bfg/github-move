@@ -53,6 +53,9 @@ public class UIResourcePanelWindowView : UIBaseWindowView
     
     [IWUIBinding("#ResourceContainerDown")] protected CanvasGroup resourceContainerDown;
     
+    // Used for camera focus to world-space views
+    [IWUIBinding("#TopSafeZone")] protected RectTransform topSafeZone;
+    
     [IWUIBinding("#HintAnchorEnergyPlusButton")] public Transform HintAnchorEnergyPlusButton;
     
     private Dictionary<string, LockerComponent> panelFadeLockers = new Dictionary<string, LockerComponent>();
@@ -226,7 +229,7 @@ public class UIResourcePanelWindowView : UIBaseWindowView
         Camera mainCamera = Camera.main;
         
         Vector3[] corners = new Vector3[4];
-        resourceContainerDown.GetComponent<RectTransform>().GetWorldCorners(corners);
+        topSafeZone.GetComponent<RectTransform>().GetWorldCorners(corners);
         Vector3 containerBottomLeft = corners[0];
 
         Camera camera = Controller.Window.Layers[0].ViewCamera;
