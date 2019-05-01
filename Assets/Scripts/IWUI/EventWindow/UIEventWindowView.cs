@@ -42,7 +42,7 @@ public class UIEventWindowView : UIGenericPopupWindowView
         Fill(UpdateEntities(), content);
 
         var manager = GameDataService.Current.EventGameManager;
-        var defs = manager.Defs[EventGameType.OrderSoftLaunch];
+        var defs = manager.Defs[EventGameType.OrderSoftLaunch].Steps;
         var step = manager.Step;
         
         var target = defs[defs.Count - 1].RealPrices[0].Amount;
@@ -100,7 +100,7 @@ public class UIEventWindowView : UIGenericPopupWindowView
     
     private List<IUIContainerElementEntity> UpdateEntities()
     {
-        var defs = GameDataService.Current.EventGameManager.Defs[EventGameType.OrderSoftLaunch];
+        var defs = GameDataService.Current.EventGameManager.Defs[EventGameType.OrderSoftLaunch].Steps;
         var views = new List<IUIContainerElementEntity>(defs.Count);
         
         foreach (var def in defs)

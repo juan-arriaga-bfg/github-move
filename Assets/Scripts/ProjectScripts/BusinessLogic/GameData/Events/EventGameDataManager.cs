@@ -9,7 +9,7 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
     
-    public Dictionary<EventGameType, List<EventGameStepDef>> Defs;
+    public Dictionary<EventGameType, EventGameDef> Defs;
     
     public int Step => context.UserProfile.GetStorageItem(Currency.EventStep.Name).Amount;
     
@@ -46,7 +46,7 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
 
     public void Reload()
     {
-        Defs = new Dictionary<EventGameType, List<EventGameStepDef>>();
+        Defs = new Dictionary<EventGameType, EventGameDef>();
         LoadData(new ResourceConfigDataMapper<List<EventGameStepDef>>("configs/eventOrderSoftLaunch.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 	
@@ -113,8 +113,8 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
                         def.RealPrices.Add(price.Copy());
                     }
                 }
-                
-                Defs.Add(EventGameType.OrderSoftLaunch, data);
+
+                Defs.Add(EventGameType.OrderSoftLaunch, new EventGameDef{EventType = EventGameType.OrderSoftLaunch, State = EventGameState.Default, Steps = data});
             }
             else
             {
@@ -138,7 +138,7 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     public int Price(EventGameType name)
     {
         var step = IsCompleted(name) ? Step - 1 : Step;
-        return Defs[name][step].Prices[0].Amount;
+        return Defs[name].Steps[step].Prices[0].Amount;
     }
     
     public bool IsActive(EventGameType name)
@@ -153,11 +153,11 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     
     public bool IsLastStep(EventGameType name)
     {
-        return Step == Defs[name].Count - 1;
+        return Step == Defs[name].Steps.Count - 1;
     }
     
     public bool IsCompleted(EventGameType name)
     {
-        return Step == Defs[name].Count;
+        return Step == Defs[name].Steps.Count;
     }
 }

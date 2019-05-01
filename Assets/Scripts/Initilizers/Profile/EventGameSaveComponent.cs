@@ -41,7 +41,7 @@ public class EventGameSaveComponent : ECSEntity, IECSSerializeable
 
         foreach (var pair in data)
         {
-            foreach (var def in pair.Value)
+            foreach (var def in pair.Value.Steps)
             {
                 steps.Add(new EventGameSaveItem
                 {
