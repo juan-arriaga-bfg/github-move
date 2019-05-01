@@ -179,6 +179,7 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
                 
                 (views[ViewType.Airbaloon] as AnimatedBoardElementView).PlayHide(2f);
                 
+                ParticleView.Show(R.FogProgressCompleteParticle, new BoardPosition(8,13,BoardLayer.FX.Layer));
                 break;
         }
 
