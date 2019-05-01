@@ -12,6 +12,8 @@ public class IslandStep : BaseTutorialStep
 
         if (BoardService.Current.FirstBoard.BoardLogic.VIPIslandLogic.State != VIPIslandState.Fog) return;
 
+		BoardService.Current.FirstBoard.BoardLogic.VIPIslandLogic.SpawnPieces();
+        
         if (Context.Context.Manipulator.CameraManipulator.CameraMove.IsLocked == false)
         {
             var position = Context.Context.BoardDef.GetSectorCenterWorldPosition(Target.X, Target.Y, 0);
