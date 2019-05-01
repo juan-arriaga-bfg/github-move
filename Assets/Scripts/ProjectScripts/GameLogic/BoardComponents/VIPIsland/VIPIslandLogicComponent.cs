@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public interface IVIPIslandLogicComponent
@@ -32,7 +33,7 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
     
     private readonly BoardPosition boardPosition = new BoardPosition(10, 13, BoardLayer.Piece.Layer);
     
-    public readonly List<BoardPosition> Island = new List<BoardPosition>
+    public static readonly List<BoardPosition> IslandPositions = new List<BoardPosition>
     {
         new BoardPosition(7,11,BoardLayer.Piece.Layer),
         new BoardPosition(8,11,BoardLayer.Piece.Layer),
@@ -51,6 +52,8 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
         new BoardPosition(7,15,BoardLayer.Piece.Layer),
         new BoardPosition(8,15,BoardLayer.Piece.Layer)
     };
+
+    public List<BoardPosition> Island => IslandPositions;
     
     private Vector3 localPosition;
 
@@ -179,6 +182,28 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
         State = state;
         
         UpdateLockState();
+    }
+
+    public void SpawnPieces()
+    {
+        var pieces = GameDataService.Current.FieldManager.Pieces;
+        foreach (var piece in pieces)
+        {
+            var positions = piece.Value.Where(position => Island.Contains(position.SetZ(BoardLayer.Piece.Layer))).ToList();
+            if (positions.Count > 0)
+            {
+                context.Context.ActionExecutor.AddAction(new FillBoardAction
+                {
+                    Piece = piece.Key,
+                    Positions = positions
+                });
+            } 
+        }
+        
+        context.Context.ActionExecutor.AddAction(new CallbackAction()
+        {
+            Callback = (board) => UpdateLockState()
+        });
     }
 
     public void UpdateLockState()

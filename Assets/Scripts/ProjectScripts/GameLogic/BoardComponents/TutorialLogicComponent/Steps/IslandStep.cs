@@ -8,6 +8,7 @@ public class IslandStep : BaseTutorialStep
     {
         if (IsPerform) return;
         
+        BoardService.Current.FirstBoard.BoardLogic.VIPIslandLogic.SpawnPieces();
         BoardService.Current.FirstBoard.BoardLogic.VIPIslandLogic.UpdateView(VIPIslandState.Broken, true);
         
         base.Perform();
