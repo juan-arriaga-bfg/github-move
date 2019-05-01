@@ -136,13 +136,16 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
 
     private void Purchase()
     {
-        if (CurrencyHelper.IsCanPurchase(price, true) == false)
+        CurrencyHelper.Purchase(Currency.Island.Name, 1, price, success =>
         {
-            isClick = false;
-            return;
-        }
-        
-        UpdateView(VIPIslandState.Paid, true);
+            if (success == false)
+            {
+                isClick = false;
+                return;
+            }
+
+            UpdateView(VIPIslandState.Paid, true);
+        });
     }
 
     public void UpdateView(VIPIslandState state, bool animation)
