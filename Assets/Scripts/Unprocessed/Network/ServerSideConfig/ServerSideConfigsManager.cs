@@ -71,6 +71,8 @@
 
     public void UpdateAll()
     {
+        IW.Logger.Log($"[ServerSideConfigsManager] => UpdateAll");
+
         foreach (var loader in loaders)
         {
             loader.Update();
@@ -82,6 +84,6 @@
         data.Remove(sender.Guid);
         data.Add(sender.Guid, receivedData);
 
-        OnDataReceived(sender.Guid, receivedData);
+        OnDataReceived?.Invoke(sender.Guid, receivedData);
     }
 }

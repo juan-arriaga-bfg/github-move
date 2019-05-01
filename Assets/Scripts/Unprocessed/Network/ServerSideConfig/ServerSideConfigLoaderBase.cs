@@ -62,11 +62,11 @@ public abstract class ServerSideConfigLoaderBase: IECSComponent
             var diff = now - saved;
             if (diff.TotalSeconds < 0 || diff.TotalSeconds > checkInterval)
             {
-                ObscuredPrefs.SetString(timeKey, null);
+                ObscuredPrefs.DeleteKey(timeKey);
             }
             else
             {
-                IW.Logger.Log($"ServerSideLoaderBase: Update: Skipped by interval: Now: {now}, Saved: {now}, Diff: {diff.TotalSeconds}s, CheckInterval: {checkInterval}");
+                IW.Logger.Log($"[ServerSideLoaderBase] => Update: Skipped by interval: Now: {now}, Saved: {now}, Waiting: {(long)(diff.TotalSeconds)}/{checkInterval} seconds");
                 return;
             }
         }
@@ -84,7 +84,7 @@ public abstract class ServerSideConfigLoaderBase: IECSComponent
     private delegate void RequestCallback(string error, object data);
     private void SendRequestAsync(RequestCallback callback)
     {
-        IW.Logger.Log("ServerSideLoaderBase: SendRequestAsync...");
+        IW.Logger.Log("[ServerSideLoaderBase] => SendRequestAsync...");
 
         if (destroyed)
         {
@@ -105,22 +105,22 @@ public abstract class ServerSideConfigLoaderBase: IECSComponent
                     try
                     {
                         object data = ParseResponse(result.ResultAsJson);
-
+                       
                         callback(null, data);
                         return;
                     }
                     catch (Exception e)
                     {
-                        IW.Logger.Log("ServerSideLoaderBase: SendRequestAsync: Error: " + e.GetType() + " " + e.Message);
+                        IW.Logger.Log("[ServerSideLoaderBase] => SendRequestAsync: Error: " + e.GetType() + " " + e.Message);
                     }
                 }
                 else if (result.IsConnectionError)
                 {
-                    IW.Logger.Log("ServerSideLoaderBase: SendRequestAsync: Connection error");
+                    IW.Logger.Log("[ServerSideLoaderBase] => SendRequestAsync: Connection error");
                 }
                 else
                 {
-                    IW.Logger.Log("ServerSideLoaderBase: SendRequestAsync: Error: " + result.ErrorAsText);
+                    IW.Logger.Log("[ServerSideLoaderBase] => SendRequestAsync: Error: " + result.ErrorAsText);
                 }
                 
                 callback("fail", null);

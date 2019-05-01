@@ -30,6 +30,11 @@ public class GameEventServerConfig
     public string Type;
     public DateTime Start;
     public DateTime End;
+
+    public override string ToString()
+    {
+        return $"ID: {Id}, Type: '{Type}', From {Start:s} to {End:s}";
+    }
 }
 
 public class GameEventServerSideConfigLoader : ServerSideConfigLoaderBase
@@ -56,6 +61,13 @@ public class GameEventServerSideConfigLoader : ServerSideConfigLoaderBase
             ret.Add(item);
         }
 
+#if DEBUG
+        foreach (var item in ret)
+        {
+            IW.Logger.Log($"GameEventServerSideConfigLoader: Received GameEvent data: {item}"); 
+        }
+#endif 
+        
         return ret;
     }
 }

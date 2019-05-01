@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 
@@ -26,10 +27,26 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
     {
         context = entity as GameDataManager;
         Reload();
+
+        ServerSideConfigService.Current.OnDataReceived += OnServerDataReceived;
     }
 	
     public void OnUnRegisterEntity(ECSEntity entity)
     {
+        ServerSideConfigService.Current.OnDataReceived -= OnServerDataReceived;
+    }
+
+    private void OnServerDataReceived(int guid, object data)
+    {
+        if (guid != GameEventServerSideConfigLoader.ComponentGuid)
+        {
+            return;
+        }
+
+        var serverData = (List<GameEventServerConfig>) data;
+        
+        // todo SERVER EVENT: 
+        // как-нибудь обрабатываем полученные данные, по аналогии с примером в LoadData
     }
 
     public void Reload()
@@ -40,6 +57,29 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
 	
     public void LoadData(IDataMapper<List<EventStepDef>> dataMapper)
     {
+        // todo SERVER EVENT
+        List<GameEventServerConfig> serverData = ServerSideConfigService.Current.GetData<List<GameEventServerConfig>>();
+        if (serverData == null)
+        {
+            // запрос на сервер не пока не прошел, ответ будет позже, в колбэке OnServerDataReceived. На данный момент считаем, что никакие данные не поменялись.
+        }
+        else
+        {
+            GameEventServerConfig config = serverData.FirstOrDefault(e => e.Type == EventName.OrderSoftLaunch.ToString());
+            if (config != null)
+            {
+                // Тут у нас есть все данные по ивенту. Можем стартовать новый или стопать текущий.
+                DateTime startDate = config.Start;
+                DateTime endDate = config.End;
+                int introDuration = config.IntroDuration;
+            }
+            else
+            {
+                // На сервере больше нет такого ивента либо он закончился - стопаем текущий, если он еще в процессе
+            }
+        }
+        // end todo
+        
         dataMapper.LoadData((data, error) =>
         {
             if (string.IsNullOrEmpty(error))

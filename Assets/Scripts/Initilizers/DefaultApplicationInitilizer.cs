@@ -117,6 +117,8 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         }
         else
         {
+            ServerSideConfigService.Current?.UpdateAll();
+            
             energyLogic?.InitInSave();
             
             BoardService.Current?.FirstBoard?.TutorialLogic?.ResetStartTime();
