@@ -63,10 +63,7 @@ public class UIEventElementViewController : UIContainerElementViewController
         
         if (isPremiumPaid == false) Sepia(premiumSprites, true);
         
-        var target = (float)contentEntity.Step.RealPrices[0].Amount;
-        var current = ProfileService.Current.GetStorageItem(Currency.Token.Name).Amount;
-        
-        IsComplete = current >= target;
+        IsComplete = Index < GameDataService.Current.EventManager.Step;
         
         check.SetActive(IsComplete);
         normalShine.SetActive(IsComplete && contentEntity.Step.IsNormalClaimed == false);

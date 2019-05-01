@@ -40,18 +40,23 @@ public class UIEventWindowView : UIGenericPopupWindowView
         OnTimeChanged();
         
         Fill(UpdateEntities(), content);
+
+        var manager = GameDataService.Current.EventManager;
+        var defs = manager.Defs[EventName.OrderSoftLaunch];
+        var step = manager.Step;
         
-        var defs = GameDataService.Current.EventManager.Defs[EventName.OrderSoftLaunch];
         var target = defs[defs.Count - 1].RealPrices[0].Amount;
-        var current = ProfileService.Current.GetStorageItem(Currency.Token.Name).Amount;
+        var real = ProfileService.Current.GetStorageItem(Currency.Token.Name).Amount;
+        var current = (step == 0 ? 0 : defs[step - 1].RealPrices[0].Amount) + (manager.IsCompleted(EventName.OrderSoftLaunch) ? 0 : (int) real);
         var progress = Mathf.Clamp(mainProgressBorder.Max * (current / (float) target) + mainProgressBorder.Min, mainProgressBorder.Min, mainProgressBorder.Max);
-        var progressSecond = GameDataService.Current.EventManager.GetStepProgress(EventName.OrderSoftLaunch, secondProgressBorder.Max, secondProgressBorder.Min);
+
+        var progressSecond = (secondProgressBorder.Max + secondProgressBorder.Min) * step + (manager.IsCompleted(EventName.OrderSoftLaunch) ? 0 : (int) (secondProgressBorder.Max * (real / (float) manager.Price(EventName.OrderSoftLaunch))));
         
         progressLabel.Text = $"{current}/{target}";
         mainLine.sizeDelta = new Vector2(progress, mainLine.sizeDelta.y);
         secondLine.sizeDelta = new Vector2(progressSecond, secondLine.sizeDelta.y);
         
-        content.GetScrollRect().horizontalNormalizedPosition = 1;
+        content.GetScrollRect().horizontalNormalizedPosition = step == 0 ? 1 : 0;
     }
 
     public override void OnViewShowCompleted()
@@ -71,6 +76,8 @@ public class UIEventWindowView : UIGenericPopupWindowView
             Scroll(tab.Index);
             break;
         }
+        
+        Scroll(content.Tabs.size - 1);
     }
     
     public override void OnViewCloseCompleted()

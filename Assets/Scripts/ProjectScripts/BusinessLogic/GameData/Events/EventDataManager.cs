@@ -133,9 +133,10 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
     
     public int Price(EventName name)
     {
-        return Defs[name][Step].Prices[0].Amount;
+        var step = IsCompleted(name) ? Step - 1 : Step;
+        return Defs[name][step].Prices[0].Amount;
     }
-
+    
     public bool IsStarted(EventName name)
     {
         return false;
@@ -145,26 +146,14 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
     {
         return false;
     }
-
-    public int GetStepProgress(EventName name, int step, int space)
+    
+    public bool IsLastStep(EventName name)
     {
-        var progressSecond = 0;
-        var defs = Defs[name];
-        var current = context.UserProfile.GetStorageItem(Currency.Token.Name).Amount;
-
-        foreach (var def in defs)
-        {
-            if (current < def.RealPrices[0].Amount)
-            {
-                var value = def.RealPrices[0].Amount - current;
-
-                progressSecond += (int) (step * (1 - value / (float) def.Prices[0].Amount));
-                break;
-            }
-            
-            progressSecond += space + step;
-        }
-
-        return progressSecond;
+        return Step == Defs[name].Count - 1;
+    }
+    
+    public bool IsCompleted(EventName name)
+    {
+        return Step == Defs[name].Count;
     }
 }

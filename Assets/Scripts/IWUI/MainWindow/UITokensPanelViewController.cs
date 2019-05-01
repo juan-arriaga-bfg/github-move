@@ -62,13 +62,14 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
     
     private void UpdateProgress(float value)
     {
-        var price = GameDataService.Current.EventManager.Price(EventName.OrderSoftLaunch);
+        var manager = GameDataService.Current.EventManager;
+        var price = manager.Price(EventName.OrderSoftLaunch);
         
         progress.sizeDelta = new Vector2(Mathf.Lerp(progressBorder.Min, progressBorder.Max, value/price), progress.sizeDelta.y);
         
-        if (CurrencyHelper.IsCanPurchase(itemUid, price) == false) return;
+        if (manager.IsCompleted(EventName.OrderSoftLaunch) || CurrencyHelper.IsCanPurchase(itemUid, price) == false) return;
 
-        CurrencyHelper.Purchase(Currency.EventStep.Name, 1, itemUid, price);
+        CurrencyHelper.Purchase(Currency.EventStep.Name, 1, itemUid, manager.IsLastStep(EventName.OrderSoftLaunch) ? 0 : price);
         UpdateDots();
     }
 
