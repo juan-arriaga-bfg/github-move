@@ -68,13 +68,22 @@ public class UIEventWindowView : UIGenericPopupWindowView
         
         InitButtonBase(btnMaskLeft, Controller.CloseCurrentWindow);
         InitButtonBase(btnMaskRight, Controller.CloseCurrentWindow);
-        
-        foreach (UIEventElementViewController tab in content.Tabs)
+
+        if (GameDataService.Current.EventManager.Step == 0)
         {
+            Scroll(0);
+            return;
+        }
+        
+        for (var i = 0; i < content.Tabs.size; i++)
+        {
+            var tab = content.Tabs[i] as UIEventElementViewController;
+            
             if (tab.IsComplete) continue;
+            if (i <= 1) return;
             
             Scroll(tab.Index);
-            break;
+            return;
         }
         
         Scroll(content.Tabs.size - 1);
@@ -132,7 +141,8 @@ public class UIEventWindowView : UIGenericPopupWindowView
         var model = UIService.Get.GetCachedModel<UIOrdersWindowModel>(UIWindowType.OrdersWindow);
 
         if (model.Orders != null && model.Orders.Count > 0) model.Select = model.Orders[0];
-        
+
+        model.IsHighlightToken = true;
         UIService.Get.ShowWindow(UIWindowType.OrdersWindow);
     }
 

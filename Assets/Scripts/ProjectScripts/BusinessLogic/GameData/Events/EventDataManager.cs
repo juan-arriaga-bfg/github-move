@@ -61,7 +61,7 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
         List<GameEventServerConfig> serverData = ServerSideConfigService.Current.GetData<List<GameEventServerConfig>>();
         if (serverData == null)
         {
-            // запрос на сервер не пока не прошел, ответ будет позже, в колбэке OnServerDataReceived. На данный момент считаем, что никакие данные не поменялись.
+            // запрос на сервер пока не прошел, ответ будет позже, в колбэке OnServerDataReceived. На данный момент считаем, что никакие данные не поменялись.
         }
         else
         {
@@ -139,7 +139,7 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
     
     public bool IsStarted(EventName name)
     {
-        return false;
+        return true;
     }
 
     public bool IsPremium(EventName name)
