@@ -511,6 +511,16 @@
     ]
   },
   {
+    "Id": "164_OpenChest_CH_NPC",
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.quest.complete32"
+      }
+    ]
+  },
+  {
     "Id": "15_CreatePiece_B4",
     "Bubbles": [
       {
@@ -921,11 +931,6 @@
         "CharacterId": "GnomeWorker",
         "Emotion": "Normal",
         "Message": "conversation.31.message2"
-      },
-      {
-        "CharacterId": "GnomeWorker",
-        "Emotion": "Normal",
-        "Message": "conversation.31.message3"
       }
     ]
   },
