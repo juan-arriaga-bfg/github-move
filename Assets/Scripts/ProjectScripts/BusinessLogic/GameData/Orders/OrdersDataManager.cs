@@ -47,8 +47,10 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
         {
             if (string.IsNullOrEmpty(error))
             {
-                var levels = GameDataService.Current.LevelsManager.Levels;
-                var save = ((GameDataManager)context).UserProfile.GetComponent<OrdersSaveComponent>(OrdersSaveComponent.ComponentGuid);
+                var dataManager = (GameDataManager) context;
+                
+                var levels = dataManager.LevelsManager.Levels;
+                var save = dataManager.UserProfile.GetComponent<OrdersSaveComponent>(OrdersSaveComponent.ComponentGuid);
 
                 foreach (var level in levels)
                 {

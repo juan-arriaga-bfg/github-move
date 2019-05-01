@@ -1,10 +1,10 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Digests
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Digests
 {
     /**
     * base implementation of MD4 family style digest as outlined in
@@ -57,38 +57,44 @@ namespace Org.BouncyCastle.Crypto.Digests
             int     inOff,
             int     length)
         {
+            length = System.Math.Max(0, length);
+
             //
             // fill the current word
             //
-            while ((xBufOff != 0) && (length > 0))
+            int i = 0;
+            if (xBufOff != 0)
             {
-                Update(input[inOff]);
-                inOff++;
-                length--;
+                while (i < length)
+                {
+                    xBuf[xBufOff++] = input[inOff + i++];
+                    if (xBufOff == 4)
+                    {
+                        ProcessWord(xBuf, 0);
+                        xBufOff = 0;
+                        break;
+                    }
+                }
             }
 
             //
             // process whole words.
             //
-            while (length > xBuf.Length)
+            int limit = ((length - i) & ~3) + i;
+            for (; i < limit; i += 4)
             {
-                ProcessWord(input, inOff);
-
-                inOff += xBuf.Length;
-                length -= xBuf.Length;
-                byteCount += xBuf.Length;
+                ProcessWord(input, inOff + i);
             }
 
             //
             // load in the remainder.
             //
-            while (length > 0)
+            while (i < length)
             {
-                Update(input[inOff]);
-
-                inOff++;
-                length--;
+                xBuf[xBufOff++] = input[inOff + i++];
             }
+
+            byteCount += length;
         }
 
         public void Finish()
@@ -127,5 +133,5 @@ namespace Org.BouncyCastle.Crypto.Digests
 		public abstract void Reset(IMemoable t);
     }
 }
-
+#pragma warning restore
 #endif

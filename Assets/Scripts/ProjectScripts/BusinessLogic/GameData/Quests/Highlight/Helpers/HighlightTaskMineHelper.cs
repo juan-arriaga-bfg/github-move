@@ -9,7 +9,7 @@ public static class HighlightTaskMineHelper
         var boardLogic = board.BoardLogic;
         
         List<BoardPosition> minePositions = mineId <= 0
-            ? boardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Mine, PieceTypeFilter.Fake)
+            ? boardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Mine)
             : boardLogic.PositionsCache.GetPiecePositionsByType(mineId);
 
         if (minePositions.Count == 0)

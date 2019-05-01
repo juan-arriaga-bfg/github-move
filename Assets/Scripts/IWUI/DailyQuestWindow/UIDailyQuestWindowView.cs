@@ -65,13 +65,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         base.OnViewShowCompleted();
     }
-
-    public override void OnViewCloseCompleted()
-    {
-        base.OnViewCloseCompleted();
-        BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.SpawnAll();
-    }
-
+    
     private void SetSequenceHeader(UIDailyQuestWindowModel model)
     {
         string allClearText = model.AllClearTaskName;

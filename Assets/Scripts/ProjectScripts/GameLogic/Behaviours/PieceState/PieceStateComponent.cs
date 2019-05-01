@@ -85,9 +85,21 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         Timer.OnComplete += OnComplete;
         Timer.OnStart += OnStart;
 
-        if (Timer != null && thisContext.Multicellular != null)
+        if (Timer != null && PieceType.GetDefById(thisContext.PieceType).Filter.Has(PieceTypeFilter.Fake))
         {
-            LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.MonumentBuild));
+            if (thisContext.Multicellular != null &&
+                PieceType.GetDefById(thisContext.PieceType).Filter.Has(PieceTypeFilter.Mine))
+            {
+                LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.BuildMineComplete));    
+            }
+            else if (thisContext.Multicellular != null)
+            {
+                LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.MonumentBuildComplete));    
+            }
+            else
+            {
+                LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.BuildPieceComplete));
+            }
         }
         
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
@@ -220,13 +232,13 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         var typeDef = PieceType.GetDefById(thisContext.PieceType);
 
-        if (typeDef.Filter.HasFlag(PieceTypeFilter.Fake))
-        {
-            NSAudioService.Current.Play(SoundId.BuildMain);
-        }
-        else
+        if (typeDef.Filter.HasFlag(PieceTypeFilter.Multicellular) && typeDef.Filter.HasFlag(PieceTypeFilter.Fake) && typeDef.Filter.HasFlag(PieceTypeFilter.Mine) == false)
         {
             NSAudioService.Current.Play(SoundId.BuildCastle);
+        } 
+        else if (typeDef.Filter.HasFlag(PieceTypeFilter.Fake))
+        {
+            NSAudioService.Current.Play(SoundId.BuildMain);
         }
     }
     

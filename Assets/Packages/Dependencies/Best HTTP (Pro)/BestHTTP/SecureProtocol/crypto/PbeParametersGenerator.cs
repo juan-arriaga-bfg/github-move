@@ -1,11 +1,11 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.Text;
 
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Crypto
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto
 {
     /**
      * super class for all Password Based Encyrption (Pbe) parameter generator classes.
@@ -132,7 +132,7 @@ namespace Org.BouncyCastle.Crypto
             if (password == null)
                 return new byte[0];
 
-            return Strings.ToAsciiByteArray(password);
+            return Strings.ToByteArray(password);
         }
 
         [Obsolete("Use version taking 'char[]' instead")]
@@ -142,7 +142,7 @@ namespace Org.BouncyCastle.Crypto
             if (password == null)
                 return new byte[0];
 
-            return Strings.ToAsciiByteArray(password);
+            return Strings.ToByteArray(password);
         }
 
         /**
@@ -202,5 +202,5 @@ namespace Org.BouncyCastle.Crypto
         }
     }
 }
-
+#pragma warning restore
 #endif

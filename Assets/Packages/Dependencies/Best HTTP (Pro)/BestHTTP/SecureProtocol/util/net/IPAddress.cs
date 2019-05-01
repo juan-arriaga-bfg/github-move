@@ -1,13 +1,13 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.Globalization;
 
-using Org.BouncyCastle.Math;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math;
 
-namespace Org.BouncyCastle.Utilities.Net
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Net
 {
-	public static class IPAddress
+	public class IPAddress
 	{
 		/**
 		 * Validate the given IPv4 or IPv6 address.
@@ -87,7 +87,7 @@ namespace Org.BouncyCastle.Utilities.Net
 		public static bool IsValidIPv4WithNetmask(
 			string address)
 		{
-			int index = address.IndexOf("/");
+			int index = address.IndexOf('/');
 			string mask = address.Substring(index + 1);
 
 			return (index > 0) && IsValidIPv4(address.Substring(0, index))
@@ -97,7 +97,7 @@ namespace Org.BouncyCastle.Utilities.Net
 		public static bool IsValidIPv6WithNetmask(
 			string address)
 		{
-			int index = address.IndexOf("/");
+			int index = address.IndexOf('/');
 			string mask = address.Substring(index + 1);
 
 			return (index > 0) && (IsValidIPv6(address.Substring(0, index))
@@ -197,5 +197,5 @@ namespace Org.BouncyCastle.Utilities.Net
 		}
 	}
 }
-
+#pragma warning restore
 #endif

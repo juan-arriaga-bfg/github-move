@@ -1,10 +1,11 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 using System.Text;
 
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Asn1.X509
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X509
 {
     /**
      * The DistributionPoint object.
@@ -43,7 +44,7 @@ namespace Org.BouncyCastle.Asn1.X509
                 return new DistributionPoint((Asn1Sequence) obj);
             }
 
-			throw new ArgumentException("Invalid DistributionPoint: " + obj.GetType().Name);
+            throw new ArgumentException("Invalid DistributionPoint: " + BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.GetTypeName(obj));
         }
 
 		private DistributionPoint(
@@ -120,7 +121,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
 		public override string ToString()
 		{
-			string sep = Platform.NewLine;
+			string sep = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.NewLine;
 			StringBuilder buf = new StringBuilder();
 			buf.Append("DistributionPoint: [");
 			buf.Append(sep);
@@ -160,5 +161,5 @@ namespace Org.BouncyCastle.Asn1.X509
 		}
 	}
 }
-
+#pragma warning restore
 #endif

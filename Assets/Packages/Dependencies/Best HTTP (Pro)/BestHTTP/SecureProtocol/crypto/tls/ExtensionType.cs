@@ -1,6 +1,8 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
+using System;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Tls
 {
     public abstract class ExtensionType
     {
@@ -20,9 +22,26 @@ namespace Org.BouncyCastle.Crypto.Tls
         public const int user_mapping = 6;
 
         /*
+         * RFC 5878
+         */
+        public const int client_authz = 7;
+        public const int server_authz = 8;
+
+        /*
+         * RFC RFC6091
+         */
+        public const int cert_type = 9;
+
+        /*
+         * draft-ietf-tls-negotiated-ff-dhe-10
+         */
+        public const int supported_groups = 10;
+
+        /*
          * RFC 4492 5.1.
          */
-        public const int elliptic_curves = 10;
+        [Obsolete("Use 'supported_groups' instead")]
+        public const int elliptic_curves = supported_groups;
         public const int ec_point_formats = 11;
 
         /*
@@ -46,16 +65,50 @@ namespace Org.BouncyCastle.Crypto.Tls
         public const int heartbeat = 15;
 
         /*
+         * RFC 7301
+         */
+        public const int application_layer_protocol_negotiation = 16;
+
+        /*
+         * RFC 6961
+         */
+        public const int status_request_v2 = 17;
+
+        /*
+         * RFC 6962
+         */
+        public const int signed_certificate_timestamp = 18;
+
+        /*
+         * RFC 7250
+         */
+        public const int client_certificate_type = 19;
+        public const int server_certificate_type = 20;
+
+        /*
+         * RFC 7685
+         */
+        public const int padding = 21;
+
+        /*
          * RFC 7366
          */
         public const int encrypt_then_mac = 22;
 
         /*
-         * draft-ietf-tls-session-hash-04
-         * 
-         * NOTE: Early code-point assignment
+         * RFC 7627
          */
         public const int extended_master_secret = 23;
+
+        /*
+         * draft-ietf-tokbind-negotiation-08
+         */
+        public static readonly int DRAFT_token_binding = 24;
+
+        /*
+         * RFC 7924
+         */
+        public const int cached_info = 25;
 
         /*
          * RFC 5077 7.
@@ -75,5 +128,5 @@ namespace Org.BouncyCastle.Crypto.Tls
         public const int renegotiation_info = 0xff01;
     }
 }
-
+#pragma warning restore
 #endif

@@ -1,14 +1,13 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
+#if UNITY_WSA && !UNITY_EDITOR && !ENABLE_IL2CPP
+using System.TypeFix;
+#endif
 using System;
 using System.Collections;
 using System.Text;
 
-#if UNITY_WSA && !UNITY_EDITOR && !ENABLE_IL2CPP
-using System.TypeFix;
-#endif
-
-namespace Org.BouncyCastle.Utilities.Collections
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Collections
 {
     public abstract class CollectionUtilities
     {
@@ -28,6 +27,29 @@ namespace Org.BouncyCastle.Utilities.Collections
                     return false;
             }
             return true;
+        }
+
+        public static IDictionary ReadOnly(IDictionary d)
+        {
+            return new UnmodifiableDictionaryProxy(d);
+        }
+
+        public static IList ReadOnly(IList l)
+        {
+            return new UnmodifiableListProxy(l);
+        }
+
+        public static ISet ReadOnly(ISet s)
+        {
+            return new UnmodifiableSetProxy(s);
+        }
+
+        public static object RequireNext(IEnumerator e)
+        {
+            if (!e.MoveNext())
+                throw new InvalidOperationException();
+
+            return e.Current;
         }
 
         public static string ToString(IEnumerable c)
@@ -53,5 +75,5 @@ namespace Org.BouncyCastle.Utilities.Collections
         }
     }
 }
-
+#pragma warning restore
 #endif

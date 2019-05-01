@@ -1,11 +1,12 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-using Org.BouncyCastle.Asn1;
+#pragma warning disable
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1;
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Math;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math;
 
-namespace Org.BouncyCastle.Asn1.Pkcs
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Pkcs
 {
     public class DHParameter
         : Asn1Encodable
@@ -71,5 +72,5 @@ namespace Org.BouncyCastle.Asn1.Pkcs
         }
     }
 }
-
+#pragma warning restore
 #endif

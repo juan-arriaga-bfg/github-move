@@ -1,10 +1,10 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Math.EC.Endo;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC.Endo;
 
-namespace Org.BouncyCastle.Math.EC.Multiplier
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC.Multiplier
 {
     public class GlvMultiplier
         :   AbstractECMultiplier
@@ -40,5 +40,5 @@ namespace Org.BouncyCastle.Math.EC.Multiplier
         }
     }
 }
-
+#pragma warning restore
 #endif

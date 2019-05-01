@@ -150,7 +150,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
 
     private void ShowTutorArrow()
     {
-        if(entity is UIOrderElementEntity == false || BoardService.Current.FirstBoard.TutorialLogic.CheckFirstOrder()) return;
+        if(entity is UIOrderElementEntity == false || GameDataService.Current.TutorialDataManager.CheckFirstOrder()) return;
 
         switch (order.State)
         {

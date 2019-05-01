@@ -277,7 +277,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
             return true;
         }
 
-        var firstInChain = GameDataService.Current.MatchDefinition.GetFirst(id);
+        var firstInChain = ((GameDataManager)context).MatchDefinition.GetFirst(id);
         
         return Items.TryGetValue(firstInChain, out var state) && state.Unlocked.Contains(id);
     }

@@ -11,7 +11,7 @@ namespace BestHTTP.Examples
         /// <summary>
         /// The URL of the server that will serve the image resources
         /// </summary>
-        const string BaseURL = "https://besthttp.azurewebsites.net/Content/";
+        string BaseURL = GUIHelper.BaseURL + "/images/Demo/";
 
         #region Private Fields
 
@@ -25,7 +25,7 @@ namespace BestHTTP.Examples
         /// </summary>
         Texture2D[] Textures = new Texture2D[9];
 
-#if !BESTHTTP_DISABLE_CACHING && (!UNITY_WEBGL || UNITY_EDITOR)
+#if !BESTHTTP_DISABLE_CACHING
         /// <summary>
         /// True if all images are loaded from the local cache instead of the server
         /// </summary>
@@ -72,7 +72,7 @@ namespace BestHTTP.Examples
                 // Draw out the textures
                 GUILayout.SelectionGrid(0, Textures, 3);
 
-#if !BESTHTTP_DISABLE_CACHING && (!UNITY_WEBGL || UNITY_EDITOR)
+#if !BESTHTTP_DISABLE_CACHING
                     if (finishedCount == Images.Length && allDownloadedFromLocalCache)
                         GUIHelper.DrawCenteredText("All images loaded from the local cache!");
 #endif
@@ -99,7 +99,7 @@ namespace BestHTTP.Examples
         void DownloadImages()
         {
             // Set these metadatas to its initial values
-#if !BESTHTTP_DISABLE_CACHING && (!UNITY_WEBGL || UNITY_EDITOR)
+#if !BESTHTTP_DISABLE_CACHING
             allDownloadedFromLocalCache = true;
 #endif
             finishedCount = 0;
@@ -111,10 +111,6 @@ namespace BestHTTP.Examples
 
                 // Construct the request
                 var request = new HTTPRequest(new Uri(BaseURL + Images[i]), ImageDownloaded);
-
-#if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-                request.UseAlternateSSL = true;
-#endif
 
                 // Set the Tag property, we can use it as a general storage bound to the request
                 request.Tag = Textures[i];
@@ -144,7 +140,7 @@ namespace BestHTTP.Examples
                         // Load the texture
                         tex.LoadImage(resp.Data);
 
-#if !BESTHTTP_DISABLE_CACHING && (!UNITY_WEBGL || UNITY_EDITOR)
+#if !BESTHTTP_DISABLE_CACHING
                         // Update the cache-info variable
                         allDownloadedFromLocalCache = allDownloadedFromLocalCache && resp.IsFromCache;
 #endif
@@ -168,7 +164,7 @@ namespace BestHTTP.Examples
                     Debug.LogWarning("Request Aborted!");
                     break;
 
-                // Ceonnecting to the server is timed out.
+                // Connecting to the server is timed out.
                 case HTTPRequestStates.ConnectionTimedOut:
                     Debug.LogError("Connection Timed Out!");
                     break;

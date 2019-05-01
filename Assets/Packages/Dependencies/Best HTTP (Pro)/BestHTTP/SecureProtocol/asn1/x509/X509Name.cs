@@ -1,18 +1,19 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 using System.Collections;
 using System.IO;
 using System.Text;
 
-#if SILVERLIGHT
+#if SILVERLIGHT || PORTABLE || NETFX_CORE
 using System.Collections.Generic;
 #endif
 
-using Org.BouncyCastle.Asn1.Pkcs;
-using Org.BouncyCastle.Utilities;
-using Org.BouncyCastle.Utilities.Encoders;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Pkcs;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Encoders;
 
-namespace Org.BouncyCastle.Asn1.X509
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X509
 {
     /**
     * <pre>
@@ -160,6 +161,11 @@ namespace Org.BouncyCastle.Asn1.X509
         public static readonly DerObjectIdentifier TelephoneNumber = X509ObjectIdentifiers.id_at_telephoneNumber;
 
         /**
+         * id-at-organizationIdentifier
+         */
+        public static readonly DerObjectIdentifier OrganizationIdentifier = X509ObjectIdentifiers.id_at_organizationIdentifier;
+
+        /**
          * id-at-name
          */
         public static readonly DerObjectIdentifier Name = X509ObjectIdentifiers.id_at_name;
@@ -204,28 +210,28 @@ namespace Org.BouncyCastle.Asn1.X509
 
         private static readonly bool[] defaultReverse = { false };
 
-#if SILVERLIGHT || NETFX_CORE || UNITY_WP8
+#if SILVERLIGHT || PORTABLE || NETFX_CORE
         /**
         * default look up table translating OID values into their common symbols following
         * the convention in RFC 2253 with a few extras
         */
-        public static readonly IDictionary DefaultSymbols = Platform.CreateHashtable();
+        public static readonly IDictionary DefaultSymbols = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateHashtable();
 
         /**
          * look up table translating OID values into their common symbols following the convention in RFC 2253
          */
-        public static readonly IDictionary RFC2253Symbols = Platform.CreateHashtable();
+        public static readonly IDictionary RFC2253Symbols = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateHashtable();
 
         /**
          * look up table translating OID values into their common symbols following the convention in RFC 1779
          *
          */
-        public static readonly IDictionary RFC1779Symbols = Platform.CreateHashtable();
+        public static readonly IDictionary RFC1779Symbols = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateHashtable();
 
         /**
         * look up table translating common symbols into their OIDS.
         */
-        public static readonly IDictionary DefaultLookup = Platform.CreateHashtable();
+        public static readonly IDictionary DefaultLookup = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateHashtable();
 #else
         /**
         * default look up table translating OID values into their common symbols following
@@ -336,11 +342,11 @@ namespace Org.BouncyCastle.Asn1.X509
             DefaultLookup.Add("telephonenumber", TelephoneNumber);
         }
 
-        private readonly IList ordering = Platform.CreateArrayList();
+        private readonly IList ordering = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateArrayList();
         private readonly X509NameEntryConverter converter;
 
-        private IList		    values = Platform.CreateArrayList();
-        private IList           added = Platform.CreateArrayList();
+        private IList		    values = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateArrayList();
+        private IList           added = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateArrayList();
         private Asn1Sequence	seq;
 
         /**
@@ -400,7 +406,7 @@ namespace Org.BouncyCastle.Asn1.X509
                     if (derValue is IAsn1String && !(derValue is DerUniversalString))
                     {
                         string v = ((IAsn1String)derValue).GetString();
-                        if (v.StartsWith("#"))
+                        if (BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.StartsWith(v, "#"))
                         {
                             v = "\\" + v;
                         }
@@ -500,12 +506,6 @@ namespace Org.BouncyCastle.Asn1.X509
             }
         }
 
-//		private static bool IsEncoded(
-//			string s)
-//		{
-//			return s.StartsWith("#");
-//		}
-
         /**
         * Takes an X509 dir name as a string of the format "C=AU, ST=Victoria", or
         * some such, converting it into an ordered set of name attributes.
@@ -582,7 +582,7 @@ namespace Org.BouncyCastle.Asn1.X509
             string		name,
             IDictionary lookUp)
         {
-            if (Platform.ToUpperInvariant(name).StartsWith("OID."))
+            if (BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.StartsWith(BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.ToUpperInvariant(name), "OID."))
             {
                 return new DerObjectIdentifier(name.Substring(4));
             }
@@ -591,7 +591,7 @@ namespace Org.BouncyCastle.Asn1.X509
                 return new DerObjectIdentifier(name);
             }
 
-            DerObjectIdentifier oid = (DerObjectIdentifier)lookUp[Platform.ToLowerInvariant(name)];
+            DerObjectIdentifier oid = (DerObjectIdentifier)lookUp[BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.ToLowerInvariant(name)];
             if (oid == null)
             {
                 throw new ArgumentException("Unknown object id - " + name + " - passed to distinguished name");
@@ -670,9 +670,9 @@ namespace Org.BouncyCastle.Asn1.X509
 //				this.ordering.Reverse();
 //				this.values.Reverse();
 //				this.added.Reverse();
-                IList o = Platform.CreateArrayList();
-                IList v = Platform.CreateArrayList();
-                IList a = Platform.CreateArrayList();
+                IList o = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateArrayList();
+                IList v = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateArrayList();
+                IList a = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateArrayList();
                 int count = 1;
 
                 for (int i = 0; i < this.ordering.Count; i++)
@@ -700,7 +700,7 @@ namespace Org.BouncyCastle.Asn1.X509
         */
         public IList GetOidList()
         {
-            return Platform.CreateArrayList(ordering);
+            return BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateArrayList(ordering);
         }
 
         /**
@@ -718,14 +718,14 @@ namespace Org.BouncyCastle.Asn1.X509
          */
         public IList GetValueList(DerObjectIdentifier oid)
         {
-            IList v = Platform.CreateArrayList();
+            IList v = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateArrayList();
             for (int i = 0; i != values.Count; i++)
             {
                 if (null == oid || oid.Equals(ordering[i]))
                 {
                     string val = (string)values[i];
 
-                    if (val.StartsWith("\\#"))
+                    if (BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.StartsWith(val, "\\#"))
                     {
                         val = val.Substring(1);
                     }
@@ -910,15 +910,15 @@ namespace Org.BouncyCastle.Asn1.X509
         private static string canonicalize(
             string s)
         {
-            string v = Platform.ToLowerInvariant(s).Trim();
+            string v = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.ToLowerInvariant(s).Trim();
 
-            if (v.StartsWith("#"))
+            if (BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.StartsWith(v, "#"))
             {
                 Asn1Object obj = decodeObject(v);
 
                 if (obj is IAsn1String)
                 {
-                    v = Platform.ToLowerInvariant(((IAsn1String)obj).GetString()).Trim();
+                    v = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.ToLowerInvariant(((IAsn1String)obj).GetString()).Trim();
                 }
             }
 
@@ -988,7 +988,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
             int end = buf.Length;
 
-            if (val.StartsWith("\\#"))
+            if (BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.StartsWith(val, "\\#"))
             {
                 index += 2;
             }
@@ -1028,7 +1028,7 @@ namespace Org.BouncyCastle.Asn1.X509
             bool		reverse,
             IDictionary oidSymbols)
         {
-#if SILVERLIGHT
+#if SILVERLIGHT || PORTABLE || NETFX_CORE
             List<object> components = new List<object>();
 #else
             ArrayList components = new ArrayList();
@@ -1082,5 +1082,5 @@ namespace Org.BouncyCastle.Asn1.X509
         }
     }
 }
-
+#pragma warning restore
 #endif

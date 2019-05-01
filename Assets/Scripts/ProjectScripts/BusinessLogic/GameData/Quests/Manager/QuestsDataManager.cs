@@ -60,13 +60,15 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     public Action<QuestEntity, TaskEntity> OnQuestStateChanged;
     
     public List<QuestStarterEntity> QuestStarters;
-
+    
     /// <summary>
     /// Flag that indicates that all active quests and tasks are listening to BoardEvents
     /// </summary>
     public bool ConnectedToBoard { get; private set; }
 
     private ECSEntity context;
+
+    private long? pendingDailyTimer;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -140,10 +142,10 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
                 startedQuests.Add(quest);
             }
         }
-
+        
         if (DailyQuest != null)
         {
-            StartDailyTimer(DateTimeExtension.UnixTimeToDateTime(questSave.DailyTimerStart));
+            pendingDailyTimer = questSave.DailyTimerStart;
         }
 
         // Handle migration - case when target is changed
@@ -317,6 +319,12 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
 
         if (DailyQuest != null)
         {
+            if (pendingDailyTimer.HasValue)
+            {
+                StartDailyTimer(DateTimeExtension.UnixTimeToDateTime(pendingDailyTimer.Value));
+                pendingDailyTimer = null;
+            }
+            
             LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
         }
         
@@ -511,11 +519,15 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
             OnActiveQuestsListChanged?.Invoke();
         }
 
+        // Commented out: looks unsafe when loading foreign profile in sync window
+        
         // Recreate daily quest if we lost all the tasks due to migration
-        if (DailyQuest != null && DailyQuest.ActiveTasks.Count == 1)
-        {
-            StartNewDailyQuest();
-        }
+        // if (DailyQuest != null && DailyQuest.ActiveTasks.Count == 1)
+        // {
+        //     StartNewDailyQuest();
+        // }
+        
+        // end
 
         return quest;
     }
@@ -632,6 +644,11 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
                                                                                                                 
         RegisterComponent(DailyTimer);
         DailyTimer.Start(startTime);
+
+        if (ConnectedToBoard)
+        {
+            LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
+        }
     }
 
     private void StopDailyTimer()

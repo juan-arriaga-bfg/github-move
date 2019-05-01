@@ -1,6 +1,6 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
-namespace Org.BouncyCastle.Crypto.Tls
+#pragma warning disable
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Tls
 {
     /// <summary>
     /// RFC 5246 7.2
@@ -217,13 +217,13 @@ namespace Org.BouncyCastle.Crypto.Tls
         public const byte unknown_psk_identity = 115;
 
         /*
-         * draft-ietf-tls-downgrade-scsv-00
+         * RFC 7507
          */
 
         /**
          * If TLS_FALLBACK_SCSV appears in ClientHello.cipher_suites and the highest protocol version
          * supported by the server is higher than the version indicated in ClientHello.client_version,
-         * the server MUST respond with an inappropriate_fallback alert.
+         * the server MUST respond with a fatal inappropriate_fallback alert [..].
          */
         public const byte inappropriate_fallback = 86;
 
@@ -304,5 +304,5 @@ namespace Org.BouncyCastle.Crypto.Tls
         }
     }
 }
-
+#pragma warning restore
 #endif

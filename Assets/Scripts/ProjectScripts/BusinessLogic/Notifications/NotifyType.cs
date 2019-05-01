@@ -26,18 +26,24 @@ public class NotifyType
 #endif
     }
     
+    /// <summary>
+    /// Format 00_11 - where 00 notification category, 11 is index in category
+    /// </summary>
     public int Id;
     public string TitleKey;
     public string MessageKey;
     public bool Override;
     public Func<DateTime, DateTime> TimeCorrector;
     public Func<List<Notifier>, List<Notifier>> NotifySelector;
-    
-    public static readonly NotifyType MonumentRefresh = new NotifyType
+
+#region Refresh
+
+    public static readonly NotifyType MonumentRefreshComplete = new NotifyType
     {
-        Id = 0, 
-        TitleKey = "notifications.monument.restore.title", 
-        MessageKey = "notifications.monument.restore.message", 
+        Id = 00_00, 
+        TitleKey = "notifications.restore.monument.complete.title", 
+        MessageKey = "notifications.restore.monument.complete.message",
+        Override = true,
         NotifySelector = (notifiers) =>
         {
             if (notifiers.Count == 0)
@@ -48,64 +54,33 @@ public class NotifyType
         },
         TimeCorrector = null
     };
-
-    public static readonly NotifyType MonumentBuild = new NotifyType
-    {
-        Id = 1, 
-        TitleKey = "notifications.monument.build.title", 
-        MessageKey = "notifications.monument.build.message",  
-        NotifySelector = null,
-        TimeCorrector = null
-    };
     
-    public static readonly NotifyType DailyTimeout = new NotifyType
+    public static readonly NotifyType MarketRefreshComplete = new NotifyType
     {
-        Id = 2, 
-        TitleKey = "notifications.daily.timeout.title", 
-        MessageKey = "notifications.daily.timeout.message",  
+        Id = 00_01,
+        TitleKey = "notifications.restore.market.complete.title",
+        MessageKey = "notifications.restore.market.complete.message",
+        Override = true,
         NotifySelector = notifiers =>
         {
             var resultNotifiers = new List<Notifier>();
-            
-            var dailyQuestEntity = GameDataService.Current.QuestsManager.DailyQuest;
-            if (dailyQuestEntity.IsAllTasksClaimed(false) ||
-                dailyQuestEntity.ActiveTasks.All(task => task.IsCompletedOrClaimed() == false))
-                return resultNotifiers;
-            
-            foreach (var notifier in notifiers)
+
+            if (GameDataService.Current.TutorialDataManager.CheckMarket() == false)
             {
-                if(LocalNotificationsService.Current.CorrectTime(DailyTimeout.TimeCorrector(notifier.Timer.CompleteTime)).Day == DateTime.UtcNow.Day)
-                    resultNotifiers.Add(notifier);
-            }
-
-            return resultNotifiers;
-        },
-        TimeCorrector = notifyDate => notifyDate.Subtract(new TimeSpan(3, 30, 0))
-    };
-
-    public static readonly NotifyType MarketRefresh = new NotifyType
-    {
-        Id = 3,
-        TitleKey = "notifications.market.restore.title",
-        MessageKey = "notifications.market.restore.message",
-        NotifySelector = notifiers =>
-        {
-            var resultNotifiers = new List<Notifier>();
-      
-            var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
-            if (tutorialLogic.CheckMarket() == false)
                 return resultNotifiers;
+            }
 
             return notifiers;
         },
         TimeCorrector = null
     };
     
-    public static readonly NotifyType EnergyRefresh = new NotifyType
+    public static readonly NotifyType EnergyRefreshComplete = new NotifyType
     {
-        Id = 4,
-        TitleKey = "notifications.energy.restore.title",
-        MessageKey = "notifications.energy.restore.message",
+        Id = 00_02,
+        TitleKey = "notifications.restore.energy.complete.title",
+        MessageKey = "notifications.restore.energy.complete.message",
+        Override = true,
         NotifySelector = null,
         TimeCorrector = notifyDate =>
         {
@@ -116,20 +91,141 @@ public class NotifyType
         }
     };
     
+    public static readonly NotifyType FreeEnergyRefreshComplete = new NotifyType
+    {
+        Id = 00_03, 
+        TitleKey = "notifications.restore.free.energy.complete.title", 
+        MessageKey = "notifications.restore.free.energy.complete.message",
+        Override = true,
+        NotifySelector = null,
+    };
+
+#endregion
+
+#region Use worker
+
+    public static readonly NotifyType MonumentBuildComplete = new NotifyType
+    {
+        Id = 01_00, 
+        TitleKey = "notifications.build.monument.complete.title", 
+        MessageKey = "notifications.build.monument.complete.message",
+        Override = true,
+        NotifySelector = null,
+        TimeCorrector = null
+    };
+
+    public static readonly NotifyType BuildPieceComplete = new NotifyType
+    {
+        Id = 01_01,
+        TitleKey = "notifications.build.piece.complete.title", 
+        MessageKey = "notifications.build.piece.complete.message",
+        Override = false,
+        NotifySelector = null,
+        TimeCorrector = null
+    };
+    
+    public static readonly NotifyType BuildMineComplete = new NotifyType
+    {
+        Id = 01_02,
+        TitleKey = "notifications.build.mine.complete.title", 
+        MessageKey = "notifications.build.mine.complete.message",
+        Override = false,
+        NotifySelector = null,
+        TimeCorrector = null
+    };
+    
+    public static readonly NotifyType RemoveObstacleComplete = new NotifyType
+    {
+        Id = 01_03,
+        TitleKey = "notifications.remove.obstacle.complete.title", 
+        MessageKey = "notifications.remove.obstacle.complete.message",
+        Override = false,
+        NotifySelector = notifiers =>
+        {
+            var resultNotifiers = new List<Notifier>();
+            foreach (var notifier in notifiers)
+            {
+                if (notifier.Timer.CompleteTime - notifier.Timer.StartTime > new TimeSpan(0, 0, 2))
+                {
+                    resultNotifiers.Add(notifier);
+                }
+            }
+            return resultNotifiers;
+        },
+        TimeCorrector = null
+    };
+    
+#endregion
+    
+#region Timeout soon
+    
+    public static readonly NotifyType DailyTimeout = new NotifyType
+    {
+        Id = 02_01, 
+        TitleKey = "notifications.timeout.daily.objectives.title", 
+        MessageKey = "notifications.timeout.daily.objectives.message",
+        Override = true,
+        NotifySelector = notifiers =>
+        {
+            var resultNotifiers = new List<Notifier>();
+                
+            var dailyQuestEntity = GameDataService.Current.QuestsManager.DailyQuest;
+            if (dailyQuestEntity.IsAllTasksClaimed(false) ||
+                dailyQuestEntity.ActiveTasks.All(task => task.IsCompletedOrClaimed() == false))
+                return resultNotifiers;
+                
+            foreach (var notifier in notifiers)
+            {
+                if(LocalNotificationsService.Current.CorrectTime(DailyTimeout.TimeCorrector(notifier.Timer.CompleteTime)).Day == DateTime.UtcNow.Day)
+                    resultNotifiers.Add(notifier);
+            }
+    
+            return resultNotifiers;
+        },
+        TimeCorrector = notifyDate => notifyDate.Subtract(new TimeSpan(3, 30, 0))
+    };
+    
+    public static readonly NotifyType FreeEnergyTimeout = new NotifyType
+    {
+        Id = 02_02, 
+        TitleKey = "notifications.timeout.free.energy.title", 
+        MessageKey = "notifications.timeout.free.energy.message",
+        Override = true,
+        NotifySelector = null,
+        TimeCorrector = notifyDate => notifyDate.Subtract(new TimeSpan(0, 0, 15, 0))
+    };
+
+#endregion
+    
+#region Special
+
     public static readonly NotifyType ComeBackToGame = new NotifyType
     {
-        Id = 5, 
+        Id = 99_01, 
         TitleKey = "notifications.come.back.title", 
-        MessageKey = "notifications.come.back.message",  
+        MessageKey = "notifications.come.back.message",
+        Override = true,
         NotifySelector = null,
         TimeCorrector = notifyDate => notifyDate.Add(new TimeSpan(5, 0, 0, 0))
     };
     
-    public static readonly NotifyType FreeEnergyRefill = new NotifyType
+    public static readonly NotifyType OrderComplete = new NotifyType
     {
-        Id = 6, 
-        TitleKey = "notifications.free.energy.title", 
-        MessageKey = "notifications.free.energy.message",  
-        NotifySelector = null,
+        Id = 99_02,
+        TitleKey = "notifications.order.complete.title", 
+        MessageKey = "notifications.order.complete.message",
+        Override = false,
+        NotifySelector = (notifiers) =>
+        {
+            if (notifiers.Count == 0)
+                return notifiers;
+            var minimalTime = notifiers.Min(elem => elem.Timer.CompleteTime);
+            var resultNotifier = notifiers.First(elem => elem.Timer.CompleteTime == minimalTime);
+            return new List<Notifier>() { resultNotifier };
+        },
+        TimeCorrector = null
     };
+    
+#endregion
+    
 }

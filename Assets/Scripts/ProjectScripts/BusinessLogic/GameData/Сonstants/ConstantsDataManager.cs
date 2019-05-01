@@ -45,6 +45,8 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     public int ExtraWorkerDelay;
     
     public int DelayToClaimFreeEnergy;
+    
+    public int PremiumIslandPrice;
 
     public override void OnRegisterEntity(ECSEntity entity)
     {

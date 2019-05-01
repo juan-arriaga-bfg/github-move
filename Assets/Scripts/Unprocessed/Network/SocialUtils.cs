@@ -332,16 +332,16 @@ public static class SocialUtils
                     }
                     catch (Exception e)
                     {
-                        IW.Logger.Log("GetUserPositionRequestAsync: Error: " + e.GetType() + " " + e.Message);
+                        IW.Logger.Log("LoginAsync: Error: " + e.GetType() + " " + e.Message);
                     }
                 }
                 else if (result.IsConnectionError)
                 {
-                    IW.Logger.Log("GetUserPositionRequestAsync: Connection error");
+                    IW.Logger.Log("LoginAsync: Connection error");
                 }
                 else
                 {
-                    IW.Logger.Log("GetUserPositionRequestAsync: Error: " + result.ErrorAsText);
+                    IW.Logger.Log("LoginAsync: Error: " + result.ErrorAsText);
                 }
 
                 ObscuredPrefs.DeleteKey(BACKEND_TOKEN);
@@ -352,6 +352,44 @@ public static class SocialUtils
                 callback("fail", null, null);
             },
             10
+        );
+    }
+    
+    public delegate void GetGameEventsCallback(string error, object events);
+    public static void GetGameEventsAsync(GetGameEventsCallback callback)
+    {
+        IW.Logger.Log("GetGameEventsAsync...");
+
+        NetworkUtils.Instance.PostToBackend("game-event/get",
+            null,
+            (result) =>
+            {
+                if (result.IsOk)
+                {
+                    try
+                    {
+                        var root = result.ResultAsJson;
+
+                        callback(null, result.ResultAsText);
+                        return;
+                        
+                    }
+                    catch (Exception e)
+                    {
+                        IW.Logger.Log("GetGameEventsAsync: Error: " + e.GetType() + " " + e.Message);
+                    }
+                }
+                else if (result.IsConnectionError)
+                {
+                    IW.Logger.Log("GetGameEventsAsync: Connection error");
+                }
+                else
+                {
+                    IW.Logger.Log("GetGameEventsAsync: Error: " + result.ErrorAsText);
+                }
+                
+                callback("fail", null);
+            }
         );
     }
 }

@@ -26,10 +26,12 @@ public class ChestsDataManager : SequenceData, IDataLoader<List<ChestDef>>
                 data.Sort((a, b) => a.Piece.CompareTo(b.Piece));
 
                 Chests = new List<ChestDef>();
+
+                var dataManager = (GameDataManager) context;
                 
                 foreach (var next in data)
                 {
-                    var previousType = GameDataService.Current.MatchDefinition.GetPrevious(next.Piece);
+                    var previousType = dataManager.MatchDefinition.GetPrevious(next.Piece);
                     
                     if (previousType != PieceType.None.Id)
                     {

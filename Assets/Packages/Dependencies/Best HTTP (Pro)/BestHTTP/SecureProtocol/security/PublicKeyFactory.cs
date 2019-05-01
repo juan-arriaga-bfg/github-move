@@ -1,21 +1,25 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
+using System.Collections;
 using System.IO;
+using System.Text;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.CryptoPro;
-using Org.BouncyCastle.Asn1.Oiw;
-using Org.BouncyCastle.Asn1.Pkcs;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Asn1.X9;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Generators;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Math.EC;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.CryptoPro;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.EdEC;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Oiw;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Pkcs;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Sec;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X509;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X9;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Generators;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC;
 
-namespace Org.BouncyCastle.Security
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Security
 {
     public sealed class PublicKeyFactory
     {
@@ -43,7 +47,7 @@ namespace Org.BouncyCastle.Security
             SubjectPublicKeyInfo keyInfo)
         {
             AlgorithmIdentifier algID = keyInfo.AlgorithmID;
-            DerObjectIdentifier algOid = algID.ObjectID;
+            DerObjectIdentifier algOid = algID.Algorithm;
 
             // TODO See RSAUtil.isRsaOid in Java build
             if (algOid.Equals(PkcsObjectIdentifiers.RsaEncryption)
@@ -217,10 +221,39 @@ namespace Org.BouncyCastle.Security
 
                 return new Gost3410PublicKeyParameters(y, algParams.PublicKeyParamSet);
             }
+            else if (algOid.Equals(EdECObjectIdentifiers.id_X25519))
+            {
+                return new X25519PublicKeyParameters(GetRawKey(keyInfo, X25519PublicKeyParameters.KeySize), 0);
+            }
+            else if (algOid.Equals(EdECObjectIdentifiers.id_X448))
+            {
+                return new X448PublicKeyParameters(GetRawKey(keyInfo, X448PublicKeyParameters.KeySize), 0);
+            }
+            else if (algOid.Equals(EdECObjectIdentifiers.id_Ed25519))
+            {
+                return new Ed25519PublicKeyParameters(GetRawKey(keyInfo, Ed25519PublicKeyParameters.KeySize), 0);
+            }
+            else if (algOid.Equals(EdECObjectIdentifiers.id_Ed448))
+            {
+                return new Ed448PublicKeyParameters(GetRawKey(keyInfo, Ed448PublicKeyParameters.KeySize), 0);
+            }
             else
             {
-                throw new SecurityUtilityException("algorithm identifier in key not recognised: " + algOid);
+                throw new SecurityUtilityException("algorithm identifier in public key not recognised: " + algOid);
             }
+        }
+
+        private static byte[] GetRawKey(SubjectPublicKeyInfo keyInfo, int expectedSize)
+        {
+            /*
+             * TODO[RFC 8422]
+             * - Require keyInfo.Algorithm.Parameters == null?
+             */
+            byte[] result = keyInfo.PublicKeyData.GetOctets();
+            if (expectedSize != result.Length)
+                throw new SecurityUtilityException("public key encoding has incorrect length");
+
+            return result;
         }
 
         private static bool IsPkcsDHParam(Asn1Sequence seq)
@@ -250,5 +283,5 @@ namespace Org.BouncyCastle.Security
         }
     }
 }
-
+#pragma warning restore
 #endif

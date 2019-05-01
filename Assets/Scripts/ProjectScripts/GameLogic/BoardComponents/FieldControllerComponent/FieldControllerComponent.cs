@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FieldControllerComponent : IECSComponent
@@ -74,10 +75,16 @@ public class FieldControllerComponent : IECSComponent
 
         foreach (var piece in pieces)
         {
+            var positions = piece.Value.Where(elem => VIPIslandLogicComponent.IslandPositions.Contains(elem.SetZ(BoardLayer.Piece.Layer)) == false).ToList();
+            if (positions.Count == 0)
+            {
+                continue;
+            }
+            
             context.ActionExecutor.AddAction(new FillBoardAction
             {
                 Piece = piece.Key,
-                Positions = piece.Value
+                Positions = positions
             });
         }
     }
@@ -121,6 +128,7 @@ public class FieldControllerComponent : IECSComponent
                 
                 FogSectorsView.Rebuild(context.RendererContext);
                 context.Manipulator.CameraManipulator.CameraMove.UnLock(context);
+                controller.BoardLogic.VIPIslandLogic.Init();
             }
         });
     }

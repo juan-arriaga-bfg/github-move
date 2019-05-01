@@ -1,17 +1,24 @@
 // Product branch
 [TaskHighlight(typeof(HighlightTaskPointToPiece),                             new[] {typeof(HighlightConditionPieceFromProductBranch)})]
 [TaskHighlight(typeof(HighlightTaskPointToPredecessor),                       new[] {typeof(HighlightConditionPieceFromProductBranch)})]
-[TaskHighlight(typeof(HighlightTaskPointToRandomChest),                       new[] {typeof(HighlightConditionPieceFromProductBranch)})]
+[TaskHighlight(typeof(HighlightTaskAnyBag),                                   new[] {typeof(HighlightConditionPieceFromProductBranch)})]
+[TaskHighlight(typeof(HighlightTaskPointToRandomChestExcludingFreeAndNpc),    new[] {typeof(HighlightConditionPieceFromProductBranch)})]
 [TaskHighlight(typeof(HighlightTaskFindDeadProductionFieldForPieceType),      new[] {typeof(HighlightConditionPieceFromProductBranch)})]
 [TaskHighlight(typeof(HighlightTaskFindObstacleOfAnyTypeExcludingProduction), new[] {typeof(HighlightConditionPieceFromProductBranch)})]
 [TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType),                       new[] {typeof(HighlightConditionPieceFromProductBranch)})]
 [TaskHighlight(typeof(HighlightTaskNextFog),                                  new[] {typeof(HighlightConditionPieceFromProductBranch)})]
 
+// NPC
+[TaskHighlight(typeof(HighlightTaskPointToPredecessor),                       new[] {typeof(HighlightConditionPieceIsNpc)})]
+[TaskHighlight(typeof(HighlightTaskPointToNpcChest),                          new[] {typeof(HighlightConditionPieceIsNpc)})]
+[TaskHighlight(typeof(HighlightTaskPointToRandomLevel3Chest),                 new[] {typeof(HighlightConditionPieceIsNpc)})]
+[TaskHighlight(typeof(HighlightTaskPointToMarketButton),                      new[] {typeof(HighlightConditionPieceIsNpc)})]
+
 // Other
 [TaskHighlight(typeof(HighlightTaskPointToPredecessor))]
+[TaskHighlight(typeof(HighlightTaskFindChestForPieceType))]
 [TaskHighlight(typeof(HighlightTaskFindObstacleForPieceType))]
 [TaskHighlight(typeof(HighlightTaskFindMineForPieceType))]
-[TaskHighlight(typeof(HighlightTaskFindChestForPieceType))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 
 // ReSharper disable once RedundantExtendsListEntry

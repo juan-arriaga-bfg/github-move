@@ -36,8 +36,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 		observer = piece.GetComponent<FogObserver>(FogObserver.ComponentGuid);
 		
 		if(observer == null) return;
-
-	    int fogIndex = 0;
+		
 		foreach (var position in observer.Mask)
 		{
 			var fog = Instantiate(fogItem, fogItem.transform.parent);
@@ -66,8 +65,6 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 			
 			views.Add(fog);
 			views.Add(touch);
-
-		    fogIndex++;
 		}
 	    
 	    ClearCacheLayers();

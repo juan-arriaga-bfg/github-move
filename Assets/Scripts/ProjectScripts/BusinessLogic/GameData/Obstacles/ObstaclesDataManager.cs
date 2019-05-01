@@ -30,10 +30,12 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
             {
                 data.Sort((a, b) => a.Piece.CompareTo(b.Piece));
 
+                var dataManager = (GameDataManager) context;
+                
                 foreach (var def in data)
                 {
                     Obstacles.Add(def.Piece, def);
-                    AddToBranch(GameDataService.Current.MatchDefinition.GetFirst(def.Piece), def);
+                    AddToBranch(dataManager.MatchDefinition.GetFirst(def.Piece), def);
                     AddSequence(def.Uid, def.PieceWeights);
                 }
             }

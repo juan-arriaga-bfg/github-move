@@ -58,7 +58,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
             {
                 Fogs = data.Fogs;
 
-                var save = ((GameDataManager)context).UserProfile.GetComponent<FogSaveComponent>(FogSaveComponent.ComponentGuid);
+                var save = ((GameDataManager)context)?.UserProfile?.GetComponent<FogSaveComponent>(FogSaveComponent.ComponentGuid);
                 var completeFogIds = save?.CompleteFogIds ?? new List<string>();
                 
                 string lastCompleteFogUid = "";

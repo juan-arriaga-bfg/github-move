@@ -31,6 +31,8 @@ public class SandboxGameController : MonoBehaviour
         {
             ElementsResourcesDef = new ElementsResourcesBuilder().Build()
         };
+
+        boardController.RegisterComponent(new LoadSilenceComponent());
         
         boardController
             .RegisterComponent(new ActionExecuteComponent()
@@ -120,6 +122,7 @@ public class SandboxGameController : MonoBehaviour
             BoardTiles.GetDefs()
         );
         
+        boardController.BoardLogic.RegisterComponent(new VIPIslandLogicComponent());
         boardController.BoardLogic.RegisterComponent(new FireflyLogicComponent());
         boardController.RegisterComponent(new TutorialLogicComponent().RegisterComponent(new LockerComponent()));
         boardController.BoardLogic.RegisterComponent(new AirShipLogicComponent());

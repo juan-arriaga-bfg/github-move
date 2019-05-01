@@ -36,11 +36,13 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
                 
                 defs = data;
                 
+                var dataManager = (GameDataManager) context;
+                
                 for (var i = Characters.Count - 1; i >= 0; i--)
                 {
                     var id = Characters[i];
                     
-                    if (GameDataService.Current.CodexManager.IsPieceUnlocked(id) == false) continue;
+                    if (dataManager.CodexManager.IsPieceUnlocked(id) == false) continue;
 
                     Characters.RemoveAt(i);
                 }
@@ -76,11 +78,13 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
         CharactersWeights = new List<ItemWeight>();
         CharactersChestWeights = new List<ItemWeight>();
         
+        var dataManager = (GameDataManager) context;
+        
         if (amount == 0)
         {
             CharactersWeights.Add(new ItemWeight{Uid = ReplacePiece.Abbreviations[0], Weight = 10});
             CharactersChestWeights.Add(new ItemWeight{Uid = ReplacePiece.Abbreviations[0], Weight = 10});
-            GameDataService.Current.MarketManager.Defs.Find(item => item.Current?.RandomType == MarketRandomType.NPCChests)?.Update(true);
+            dataManager.MarketManager.Defs.Find(item => item.Current?.RandomType == MarketRandomType.NPCChests)?.Update(true);
             return;
         }
         
@@ -88,7 +92,7 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
         {
             var def = defs[i];
             var isReplace = i < amount;
-            var chain = isReplace ? GameDataService.Current.MatchDefinition.GetChain(Characters[i]) : new List<int>();
+            var chain = isReplace ? dataManager.MatchDefinition.GetChain(Characters[i]) : new List<int>();
 
             UpdateCurrentSequence(def.PieceWeights, CharactersWeights, isReplace, chain);
             UpdateCurrentSequence(def.ChestWeights, CharactersChestWeights, isReplace, chain);

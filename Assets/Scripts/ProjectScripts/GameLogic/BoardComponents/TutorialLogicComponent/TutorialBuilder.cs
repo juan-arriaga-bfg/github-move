@@ -353,7 +353,7 @@ public static class TutorialBuilder
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "21_OpenChest", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.CH_Free.Id, Amount = 1, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.CH_Free.Id, Amount = 1, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckPieceInAirShipTutorialCondition {Target = PieceType.CH_Free.Id, ConditionType = TutorialConditionType.Hard}, true);
                 break;
             }
             case 24: // daily quest tutorial
@@ -402,6 +402,14 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.RC_I.Id, Amount = 1, MoreThan = true, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.RC_I.Id, Amount = 0, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckPieceChangeTutorialCondition {Target = PieceType.RC_I.Id, Amount = -1, ConditionType = TutorialConditionType.Complete}, true);
+                break;
+            }
+            case 28: // vip island
+            {
+                step = new IslandStep {Target = new BoardPosition(10, 13), IsIgnoreDebug = false};
+                
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "87_KillTree", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "87_KillTree", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Complete}, true);
                 break;
             }
             default:

@@ -32,6 +32,15 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         base.OnRegisterEntity(entity);
         
         HP = Context.Context.BoardLogic.MatchDefinition.GetIndexInChain(Context.PieceType);
+
+        LocalNotificationsService.Current.RegisterNotifier(new Notifier(TimerWork, NotifyType.RemoveObstacleComplete));    
+    }
+
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {
+        base.OnUnRegisterEntity(entity);
+        
+        LocalNotificationsService.Current.UnRegisterNotifier(TimerWork);    
     }
 
     protected override LifeSaveItem InitInSave(BoardPosition position)

@@ -1,12 +1,12 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Engines
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Engines
 {
     /**
     * support class for constructing intergrated encryption ciphers
@@ -98,6 +98,10 @@ namespace Org.BouncyCastle.Crypto.Engines
             int             macKeySize = param.MacKeySize;
 
             kdf.Init(kParam);
+
+            // Ensure that the length of the input is greater than the MAC in bytes
+            if (inLen < mac.GetMacSize())
+                throw new InvalidCipherTextException("Length of input must be greater than the MAC");
 
             inLen -= mac.GetMacSize();
 
@@ -238,7 +242,6 @@ namespace Org.BouncyCastle.Crypto.Engines
             }
         }
     }
-
 }
-
+#pragma warning restore
 #endif

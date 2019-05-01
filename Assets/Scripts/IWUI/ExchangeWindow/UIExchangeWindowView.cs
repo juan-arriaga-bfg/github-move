@@ -21,7 +21,7 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
         
         UIExchangeWindowModel windowModel = Model as UIExchangeWindowModel;
         
-        var isBuy = BoardService.Current.FirstBoard.TutorialLogic.CheckFirstOrder();
+        var isBuy = GameDataService.Current.TutorialDataManager.CheckFirstOrder();
         
         btnBuy.gameObject.SetActive(isBuy);
         btnFind.gameObject.SetActive(!isBuy);
@@ -44,7 +44,7 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
         InitButtonBase(btnBuy, OnBuyClick);
         InitButtonBase(btnFind, OnFindClick);
         
-        if (BoardService.Current.FirstBoard.TutorialLogic.CheckFirstOrder() == false) CachedHintArrowComponent.ShowArrow(tutorAnchor, 5f);
+        if (GameDataService.Current.TutorialDataManager.CheckFirstOrder() == false) CachedHintArrowComponent.ShowArrow(tutorAnchor, 5f);
     }
 
     private List<IUIContainerElementEntity> UpdateEntities(List<CurrencyPair> entities)

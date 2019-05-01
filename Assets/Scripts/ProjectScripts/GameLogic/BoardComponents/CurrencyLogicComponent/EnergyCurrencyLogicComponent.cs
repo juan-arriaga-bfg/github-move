@@ -22,7 +22,7 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         targetItem = ProfileService.Current.Purchases.GetStorageItem(Currency.Energy.Name);
         limitItem = ProfileService.Current.Purchases.GetStorageItem(Currency.EnergyLimit.Name);
         
-        LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.EnergyRefresh));
+        LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.EnergyRefreshComplete));
         
         Timer.Delay = delay;
         Timer.OnComplete += StepComplete;

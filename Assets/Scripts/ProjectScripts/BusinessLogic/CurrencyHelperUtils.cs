@@ -110,8 +110,6 @@ public static partial class CurrencyHelper
                 NSAudioService.Current.Play(SoundId.GetSoftCurr, false, 1);
             if (resource.Currency == Currency.Energy.Name)
                 NSAudioService.Current.Play(SoundId.GetEnergy, false, 1);
-            if(resource.Currency == Currency.Mana.Name)
-                NSAudioService.Current.Play(SoundId.GetMagic, false, 1);
             if(resource.Currency == Currency.Crystals.Name)
                 NSAudioService.Current.Play(SoundId.GetHardCurr, false, 1);
         };
@@ -137,7 +135,7 @@ public static partial class CurrencyHelper
         
         if (currency == Currency.Coins.Name)
         {
-            if (BoardService.Current.FirstBoard.TutorialLogic.CheckMarket() == false)
+            if (GameDataService.Current.TutorialDataManager.CheckMarket() == false)
             {
                 UIMessageWindowController.CreateMessage(
                     LocalizationService.Get("common.title.forbidden", "common.title.forbidden"),

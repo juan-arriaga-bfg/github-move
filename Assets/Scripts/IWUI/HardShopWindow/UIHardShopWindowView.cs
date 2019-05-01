@@ -10,6 +10,5 @@ public class UIHardShopWindowView : UIShopWindowView
     {
         base.OnViewCloseCompleted();
         TackleBoxEvents.SendShopClose();
-        BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.SpawnAll();
     }
 }

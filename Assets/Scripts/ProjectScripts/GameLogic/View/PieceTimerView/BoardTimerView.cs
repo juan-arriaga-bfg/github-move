@@ -104,8 +104,8 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         if (progressBar != null) progressBar.SetProgress(timer.GetProgress());
         
         label.Text = timer.CompleteTime.GetTimeLeftText();
-        
-        if (timer.IsFree()) SetState(TimerViewSate.Free);
+
+        if ((int) timer.StartTime.GetTime(timer.UseUTC).TotalSeconds > 0 && timer.IsFree()) SetState(TimerViewSate.Free);
         if (smallButton.activeSelf) price.Text = timerState == TimerViewSate.Free ? LocalizationService.Get("common.button.free", "common.button.free") : timer.GetPrice().ToStringIcon();
     }
     

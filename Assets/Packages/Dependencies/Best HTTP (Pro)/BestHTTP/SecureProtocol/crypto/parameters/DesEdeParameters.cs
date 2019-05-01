@@ -1,8 +1,8 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-namespace Org.BouncyCastle.Crypto.Parameters
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters
 {
     public class DesEdeParameters
 		: DesParameters
@@ -93,7 +93,52 @@ namespace Org.BouncyCastle.Crypto.Parameters
 		{
 			return IsWeakKey(key, 0, key.Length);
 		}
+
+        /**
+         * return true if the passed in key is a real 2/3 part DES-EDE key.
+         *
+         * @param key bytes making up the key
+         * @param offset offset into the byte array the key starts at
+         */
+        public static bool IsRealEdeKey(byte[] key, int offset)
+        {
+            return key.Length == 16 ? IsReal2Key(key, offset) : IsReal3Key(key, offset);
+        }
+
+        /**
+         * return true if the passed in key is a real 2 part DES-EDE key.
+         *
+         * @param key bytes making up the key
+         * @param offset offset into the byte array the key starts at
+         */
+        public static bool IsReal2Key(byte[] key, int offset)
+        {
+            bool isValid = false;
+            for (int i = offset; i != offset + 8; i++)
+            {
+                isValid |= (key[i] != key[i + 8]);
+            }
+            return isValid;
+        }
+
+        /**
+         * return true if the passed in key is a real 3 part DES-EDE key.
+         *
+         * @param key bytes making up the key
+         * @param offset offset into the byte array the key starts at
+         */
+        public static bool IsReal3Key(byte[] key, int offset)
+        {
+            bool diff12 = false, diff13 = false, diff23 = false;
+            for (int i = offset; i != offset + 8; i++)
+            {
+                diff12 |= (key[i] != key[i + 8]);
+                diff13 |= (key[i] != key[i + 16]);
+                diff23 |= (key[i + 8] != key[i + 16]);
+            }
+            return diff12 && diff13 && diff23;
+        }
     }
 }
-
+#pragma warning restore
 #endif

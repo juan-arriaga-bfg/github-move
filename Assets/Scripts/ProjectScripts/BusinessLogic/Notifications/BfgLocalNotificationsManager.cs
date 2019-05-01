@@ -6,12 +6,6 @@ using BFGSDK;
 
 public class BfgLocalNotificationsManagerBase : LocalNotificationsManagerBase
 {
-    public BfgLocalNotificationsManagerBase()
-    {
-        RegisterNotifier(new Notifier(new NowTimer(), NotifyType.ComeBackToGame));
-    }
-
-    
 #if UNITY_EDITOR
     
     protected override void CancelAllOnDevice()
@@ -47,12 +41,18 @@ public class BfgLocalNotificationsManagerBase : LocalNotificationsManagerBase
     {
         List<int> ids = new List<int>
         {
+            NotifyType.MonumentRefreshComplete.Id,
+            NotifyType.MarketRefreshComplete.Id,
+            NotifyType.EnergyRefreshComplete.Id,
+            NotifyType.FreeEnergyRefreshComplete.Id,
+            NotifyType.MonumentBuildComplete.Id,
+            NotifyType.BuildPieceComplete.Id,
+            NotifyType.BuildMineComplete.Id,
+            NotifyType.RemoveObstacleComplete.Id,
             NotifyType.DailyTimeout.Id,
-            NotifyType.EnergyRefresh.Id,
-            NotifyType.MarketRefresh.Id,
-            NotifyType.MonumentBuild.Id,
-            NotifyType.MonumentRefresh.Id,
+            NotifyType.FreeEnergyTimeout.Id,
             NotifyType.ComeBackToGame.Id,
+            NotifyType.OrderComplete.Id,
         };
         
         foreach (var id in ids)

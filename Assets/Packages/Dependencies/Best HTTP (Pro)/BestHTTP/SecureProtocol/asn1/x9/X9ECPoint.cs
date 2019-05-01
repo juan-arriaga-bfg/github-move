@@ -1,7 +1,10 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-using Org.BouncyCastle.Math.EC;
+#pragma warning disable
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC;
 
-namespace Org.BouncyCastle.Asn1.X9
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
+
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X9
 {
     /**
      * class for describing an ECPoint as a Der object.
@@ -9,24 +12,58 @@ namespace Org.BouncyCastle.Asn1.X9
     public class X9ECPoint
         : Asn1Encodable
     {
-        private readonly ECPoint p;
+        private readonly Asn1OctetString encoding;
 
-        public X9ECPoint(
-            ECPoint p)
+        private ECCurve c;
+        private ECPoint p;
+
+        public X9ECPoint(ECPoint p)
+            : this(p, false)
         {
-            this.p = p.Normalize();
         }
 
-        public X9ECPoint(
-            ECCurve			c,
-            Asn1OctetString	s)
+        public X9ECPoint(ECPoint p, bool compressed)
         {
-            this.p = c.DecodePoint(s.GetOctets());
+            this.p = p.Normalize();
+            this.encoding = new DerOctetString(p.GetEncoded(compressed));
+        }
+
+        public X9ECPoint(ECCurve c, byte[] encoding)
+        {
+            this.c = c;
+            this.encoding = new DerOctetString(Arrays.Clone(encoding));
+        }
+
+        public X9ECPoint(ECCurve c, Asn1OctetString s)
+            : this(c, s.GetOctets())
+        {
+        }
+
+        public byte[] GetPointEncoding()
+        {
+            return Arrays.Clone(encoding.GetOctets());
         }
 
         public ECPoint Point
         {
-            get { return p; }
+            get
+            {
+                if (p == null)
+                {
+                    p = c.DecodePoint(encoding.GetOctets()).Normalize();
+                }
+
+                return p;
+            }
+        }
+
+        public bool IsPointCompressed
+        {
+            get
+            {
+                byte[] octets = encoding.GetOctets();
+                return octets != null && octets.Length > 0 && (octets[0] == 2 || octets[0] == 3);
+            }
         }
 
         /**
@@ -39,9 +76,9 @@ namespace Org.BouncyCastle.Asn1.X9
          */
         public override Asn1Object ToAsn1Object()
         {
-            return new DerOctetString(p.GetEncoded());
+            return encoding;
         }
     }
 }
-
+#pragma warning restore
 #endif

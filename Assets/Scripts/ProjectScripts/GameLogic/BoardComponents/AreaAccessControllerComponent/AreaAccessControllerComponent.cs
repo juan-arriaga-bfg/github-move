@@ -81,6 +81,8 @@ public class AreaAccessControllerComponent:ECSEntity
                 
             currentCheckGroup = empty.Count > 0 ? CutGroup(empty) : new HashSet<BoardPosition>();
         }
+
+        currentMaxGroup.Add(new BoardPosition(8, 13, BoardLayer.Piece.Layer));
 #if DEBUG
         sw.Stop();
         IW.Logger.Log($"[AreaAccessControllerComponent] => Detect base points calculated: {sw.ElapsedMilliseconds}ms");

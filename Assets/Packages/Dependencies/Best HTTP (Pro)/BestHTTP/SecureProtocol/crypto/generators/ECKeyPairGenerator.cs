@@ -1,22 +1,22 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Nist;
-using Org.BouncyCastle.Asn1.Sec;
-using Org.BouncyCastle.Asn1.TeleTrust;
-using Org.BouncyCastle.Asn1.X9;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.EC;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Math.EC;
-using Org.BouncyCastle.Math.EC.Multiplier;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Nist;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Sec;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.TeleTrust;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X9;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.EC;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC.Multiplier;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Security;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Generators
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Generators
 {
     public class ECKeyPairGenerator
         : IAsymmetricCipherKeyPairGenerator
@@ -80,6 +80,7 @@ namespace Org.BouncyCastle.Crypto.Generators
 
                 X9ECParameters ecps = FindECCurveByOid(oid);
 
+                this.publicKeyParamSet = oid;
                 this.parameters = new ECDomainParameters(
                     ecps.Curve, ecps.G, ecps.N, ecps.H, ecps.GetSeed());
             }
@@ -109,12 +110,6 @@ namespace Org.BouncyCastle.Crypto.Generators
                 if (d.CompareTo(BigInteger.Two) < 0 || d.CompareTo(n) >= 0)
                     continue;
 
-                /*
-                 * Require a minimum weight of the NAF representation, since low-weight primes may be
-                 * weak against a version of the number-field-sieve for the discrete-logarithm-problem.
-                 * 
-                 * See "The number field sieve for integers of low weight", Oliver Schirokauer.
-                 */
                 if (WNafUtilities.GetNafWeight(d) < minWeight)
                     continue;
 
@@ -167,5 +162,5 @@ namespace Org.BouncyCastle.Crypto.Generators
         }
     }
 }
-
+#pragma warning restore
 #endif
