@@ -29,7 +29,7 @@
         profile.RegisterComponent(new BaseInformationSaveComponent());
         profile.RegisterComponent(new FogSaveComponent());
         profile.RegisterComponent(new AirShipSaveComponent());
-        profile.RegisterComponent(new EventSaveComponent());
+        profile.RegisterComponent(new EventGameSaveComponent());
     }
     
     public void SetDefaultSettings(UserProfile profile)

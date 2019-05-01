@@ -4,22 +4,17 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public enum EventName
-{
-    OrderSoftLaunch,
-}
-
-public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<EventStepDef>>
+public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<List<EventGameStepDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
     
-    public Dictionary<EventName, List<EventStepDef>> Defs;
+    public Dictionary<EventGameType, List<EventGameStepDef>> Defs;
     
     public int Step => context.UserProfile.GetStorageItem(Currency.EventStep.Name).Amount;
     
-    public Action<EventName> OnStart;
-    public Action<EventName> OnStop;
+    public Action<EventGameType> OnStart;
+    public Action<EventGameType> OnStop;
 
     private GameDataManager context;
     
@@ -51,11 +46,11 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
 
     public void Reload()
     {
-        Defs = new Dictionary<EventName, List<EventStepDef>>();
-        LoadData(new ResourceConfigDataMapper<List<EventStepDef>>("configs/eventOrderSoftLaunch.data", NSConfigsSettings.Instance.IsUseEncryption));
+        Defs = new Dictionary<EventGameType, List<EventGameStepDef>>();
+        LoadData(new ResourceConfigDataMapper<List<EventGameStepDef>>("configs/eventOrderSoftLaunch.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 	
-    public void LoadData(IDataMapper<List<EventStepDef>> dataMapper)
+    public void LoadData(IDataMapper<List<EventGameStepDef>> dataMapper)
     {
         // todo SERVER EVENT
         List<GameEventServerConfig> serverData = ServerSideConfigService.Current.GetData<List<GameEventServerConfig>>();
@@ -65,7 +60,7 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
         }
         else
         {
-            GameEventServerConfig config = serverData.FirstOrDefault(e => e.Type == EventName.OrderSoftLaunch.ToString());
+            GameEventServerConfig config = serverData.FirstOrDefault(e => e.Type == EventGameType.OrderSoftLaunch.ToString());
             if (config != null)
             {
                 // Тут у нас есть все данные по ивенту. Можем стартовать новый или стопать текущий.
@@ -84,7 +79,7 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
         {
             if (string.IsNullOrEmpty(error))
             {
-                var save = context.UserProfile?.EventSave?.Steps ?? new List<EventSaveItem>();
+                var save = context.UserProfile?.EventGameSave?.Steps ?? new List<EventGameSaveItem>();
                 
                 for (var i = 0; i < data.Count; i++)
                 {
@@ -119,7 +114,7 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
                     }
                 }
                 
-                Defs.Add(EventName.OrderSoftLaunch, data);
+                Defs.Add(EventGameType.OrderSoftLaunch, data);
             }
             else
             {
@@ -130,38 +125,38 @@ public class EventDataManager : IECSComponent, IDataManager, IDataLoader<List<Ev
 
     public void Start(string id)
     {
-        var name = (EventName)Enum.Parse(typeof(EventName), id);
+        var name = (EventGameType)Enum.Parse(typeof(EventGameType), id);
         OnStart?.Invoke(name);
     }
     
     public void Stop(string id)
     {
-        var name = (EventName)Enum.Parse(typeof(EventName), id);
+        var name = (EventGameType)Enum.Parse(typeof(EventGameType), id);
         OnStop?.Invoke(name);
     }
     
-    public int Price(EventName name)
+    public int Price(EventGameType name)
     {
         var step = IsCompleted(name) ? Step - 1 : Step;
         return Defs[name][step].Prices[0].Amount;
     }
     
-    public bool IsStarted(EventName name)
+    public bool IsActive(EventGameType name)
     {
-        return true;
+        return IsCompleted(name) == false;
     }
 
-    public bool IsPremium(EventName name)
+    public bool IsPremium(EventGameType name)
     {
         return false;
     }
     
-    public bool IsLastStep(EventName name)
+    public bool IsLastStep(EventGameType name)
     {
         return Step == Defs[name].Count - 1;
     }
     
-    public bool IsCompleted(EventName name)
+    public bool IsCompleted(EventGameType name)
     {
         return Step == Defs[name].Count;
     }

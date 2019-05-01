@@ -6,5 +6,5 @@ public class UIEventElementEntity : IUIContainerElementEntity
     public Action<UIContainerElementViewController> OnSelectEvent { get; set; }
     public Action<UIContainerElementViewController> OnDeselectEvent { get; set; }
 
-    public EventStepDef Step;
+    public EventGameStepDef GameStep;
 }

@@ -1,7 +1,7 @@
 ﻿public class GameDataManager : ECSEntity,
     IChestsDataManager, IPiecesDataManager, IFogsDataManager, IObstaclesDataManager, ILevelsDataManager,
     IFieldDataManager, ICodexDataManager, IEnemiesDataManager, IConstantsDataManager, IQuestsDataManager, IShopDataManager,
-    IOrdersDataManager, IConversationsDataManager, IMarketDataManager, ICharactersDataManager, IDailyRewardDataManager, IFireflyDataManager, IEventDataManager, ITutorialDataManager
+    IOrdersDataManager, IConversationsDataManager, IMarketDataManager, ICharactersDataManager, IDailyRewardDataManager, IFireflyDataManager, IEventGameDataManager, ITutorialDataManager
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -60,8 +60,8 @@
     private FireflyDataManager fireflyManager;
     public FireflyDataManager FireflyManager => fireflyManager ?? (fireflyManager = GetComponent<FireflyDataManager>(FireflyDataManager.ComponentGuid));
     
-    private EventDataManager eventManager;
-    public EventDataManager EventManager => eventManager ?? (eventManager = GetComponent<EventDataManager>(EventDataManager.ComponentGuid));
+    private EventGameDataManager eventGameManager;
+    public EventGameDataManager EventGameManager => eventGameManager ?? (eventGameManager = GetComponent<EventGameDataManager>(EventGameDataManager.ComponentGuid));
     
     private TutorialDataManager tutorialDataManager;
     public TutorialDataManager TutorialDataManager => tutorialDataManager ?? (tutorialDataManager = GetComponent<TutorialDataManager>(TutorialDataManager.ComponentGuid));
@@ -91,7 +91,7 @@
         RegisterComponent(new CharactersDataManager());
         RegisterComponent(new DailyRewardDataManager());
         RegisterComponent(new FireflyDataManager());
-        RegisterComponent(new EventDataManager());
+        RegisterComponent(new EventGameDataManager());
         RegisterComponent(new TutorialDataManager());
     }
 

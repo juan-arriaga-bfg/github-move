@@ -41,16 +41,16 @@ public class UIEventWindowView : UIGenericPopupWindowView
         
         Fill(UpdateEntities(), content);
 
-        var manager = GameDataService.Current.EventManager;
-        var defs = manager.Defs[EventName.OrderSoftLaunch];
+        var manager = GameDataService.Current.EventGameManager;
+        var defs = manager.Defs[EventGameType.OrderSoftLaunch];
         var step = manager.Step;
         
         var target = defs[defs.Count - 1].RealPrices[0].Amount;
         var real = ProfileService.Current.GetStorageItem(Currency.Token.Name).Amount;
-        var current = (step == 0 ? 0 : defs[step - 1].RealPrices[0].Amount) + (manager.IsCompleted(EventName.OrderSoftLaunch) ? 0 : (int) real);
+        var current = (step == 0 ? 0 : defs[step - 1].RealPrices[0].Amount) + (manager.IsCompleted(EventGameType.OrderSoftLaunch) ? 0 : (int) real);
         var progress = Mathf.Clamp(mainProgressBorder.Max * (current / (float) target) + mainProgressBorder.Min, mainProgressBorder.Min, mainProgressBorder.Max);
 
-        var progressSecond = (secondProgressBorder.Max + secondProgressBorder.Min) * step + (manager.IsCompleted(EventName.OrderSoftLaunch) ? 0 : (int) (secondProgressBorder.Max * (real / (float) manager.Price(EventName.OrderSoftLaunch))));
+        var progressSecond = (secondProgressBorder.Max + secondProgressBorder.Min) * step + (manager.IsCompleted(EventGameType.OrderSoftLaunch) ? 0 : (int) (secondProgressBorder.Max * (real / (float) manager.Price(EventGameType.OrderSoftLaunch))));
         
         progressLabel.Text = $"{current}/{target}";
         mainLine.sizeDelta = new Vector2(progress, mainLine.sizeDelta.y);
@@ -69,7 +69,7 @@ public class UIEventWindowView : UIGenericPopupWindowView
         InitButtonBase(btnMaskLeft, Controller.CloseCurrentWindow);
         InitButtonBase(btnMaskRight, Controller.CloseCurrentWindow);
 
-        if (GameDataService.Current.EventManager.Step == 0)
+        if (GameDataService.Current.EventGameManager.Step == 0)
         {
             Scroll(0);
             return;
@@ -100,14 +100,14 @@ public class UIEventWindowView : UIGenericPopupWindowView
     
     private List<IUIContainerElementEntity> UpdateEntities()
     {
-        var defs = GameDataService.Current.EventManager.Defs[EventName.OrderSoftLaunch];
+        var defs = GameDataService.Current.EventGameManager.Defs[EventGameType.OrderSoftLaunch];
         var views = new List<IUIContainerElementEntity>(defs.Count);
         
         foreach (var def in defs)
         {
             var entity = new UIEventElementEntity
             {
-                Step = def,
+                GameStep = def,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
             };

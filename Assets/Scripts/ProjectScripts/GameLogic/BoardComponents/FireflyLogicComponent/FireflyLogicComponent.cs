@@ -88,10 +88,10 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		bottom = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, 0);
 		right = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, context.Context.BoardDef.Height + 5);
 
-		ResetLogic(GameDataService.Current.EventManager.IsStarted(EventName.OrderSoftLaunch) ? FireflyLogicType.Event : FireflyLogicType.Normal);
+		ResetLogic(GameDataService.Current.EventGameManager.IsActive(EventGameType.OrderSoftLaunch) ? FireflyLogicType.Event : FireflyLogicType.Normal);
 		
-		GameDataService.Current.EventManager.OnStart += OnStartEvent;
-		GameDataService.Current.EventManager.OnStop += OnStopEvent;
+		GameDataService.Current.EventGameManager.OnStart += OnStartEvent;
+		GameDataService.Current.EventGameManager.OnStop += OnStopEvent;
 	}
 	
 	public override void OnUnRegisterEntity(ECSEntity entity)
@@ -100,8 +100,8 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
 		ShopService.Current.OnPurchasedEvent -= UpdateFirefly;
 		
-		GameDataService.Current.EventManager.OnStart -= OnStartEvent;
-		GameDataService.Current.EventManager.OnStop -= OnStopEvent;
+		GameDataService.Current.EventGameManager.OnStart -= OnStartEvent;
+		GameDataService.Current.EventGameManager.OnStop -= OnStopEvent;
 
 		restartTimer.OnComplete = null;
 	}
@@ -116,16 +116,16 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		restartTimer.Reset();
 	}
 
-	private void OnStartEvent(EventName name)
+	private void OnStartEvent(EventGameType name)
 	{
-		if(name != EventName.OrderSoftLaunch) return;
+		if(name != EventGameType.OrderSoftLaunch) return;
 		
 		ResetLogic(FireflyLogicType.Event);
 	}
 
-	private void OnStopEvent(EventName name)
+	private void OnStopEvent(EventGameType name)
 	{
-		if(name != EventName.OrderSoftLaunch) return;
+		if(name != EventGameType.OrderSoftLaunch) return;
 		
 		ResetLogic(FireflyLogicType.Normal);
 	}

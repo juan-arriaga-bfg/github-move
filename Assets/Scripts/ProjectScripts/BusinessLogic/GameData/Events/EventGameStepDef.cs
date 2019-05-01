@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class EventStepDef
+public class EventGameStepDef
 {
     public string Step;
 

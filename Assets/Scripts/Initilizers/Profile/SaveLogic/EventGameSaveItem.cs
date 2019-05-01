@@ -1,16 +1,16 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-public class EventSaveItemJsonConverter : JsonConverter
+public class EventGameSaveItemJsonConverter : JsonConverter
 {
     public override bool CanConvert(Type objectType)
     {
-        return objectType == typeof (EventSaveItem);
+        return objectType == typeof (EventGameSaveItem);
     }
     
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
     {
-        var targetValue = (EventSaveItem) value;
+        var targetValue = (EventGameSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
         serializer.Serialize(writer, $"{(int)targetValue.Key},{targetValue.Step},{(targetValue.IsNormalClaimed ? 1 : 0)},{(targetValue.IsPremiumClaimed ? 1 : 0)}");
@@ -21,9 +21,9 @@ public class EventSaveItemJsonConverter : JsonConverter
         var data = serializer.Deserialize<string>(reader);
         var dataArray = data.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
 
-        var targetValue = new EventSaveItem
+        var targetValue = new EventGameSaveItem
         {
-            Key = (EventName) int.Parse(dataArray[0]),
+            Key = (EventGameType) int.Parse(dataArray[0]),
             Step = dataArray[1],
             IsNormalClaimed = int.Parse(dataArray[2]) == 1,
             IsPremiumClaimed = int.Parse(dataArray[3]) == 1
@@ -33,16 +33,16 @@ public class EventSaveItemJsonConverter : JsonConverter
     }
 }
 
-[JsonConverter(typeof(EventSaveItemJsonConverter))]
-public class EventSaveItem
+[JsonConverter(typeof(EventGameSaveItemJsonConverter))]
+public class EventGameSaveItem
 {
-    private EventName key;
+    private EventGameType key;
     private string step;
 
     private bool isNormalClaimed;
     private bool isPremiumClaimed;
 
-    public EventName Key
+    public EventGameType Key
     {
         get { return key; }
         set { key = value; }

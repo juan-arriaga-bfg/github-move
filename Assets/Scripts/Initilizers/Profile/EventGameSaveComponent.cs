@@ -2,29 +2,29 @@
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
-public interface IEventSaveComponent
+public interface IEventGameSaveComponent
 {
-    EventSaveComponent EventSave { get; }
+    EventGameSaveComponent EventGameSave { get; }
 }
 
-public partial class UserProfile : IEventSaveComponent
+public partial class UserProfile : IEventGameSaveComponent
 {
-    protected EventSaveComponent eventSaveComponent;
+    protected EventGameSaveComponent EventGameSaveComponent;
 
     [JsonIgnore]
-    public EventSaveComponent EventSave => eventSaveComponent ?? (eventSaveComponent = GetComponent<EventSaveComponent>(EventSaveComponent.ComponentGuid));
+    public EventGameSaveComponent EventGameSave => EventGameSaveComponent ?? (EventGameSaveComponent = GetComponent<EventGameSaveComponent>(EventGameSaveComponent.ComponentGuid));
 }
 
 [JsonObject(MemberSerialization.OptIn)]
-public class EventSaveComponent : ECSEntity, IECSSerializeable
+public class EventGameSaveComponent : ECSEntity, IECSSerializeable
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
     
-    private List<EventSaveItem> steps;
+    private List<EventGameSaveItem> steps;
     
     [JsonProperty]
-    public List<EventSaveItem> Steps
+    public List<EventGameSaveItem> Steps
     {
         get { return steps; }
         set { steps = value; }
@@ -33,17 +33,17 @@ public class EventSaveComponent : ECSEntity, IECSSerializeable
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
-        if (GameDataService.Current?.EventManager?.Defs == null) return;
+        if (GameDataService.Current?.EventGameManager?.Defs == null) return;
         
-        var data = GameDataService.Current.EventManager.Defs;
+        var data = GameDataService.Current.EventGameManager.Defs;
         
-        steps = new List<EventSaveItem>();
+        steps = new List<EventGameSaveItem>();
 
         foreach (var pair in data)
         {
             foreach (var def in pair.Value)
             {
-                steps.Add(new EventSaveItem
+                steps.Add(new EventGameSaveItem
                 {
                     Key = pair.Key,
                     Step = def.Step,

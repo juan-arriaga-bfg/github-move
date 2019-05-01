@@ -42,32 +42,32 @@ public class UIEventElementViewController : UIContainerElementViewController
         
         var contentEntity = entity as UIEventElementEntity;
 
-        var isNormalActive = contentEntity.Step.NormalRewards != null && contentEntity.Step.NormalRewards.Count > 0;
-        var isPremiumActive = contentEntity.Step.PremiumRewards != null && contentEntity.Step.PremiumRewards.Count > 0;
-        var isPremiumPaid = GameDataService.Current.EventManager.IsPremium(EventName.OrderSoftLaunch);
+        var isNormalActive = contentEntity.GameStep.NormalRewards != null && contentEntity.GameStep.NormalRewards.Count > 0;
+        var isPremiumActive = contentEntity.GameStep.PremiumRewards != null && contentEntity.GameStep.PremiumRewards.Count > 0;
+        var isPremiumPaid = GameDataService.Current.EventGameManager.IsPremium(EventGameType.OrderSoftLaunch);
         
         normal.SetActive(isNormalActive);
         premium.SetActive(isPremiumActive);
 
         if (isNormalActive)
         {
-            normalLabel.Text = $"x{contentEntity.Step.NormalRewards[0].Amount}";
-            CreateIcon(ref normalIcon, normalAnchor, ref normalSprites, contentEntity.Step.NormalRewards[0].Currency);
+            normalLabel.Text = $"x{contentEntity.GameStep.NormalRewards[0].Amount}";
+            CreateIcon(ref normalIcon, normalAnchor, ref normalSprites, contentEntity.GameStep.NormalRewards[0].Currency);
         }
         
         if (isPremiumActive)
         {
-            premiumLabel.Text = $"x{contentEntity.Step.PremiumRewards[0].Amount}";
-            CreateIcon(ref premiumIcon, premiumAnchor, ref premiumSprites, contentEntity.Step.PremiumRewards[0].Currency);
+            premiumLabel.Text = $"x{contentEntity.GameStep.PremiumRewards[0].Amount}";
+            CreateIcon(ref premiumIcon, premiumAnchor, ref premiumSprites, contentEntity.GameStep.PremiumRewards[0].Currency);
         }
         
         if (isPremiumPaid == false) Sepia(premiumSprites, true);
         
-        IsComplete = Index < GameDataService.Current.EventManager.Step;
+        IsComplete = Index < GameDataService.Current.EventGameManager.Step;
         
         check.SetActive(IsComplete);
-        normalShine.SetActive(IsComplete && contentEntity.Step.IsNormalClaimed == false);
-        premiumShine.SetActive(isPremiumPaid && IsComplete && contentEntity.Step.IsPremiumClaimed == false);
+        normalShine.SetActive(IsComplete && contentEntity.GameStep.IsNormalClaimed == false);
+        premiumShine.SetActive(isPremiumPaid && IsComplete && contentEntity.GameStep.IsPremiumClaimed == false);
         
         btnNormal.gameObject.SetActive(normalShine.activeSelf);
         btnPremium.gameObject.SetActive(premiumShine.activeSelf);
@@ -95,16 +95,16 @@ public class UIEventElementViewController : UIContainerElementViewController
     {
         var contentEntity = entity as UIEventElementEntity;
         
-        contentEntity.Step.IsNormalClaimed = true;
-        Claim(contentEntity.Step.NormalRewards, btnNormal.transform.position);
+        contentEntity.GameStep.IsNormalClaimed = true;
+        Claim(contentEntity.GameStep.NormalRewards, btnNormal.transform.position);
     }
     
     private void OnPremiumClick()
     {
         var contentEntity = entity as UIEventElementEntity;
         
-        contentEntity.Step.IsPremiumClaimed = true;
-        Claim(contentEntity.Step.PremiumRewards, btnPremium.transform.position);
+        contentEntity.GameStep.IsPremiumClaimed = true;
+        Claim(contentEntity.GameStep.PremiumRewards, btnPremium.transform.position);
     }
 
     private void Claim(List<CurrencyPair> reward, Vector3 position)
@@ -119,8 +119,8 @@ public class UIEventElementViewController : UIContainerElementViewController
     private void CheckClaim()
     {
         var contentEntity = entity as UIEventElementEntity;
-        var isNormalClaimed = contentEntity.Step.IsNormalClaimed;
-        var isPremiumClaimed = contentEntity.Step.IsPremiumClaimed;
+        var isNormalClaimed = contentEntity.GameStep.IsNormalClaimed;
+        var isPremiumClaimed = contentEntity.GameStep.IsPremiumClaimed;
         
         normalCheck.SetActive(isNormalClaimed);
         premiumCheck.SetActive(isPremiumClaimed);

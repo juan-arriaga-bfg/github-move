@@ -27,7 +27,7 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
 
     public override void OnViewShow(IWUIWindowView context)
     {
-        var amount = GameDataService.Current.EventManager.Defs[EventName.OrderSoftLaunch].Count;
+        var amount = GameDataService.Current.EventGameManager.Defs[EventGameType.OrderSoftLaunch].Count;
 
         for (var i = 1; i < amount; i++)
         {
@@ -66,21 +66,21 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
     
     private void UpdateProgress(float value)
     {
-        var manager = GameDataService.Current.EventManager;
-        var price = manager.Price(EventName.OrderSoftLaunch);
+        var manager = GameDataService.Current.EventGameManager;
+        var price = manager.Price(EventGameType.OrderSoftLaunch);
         
         progress.sizeDelta = new Vector2(Mathf.Lerp(progressBorder.Min, progressBorder.Max, value/price), progress.sizeDelta.y);
         
-        if (manager.IsCompleted(EventName.OrderSoftLaunch) || CurrencyHelper.IsCanPurchase(itemUid, price) == false) return;
+        if (manager.IsCompleted(EventGameType.OrderSoftLaunch) || CurrencyHelper.IsCanPurchase(itemUid, price) == false) return;
 
-        CurrencyHelper.Purchase(Currency.EventStep.Name, 1, itemUid, manager.IsLastStep(EventName.OrderSoftLaunch) ? 0 : price);
+        CurrencyHelper.Purchase(Currency.EventStep.Name, 1, itemUid, manager.IsLastStep(EventGameType.OrderSoftLaunch) ? 0 : price);
         UpdateDots();
         UpdateMark();
     }
 
     private void UpdateDots()
     {
-        var manager = GameDataService.Current.EventManager;
+        var manager = GameDataService.Current.EventGameManager;
         var current = manager.Step;
 
         for (var i = 0; i < dots.Count; i++)
@@ -91,15 +91,15 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
 
     public void UpdateMark()
     {
-        var manager = GameDataService.Current.EventManager;
+        var manager = GameDataService.Current.EventGameManager;
         var step = manager.Step;
-        var defs = manager.Defs[EventName.OrderSoftLaunch];
+        var defs = manager.Defs[EventGameType.OrderSoftLaunch];
 
         for (var i = 0; i < step; i++)
         {
             var def = defs[i];
             
-            if(def.IsNormalClaimed && (manager.IsPremium(EventName.OrderSoftLaunch) == false || def.IsPremiumClaimed)) continue;
+            if(def.IsNormalClaimed && (manager.IsPremium(EventGameType.OrderSoftLaunch) == false || def.IsPremiumClaimed)) continue;
             
             shine.SetActive(true);
             exclamationMark.SetActive(true);
@@ -114,10 +114,10 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
     {
         if (amountLabel == null) return;
         
-        var manager = GameDataService.Current.EventManager;
+        var manager = GameDataService.Current.EventGameManager;
         
         value = Mathf.Max(0, value);
-        amountLabel.Text = $"<mspace=2.7em>{value}/{manager.Price(EventName.OrderSoftLaunch)}</mspace>";
+        amountLabel.Text = $"<mspace=2.7em>{value}/{manager.Price(EventGameType.OrderSoftLaunch)}</mspace>";
     }
     
     public void OnClick()

@@ -12,7 +12,7 @@ public class OrderDef
         {
             var rewards = new List<CurrencyPair>(NormalRewards);
 
-            if (EventRewards != null && GameDataService.Current.EventManager.IsStarted(EventName.OrderSoftLaunch)) rewards.AddRange(EventRewards);
+            if (EventRewards != null && GameDataService.Current.EventGameManager.IsActive(EventGameType.OrderSoftLaunch)) rewards.AddRange(EventRewards);
 
             return rewards;
         }
