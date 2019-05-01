@@ -408,8 +408,8 @@ public static class TutorialBuilder
             {
                 step = new IslandStep {Target = new BoardPosition(10, 13), IsIgnoreDebug = false};
                 
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "87_KillTree", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "87_KillTree", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "87_KillTree", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "87_KillTree", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Complete}, true);
                 break;
             }
             default:
