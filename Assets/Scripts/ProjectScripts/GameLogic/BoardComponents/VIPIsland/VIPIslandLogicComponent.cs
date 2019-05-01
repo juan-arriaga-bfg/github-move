@@ -195,15 +195,11 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
                 context.Context.ActionExecutor.AddAction(new FillBoardAction
                 {
                     Piece = piece.Key,
-                    Positions = positions
+                    Positions = positions,
+                    OnComplete = (board) => UpdateLockState() 
                 });
             } 
         }
-        
-        context.Context.ActionExecutor.AddAction(new CallbackAction()
-        {
-            Callback = (board) => UpdateLockState()
-        });
     }
 
     public void UpdateLockState()
