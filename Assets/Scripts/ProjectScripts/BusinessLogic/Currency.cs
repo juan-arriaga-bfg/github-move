@@ -38,7 +38,9 @@ public static partial class Currency
                           
     [IncludeToCheatSheet] public static readonly CurrencyDef Token       = new CurrencyDef { Id = 170, Name = "Token",       IsConsumable = true };
                           public static readonly CurrencyDef EventStep   = new CurrencyDef { Id = 171, Name = "EventStep",   IsConsumable = true };
-    
+                          
+                          public static readonly CurrencyDef Island      = new CurrencyDef { Id = 170, Name = "Island",       IsConsumable = true };
+                          
                           public static readonly CurrencyDef Resources   = new CurrencyDef { Id = 1000, Name = "Resources",  IsConsumable = true };
                           
     [IncludeToCheatSheet] public static readonly CurrencyDef PR_A5       = new CurrencyDef { Id = 1001, Name = "PR_A5",      IsConsumable = true, Icon = "PR_A5" };

@@ -1,4 +1,6 @@
-﻿public class CheckPieceTutorialCondition : BaseTutorialCondition
+﻿using System.Linq;
+
+public class CheckPieceTutorialCondition : BaseTutorialCondition
 {
 	public int Target;
 	public int Amount = 1;

@@ -1329,7 +1329,7 @@
         "Ico": "CH_Free",
         "Title": "quest.open.chest.title",
         "Message": "quest.open.chest.message",
-        "Hint": "task.open.chest.hint"
+        "Hint": "task.open.chest.free.hint"
       }
     }
   },
@@ -1885,11 +1885,12 @@
     "$type": "TaskOpenChestEntity, GameAssembly",
     "Id": "164_OpenChest_CH_NPC",
     "PieceUid": "CH_NPC",
-    "TargetValue": 2,
+    "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.open.chest.title",
-        "Message": "quest.open.chest.message"
+        "Message": "quest.open.chest.message",
+        "Hint": "task.open.chest.npc.hint"
       }
     }
   },
