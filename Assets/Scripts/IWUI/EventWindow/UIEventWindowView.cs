@@ -20,6 +20,9 @@ public class UIEventWindowView : UIGenericPopupWindowView
     
     [IWUIBinding("#MainProgressLine")] private RectTransform mainLine;
     [IWUIBinding("#ProgressLine")] private RectTransform secondLine;
+    
+    [IWUIBinding("#MessageIcon")] private GameObject messageIcon;
+    [IWUIBinding("#Message")] private RectTransform messageTransform;
 
     private readonly AmountRange mainProgressBorder = new AmountRange(10, 145);
     private readonly AmountRange secondProgressBorder = new AmountRange(35, 100);
@@ -29,28 +32,34 @@ public class UIEventWindowView : UIGenericPopupWindowView
         base.OnViewShow();
         
         var windowModel = Model as UIEventWindowModel;
+        var manager = GameDataService.Current.EventGameManager;
+        var isCompleted = manager.IsCompleted(EventGameType.OrderSoftLaunch);
         
         SetTitle(windowModel.Title);
-        SetMessage(windowModel.Message);
+        SetMessage(isCompleted ? windowModel.MessageFinish : windowModel.Message);
 
         vipLabel.Text = windowModel.VIPText;
-        btnShowLabel.Text = windowModel.ButtonText;
+        btnShowLabel.Text = isCompleted ? windowModel.ButtonFinishText : windowModel.ButtonText;
         
-        if(windowModel.Timer != null) windowModel.Timer.OnTimeChanged += OnTimeChanged;
+        messageIcon.SetActive(isCompleted == false);
+        messageTransform.sizeDelta = new Vector2(isCompleted ? 860 : 660, messageTransform.sizeDelta.y);
+        messageTransform.anchoredPosition = new Vector2(isCompleted ? -100 : 0, messageTransform.anchoredPosition.y);
+
+        if (windowModel.Timer != null) windowModel.Timer.OnTimeChanged += OnTimeChanged;
+        
         OnTimeChanged();
         
         Fill(UpdateEntities(), content);
-
-        var manager = GameDataService.Current.EventGameManager;
+        
         var defs = manager.Defs[EventGameType.OrderSoftLaunch].Steps;
         var step = manager.Step;
         
         var target = defs[defs.Count - 1].RealPrices[0].Amount;
         var real = ProfileService.Current.GetStorageItem(Currency.Token.Name).Amount;
-        var current = (step == 0 ? 0 : defs[step - 1].RealPrices[0].Amount) + (manager.IsCompleted(EventGameType.OrderSoftLaunch) ? 0 : (int) real);
+        var current = (step == 0 ? 0 : defs[step - 1].RealPrices[0].Amount) + (isCompleted ? 0 : (int) real);
         var progress = Mathf.Clamp(mainProgressBorder.Max * (current / (float) target) + mainProgressBorder.Min, mainProgressBorder.Min, mainProgressBorder.Max);
 
-        var progressSecond = (secondProgressBorder.Max + secondProgressBorder.Min) * step + (manager.IsCompleted(EventGameType.OrderSoftLaunch) ? 0 : (int) (secondProgressBorder.Max * (real / (float) manager.Price(EventGameType.OrderSoftLaunch))));
+        var progressSecond = (secondProgressBorder.Max + secondProgressBorder.Min) * step + (isCompleted ? 0 : (int) (secondProgressBorder.Max * (real / (float) manager.Price(EventGameType.OrderSoftLaunch))));
         
         progressLabel.Text = $"{current}/{target}";
         mainLine.sizeDelta = new Vector2(progress, mainLine.sizeDelta.y);
