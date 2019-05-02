@@ -94,12 +94,13 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
         var manager = GameDataService.Current.EventGameManager;
         var step = manager.Step;
         var defs = manager.Defs[EventGameType.OrderSoftLaunch].Steps;
+        var isPremium = manager.IsPremium(EventGameType.OrderSoftLaunch);
 
         for (var i = 0; i < step; i++)
         {
             var def = defs[i];
-            
-            if(def.IsNormalClaimed && (manager.IsPremium(EventGameType.OrderSoftLaunch) == false || def.IsPremiumClaimed)) continue;
+
+            if (def.IsNormalIgnoredOrClaimed && (isPremium == false || def.IsPremiumIgnoredOrClaimed)) continue;
             
             shine.SetActive(true);
             exclamationMark.SetActive(true);

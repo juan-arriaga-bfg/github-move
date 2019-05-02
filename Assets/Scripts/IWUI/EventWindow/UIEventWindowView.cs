@@ -56,7 +56,7 @@ public class UIEventWindowView : UIGenericPopupWindowView
         
         var target = defs[defs.Count - 1].RealPrices[0].Amount;
         var real = ProfileService.Current.GetStorageItem(Currency.Token.Name).Amount;
-        var current = (step == 0 ? 0 : defs[step - 1].RealPrices[0].Amount) + (isCompleted ? 0 : (int) real);
+        var current = (step == 0 ? 0 : defs[step - 1].RealPrices[0].Amount) + real - (isCompleted ? defs[step - 1].Prices[0].Amount : 0);
         var progress = Mathf.Clamp(mainProgressBorder.Max * (current / (float) target) + mainProgressBorder.Min, mainProgressBorder.Min, mainProgressBorder.Max);
 
         var progressSecond = (secondProgressBorder.Max + secondProgressBorder.Min) * step + (isCompleted ? 0 : (int) (secondProgressBorder.Max * (real / (float) manager.Price(EventGameType.OrderSoftLaunch))));
@@ -68,11 +68,37 @@ public class UIEventWindowView : UIGenericPopupWindowView
         content.GetScrollRect().horizontalNormalizedPosition = step == 0 ? 1 : 0;
     }
 
+    public override void OnViewClose()
+    {
+        if (GameDataService.Current.EventGameManager.IsCompleted(EventGameType.OrderSoftLaunch))
+        {
+            var board = BoardService.Current.FirstBoard;
+            var positions = new List<BoardPosition>();
+
+            for (var id = PieceType.Token1.Id; id <= PieceType.Token3.Id; id++)
+            {
+                positions.AddRange(board.BoardLogic.PositionsCache.GetPiecePositionsByType(id));
+            }
+            
+            foreach (var position in positions)
+            {
+                board.ActionExecutor.AddAction(new CollapsePieceToAction
+                {
+                    To = position,
+                    Positions = new List<BoardPosition> {position},
+                    AnimationResourceSearch = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnDestroyFromBoard)
+                });
+            }
+        }
+        
+        base.OnViewClose();
+    }
+
     public override void OnViewShowCompleted()
     {
         base.OnViewShowCompleted();
         
-        InitButtonBase(btnShow, OnShowClick);
+        InitButtonBase(btnShow, OnClick);
         InitButtonBase(btnPremium, OnPremiumClick);
         
         InitButtonBase(btnMaskLeft, Controller.CloseCurrentWindow);
@@ -145,8 +171,14 @@ public class UIEventWindowView : UIGenericPopupWindowView
             .OnComplete(() => { content.GetScrollRect().enabled = true; });
     }
 
-    private void OnShowClick()
+    private void OnClick()
     {
+        if (GameDataService.Current.EventGameManager.IsCompleted(EventGameType.OrderSoftLaunch))
+        {
+            Controller.CloseCurrentWindow();
+            return;
+        }
+        
         var model = UIService.Get.GetCachedModel<UIOrdersWindowModel>(UIWindowType.OrdersWindow);
 
         if (model.Orders != null && model.Orders.Count > 0) model.Select = model.Orders[0];

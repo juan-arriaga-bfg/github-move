@@ -66,8 +66,8 @@ public class UIEventElementViewController : UIContainerElementViewController
         IsComplete = Index < GameDataService.Current.EventGameManager.Step;
         
         check.SetActive(IsComplete);
-        normalShine.SetActive(IsComplete && contentEntity.GameStep.IsNormalClaimed == false);
-        premiumShine.SetActive(isPremiumPaid && IsComplete && contentEntity.GameStep.IsPremiumClaimed == false);
+        normalShine.SetActive(isNormalActive && IsComplete && contentEntity.GameStep.IsNormalClaimed == false);
+        premiumShine.SetActive(isPremiumActive && isPremiumPaid && IsComplete && contentEntity.GameStep.IsPremiumClaimed == false);
         
         btnNormal.gameObject.SetActive(normalShine.activeSelf);
         btnPremium.gameObject.SetActive(premiumShine.activeSelf);
@@ -83,6 +83,17 @@ public class UIEventElementViewController : UIContainerElementViewController
         btnPremium.ToState(GenericButtonState.Active).OnClick(OnPremiumClick);
     }
 
+    public override void OnViewClose(IWUIWindowView context)
+    {
+        if (entity is UIEventElementEntity && GameDataService.Current.EventGameManager.IsCompleted(EventGameType.OrderSoftLaunch))
+        {
+            OnNormalClick();
+            OnPremiumClick();
+        }
+        
+        base.OnViewClose(context);
+    }
+
     public override void OnViewCloseCompleted()
     {
         Return(ref normalIcon, ref normalSprites);
@@ -95,6 +106,8 @@ public class UIEventElementViewController : UIContainerElementViewController
     {
         var contentEntity = entity as UIEventElementEntity;
         
+        if (btnNormal.gameObject.activeSelf == false || contentEntity.GameStep.IsNormalClaimed) return;
+        
         contentEntity.GameStep.IsNormalClaimed = true;
         Claim(contentEntity.GameStep.NormalRewards, btnNormal.transform.position);
     }
@@ -102,6 +115,8 @@ public class UIEventElementViewController : UIContainerElementViewController
     private void OnPremiumClick()
     {
         var contentEntity = entity as UIEventElementEntity;
+
+        if (btnPremium.gameObject.activeSelf == false || contentEntity.GameStep.IsPremiumClaimed) return;
         
         contentEntity.GameStep.IsPremiumClaimed = true;
         Claim(contentEntity.GameStep.PremiumRewards, btnPremium.transform.position);

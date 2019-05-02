@@ -7,6 +7,9 @@ public class EventGameStepDef
     public bool IsNormalClaimed;
     public bool IsPremiumClaimed;
     
+    public bool IsNormalIgnoredOrClaimed => NormalRewards == null || NormalRewards.Count == 0 || IsNormalClaimed;
+    public bool IsPremiumIgnoredOrClaimed => PremiumRewards == null || PremiumRewards.Count == 0 || IsPremiumClaimed;
+    
     public List<CurrencyPair> Prices;
     public List<CurrencyPair> RealPrices;
     
