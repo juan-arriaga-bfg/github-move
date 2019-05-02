@@ -53,14 +53,15 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     public void LoadData(IDataMapper<List<EventGameStepDef>> dataMapper)
     {
         // todo SERVER EVENT
-        List<GameEventServerConfig> serverData = ServerSideConfigService.Current.GetData<List<GameEventServerConfig>>();
+        var serverData = ServerSideConfigService.Current.GetData<List<GameEventServerConfig>>();
+        
         if (serverData == null)
         {
             // запрос на сервер пока не прошел, ответ будет позже, в колбэке OnServerDataReceived. На данный момент считаем, что никакие данные не поменялись.
         }
         else
         {
-            GameEventServerConfig config = serverData.FirstOrDefault(e => e.Type == EventGameType.OrderSoftLaunch.ToString());
+            var config = serverData.FirstOrDefault(e => e.Type == EventGameType.OrderSoftLaunch.ToString());
             if (config != null)
             {
                 // Тут у нас есть все данные по ивенту. Можем стартовать новый или стопать текущий.
@@ -79,18 +80,21 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
         {
             if (string.IsNullOrEmpty(error))
             {
-                var save = context.UserProfile?.EventGameSave?.Steps ?? new List<EventGameSaveItem>();
+                var save = context.UserProfile?.EventGameSave?.EventGames ?? new List<EventGameSaveItem>();
+                var saveGame = save.Find(item => item.Key == EventGameType.OrderSoftLaunch);
                 
                 for (var i = 0; i < data.Count; i++)
                 {
                     var def = data[i];
-                    var saveStep = save.Find(item => item.Step == def.Step);
+                    
                     var previous = i == 0 ? new List<CurrencyPair>() : data[i - 1].RealPrices;
 
-                    if (saveStep != null)
+                    if (saveGame != null)
                     {
-                        def.IsNormalClaimed = saveStep.IsNormalClaimed;
-                        def.IsPremiumClaimed = saveStep.IsPremiumClaimed;
+                        var saveStep = saveGame.Steps[i];
+                        
+                        def.IsNormalClaimed = saveStep.Key;
+                        def.IsPremiumClaimed = saveStep.Value;
                     }
                     
                     def.RealPrices = new List<CurrencyPair>();
@@ -114,7 +118,7 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
                     }
                 }
 
-                CurrentEventGame = new EventGame{EventType = EventGameType.OrderSoftLaunch, State = EventGameState.Default, Steps = data};
+                CurrentEventGame = new EventGame{EventType = EventGameType.OrderSoftLaunch, State = saveGame?.State ?? EventGameState.Default, Steps = data};
                 Defs.Add(EventGameType.OrderSoftLaunch, CurrentEventGame);
             }
             else

@@ -88,7 +88,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		bottom = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, 0);
 		right = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, context.Context.BoardDef.Height + 5);
 		
-		var isEventGameActive = GameDataService.Current.EventGameManager.Defs.TryGetValue(EventGameType.OrderSoftLaunch, out var eventGame) && eventGame.IsActive;
+		var isEventGameActive = GameDataService.Current.EventGameManager.Defs.TryGetValue(EventGameType.OrderSoftLaunch, out var eventGame) && eventGame.State == EventGameState.InProgress;
 
 		ResetLogic(isEventGameActive ? FireflyLogicType.Event : FireflyLogicType.Normal);
 		

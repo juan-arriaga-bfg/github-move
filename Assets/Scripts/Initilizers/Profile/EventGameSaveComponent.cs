@@ -21,13 +21,13 @@ public class EventGameSaveComponent : ECSEntity, IECSSerializeable
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
     
-    private List<EventGameSaveItem> steps;
+    private List<EventGameSaveItem> eventGames;
     
     [JsonProperty]
-    public List<EventGameSaveItem> Steps
+    public List<EventGameSaveItem> EventGames
     {
-        get { return steps; }
-        set { steps = value; }
+        get => eventGames;
+        set => eventGames = value;
     }
     
     [OnSerializing]
@@ -37,25 +37,23 @@ public class EventGameSaveComponent : ECSEntity, IECSSerializeable
         
         var data = GameDataService.Current.EventGameManager.Defs;
         
-        steps = new List<EventGameSaveItem>();
+        eventGames = new List<EventGameSaveItem>();
 
-        foreach (var pair in data)
+        foreach (var def in data.Values)
         {
-            foreach (var def in pair.Value.Steps)
+            var steps = new List<KeyValuePair<bool, bool>>();
+
+            foreach (var step in def.Steps)
             {
-                steps.Add(new EventGameSaveItem
-                {
-                    Key = pair.Key,
-                    Step = def.Step,
-                    IsNormalClaimed = def.IsNormalClaimed,
-                    IsPremiumClaimed = def.IsPremiumClaimed
-                });
+                steps.Add(new KeyValuePair<bool, bool>(step.IsNormalClaimed, step.IsPremiumClaimed));
             }
+            
+            eventGames.Add(new EventGameSaveItem
+            {
+                Key = def.EventType,
+                State = def.State,
+                Steps = steps
+            });
         }
-    }
-    
-    [OnDeserialized]
-    internal void OnDeserialized(StreamingContext context)
-    {
     }
 }

@@ -33,9 +33,7 @@ public class EventGame
             return Steps[step].Prices[0].Amount;
         }
     }
-
-    public bool IsActive => IsCompleted == false;
-
+    
     public bool IsPremium => false;
     
     public bool IsLastStep => Step == Steps.Count - 1;

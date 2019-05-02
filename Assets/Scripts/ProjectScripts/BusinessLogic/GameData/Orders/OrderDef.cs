@@ -11,7 +11,7 @@ public class OrderDef
         get
         {
             var rewards = new List<CurrencyPair>(NormalRewards);
-            var isEventGameActive = GameDataService.Current.EventGameManager.Defs.TryGetValue(EventGameType.OrderSoftLaunch, out var eventGame) && eventGame.IsActive;
+            var isEventGameActive = GameDataService.Current.EventGameManager.Defs.TryGetValue(EventGameType.OrderSoftLaunch, out var eventGame) && eventGame.State == EventGameState.InProgress;
 
             if (EventRewards != null && isEventGameActive) rewards.AddRange(EventRewards);
 
