@@ -68,23 +68,17 @@ public class FieldControllerComponent : IECSComponent
 
     private void CreateNewField()
     {
-        var pieces = new Dictionary<int, List<BoardPosition>>(GameDataService.Current.FieldManager.Pieces)
+        var pieces = new Dictionary<int, List<BoardPosition>>(GameDataService.Current.FieldManager.BoardPieces)
         {
             {PieceType.Fog.Id, CreateFog()}
         };
 
         foreach (var piece in pieces)
         {
-            var positions = piece.Value.Where(elem => VIPIslandLogicComponent.IslandPositions.Contains(elem.SetZ(BoardLayer.Piece.Layer)) == false).ToList();
-            if (positions.Count == 0)
-            {
-                continue;
-            }
-            
             context.ActionExecutor.AddAction(new FillBoardAction
             {
                 Piece = piece.Key,
-                Positions = positions
+                Positions = piece.Value
             });
         }
     }
