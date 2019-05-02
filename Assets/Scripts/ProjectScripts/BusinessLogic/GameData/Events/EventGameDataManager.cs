@@ -9,14 +9,14 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
     
-    public Dictionary<EventGameType, EventGameDef> Defs;
-    
-    public int Step => context.UserProfile.GetStorageItem(Currency.EventStep.Name).Amount;
+    public Dictionary<EventGameType, EventGame> Defs;
     
     public Action<EventGameType> OnStart;
     public Action<EventGameType> OnStop;
 
     private GameDataManager context;
+
+    public EventGame CurrentEventGame;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -46,7 +46,7 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
 
     public void Reload()
     {
-        Defs = new Dictionary<EventGameType, EventGameDef>();
+        Defs = new Dictionary<EventGameType, EventGame>();
         LoadData(new ResourceConfigDataMapper<List<EventGameStepDef>>("configs/eventOrderSoftLaunch.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 	
@@ -114,7 +114,8 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
                     }
                 }
 
-                Defs.Add(EventGameType.OrderSoftLaunch, new EventGameDef{EventType = EventGameType.OrderSoftLaunch, State = EventGameState.Default, Steps = data});
+                CurrentEventGame = new EventGame{EventType = EventGameType.OrderSoftLaunch, State = EventGameState.Default, Steps = data};
+                Defs.Add(EventGameType.OrderSoftLaunch, CurrentEventGame);
             }
             else
             {
@@ -133,31 +134,5 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     {
         var name = (EventGameType)Enum.Parse(typeof(EventGameType), id);
         OnStop?.Invoke(name);
-    }
-    
-    public int Price(EventGameType name)
-    {
-        var step = IsCompleted(name) ? Step - 1 : Step;
-        return Defs[name].Steps[step].Prices[0].Amount;
-    }
-    
-    public bool IsActive(EventGameType name)
-    {
-        return IsCompleted(name) == false;
-    }
-
-    public bool IsPremium(EventGameType name)
-    {
-        return false;
-    }
-    
-    public bool IsLastStep(EventGameType name)
-    {
-        return Step == Defs[name].Steps.Count - 1;
-    }
-    
-    public bool IsCompleted(EventGameType name)
-    {
-        return Step == Defs[name].Steps.Count;
     }
 }

@@ -35,16 +35,19 @@ public class UIEventElementViewController : UIContainerElementViewController
     private Material unlockMaterial;
 
     public bool IsComplete;
+
+    private EventGame eventGame;
     
     public override void Init()
     {
         base.Init();
         
+        eventGame = GameDataService.Current.EventGameManager.CurrentEventGame;
+        
         var contentEntity = entity as UIEventElementEntity;
 
         var isNormalActive = contentEntity.GameStep.NormalRewards != null && contentEntity.GameStep.NormalRewards.Count > 0;
         var isPremiumActive = contentEntity.GameStep.PremiumRewards != null && contentEntity.GameStep.PremiumRewards.Count > 0;
-        var isPremiumPaid = GameDataService.Current.EventGameManager.IsPremium(EventGameType.OrderSoftLaunch);
         
         normal.SetActive(isNormalActive);
         premium.SetActive(isPremiumActive);
@@ -61,13 +64,13 @@ public class UIEventElementViewController : UIContainerElementViewController
             CreateIcon(ref premiumIcon, premiumAnchor, ref premiumSprites, contentEntity.GameStep.PremiumRewards[0].Currency);
         }
         
-        if (isPremiumPaid == false) Sepia(premiumSprites, true);
+        if (eventGame.IsPremium == false) Sepia(premiumSprites, true);
         
-        IsComplete = Index < GameDataService.Current.EventGameManager.Step;
+        IsComplete = Index < eventGame.Step;
         
         check.SetActive(IsComplete);
         normalShine.SetActive(isNormalActive && IsComplete && contentEntity.GameStep.IsNormalClaimed == false);
-        premiumShine.SetActive(isPremiumActive && isPremiumPaid && IsComplete && contentEntity.GameStep.IsPremiumClaimed == false);
+        premiumShine.SetActive(isPremiumActive && eventGame.IsPremium && IsComplete && contentEntity.GameStep.IsPremiumClaimed == false);
         
         btnNormal.gameObject.SetActive(normalShine.activeSelf);
         btnPremium.gameObject.SetActive(premiumShine.activeSelf);
@@ -85,7 +88,7 @@ public class UIEventElementViewController : UIContainerElementViewController
 
     public override void OnViewClose(IWUIWindowView context)
     {
-        if (entity is UIEventElementEntity && GameDataService.Current.EventGameManager.IsCompleted(EventGameType.OrderSoftLaunch))
+        if (entity is UIEventElementEntity && eventGame.IsCompleted)
         {
             OnNormalClick();
             OnPremiumClick();

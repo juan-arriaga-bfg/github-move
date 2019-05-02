@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public class UIEventAlmostWindowModel : IWWindowModel 
 {
     public string Title => LocalizationService.Get("window.event.almost.title", "window.event.almost.title");
@@ -6,4 +8,6 @@ public class UIEventAlmostWindowModel : IWWindowModel
     
     public string MarkText => LocalizationService.Get("window.event.almost.mark", "window.event.almost.mark");
     public string ButtonText => LocalizationService.Get("common.button.ok", "common.button.ok");
+
+    public List<CurrencyPair> Rewards;
 }

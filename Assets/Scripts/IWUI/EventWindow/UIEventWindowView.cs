@@ -26,24 +26,26 @@ public class UIEventWindowView : UIGenericPopupWindowView
 
     private readonly AmountRange mainProgressBorder = new AmountRange(10, 145);
     private readonly AmountRange secondProgressBorder = new AmountRange(35, 100);
+
+    private EventGame eventGame;
     
     public override void OnViewShow()
     {
         base.OnViewShow();
+
+        eventGame = GameDataService.Current.EventGameManager.CurrentEventGame;
         
         var windowModel = Model as UIEventWindowModel;
-        var manager = GameDataService.Current.EventGameManager;
-        var isCompleted = manager.IsCompleted(EventGameType.OrderSoftLaunch);
         
         SetTitle(windowModel.Title);
-        SetMessage(isCompleted ? windowModel.MessageFinish : windowModel.Message);
+        SetMessage(eventGame.IsCompleted ? windowModel.MessageFinish : windowModel.Message);
 
         vipLabel.Text = windowModel.VIPText;
-        btnShowLabel.Text = isCompleted ? windowModel.ButtonFinishText : windowModel.ButtonText;
+        btnShowLabel.Text = eventGame.IsCompleted ? windowModel.ButtonFinishText : windowModel.ButtonText;
         
-        messageIcon.SetActive(isCompleted == false);
-        messageTransform.sizeDelta = new Vector2(isCompleted ? 860 : 660, messageTransform.sizeDelta.y);
-        messageTransform.anchoredPosition = new Vector2(isCompleted ? -100 : 0, messageTransform.anchoredPosition.y);
+        messageIcon.SetActive(eventGame.IsCompleted == false);
+        messageTransform.sizeDelta = new Vector2(eventGame.IsCompleted ? 860 : 660, messageTransform.sizeDelta.y);
+        messageTransform.anchoredPosition = new Vector2(eventGame.IsCompleted ? -100 : 0, messageTransform.anchoredPosition.y);
 
         if (windowModel.Timer != null) windowModel.Timer.OnTimeChanged += OnTimeChanged;
         
@@ -51,15 +53,15 @@ public class UIEventWindowView : UIGenericPopupWindowView
         
         Fill(UpdateEntities(), content);
         
-        var defs = manager.Defs[EventGameType.OrderSoftLaunch].Steps;
-        var step = manager.Step;
+        var defs = eventGame.Steps;
+        var step = eventGame.Step;
         
         var target = defs[defs.Count - 1].RealPrices[0].Amount;
         var real = ProfileService.Current.GetStorageItem(Currency.Token.Name).Amount;
-        var current = (step == 0 ? 0 : defs[step - 1].RealPrices[0].Amount) + real - (isCompleted ? defs[step - 1].Prices[0].Amount : 0);
+        var current = (step == 0 ? 0 : defs[step - 1].RealPrices[0].Amount) + real - (eventGame.IsCompleted ? defs[step - 1].Prices[0].Amount : 0);
         var progress = Mathf.Clamp(mainProgressBorder.Max * (current / (float) target) + mainProgressBorder.Min, mainProgressBorder.Min, mainProgressBorder.Max);
 
-        var progressSecond = (secondProgressBorder.Max + secondProgressBorder.Min) * step + (isCompleted ? 0 : (int) (secondProgressBorder.Max * (real / (float) manager.Price(EventGameType.OrderSoftLaunch))));
+        var progressSecond = (secondProgressBorder.Max + secondProgressBorder.Min) * step + (eventGame.IsCompleted ? 0 : (int) (secondProgressBorder.Max * (real / (float) eventGame.Price)));
         
         progressLabel.Text = $"{current}/{target}";
         mainLine.sizeDelta = new Vector2(progress, mainLine.sizeDelta.y);
@@ -70,7 +72,7 @@ public class UIEventWindowView : UIGenericPopupWindowView
 
     public override void OnViewClose()
     {
-        if (GameDataService.Current.EventGameManager.IsCompleted(EventGameType.OrderSoftLaunch))
+        if (eventGame.IsCompleted)
         {
             var board = BoardService.Current.FirstBoard;
             var positions = new List<BoardPosition>();
@@ -104,7 +106,7 @@ public class UIEventWindowView : UIGenericPopupWindowView
         InitButtonBase(btnMaskLeft, Controller.CloseCurrentWindow);
         InitButtonBase(btnMaskRight, Controller.CloseCurrentWindow);
 
-        if (GameDataService.Current.EventGameManager.Step == 0)
+        if (eventGame.Step == 0)
         {
             Scroll(0);
             return;
@@ -173,8 +175,12 @@ public class UIEventWindowView : UIGenericPopupWindowView
 
     private void OnClick()
     {
-        if (GameDataService.Current.EventGameManager.IsCompleted(EventGameType.OrderSoftLaunch))
+        if (eventGame.IsCompleted)
         {
+            var modelAlmost = UIService.Get.GetCachedModel<UIEventAlmostWindowModel>(UIWindowType.EventAlmostWindow);
+            
+//            modelAlmost.Rewards = eventGame.
+            
             Controller.CloseCurrentWindow();
             return;
         }

@@ -66,22 +66,21 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
     
     private void UpdateProgress(float value)
     {
-        var manager = GameDataService.Current.EventGameManager;
-        var price = manager.Price(EventGameType.OrderSoftLaunch);
+        var eventGame = GameDataService.Current.EventGameManager.CurrentEventGame;
+        var price = eventGame.Price;
         
         progress.sizeDelta = new Vector2(Mathf.Lerp(progressBorder.Min, progressBorder.Max, value/price), progress.sizeDelta.y);
         
-        if (manager.IsCompleted(EventGameType.OrderSoftLaunch) || CurrencyHelper.IsCanPurchase(itemUid, price) == false) return;
+        if (eventGame.IsCompleted || CurrencyHelper.IsCanPurchase(itemUid, price) == false) return;
 
-        CurrencyHelper.Purchase(Currency.EventStep.Name, 1, itemUid, manager.IsLastStep(EventGameType.OrderSoftLaunch) ? 0 : price);
+        CurrencyHelper.Purchase(Currency.EventStep.Name, 1, itemUid, eventGame.IsLastStep ? 0 : price);
         UpdateDots();
         UpdateMark();
     }
 
     private void UpdateDots()
     {
-        var manager = GameDataService.Current.EventGameManager;
-        var current = manager.Step;
+        var current = GameDataService.Current.EventGameManager.CurrentEventGame.Step;
 
         for (var i = 0; i < dots.Count; i++)
         {
@@ -91,16 +90,14 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
 
     public void UpdateMark()
     {
-        var manager = GameDataService.Current.EventGameManager;
-        var step = manager.Step;
-        var defs = manager.Defs[EventGameType.OrderSoftLaunch].Steps;
-        var isPremium = manager.IsPremium(EventGameType.OrderSoftLaunch);
+        var eventGame = GameDataService.Current.EventGameManager.CurrentEventGame;
+        var step = eventGame.Step;
 
         for (var i = 0; i < step; i++)
         {
-            var def = defs[i];
+            var def = eventGame.Steps[i];
 
-            if (def.IsNormalIgnoredOrClaimed && (isPremium == false || def.IsPremiumIgnoredOrClaimed)) continue;
+            if (def.IsNormalIgnoredOrClaimed && (eventGame.IsPremium == false || def.IsPremiumIgnoredOrClaimed)) continue;
             
             shine.SetActive(true);
             exclamationMark.SetActive(true);
@@ -115,10 +112,10 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
     {
         if (amountLabel == null) return;
         
-        var manager = GameDataService.Current.EventGameManager;
+        var eventGame = GameDataService.Current.EventGameManager.CurrentEventGame;
         
         value = Mathf.Max(0, value);
-        amountLabel.Text = $"<mspace=2.7em>{value}/{manager.Price(EventGameType.OrderSoftLaunch)}</mspace>";
+        amountLabel.Text = $"<mspace=2.7em>{value}/{eventGame.Price}</mspace>";
     }
     
     public void OnClick()
