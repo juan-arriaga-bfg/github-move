@@ -104,4 +104,4 @@ MonoBehaviour:
   - Key: eventOrderSoftLaunch
     Link: 1AWIGmKrwWJZCl0gv5-Qmg6t5L3KrCFC43N5phnvX6Is
     Route: parse
-    Pattern: '[{"Step":"","Prices":[{"Currency":"","Amount":0}],"NormalRewards":[{"Currency":"","Amount":0}],"PremiumRewards":[{"Currency":"","Amount":0}]}]'
+    Pattern: '[{"Step":"","Prices":[{"Currency":"","Amount":0}],"NormalRewards":[{"Currency":"","Amount":0}],"NormalRewardsPrice":{"Currency":"","Amount":0},"PremiumRewards":[{"Currency":"","Amount":0}],"PremiumRewardsPrice":{"Currency":"","Amount":0}}]'

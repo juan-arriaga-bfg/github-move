@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BfgAnalytics;
 
 public class UIEventAlmostWindowView : UIGenericPopupWindowView 
 {
@@ -33,9 +34,26 @@ public class UIEventAlmostWindowView : UIGenericPopupWindowView
         InitButtonBase(btnBuy, OnClick);
     }
 
+    public override void OnViewClose()
+    {
+        var windowModel = Model as UIEventAlmostWindowModel;
+
+        windowModel.Price = null;
+        windowModel.Rewards = null;
+        
+        base.OnViewClose();
+    }
+
     private void OnClick()
     {
+        var windowModel = Model as UIEventAlmostWindowModel;
         
+        var flyPosition = GetCanvas().worldCamera.WorldToScreenPoint(btnBuy.transform.position);
+        
+        CurrencyHelper.PurchaseAndProvideSpawn(windowModel.Rewards, windowModel.Price, null, flyPosition, null, false, true);
+//        Analytics.SendPurchase($"market{GetIndex()}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Price}, null, false, false);
+        
+        Controller.CloseCurrentWindow();
     }
     
     private List<IUIContainerElementEntity> UpdateEntities()

@@ -69,33 +69,7 @@ public class UIEventWindowView : UIGenericPopupWindowView
         
         content.GetScrollRect().horizontalNormalizedPosition = step == 0 ? 1 : 0;
     }
-
-    public override void OnViewClose()
-    {
-        if (eventGame.IsCompleted)
-        {
-            var board = BoardService.Current.FirstBoard;
-            var positions = new List<BoardPosition>();
-
-            for (var id = PieceType.Token1.Id; id <= PieceType.Token3.Id; id++)
-            {
-                positions.AddRange(board.BoardLogic.PositionsCache.GetPiecePositionsByType(id));
-            }
-            
-            foreach (var position in positions)
-            {
-                board.ActionExecutor.AddAction(new CollapsePieceToAction
-                {
-                    To = position,
-                    Positions = new List<BoardPosition> {position},
-                    AnimationResourceSearch = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnDestroyFromBoard)
-                });
-            }
-        }
-        
-        base.OnViewClose();
-    }
-
+    
     public override void OnViewShowCompleted()
     {
         base.OnViewShowCompleted();
@@ -125,6 +99,13 @@ public class UIEventWindowView : UIGenericPopupWindowView
         
         Scroll(content.Tabs.size - 1);
     }
+
+    public override void OnViewClose()
+    {
+        if (eventGame.IsCompleted) eventGame.Finish();
+        
+        base.OnViewClose();
+    }
     
     public override void OnViewCloseCompleted()
     {
@@ -137,10 +118,9 @@ public class UIEventWindowView : UIGenericPopupWindowView
     
     private List<IUIContainerElementEntity> UpdateEntities()
     {
-        var defs = GameDataService.Current.EventGameManager.Defs[EventGameType.OrderSoftLaunch].Steps;
-        var views = new List<IUIContainerElementEntity>(defs.Count);
+        var views = new List<IUIContainerElementEntity>(eventGame.Steps.Count);
         
-        foreach (var def in defs)
+        foreach (var def in eventGame.Steps)
         {
             var entity = new UIEventElementEntity
             {
@@ -177,10 +157,6 @@ public class UIEventWindowView : UIGenericPopupWindowView
     {
         if (eventGame.IsCompleted)
         {
-            var modelAlmost = UIService.Get.GetCachedModel<UIEventAlmostWindowModel>(UIWindowType.EventAlmostWindow);
-            
-//            modelAlmost.Rewards = eventGame.
-            
             Controller.CloseCurrentWindow();
             return;
         }

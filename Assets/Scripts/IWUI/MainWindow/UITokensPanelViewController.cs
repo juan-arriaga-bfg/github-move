@@ -27,7 +27,7 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
 
     public override void OnViewShow(IWUIWindowView context)
     {
-        var amount = GameDataService.Current.EventGameManager.Defs[EventGameType.OrderSoftLaunch].Steps.Count;
+        var amount = GameDataService.Current.EventGameManager.CurrentEventGame.Steps.Count;
 
         for (var i = 1; i < amount; i++)
         {

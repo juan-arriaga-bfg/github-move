@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public enum EventGameType
 {
@@ -37,6 +38,53 @@ public class EventGame
     public bool IsPremium => false;
     
     public bool IsLastStep => Step == Steps.Count - 1;
-    
-    public bool IsCompleted => Step == Steps.Count;
+
+    public bool IsCompleted => true; //Step == Steps.Count;
+
+    public void Finish()
+    {
+        var board = BoardService.Current.FirstBoard;
+        var positions = new List<BoardPosition>();
+
+        for (var id = PieceType.Token1.Id; id <= PieceType.Token3.Id; id++)
+        {
+            positions.AddRange(board.BoardLogic.PositionsCache.GetPiecePositionsByType(id));
+        }
+            
+        foreach (var position in positions)
+        {
+            board.ActionExecutor.AddAction(new CollapsePieceToAction
+            {
+                To = position,
+                Positions = new List<BoardPosition> {position},
+                AnimationResourceSearch = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnDestroyFromBoard)
+            });
+        }
+        
+        if (Step == Steps.Count) return;
+        
+        var stepDef = Steps[Step];
+        var model = UIService.Get.GetCachedModel<UIEventAlmostWindowModel>(UIWindowType.EventAlmostWindow);
+
+        model.Price = null;
+        model.Rewards = new List<CurrencyPair>();
+
+        if (stepDef.IsNormalIgnored == false)
+        {
+            model.Price = stepDef.NormalRewardsPrice.Copy();
+            model.Rewards.AddRange(stepDef.NormalRewards);
+        }
+        
+        if (IsPremium && stepDef.IsPremiumIgnored == false)
+        {
+            if (model.Price == null) model.Price = stepDef.PremiumRewardsPrice.Copy();
+            else model.Price.Amount += stepDef.PremiumRewardsPrice.Amount;
+            
+            model.Rewards.AddRange(stepDef.PremiumRewards);
+        }
+        
+        if (model.Price == null) return;
+        
+        UIService.Get.ShowWindow(UIWindowType.EventAlmostWindow);
+    }
 }

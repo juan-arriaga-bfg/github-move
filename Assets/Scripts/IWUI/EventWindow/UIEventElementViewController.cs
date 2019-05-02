@@ -46,8 +46,8 @@ public class UIEventElementViewController : UIContainerElementViewController
         
         var contentEntity = entity as UIEventElementEntity;
 
-        var isNormalActive = contentEntity.GameStep.NormalRewards != null && contentEntity.GameStep.NormalRewards.Count > 0;
-        var isPremiumActive = contentEntity.GameStep.PremiumRewards != null && contentEntity.GameStep.PremiumRewards.Count > 0;
+        var isNormalActive = contentEntity.GameStep.IsNormalIgnored == false;
+        var isPremiumActive = contentEntity.GameStep.IsPremiumIgnored == false;
         
         normal.SetActive(isNormalActive);
         premium.SetActive(isPremiumActive);
