@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DailyRewardDataManager : ECSEntity, IDataManager, IDataLoader<List<DailyRewardDef>>
 {
+    public const string QUEST_ID = "66_CreatePiece_NPC_B3";
+    
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
@@ -20,6 +22,8 @@ public class DailyRewardDataManager : ECSEntity, IDataManager, IDataLoader<List<
     public int DaysCount => Defs.Count;
 
     private GameDataManager context;
+
+    public bool IsActivated { get; private set; }
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -31,11 +35,13 @@ public class DailyRewardDataManager : ECSEntity, IDataManager, IDataLoader<List<
     public override void OnUnRegisterEntity(ECSEntity entity)
     {
         context = null;
+        
+        Cleanup();
     }
 	
     public void Reload()
     {
-        StopTimer();
+        Cleanup();
         
         Defs = new List<DailyRewardDef>();
         LoadData(new ResourceConfigDataMapper<List<DailyRewardDef>>("configs/daily.data", NSConfigsSettings.Instance.IsUseEncryption));
@@ -46,14 +52,16 @@ public class DailyRewardDataManager : ECSEntity, IDataManager, IDataLoader<List<
             return;
         }
         
-        Day = save.Day;
+        Day = save.Data.Day;
         if (Day - 1 > Defs.Count)
         {
             IW.Logger.LogWarning($"[DailyRewardDataManager] => Reload: Day = {Day} but we have only {Defs.Count} Defs. Sequence will be reseted!");
             ResetSequence();
         }
         
-        TimerStartTime = DateTimeExtension.UnixTimeToDateTime(save.TimerStart);
+        TimerStartTime = DateTimeExtension.UnixTimeToDateTime(save.Data.TimerStart);
+
+        IsActivated = save.Data.IsActivated;
     }
 
     public void StopTimer()
@@ -61,23 +69,28 @@ public class DailyRewardDataManager : ECSEntity, IDataManager, IDataLoader<List<
         if (Timer != null)
         {
             Timer.OnComplete -= OnCompleteTimer;
-            Timer.OnComplete -= OnTimeChanged;
             Timer.Stop();
             UnRegisterComponent(Timer);
             Timer = null;
         }
     }
 
-    private bool IsActivated()
-    {
-        return context.TutorialDataManager.IsCompeted(29);
-    }
-    
     public void StartTimer()
     {
-        if (!IsActivated())
+        if (!IsActivated)
         {
-            IW.Logger.Log($"[DailyRewardDataManager] => StartTimer: Skip by still not activated!");
+            IW.Logger.Log($"[DailyRewardDataManager] => StartTimer: Skip by !IsActivated");
+
+            var questManager = context.QuestsManager;
+            if (questManager.IsQuestCompleted(QUEST_ID))
+            {
+                FirstRun();
+            }
+            else
+            {
+                questManager.OnQuestStateChanged += OnQuestStateChanged;
+            }
+            
             return;
         }
         
@@ -93,15 +106,24 @@ public class DailyRewardDataManager : ECSEntity, IDataManager, IDataLoader<List<
         };
         
         Timer.OnComplete += OnCompleteTimer;
-        Timer.OnTimeChanged += OnTimeChanged;
-                                                                                                                
+
         RegisterComponent(Timer);
         Timer.Start(TimerStartTime);
     }
 
-    private void OnTimeChanged()
+    private void OnQuestStateChanged(QuestEntity quest, TaskEntity task)
     {
-        IW.Logger.Log($"Timer: OnTimeChanged: {Timer.CompleteTime.GetTimeLeftText(false, false, null, false, false)}");
+        if (quest.Id == QUEST_ID && quest.IsClaimed())
+        {
+            FirstRun();
+        }
+    }
+
+    private void Cleanup()
+    {
+        context.QuestsManager.OnQuestStateChanged -= OnQuestStateChanged;
+
+        StopTimer();
     }
 
     private DateTime CalculateTimerStartTime()
@@ -191,6 +213,8 @@ public class DailyRewardDataManager : ECSEntity, IDataManager, IDataLoader<List<
     {
         IW.Logger.Log($"[DailyRewardDataManager] => ConsumeCurrentDay");
 
+        IsActivated = true;
+        
         NextDay();
     }
     
@@ -230,10 +254,11 @@ public class DailyRewardDataManager : ECSEntity, IDataManager, IDataLoader<List<
         });
     }
 
-    public void Activate()
+    public void FirstRun()
     {
         IW.Logger.Log($"[DailyRewardDataManager] => Activate");
-        
+
+        Cleanup();
         ResetSequence();
         ShowWindow();
     }
