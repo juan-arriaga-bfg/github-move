@@ -35,25 +35,25 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
     
     public static readonly List<BoardPosition> IslandPositions = new List<BoardPosition>
     {
-        new BoardPosition(7,11,BoardLayer.Piece.Layer),
-        new BoardPosition(8,11,BoardLayer.Piece.Layer),
-        new BoardPosition(6,12,BoardLayer.Piece.Layer),
-        new BoardPosition(7,12,BoardLayer.Piece.Layer),
-        new BoardPosition(8,12,BoardLayer.Piece.Layer),
-        new BoardPosition(9,12,BoardLayer.Piece.Layer),
-        new BoardPosition(6,13,BoardLayer.Piece.Layer),
-        new BoardPosition(7,13,BoardLayer.Piece.Layer),
-        new BoardPosition(8,13,BoardLayer.Piece.Layer),
-        new BoardPosition(9,13,BoardLayer.Piece.Layer),
-        new BoardPosition(6,14,BoardLayer.Piece.Layer),
-        new BoardPosition(7,14,BoardLayer.Piece.Layer),
-        new BoardPosition(8,14,BoardLayer.Piece.Layer),
-        new BoardPosition(9,14,BoardLayer.Piece.Layer),
-        new BoardPosition(7,15,BoardLayer.Piece.Layer),
-        new BoardPosition(8,15,BoardLayer.Piece.Layer)
+        new BoardPosition(7,11),
+        new BoardPosition(8,11),
+        new BoardPosition(6,12),
+        new BoardPosition(7,12),
+        new BoardPosition(8,12),
+        new BoardPosition(9,12),
+        new BoardPosition(6,13),
+        new BoardPosition(7,13),
+        new BoardPosition(8,13),
+        new BoardPosition(9,13),
+        new BoardPosition(6,14),
+        new BoardPosition(7,14),
+        new BoardPosition(8,14),
+        new BoardPosition(9,14),
+        new BoardPosition(7,15),
+        new BoardPosition(8,15)
     };
 
-    public List<BoardPosition> Island => IslandPositions;
+    public List<BoardPosition> Island;
     
     private Vector3 localPosition;
 
@@ -71,6 +71,7 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
             Currency = Currency.Crystals.Name,
             Amount = GameDataService.Current.ConstantsManager.PremiumIslandPrice
         };
+        Island = IslandPositions.Select(pos => pos.SetZ(BoardLayer.Piece.Layer)).ToList();
     }
 
     public void Init()
@@ -190,19 +191,15 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
 
     public void SpawnPieces()
     {
-        var pieces = GameDataService.Current.FieldManager.Pieces;
+        var pieces = GameDataService.Current.FieldManager.IslandPieces;
         foreach (var piece in pieces)
         {
-            var positions = piece.Value.Where(position => Island.Contains(position.SetZ(BoardLayer.Piece.Layer))).ToList();
-            if (positions.Count > 0)
+            context.Context.ActionExecutor.AddAction(new FillBoardAction
             {
-                context.Context.ActionExecutor.AddAction(new FillBoardAction
-                {
-                    Piece = piece.Key,
-                    Positions = positions,
-                    OnComplete = (board) => UpdateLockState() 
-                });
-            } 
+                Piece = piece.Key,
+                Positions = piece.Value,
+                OnComplete = (board) => UpdateLockState() 
+            });
         }
     }
 

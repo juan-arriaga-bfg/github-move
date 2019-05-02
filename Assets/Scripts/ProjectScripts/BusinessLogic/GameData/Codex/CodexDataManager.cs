@@ -81,7 +81,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
                     UnlockPiece(PieceType.Empty.Id);
                     UnlockPiece(PieceType.None.Id);
                     
-                    var pieces = GameDataService.Current.FieldManager.Pieces;
+                    var pieces = GameDataService.Current.FieldManager.BoardPieces;
                     foreach (var key in pieces.Keys)
                     {
                         UnlockPiece(key);
