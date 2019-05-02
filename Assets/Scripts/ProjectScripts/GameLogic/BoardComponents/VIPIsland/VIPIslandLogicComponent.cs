@@ -209,7 +209,11 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
         foreach (var position in Island)
         {
             var view = context.Context.RendererContext.GetElementAt(position) as PieceBoardElementView;
-            view?.ToggleLockView(isLocked);
+            if (view != null)
+            {
+                view.ToggleLockView(isLocked);
+                context.PieceFlyer?.FlyToCodex(view.Piece, position.X, position.Y, Currency.Codex.Name);
+            }
         }
     }
 
