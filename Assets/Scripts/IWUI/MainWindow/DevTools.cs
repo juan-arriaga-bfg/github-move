@@ -1,6 +1,7 @@
 using Debug = IW.Logger;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BfgAnalytics;
 using CodeStage.AntiCheat.ObscuredTypes;
 using DG.Tweening;
@@ -31,7 +32,9 @@ public class DevTools : UIContainerElementViewController
     private static bool isTutorialDisabled = true;
     private static bool isRemoverDebugDisabled = true;
 #endif
+    
     private bool isEnabled = false;
+    public static bool IsIdsEnabled = false;
     
     public override void OnViewInit(IWUIWindowView context)
     {
@@ -91,7 +94,7 @@ public class DevTools : UIContainerElementViewController
         UIService.Get.ShowWindow(UIWindowType.QuestCheatSheetWindow);
     }
     
-    private List<DebugCellView> cells = new List<DebugCellView>();
+    private List<DebugTextView> cells = new List<DebugTextView>();
     
     public void OnToggleCells(bool isChecked)
     {
@@ -104,7 +107,7 @@ public class DevTools : UIContainerElementViewController
                 board.RendererContext.DestroyElement(cell);
             }
             
-            cells = new List<DebugCellView>();
+            cells = new List<DebugTextView>();
             return;
         }
         
@@ -114,9 +117,32 @@ public class DevTools : UIContainerElementViewController
             {
                 //if(board.BoardLogic.IsLockedCell(new BoardPosition(i, j, 1))) continue;
                 
-                var cell = board.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell, new BoardPosition(i, j, BoardLayer.MAX.Layer));
+                var cell = board.RendererContext.CreateBoardElementAt<DebugTextView>(R.DebugCell, new BoardPosition(i, j, BoardLayer.MAX.Layer));
                 cell.SetIndex(i, j);
                 cells.Add(cell);
+            }
+        }
+    }
+
+    public void OnToggleIds(bool isChecked)
+    {
+        IsIdsEnabled = !isChecked;
+        
+        var logic = BoardService.Current.FirstBoard.BoardLogic;
+        var cache = new Dictionary<int, List<BoardPosition>>(logic.PositionsCache.Cache);
+
+        cache.Remove(PieceType.Fog.Id);
+        cache.Remove(PieceType.LockedEmpty.Id);
+
+        foreach (var positions in cache.Values)
+        {
+            foreach (var position in positions)
+            {
+                var piece = logic.GetPieceAt(position);
+
+                if (piece?.ActorView == null) continue;
+                
+                piece.ActorView.ShowId(IsIdsEnabled);
             }
         }
     }
@@ -137,6 +163,94 @@ public class DevTools : UIContainerElementViewController
     {
         Debug.Log("OnSpawnFireFlyClick");
         BoardService.Current.FirstBoard.BoardLogic.FireflyLogic.Execute();
+    }
+    
+    public void OnSpawnAirShipClick()
+    {
+        Debug.Log("OnSpawnAirShipClick");
+        
+        var pieces1 = new Dictionary<int, int>
+        {
+            { PieceType.Parse("A1"), 1 },
+            { PieceType.Parse("B3"), 1 },
+            { PieceType.Parse("A2"), 1 },
+            { PieceType.Parse("B5"), 1 },
+        };
+        
+        BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Add(pieces1).AnimateSpawn();        
+        return;
+        
+        var allIds = PieceType.GetAllIds();
+        
+        for (int i = allIds.Count - 1; i >=0 ; i--)
+        {
+            var id = allIds[i];
+            var def = PieceType.GetDefById(id);
+            if (def.Filter.Has(PieceTypeFilter.Fake)
+            || def.Filter.Has(PieceTypeFilter.Multicellular)
+            || def.Filter.Has(PieceTypeFilter.Mine)
+            || def.Filter.Has(PieceTypeFilter.Obstacle)
+            || def.Filter.Has(PieceTypeFilter.Character)
+            || def.Filter.Has(PieceTypeFilter.ProductionField)                
+            || (def.Abbreviations[0].Contains("NPC") && id > 2000501)                
+                )
+            {
+                allIds.RemoveAt(i);
+            }
+        }
+
+        for (int i = 0; i < 1000; i++)
+        {
+            int PIECES_COUNT = UnityEngine.Random.Range(1, 5);
+            var pieces = new Dictionary<int, int>();
+            for (int i1 = 0; i1 < PIECES_COUNT; i1++)
+            {
+                int index = UnityEngine.Random.Range(0, allIds.Count);
+
+                int id = allIds[index];
+                // var def = PieceType.GetDefById(id);
+                
+                if (i % 5 == 0)
+                {
+                    if (pieces.Count > 0)
+                    {
+                        pieces[pieces.Keys.First()]++;
+                    }
+                    else
+                    {
+                        pieces.Add(id, 1);
+                    } 
+                }
+                else
+                {
+                    if (pieces.ContainsKey(id))
+                    {
+                        pieces[id]++;
+                    }
+                    else
+                    {
+                        pieces.Add(id, 1);
+                    } 
+                }
+
+                if (i % 7 == 0)
+                {
+                    break;
+                }
+            }
+
+            try
+            {
+                var view = BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Add(pieces);
+                
+                view.PlaceTo(new Vector2(17 + i * 3f, view.transform.position.y + 10));
+                view.AnimateSpawn();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }        
     }
 
     private void ShowQuestWindow(List<QuestEntity> quests, int index)
@@ -265,17 +379,11 @@ public class DevTools : UIContainerElementViewController
         new HighlightTaskPointToEnergyPlusButton().Highlight(null);
     }
 
-    public static void UpdateFogSectorsDebug()    
-    {
-        var view = new FogSectorsView();
-        view.Init(BoardService.Current.FirstBoard.RendererContext);
-        view.UpdateFogSectorsMesh();
-    }
-
     public void OnDebug2Click()
     {
         Debug.Log("OnDebug2Click");
-       
+        return;
+        
         GameDataService.Current.QuestsManager.StartNewDailyQuest();
         return;
         

@@ -22,6 +22,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     [SerializeField] private GameObject smallButton;
     [SerializeField] private GameObject bigButton;
     [SerializeField] private GameObject hourglass;
+    [SerializeField] private Transform timerTransform;
     
     private TimerComponent timer;
     private bool isActiveHourglass;
@@ -103,12 +104,8 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         if (progressBar != null) progressBar.SetProgress(timer.GetProgress());
         
         label.Text = timer.CompleteTime.GetTimeLeftText();
-        
-        if (timer.CompleteTime.GetTimeLeft().TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit)
-        {
-            SetState(TimerViewSate.Free);
-        }
-        
+
+        if ((int) timer.StartTime.GetTime(timer.UseUTC).TotalSeconds > 0 && timer.IsFree()) SetState(TimerViewSate.Free);
         if (smallButton.activeSelf) price.Text = timerState == TimerViewSate.Free ? LocalizationService.Get("common.button.free", "common.button.free") : timer.GetPrice().ToStringIcon();
     }
     
@@ -116,7 +113,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     {
         if (code != GameEventsCodes.ClosePieceUI) return;
         
-        SetState(TimerViewSate.Normal, context is BoardPosition && ((BoardPosition) context).Equals(Context.CachedPosition) ? 0 : 0.2f);
+        SetState(TimerViewSate.Normal, context is BoardPosition position && position.Equals(Context.CachedPosition) ? 0 : 0.2f);
     }
 
     public override void OnSwap(bool isEnd)
@@ -160,5 +157,22 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         }
         
         timer.FastComplete(analyticsLocation);
+    }
+
+    public override void Attention()
+    {
+        DOTween.Kill(attentionUid);
+        
+        const int loops = 3;
+        const float duration = 1.5f / (loops* 2);
+        var sequence = DOTween.Sequence().SetId(attentionUid).SetEase(Ease.Linear);
+
+        ColorUtility.TryParseHtmlString("#00D46C", out var color);
+        
+        sequence.SetLoops(loops);
+        sequence.Insert(0f, timerTransform.DOScale(1.3f, duration));
+        sequence.Insert(0f, label.TextLabel.DOColor(color, duration));
+        sequence.Insert(duration, timerTransform.DOScale(1f, duration));
+        sequence.Insert(duration, label.TextLabel.DOColor(Color.white, duration));
     }
 }

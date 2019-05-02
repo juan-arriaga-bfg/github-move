@@ -38,12 +38,6 @@ public class TaskHitTreeEntity : TaskEventCounterEntity, IHavePieceId
             PieceId = PieceType.Parse(PieceUid);
             targetBranch = HighlightTaskPointToPieceSourceHelper.PieceBranchRegexComplex.Match(PieceUid).Value;
 
-            // fallback for tutorial pieces
-            if (targetBranch == "TT")
-            {
-                targetBranch = "A";
-            }
-            
             if (string.IsNullOrEmpty(targetBranch))
             {
                 Debug.LogError($"[TaskHitTreeEntity] => OnDeserializedTaskCounterAboutPiece: Branch for {PieceUid} is empty!");

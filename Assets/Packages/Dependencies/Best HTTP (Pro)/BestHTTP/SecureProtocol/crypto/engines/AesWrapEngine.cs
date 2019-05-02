@@ -1,6 +1,6 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
-namespace Org.BouncyCastle.Crypto.Engines
+#pragma warning disable
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Engines
 {
 	/// <remarks>
 	/// An implementation of the AES Key Wrapper from the NIST Key Wrap Specification.
@@ -16,5 +16,5 @@ namespace Org.BouncyCastle.Crypto.Engines
 		}
 	}
 }
-
+#pragma warning restore
 #endif

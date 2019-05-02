@@ -20,8 +20,9 @@ public class SecuredTimeServiceInitComponent : AsyncInitComponentBase
         SecuredTimeService.Instance.SetManager(timeManager);
 
         timeManager
-           .AddServerTimeProvider(new BfgServerTimeProvider().SetUrl("https://f2p-qa.bigfishgames.com/RobinHood1/time"))
-           .AddServerTimeProvider(new BfgServerTimeProvider().SetUrl("https://f2p.bigfishgames.com/RobinHood/time"));
+            // .AddServerTimeProvider(new BfgServerTimeProvider().SetUrl("https://f2p-qa.bigfishgames.com/nodejs101/time"))
+           .AddServerTimeProvider(new BfgServerTimeProvider().SetUrl("https://f2p.bigfishgames.com/RobinHood/time"))
+           .AddServerTimeProvider(new BfgServerTimeProvider().SetUrl("https://f2p-qa.bigfishgames.com/RobinHood1/time"));
 
         SecuredTimeManager = timeManager;
         

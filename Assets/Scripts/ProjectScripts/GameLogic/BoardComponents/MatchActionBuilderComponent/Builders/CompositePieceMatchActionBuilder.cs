@@ -8,15 +8,15 @@ public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatc
         return new List<int>
         {
             PieceType.A8.Id,
-            PieceType.B10.Id,
-            PieceType.C8.Id,
-            PieceType.D8.Id,
-            PieceType.E8.Id,
-            PieceType.F8.Id,
-            PieceType.G8.Id,
-            PieceType.H8.Id,
-            PieceType.I8.Id,
-            PieceType.J8.Id,
+            PieceType.B9.Id,
+            PieceType.C9.Id,
+            PieceType.D9.Id,
+            PieceType.E9.Id,
+            PieceType.F9.Id,
+            PieceType.G9.Id,
+            PieceType.H9.Id,
+            PieceType.I9.Id,
+            PieceType.J9.Id,
             PieceType.EXT_A8.Id,
             PieceType.EXT_B8.Id,
             PieceType.EXT_C8.Id,
@@ -89,22 +89,30 @@ public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatc
 
         if (starts.Count == 0) return null;
         
-        var at = BoardPosition.Default();
-        List<BoardPosition> positions = null;
+        var options = new List<List<BoardPosition>>();
         
         foreach (var start in starts)
         {
-            positions = CheckMatch(pattern, definition.Context, start);
-            at = start;
-            if(positions != null) break;
+            var positions = CheckMatch(pattern, definition.Context, start);
+            
+            if (positions == null) continue;
+
+            if (positions[2].Equals(position))
+            {
+                matchField.Clear();
+                matchField.AddRange(positions);
+                return CreateAction(new List<int>{nextType}, positions, start, pieceType);
+            }
+            
+            options.Add(positions);
         }
 
-        if (positions == null) return null;
+        if (options.Count == 0) return null;
         
         matchField.Clear();
-        matchField.AddRange(positions);
+        matchField.AddRange(options[0]);
         
-        return CreateAction(new List<int>{nextType}, positions, at, pieceType);
+        return CreateAction(new List<int>{nextType}, matchField, matchField[0], pieceType);
     }
 
     private List<BoardPosition> CheckMatch(List<List<int>> pattern, BoardLogicComponent logic, BoardPosition start)

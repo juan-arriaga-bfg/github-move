@@ -138,6 +138,13 @@ public class GridMeshBuilder
 
     private void CreateEdgesData()
     {
+        // Draw locked cells
+        // foreach (var cell in GameDataService.Current.FieldManager.LockedCells)
+        // {
+        //     DebugTextView debugView = BoardService.Current.FirstBoard.RendererContext.CreateBoardElementAt<DebugTextView>(R.DebugCell2, new BoardPosition(cell.X, cell.Y, BoardLayer.MAX.Layer));
+        //     debugView.SetText($"<size=10><color=#FF0000>!</color></size>");
+        // }
+        
         edgesData = new int[def.FieldWidth + 1,def.FieldHeight + 1];
 
         def.Areas.Sort (delegate(GridMeshArea area1, GridMeshArea area2)
@@ -168,13 +175,14 @@ public class GridMeshBuilder
 
                     int edgeDataOld = edgeData;
                     
-                    bool hasLeftNeighbor       = HasLeftNeighbor(ref matrix, areaX, areaY);
-                    bool hasBottomNeighbor     = HasBottomNeighbor(ref matrix, areaX, areaY);
+                    bool hasLeftNeighbor       = HasLeftNeighbor(ref matrix, areaX, areaY)      ;
+                    bool hasBottomNeighbor     = HasBottomNeighbor(ref matrix, areaX, areaY)    ;
                     bool hasBottomLeftNeighbor = HasBottomLeftNeighbor(ref matrix, areaX, areaY);
-                    
-#region TOP and RIGHT
+                    bool cellExists            = HasCell(ref matrix, areaX, areaY)              ;
 
-                    if (HasCell(ref matrix, areaX, areaY))
+                    #region TOP and RIGHT
+
+                    if (cellExists)
                     {
                         if (!hasLeftNeighbor)
                         {
@@ -258,6 +266,10 @@ public class GridMeshBuilder
 
 #endregion
                     if (edgeData != edgeDataOld && !enable)
+                    {
+                        edgeData = BitsHelper.ToggleBit(edgeData, BIT_EXCLUDED_VERTEX, true);
+                    }
+                    else if (worldX == 0 || worldY == 0)
                     {
                         edgeData = BitsHelper.ToggleBit(edgeData, BIT_EXCLUDED_VERTEX, true);
                     }

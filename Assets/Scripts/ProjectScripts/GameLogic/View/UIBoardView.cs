@@ -16,6 +16,8 @@ public class UIBoardView : BoardElementView
     
     private Transform content;
 
+    public LayerMask DefaultCameraLayer = 1;
+
     public virtual bool IsTop { get; set; }
     
     public Canvas GetCanvas()
@@ -84,6 +86,9 @@ public class UIBoardView : BoardElementView
         ResetAnimation();
         UpdateVisibility(false);
         controller = Context.ViewDefinition;
+        
+        DefaultCameraLayer = LayerMask.NameToLayer("Default");
+        CachedTransform.SetLayerRecursive(DefaultCameraLayer);
     }
 
     public override void ResetViewOnDestroy()
@@ -112,8 +117,12 @@ public class UIBoardView : BoardElementView
     public void Change(bool isShow)
     {
         UpdateView();
-        
-        if(controller == null || IsShow == isShow) return;
+
+        if (controller == null || IsShow == isShow)
+        {
+            IsShow = isShow;
+            return;
+        }
         
         IsShow = isShow;
         
@@ -208,8 +217,12 @@ public class UIBoardView : BoardElementView
             sequence = AddShowAnimation(sequence);
             sequence.InsertCallback(0.25f, () =>
             {
+                controller.OnViewToggle(this, true);
+                
                 OnShow?.Invoke();
                 OnShow = null;
+                
+                
             });
             return;
         }
@@ -219,13 +232,17 @@ public class UIBoardView : BoardElementView
         
         sequence.InsertCallback(0.15f, () =>
         {
+            controller.OnViewToggle(this, false);
+            
             Cash();
             OnHide?.Invoke();
             OnHide = null;
+            
+            
         });
     }
 
-    private Sequence AddShowAnimation(Sequence sequence, bool isAnimate = true)
+    public Sequence AddShowAnimation(Sequence sequence, bool isAnimate = true)
     {
         if (isAnimate)
         {
@@ -241,7 +258,7 @@ public class UIBoardView : BoardElementView
         return sequence;
     }
 
-    private Sequence AddHideAnimation(Sequence sequence, bool isAnimate = true)
+    public Sequence AddHideAnimation(Sequence sequence, bool isAnimate = true)
     {
         if (isAnimate)
         {
@@ -331,5 +348,10 @@ public class UIBoardView : BoardElementView
         {
             BoardService.Current.FirstBoard.Manipulator.CameraManipulator.MoveTo(newPos, true, 0.4f, Ease.OutCubic);
         }
+    }
+
+    public virtual void OnViewInContainerToggle(UIBoardView view, bool state)
+    {
+
     }
 }

@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -45,6 +46,104 @@ namespace UT
                 }
             }
         }
+
+        [Test]
+        public void UTQuestStarterConditionsPassed()
+        {
+            LogAssert.ignoreFailingMessages = true;
+            
+            QuestsDataManager questsDataManager = new QuestsDataManager();
+            questsDataManager.Reload();
+            if (!questsDataManager.CreateStarters())
+            {
+                LogAssert.ignoreFailingMessages = false;
+                Assert.Fail("Can't create starters");
+                return;
+            } 
+            
+            FogsDataManager fogManager = new FogsDataManager();
+            fogManager.Reload();
+
+            var fogIds = fogManager.Fogs.Select(e => e.Uid).ToList();
+            
+            StringBuilder sb = new StringBuilder();
+            
+            var starters = questsDataManager.QuestStarters;
+
+            foreach (var starter in starters)
+            {
+                if (!ValidateId(starter.Id))
+                {
+                    sb.AppendLine($"Wrong starter id '{starter.Id}'");
+                }
+
+                var questIds = starter.QuestToStartIds;
+                if (questIds == null || questIds.Count == 0)
+                {
+                    sb.AppendLine($"No QuestToStartIds specified in starter '{starter.Id}'");
+                    continue;
+                }
+                
+                foreach (var questId in questIds)
+                {
+                    if (!ValidateId(questId))
+                    {
+                        sb.AppendLine($"Wrong quest id '{questId}' in starter '{starter.Id}'");
+                        continue;
+                    }
+                }
+
+                foreach (var condition in starter.Conditions)
+                {
+                    if (!(condition is QuestStartConditionAlwaysTrueComponent) 
+                     && !(condition is QuestStartConditionAlwaysFalseComponent))
+                    {
+                        if (string.IsNullOrEmpty(condition.Value))
+                        {
+                            sb.AppendLine($"Starter '{starter.Id}' Condition {condition.GetType()} with id '{condition.Id}' has null or empty Value");
+                            continue;
+                        }
+                    }
+
+                    switch (condition)
+                    {
+                        case QuestStartConditionQuestCompletedComponent cmp:
+                            var quest = questsDataManager.InstantiateQuest(cmp.QuestId);
+                            if (quest == null)
+                            {
+                                sb.AppendLine($"Starter '{starter.Id}' Condition QuestCompleted with id '{condition.Id}' has reference to not existing quest '{cmp.QuestId}'");
+                            }
+                            break;
+                        
+                        case QuestStartConditionFogClearedComponent cmp:
+                            if (!fogIds.Contains(cmp.FogUid))
+                            {
+                                sb.AppendLine($"Starter '{starter.Id}' Condition FogCleared with id '{condition.Id}' has reference to not existing fog '{cmp.FogUid}'");
+                            }
+                            break;
+                        
+                        case QuestStartConditionPieceUnlockedComponent cmp:
+                            if (PieceType.Parse(cmp.Value) == PieceType.None.Id)
+                            {
+                                sb.AppendLine($"Starter '{starter.Id}' Condition PieceUnlocked with id '{condition.Id}' has reference to not existing piece '{cmp.Value}'");
+                            }
+                            break;
+                    }
+                }
+            }
+
+            LogAssert.ignoreFailingMessages = false;
+            
+            var message = sb.ToString();
+            if (string.IsNullOrEmpty(message))
+            {
+                Assert.Pass();
+            }
+            else
+            {
+                Assert.Fail(message);
+            }
+        }
         
         [Test]
         public void UTQuestIdsPasses()
@@ -72,12 +171,13 @@ namespace UT
             {
                 startersCnt++;
 
-                if (!ValidateId(starter.Id))
-                {
-                    sb.AppendLine($"Wrong starter id '{starter.Id}'");
-                }
-
                 var questIds = starter.QuestToStartIds;
+                if (questIds == null || questIds.Count == 0)
+                {
+                    sb.AppendLine($"No QuestToStartIds specified in starter '{starter.Id}'");
+                    continue;
+                }
+                
                 foreach (var questId in questIds)
                 {
                     if (!ValidateId(questId))
@@ -182,6 +282,12 @@ namespace UT
             foreach (var starterToCheck in starters)
             {
                 var idsToCheck = starterToCheck.QuestToStartIds;
+                if (idsToCheck == null || idsToCheck.Count == 0)
+                {
+                    sb.AppendLine($"No QuestToStartIds specified in starter '{starterToCheck.Id}'");
+                    continue;
+                }
+                
                 foreach (var id in idsToCheck)
                 {
                     foreach (var starterToCompare in starters)
@@ -192,6 +298,12 @@ namespace UT
                         }
 
                         var idsToCompare = starterToCompare.QuestToStartIds;
+                        if (idsToCompare == null || idsToCompare.Count == 0)
+                        {
+                            sb.AppendLine($"No QuestToStartIds specified in starter '{starterToCompare.Id}'");
+                            continue;
+                        }
+                        
                         if (idsToCompare.Contains(id))
                         {
                             if (!idsInMultiplyStarters.Add(id))
@@ -236,5 +348,78 @@ namespace UT
                 Assert.Fail(message);
             }
         }
+        
+        [Test]
+        public void UTTaskPieceIds()
+        {
+            LogAssert.ignoreFailingMessages = true;
+
+            QuestsDataManager questsDataManager = new QuestsDataManager();
+            questsDataManager.Reload();
+            if (!questsDataManager.CreateStarters())
+            {
+                LogAssert.ignoreFailingMessages = false;
+                Assert.Fail("Can't create starters");
+                return;
+            }
+
+            var sb = new StringBuilder();
+            
+            var tasks = questsDataManager.Cache[typeof(TaskEntity)];
+            foreach (var taskJson in tasks.Values)
+            {
+                TaskEntity task = questsDataManager.InstantiateFromJson<TaskEntity>(taskJson);
+                FieldInfo[] fields = task.GetType().GetFields(BindingFlags.Public | 
+                                                              BindingFlags.NonPublic | 
+                                                              BindingFlags.Instance);
+
+                FieldInfo pieceUidField = fields.FirstOrDefault(e => e.Name == "PieceUid");
+                if (pieceUidField == null)
+                {
+                    continue;
+                }
+
+                string pieceUid = pieceUidField.GetValue(task) as string;
+                if (string.IsNullOrEmpty(pieceUid))
+                {
+                    continue;
+                }
+
+                switch (pieceUid)
+                {
+                    case "None":
+                    case "Empty":
+                        continue;
+                }
+
+                int parsedId = PieceType.Parse(pieceUid);
+                if (parsedId == PieceType.None.Id)
+                {
+                    sb.Append($"Task '{task.Id}' has invalid PieceUid: '{pieceUid}'");
+                }
+            }
+            
+
+            LogAssert.ignoreFailingMessages = false;
+            
+            var message = sb.ToString();
+            if (string.IsNullOrEmpty(message))
+            {
+                Assert.Pass($"Tasks checked: {tasks.Count}");
+            }
+            else
+            {
+                Assert.Fail(message);
+            }
+        }
+
+        // A UnityTest behaves like a coroutine in PlayMode
+        // and allows you to yield null to skip a frame in EditMode
+        // [UnityTest]
+        // public IEnumerator UTQuestIdsWithEnumeratorPasses() {
+        //     // Use the Assert class to test conditions.
+        //     // yield to skip a frame
+        //     yield return null;
+        // }
     }
 }

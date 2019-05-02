@@ -1,23 +1,23 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.Text;
 
-//#if NETCF_1_0 || NETCF_2_0 || SILVERLIGHT
+#if NETCF_1_0 || NETCF_2_0 || SILVERLIGHT || PORTABLE || NETFX_CORE
 using System.Collections;
 using System.Reflection;
-//#endif
+#endif
 
-using Org.BouncyCastle.Utilities.Date;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Date;
 
-namespace Org.BouncyCastle.Utilities
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities
 {
     internal abstract class Enums
     {
         internal static Enum GetEnumValue(System.Type enumType, string s)
         {
-            /*if (!enumType.IsEnum)
-                throw new ArgumentException("Not an enumeration type", "enumType");*/
+            if (!IsEnumType(enumType))
+                throw new ArgumentException("Not an enumeration type", "enumType");
 
             // We only want to parse single named constants
             if (s.Length > 0 && char.IsLetter(s[0]) && s.IndexOf(',') < 0)
@@ -41,11 +41,11 @@ namespace Org.BouncyCastle.Utilities
 
         internal static Array GetEnumValues(System.Type enumType)
         {
-            /*if (!enumType.IsEnum)
-                throw new ArgumentException("Not an enumeration type", "enumType");*/
+            if (!IsEnumType(enumType))
+                throw new ArgumentException("Not an enumeration type", "enumType");
 
 #if NETCF_1_0 || NETCF_2_0 || SILVERLIGHT
-            IList result = Platform.CreateArrayList();
+            IList result = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateArrayList();
             FieldInfo[] fields = enumType.GetFields(BindingFlags.Static | BindingFlags.Public);
             foreach (FieldInfo field in fields)
             {
@@ -67,7 +67,16 @@ namespace Org.BouncyCastle.Utilities
             int pos = (int)(DateTimeUtilities.CurrentUnixMs() & int.MaxValue) % values.Length;
             return (Enum)values.GetValue(pos);
         }
+
+        internal static bool IsEnumType(System.Type t)
+        {
+#if NEW_REFLECTION || NETFX_CORE
+            return t.GetTypeInfo().IsEnum;
+#else
+            return t.IsEnum;
+#endif
+        }
     }
 }
-
+#pragma warning restore
 #endif

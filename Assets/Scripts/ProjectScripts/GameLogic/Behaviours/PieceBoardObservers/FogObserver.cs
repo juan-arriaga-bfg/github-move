@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using DG.Tweening;
 using UnityEngine;
 
@@ -7,12 +9,12 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 {
     public FogDef Def { get; private set; }
     public CurrencyPair AlreadyPaid { get; private set; }
+    public Dictionary<Piece, int> TempMana = new Dictionary<Piece, int>();
     
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
     public LockView LockView;
     private FogProgressView bar;
-    private BubbleView bubble;
     public BoardPosition Key { get; private set; }
 
     public bool IsRemoved = false;
@@ -92,11 +94,9 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void UpdateResource(int offset)
     {
-        if (bubble != null && bubble.IsShow) return;
-
-        if (AlreadyPaid.Amount >= Def.Condition.Amount)
+        if (CanBeFilled() == false)
         {
-            OpenBubble();
+            Open();
             return;
         }
         
@@ -139,13 +139,13 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         }
         
         bar = viewDef.AddView(ViewType.FogProgress) as FogProgressView;
-        
-        if(bar.IsShow) return;
+
+        if (bar.IsShow) return;
         
         bar.Priority = -1;
         bar.Change(true);
-        
-        if(Context.Context.Manipulator.CameraManipulator.CameraMove.IsLocked) return;
+
+        if (Context.Context.Manipulator.CameraManipulator.CameraMove.IsLocked) return;
         
         Context.Context.Manipulator.CameraManipulator.MoveTo(Def.GetCenter(Context.Context));
     }
@@ -188,6 +188,23 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         return AlreadyPaid.Amount < Def.Condition.Amount;
     }
     
+    public bool CanBeFilled(Piece piece, bool isAdd)
+    {
+        if (piece != null && TempMana.ContainsKey(piece)) return true;
+
+        var temp = TempMana.Sum(pair => pair.Value);
+        
+        if (AlreadyPaid.Amount + temp >= Def.Condition.Amount) return false;
+
+        if (isAdd)
+        {
+            var def = GameDataService.Current.PiecesManager.GetPieceDef(piece.PieceType);
+            TempMana.Add(piece, def.SpawnResources.Amount);
+        }
+        
+        return true;
+    }
+    
     public bool RequiredConditionReached()
     {
         return IsLevelReached && IsHeroReached;
@@ -213,70 +230,61 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         {
             onComplete = () =>
             {
+                bar.OnHide = Open;
                 bar.Priority = 1;
                 bar.Change(false);
-                OpenBubble();
+                
+                (Context.ActorView as FogPieceView)?.ShowProgressCompleteEffect();
             };
         }
         
         bar.UpdateProgress(onComplete);
     }
+
+    public void OnProgress(BoardPosition position)
+    {
+        (Context.ActorView as FogPieceView)?.ShowProgressEffect(position);
+    }
     
     public void FillingFake(int value)
     {
-        if (bar != null)
-        {
-            bar.UpdateFakeProgress(value);
+        if (bar == null) return;
+        
+        bar.UpdateFakeProgress(value);
             
-            FogPieceView fog = Context.ActorView as FogPieceView;
-            if (fog != null)
-            {
-                fog.ToggleHighlightWhenReadyToClear(value > 0);
-            }
-        }
-    }
-    
-    private void OnClick(Piece piece)
-    {
-        bubble.OnHide = () =>
-        {
-            piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, Def);
-            AddResourceView.Show(Def.GetCenter(piece.Context), Def.Reward);
-                
-            IsRemoved = true;
-            piece.Context.ActionExecutor.AddAction(new CollapseFogToAction
-            {
-                To = piece.CachedPosition,
-                Positions = new List<BoardPosition> {piece.CachedPosition},
-                FogObserver = this,
-                OnComplete = () =>
-                {
-                    ProfileService.Instance.Manager.UploadCurrentProfile(false);
-                    DevTools.UpdateFogSectorsDebug();
-                }
-            });
-        };
-            
-        bubble.Priority = 1;
-        bubble.Change(false);
+        var fog = Context.ActorView as FogPieceView;
+        if (fog != null) fog.ToggleHighlightWhenReadyToClear(value > 0);
     }
 
-    private void OpenBubble()
+    private void Open()
     {
-        bubble = viewDef.AddView(ViewType.Bubble) as BubbleView;
-                
-        bubble.SetData(LocalizationService.Get("gameboard.bubble.message.fog", "gameboard.bubble.message.fog"),
-            LocalizationService.Get("gameboard.bubble.button.fog", "gameboard.bubble.button.fog"), OnClick);
-                
-        bubble.Priority = -2;
-        bubble.Change(true);
+        var centerPosition = Def.GetCenter();
+        centerPosition.Z = BoardLayer.Piece.Layer;
+            
+        Context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, Def);
+        AddResourceView.Show(Def.GetCenter(Context.Context), Def.Reward);
+                    
+        IsRemoved = true;
+        Context.Context.ActionExecutor.AddAction(new CollapseFogToAction
+        {
+            To = centerPosition,
+            Positions = new List<BoardPosition> {centerPosition},
+            FogObserver = this,
+            OnComplete = () =>
+            {
+                ProfileService.Instance.Manager.UploadCurrentProfile(false);
+                FogSectorsView.Rebuild(Context.Context.RendererContext);
+            }
+        });
     }
     
     #if DEBUG
     public void DebugOpenFog()
     {
-        OpenBubble();
-        LockView?.DestroyOnBoard();
+        Open();
+        
+        if (LockView != null) LockView.DestroyOnBoard();
+        
         LockView = null;
     }
     #endif

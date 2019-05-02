@@ -1,12 +1,12 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Security;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Tls
 {
     /**
      * Buffers input until the hash algorithm is determined.
@@ -25,14 +25,14 @@ namespace Org.BouncyCastle.Crypto.Tls
         internal DeferredHash()
         {
             this.mBuf = new DigestInputBuffer();
-            this.mHashes = Platform.CreateHashtable();
+            this.mHashes = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateHashtable();
             this.mPrfHashAlgorithm = -1;
         }
 
         private DeferredHash(byte prfHashAlgorithm, IDigest prfHash)
         {
             this.mBuf = null;
-            this.mHashes = Platform.CreateHashtable();
+            this.mHashes = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateHashtable();
             this.mPrfHashAlgorithm = prfHashAlgorithm;
             mHashes[prfHashAlgorithm] = prfHash;
         }
@@ -105,7 +105,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         {
             IDigest d = (IDigest)mHashes[hashAlgorithm];
             if (d == null)
-                throw new InvalidOperationException("HashAlgorithm " + hashAlgorithm + " is not being tracked");
+                throw new InvalidOperationException("HashAlgorithm." + HashAlgorithm.GetText(hashAlgorithm) + " is not being tracked");
 
             d = TlsUtilities.CloneHash(hashAlgorithm, d);
             if (mBuf != null)
@@ -201,5 +201,5 @@ namespace Org.BouncyCastle.Crypto.Tls
         }
     }
 }
-
+#pragma warning restore
 #endif

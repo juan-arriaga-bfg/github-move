@@ -88,9 +88,11 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         {
             completeTimesList.Sort((a, b) => a.Value.CompleteTime.CompareTo(b.Value.CompleteTime));
             
-            var select = completeTimesList[0];
-            
             UIErrorWindowController.AddError(LocalizationService.Get("message.error.workerBusy", "message.error.workerBusy"));
+
+            if (completeTimesList.Count == 0) return false;
+            
+            var select = completeTimesList[0];
 
             if (select.Value.CompleteTime.GetTimeLeft().TotalSeconds <= MinDelay) return false;
             
@@ -176,8 +178,8 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         var target = context.BoardLogic.GetPieceAt(targetPosition);
         var def = PieceType.GetDefById(target.PieceType);
 
-        if (def.Filter.Has(PieceTypeFilter.Workplace) == false || !CheckLock(target)) return false;
-        if (!CheckPieceState(target) && !context.PartPiecesLogic.Work(target, true)) return false;
+        if (CheckLock(target) == false || target.PieceType != PieceType.Boost_CR.Id && def.Filter.Has(PieceTypeFilter.Workplace) == false) return false;
+        if (CheckPieceState(target) == false && context.PartPiecesLogic.Work(targetPosition, true) == false) return false;
         
         return true;
     }

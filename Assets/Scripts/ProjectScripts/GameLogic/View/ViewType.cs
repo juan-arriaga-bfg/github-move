@@ -20,5 +20,14 @@
     GodRay = -1016,
     UIContainer = -1017,
     FogProgress = -1018,
-    MineProgress = -1019
+    MineProgress = -1019,
+    ObstacleProgress = -1020,
+    DebugId = -1021,
+    AirShip = -1022,
+    Bridge = -1023,
+    FogBridge = -1024,
+    BrokenBridge = -1025,
+    Airbaloon = -1026,
+    Coast = -1027,
+    IslandFog = -1028,
 }

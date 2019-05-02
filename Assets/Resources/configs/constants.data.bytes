@@ -49,7 +49,7 @@
   },
   {
     "Key": "TapDelayFirefly",
-    "Value": 60
+    "Value": 45
   },
   {
     "Key": "MinAmountFirefly",
@@ -84,11 +84,15 @@
     "Value": 180
   },
   {
-    "Key": "FreeEnergyDelay",
-    "Value": 14400
-  },
-  {
     "Key": "ExtraWorkerDelay",
     "Value": 3600
+  },
+  {
+    "Key": "DelayToClaimFreeEnergy",
+    "Value": 7200
+  },
+  {
+    "Key": "PremiumIslandPrice",
+    "Value": 799
   }
 ]

@@ -23,9 +23,8 @@
             for (var taskIndex = 0; taskIndex < quest.Tasks.Count; taskIndex++)
             {
                 var task      = quest.Tasks[taskIndex];
-                var pieceTask = task as IHavePieceId;
 
-                if (pieceTask != null)
+                if (task is IHavePieceId pieceTask)
                 {
                     if (pieceTask.PieceId == piece.PieceType || pieceTask.PieceId == PieceType.None.Id || pieceTask.PieceId == PieceType.Empty.Id )
                     return true;
@@ -69,23 +68,22 @@
     {
         if (Locker.IsLocked) return;
         
-        var currency = PieceType.Parse(piece.PieceType);
         var flay = ResourcesViewManager.Instance.GetFirstViewById(target);
         
         if (flay == null) return;
 
-        var from = context.Context.BoardDef.GetPiecePosition(x, y);
+        var piecePosition = context.Context.BoardDef.GetPiecePosition(x, y);
+        var screenPoint = context.Context.BoardDef.ViewCamera.WorldToScreenPoint(piecePosition);
         
         var carriers = ResourcesViewManager.DeliverResource<ResourceCarrierWithObject>
         (
             target,
             1,
             flay.GetAnchorRect(),
-            context.Context.BoardDef.ViewCamera.WorldToScreenPoint(from),
+            screenPoint,
             R.ResourceCarrierWithObject
         );
         
-        if (carriers.Count != 0) carriers[0].RefreshIcon(currency);
+        if (carriers.Count != 0) carriers[0].RefreshIcon(PieceType.Parse(piece.PieceType));
     }
-
 }

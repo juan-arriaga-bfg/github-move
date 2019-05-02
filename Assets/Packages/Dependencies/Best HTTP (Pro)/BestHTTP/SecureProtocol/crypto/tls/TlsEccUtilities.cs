@@ -1,22 +1,22 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.Collections;
 using System.IO;
 
-using Org.BouncyCastle.Asn1.X9;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Agreement;
-using Org.BouncyCastle.Crypto.EC;
-using Org.BouncyCastle.Crypto.Generators;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Math.EC;
-using Org.BouncyCastle.Math.Field;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X9;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Agreement;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.EC;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Generators;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.EC;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.Field;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Security;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Tls
 {
     public abstract class TlsEccUtilities
     {
@@ -92,19 +92,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         public static byte[] ReadSupportedPointFormatsExtension(byte[] extensionData)
         {
-            if (extensionData == null)
-                throw new ArgumentNullException("extensionData");
-
-            MemoryStream buf = new MemoryStream(extensionData, false);
-
-            byte length = TlsUtilities.ReadUint8(buf);
-            if (length < 1)
-                throw new TlsFatalAlert(AlertDescription.decode_error);
-
-            byte[] ecPointFormats = TlsUtilities.ReadUint8Array(length, buf);
-
-            TlsProtocol.AssertEmpty(buf);
-
+            byte[] ecPointFormats = TlsUtilities.DecodeUint8ArrayWithUint8Length(extensionData);
             if (!Arrays.Contains(ecPointFormats, ECPointFormat.uncompressed))
             {
                 /*
@@ -113,7 +101,6 @@ namespace Org.BouncyCastle.Crypto.Tls
                  */
                 throw new TlsFatalAlert(AlertDescription.illegal_parameter);
             }
-
             return ecPointFormats;
         }
 
@@ -256,20 +243,21 @@ namespace Org.BouncyCastle.Crypto.Tls
             case CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CCM_8:
 
             /*
-             * draft-agl-tls-chacha20poly1305-04
+             * draft-ietf-tls-chacha20-poly1305-04
              */
-            case CipherSuite.TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:
-            case CipherSuite.TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:
+            case CipherSuite.DRAFT_TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:
+            case CipherSuite.DRAFT_TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256:
+            case CipherSuite.DRAFT_TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:
 
             /*
-             * draft-josefsson-salsa20-tls-04 
+             * draft-zauner-tls-aes-ocb-04
              */
-            case CipherSuite.TLS_ECDHE_ECDSA_WITH_ESTREAM_SALSA20_SHA1:
-            case CipherSuite.TLS_ECDHE_ECDSA_WITH_SALSA20_SHA1:
-            case CipherSuite.TLS_ECDHE_PSK_WITH_ESTREAM_SALSA20_SHA1:
-            case CipherSuite.TLS_ECDHE_PSK_WITH_SALSA20_SHA1:
-            case CipherSuite.TLS_ECDHE_RSA_WITH_ESTREAM_SALSA20_SHA1:
-            case CipherSuite.TLS_ECDHE_RSA_WITH_SALSA20_SHA1:
+            case CipherSuite.DRAFT_TLS_ECDHE_RSA_WITH_AES_128_OCB:
+            case CipherSuite.DRAFT_TLS_ECDHE_RSA_WITH_AES_256_OCB:
+            case CipherSuite.DRAFT_TLS_ECDHE_ECDSA_WITH_AES_128_OCB:
+            case CipherSuite.DRAFT_TLS_ECDHE_ECDSA_WITH_AES_256_OCB:
+            case CipherSuite.DRAFT_TLS_ECDHE_PSK_WITH_AES_128_OCB:
+            case CipherSuite.DRAFT_TLS_ECDHE_PSK_WITH_AES_256_OCB:
 
                 return true;
 
@@ -280,8 +268,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         public static bool AreOnSameCurve(ECDomainParameters a, ECDomainParameters b)
         {
-            // TODO Move to ECDomainParameters.Equals() or other utility method?
-            return a.Curve.Equals(b.Curve) && a.G.Equals(b.G) && a.N.Equals(b.N) && a.H.Equals(b.H);
+            return a != null && a.Equals(b);
         }
 
         public static bool IsSupportedNamedCurve(int namedCurve)
@@ -718,5 +705,5 @@ namespace Org.BouncyCastle.Crypto.Tls
         }
     }
 }
-
+#pragma warning restore
 #endif

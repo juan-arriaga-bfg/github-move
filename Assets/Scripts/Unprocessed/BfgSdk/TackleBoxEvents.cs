@@ -1,3 +1,4 @@
+using BFGSDK;
 using Debug = IW.Logger;
 
 using UnityEngine;
@@ -11,16 +12,6 @@ public static class TackleBoxEvents
 #if !UNITY_EDITOR
         bfgGameReporting.logCustomPlacement(id);  
 #endif  
-    }
-
-    public static void SendCoinsOpen()
-    {
-        Send("coins_open");
-    }
-
-    public static void SendCoinsClosed()
-    {
-        Send("coins_closed");
     }
 
     public static void SendCollectionOpen()

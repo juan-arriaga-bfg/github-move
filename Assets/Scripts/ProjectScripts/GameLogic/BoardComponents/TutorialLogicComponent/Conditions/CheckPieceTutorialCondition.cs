@@ -1,4 +1,6 @@
-﻿public class CheckPieceTutorialCondition : BaseTutorialCondition
+﻿using System.Linq;
+
+public class CheckPieceTutorialCondition : BaseTutorialCondition
 {
 	public int Target;
 	public int Amount = 1;
@@ -6,7 +8,7 @@
 
 	public override bool Check()
 	{
-		var value = context.Context.Context.BoardLogic.PositionsCache.GetCountByType(Target);
+		var value = context.Context.Context.BoardLogic.PositionsCache.GetUnlockedPiecePositionsByType(Target).Count;
 
 		return MoreThan ? value > Amount : value == Amount;
 	}

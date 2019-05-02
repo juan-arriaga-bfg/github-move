@@ -18,9 +18,9 @@ public class WaterBuilder : MonoBehaviour
             boardController.BoardDef.Height,
             boardController.BoardDef.UnitSize,
             GameDataService.Current.FieldManager.LayoutData,
-            1,
-            10,
-            10,
+            BoardTiles.WATER_TILE_ID,
+            15,
+            16,
             30
         );
 

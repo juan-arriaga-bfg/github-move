@@ -55,23 +55,33 @@ public static class UiCharacterData
             }
         },
         { 
-            Mermaid, 
-            new UICharacterDef
-            {
-                Id = Mermaid,
-                Name = "conversation.character.Mermaid",
-                ColorHex = "#7afff6",
-                PieceId = PieceType.NPC_E.Id
-            }
-        },
-        { 
             TigerLilly, 
             new UICharacterDef
             {
                 Id = TigerLilly,
                 Name = "conversation.character.TigerLily",
                 ColorHex = "#ff0033",
+                PieceId = PieceType.NPC_E.Id
+            }
+        },
+        { 
+            Mermaid, 
+            new UICharacterDef
+            {
+                Id = Mermaid,
+                Name = "conversation.character.Mermaid",
+                ColorHex = "#7afff6",
                 PieceId = PieceType.NPC_F.Id
+            }
+        },
+        { 
+            PeterPan, 
+            new UICharacterDef
+            {
+                Id = PeterPan,
+                Name = "conversation.character.PeterPan",
+                ColorHex = "#FFFB00",
+                PieceId = PieceType.NPC_G.Id
             }
         },
         { 
@@ -91,16 +101,6 @@ public static class UiCharacterData
                 Name = "conversation.character.GnomeWorker2",
                 ColorHex = "#00A0FF",
                 ViewName = $"UICharacter{CharGnomeWorker}View" // Use the same view as for CharGnomeWorker #1
-            }
-        },
-        { 
-            PeterPan, 
-            new UICharacterDef
-            {
-                Id = PeterPan,
-                Name = "conversation.character.PeterPan",
-                ColorHex = "#FFFB00",
-                PieceId = PieceType.NPC_G.Id
             }
         },
     };

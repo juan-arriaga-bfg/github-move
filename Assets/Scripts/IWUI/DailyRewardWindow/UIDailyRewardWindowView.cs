@@ -29,7 +29,7 @@ public class UIDailyRewardWindowView : UIGenericPopupWindowView
         InitButtonBase(btnMaskLeft, Controller.CloseCurrentWindow);
         InitButtonBase(btnMaskRight, Controller.CloseCurrentWindow);
     }
-
+    
     protected virtual List<IUIContainerElementEntity> UpdateEntities(List<DailyRewardDef> entities)
     {
         var views = new List<IUIContainerElementEntity>(entities.Count);

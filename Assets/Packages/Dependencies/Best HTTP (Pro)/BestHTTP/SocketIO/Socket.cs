@@ -7,7 +7,7 @@ namespace BestHTTP.SocketIO
 {
     using BestHTTP;
     using BestHTTP.SocketIO.Events;
-    
+
     /// <summary>
     /// This class represents a Socket.IO namespace.
     /// </summary>
@@ -26,12 +26,17 @@ namespace BestHTTP.SocketIO
         public string Namespace { get; private set; }
 
         /// <summary>
+        /// Unique Id of the socket.
+        /// </summary>
+        public string Id { get; private set; }
+
+        /// <summary>
         /// True if the socket is connected and open to the server. False otherwise.
         /// </summary>
         public bool IsOpen { get; private set; }
 
         /// <summary>
-        /// While this property is True, the socket will decode the Packet's Payload data using the parent SocketManager's Encoder. You must set this property before any event subsciption! It's default value is True;
+        /// While this property is True, the socket will decode the Packet's Payload data using the parent SocketManager's Encoder. You must set this property before any event subscription! Its default value is True;
         /// </summary>
         public bool AutoDecodePayload { get; set; }
 
@@ -40,12 +45,12 @@ namespace BestHTTP.SocketIO
         #region Privates
 
         /// <summary>
-        /// A table to store acknowlegement callbacks associated to the given ids.
+        /// A table to store acknowledgment callbacks associated to the given ids.
         /// </summary>
         private Dictionary<int, SocketIOAckCallback> AckCallbacks;
 
         /// <summary>
-        /// Tha callback table that helps this class to manage event subsciption and dispatching events.
+        /// Tha callback table that helps this class to manage event subscription and dispatching events.
         /// </summary>
         private EventTable EventCallbacks;
 
@@ -75,7 +80,7 @@ namespace BestHTTP.SocketIO
         /// </summary>
         void ISocket.Open()
         {
-            // The transport already estabilished the connection
+            // The transport already established the connection
             if (Manager.State == SocketManager.States.Open)
                 OnTransportOpen(Manager.Socket, null);
             else
@@ -108,7 +113,7 @@ namespace BestHTTP.SocketIO
                 Packet packet = new Packet(TransportEventTypes.Message, SocketIOEventTypes.Disconnect, this.Namespace, string.Empty);
                 (Manager as IManager).SendPacket(packet);
 
-                // IsOpen must be false, becouse in the OnPacket preprocessing the packet would call this function again
+                // IsOpen must be false, because in the OnPacket preprocessing the packet would call this function again
                 IsOpen = false;
                 (this as ISocket).OnPacket(packet);
             }
@@ -363,9 +368,13 @@ namespace BestHTTP.SocketIO
         /// </summary>
         void ISocket.OnPacket(Packet packet)
         {
-            // Some preprocessing of the the packet
+            // Some preprocessing of the packet
             switch(packet.SocketIOEvent)
             {
+                case SocketIOEventTypes.Connect:
+                    this.Id = this.Namespace != "/" ? this.Namespace + "#" + this.Manager.Handshake.Sid : this.Manager.Handshake.Sid;
+                    break;
+
                 case SocketIOEventTypes.Disconnect:
                     if (IsOpen)
                     {
@@ -378,11 +387,16 @@ namespace BestHTTP.SocketIO
                 // Create an Error object from the server-sent json string
                 case SocketIOEventTypes.Error:
                     bool success = false;
-                    var errDict = JSON.Json.Decode(packet.Payload, ref success) as Dictionary<string, object>;
+                    object result = JSON.Json.Decode(packet.Payload, ref success);
                     if (success)
                     {
-                        Error err = new Error((SocketIOErrors)Convert.ToInt32(errDict["code"]),
-                                                                              errDict["message"] as string);
+                        var errDict = result as Dictionary<string, object>;
+                        Error err;
+
+                        if (errDict != null && errDict.ContainsKey("code"))
+                            err = new Error((SocketIOErrors)Convert.ToInt32(errDict["code"]), errDict["message"] as string);
+                        else
+                            err = new Error(SocketIOErrors.Custom, packet.Payload);
 
                         EventCallbacks.Call(EventNames.GetNameFor(SocketIOEventTypes.Error), packet, err);
 
@@ -398,12 +412,12 @@ namespace BestHTTP.SocketIO
             if ((packet.SocketIOEvent == SocketIOEventTypes.Ack || packet.SocketIOEvent == SocketIOEventTypes.BinaryAck) && AckCallbacks != null)
             {
                 SocketIOAckCallback ackCallback = null;
-                if (AckCallbacks.TryGetValue(packet.Id, out ackCallback) && 
+                if (AckCallbacks.TryGetValue(packet.Id, out ackCallback) &&
                     ackCallback != null)
                 {
                     try
                     {
-                        ackCallback(this, packet, packet.Decode(Manager.Encoder));
+                        ackCallback(this, packet, this.AutoDecodePayload ? packet.Decode(Manager.Encoder) : null);
                     }
                     catch (Exception ex)
                     {
@@ -450,7 +464,7 @@ namespace BestHTTP.SocketIO
             if (this.Namespace != "/")
                 (Manager as IManager).SendPacket(new Packet(TransportEventTypes.Message, SocketIOEventTypes.Connect, this.Namespace, string.Empty));
 
-            // and we are no open
+            // and we are now open
             IsOpen = true;
         }
 

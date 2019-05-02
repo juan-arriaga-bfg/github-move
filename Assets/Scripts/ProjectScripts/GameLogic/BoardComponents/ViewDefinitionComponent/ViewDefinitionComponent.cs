@@ -11,7 +11,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     public List<ViewType> ViewIds { get; set; }
 
     private int shownViewPriority;
-    private BoardPosition Position;
+    private BoardPosition CachedPosition => thisContext.Multicellular is FogObserver observer ? observer.Def.GetCenter() : thisContext.CachedPosition;
     private readonly Dictionary<ViewType, UIBoardView> views = new Dictionary<ViewType, UIBoardView>();
 
     private Piece thisContext;
@@ -21,6 +21,8 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     private UIBoardView container;
     
+    private BetterList<UIBoardView> showedViews = new BetterList<UIBoardView>();
+    
     public void OnRegisterEntity(ECSEntity entity)
     {
         thisContext = entity as Piece;
@@ -29,7 +31,16 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     public void OnUnRegisterEntity(ECSEntity entity)
     {
-        OnRemoveFromBoard(Position, thisContext);
+        OnRemoveFromBoard(CachedPosition, thisContext);
+    }
+
+    public void SetFade(float alpha, float duration)
+    {
+        if (container == null) return;
+        
+        DOTween.Kill(container);
+        var canvasGroup = container.GetCanvasGroup();
+        canvasGroup.DOFade(alpha, duration).SetId(container);
     }
 
     public bool Visible
@@ -86,12 +97,8 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
             })
             .AppendInterval(0.1f);
         
-        if (thisContext == null) return;
-
-        Position = thisContext.Multicellular is FogObserver observer ? observer.Def.GetCenter() : position;
-
-        if (ViewIds == null) return;
-
+        if (thisContext == null || ViewIds == null) return;
+        
         foreach (var id in ViewIds)
         {
             AddView(id).Change(true);
@@ -100,18 +107,31 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
     {
-        var f = from;
-        var t = Position = to;
-
         if (container == null) return;
         
-        f.Z = t.Z = BoardLayer.UI.Layer;
-        thisContext.Context.RendererContext.MoveElement(f, t);
-        container.CachedTransform.localPosition = thisContext.Context.BoardDef.GetPiecePosition(Position.X, Position.Y);
+        var f = from;
+        f.Z = BoardLayer.UI.Layer;
+
+        thisContext.Context.RendererContext.RemoveElementAt(f, false);
     }
 
     public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
+        var t = to;
+        
+        if (container == null) return;
+        
+        t.Z = BoardLayer.UI.Layer;
+        container.CachedTransform.localPosition = thisContext.Context.BoardDef.GetPiecePosition(CachedPosition.X, CachedPosition.Y);
+        thisContext.Context.RendererContext.SetElementAt(t, container);
+        
+        foreach (var view in views.Values)
+        {
+            if (!view.IsShow) continue;
+            
+            view.SyncRendererLayers(t);
+        }
+        
         OnDrag(true);
     }
     
@@ -154,15 +174,12 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     public UIBoardView AddView(ViewType id)
     {
-        if (views.TryGetValue(id, out var view))
-        {
-            return view;
-        }
+        if (views.TryGetValue(id, out var view)) return view;
         
-        var pos = Position;
+        var pos = CachedPosition;
 
         pos.Z = BoardLayer.UI.Layer;
-
+        
         if (container == null)
         {
             container = thisContext.Context.RendererContext.CreateElementAt((int) ViewType.UIContainer, pos) as UIBoardView;
@@ -176,15 +193,16 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         element.CachedTransform.SetParentAndReset(container.CachedTransform);
         element.SyncRendererLayers(pos);
         element.SetOffset(thisContext?.ActorView != null ? GetViewPosition(element.IsTop) + thisContext.ActorView.GetUIPosition(id) : Vector2.zero);
-        
         views.Add(id, element);
         
         return element;
     }
     
-    public UIBoardView GetView(ViewType viewType)
+    public void HideView(ViewType viewType)
     {
-        return views.TryGetValue(viewType, out var targetView) ? targetView : null;
+        if(views.TryGetValue(viewType, out var view) == false) return;
+        
+        view.Change(false);
     }
 
     public List<UIBoardView> GetViews()
@@ -218,6 +236,20 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         }
     }
 
+    public BetterList<UIBoardView> GetShowedViews()
+    {
+        showedViews.Clear();
+        
+        foreach (var view in views.Values)
+        {
+            if (!view.IsShow) continue;
+            
+            showedViews.Add(view);
+        }
+
+        return showedViews;
+    }
+
     private Vector2 GetViewPosition(bool isTop)
     {
         var position = BoardPosition.Zero();
@@ -232,4 +264,14 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         
         return thisContext.Context.BoardDef.GetSectorWorldPosition(position.X, position.Y, position.Z);
     }
+
+    public virtual void OnViewToggle(UIBoardView view, bool state)
+    {
+        foreach (var viewPair in views)
+        {
+            var currentView = viewPair.Value;
+            currentView.OnViewInContainerToggle(view, state);
+        }
+    }
+
 }

@@ -29,13 +29,14 @@
         profile.RegisterComponent(new BaseInformationSaveComponent());
         profile.RegisterComponent(new FogSaveComponent());
         profile.RegisterComponent(new DailyRewardSaveComponent());
+        profile.RegisterComponent(new AirShipSaveComponent());
     }
     
     public void SetDefaultSettings(UserProfile profile)
     {
         profile.GetStorageItem(Currency.Level.Name).Amount = 1;
         profile.GetStorageItem(Currency.WorkerLimit.Name).Amount = 2;
-        profile.GetStorageItem(Currency.Energy.Name).Amount = 79;
+        profile.GetStorageItem(Currency.Energy.Name).Amount = 80;
         profile.GetStorageItem(Currency.EnergyLimit.Name).Amount = 79;
     }
 }

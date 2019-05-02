@@ -1,10 +1,11 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 using System.Collections;
 
-using Org.BouncyCastle.Asn1;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1;
 
-namespace Org.BouncyCastle.Asn1.X509
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X509
 {
     /**
      * PKIX RFC-2459
@@ -81,7 +82,12 @@ namespace Org.BouncyCastle.Asn1.X509
 			get { return sig; }
 		}
 
-		public int Version
+        public byte[] GetSignatureOctets()
+        {
+            return sig.GetOctets();
+        }
+
+        public int Version
 		{
 			get { return tbsCertList.Version; }
 		}
@@ -107,5 +113,5 @@ namespace Org.BouncyCastle.Asn1.X509
         }
     }
 }
-
+#pragma warning restore
 #endif

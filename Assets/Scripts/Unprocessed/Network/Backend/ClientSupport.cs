@@ -300,6 +300,7 @@ namespace Backend
             if (string.IsNullOrEmpty(userId))
             {
                 IW.Logger.LogWarning("ClientSupport: Get: IsNullOrEmpty(userId) == true, request SKIPPED");
+                callback(null);
                 return;
             }
 

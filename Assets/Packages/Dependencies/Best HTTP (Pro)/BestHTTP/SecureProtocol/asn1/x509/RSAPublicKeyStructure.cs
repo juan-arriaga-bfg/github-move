@@ -1,11 +1,13 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Math;
-
+#pragma warning disable
 using System;
 using System.Collections;
 
-namespace Org.BouncyCastle.Asn1.X509
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Math;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
+
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X509
 {
     public class RsaPublicKeyStructure
         : Asn1Encodable
@@ -33,7 +35,7 @@ namespace Org.BouncyCastle.Asn1.X509
                 return new RsaPublicKeyStructure((Asn1Sequence) obj);
             }
 
-			throw new ArgumentException("Invalid RsaPublicKeyStructure: " + obj.GetType().Name);
+            throw new ArgumentException("Invalid RsaPublicKeyStructure: " + BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.GetTypeName(obj));
         }
 
 		public RsaPublicKeyStructure(
@@ -91,5 +93,5 @@ namespace Org.BouncyCastle.Asn1.X509
         }
     }
 }
-
+#pragma warning restore
 #endif

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BfgAnalytics;
+using DG.Tweening;
 using UnityEngine;
 
 public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
@@ -76,17 +77,51 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
         OnStart?.Invoke();
     }
 
-    public void Add(int value)
+    public void Add(int value, float duration = 0)
     {
         if (Delay == 0 || IsStarted == false) return;
+
+        var then = value;
+        var animationTime = StartTime;
         
+        void Callback()
+        {
+            DOTween
+                .To(() => value, (v) => { value = v; }, 0, 1.5f)
+                .OnStart(() =>
+                {
+                    if (View != null) View.Attention();
+                })
+                .OnUpdate(() =>
+                {
+                    var step = then - value;
+
+                    then = value;
+                    animationTime = animationTime.AddSeconds(step);
+                    CompleteTime = animationTime.AddSeconds(Delay);
+                    OnTimeChanged?.Invoke();
+                })
+                .OnComplete(() => { IsPaused = false; });
+        }
+        
+        IsPaused = true;
         StartTime = StartTime.AddSeconds(value);
-        CompleteTime = StartTime.AddSeconds(Delay);
+
+        if (duration > 0)
+        {
+            DOTween.Sequence()
+                .AppendInterval(duration)
+                .AppendCallback(Callback);
+            
+            return;
+        }
+
+        Callback();
     }
 
-    public void Subtract(int value)
+    public void Subtract(int value, float duration = 0)
     {
-        Add(-Mathf.Min(Delay, value));
+        Add(-Mathf.Min(Delay, value), duration);
     }
 
     public void Reset()
@@ -109,9 +144,8 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     public void Execute()
     {
         OnExecute?.Invoke();
-
-        var elapsedTime = StartTime.GetTime(UseUTC);
-        var elapsedSeconds = (int) elapsedTime.TotalSeconds;
+        
+        var elapsedSeconds = (int) StartTime.GetTime(UseUTC).TotalSeconds;
 
         if (lastProcessedSecond < 0 || lastProcessedSecond != elapsedSeconds)
         {
@@ -196,6 +230,6 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     
     public bool IsFree()
     {
-        return CompleteTime.GetTimeLeft(UseUTC).TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit;
+        return (int) StartTime.GetTime(UseUTC).TotalSeconds < Delay && CompleteTime.GetTimeLeft(UseUTC).TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit;
     }
 }

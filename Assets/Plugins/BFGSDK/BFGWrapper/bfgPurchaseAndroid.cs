@@ -5,283 +5,285 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using SimpleJSON;
 
-
-public class bfgPurchaseAndroid
+namespace BFGSDK
 {
+    public class bfgPurchaseAndroid
+    {
 
-	// Types
+        // Types
 
-	public enum bfgStoreType
-	{
+        public enum bfgStoreType
+        {
 
-		google,
-		amazon}
+            google,
+            amazon
+        }
 
-	;
+        ;
 
-	// Constants
+        // Constants
 
-	public const string	BFGSETTING_FULLGAMEPURCHASE_KEY = "BFGSETTING_FULLGAMEPURCHASE_KEY";
+        public const string BFGSETTING_FULLGAMEPURCHASE_KEY = "BFGSETTING_FULLGAMEPURCHASE_KEY";
 
-	public const string	NOTIFICATION_PURCHASE_ASKUSER = "NOTIFICATION_PURCHASE_ASKUSER";
-	// User info contains a dictionary with description, and pricing.
-	public const string	NOTIFICATION_PURCHASE_NOTALLOWED = "NOTIFICATION_PURCHASE_NOTALLOWED";
-	// This user is not allowed to make purchases on this phone.
-	public const string	NOTIFICATION_PURCHASE_STARTED = "NOTIFICATION_PURCHASE_STARTED";
-	/// SKU Revoked
-	public const string	NOTIFICATION_PURCHASE_REVOKED = "NOTIFICATION_PURCHASE_REVOKED";
-	/// Restore completed
-	public const string NOTIFICATION_RESTORE_COMPLETED = "NOTIFICATION_RESTORE_COMPLETED";
-	public const string	NOTIFICATION_PURCHASE_CANCELLED = "NOTIFICATION_PURCHASE_CANCELLED";
-	public const string NOTIFICATION_PURCHASE_GETUSERID_SUCCEEDED = "NOTIFICATION_PURCHASE_GETUSERID_SUCCEEDED";
+        public const string NOTIFICATION_PURCHASE_ASKUSER = "NOTIFICATION_PURCHASE_ASKUSER";
+        // User info contains a dictionary with description, and pricing.
+        public const string NOTIFICATION_PURCHASE_NOTALLOWED = "NOTIFICATION_PURCHASE_NOTALLOWED";
+        // This user is not allowed to make purchases on this phone.
+        public const string NOTIFICATION_PURCHASE_STARTED = "NOTIFICATION_PURCHASE_STARTED";
+        /// SKU Revoked
+        public const string NOTIFICATION_PURCHASE_REVOKED = "NOTIFICATION_PURCHASE_REVOKED";
+        /// Restore completed
+        public const string NOTIFICATION_RESTORE_COMPLETED = "NOTIFICATION_RESTORE_COMPLETED";
+        public const string NOTIFICATION_PURCHASE_CANCELLED = "NOTIFICATION_PURCHASE_CANCELLED";
+        public const string NOTIFICATION_PURCHASE_GETUSERID_SUCCEEDED = "NOTIFICATION_PURCHASE_GETUSERID_SUCCEEDED";
 
-	// New Google IABv3 events
-	public const string NOTIFICATION_BILLING_INITIALIZE_SUCCEEDED = "NOTIFICATION_BILLING_INITIALIZE_SUCCEEDED";
-	public const string NOTIFICATION_BILLING_INITIALIZE_FAILED = "NOTIFICATION_BILLING_INITIALIZE_FAILED";
-	public const string NOTIFICATION_PURCHASE_PRODUCTINFORMATION_FAILED	= "NOTIFICATION_PURCHASE_PRODUCTINFORMATION_FAILED";
-	public const string NOTIFICATION_PURCHASE_CONSUMPTION_SUCCEEDED = "NOTIFICATION_PURCHASE_CONSUMPTION_SUCCEEDED";
-	public const string NOTIFICATION_PURCHASE_CONSUMPTION_FAILED = "NOTIFICATION_PURCHASE_CONSUMPTION_FAILED";
-	public const string NOTIFICATION_PURCHASE_SUCCEEDED_WITH_RECEIPT	= "NOTIFICATION_PURCHASE_SUCCEEDED_WITH_RECEIPT";
+        // New Google IABv3 events
+        public const string NOTIFICATION_BILLING_INITIALIZE_SUCCEEDED = "NOTIFICATION_BILLING_INITIALIZE_SUCCEEDED";
+        public const string NOTIFICATION_BILLING_INITIALIZE_FAILED = "NOTIFICATION_BILLING_INITIALIZE_FAILED";
+        public const string NOTIFICATION_PURCHASE_PRODUCTINFORMATION_FAILED = "NOTIFICATION_PURCHASE_PRODUCTINFORMATION_FAILED";
+        public const string NOTIFICATION_PURCHASE_CONSUMPTION_SUCCEEDED = "NOTIFICATION_PURCHASE_CONSUMPTION_SUCCEEDED";
+        public const string NOTIFICATION_PURCHASE_CONSUMPTION_FAILED = "NOTIFICATION_PURCHASE_CONSUMPTION_FAILED";
+        public const string NOTIFICATION_PURCHASE_SUCCEEDED_WITH_RECEIPT = "NOTIFICATION_PURCHASE_SUCCEEDED_WITH_RECEIPT";
 
-	public const string NOTIFICATION_POST_CURRENT_INVENTORY_SUCCEEDED	= "NOTIFICATION_POST_CURRENT_INVENTORY_SUCCEEDED";
-	public const string NOTIFICATION_POST_CURRENT_INVENTORY_FAILED = "NOTIFICATION_POST_CURRENT_INVENTORY_FAILED";
-
-
-	// Misc.
-	public const string kPurchaseKeyPrefix = "PURCHASEKEY-";
-	public const string kPurchaseMapName = "PurchaseMap";
-	public const string kSkuMapName = "SkuMap";
+        public const string NOTIFICATION_POST_CURRENT_INVENTORY_SUCCEEDED = "NOTIFICATION_POST_CURRENT_INVENTORY_SUCCEEDED";
+        public const string NOTIFICATION_POST_CURRENT_INVENTORY_FAILED = "NOTIFICATION_POST_CURRENT_INVENTORY_FAILED";
 
 
-	// Static Methods
+        // Misc.
+        public const string kPurchaseKeyPrefix = "PURCHASEKEY-";
+        public const string kPurchaseMapName = "PurchaseMap";
+        public const string kSkuMapName = "SkuMap";
 
-	public static string getAppstoreName ()
-	{
 
-		#if UNITY_EDITOR
-		return null;
-		#elif UNITY_ANDROID
+        // Static Methods
+
+        public static string getAppstoreName()
+        {
+
+#if UNITY_EDITOR
+            return null;
+#elif UNITY_ANDROID
 			string result;
 			using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {result = ajc.CallStatic<string>("getAppstoreName");}
 			return result;
-		#else
+#else
 			return null;
-		#endif
-	}
+#endif
+        }
 
-	public static void setupService ()
-	{
+        public static void setupService()
+        {
 
-		#if UNITY_EDITOR
-		return;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return;
+#elif UNITY_ANDROID
 			using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {ajc.CallStatic("setupService");}
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
 
-	public static bool startUsingService ()
-	{
+        public static bool startUsingService()
+        {
 
-		#if UNITY_EDITOR
-		return false;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_ANDROID
 			bool result;
 			using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {result = ajc.CallStatic<bool>("startUsingService");}
 			return result;
-		#else
+#else
 			return false;
-		#endif
-	}
+#endif
+        }
 
-	public static void resumeUsingService ()
-	{
+        public static void resumeUsingService()
+        {
 
-		#if UNITY_EDITOR
-		return;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return;
+#elif UNITY_ANDROID
 			using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {ajc.CallStatic("resumeUsingService");}
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
 
 
-	public static void reportPurchaseCompletedSuccessfully (string receipt)
-	{
+        public static void reportPurchaseCompletedSuccessfully(string receipt)
+        {
 
-		#if UNITY_EDITOR
-		return;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return;
+#elif UNITY_ANDROID
 			using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {ajc.CallStatic("reportPurchaseCompletedSuccessfully", receipt);}
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
 
-	public static string getCurrentUser ()
-	{
+        public static string getCurrentUser()
+        {
 
-		#if UNITY_EDITOR
-		return null;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return null;
+#elif UNITY_ANDROID
 	string result;
 		using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {result = ajc.CallStatic<string>("getCurrentUser");}
 		return result;
-		#else
+#else
 			return null;
-		#endif
-	}
+#endif
+        }
 
-	public static void setCurrentUser (string userId)
-	{
+        public static void setCurrentUser(string userId)
+        {
 
-		#if UNITY_EDITOR
-		return;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return;
+#elif UNITY_ANDROID
 	using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {ajc.CallStatic("setCurrentUser", userId);}
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
 
-	public static void stopUsingService ()
-	{
+        public static void stopUsingService()
+        {
 
-		#if UNITY_EDITOR
-		return;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return;
+#elif UNITY_ANDROID
 	using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {ajc.CallStatic("stopUsingService");}
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
 
-	public static void cleanupService ()
-	{
+        public static void cleanupService()
+        {
 
-		#if UNITY_EDITOR
-		return;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return;
+#elif UNITY_ANDROID
 	using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {ajc.CallStatic("cleanupService");}
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
 
-	public static bool beginPurchase ()
-	{
+        public static bool beginPurchase()
+        {
 
-		#if UNITY_EDITOR
-		return false;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_ANDROID
 	bool result;
 		using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {result = ajc.CallStatic<bool>("beginPurchase");}
 		return result;
-		#else
+#else
 		return false;
-		#endif
-	}
+#endif
+        }
 
-	public static bool beginPurchase (string productid)
-	{
+        public static bool beginPurchase(string productid)
+        {
 
-		#if UNITY_EDITOR
-		return false;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_ANDROID
 	bool result;
 		using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {result = ajc.CallStatic<bool>("beginPurchase", productid);}
 		return result;
-		#else
+#else
 		return false;
-		#endif
-	}
+#endif
+        }
 
-	public static void completePurchase (string productid)
-	{
+        public static void completePurchase(string productid)
+        {
 
-		#if UNITY_EDITOR
-		return;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return;
+#elif UNITY_ANDROID
 	using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {ajc.CallStatic("completePurchase", productid);}
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
 
-	public static bool completePurchase (string productid, string additionalPayload)
-	{
+        public static bool completePurchase(string productid, string additionalPayload)
+        {
 
-		#if UNITY_EDITOR
-		return false;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_ANDROID
 	bool isSuccessful;
 		string[] args = new string[] { productid, additionalPayload };
 		using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {isSuccessful = ajc.CallStatic<bool>("completePurchase", args); }
 		return isSuccessful;
-		#else
+#else
 		return false;
-		#endif
-	}
+#endif
+        }
 
-	public static void restorePurchase ()
-	{
+        public static void restorePurchase()
+        {
 
-		#if UNITY_EDITOR
-		return;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return;
+#elif UNITY_ANDROID
 	        using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {ajc.CallStatic("restorePurchase");}
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
 
-	public static void restorePurchase (string productid)
-	{
+        public static void restorePurchase(string productid)
+        {
 
-		#if UNITY_EDITOR
-		return;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return;
+#elif UNITY_ANDROID
 	        using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {ajc.CallStatic("restorePurchase", productid);}
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
 
-	public static void restorePurchase (List<string> productids)
-	{
-	
-		#if UNITY_EDITOR
-		return;
-		#elif UNITY_ANDROID
+        public static void restorePurchase(List<string> productids)
+        {
+
+#if UNITY_EDITOR
+            return;
+#elif UNITY_ANDROID
 		foreach (string productid in productids)
 		{
 			using (AndroidJavaClass ajc = new AndroidJavaClass ("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")){ajc.CallStatic ("restorePurchase", productid);}
 		}            
-		#else
+#else
             return;
-		#endif
-	}
+#endif
+        }
 
-	public static void consumePurchase (string productid)
-	{
+        public static void consumePurchase(string productid)
+        {
 
-		#if UNITY_EDITOR
-		return;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return;
+#elif UNITY_ANDROID
 	using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {ajc.CallStatic("consumePurchase", productid);}
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
 
-	public static Dictionary<string, Dictionary<string,Dictionary<string,string>>> getVolatileInventory ()
-	{
+        public static Dictionary<string, Dictionary<string, Dictionary<string, string>>> getVolatileInventory()
+        {
 
-		#if UNITY_EDITOR
-		return null;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return null;
+#elif UNITY_ANDROID
 	Dictionary<string, Dictionary<string,Dictionary<string,string>>> returnDictionary = new Dictionary<string, Dictionary<string,Dictionary<string,string>>>();
 		Dictionary<string, Dictionary<string,string>> purchaseDictionary = new Dictionary<string, Dictionary<string,string>>();
 		Dictionary<string, Dictionary<string,string>> skuDictionary = new Dictionary<string, Dictionary<string,string>>();
@@ -327,17 +329,17 @@ public class bfgPurchaseAndroid
 		returnDictionary.Add (kSkuMapName, skuDictionary);
 
 		return returnDictionary;
-		#else
+#else
 		return null;
-		#endif
-	}
+#endif
+        }
 
-	public static Dictionary<string, string> productInformation (string productid)
-	{
+        public static Dictionary<string, string> productInformation(string productid)
+        {
 
-		#if UNITY_EDITOR
-		return null;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return null;
+#elif UNITY_ANDROID
 	Dictionary<string, string> returnDictionary = new Dictionary<string, string>();
 
 		string productInformationJson;
@@ -351,17 +353,17 @@ public class bfgPurchaseAndroid
 		}
 
 		return returnDictionary;
-		#else
+#else
 		return null;
-		#endif
-	}
+#endif
+        }
 
-	public static Dictionary<string, string> productInformation ()
-	{
+        public static Dictionary<string, string> productInformation()
+        {
 
-		#if UNITY_EDITOR
-		return null;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return null;
+#elif UNITY_ANDROID
 	Dictionary<string, string> returnDictionary = new Dictionary<string, string> ();
 		string productInformationJson;
 		using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {productInformationJson = ajc.CallStatic<string>("productInformation");}
@@ -373,52 +375,53 @@ public class bfgPurchaseAndroid
 			returnDictionary.Add(key, val);
 		}
 		return returnDictionary;
-		#else
+#else
 		return null;
-		#endif
-	}
+#endif
+        }
 
-	// Big Fish Android SDK 5.5
+        // Big Fish Android SDK 5.5
 
-	public static bool postCurrentInventory ()
-	{
+        public static bool postCurrentInventory()
+        {
 
-		#if UNITY_EDITOR
-		return false;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return false;
+#elif UNITY_ANDROID
 	bool result;
 		using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {result = ajc.CallStatic<bool>("postCurrentInventory");}
 		return result;
-		#else
+#else
 		return false;
-		#endif
-	}
+#endif
+        }
 
-	public static void defineConsumableSKUs (List<string> skus)
-	{
+        public static void defineConsumableSKUs(List<string> skus)
+        {
 
-		#if UNITY_EDITOR
-		return;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return;
+#elif UNITY_ANDROID
 	string jsonConsumableSKUs = BfgUtilities.ConvertArrayOfStringsToJsonString(skus);
 		if (jsonConsumableSKUs == null)
 			jsonConsumableSKUs = "[]";
 
 		using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {ajc.CallStatic("defineConsumableSKUs", jsonConsumableSKUs);}
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
 
-	public static void finishPurchase (string sku)
-	{
+        public static void finishPurchase(string sku)
+        {
 
-		#if UNITY_EDITOR
-		return;
-		#elif UNITY_ANDROID
+#if UNITY_EDITOR
+            return;
+#elif UNITY_ANDROID
 	using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.bfgPurchaseUnityWrapper")) {ajc.CallStatic("finishPurchase", sku);}
-		#else
+#else
 			return;
-		#endif
-	}
+#endif
+        }
+    }
 }

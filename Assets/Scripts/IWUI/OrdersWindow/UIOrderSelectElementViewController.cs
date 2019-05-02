@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
@@ -112,19 +113,16 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
                 mark = false;
                 message = string.Empty;
             }
+            else if (current >= def.Amount)
+            {
+                mark = true;
+                message = string.Empty;
+            }
             else
             {
-                if (current >= def.Amount)
-                {
-                    mark = true;
-                    message = string.Empty;
-                }
-                else
-                {
-                    mark = false;
-                    color = "EC5928";
-                    message = $"<color=#{color}>{current}</color><size=45>/{def.Amount}</size>";
-                } 
+                mark = false;
+                color = "EC5928";
+                message = $"<color=#{color}>{current}</color><size=45>/{def.Amount}</size>";
             }
 
             var entity = new UIOrderIngredientElementEntity
@@ -152,7 +150,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
 
     private void ShowTutorArrow()
     {
-        if(entity is UIOrderElementEntity == false || BoardService.Current.FirstBoard.TutorialLogic.CheckFirstOrder()) return;
+        if(entity is UIOrderElementEntity == false || GameDataService.Current.TutorialDataManager.CheckFirstOrder()) return;
 
         switch (order.State)
         {
@@ -213,6 +211,8 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             Vector3 downScale = new Vector3(1f, 1f, 1f);
             var jumpItems = new List<Transform>();
 
+            List<Transform> particles = new List<Transform>();
+            
             for (int i = innerElements.size - 1; i >= 0; i--)
             {
                 var innerElement = innerElements[i] as UIOrderIngredientElementViewController;
@@ -237,14 +237,29 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
                 jumpSequence.Insert(Time.deltaTime * 2f + index * jumpDelay, innerElementCopy.DOScale(upScale, jumpDuration * 0.5f).SetEase(Ease.InSine));
                 jumpSequence.Insert(Time.deltaTime * 2f + index * jumpDelay + jumpDuration * 0.5f, innerElementCopy.DOScale(downScale, jumpDuration * 0.4f).SetEase(Ease.InSine));
                 jumpSequence.Insert(Time.deltaTime * 2f + index * jumpDelay + jumpDuration * 0.9f, innerElementCopy.DOScale(Vector3.zero, jumpDuration * 0.1f).SetEase(Ease.InSine));
+                jumpSequence.InsertCallback(Time.deltaTime * 2f + index * jumpDelay + jumpDuration * 0.9f, () =>
+                {
+                    var uiParticle = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(R.IngredientFlyUIParticle));
+                    uiParticle.SetParentAndReset(resultAnchor);
+                    uiParticle.position = resultAnchor.position;
+                    particles.Add(uiParticle);
+                });
             }
+            
+            jumpSequence.AppendInterval(1.8f);
 
             jumpSequence.OnComplete(() =>
             {
+                while (particles.Count > 0)
+                {
+                    UIService.Get.PoolContainer.Return(particles[0].gameObject);
+                    particles.RemoveAt(0);
+                }
+                
                 for (int i = 0; i < jumpItems.Count; i++)
                 {
                     var jumpItem = jumpItems[i];
-                    Destroy(jumpItem.gameObject);
+                    UIService.Get.PoolContainer.Return(jumpItem.gameObject);
                 }
             });
     }

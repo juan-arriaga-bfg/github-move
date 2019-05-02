@@ -7,33 +7,11 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 	public List<Piece> Pieces;
 	public List<BoardPosition> Positions;
     
-    public void ToggleView(bool state)
-    {
-        if (Pieces != null)
-        {
-            for (int i = 0; i < Pieces.Count; i++)
-            {
-                var nextPiece = Pieces[i];
-
-                if (nextPiece?.ViewDefinition == null) continue;
-                
-//                nextPiece.ViewDefinition.Visible = state;
-                var views = nextPiece.ViewDefinition.GetViews();
-                for (int j = 0; j < views.Count; j++)
-                {
-	                var view = views[j];
-	                view.OnSwap(state);
-//	                view.UpdateVisibility(state);
-                }
-            }
-        }
-    }
-    
 	public override void Animate(BoardRenderer context)
 	{
 		var sequence = DOTween.Sequence().SetId(animationUid);
 
-	    ToggleView(false);
+	    ToggleView(false, Pieces);
 	   
 		for (var i = 0; i < Pieces.Count; i++)
 		{
@@ -61,6 +39,7 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 			var animationResource = AnimationOverrideDataService.Current.FindAnimation(piece.PieceType, def => def.OnMergeSpawn);
 			if (string.IsNullOrEmpty(animationResource) == false)
 			{
+				centerContainer.localScale = Vector3.one;
 			    var scaleForAnimationView = new Vector3(1f, 1f, 1f);
 			    if (piece.Multicellular != null)
 			    {
@@ -75,6 +54,19 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 
 				animView.OnComplete += () =>
 				{
+					ToggleView(true, Pieces);
+					
+					if (centerContainer != null)
+					{
+						boardElement.CachedTransform.SetParent(centerContainer.parent);
+			        
+						GameObject.Destroy(centerContainer.gameObject);
+
+						centerContainer = null;
+					}
+			    
+					boardElement.SyncRendererLayers(position.Copy());
+					
 					CompleteAnimation(context);
 				};
 
@@ -109,7 +101,7 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 		
 		sequence.OnComplete(() =>
 		{
-		    ToggleView(true);
+		    ToggleView(true, Pieces);
 		    
 		    CompleteAnimation(context);
 		});

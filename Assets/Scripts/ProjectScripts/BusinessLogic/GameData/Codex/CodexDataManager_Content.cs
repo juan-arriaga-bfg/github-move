@@ -165,6 +165,11 @@ public partial class CodexDataManager
                         Name = LocalizationService.Get("window.codex.branch.SK_PR", "window.codex.branch.SK_PR"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.SK1_PR.Id)),
                     },
+                    new CodexChainDef
+                    {
+                        Name = LocalizationService.Get("window.codex.branch.EXT_A", "window.codex.branch.EXT_A"),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.EXT_A1.Id)),
+                    },
                 }
             }
         };

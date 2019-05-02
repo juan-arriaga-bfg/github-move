@@ -116,12 +116,14 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             if (rend.CachedRenderer == null) continue;
             if (rend.CachedRenderer.sharedMaterial == null) continue;
 
-            var material = rend.MaterialCopy;//rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial(BoardElementMaterialType.PiecesFadeMaterial));
+            var material = rend.MaterialCopy;
+            
             if (material.HasProperty(propName) == false)
             {
                 material = rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial(BoardElementMaterialType.PiecesDefaultMaterial));
+                material = rend.MaterialCopy;
             }
-
+            
             DOTween.Kill(rend);
             
             if (duration <= 0)
@@ -131,13 +133,17 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             }
             else
             {
-                material
-                    .DOFloat(alpha, propName, duration)
-                    .SetId(rend)
-                    .OnComplete(() =>
-                    {
-                        if (alpha >= 1f) rend.ResetDefaultMaterial();
-                    });
+                if (material.HasProperty(propName))
+                {
+                    material
+                        .DOFloat(alpha, propName, duration)
+                        .SetId(rend)
+                        .OnComplete(() =>
+                        {
+                            if (alpha >= 1f) rend.ResetDefaultMaterial();
+                        });
+                }
+                
             }
         }
     }
@@ -604,19 +610,13 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
                 .SetId(animationUid)
                 .AppendInterval(delay)
                 .OnComplete(() =>
-               {
-                   if (Context != null)
-                   {
-                       Context.DestroyElement(this);
-                   }
-               });
+                {
+                    Context?.DestroyElement(this);
+                });
         }
         else
         {
-            if (Context != null)
-            {
-                Context.DestroyElement(this);
-            }
+            Context?.DestroyElement(this);
         }
 
         return this;

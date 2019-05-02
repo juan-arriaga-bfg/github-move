@@ -3,4 +3,5 @@
 public class CharacterDef
 {
     public List<ItemWeight> PieceWeights;
+    public List<ItemWeight> ChestWeights;
 }

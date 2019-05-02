@@ -80,7 +80,7 @@ public class TaskUseMineEntity : TaskEventCounterEntity
             for (int i = chain.Count - 1; i >= 0; i--)
             {
                 PieceTypeDef def = PieceType.GetDefById(chain[i]);
-                if (!def.Filter.Has(PieceTypeFilter.Mine) || def.Filter.Has(PieceTypeFilter.Fake))
+                if (!def.Filter.Has(PieceTypeFilter.Mine)/* || def.Filter.Has(PieceTypeFilter.Fake)*/)
                 {
                     chain.RemoveAt(i); 
                 }
@@ -98,23 +98,12 @@ public class TaskUseMineEntity : TaskEventCounterEntity
     public override string GetIco()
     {
         var baseIco = base.GetIco();
+        
         if (!string.IsNullOrEmpty(baseIco) || PieceId == PieceType.None.Id || PieceId == PieceType.Empty.Id || Chain.Count == 0)
         {
             return baseIco;
         }
-
-        int firstId = Chain[0];
-        string pieceUid = PieceType.Parse(firstId).ToLower();
         
-        // First piece is fake, fix first real piece name to correspond icons naming
-        int len = pieceUid.Length;
-        if (!char.IsLetter(pieceUid[len - 1]))
-        {
-            pieceUid = pieceUid.Remove(len - 1, 1);
-        }
-        
-        string iconName = $"quest_icon_{pieceUid}";
-
-        return iconName;
+        return PieceType.Parse(Chain[1]);
     }
 }

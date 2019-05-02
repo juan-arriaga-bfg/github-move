@@ -5,7 +5,7 @@ using System.Text;
 
 public partial class BoardLogicComponent : ECSEntity,
     IMatchDefinitionComponent, IFieldFinderComponent, IEmptyCellsFinderComponent, IMatchActionBuilderComponent, IPiecePositionsCacheComponent,
-    IPieceFlyerComponent, ICellHintsComponent, IFireflyLogicComponent
+    IPieceFlyerComponent, ICellHintsComponent, IFireflyLogicComponent, IAirShipLogicComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -65,6 +65,9 @@ public partial class BoardLogicComponent : ECSEntity,
     protected FireflyLogicComponent fireflyLogic;
     public FireflyLogicComponent FireflyLogic => fireflyLogic ?? (fireflyLogic = GetComponent<FireflyLogicComponent>(FireflyLogicComponent.ComponentGuid));
     
+    protected AirShipLogicComponent airShipLogic;
+    public AirShipLogicComponent AirShipLogic => airShipLogic ?? (airShipLogic = GetComponent<AirShipLogicComponent>(AirShipLogicComponent.ComponentGuid));
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as BoardController;
@@ -458,38 +461,29 @@ public partial class BoardLogicComponent : ECSEntity,
 
     public virtual bool RemovePieceFromBoardSilent(BoardPosition pos)
     {
-        if (pos.IsValid && boardEntities.TryGetValue(pos, out var piece))
-        {
-            if (boardEntities.Remove(pos))
-            {
-                logicMatrix[pos.X, pos.Y, pos.Z] = -1;
-//                piece?.UnregisterRecursive();
-                
-                return true;
-            }
-        }
+        if (pos.IsValid == false
+            || boardEntities.TryGetValue(pos, out var piece) == false
+            || boardEntities.Remove(pos) == false) return false;
         
-        return false;
+        logicMatrix[pos.X, pos.Y, pos.Z] = -1;
+        
+        return true;
     }
 
     protected virtual Piece RemoveAndGetPieceFromBoard(BoardPosition pos)
     {
-        if (pos.IsValid && boardEntities.TryGetValue(pos, out var piece))
-        {
-            if (boardEntities.Remove(pos))
-            {
-                logicMatrix[pos.X, pos.Y, pos.Z] = -1;
+        if (pos.IsValid == false
+            || boardEntities.TryGetValue(pos, out var piece) == false
+            || boardEntities.Remove(pos) == false) return null;
+        
+        logicMatrix[pos.X, pos.Y, pos.Z] = -1;
                 
-                var observer = piece?.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
-                observer?.OnRemoveFromBoard(pos, piece);
+        var observer = piece?.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+        observer?.OnRemoveFromBoard(pos, piece);
                 
-                piece?.UnregisterRecursive();
+        piece.UnregisterRecursive();
                 
-                return piece;
-            }
-        }
-
-        return null;
+        return piece;
     }
 
     public virtual void ClearMatrix()
@@ -527,20 +521,16 @@ public partial class BoardLogicComponent : ECSEntity,
 
     protected virtual void SetPieceToBoard(int x, int y, Piece piece)
     {
-        BoardPosition position = new BoardPosition(x, y, piece.Layer.Index);
+        var position = new BoardPosition(x, y, piece.Layer.Index);
 
         if (IsPointValid(position) == false) return;
 
         logicMatrix[position.X, position.Y, position.Z] = piece.PieceType;
 
-        if (boardEntities.ContainsKey(position) == false)
-        {
-            boardEntities.Add(position, piece);
-        }
-        else
-        {
-            boardEntities[position] = piece;
-        }
+        if (boardEntities.ContainsKey(position)) boardEntities[position] = piece;
+        else boardEntities.Add(position, piece);
+        
+        piece.CachedPosition = position;
     }
 
     public virtual void ClearBoard()

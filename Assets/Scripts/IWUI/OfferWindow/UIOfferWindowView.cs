@@ -103,7 +103,7 @@ public class UIOfferWindowView : UIGenericPopupWindowView
             .ToState(GenericButtonState.Active)
             .OnClick(OnClick);
     }
-
+    
     private void OnClick()
     {
         if (isClick) return;
@@ -126,7 +126,9 @@ public class UIOfferWindowView : UIGenericPopupWindowView
             return;
         }
         // END
-
+        
+        CurrencyHelper.FlyPosition = GetCanvas().worldCamera.WorldToScreenPoint(btnBuy.transform.position);
+        
         SellForCashService.Current.Purchase(offer.PurchaseKey, (isOk, productId) =>
         {
             isClick = false;
@@ -140,8 +142,8 @@ public class UIOfferWindowView : UIGenericPopupWindowView
     private void OnPurchase()
     {
         var flyPosition = GetComponentInChildren<Canvas>().worldCamera.WorldToScreenPoint(btnBuy.transform.position);
-
-        CurrencyHelper.PurchaseAsyncOnlyCurrency(offer.Products, flyPosition, null);
+        
+        CurrencyHelper.PurchaseAndProvideSpawn(offer.Products, null, null, flyPosition, null, false, true);
 	    
         isClick = false;
         PurchaseComplete();
@@ -150,6 +152,8 @@ public class UIOfferWindowView : UIGenericPopupWindowView
     private void PurchaseComplete()
     {
         BoardService.Current.FirstBoard.MarketLogic.CompleteOffer();
+        
+        ProfileService.Instance.Manager.UploadCurrentProfile(true);
         
         Analytics.SendPurchase($"shop_{Currency.Offer.Name.ToLower()}",
             $"item{ProfileService.Current.GetStorageItem(Currency.Offer.Name).Amount}",

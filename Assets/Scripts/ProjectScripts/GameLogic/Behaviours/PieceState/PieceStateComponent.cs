@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Contexts;
-using UnityEngine;
 
 public enum BuildingState
 {
@@ -64,10 +62,22 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         thisContext = entity as Piece;
         
-        var def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType + 1);
-
-        Timer = new TimerComponent {Delay = def.Delay, IsCanceled = thisContext.Multicellular == null};
+        Timer = new TimerComponent {IsCanceled = thisContext.Multicellular == null};
         RegisterComponent(Timer);
+        
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType - 1);
+        
+        if (def?.MineDef != null)
+        {
+            var data = GameDataService.Current.PiecesManager.GetComponent<PiecesMineDataManager>(PiecesMineDataManager.ComponentGuid);
+            var loop = data.GetCurrentLoop(thisContext.PieceType - 1) + 1;
+
+            Timer.Delay = def.Delay + def.MineDef.Delay * (def.MineDef.Loop - loop);
+            return;
+        }
+        
+        def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType + 1);
+        Timer.Delay = def.Delay;
     }
     
     public void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -75,9 +85,21 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         Timer.OnComplete += OnComplete;
         Timer.OnStart += OnStart;
 
-        if (Timer != null && thisContext.Multicellular != null)
+        if (Timer != null && PieceType.GetDefById(thisContext.PieceType).Filter.Has(PieceTypeFilter.Fake))
         {
-            LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.MonumentBuild));
+            if (thisContext.Multicellular != null &&
+                PieceType.GetDefById(thisContext.PieceType).Filter.Has(PieceTypeFilter.Mine))
+            {
+                LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.BuildMineComplete));    
+            }
+            else if (thisContext.Multicellular != null)
+            {
+                LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.MonumentBuildComplete));    
+            }
+            else
+            {
+                LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.BuildPieceComplete));
+            }
         }
         
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
@@ -210,13 +232,13 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         var typeDef = PieceType.GetDefById(thisContext.PieceType);
 
-        if (typeDef.Filter.HasFlag(PieceTypeFilter.Fake))
-        {
-            NSAudioService.Current.Play(SoundId.BuildMain);
-        }
-        else
+        if (typeDef.Filter.HasFlag(PieceTypeFilter.Multicellular) && typeDef.Filter.HasFlag(PieceTypeFilter.Fake) && typeDef.Filter.HasFlag(PieceTypeFilter.Mine) == false)
         {
             NSAudioService.Current.Play(SoundId.BuildCastle);
+        } 
+        else if (typeDef.Filter.HasFlag(PieceTypeFilter.Fake))
+        {
+            NSAudioService.Current.Play(SoundId.BuildMain);
         }
     }
     

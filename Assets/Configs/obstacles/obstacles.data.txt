@@ -24,6 +24,10 @@
       "Min": 0,
       "Max": 0
     },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 0
+    },
     "PieceAmount": 2,
     "PieceWeights": [
       {
@@ -37,7 +41,7 @@
     "Delay": 3,
     "Price": {
       "Currency": "Energy",
-      "Amount": 5
+      "Amount": 7
     },
     "StepRewards": [
       {
@@ -57,7 +61,11 @@
       "Min": 0,
       "Max": 0
     },
-    "PieceAmount": 2,
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 3,
     "PieceWeights": [
       {
         "Uid": "A1",
@@ -71,7 +79,7 @@
     "Delay": 5,
     "Price": {
       "Currency": "Energy",
-      "Amount": 5
+      "Amount": 9
     },
     "StepRewards": [
       {
@@ -91,6 +99,10 @@
       "Min": 0,
       "Max": 0
     },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 1
+    },
     "PieceAmount": 3,
     "PieceWeights": [
       {
@@ -99,7 +111,7 @@
       },
       {
         "Uid": "A2",
-        "Weight": 1
+        "Weight": 2
       }
     ],
     "ChestId": "CH1_A"
@@ -109,7 +121,7 @@
     "Delay": 10,
     "Price": {
       "Currency": "Energy",
-      "Amount": 10
+      "Amount": 12
     },
     "StepRewards": [
       {
@@ -128,6 +140,10 @@
     "ExtrasAmount": {
       "Min": 0,
       "Max": 0
+    },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 1
     },
     "PieceAmount": 4,
     "PieceWeights": [
@@ -151,7 +167,7 @@
     "Delay": 15,
     "Price": {
       "Currency": "Energy",
-      "Amount": 10
+      "Amount": 15
     },
     "StepRewards": [
       {
@@ -170,6 +186,10 @@
     "ExtrasAmount": {
       "Min": 0,
       "Max": 0
+    },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 1
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -197,7 +217,7 @@
     "Delay": 30,
     "Price": {
       "Currency": "Energy",
-      "Amount": 15
+      "Amount": 17
     },
     "StepRewards": [
       {
@@ -216,6 +236,10 @@
     "ExtrasAmount": {
       "Min": 0,
       "Max": 0
+    },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 2
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -243,7 +267,7 @@
     "Delay": 180,
     "Price": {
       "Currency": "Energy",
-      "Amount": 15
+      "Amount": 20
     },
     "StepRewards": [
       {
@@ -252,8 +276,8 @@
       }
     ],
     "ProductionAmount": {
-      "Min": 2,
-      "Max": 1
+      "Min": 1,
+      "Max": 2
     },
     "CharactersAmount": {
       "Min": 1,
@@ -262,6 +286,10 @@
     "ExtrasAmount": {
       "Min": 0,
       "Max": 0
+    },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 2
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -289,7 +317,7 @@
     "Delay": 300,
     "Price": {
       "Currency": "Energy",
-      "Amount": 20
+      "Amount": 22
     },
     "StepRewards": [
       {
@@ -298,8 +326,8 @@
       }
     ],
     "ProductionAmount": {
-      "Min": 2,
-      "Max": 1
+      "Min": 1,
+      "Max": 2
     },
     "CharactersAmount": {
       "Min": 1,
@@ -308,6 +336,10 @@
     "ExtrasAmount": {
       "Min": 0,
       "Max": 0
+    },
+    "OtherAmount": {
+      "Min": 1,
+      "Max": 2
     },
     "PieceAmount": 6,
     "PieceWeights": [
@@ -370,6 +402,10 @@
       "Min": 0,
       "Max": 0
     },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 0
+    },
     "PieceAmount": 2,
     "PieceWeights": [
       {
@@ -383,7 +419,7 @@
     "Delay": 3,
     "Price": {
       "Currency": "Energy",
-      "Amount": 10
+      "Amount": 5
     },
     "StepRewards": [
       {
@@ -403,6 +439,10 @@
       "Min": 0,
       "Max": 0
     },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 0
+    },
     "PieceAmount": 2,
     "PieceWeights": [
       {
@@ -417,7 +457,7 @@
     "Delay": 5,
     "Price": {
       "Currency": "Energy",
-      "Amount": 15
+      "Amount": 5
     },
     "StepRewards": [
       {
@@ -437,6 +477,10 @@
       "Min": 0,
       "Max": 0
     },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 1
+    },
     "PieceAmount": 3,
     "PieceWeights": [
       {
@@ -455,7 +499,7 @@
     "Delay": 10,
     "Price": {
       "Currency": "Energy",
-      "Amount": 15
+      "Amount": 10
     },
     "StepRewards": [
       {
@@ -475,6 +519,10 @@
       "Min": 0,
       "Max": 0
     },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 1
+    },
     "PieceAmount": 4,
     "PieceWeights": [
       {
@@ -493,7 +541,7 @@
     "Delay": 15,
     "Price": {
       "Currency": "Energy",
-      "Amount": 20
+      "Amount": 10
     },
     "StepRewards": [
       {
@@ -512,6 +560,10 @@
     "ExtrasAmount": {
       "Min": 0,
       "Max": 0
+    },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 1
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -539,7 +591,7 @@
     "Delay": 30,
     "Price": {
       "Currency": "Energy",
-      "Amount": 20
+      "Amount": 15
     },
     "StepRewards": [
       {
@@ -558,6 +610,10 @@
     "ExtrasAmount": {
       "Min": 0,
       "Max": 0
+    },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 2
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -585,7 +641,7 @@
     "Delay": 180,
     "Price": {
       "Currency": "Energy",
-      "Amount": 30
+      "Amount": 15
     },
     "StepRewards": [
       {
@@ -604,6 +660,10 @@
     "ExtrasAmount": {
       "Min": 0,
       "Max": 0
+    },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 2
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -631,7 +691,7 @@
     "Delay": 300,
     "Price": {
       "Currency": "Energy",
-      "Amount": 30
+      "Amount": 20
     },
     "StepRewards": [
       {
@@ -650,6 +710,10 @@
     "ExtrasAmount": {
       "Min": 0,
       "Max": 0
+    },
+    "OtherAmount": {
+      "Min": 1,
+      "Max": 2
     },
     "PieceAmount": 6,
     "PieceWeights": [
@@ -677,7 +741,7 @@
     "Delay": 1800,
     "Price": {
       "Currency": "Energy",
-      "Amount": 35
+      "Amount": 25
     },
     "StepRewards": [
       {
@@ -711,6 +775,10 @@
     "ExtrasAmount": {
       "Min": 0,
       "Max": 2
+    },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 0
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -753,6 +821,10 @@
       "Min": 0,
       "Max": 2
     },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 0
+    },
     "PieceAmount": 5,
     "PieceWeights": [
       {
@@ -793,6 +865,10 @@
     "ExtrasAmount": {
       "Min": 0,
       "Max": 2
+    },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 0
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -835,6 +911,10 @@
       "Min": 0,
       "Max": 2
     },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 0
+    },
     "PieceAmount": 5,
     "PieceWeights": [
       {
@@ -875,6 +955,10 @@
     "ExtrasAmount": {
       "Min": 0,
       "Max": 2
+    },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 0
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -917,6 +1001,10 @@
       "Min": 0,
       "Max": 2
     },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 0
+    },
     "PieceAmount": 5,
     "PieceWeights": [
       {
@@ -957,6 +1045,10 @@
     "ExtrasAmount": {
       "Min": 0,
       "Max": 2
+    },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 0
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -999,6 +1091,10 @@
       "Min": 0,
       "Max": 0
     },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 0
+    },
     "PieceAmount": 2,
     "PieceWeights": [
       {
@@ -1029,6 +1125,10 @@
       "Max": 0
     },
     "ExtrasAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "OtherAmount": {
       "Min": 0,
       "Max": 0
     },
@@ -1065,10 +1165,14 @@
       "Min": 0,
       "Max": 0
     },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 1
+    },
     "PieceAmount": 2,
     "PieceWeights": [
       {
-        "Uid": "E1",
+        "Uid": "G1",
         "Weight": 1
       }
     ]
@@ -1098,14 +1202,18 @@
       "Min": 0,
       "Max": 0
     },
+    "OtherAmount": {
+      "Min": 0,
+      "Max": 1
+    },
     "PieceAmount": 4,
     "PieceWeights": [
       {
-        "Uid": "E1",
+        "Uid": "G1",
         "Weight": 3
       },
       {
-        "Uid": "E2",
+        "Uid": "G2",
         "Weight": 1
       }
     ],
@@ -1136,14 +1244,18 @@
       "Min": 0,
       "Max": 0
     },
+    "OtherAmount": {
+      "Min": 1,
+      "Max": 2
+    },
     "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": "E1",
+        "Uid": "G1",
         "Weight": 1
       },
       {
-        "Uid": "E2",
+        "Uid": "G2",
         "Weight": 1
       },
       {
@@ -1178,14 +1290,18 @@
       "Min": 0,
       "Max": 0
     },
+    "OtherAmount": {
+      "Min": 1,
+      "Max": 2
+    },
     "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": "E1",
+        "Uid": "G1",
         "Weight": 1
       },
       {
-        "Uid": "E2",
+        "Uid": "G2",
         "Weight": 2
       },
       {

@@ -91,6 +91,15 @@ public class BoardManipulatorComponent : ECSEntity,
 
     public override int Guid => ComponentGuid;
 
+    private ITouchableBoardObjectLogic[] touchableBoardObjectLogics;
+    private ITouchableBoardObjectLogic[] TouchableBoardObjectLogics =>
+        touchableBoardObjectLogics ?? (touchableBoardObjectLogics = new ITouchableBoardObjectLogic[]
+        {
+            context.BoardLogic.FireflyLogic,
+            context.BoardLogic.AirShipLogic,
+            context.BoardLogic.VIPIslandLogic,
+        });
+
     public bool IsExecuteable()
     {
         return true;
@@ -168,7 +177,10 @@ public class BoardManipulatorComponent : ECSEntity,
             return false;
         }
 
-        if (context.BoardLogic.FireflyLogic.OnClick(selectedView)) return true;
+        foreach (var touchableObjectLogic in TouchableBoardObjectLogics)
+        {
+            if (touchableObjectLogic.OnClick(selectedView)) return true;
+        }
 
         var pieceView = selectedView as PieceBoardElementView;
         if (pieceView != null && context.BoardLogic.IsLockedCell(pieceView.Piece.CachedPosition) == false && pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero()) == false)
@@ -180,8 +192,15 @@ public class BoardManipulatorComponent : ECSEntity,
                 
                 UIErrorWindowController.AddError(LocalizationService.Get("message.error.pieceLock"));  
             }
-            
-            if (pieceView.Piece.TouchReaction != null) return pieceView.Piece.TouchReaction.Touch(pieceView.Piece.CachedPosition);
+
+            if (pieceView.Piece.TouchReaction != null)
+            {
+                var isPieceTouch = pieceView.Piece.TouchReaction.Touch(pieceView.Piece.CachedPosition);
+
+                if (isPieceTouch) context.TutorialLogic.Update();
+                
+                return isPieceTouch;
+            }
         }
         
         context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
@@ -202,37 +221,37 @@ public class BoardManipulatorComponent : ECSEntity,
         var start = context.BoardDef.GetSectorPosition(startPos);
         var current = context.BoardDef.GetSectorPosition(pos);
         
-        if (!start.Equals(current)) return;
-
-        if (cachedViewForDrag == null)
+        if (start.Equals(current) == false) return;
+        if (cachedViewForDrag != null) return;
+        if (selectedView == null) return;
+            
+        if (selectedView is PieceBoardElementView pieceView)
         {
-//            var selectedView = GetSelectedBoardElementView();
-            
-            if (selectedView == null) return;
-            
-            var pieceView = selectedView as PieceBoardElementView;
-            
-            if (context.BoardLogic.FireflyLogic.OnDragStart(selectedView) == false && pieceView != null)
+            if (pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero())
+                || pieceView.Piece.Draggable == null
+                || pieceView.Piece.Draggable.IsDraggable(pieceView.Piece.CachedPosition) == false)
             {
-                if (pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero()) || pieceView.Piece.Draggable == null || pieceView.Piece.Draggable.IsDraggable(pieceView.Piece.CachedPosition) == false)
-                {
-                    return;
-                }
-                
-                var boardPos = context.BoardDef.GetSectorPosition(pos);
-                pieceView.OnDragStart(boardPos, pos);
+                return;
             }
-            
-            cachedViewForDrag = selectedView;
-            cachedDragDownPos = pos + Vector2.up * 0.5f;
-            cameraManipulator.CameraMove.Lock(this);
-            isDrag = true;
-            
-            
+                
+            pieceView.OnDragStart(context.BoardDef.GetSectorPosition(pos), pos);
         }
+        else
+        {
+            foreach (var touchableObjectLogic in TouchableBoardObjectLogics)
+            {
+                if (touchableObjectLogic.OnDragStart(selectedView) == false) continue;
+            
+                break;
+            }
+        }
+        
+        cachedViewForDrag = selectedView;
+        cachedDragDownPos = pos + Vector2.up * 0.5f;
+        cameraManipulator.CameraMove.Lock(this);
+        isDrag = true;
     }
     
-
     public bool OnSet(Vector2 startPos, Vector2 pos, float duration)
     {
         if (LeanTouch.Fingers.Count > 1)
@@ -266,9 +285,11 @@ public class BoardManipulatorComponent : ECSEntity,
 
         var targetPos = new Vector3(pos.x, pos.y, cachedViewForDrag.CachedTransform.position.z);
 
-        if (context.BoardLogic.FireflyLogic.Check(cachedViewForDrag))
+        foreach (var touchableObjectLogic in TouchableBoardObjectLogics)
         {
-            cachedViewForDrag.CachedTransform.localPosition = pos;
+            if (touchableObjectLogic.Check(cachedViewForDrag) == false) continue;
+            if (touchableObjectLogic.IsDraggable) cachedViewForDrag.CachedTransform.localPosition = pos;
+            
             return true;
         }
 
@@ -336,20 +357,30 @@ public class BoardManipulatorComponent : ECSEntity,
             isTouch = true;
             isFullPass = true;
             
-            var selectedView = GetSelectedBoardElementView();
+            var selectedView = GetSelectedBoardElementView(0);
             if (selectedView != null && selectedView is PieceBoardElementView)
             {
                 var pieceView = selectedView as PieceBoardElementView;
-                if (pieceView != null && pieceView.Piece?.Draggable != null)
+                var pathfindLockListenerComponent = pieceView.Piece?.GetComponent<PathfindLockListenerComponent>(PathfindLockListenerComponent.ComponentGuid);
+                
+                if (pieceView != null && (pieceView.Piece?.Draggable != null && (pathfindLockListenerComponent != null && pathfindLockListenerComponent.IsHasPath() == true)))
                 {
                     cameraManipulator.CameraMove.Lock(dragTresholdId, true);
 
                     cachedViewOnDown = selectedView;
                 }
-
                 return true;
             }
-            
+
+            foreach (var touchableObjectLogic in TouchableBoardObjectLogics)
+            {
+                if (touchableObjectLogic.Check(selectedView) == false) continue;
+                if (touchableObjectLogic.IsDraggable) cameraManipulator.CameraMove.Lock(dragTresholdId, true);
+
+                cachedViewOnDown = selectedView;
+                break;
+            }
+
             return true;
         }
         
@@ -369,20 +400,21 @@ public class BoardManipulatorComponent : ECSEntity,
 
             StopDragAnimationInternal();
 
-            if (context.BoardLogic.FireflyLogic.OnDragEnd(cachedViewForDrag))
+            foreach (var touchableObjectLogic in TouchableBoardObjectLogics)
             {
+                if (touchableObjectLogic.OnDragEnd(cachedViewForDrag) == false) continue;
+                
                 cachedViewForDrag = null;
                 cameraManipulator.CameraMove.UnLock(this);
                 context.TutorialLogic.Pause(false);
                 context.TutorialLogic.Update();
                 return true;
             }
-            
-            if (cachedViewForDrag is PieceBoardElementView)
+
+            if (cachedViewForDrag is PieceBoardElementView pieceView)
             {
-                var pieceView = cachedViewForDrag as PieceBoardElementView;
                 var boardPos = context.BoardDef.GetSectorPosition(pos);
-                var fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
+                var fromPosition = context.RendererContext.GetBoardPosition(pieceView);
                 
                 pieceView.OnDragEnd(boardPos, pos);
 
@@ -460,15 +492,18 @@ public class BoardManipulatorComponent : ECSEntity,
             
             return true;
         }
-
-        
         
         context.TutorialLogic.Pause(false);
         context.TutorialLogic.Update();
         return false;
     }
     
-    protected virtual BoardElementView GetSelectedBoardElementView()
+    /// <summary>
+    /// Get selected view using filter: -1 (all);  0 (only draggable objects + firefly)
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
+    protected virtual BoardElementView GetSelectedBoardElementView(int filter = -1)
     {
         var touchableObjects = cameraManipulator.GetTouchable();
         
@@ -494,11 +529,22 @@ public class BoardManipulatorComponent : ECSEntity,
                 coef = position.X * context.BoardDef.Width - position.Y + position.Z;
             }
 
-            if (context.BoardLogic.FireflyLogic.Check(touchableObject as BoardElementView))
+            if (filter == 0)
             {
-                coef = int.MaxValue;
+                if (touchableObject is UIBoardView)
+                {
+                    coef = int.MinValue;
+                }
             }
-            
+
+            foreach (var touchableObjectLogic in TouchableBoardObjectLogics)
+            {
+                if (touchableObjectLogic.Check(touchableObject as BoardElementView) == false) continue;
+                
+                coef = int.MaxValue;
+                break;
+            }
+
             if (coef != null && coef > maxCoef)
             {
                 maxCoef = coef.Value;

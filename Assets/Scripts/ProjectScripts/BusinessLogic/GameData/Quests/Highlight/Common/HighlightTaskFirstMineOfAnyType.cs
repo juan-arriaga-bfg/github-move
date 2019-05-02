@@ -5,7 +5,7 @@ public class HighlightTaskFirstMineOfAnyType : TaskHighlightUsingArrow
 {
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
-        var ids = PieceType.GetIdsByFilter(PieceTypeFilter.Mine, PieceTypeFilter.Fake);
+        var ids = PieceType.GetIdsByFilter(PieceTypeFilter.Mine);
         foreach (var id in ids)
         {
             if (HighlightTaskMineHelper.Highlight(id))

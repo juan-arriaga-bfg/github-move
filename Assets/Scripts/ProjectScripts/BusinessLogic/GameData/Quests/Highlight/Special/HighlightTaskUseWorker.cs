@@ -57,7 +57,7 @@ public class HighlightTaskUseWorker : TaskHighlightUsingArrow
 
         var board = BoardService.Current.FirstBoard;
         var posCache = board.BoardLogic.PositionsCache;
-        var workPlacesList = posCache.GetPiecePositionsByFilter(PieceTypeFilter.Mine, PieceTypeFilter.Fake);
+        var workPlacesList = posCache.GetPiecePositionsByFilter(PieceTypeFilter.Mine);
         
         workPlacesList.AddRange(posCache.GetPiecePositionsByFilter(PieceTypeFilter.Obstacle));
         workPlacesList.AddRange(posCache.GetPiecePositionsByFilter(PieceTypeFilter.Multicellular | PieceTypeFilter.Progress, PieceTypeFilter.Fake));
@@ -92,28 +92,47 @@ public class HighlightTaskUseWorker : TaskHighlightUsingArrow
         for (var i = 0; i < positions.Count; i++)
         {
             var position = positions[i];
-            var life = logic.GetPieceAt(position)?.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
+            int energyCost;
+
+            var piece = logic.GetPieceAt(position);
+            if (piece == null)
+            {
+                Debug.LogError($"piece not found at {position}");
+                continue;
+            }
+            
+            var life = piece.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
             
             if (life == null)
             {
-                Debug.LogError($"storageLifeComponent not found for pos {position}");
-                continue;
+                var def = PieceType.GetDefById(piece.PieceType);
+                if (def.Filter.Has(PieceTypeFilter.Mine) && def.Filter.Has(PieceTypeFilter.Fake))
+                {
+                    energyCost = 0;
+                }
+                else
+                {
+                    Debug.LogError($"WorkplaceLifeComponent not found at {position}");
+                    continue;
+                }
             }
-
-            if (life.IsDead)
+            else
             {
-                Debug.LogError($"storageLifeComponent is dear for pos {position}");
-                continue;
+                if (life.IsDead)
+                {
+                    Debug.Log($"WorkplaceLifeComponent is dead at {position}");
+                    continue;
+                }
+
+                if (life.TimerWork != null && life.TimerWork.IsExecuteable() || life.TimerCooldown != null && life.TimerCooldown.IsExecuteable())
+                {
+                    busy.Add(life.Context);
+                    continue;
+                }
+                
+                energyCost = life.Energy.Amount;
             }
 
-            if (life.TimerWork != null && life.TimerWork.IsExecuteable() || life.TimerCooldown != null && life.TimerCooldown.IsExecuteable())
-            {
-                busy.Add(life.Context);
-                continue;
-            }
-
-            var energyCost = life.Energy.Amount;
-            
             if (lastEnergy > energyCost)
             {
                 lastEnergy = energyCost;
@@ -179,17 +198,17 @@ public class HighlightTaskUseWorker : TaskHighlightUsingArrow
         for (var i = 0; i < positions.Count; i++)
         {
             var position = positions[i];
-            var unfinished = logic.GetPieceAt(position)?.PieceState;
+            PieceStateComponent unfinished = logic.GetPieceAt(position)?.PieceState;
 
             if (unfinished == null)
             {
-                Debug.LogError($"PieceStateComponent not found for pos {position}");
+                Debug.LogError($"PieceStateComponent not found at {position}");
                 continue;
             }
 
             if (unfinished.State == BuildingState.InProgress || unfinished.State == BuildingState.Complete)
             {
-                Debug.LogError($"PieceStateComponent InProgress for pos {position}");
+                Debug.Log($"PieceStateComponent InProgress at {position}");
                 continue;
             }
             

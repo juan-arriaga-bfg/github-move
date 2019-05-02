@@ -1,3 +1,4 @@
+using System;
 using Debug = IW.Logger;
 using UnityEngine;
 using DG.Tweening;
@@ -8,10 +9,13 @@ public class SpawnPieceAtAnimation : BoardAnimation
     public BoardPosition At;
     public string AnimationResource;
 	public float Delay = 0f;
+    public Action<BoardController> OnComplete;
     
     public override void Animate(BoardRenderer context)
     {
         var boardElement = context.CreatePieceAt(CreatedPiece, At);
+        
+        ToggleView(false, CreatedPiece);
 
         if (boardElement == null)
         {
@@ -34,6 +38,10 @@ public class SpawnPieceAtAnimation : BoardAnimation
 
         sequence.OnComplete(() =>
         {
+            ToggleView(true, CreatedPiece);
+
+            OnComplete?.Invoke(context.Context);
+            
             CompleteAnimation(context);
         });
     }

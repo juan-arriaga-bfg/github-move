@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchablePiece, IDraggablePiece, IMulticellularPiece, IBoardConditionComponent,
+public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchablePiece, IDraggablePiece, IMulticellularPiece,
     IPieceStateComponent, IViewDefinitionComponent, ITouchReactionComponent, ITutorialLocker
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
@@ -12,10 +12,10 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchab
 
     public BoardPosition CachedPosition
     {
-        get { return cachedPosition; }
-        set { cachedPosition = value; }
+        get => Multicellular?.RealPosition ?? cachedPosition;
+        set => cachedPosition = value;
     }
-
+    
     private LayerPieceComponent layer;
     public virtual LayerPieceComponent Layer => layer ?? (layer = GetComponent<LayerPieceComponent>(LayerPieceComponent.ComponentGuid));
     
@@ -30,9 +30,6 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchab
     
     private MulticellularPieceBoardObserver multicellular;
     public MulticellularPieceBoardObserver Multicellular => multicellular ?? (multicellular = GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid));
-
-    private BoardConditionComponent boardCondition;
-    public BoardConditionComponent BoardCondition => boardCondition ?? (boardCondition = GetComponent<BoardConditionComponent>(BoardConditionComponent.ComponentGuid));
     
     private PieceStateComponent pieceState;
     public PieceStateComponent PieceState => pieceState ?? (pieceState = GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid));
@@ -42,9 +39,6 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchab
     
     private TouchReactionComponent touchReaction;
     public TouchReactionComponent TouchReaction => touchReaction ?? (touchReaction = GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid));
-
-    private PathfindLockObserver pathfindLockObserver;
-    public PathfindLockObserver PathfindLockObserver => pathfindLockObserver ?? (pathfindLockObserver = GetComponent<PathfindLockObserver>(PathfindLockObserver.ComponentGuid));
 
     private TutorialLockerComponent tutorialLocker;
     public TutorialLockerComponent TutorialLocker

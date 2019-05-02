@@ -5,14 +5,12 @@ public class FireflyPieceSpawnAnimation : BoardAnimation
 {
 	public Piece CreatedPiece;
 	public FireflyPieceSpawnAction Action;
-    
+
 	public override void Animate(BoardRenderer context)
 	{
 		var boardElement = context.CreatePieceAt(CreatedPiece, Action.At);
         
 		boardElement.CachedTransform.localScale = Vector3.zero;
-        
-		
         
 		var sequence = DOTween.Sequence().SetId(animationUid);
 		var particlePosition = new BoardPosition(Action.At.X, Action.At.Y, 2);
@@ -28,7 +26,11 @@ public class FireflyPieceSpawnAnimation : BoardAnimation
 		});
 		
 		sequence.InsertCallback(0.25f, () => ParticleView.Show(R.FireflyExplosion, particlePosition));
-		sequence.Insert(0.3f, boardElement.CachedTransform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack));
+		sequence.Insert(0.3f, boardElement.CachedTransform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack).OnComplete(
+			() =>
+			{
+				CompleteAnimation(context);
+			}));
 		
 		sequence.InsertCallback(0.2f, () =>
 		{
@@ -40,8 +42,8 @@ public class FireflyPieceSpawnAnimation : BoardAnimation
 		
 		sequence.OnComplete(() =>
 		{
+//			CompleteAnimation(context);
 			context.DestroyElement(Action.View.gameObject);
-			CompleteAnimation(context);
 		});
 	}
 }

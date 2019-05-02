@@ -1,10 +1,10 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace Org.BouncyCastle.Utilities.IO
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.IO
 {
     public abstract class BaseOutputStream : Stream
     {
@@ -13,17 +13,25 @@ namespace Org.BouncyCastle.Utilities.IO
 		public sealed override bool CanRead { get { return false; } }
         public sealed override bool CanSeek { get { return false; } }
         public sealed override bool CanWrite { get { return !closed; } }
-		protected override void Dispose(bool isDisposing) {
-            try
+
+#if PORTABLE || NETFX_CORE
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
                 closed = true;
             }
-            finally
-            {
-                base.Dispose(isDisposing);
-            }
+            base.Dispose(disposing);
         }
-        public override void Flush() {}
+#else
+        public override void Close()
+        {
+            closed = true;
+            base.Close();
+        }
+#endif
+
+        public override void Flush() { }
         public sealed override long Length { get { throw new NotSupportedException(); } }
         public sealed override long Position
         {
@@ -54,7 +62,12 @@ namespace Org.BouncyCastle.Utilities.IO
 		{
 			Write(buffer, 0, buffer.Length);
 		}
-	}
-}
 
+        public override void WriteByte(byte b)
+        {
+            Write(new byte[]{ b }, 0, 1);
+        }
+    }
+}
+#pragma warning restore
 #endif

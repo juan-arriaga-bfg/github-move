@@ -1,5 +1,6 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-namespace Org.BouncyCastle.Asn1.X509
+#pragma warning disable
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X509
 {
     /**
      * The ReasonFlags object.
@@ -32,18 +33,17 @@ namespace Org.BouncyCastle.Asn1.X509
          * @param reasons - the bitwise OR of the Key Reason flags giving the
          * allowed uses for the key.
          */
-        public ReasonFlags(
-            int reasons)
-             : base(GetBytes(reasons), GetPadBits(reasons))
+        public ReasonFlags(int reasons)
+             : base(reasons)
         {
         }
 
-		public ReasonFlags(
+        public ReasonFlags(
             DerBitString reasons)
              : base(reasons.GetBytes(), reasons.PadBits)
         {
         }
     }
 }
-
+#pragma warning restore
 #endif

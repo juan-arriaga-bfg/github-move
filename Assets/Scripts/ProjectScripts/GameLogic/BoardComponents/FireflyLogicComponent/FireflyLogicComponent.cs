@@ -4,7 +4,7 @@ using BfgAnalytics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
+public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, ITouchableBoardObjectLogic
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
@@ -36,6 +36,8 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	private bool isTutorialActive => ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount < TUTORIAL_FIREFLY_COUNT;
 
 	private TimerComponent restartTimer;
+	
+	public bool IsDraggable => true;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{

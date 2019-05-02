@@ -41,8 +41,6 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     
     public DailyQuestEntity DailyQuest;
 
-    private DateTime dailyTimerStartTime;
-    
     public int DailyQuestRewardIndex { get; private set; }
     public int DailyQuestCompletedCount;
     
@@ -62,13 +60,15 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     public Action<QuestEntity, TaskEntity> OnQuestStateChanged;
     
     public List<QuestStarterEntity> QuestStarters;
-
+    
     /// <summary>
     /// Flag that indicates that all active quests and tasks are listening to BoardEvents
     /// </summary>
     public bool ConnectedToBoard { get; private set; }
 
     private ECSEntity context;
+
+    private long? pendingDailyTimer;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -142,10 +142,10 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
                 startedQuests.Add(quest);
             }
         }
-
+        
         if (DailyQuest != null)
         {
-            dailyTimerStartTime = DateTimeExtension.UnixTimeToDateTime(questSave.DailyTimerStart);
+            pendingDailyTimer = questSave.DailyTimerStart;
         }
 
         // Handle migration - case when target is changed
@@ -317,11 +317,6 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
             }
         }
 
-        if (DailyQuest != null)
-        {
-            LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
-        }
-        
         ConnectedToBoard = true;
     }
 
@@ -513,11 +508,15 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
             OnActiveQuestsListChanged?.Invoke();
         }
 
+        // Commented out: looks unsafe when loading foreign profile in sync window
+        
         // Recreate daily quest if we lost all the tasks due to migration
-        if (DailyQuest != null && DailyQuest.ActiveTasks.Count == 1)
-        {
-            StartNewDailyQuest();
-        }
+        // if (DailyQuest != null && DailyQuest.ActiveTasks.Count == 1)
+        // {
+        //     StartNewDailyQuest();
+        // }
+        
+        // end
 
         return quest;
     }
@@ -612,34 +611,37 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         if (ConnectedToBoard)
         {
             quest.ConnectToBoard();
+            StartDailyTimer();
         }
-
-        dailyTimerStartTime = CalculateDailyTimerStartTime();
-        StartDailyTimer();
     }
 
     public void StartDailyTimer()
-    {   
-        StopDailyTimer();
-
-        if (DailyQuest == null)
+    {
+        if (!ConnectedToBoard)
         {
-            return;
+            Debug.LogError($"[QuestsDataManager] => StartDailyTimer: Do not call StartDailyTimer before ConnectedToBoard!");
         }
         
-        Debug.Log($"[QuestsDataManager] => StartDailyTimer: startTime: {dailyTimerStartTime}, delay: {DAILY_TIMER_DELAY}");
+        StopDailyTimer();
+
+        DateTime startTime = pendingDailyTimer.HasValue ? UnixTimeHelper.UnixTimestampToDateTime(pendingDailyTimer.Value) : CalculateDailyTimerStartTime();
+        pendingDailyTimer = null;
+        
+        Debug.Log($"[QuestsDataManager] => StartDailyTimer: startTime: {startTime}, delay: {DAILY_TIMER_DELAY}");
 
         DailyTimer = new TimerComponent
         {
             UseUTC = false,
             Delay = DAILY_TIMER_DELAY,
-            Tag = DAILY_QUEST_ID
+            Tag = "daily"
         };
         
         DailyTimer.OnComplete += OnCompleteDailyTimer;
                                                                                                                 
         RegisterComponent(DailyTimer);
-        DailyTimer.Start(dailyTimerStartTime);
+        DailyTimer.Start(startTime);
+
+        LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
     }
 
     public void StopDailyTimer()

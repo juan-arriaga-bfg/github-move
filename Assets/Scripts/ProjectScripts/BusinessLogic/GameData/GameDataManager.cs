@@ -1,7 +1,7 @@
 ﻿public class GameDataManager : ECSEntity,
     IChestsDataManager, IPiecesDataManager, IFogsDataManager, IObstaclesDataManager, ILevelsDataManager,
     IFieldDataManager, ICodexDataManager, IEnemiesDataManager, IConstantsDataManager, IQuestsDataManager, IShopDataManager,
-    IOrdersDataManager, IConversationsDataManager, IMarketDataManager, ICharactersDataManager, IDailyRewardDataManager, IAbTestDataManager
+    IOrdersDataManager, IConversationsDataManager, IMarketDataManager, ICharactersDataManager, IDailyRewardDataManager, ITutorialDataManager, IAbTestDataManager
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -60,6 +60,8 @@
     private AbTestDataManager abTestManager;
     public AbTestDataManager AbTestManager => abTestManager ?? (abTestManager = GetComponent<AbTestDataManager>(AbTestDataManager.ComponentGuid));
 
+    private TutorialDataManager tutorialDataManager;
+    public TutorialDataManager TutorialDataManager => tutorialDataManager ?? (tutorialDataManager = GetComponent<TutorialDataManager>(TutorialDataManager.ComponentGuid));
     
     public UserProfile UserProfile { get; private set; } 
     
@@ -86,6 +88,7 @@
         RegisterComponent(new CharactersDataManager());
         RegisterComponent(new DailyRewardDataManager());
         RegisterComponent(new AbTestDataManager());
+        RegisterComponent(new TutorialDataManager());
     }
 
     public void Reload()

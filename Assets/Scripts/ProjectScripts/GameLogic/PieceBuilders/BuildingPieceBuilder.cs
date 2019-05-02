@@ -13,7 +13,7 @@
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionBuilding())
 			.RegisterComponent(new TouchReactionConditionComponent()));
-        
+		
 		return piece;
 	}
 }

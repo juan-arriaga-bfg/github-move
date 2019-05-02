@@ -1,10 +1,11 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-using Org.BouncyCastle.Crypto.Parameters;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Crypto.Engines
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Engines
 {
     /**
     * an implementation of RC2 as described in RFC 2268
@@ -137,7 +138,7 @@ namespace Org.BouncyCastle.Crypto.Engines
             }
             else
             {
-                throw new ArgumentException("invalid parameter passed to RC2 init - " + parameters.GetType().Name);
+                throw new ArgumentException("invalid parameter passed to RC2 init - " + BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.GetTypeName(parameters));
             }
         }
 
@@ -309,7 +310,6 @@ namespace Org.BouncyCastle.Crypto.Engines
             outBytes[outOff + 7] = (byte)(x76 >> 8);
         }
     }
-
 }
-
+#pragma warning restore
 #endif

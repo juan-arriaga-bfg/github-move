@@ -19,6 +19,7 @@ public class FieldDataManager : IECSComponent, IDataManager
     public int LayoutW;
     public int LayoutH;
     public int[] LayoutData;
+    public List<BoardPosition> LockedCells;
 	
 	public void OnRegisterEntity(ECSEntity entity)
 	{
@@ -60,24 +61,31 @@ public class FieldDataManager : IECSComponent, IDataManager
         {
             if (string.IsNullOrEmpty(error))
             {
+                LockedCells = new List<BoardPosition>();
+                
                 LayoutW = data.Width;
                 LayoutH = data.Height;
 
                 int size = LayoutW * LayoutH;
-                if (size != data.Data.Length)
+
+                string[] idsStr = data.Data.Split(',');
+                
+                if (size != idsStr.Length)
                 {
                     Debug.LogError("[FieldDataManager] => LoadLayoutData: LayoutW * LayoutH != Data.Length"); 
                     return;
                 }
                 
                 LayoutData = new int[size];
-
-                int index = 0;
-                for (var i = 0; i < data.Data.Length; i++)
+                int len = idsStr.Length;
+                for (int i = 0; i < len; i++)
                 {
-                    char c = data.Data[i];
-                    int value = c - '0';
-                    LayoutData[index++] = value;
+                    // Working code to get x/y coords if needed
+                    // int x = i / LayoutW;
+                    // int y = i % LayoutW;
+                    
+                    var tileId = int.Parse(idsStr[i]);
+                    LayoutData[i] = tileId;
                 }
             }
             else
@@ -87,8 +95,14 @@ public class FieldDataManager : IECSComponent, IDataManager
         });
     }
 
-    public int GetCellType(int x, int y)
+    public int GetTileId(int x, int y)
     {
+        int index = x * LayoutW + y;
+        if (index < 0 || index >= LayoutData.Length)
+        {
+            return -1;
+        }
+        
         return LayoutData[x * LayoutW + y];
     }
 }

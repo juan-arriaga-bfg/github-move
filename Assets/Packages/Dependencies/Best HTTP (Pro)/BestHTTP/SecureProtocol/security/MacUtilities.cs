@@ -1,17 +1,21 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
+using System;
 using System.Collections;
+using System.Globalization;
 
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Iana;
-using Org.BouncyCastle.Asn1.Pkcs;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Engines;
-using Org.BouncyCastle.Crypto.Macs;
-using Org.BouncyCastle.Crypto.Paddings;
-using Org.BouncyCastle.Utilities;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Iana;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Nist;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Pkcs;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Rosstandart;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Engines;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Macs;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Paddings;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
 
-namespace Org.BouncyCastle.Security
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Security
 {
     /// <remarks>
     ///  Utility class for creating HMac object from their names/Oids
@@ -22,8 +26,8 @@ namespace Org.BouncyCastle.Security
         {
         }
 
-        private static readonly IDictionary algorithms = Platform.CreateHashtable();
-        //private static readonly IDictionary oids = Platform.CreateHashtable();
+        private static readonly IDictionary algorithms = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateHashtable();
+        //private static readonly IDictionary oids = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.CreateHashtable();
 
         static MacUtilities()
         {
@@ -37,6 +41,14 @@ namespace Org.BouncyCastle.Security
             algorithms[PkcsObjectIdentifiers.IdHmacWithSha256.Id] = "HMAC-SHA256";
             algorithms[PkcsObjectIdentifiers.IdHmacWithSha384.Id] = "HMAC-SHA384";
             algorithms[PkcsObjectIdentifiers.IdHmacWithSha512.Id] = "HMAC-SHA512";
+
+            algorithms[NistObjectIdentifiers.IdHMacWithSha3_224.Id] = "HMAC-SHA3-224";
+            algorithms[NistObjectIdentifiers.IdHMacWithSha3_256.Id] = "HMAC-SHA3-256";
+            algorithms[NistObjectIdentifiers.IdHMacWithSha3_384.Id] = "HMAC-SHA3-384";
+            algorithms[NistObjectIdentifiers.IdHMacWithSha3_512.Id] = "HMAC-SHA3-512";
+
+            algorithms[RosstandartObjectIdentifiers.id_tc26_hmac_gost_3411_12_256.Id] = "HMAC-GOST3411-2012-256";
+            algorithms[RosstandartObjectIdentifiers.id_tc26_hmac_gost_3411_12_512.Id] = "HMAC-GOST3411-2012-512";
 
             // TODO AESMAC?
 
@@ -81,7 +93,7 @@ namespace Org.BouncyCastle.Security
 //		public static DerObjectIdentifier GetObjectIdentifier(
 //			string mechanism)
 //		{
-//			mechanism = (string) algorithms[Platform.ToUpperInvariant(mechanism)];
+//			mechanism = (string) algorithms[BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.ToUpperInvariant(mechanism)];
 //
 //			if (mechanism != null)
 //			{
@@ -105,7 +117,7 @@ namespace Org.BouncyCastle.Security
         public static IMac GetMac(
             string algorithm)
         {
-            string upper = Platform.ToUpperInvariant(algorithm);
+            string upper = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.ToUpperInvariant(algorithm);
 
             string mechanism = (string) algorithms[upper];
 
@@ -114,15 +126,15 @@ namespace Org.BouncyCastle.Security
                 mechanism = upper;
             }
 
-            if (mechanism.StartsWith("PBEWITH"))
+            if (BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.StartsWith(mechanism, "PBEWITH"))
             {
                 mechanism = mechanism.Substring("PBEWITH".Length);
             }
 
-            if (mechanism.StartsWith("HMAC"))
+            if (BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.StartsWith(mechanism, "HMAC"))
             {
                 string digestName;
-                if (mechanism.StartsWith("HMAC-") || mechanism.StartsWith("HMAC/"))
+                if (BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.StartsWith(mechanism, "HMAC-") || BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.StartsWith(mechanism, "HMAC/"))
                 {
                     digestName = mechanism.Substring(5);
                 }
@@ -136,7 +148,7 @@ namespace Org.BouncyCastle.Security
 
             if (mechanism == "AESCMAC")
             {
-                return new CMac(new AesFastEngine());
+                return new CMac(new AesEngine());
             }
             if (mechanism == "DESMAC")
             {
@@ -232,6 +244,14 @@ namespace Org.BouncyCastle.Security
             return (string) algorithms[oid.Id];
         }
 
+        public static byte[] CalculateMac(string algorithm, ICipherParameters cp, byte[] input)
+        {
+            IMac mac = GetMac(algorithm);
+            mac.Init(cp);
+            mac.BlockUpdate(input, 0, input.Length);
+            return DoFinal(mac);
+        }
+
         public static byte[] DoFinal(IMac mac)
         {
             byte[] b = new byte[mac.GetMacSize()];
@@ -246,5 +266,5 @@ namespace Org.BouncyCastle.Security
         }
     }
 }
-
+#pragma warning restore
 #endif

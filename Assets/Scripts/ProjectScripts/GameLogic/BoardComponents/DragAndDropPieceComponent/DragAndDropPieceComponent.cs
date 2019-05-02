@@ -109,19 +109,41 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
         {
             fakeBoardElement.Init(context.Context.RendererContext, fakePiece);
 
-            var particleSystems = fakeBoardElement.GetComponentsInChildren<ParticleSystem>();
-            for (int i = 0; i < particleSystems.Length; i++)
-            {
-                var particleSystem = particleSystems[i];
-                var emission = particleSystem.emission;
-                emission.enabled = false;
-            }
-            
-            var touchRegion = fakeBoardElement.GetComponent<TouchRegion>();
-            if (touchRegion != null) touchRegion.enabled = false;
+            DisableTouchAndEffectsForElement(fakeBoardElement);
         }
 
         return fakeBoardElement;
+    }
+    
+    public virtual PieceBoardElementView CreateFakePieceOutsideOfBoard(int targetPieceId)
+    {
+        var fakePiece = context.Context.CreatePieceFromType(targetPieceId);
+        var fakeBoardElement = context.Context.RendererContext.CreateElementOutsideOfBoard(fakePiece.PieceType) as PieceBoardElementView;
+
+        if (fakeBoardElement != null)
+        {
+            fakeBoardElement.Init(context.Context.RendererContext, fakePiece);
+
+            DisableTouchAndEffectsForElement(fakeBoardElement);
+        }
+
+        return fakeBoardElement;
+    }
+
+    private static void DisableTouchAndEffectsForElement(PieceBoardElementView fakeBoardElement)
+    {
+        var particleSystems = fakeBoardElement.GetComponentsInChildren<ParticleSystem>();
+        for (int i = 0; i < particleSystems.Length; i++)
+        {
+            var particleSystem = particleSystems[i];
+            var emission = particleSystem.emission;
+            emission.enabled = false;
+        }
+        
+        fakeBoardElement.StopAllAnimations();
+
+        var touchRegion = fakeBoardElement.GetComponent<TouchRegion>();
+        if (touchRegion != null) touchRegion.enabled = false;
     }
 
     public virtual PieceBoardElementView CreateFakePiece(int targetPieceId, BoardPosition fakePosition)
@@ -147,8 +169,11 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
         var touchRegion = fakePieceView.GetComponent<TouchRegion>();
         if (touchRegion != null) touchRegion.enabled = true;
         
-        fakePieceView.ToggleSelection(false);  
-        context.Context.RendererContext.RemoveElement(fakePieceView);
+        fakePieceView.ToggleSelection(false);
+
+        if (context.Context.RendererContext.RemoveElement(fakePieceView) == fakePieceView) return;
+        
+        context.Context.RendererContext.DestroyElement(fakePieceView);
     }
 
     public bool IsValidPoint(BoardPosition boardPosition)

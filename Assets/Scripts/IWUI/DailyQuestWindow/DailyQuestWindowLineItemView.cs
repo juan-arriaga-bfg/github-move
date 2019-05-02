@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class DailyQuestWindowLineItemView : IWUIWindowViewController
@@ -13,13 +14,41 @@ public class DailyQuestWindowLineItemView : IWUIWindowViewController
     [IWUIBinding("#LineItemEmpty")] private GameObject empty;
     [IWUIBinding("#LineItemCheck")] private GameObject check;
     [IWUIBinding("#LineItemFill")] private GameObject fill;
-
+    [IWUIBinding("#LineItemFillHighlight")] private GameObject fillHiglhlight;
+    
     public void UpdateUi(State state)
     {
         CacheResources();
         
         empty.SetActive(state == State.Empty); 
         check.SetActive(state == State.Check); 
-        fill.SetActive(state == State.Fill); 
+        
+        DOTween.Kill(this);
+        if (state == State.Fill)
+        {
+            var interval = 0.5f;
+            var sequence = DOTween.Sequence().SetId(this);
+            
+            fill.SetActive(true);
+            fillHiglhlight.SetActive(false);
+            sequence.InsertCallback(0.0f, () =>
+            {
+                fillHiglhlight.SetActive(!fillHiglhlight.activeSelf);
+                fill.SetActive(!fill.activeSelf);
+            });
+            sequence.AppendInterval(interval);
+            sequence.SetLoops(8);
+
+            sequence.OnComplete(() =>
+            {
+                fillHiglhlight.SetActive(true);
+                fill.SetActive(false);
+            });
+        }
+        else
+        {
+            fill.SetActive(false);
+            fillHiglhlight.SetActive(false);
+        }
     }
 }

@@ -37,6 +37,8 @@ public class PieceBoardElementView : BoardElementView
 
     private readonly ViewAnimationUid selectedAnimationId = new ViewAnimationUid();
     
+    private readonly ViewAnimationUid selectionViewAnimationId = new ViewAnimationUid();
+    
     public ViewAnimationUid SelectedAnimationId { get { return selectedAnimationId; } }
     public List<ViewAnchorLink> Anchors => anchors;
     private SpriteRenderer selectionSprite;
@@ -81,6 +83,8 @@ public class PieceBoardElementView : BoardElementView
     }
     
     [SerializeField] private HintArrowView arrow;
+
+    private DebugTextView labelId;
     
     public virtual void Init(BoardRenderer context, Piece piece)
     {
@@ -103,6 +107,11 @@ public class PieceBoardElementView : BoardElementView
 
         if (selectionView != null)
         {
+            var timeOffsetComponent = selectionView.gameObject.GetComponent<IWOffsetForTimeShaderAnimation>();
+            if (timeOffsetComponent == null)
+            {
+                selectionView.gameObject.AddComponent<IWOffsetForTimeShaderAnimation>();
+            }
             selectionSprite = selectionView.GetComponent<SpriteRenderer>();
         }
 
@@ -114,6 +123,30 @@ public class PieceBoardElementView : BoardElementView
         CacheDefaultMaterials();
         
         CheckLock();
+        
+#if DEBUG
+        if (DevTools.IsIdsEnabled) ShowId(true);
+#endif
+
+    }
+    
+    public void ShowId(bool isShow)
+    {
+        if (isShow)
+        {
+            labelId = Context.CreateElement((int) ViewType.DebugId).GetComponent<DebugTextView>();
+            labelId.SetId(Piece.PieceType);
+            labelId.transform.SetParent(CachedTransform, false);
+            AddToLayerCache(labelId.gameObject);
+            SyncRendererLayers(Piece.CachedPosition);
+            return;
+        }
+        
+        if(labelId == null) return;
+        
+        RemoveFromLayerCache(labelId.gameObject);
+        Context.DestroyElement(labelId.gameObject);
+        labelId = null;
     }
 
     public Vector2 GetUIPosition(ViewType key)
@@ -426,6 +459,10 @@ public class PieceBoardElementView : BoardElementView
         DestroyDropEffect();
         RemoveArrow();
         
+#if DEBUG
+        ShowId(false);
+#endif
+        
         base.ResetViewOnDestroy();
     }
 
@@ -464,9 +501,9 @@ public class PieceBoardElementView : BoardElementView
         {
             var duration = 0.2f;
 
-            DOTween.Kill(animationUid);
+            DOTween.Kill(selectionViewAnimationId);
 
-            var sequence = DOTween.Sequence().SetId(animationUid);
+            var sequence = DOTween.Sequence().SetId(selectionViewAnimationId);
 
             if ((Piece == null || Piece.Draggable != null) && isValid)
             {
@@ -486,7 +523,7 @@ public class PieceBoardElementView : BoardElementView
         }
         else
         {
-            DOTween.Kill(animationUid);
+            DOTween.Kill(selectionViewAnimationId);
             bodySprites.ForEach(sprite => sprite.color = Color.white);
             selectionSprite.color = baseColor;
             selectionView.gameObject.SetActive(false);
@@ -518,10 +555,7 @@ public class PieceBoardElementView : BoardElementView
             this.arrow = arrow;
             this.arrow.AddOnRemoveAction(() =>
             {
-                if (this.arrow == arrow)
-                {
-                    this.arrow = null;
-                }
+                if (this.arrow == arrow) this.arrow = null;
             });
         }
         else
@@ -590,5 +624,10 @@ public class PieceBoardElementView : BoardElementView
     public virtual bool AvailiableLockTouchMessage()
     {
         return true;
+    }
+
+    public virtual void StopAllAnimations()
+    {
+        
     }
 }

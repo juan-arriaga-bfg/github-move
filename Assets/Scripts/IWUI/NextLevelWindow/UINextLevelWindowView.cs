@@ -124,7 +124,7 @@ public class UINextLevelWindowView : UIGenericWindowView
         CurrencyHelper.Purchase(manager.Rewards, null, new Vector2(Screen.width/2, Screen.height/2));
         CurrencyHelper.Purchase(Currency.Level.Name, 1, Currency.Experience.Name, manager.Price);
         CurrencyHelper.Purchase(Currency.EnergyLimit.Name, 1);
-        
+
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
         GameDataService.Current.LevelsManager.UpdateSequence();
         

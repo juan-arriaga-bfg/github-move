@@ -1,8 +1,8 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 
-namespace Org.BouncyCastle.Crypto.Utilities
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Utilities
 {
     internal sealed class Pack
     {
@@ -119,6 +119,22 @@ namespace Org.BouncyCastle.Crypto.Utilities
             UInt32_To_BE((uint)(n), bs, off + 4);
         }
 
+        internal static byte[] UInt64_To_BE(ulong[] ns)
+        {
+            byte[] bs = new byte[8 * ns.Length];
+            UInt64_To_BE(ns, bs, 0);
+            return bs;
+        }
+
+        internal static void UInt64_To_BE(ulong[] ns, byte[] bs, int off)
+        {
+            for (int i = 0; i < ns.Length; ++i)
+            {
+                UInt64_To_BE(ns[i], bs, off);
+                off += 8;
+            }
+        }
+
         internal static ulong BE_To_UInt64(byte[] bs)
         {
             uint hi = BE_To_UInt32(bs);
@@ -131,6 +147,15 @@ namespace Org.BouncyCastle.Crypto.Utilities
             uint hi = BE_To_UInt32(bs, off);
             uint lo = BE_To_UInt32(bs, off + 4);
             return ((ulong)hi << 32) | (ulong)lo;
+        }
+
+        internal static void BE_To_UInt64(byte[] bs, int off, ulong[] ns)
+        {
+            for (int i = 0; i < ns.Length; ++i)
+            {
+                ns[i] = BE_To_UInt64(bs, off);
+                off += 8;
+            }
         }
 
         internal static void UInt16_To_LE(ushort n, byte[] bs)
@@ -232,6 +257,17 @@ namespace Org.BouncyCastle.Crypto.Utilities
             }
         }
 
+        internal static uint[] LE_To_UInt32(byte[] bs, int off, int count)
+        {
+            uint[] ns = new uint[count];
+            for (int i = 0; i < ns.Length; ++i)
+            {
+                ns[i] = LE_To_UInt32(bs, off);
+                off += 4;
+            }
+            return ns;
+        }
+
         internal static byte[] UInt64_To_LE(ulong n)
         {
             byte[] bs = new byte[8];
@@ -251,6 +287,31 @@ namespace Org.BouncyCastle.Crypto.Utilities
             UInt32_To_LE((uint)(n >> 32), bs, off + 4);
         }
 
+        internal static byte[] UInt64_To_LE(ulong[] ns)
+        {
+            byte[] bs = new byte[8 * ns.Length];
+            UInt64_To_LE(ns, bs, 0);
+            return bs;
+        }
+
+        internal static void UInt64_To_LE(ulong[] ns, byte[] bs, int off)
+        {
+            for (int i = 0; i < ns.Length; ++i)
+            {
+                UInt64_To_LE(ns[i], bs, off);
+                off += 8;
+            }
+        }
+
+        internal static void UInt64_To_LE(ulong[] ns, int nsOff, int nsLen, byte[] bs, int bsOff)
+        {
+            for (int i = 0; i < nsLen; ++i)
+            {
+                UInt64_To_LE(ns[nsOff + i], bs, bsOff);
+                bsOff += 8;
+            }
+        }
+
         internal static ulong LE_To_UInt64(byte[] bs)
         {
             uint lo = LE_To_UInt32(bs);
@@ -264,7 +325,25 @@ namespace Org.BouncyCastle.Crypto.Utilities
             uint hi = LE_To_UInt32(bs, off + 4);
             return ((ulong)hi << 32) | (ulong)lo;
         }
+
+        internal static void LE_To_UInt64(byte[] bs, int off, ulong[] ns)
+        {
+            for (int i = 0; i < ns.Length; ++i)
+            {
+                ns[i] = LE_To_UInt64(bs, off);
+                off += 8;
+            }
+        }
+
+        internal static void LE_To_UInt64(byte[] bs, int bsOff, ulong[] ns, int nsOff, int nsLen)
+        {
+            for (int i = 0; i < nsLen; ++i)
+            {
+                ns[nsOff + i] = LE_To_UInt64(bs, bsOff);
+                bsOff += 8;
+            }
+        }
     }
 }
-
+#pragma warning restore
 #endif

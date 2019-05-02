@@ -1,25 +1,8 @@
-﻿#if !BESTHTTP_DISABLE_CACHING && (!UNITY_WEBGL || UNITY_EDITOR)
+﻿#if !BESTHTTP_DISABLE_CACHING
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
-
-#if NETFX_CORE
-    using FileStream = BestHTTP.PlatformSupport.IO.FileStream;
-    using Directory = BestHTTP.PlatformSupport.IO.Directory;
-    using File = BestHTTP.PlatformSupport.IO.File;
-
-    using BestHTTP.PlatformSupport.IO;
-
-    //Disable CD4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the 'await' operator to the result of the call.
-    #pragma warning disable 4014
-#else
-    using FileStream = System.IO.FileStream;
-    using Directory = System.IO.Directory;
-
-    using System.IO;
-#endif
 
 //
 // Version 1: Initial release
@@ -29,6 +12,21 @@ using System.Threading;
 namespace BestHTTP.Caching
 {
     using BestHTTP.Extensions;
+    using BestHTTP.PlatformSupport.FileSystem;
+
+    public sealed class UriComparer : IEqualityComparer<Uri>
+    {
+        public bool Equals(Uri x, Uri y)
+        {
+            return Uri.Compare(x, y, UriComponents.HttpRequestUrl, UriFormat.SafeUnescaped, StringComparison.Ordinal) == 0;
+        }
+
+        public int GetHashCode(Uri uri)
+        {
+            return uri.ToString().GetHashCode();
+        }
+    }
+
 
     public static class HTTPCacheService
     {
@@ -48,7 +46,9 @@ namespace BestHTTP.Caching
 
                 try
                 {
-                    File.Exists(HTTPManager.GetRootCacheFolder());
+                    // If DirectoryExists throws an exception we will set IsSupprted to false
+
+                    HTTPManager.IOService.DirectoryExists(HTTPManager.GetRootCacheFolder());
                     isSupported = true;
                 }
                 catch
@@ -117,14 +117,18 @@ namespace BestHTTP.Caching
                 if (string.IsNullOrEmpty(CacheFolder) || string.IsNullOrEmpty(LibraryPath))
                 {
                     CacheFolder = System.IO.Path.Combine(HTTPManager.GetRootCacheFolder(), "HTTPCache");
-                    if (!Directory.Exists(CacheFolder))
-                        Directory.CreateDirectory(CacheFolder);
+                    if (!HTTPManager.IOService.DirectoryExists(CacheFolder))
+                        HTTPManager.IOService.DirectoryCreate(CacheFolder);
 
                     LibraryPath = System.IO.Path.Combine(HTTPManager.GetRootCacheFolder(), "Library");
                 }
             }
             catch
-            { }
+            {
+                isSupported = false;
+
+                HTTPManager.Logger.Warning("HTTPCacheService", "Cache Service Disabled!");
+            }
         }
 
         internal static UInt64 GetNameIdx()
@@ -151,7 +155,7 @@ namespace BestHTTP.Caching
                 return Library.ContainsKey(uri);
         }
 
-        internal static bool DeleteEntity(Uri uri, bool removeFromLibrary = true)
+        public static bool DeleteEntity(Uri uri, bool removeFromLibrary = true)
         {
             if (!IsSupported)
                 return false;
@@ -214,6 +218,9 @@ namespace BestHTTP.Caching
             if (!IsSupported)
                 return;
 
+            request.RemoveHeader("If-None-Match");
+            request.RemoveHeader("If-Modified-Since");
+
             HTTPCacheFileInfo info;
             lock (Library)
                 if (Library.TryGetValue(request.CurrentUri, out info))
@@ -224,19 +231,14 @@ namespace BestHTTP.Caching
 
         #region Get Functions
 
-        internal static System.IO.Stream GetBody(Uri uri, out int length)
+        internal static HTTPCacheFileInfo GetEntity(Uri uri)
         {
-            length = 0;
-
             if (!IsSupported)
                 return null;
-
-            HTTPCacheFileInfo info;
+            HTTPCacheFileInfo info = null;
             lock (Library)
-                if (Library.TryGetValue(uri, out info))
-                    return info.GetBodyStream(out length);
-
-            return null;
+                Library.TryGetValue(uri, out info);
+            return info;
         }
 
         internal static HTTPResponse GetFullResponse(HTTPRequest request)
@@ -271,9 +273,10 @@ namespace BestHTTP.Caching
             if (response == null)
                 return false;
 
-            // Already cached
-            if (response.StatusCode == 304)
-                return false;
+            // https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13.12 - Cache Replacement
+            // It MAY insert it into cache storage and MAY, if it meets all other requirements, use it to respond to any future requests that would previously have caused the old response to be returned.
+            //if (response.StatusCode == 304)
+            //    return false;
 
             if (response.StatusCode < 200 || response.StatusCode >= 400)
                 return false;
@@ -328,10 +331,12 @@ namespace BestHTTP.Caching
                 try
                 {
                     info.Store(response);
+                    if (HTTPManager.Logger.Level == Logger.Loglevels.All)
+                        HTTPManager.Logger.Verbose("HTTPCacheService", string.Format("{0} - Saved to cache", uri.ToString()));
                 }
                 catch
                 {
-                    // If something happens while we write out the response, than we will delete it becouse it might be in an invalid state.
+                    // If something happens while we write out the response, than we will delete it because it might be in an invalid state.
                     DeleteEntity(uri);
 
                     throw;
@@ -362,7 +367,7 @@ namespace BestHTTP.Caching
                 }
                 catch
                 {
-                    // If something happens while we write out the response, than we will delete it becouse it might be in an invalid state.
+                    // If something happens while we write out the response, than we will delete it because it might be in an invalid state.
                     DeleteEntity(uri);
 
                     throw;
@@ -372,11 +377,11 @@ namespace BestHTTP.Caching
 
         #endregion
 
-        #region Public Maintanance Functions
+        #region Public Maintenance Functions
 
         /// <summary>
         /// Deletes all cache entity. Non blocking.
-        /// <remarks>Call it only if there no requests currently processed, becouse cache entries can be deleted while a server sends back a 304 result, so there will be no data to read from the cache!</remarks>
+        /// <remarks>Call it only if there no requests currently processed, because cache entries can be deleted while a server sends back a 304 result, so there will be no data to read from the cache!</remarks>
         /// </summary>
         public static void BeginClear()
         {
@@ -390,11 +395,13 @@ namespace BestHTTP.Caching
             SetupCacheFolder();
 
     #if !NETFX_CORE
-            //ThreadPool.QueueUserWorkItem(new WaitCallback((param) =>
-            new Thread(ClearImpl).Start();
-    #else
+            ThreadPool.QueueUserWorkItem(new WaitCallback((param) => ClearImpl(param)));
+            //new Thread(ClearImpl).Start();
+#else
+#pragma warning disable 4014
             Windows.System.Threading.ThreadPool.RunAsync(ClearImpl);
-    #endif
+#pragma warning restore 4014
+#endif
         }
 
         private static void ClearImpl(object param)
@@ -405,15 +412,15 @@ namespace BestHTTP.Caching
             try
             {
                 // GetFiles will return a string array that contains the files in the folder with the full path
-                string[] cacheEntries = Directory.GetFiles(CacheFolder);
+                string[] cacheEntries = HTTPManager.IOService.GetFiles(CacheFolder);
 
                 for (int i = 0; i < cacheEntries.Length; ++i)
                 {
-                    // We need a try-catch block becouse between the Directory.GetFiles call and the File.Delete calls a maintainance job, or other file operations can delelete any file from the cache folder.
+                    // We need a try-catch block because between the Directory.GetFiles call and the File.Delete calls a maintenance job, or other file operations can delete any file from the cache folder.
                     // So while there might be some problem with any file, we don't want to abort the whole for loop
                     try
                     {
-                        File.Delete(cacheEntries[i]);
+                        HTTPManager.IOService.FileDelete(cacheEntries[i]);
                     }
                     catch
                     { }
@@ -432,7 +439,7 @@ namespace BestHTTP.Caching
 
         /// <summary>
         /// Deletes all expired cache entity.
-        /// <remarks>Call it only if there no requests currently processed, becouse cache entries can be deleted while a server sends back a 304 result, so there will be no data to read from the cache!</remarks>
+        /// <remarks>Call it only if there no requests currently processed, because cache entries can be deleted while a server sends back a 304 result, so there will be no data to read from the cache!</remarks>
         /// </summary>
         public static void BeginMaintainence(HTTPCacheMaintananceParams maintananceParam)
         {
@@ -449,14 +456,16 @@ namespace BestHTTP.Caching
 
             SetupCacheFolder();
 
-    #if !NETFX_CORE
-            //ThreadPool.QueueUserWorkItem(new WaitCallback((param) =>
-            new Thread((param) =>
-    #else
+#if !NETFX_CORE
+            ThreadPool.QueueUserWorkItem(new WaitCallback((param) =>
+            //new Thread((param) =>
+#else
+#pragma warning disable 4014
             Windows.System.Threading.ThreadPool.RunAsync((param) =>
-    #endif
-                {
-                    try
+#pragma warning restore 4014
+#endif
+            {
+                try
                     {
                         lock (Library)
                         {
@@ -518,7 +527,7 @@ namespace BestHTTP.Caching
                     }
                 }
     #if !NETFX_CORE
-                ).Start();
+                ));
     #else
                 );
     #endif
@@ -564,9 +573,9 @@ namespace BestHTTP.Caching
             if (!IsSupported)
                 return;
 
-            library = new Dictionary<Uri, HTTPCacheFileInfo>();
+            library = new Dictionary<Uri, HTTPCacheFileInfo>(new UriComparer());
 
-            if (!File.Exists(LibraryPath))
+            if (!HTTPManager.IOService.FileExists(LibraryPath))
             {
                 DeleteUnusedFiles();
                 return;
@@ -578,7 +587,7 @@ namespace BestHTTP.Caching
 
                 lock (library)
                 {
-                    using (var fs = new FileStream(LibraryPath, FileMode.Open))
+                    using (var fs = HTTPManager.IOService.CreateFileStream(LibraryPath, FileStreamModes.Open))
                     using (var br = new System.IO.BinaryReader(fs))
                     {
                         version = br.ReadInt32();
@@ -625,7 +634,7 @@ namespace BestHTTP.Caching
             {
                 lock (Library)
                 {
-                    using (var fs = new FileStream(LibraryPath, FileMode.Create))
+                    using (var fs = HTTPManager.IOService.CreateFileStream(LibraryPath, FileStreamModes.Create))
                     using (var bw = new System.IO.BinaryWriter(fs))
                     {
                         bw.Write(LibraryVersion);
@@ -675,11 +684,11 @@ namespace BestHTTP.Caching
             CheckSetup();
 
             // GetFiles will return a string array that contains the files in the folder with the full path
-            string[] cacheEntries = Directory.GetFiles(CacheFolder);
+            string[] cacheEntries = HTTPManager.IOService.GetFiles(CacheFolder);
 
             for (int i = 0; i < cacheEntries.Length; ++i)
             {
-                // We need a try-catch block becouse between the Directory.GetFiles call and the File.Delete calls a maintainance job, or other file operations can delelete any file from the cache folder.
+                // We need a try-catch block because between the Directory.GetFiles call and the File.Delete calls a maintenance job, or other file operations can delete any file from the cache folder.
                 // So while there might be some problem with any file, we don't want to abort the whole for loop
                 try
                 {
@@ -690,10 +699,10 @@ namespace BestHTTP.Caching
                         lock (Library)
                             deleteFile = !UsedIndexes.ContainsKey(idx);
                     else
-                        deleteFile = true;                                
-                    
+                        deleteFile = true;
+
                     if (deleteFile)
-                        File.Delete(cacheEntries[i]);
+                        HTTPManager.IOService.FileDelete(cacheEntries[i]);
                 }
                 catch
                 {}

@@ -5,10 +5,17 @@
         var piece = base.Build(pieceType, context);
 
         piece.RegisterComponent(new ManaDraggablePieceComponent());
-        piece.RegisterComponent(new PiecePathfindBoardCondition(piece.Context, piece)
-            .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
         
-        AddPathfindLockObserver(piece, true);
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
+
+        if (def == null) return piece;
+        
+        piece.RegisterComponent(new TutorialLockerComponent {Step = TutorialBuilder.FogStepIndex});
+        piece.RegisterComponent(new ResourceStorageComponent {Resources = def.SpawnResources});
+
+        piece.RegisterComponent(new TouchReactionComponent()
+            .RegisterComponent(new TouchReactionDefinitionCollectMana())
+            .RegisterComponent(new TouchReactionConditionMana()));
         
         return piece;
     }

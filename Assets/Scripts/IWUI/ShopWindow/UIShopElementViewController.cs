@@ -130,7 +130,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
 		    if (isOk)
 		    {
-			    OnPurchaseComplete();
+			    OnPurchaseComplete(true);
 		    }
 	    });
     }
@@ -164,12 +164,12 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 	    CurrencyHelper.PurchaseAsyncOnlyCurrency(products, contentEntity.Price, flyPosition, null);
 	    
 	    isClick = false;
-	    OnPurchaseComplete();
+	    OnPurchaseComplete(false);
     }
 
-    protected virtual void OnPurchaseComplete()
+    protected virtual void OnPurchaseComplete(bool isIap)
     {
-	    ProfileService.Instance.Manager.UploadCurrentProfile(false);
+	    ProfileService.Instance.Manager.UploadCurrentProfile(isIap);
 	    SendAnalyticsEvent();
     }
     

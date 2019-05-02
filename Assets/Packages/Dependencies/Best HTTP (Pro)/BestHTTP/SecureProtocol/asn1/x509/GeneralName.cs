@@ -1,13 +1,15 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
+#pragma warning disable
 using System;
 using System.Collections;
 using System.Globalization;
 using System.IO;
 using System.Text;
 
-using NetUtils = Org.BouncyCastle.Utilities.Net;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities;
+using NetUtils = BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Net;
 
-namespace Org.BouncyCastle.Asn1.X509
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X509
 {
     /**
      * The GeneralName object.
@@ -203,7 +205,7 @@ namespace Org.BouncyCastle.Asn1.X509
 	            }
 	        }
 
-			throw new ArgumentException("unknown object in GetInstance: " + obj.GetType().FullName, "obj");
+			throw new ArgumentException("unknown object in GetInstance: " + BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.GetTypeName(obj), "obj");
 		}
 
 		public static GeneralName GetInstance(
@@ -357,11 +359,11 @@ namespace Org.BouncyCastle.Asn1.X509
 
 		private int[] parseIPv6(string ip)
 		{
-			if (ip.StartsWith("::"))
+			if (BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.StartsWith(ip, "::"))
 			{
 				ip = ip.Substring(1);
 			}
-			else if (ip.EndsWith("::"))
+			else if (BestHTTP.SecureProtocol.Org.BouncyCastle.Utilities.Platform.EndsWith(ip, "::"))
 			{
 				ip = ip.Substring(0, ip.Length - 1);
 			}
@@ -417,5 +419,5 @@ namespace Org.BouncyCastle.Asn1.X509
         }
     }
 }
-
+#pragma warning restore
 #endif

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FieldControllerComponent : IECSComponent
@@ -17,7 +18,7 @@ public class FieldControllerComponent : IECSComponent
         
         //GenerateBorder();
 
-        LockWater();
+        LockCellsByLayout();
         
         // var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
         // CutTriangles(maxEdge / 2, Directions.All);
@@ -74,10 +75,16 @@ public class FieldControllerComponent : IECSComponent
 
         foreach (var piece in pieces)
         {
+            var positions = piece.Value.Where(elem => VIPIslandLogicComponent.IslandPositions.Contains(elem.SetZ(BoardLayer.Piece.Layer)) == false).ToList();
+            if (positions.Count == 0)
+            {
+                continue;
+            }
+            
             context.ActionExecutor.AddAction(new FillBoardAction
             {
                 Piece = piece.Key,
-                Positions = piece.Value
+                Positions = positions
             });
         }
     }
@@ -96,7 +103,14 @@ public class FieldControllerComponent : IECSComponent
                 controller.BoardLogic.PieceFlyer.Locker.Unlock(controller);
                 
                 controller.AreaAccessController?.FullRecalculate();
-                PathfindLockObserver.LoadPathfindLock();
+
+                var fogPositions = controller.BoardLogic.PositionsCache.GetPiecePositionsByType(PieceType.Fog.Id);
+                foreach (var fog in fogPositions)
+                {
+                    var fogPiece = controller.BoardLogic.GetPieceAt(fog);
+                    controller.PathfindLocker.RecalcCacheOnPieceAdded(controller.AreaAccessController.AvailiablePositions, fogPiece.CachedPosition, fogPiece);
+                }
+                
                 controller.PathfindLocker.OnAddComplete(BoardPosition.GetRect(BoardPosition.Zero(), context.BoardDef.Width, context.BoardDef.Height));
                 
                 var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
@@ -112,8 +126,9 @@ public class FieldControllerComponent : IECSComponent
                     view.UpdateResource(0);
                 }
                 
-                DevTools.UpdateFogSectorsDebug();
+                FogSectorsView.Rebuild(context.RendererContext);
                 context.Manipulator.CameraManipulator.CameraMove.UnLock(context);
+                controller.BoardLogic.VIPIslandLogic.Init();
             }
         });
     }
@@ -127,7 +142,7 @@ public class FieldControllerComponent : IECSComponent
     private void TestFieldAlex()
     {
         AddPieces(new BoardPosition(17, 16), PieceType.A1.Id, PieceType.A1.Id);
-        AddPieces(new BoardPosition(19, 16), PieceType.B1.Id, PieceType.B11.Id);
+        AddPieces(new BoardPosition(19, 16), PieceType.B1.Id, PieceType.BM.Id);
         AddPieces(new BoardPosition(20, 16), PieceType.PR_A1.Id, PieceType.PR_A5.Id);
         AddPieces(new BoardPosition(21, 16), PieceType.NPC_A.Id, PieceType.NPC_H.Id);
         AddPieces(new BoardPosition(23, 16), PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id);
@@ -140,7 +155,7 @@ public class FieldControllerComponent : IECSComponent
     
     private void TestFieldQA()
     {
-        AddPieces(new BoardPosition(19, 16), PieceType.B1.Id, PieceType.B11.Id);
+        AddPieces(new BoardPosition(19, 16), PieceType.B1.Id, PieceType.BM.Id);
         AddPiece(10, 20, PieceType.B1.Id);
     }
     
@@ -192,19 +207,21 @@ public class FieldControllerComponent : IECSComponent
         view.CachedTransform.localPosition += offset;
     }
     
-    private void LockWater()
+    private void LockCellsByLayout()
     {
         var width = context.BoardDef.Width;
         var height = context.BoardDef.Height;
         var layout = GameDataService.Current.FieldManager.LayoutData;
+        var tileDefs = BoardTiles.GetDefs();
         
         int layoutIndex = 0;
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                var cell = layout[layoutIndex++];
-                if (cell == 1)
+                var tileId = layout[layoutIndex++];
+                var def = tileDefs[tileId];
+                if (def.IsLock)
                 {
                     var point = new BoardPosition(x, y, BoardLayer.Piece.Layer);
                     context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreateEmptyPiece());
@@ -212,83 +229,7 @@ public class FieldControllerComponent : IECSComponent
             }
         }
     }
-    
-    private void CutTriangles(int count, Directions directions)
-    {
-        var width = context.BoardDef.Width;
-        var height = context.BoardDef.Height;
 
-        for (var i = 0; i < count; i++)
-        {
-            for (var j = 0; j < count - i; j++)
-            {
-                if ((directions & Directions.Left) == Directions.Left)
-                {
-                    var point = new BoardPosition(i, j, BoardLayer.Piece.Layer);
-                    context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreatePieceFromType(PieceType.Empty.Id));
-                }
-
-                if ((directions & Directions.Right) == Directions.Right)
-                {
-                    var point = new BoardPosition(width - 1 - i, height - 1 - j, BoardLayer.Piece.Layer);
-                    context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreatePieceFromType(PieceType.Empty.Id));
-                }
-
-                if ((directions & Directions.Top) == Directions.Top)
-                {
-                    var point = new BoardPosition(i, height - 1 - j, BoardLayer.Piece.Layer);
-                    context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreatePieceFromType(PieceType.Empty.Id));
-                }
-
-                if ((directions & Directions.Bottom) == Directions.Bottom)
-                {
-                    var point = new BoardPosition(width - 1 - i, j, BoardLayer.Piece.Layer);
-                    context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreatePieceFromType(PieceType.Empty.Id));
-                }
-            }    
-        }
-    }
-
-    private void GenerateBorder()
-    {
-        
-        var width = context.BoardDef.Width;
-        var height = context.BoardDef.Height;
-
-        var maxEdge = Math.Max(width, height);
-        var minEdge = Math.Min(width, height);
-        var cutSize = maxEdge / 2;
-        
-        var typeBottom = R.BorderBottom;
-        var typeTop = R.BorderTop;
-        var typeLeft = R.BorderLeft;
-        var typeRight = R.BorderRight;
-
-        var oddShift = (maxEdge) & 1;
-        
-        for (var currentPos = 0; currentPos < cutSize; currentPos++)
-        {
-            var cutDifference = cutSize - currentPos;
-            
-            var topPos = new BoardPosition(currentPos, height - 1 - cutDifference, BoardLayer.Default.Layer);
-            var bottomPos = new BoardPosition(width - 1 - currentPos, cutDifference, BoardLayer.Default.Layer);
-            var leftPos = new BoardPosition(currentPos, cutDifference, BoardLayer.Default.Layer);
-            var rightPos = new BoardPosition(width - 1 - currentPos, height - 1 - cutDifference, BoardLayer.Default.Layer);
-            
-            
-            
-            if(topPos.X < minEdge / 2 && bottomPos.X < width - 1)
-                context.RendererContext.CreateBoardElementAt<BoardElementView>(typeTop, topPos);
-            if(bottomPos.X > minEdge / 2 - 1 && bottomPos.X < width - 1)
-                context.RendererContext.CreateBoardElementAt<BoardElementView>(typeBottom, bottomPos);
-            if(leftPos.X < minEdge / 2 && leftPos.X > oddShift)
-                context.RendererContext.CreateBoardElementAt<BoardElementView>(typeLeft, leftPos);
-            if(rightPos.X > maxEdge/2 - 1 && rightPos.X < width - 1)
-                context.RendererContext.CreateBoardElementAt<BoardElementView>(typeRight, rightPos);
-        }
-        
-    }
-    
     private void AddPiece(BoardPosition position, int piece)
     {
         context.ActionExecutor.AddAction(new CreatePieceAtAction

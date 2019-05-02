@@ -1,14 +1,14 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-
+#pragma warning disable
 using System;
 using System.Collections;
 using System.IO;
 
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Security;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.X509;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Parameters;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Security;
 
-namespace Org.BouncyCastle.Crypto.Tls
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Tls
 {
     /// <summary>(D)TLS ECDH key exchange (see RFC 4492).</summary>
     public class TlsECDHKeyExchange
@@ -36,6 +36,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             case KeyExchangeAlgorithm.ECDHE_ECDSA:
                 this.mTlsSigner = new TlsECDsaSigner();
                 break;
+            case KeyExchangeAlgorithm.ECDH_anon:
             case KeyExchangeAlgorithm.ECDH_RSA:
             case KeyExchangeAlgorithm.ECDH_ECDSA:
                 this.mTlsSigner = null;
@@ -61,11 +62,14 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         public override void SkipServerCredentials()
         {
-            throw new TlsFatalAlert(AlertDescription.unexpected_message);
+            if (mKeyExchange != KeyExchangeAlgorithm.ECDH_anon)
+                throw new TlsFatalAlert(AlertDescription.unexpected_message);
         }
 
         public override void ProcessServerCertificate(Certificate serverCertificate)
         {
+            if (mKeyExchange == KeyExchangeAlgorithm.ECDH_anon)
+                throw new TlsFatalAlert(AlertDescription.unexpected_message);
             if (serverCertificate.IsEmpty)
                 throw new TlsFatalAlert(AlertDescription.bad_certificate);
 
@@ -111,9 +115,9 @@ namespace Org.BouncyCastle.Crypto.Tls
             {
                 switch (mKeyExchange)
                 {
+                case KeyExchangeAlgorithm.ECDH_anon:
                 case KeyExchangeAlgorithm.ECDHE_ECDSA:
                 case KeyExchangeAlgorithm.ECDHE_RSA:
-                case KeyExchangeAlgorithm.ECDH_anon:
                     return true;
                 default:
                     return false;
@@ -121,8 +125,39 @@ namespace Org.BouncyCastle.Crypto.Tls
             }
         }
 
+        public override byte[] GenerateServerKeyExchange()
+        {
+            if (!RequiresServerKeyExchange)
+                return null;
+
+            // ECDH_anon is handled here, ECDHE_* in a subclass
+
+            MemoryStream buf = new MemoryStream();
+            this.mECAgreePrivateKey = TlsEccUtilities.GenerateEphemeralServerKeyExchange(mContext.SecureRandom, mNamedCurves,
+                mClientECPointFormats, buf);
+            return buf.ToArray();
+        }
+
+        public override void ProcessServerKeyExchange(Stream input)
+        {
+            if (!RequiresServerKeyExchange)
+                throw new TlsFatalAlert(AlertDescription.unexpected_message);
+
+            // ECDH_anon is handled here, ECDHE_* in a subclass
+
+            ECDomainParameters curve_params = TlsEccUtilities.ReadECParameters(mNamedCurves, mClientECPointFormats, input);
+
+            byte[] point = TlsUtilities.ReadOpaque8(input);
+
+            this.mECAgreePublicKey = TlsEccUtilities.ValidateECPublicKey(TlsEccUtilities.DeserializeECPublicKey(
+                mClientECPointFormats, curve_params, point));
+        }
+
         public override void ValidateCertificateRequest(CertificateRequest certificateRequest)
         {
+            if (mKeyExchange == KeyExchangeAlgorithm.ECDH_anon)
+                throw new TlsFatalAlert(AlertDescription.handshake_failure);
+
             /*
              * RFC 4492 3. [...] The ECDSA_fixed_ECDH and RSA_fixed_ECDH mechanisms are usable with
              * ECDH_ECDSA and ECDH_RSA. Their use with ECDHE_ECDSA and ECDHE_RSA is prohibited because
@@ -148,6 +183,9 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         public override void ProcessClientCredentials(TlsCredentials clientCredentials)
         {
+            if (mKeyExchange == KeyExchangeAlgorithm.ECDH_anon)
+                throw new TlsFatalAlert(AlertDescription.internal_error);
+
             if (clientCredentials is TlsAgreementCredentials)
             {
                 // TODO Validate client cert has matching parameters (see 'TlsEccUtilities.AreOnSameCurve')?
@@ -175,6 +213,9 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         public override void ProcessClientCertificate(Certificate clientCertificate)
         {
+            if (mKeyExchange == KeyExchangeAlgorithm.ECDH_anon)
+                throw new TlsFatalAlert(AlertDescription.unexpected_message);
+
             // TODO Extract the public key
             // TODO If the certificate is 'fixed', take the public key as mECAgreeClientPublicKey
         }
@@ -211,5 +252,5 @@ namespace Org.BouncyCastle.Crypto.Tls
         }
     }
 }
-
+#pragma warning restore
 #endif

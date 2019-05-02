@@ -52,6 +52,12 @@ public class HighlightTaskMatch : TaskHighlightUsingArrow
                 {
                     continue;
                 }
+
+                var nextDef = PieceType.GetDefById(next);
+                if (nextDef.Filter.Has(PieceTypeFilter.Multicellular))
+                {
+                    continue;
+                }
                 
                 list = new List<BoardPosition>();
                 allPiecesDict.Add(id, list);
@@ -71,14 +77,16 @@ public class HighlightTaskMatch : TaskHighlightUsingArrow
         }
         
         List<BoardPosition> unlocked = new List<BoardPosition>();
-        
-        foreach (var pair in allPiecesDict)
+
+        var pathfinder = BoardService.Current.FirstBoard.PathfindLocker;
+
+        foreach (var pair in x3Dict)
         {
             var positions = pair.Value;
             unlocked.Clear();
             foreach (var position in positions)
             {
-                if (!boardLogic.IsLockedCell(position))
+                if (pathfinder.HasPath(boardLogic.GetPieceAt(position)))
                 {
                     unlocked.Add(position);
                 }

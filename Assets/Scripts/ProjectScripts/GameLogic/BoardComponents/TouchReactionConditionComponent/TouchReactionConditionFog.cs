@@ -4,8 +4,6 @@
 	
 	public override bool Check(BoardPosition position, Piece piece)
 	{
-		var board = piece.Context;
-		
 		var key = new BoardPosition(position.X, position.Y);
 		var def = GameDataService.Current.FogsManager.GetDef(key);
 

@@ -1,6 +1,7 @@
 using Debug = IW.Logger;
 using System;
 using Backend;
+using BFGSDK;
 using UnityEngine;
 
 public class UISettingsWindowView : UIGenericPopupWindowView

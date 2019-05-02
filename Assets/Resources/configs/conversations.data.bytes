@@ -165,24 +165,6 @@
     ]
   },
   {
-    "Id": 11,
-    "ConversationCharacters": {
-      "LeftInner": "GnomeWorker"
-    },
-    "Bubbles": [
-      {
-        "CharacterId": "GnomeWorker",
-        "Emotion": "Happy",
-        "Message": "conversation.5.message1"
-      },
-      {
-        "CharacterId": "GnomeWorker",
-        "Emotion": "Normal",
-        "Message": "conversation.5.message2"
-      }
-    ]
-  },
-  {
     "Id": "4_CreatePiece_A2",
     "Bubbles": [
       {
@@ -297,16 +279,6 @@
     ]
   },
   {
-    "Id": "16_CompleteOrder",
-    "Bubbles": [
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Normal",
-        "Message": "conversation.quest.complete17"
-      }
-    ]
-  },
-  {
     "Id": 60,
     "ConversationCharacters": {
       "LeftInner": "SleepingBeauty",
@@ -395,6 +367,16 @@
         "CharacterId": "PussInBoots",
         "Emotion": "Normal",
         "Message": "conversation.26.message6"
+      }
+    ]
+  },
+  {
+    "Id": "16_CompleteOrder",
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.quest.complete17"
       }
     ]
   },
@@ -529,6 +511,16 @@
     ]
   },
   {
+    "Id": "164_OpenChest_CH_NPC",
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.quest.complete32"
+      }
+    ]
+  },
+  {
     "Id": "15_CreatePiece_B4",
     "Bubbles": [
       {
@@ -539,44 +531,31 @@
     ]
   },
   {
-    "Id": 13,
-    "ConversationCharacters": {
-      "LeftInner": "SleepingBeauty",
-      "RightInner": "PussInBoots"
-    },
-    "Bubbles": [
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Normal",
-        "Message": "conversation.13.message1"
-      },
-      {
-        "CharacterId": "PussInBoots",
-        "Emotion": "Normal",
-        "Message": "conversation.13.message2"
-      }
-    ]
-  },
-  {
-    "Id": 16,
-    "ConversationCharacters": {
-      "LeftInner": "GnomeWorker"
-    },
-    "Bubbles": [
-      {
-        "CharacterId": "GnomeWorker",
-        "Emotion": "Normal",
-        "Message": "conversation.10.message1"
-      }
-    ]
-  },
-  {
     "Id": "14_CreatePiece_B3",
     "Bubbles": [
       {
         "CharacterId": "GnomeWorker",
         "Emotion": "Happy",
         "Message": "conversation.quest.complete15"
+      }
+    ]
+  },
+  {
+    "Id": 13,
+    "ConversationCharacters": {
+      "LeftInner": "GnomeWorker",
+      "RightInner": "PussInBoots"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
+        "Message": "conversation.13.message1"
+      },
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.13.message2"
       }
     ]
   },
@@ -735,7 +714,7 @@
     ]
   },
   {
-    "Id": 65,
+    "Id": 139,
     "ConversationCharacters": {
       "LeftInner": "GnomeWorker",
       "RightInner": "GnomeWorker2"
@@ -750,6 +729,74 @@
         "CharacterId": "GnomeWorker",
         "Emotion": "Normal",
         "Message": "conversation.29.message2"
+      }
+    ]
+  },
+  {
+    "Id": "155_CreatePiece_NPC_C6",
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.quest.complete30"
+      }
+    ]
+  },
+  {
+    "Id": 65,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty",
+      "RightInner": "GnomeWorker"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.32.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.32.message2"
+      }
+    ]
+  },
+  {
+    "Id": "154_CreatePiece_NPC_C5",
+    "Bubbles": [
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.quest.complete31"
+      }
+    ]
+  },
+  {
+    "Id": 140,
+    "ConversationCharacters": {
+      "LeftInner": "GnomeWorker",
+      "RightInner": "GnomeWorker2"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "GnomeWorker2",
+        "Emotion": "Happy",
+        "Message": "conversation.33.message1"
+      },
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.33.message2"
+      },
+      {
+        "CharacterId": "GnomeWorker2",
+        "Emotion": "Happy",
+        "Message": "conversation.33.message3"
+      },
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.33.message4"
       }
     ]
   },
@@ -783,7 +830,7 @@
     ]
   },
   {
-    "Id": 23,
+    "Id": 74,
     "ConversationCharacters": {
       "LeftInner": "SleepingBeauty",
       "RightInner": "Rapunzel"
@@ -884,11 +931,6 @@
         "CharacterId": "GnomeWorker",
         "Emotion": "Normal",
         "Message": "conversation.31.message2"
-      },
-      {
-        "CharacterId": "GnomeWorker",
-        "Emotion": "Normal",
-        "Message": "conversation.31.message3"
       }
     ]
   },
@@ -899,6 +941,40 @@
         "CharacterId": "SleepingBeauty",
         "Emotion": "Normal",
         "Message": "conversation.quest.complete8"
+      }
+    ]
+  },
+  {
+    "Id": 23,
+    "ConversationCharacters": {
+      "LeftInner": "PussInBoots",
+      "RightInner": "GnomeWorker"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.34.message1"
+      },
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
+        "Message": "conversation.34.message2"
+      },
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.34.message3"
+      }
+    ]
+  },
+  {
+    "Id": "87_KillTree",
+    "Bubbles": [
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
+        "Message": "conversation.quest.complete33"
       }
     ]
   }

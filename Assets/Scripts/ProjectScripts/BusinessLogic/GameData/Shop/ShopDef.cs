@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 public class ShopDef
 {
@@ -6,12 +7,13 @@ public class ShopDef
     public string Icon;
     public string Name;
     public string PurchaseKey;
+    public string SaleKey;
     public List<CurrencyPair> Products;
     public List<CurrencyPair> Extras;
     public CurrencyPair Price;
     public bool IsPermanent;
     public int Sale;
-    public int Delay;
+    public int[] Delays;
     
     public ShopDef Copy()
     {
@@ -37,12 +39,13 @@ public class ShopDef
             Icon = this.Icon,
             Name = this.Name,
             PurchaseKey = this.PurchaseKey,
+            SaleKey = this.SaleKey,
             Price = new CurrencyPair{Currency = this.Price.Currency, Amount = this.Price.Amount},
             Products = products,
             Extras = extras,
             IsPermanent = this.IsPermanent,
             Sale = this.Sale,
-            Delay = this.Delay
+            Delays = this.Delays?.ToArray()
         };
     }
 }

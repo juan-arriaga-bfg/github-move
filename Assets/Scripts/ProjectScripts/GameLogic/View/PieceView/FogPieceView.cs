@@ -1,4 +1,4 @@
-using Debug = IW.Logger;
+﻿using Debug = IW.Logger;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -36,8 +36,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 		observer = piece.GetComponent<FogObserver>(FogObserver.ComponentGuid);
 		
 		if(observer == null) return;
-
-	    int fogIndex = 0;
+		
 		foreach (var position in observer.Mask)
 		{
 			var fog = Instantiate(fogItem, fogItem.transform.parent);
@@ -66,8 +65,6 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 			
 			views.Add(fog);
 			views.Add(touch);
-
-		    fogIndex++;
 		}
 	    
 	    ClearCacheLayers();
@@ -314,5 +311,15 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
     public override bool AvailiableLockTouchMessage()
     {
 	    return false;
+    }
+
+    public void ShowProgressEffect(BoardPosition position)
+    {
+	    ParticleView.Show(R.FogProgressParticle, position.SetZ(BoardLayer.FX.Layer));
+    }
+
+    public void ShowProgressCompleteEffect()
+    {
+	    ParticleView.Show(R.FogProgressCompleteParticle, Piece.CachedPosition.SetZ(BoardLayer.FX.Layer));
     }
 }

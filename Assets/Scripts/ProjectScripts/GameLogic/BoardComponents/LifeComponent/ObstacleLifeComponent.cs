@@ -17,13 +17,30 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         }
     }
 
-    public override string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.chop", "gameboard.bubble.button.chop {0}"), Energy.ToStringIcon());
-    
+    public override string Price
+    {
+        get
+        {
+            var key = Context.Draggable == null ? "gameboard.bubble.button.obstacle" : "gameboard.bubble.button.deadfield";
+            
+            return string.Format(LocalizationService.Get(key, $"{key} {0}"), Energy.ToStringIcon());
+        }
+    }
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
         
         HP = Context.Context.BoardLogic.MatchDefinition.GetIndexInChain(Context.PieceType);
+
+        LocalNotificationsService.Current.RegisterNotifier(new Notifier(TimerWork, NotifyType.RemoveObstacleComplete));    
+    }
+
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {
+        base.OnUnRegisterEntity(entity);
+        
+        LocalNotificationsService.Current.UnRegisterNotifier(TimerWork);    
     }
 
     protected override LifeSaveItem InitInSave(BoardPosition position)
@@ -49,6 +66,13 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         }
         
         return item;
+    }
+
+    public override void OnAddToBoard(BoardPosition position, Piece context = null)
+    {
+        base.OnAddToBoard(position, context);
+        
+        Context.AddView(ViewType.ObstacleProgress);
     }
 
     protected override Dictionary<int, int> GetRewards()

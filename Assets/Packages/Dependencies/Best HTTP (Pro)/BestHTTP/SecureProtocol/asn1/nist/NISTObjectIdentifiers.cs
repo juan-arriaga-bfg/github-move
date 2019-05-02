@@ -1,7 +1,8 @@
 #if !BESTHTTP_DISABLE_ALTERNATE_SSL && (!UNITY_WEBGL || UNITY_EDITOR)
-using Org.BouncyCastle.Asn1;
+#pragma warning disable
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1;
 
-namespace Org.BouncyCastle.Asn1.Nist
+namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Nist
 {
     public sealed class NistObjectIdentifiers
     {
@@ -26,6 +27,16 @@ namespace Org.BouncyCastle.Asn1.Nist
         public static readonly DerObjectIdentifier IdSha224 = HashAlgs.Branch("4");
         public static readonly DerObjectIdentifier IdSha512_224 = HashAlgs.Branch("5");
         public static readonly DerObjectIdentifier IdSha512_256 = HashAlgs.Branch("6");
+        public static readonly DerObjectIdentifier IdSha3_224 = HashAlgs.Branch("7");
+        public static readonly DerObjectIdentifier IdSha3_256 = HashAlgs.Branch("8");
+        public static readonly DerObjectIdentifier IdSha3_384 = HashAlgs.Branch("9");
+        public static readonly DerObjectIdentifier IdSha3_512 = HashAlgs.Branch("10");
+        public static readonly DerObjectIdentifier IdShake128 = HashAlgs.Branch("11");
+        public static readonly DerObjectIdentifier IdShake256 = HashAlgs.Branch("12");
+        public static readonly DerObjectIdentifier IdHMacWithSha3_224 = HashAlgs.Branch("13");
+        public static readonly DerObjectIdentifier IdHMacWithSha3_256 = HashAlgs.Branch("14");
+        public static readonly DerObjectIdentifier IdHMacWithSha3_384 = HashAlgs.Branch("15");
+        public static readonly DerObjectIdentifier IdHMacWithSha3_512 = HashAlgs.Branch("16");
 
         public static readonly DerObjectIdentifier Aes = new DerObjectIdentifier(NistAlgorithm + ".1");
 
@@ -64,5 +75,5 @@ namespace Org.BouncyCastle.Asn1.Nist
         public static readonly DerObjectIdentifier DsaWithSha512 = new DerObjectIdentifier(IdDsaWithSha2 + ".4"); 
     }
 }
-
+#pragma warning restore
 #endif

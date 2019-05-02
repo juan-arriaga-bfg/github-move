@@ -2,6 +2,8 @@ using Debug = IW.Logger;
 using UnityEngine;
 
 [TaskHighlight(typeof(HighlightTaskMatch))]
+[TaskHighlight(typeof(HighlightTaskPointToRandomChestExcludingFreeAndNpc))]
+[TaskHighlight(typeof(HighlightTaskAnyBag))]
 [TaskHighlight(typeof(HighlightTaskPointToRandomBranchATree))]
 [TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]

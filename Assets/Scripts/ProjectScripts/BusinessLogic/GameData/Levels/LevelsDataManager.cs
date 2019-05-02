@@ -18,7 +18,7 @@ public class LevelsDataManager : SequenceData, IDataLoader<List<LevelsDef>>
 	public void UpdateSequence()
 	{
 		GetSequence(Currency.Level.Name).Reinit(Levels[Level - 1].PieceWeights);
-		GetSequence(Currency.Order.Name).Reinit(Levels[Level - 1].OrdersWeights);
+		GetSequence(Currency.Order.Name).Reinit(Levels[Level - 1].OrdersWeights, Levels[Level - 1].HardOrdersUids);
 		GetSequence(Currency.Resources.Name).Reinit(Levels[Level - 1].ResourcesWeights);
 		GetSequence(Currency.Extra.Name).Reinit(Levels[Level - 1].ExtrasWeights);
 	}
@@ -47,7 +47,7 @@ public class LevelsDataManager : SequenceData, IDataLoader<List<LevelsDef>>
 				
 				AddSequence(Currency.Level.Name, Levels[Level - 1].PieceWeights);
 				AddSequence(Currency.Resources.Name, Levels[Level - 1].ResourcesWeights);
-				AddSequence(Currency.Order.Name, Levels[Level - 1].OrdersWeights);
+				AddSequence(Currency.Order.Name, Levels[Level - 1].OrdersWeights, Levels[Level - 1].HardOrdersUids);
 				AddSequence(Currency.Extra.Name, Levels[Level - 1].ExtrasWeights);
 			}
 			else

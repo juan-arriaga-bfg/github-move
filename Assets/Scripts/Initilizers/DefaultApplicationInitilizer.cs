@@ -16,7 +16,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         
         Application.targetFrameRate = 60;
 
-        DOTween.SetTweensCapacity(200, 125);
+        DOTween.SetTweensCapacity(200, 312);
 
         // wait for Editor version update
 #if UNITY_EDITOR
@@ -93,18 +93,23 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
 
     void OnApplicationPause(bool pauseStatus)
     {
-        Debug.Log($"OnApplicationPause: {(pauseStatus ? "PAUSE" : "UNPAUSE")}");
+        bool isGameLoaded = AsyncInitService.Current?.IsAllComponentsInited() ?? false;
         
+        Debug.Log($"OnApplicationPause: {(pauseStatus ? "PAUSE" : "UNPAUSE")} Loaded: {isGameLoaded}");
+
         var energyLogic = BoardService.Current?.FirstBoard?.GetComponent<EnergyCurrencyLogicComponent>(EnergyCurrencyLogicComponent.ComponentGuid);
         if (pauseStatus)
         {
-            if (ProfileService.Instance != null && ProfileService.Instance.Manager != null)
+            if (ProfileService.Instance != null && ProfileService.Instance.Manager != null && isGameLoaded)
             {
                 ProfileService.Instance.Manager.UploadCurrentProfile(true);
-
-                LocalNotificationsService.Current.ScheduleNotifications();
             }
 
+            if (isGameLoaded)
+            {
+                LocalNotificationsService.Current.ScheduleNotifications();
+            }
+            
             energyLogic?.Timer.Stop();
         }
         else
@@ -112,7 +117,12 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             energyLogic?.InitInSave();
             
             BoardService.Current?.FirstBoard?.TutorialLogic?.ResetStartTime();
-            LocalNotificationsService.Current.CancelNotifications();
+
+            if (isGameLoaded)
+            {
+                LocalNotificationsService.Current.CancelNotifications();    
+            }
+            
             TackleBoxEvents.SendGameResumed();
         }
     }
@@ -123,6 +133,12 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         
         ProfileService.Instance.Manager.UploadCurrentProfile(true);
 
-        LocalNotificationsService.Current.ScheduleNotifications();
+        bool isGameLoaded = AsyncInitService.Current?.IsAllComponentsInited() ?? false;
+        if (isGameLoaded)
+        {
+            LocalNotificationsService.Current.ScheduleNotifications();    
+        }
+        
+        BoardService.Current.FirstBoard.GetComponent<LoadSilenceComponent>(LoadSilenceComponent.ComponentGuid)?.OnLoadComplete();
     }
 }

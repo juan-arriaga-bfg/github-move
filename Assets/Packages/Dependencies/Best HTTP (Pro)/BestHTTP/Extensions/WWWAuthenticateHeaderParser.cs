@@ -16,9 +16,9 @@ namespace BestHTTP.Extensions
             Values = ParseQuotedHeader(headerValue);
         }
 
-        private List<KeyValuePair> ParseQuotedHeader(string str)
+        private List<HeaderValue> ParseQuotedHeader(string str)
         {
-            List<KeyValuePair> result = new List<KeyValuePair>();
+            List<HeaderValue> result = new List<HeaderValue>();
 
             if (str != null)
             {
@@ -27,19 +27,19 @@ namespace BestHTTP.Extensions
 
                 // Read Type (Basic|Digest)
                 string type = str.Read(ref idx, (ch) => !char.IsWhiteSpace(ch) && !char.IsControl(ch)).TrimAndLower();
-                result.Add(new KeyValuePair(type));
+                result.Add(new HeaderValue(type));
 
                 // process the rest of the text
                 while (idx < str.Length)
                 {
                     // Read key
                     string key = str.Read(ref idx, '=').TrimAndLower();
-                    KeyValuePair qp = new KeyValuePair(key);
+                    HeaderValue qp = new HeaderValue(key);
 
                     // Skip any white space
                     str.SkipWhiteSpace(ref idx);
 
-                    qp.Value = str.ReadQuotedText(ref idx);
+                    qp.Value = str.ReadPossibleQuotedText(ref idx);
 
                     result.Add(qp);
                 }

@@ -5,10 +5,24 @@ public class OrderDef
     public string Uid;
     public int Level = -1;
     public int Delay;
-    public List<CurrencyPair> Prices;
-    public List<CurrencyPair> Rewards;
-    public List<CurrencyPair> Result;
+    
+    public List<CurrencyPair> Rewards
+    {
+        get
+        {
+            var rewards = new List<CurrencyPair>(NormalRewards);
 
+            if (EventRewards != null) rewards.AddRange(EventRewards);
+
+            return rewards;
+        }
+    }
+
+    public List<CurrencyPair> NormalRewards;
+    public List<CurrencyPair> EventRewards;
+    
+    public List<CurrencyPair> Prices;
+    
     private bool isUnlocked;
 
     public bool IsUnlocked()
