@@ -4,8 +4,12 @@ public class UIChestMessageWindowModel : IWWindowModel
 {
     public ChestPieceComponent ChestComponent;
     
-    public string Title => LocalizationService.Get("window.chest.title", "window.chest.title");
-    public string Message => LocalizationService.Get("window.chest.message", "window.chest.message");
+    public string Title => PieceType.GetDefById(ChestComponent.ContextPiece.PieceType).Filter.Has(PieceTypeFilter.Bag)
+                           ? LocalizationService.Get("window.chest.sack.title", "window.chest.sack.title") 
+                           : LocalizationService.Get("window.chest.title", "window.chest.title");
+    public string Message => PieceType.GetDefById(ChestComponent.ContextPiece.PieceType).Filter.Has(PieceTypeFilter.Bag)
+                             ? LocalizationService.Get("window.chest.sack.message", "window.chest.sack.message")
+                             : LocalizationService.Get("window.chest.message", "window.chest.message");
     public string ButtonText => LocalizationService.Get("common.button.unlock", "common.button.unlock");
     public string DelimiterText => LocalizationService.Get("window.chest.chance", "window.chest.chance");
 
