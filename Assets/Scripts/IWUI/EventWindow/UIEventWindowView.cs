@@ -58,10 +58,11 @@ public class UIEventWindowView : UIGenericPopupWindowView
         
         var target = defs[defs.Count - 1].RealPrices[0].Amount;
         var real = ProfileService.Current.GetStorageItem(Currency.Token.Name).Amount;
-        var current = (step == 0 ? 0 : defs[step - 1].RealPrices[0].Amount) + real - (eventGame.IsCompleted ? defs[step - 1].Prices[0].Amount : 0);
+        var current = step == 0 ? (int) real : defs[step - 1].RealPrices[0].Amount + real - (eventGame.IsCompleted ? defs[step - 1].Prices[0].Amount : 0);
         var progress = Mathf.Clamp(mainProgressBorder.Max * (current / (float) target) + mainProgressBorder.Min, mainProgressBorder.Min, mainProgressBorder.Max);
-
-        var progressSecond = (secondProgressBorder.Max + secondProgressBorder.Min) * step + (eventGame.IsCompleted ? 0 : (int) (secondProgressBorder.Max * (real / (float) eventGame.Price)));
+        
+        var progressSecondMax = (secondProgressBorder.Max + secondProgressBorder.Min) * eventGame.Steps.Count;
+        var progressSecond = Mathf.Clamp((secondProgressBorder.Max + secondProgressBorder.Min) * step + (int) (secondProgressBorder.Max * (real / (float) eventGame.Price)), 0, progressSecondMax);
         
         progressLabel.Text = $"{current}/{target}";
         mainLine.sizeDelta = new Vector2(progress, mainLine.sizeDelta.y);

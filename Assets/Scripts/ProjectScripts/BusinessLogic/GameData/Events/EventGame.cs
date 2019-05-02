@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public enum EventGameType
 {
@@ -28,7 +29,7 @@ public class EventGame
     {
         get
         {
-            var step = IsCompleted ? Step - 1 : Step;
+            var step = Mathf.Min(Step, Steps.Count - 1);
             return Steps[step].Prices[0].Amount;
         }
     }
@@ -39,33 +40,23 @@ public class EventGame
     
     public bool IsLastStep => Step == Steps.Count - 1;
 
-    public bool IsCompleted => true; //Step == Steps.Count;
+    public bool IsCompleted => Step == Steps.Count;
 
     public void Finish()
     {
-        var board = BoardService.Current.FirstBoard;
-        var positions = new List<BoardPosition>();
+        RemovePieces();
 
-        for (var id = PieceType.Token1.Id; id <= PieceType.Token3.Id; id++)
+        if (Step == Steps.Count)
         {
-            positions.AddRange(board.BoardLogic.PositionsCache.GetPiecePositionsByType(id));
+            RemoveCurrency();
+            return;
         }
-            
-        foreach (var position in positions)
-        {
-            board.ActionExecutor.AddAction(new CollapsePieceToAction
-            {
-                To = position,
-                Positions = new List<BoardPosition> {position},
-                AnimationResourceSearch = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnDestroyFromBoard)
-            });
-        }
-        
-        if (Step == Steps.Count) return;
         
         var stepDef = Steps[Step];
         var model = UIService.Get.GetCachedModel<UIEventAlmostWindowModel>(UIWindowType.EventAlmostWindow);
-
+        
+        RemoveCurrency();
+        
         model.Price = null;
         model.Rewards = new List<CurrencyPair>();
 
@@ -86,5 +77,32 @@ public class EventGame
         if (model.Price == null) return;
         
         UIService.Get.ShowWindow(UIWindowType.EventAlmostWindow);
+    }
+
+    private void RemovePieces()
+    {
+        var board = BoardService.Current.FirstBoard;
+        var positions = new List<BoardPosition>();
+
+        for (var id = PieceType.Token1.Id; id <= PieceType.Token3.Id; id++)
+        {
+            positions.AddRange(board.BoardLogic.PositionsCache.GetPiecePositionsByType(id));
+        }
+            
+        foreach (var position in positions)
+        {
+            board.ActionExecutor.AddAction(new CollapsePieceToAction
+            {
+                To = position,
+                Positions = new List<BoardPosition> {position},
+                AnimationResourceSearch = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnDestroyFromBoard)
+            });
+        }
+    }
+
+    private void RemoveCurrency()
+    {
+        ProfileService.Current.GetStorageItem(Currency.EventStep.Name).Amount = 0;
+        ProfileService.Current.GetStorageItem(Currency.Token.Name).Amount = 0;
     }
 }
