@@ -10,9 +10,9 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
     [SerializeField] private Transform dot;
     [SerializeField] private GameObject shine;
     [SerializeField] private GameObject exclamationMark;
-    
-    private AmountRange progressBorder = new AmountRange(12, 220);
 
+    private EventGame eventGame;
+    private AmountRange progressBorder = new AmountRange(12, 220);
     private List<Toggle> dots;
     
     public override int CurrentValueAnimated
@@ -27,8 +27,14 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
 
     public override void OnViewShow(IWUIWindowView context)
     {
-        var amount = GameDataService.Current.EventGameManager.CurrentEventGame.Steps.Count;
-
+        if (BoardService.Current.FirstBoard.BoardLogic.EventGamesLogic.GetEventGame(EventGameType.OrderSoftLaunch, out eventGame))
+        {
+            // скрыть с панели
+            return;
+        }
+        
+        var amount = eventGame.Steps.Count;
+        
         for (var i = 1; i < amount; i++)
         {
             Instantiate(dot, dot.parent);
@@ -66,7 +72,6 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
     
     private void UpdateProgress(float value)
     {
-        var eventGame = GameDataService.Current.EventGameManager.CurrentEventGame;
         var price = eventGame.Price;
         
         progress.sizeDelta = new Vector2(Mathf.Lerp(progressBorder.Min, progressBorder.Max, value/price), progress.sizeDelta.y);
@@ -80,7 +85,7 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
 
     private void UpdateDots()
     {
-        var current = GameDataService.Current.EventGameManager.CurrentEventGame.Step;
+        var current = eventGame.Step;
 
         for (var i = 0; i < dots.Count; i++)
         {
@@ -90,7 +95,6 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
 
     public void UpdateMark()
     {
-        var eventGame = GameDataService.Current.EventGameManager.CurrentEventGame;
         var step = eventGame.Step;
 
         for (var i = 0; i < step; i++)
@@ -111,8 +115,6 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
     private void SetLabelText(int value)
     {
         if (amountLabel == null) return;
-        
-        var eventGame = GameDataService.Current.EventGameManager.CurrentEventGame;
         
         value = Mathf.Max(0, value);
         amountLabel.Text = $"<mspace=2.7em>{value}/{eventGame.Price}</mspace>";

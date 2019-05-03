@@ -16,8 +16,11 @@ public enum EventGameState
     Claimed
 }
 
-public class EventGame
+public class EventGame : ECSEntity
 {
+    public static readonly int ComponentGuid = ECSManager.GetNextGuid();
+    public override int Guid => ComponentGuid;
+    
     public EventGameType EventType;
     public EventGameState State;
 
@@ -39,7 +42,33 @@ public class EventGame
     public bool IsLastStep => Step == Steps.Count - 1;
 
     public bool IsCompleted => Step == Steps.Count;
+    
+    private EventGamesLogicComponent context;
 
+    public DateTime StartTime { get; private set; }
+    public DateTime EndTime { get; private set; }
+    public int IntroDuration { get; private set; }
+    
+    public long StartTimeLong => StartTime.ConvertToUnixTime();
+    
+    public override void OnRegisterEntity(ECSEntity entity)
+    {
+        context = entity as EventGamesLogicComponent;
+    }
+
+    public void InitData(DateTime start, DateTime end, int intro)
+    {
+        StartTime = start;
+        EndTime = end;
+        IntroDuration = intro;
+    }
+
+    public void UpdateData(DateTime end, int intro)
+    {
+        EndTime = end;
+        IntroDuration = intro;
+    }
+    
     public void Finish()
     {
         RemovePieces();

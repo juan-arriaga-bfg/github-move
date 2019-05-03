@@ -42,7 +42,7 @@ public class UIEventElementViewController : UIContainerElementViewController
     {
         base.Init();
         
-        eventGame = GameDataService.Current.EventGameManager.CurrentEventGame;
+        BoardService.Current.FirstBoard.BoardLogic.EventGamesLogic.GetEventGame(EventGameType.OrderSoftLaunch, out eventGame);
         
         var contentEntity = entity as UIEventElementEntity;
 

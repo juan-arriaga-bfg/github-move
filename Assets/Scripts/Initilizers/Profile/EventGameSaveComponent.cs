@@ -33,27 +33,35 @@ public class EventGameSaveComponent : ECSEntity, IECSSerializeable
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
-        if (GameDataService.Current?.EventGameManager?.Defs == null) return;
+        if (BoardService.Current?.FirstBoard?.BoardLogic.EventGamesLogic == null) return;
         
-        var data = GameDataService.Current.EventGameManager.Defs;
+        var data = BoardService.Current?.FirstBoard?.BoardLogic.EventGamesLogic.EventGames;
         
         eventGames = new List<EventGameSaveItem>();
 
-        foreach (var def in data.Values)
+        foreach (var pair in data.Values)
         {
-            var steps = new List<KeyValuePair<bool, bool>>();
+            foreach (var def in pair.Values)
+            {
+                var steps = new List<KeyValuePair<bool, bool>>();
 
-            foreach (var step in def.Steps)
-            {
-                steps.Add(new KeyValuePair<bool, bool>(step.IsNormalClaimed, step.IsPremiumClaimed));
+                if (def.State == EventGameState.Default) continue;
+
+                foreach (var step in def.Steps)
+                {
+                    steps.Add(new KeyValuePair<bool, bool>(step.IsNormalClaimed, step.IsPremiumClaimed));
+                }
+                
+                eventGames.Add(new EventGameSaveItem
+                {
+                    Key = def.EventType,
+                    State = def.State,
+                    StartTime = def.StartTimeLong,
+                    EndTime = def.EndTime.ConvertToUnixTime(),
+                    Intro = def.IntroDuration,
+                    Steps = steps
+                });
             }
-            
-            eventGames.Add(new EventGameSaveItem
-            {
-                Key = def.EventType,
-                State = def.State,
-                Steps = steps
-            });
         }
     }
 }

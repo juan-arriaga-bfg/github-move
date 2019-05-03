@@ -21,4 +21,18 @@ public class EventGameStepDef
     
     public List<CurrencyPair> PremiumRewards;
     public CurrencyPair PremiumRewardsPrice;
+
+    public EventGameStepDef Copy()
+    {
+        return new EventGameStepDef
+        {
+            Step = this.Step,
+            Prices = this.Prices,
+            RealPrices = this.RealPrices,
+            NormalRewards = this.NormalRewards,
+            NormalRewardsPrice = this.NormalRewardsPrice,
+            PremiumRewards = this.PremiumRewards,
+            PremiumRewardsPrice = this.PremiumRewardsPrice
+        };
+    }
 }

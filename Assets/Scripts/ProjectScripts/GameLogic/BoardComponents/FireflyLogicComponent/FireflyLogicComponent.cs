@@ -88,12 +88,12 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		bottom = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, 0);
 		right = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, context.Context.BoardDef.Height + 5);
 		
-		var isEventGameActive = GameDataService.Current.EventGameManager.Defs.TryGetValue(EventGameType.OrderSoftLaunch, out var eventGame) && eventGame.State == EventGameState.InProgress;
+		var isEventGameActive = context.EventGamesLogic.GetEventGame(EventGameType.OrderSoftLaunch, out var eventGame) && eventGame.State == EventGameState.InProgress;
 
 		ResetLogic(isEventGameActive ? FireflyLogicType.Event : FireflyLogicType.Normal);
 		
-		GameDataService.Current.EventGameManager.OnStart += OnStartEvent;
-		GameDataService.Current.EventGameManager.OnStop += OnStopEvent;
+		context.EventGamesLogic.OnStart += OnStartEvent;
+		context.EventGamesLogic.OnStop += OnStopEvent;
 	}
 	
 	public override void OnUnRegisterEntity(ECSEntity entity)
@@ -102,8 +102,8 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
 		ShopService.Current.OnPurchasedEvent -= UpdateFirefly;
 		
-		GameDataService.Current.EventGameManager.OnStart -= OnStartEvent;
-		GameDataService.Current.EventGameManager.OnStop -= OnStopEvent;
+		context.EventGamesLogic.OnStart -= OnStartEvent;
+		context.EventGamesLogic.OnStop -= OnStopEvent;
 
 		restartTimer.OnComplete = null;
 	}
@@ -120,14 +120,14 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 
 	private void OnStartEvent(EventGameType name)
 	{
-		if(name != EventGameType.OrderSoftLaunch) return;
+		if (name != EventGameType.OrderSoftLaunch) return;
 		
 		ResetLogic(FireflyLogicType.Event);
 	}
 
 	private void OnStopEvent(EventGameType name)
 	{
-		if(name != EventGameType.OrderSoftLaunch) return;
+		if (name != EventGameType.OrderSoftLaunch) return;
 		
 		ResetLogic(FireflyLogicType.Normal);
 	}

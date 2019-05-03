@@ -23,7 +23,7 @@ public class UIOrderElementViewController : UISimpleScrollElementViewController
 
 		UpdateMark();
 
-		var eventGameIsActive = GameDataService.Current.EventGameManager.Defs.TryGetValue(EventGameType.OrderSoftLaunch, out var eventGame) && eventGame.State == EventGameState.InProgress;
+		var eventGameIsActive = BoardService.Current.FirstBoard.BoardLogic.EventGamesLogic.GetEventGame(EventGameType.OrderSoftLaunch, out var eventGame) && eventGame.State == EventGameState.InProgress;
 		
 		token.SetActive(eventGameIsActive);
 		token.transform.localScale = Vector3.one;

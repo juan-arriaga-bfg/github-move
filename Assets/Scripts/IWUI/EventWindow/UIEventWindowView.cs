@@ -32,8 +32,8 @@ public class UIEventWindowView : UIGenericPopupWindowView
     public override void OnViewShow()
     {
         base.OnViewShow();
-
-        eventGame = GameDataService.Current.EventGameManager.CurrentEventGame;
+        
+        BoardService.Current.FirstBoard.BoardLogic.EventGamesLogic.GetEventGame(EventGameType.OrderSoftLaunch, out eventGame);
         
         var windowModel = Model as UIEventWindowModel;
         

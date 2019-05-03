@@ -9,14 +9,10 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
     
-    public Dictionary<EventGameType, EventGame> Defs;
+    public Dictionary<EventGameType, List<EventGameStepDef>> Defs;
+    private List<EventGame> eventGames;
     
-    public Action<EventGameType> OnStart;
-    public Action<EventGameType> OnStop;
-
     private GameDataManager context;
-
-    public EventGame CurrentEventGame;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -33,69 +29,40 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
 
     private void OnServerDataReceived(int guid, object data)
     {
-        if (guid != GameEventServerSideConfigLoader.ComponentGuid)
-        {
-            return;
-        }
+        if (guid != GameEventServerSideConfigLoader.ComponentGuid) return;
 
         var serverData = (List<GameEventServerConfig>) data;
+        var logic = BoardService.Current?.FirstBoard?.BoardLogic.EventGamesLogic;
         
-        // todo SERVER EVENT: 
-        // как-нибудь обрабатываем полученные данные, по аналогии с примером в LoadData
+        if (serverData == null || logic == null) return;
+        
+        foreach (var config in serverData)
+        {
+            if ((EventGameType) Enum.Parse(typeof(EventGameType), config.Type) != EventGameType.OrderSoftLaunch) continue;
+
+            var game = new EventGame {EventType = EventGameType.OrderSoftLaunch};
+            
+            game.InitData(config.Start, config.End, config.IntroDuration);
+            logic.AddEventGame(game);
+        }
     }
 
     public void Reload()
     {
-        Defs = new Dictionary<EventGameType, EventGame>();
+        Defs = new Dictionary<EventGameType, List<EventGameStepDef>>();
         LoadData(new ResourceConfigDataMapper<List<EventGameStepDef>>("configs/eventOrderSoftLaunch.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 	
     public void LoadData(IDataMapper<List<EventGameStepDef>> dataMapper)
     {
-        // todo SERVER EVENT
-        var serverData = ServerSideConfigService.Current.GetData<List<GameEventServerConfig>>();
-        
-        if (serverData == null)
-        {
-            // запрос на сервер пока не прошел, ответ будет позже, в колбэке OnServerDataReceived. На данный момент считаем, что никакие данные не поменялись.
-        }
-        else
-        {
-            var config = serverData.FirstOrDefault(e => e.Type == EventGameType.OrderSoftLaunch.ToString());
-            if (config != null)
-            {
-                // Тут у нас есть все данные по ивенту. Можем стартовать новый или стопать текущий.
-                DateTime startDate = config.Start;
-                DateTime endDate = config.End;
-                int introDuration = config.IntroDuration;
-            }
-            else
-            {
-                // На сервере больше нет такого ивента либо он закончился - стопаем текущий, если он еще в процессе
-            }
-        }
-        // end todo
-        
         dataMapper.LoadData((data, error) =>
         {
             if (string.IsNullOrEmpty(error))
             {
-                var save = context.UserProfile?.EventGameSave?.EventGames ?? new List<EventGameSaveItem>();
-                var saveGame = save.Find(item => item.Key == EventGameType.OrderSoftLaunch);
-                
                 for (var i = 0; i < data.Count; i++)
                 {
                     var def = data[i];
-                    
                     var previous = i == 0 ? new List<CurrencyPair>() : data[i - 1].RealPrices;
-
-                    if (saveGame != null)
-                    {
-                        var saveStep = saveGame.Steps[i];
-                        
-                        def.IsNormalClaimed = saveStep.Key;
-                        def.IsPremiumClaimed = saveStep.Value;
-                    }
                     
                     def.RealPrices = new List<CurrencyPair>();
                     
@@ -111,32 +78,42 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
                     foreach (var price in def.Prices)
                     {
                         var real = def.RealPrices.Find(pair => pair.Currency == price.Currency);
-                        
-                        if(real != null) continue;
+
+                        if (real != null) continue;
                         
                         def.RealPrices.Add(price.Copy());
                     }
                 }
-
-                CurrentEventGame = new EventGame{EventType = EventGameType.OrderSoftLaunch, State = saveGame?.State ?? EventGameState.Default, Steps = data};
-                Defs.Add(EventGameType.OrderSoftLaunch, CurrentEventGame);
+                
+                Defs.Add(EventGameType.OrderSoftLaunch, data);
             }
             else
             {
                 Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
             }
         });
+        
+        var serverData = ServerSideConfigService.Current.GetData<List<GameEventServerConfig>>();
+        
+        if (serverData == null) return;
+
+        foreach (var config in serverData)
+        {
+            if ((EventGameType) Enum.Parse(typeof(EventGameType), config.Type) != EventGameType.OrderSoftLaunch) continue;
+            
+            var game = new EventGame {EventType = EventGameType.OrderSoftLaunch};
+            
+            game.InitData(config.Start, config.End, config.IntroDuration);
+            eventGames.Add(game);
+        }
     }
 
-    public void Start(string id)
+    public List<EventGame> GetNewEventGame()
     {
-        var name = (EventGameType)Enum.Parse(typeof(EventGameType), id);
-        OnStart?.Invoke(name);
-    }
-    
-    public void Stop(string id)
-    {
-        var name = (EventGameType)Enum.Parse(typeof(EventGameType), id);
-        OnStop?.Invoke(name);
+        var result = eventGames;
+
+        eventGames = null;
+        
+        return result;
     }
 }
