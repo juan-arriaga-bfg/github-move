@@ -12,6 +12,7 @@ public static class TutorialBuilder
     public const int LockOrderStepIndex = 18;
     public const int FirstOrderStepIndex = 19;
     public const int LockFireflyStepIndex = 21;
+    public const int LockEventGameStepIndex = 29;
     
     public static BaseTutorialStep BuildTutorial(int index, BoardController context)
     {
@@ -410,6 +411,22 @@ public static class TutorialBuilder
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "87_KillTree", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "87_KillTree", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Complete}, true);
+                break;
+            }
+            case 29: // unlock EventGame
+            {
+                if (LockEventGameStepIndex != index) Debug.LogError("Tutorial Error: LockEventGameStepIndex != index");
+                
+                step = new EventGameLockTutorialStep
+                {
+                    IsIgnoreDebug = false,
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("eventgame"),
+                };
+                
+                step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition {Target = GameDataService.Current.ConstantsManager.StartLevelEventGame, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition {Target = GameDataService.Current.ConstantsManager.StartLevelEventGame, ConditionType = TutorialConditionType.Hard}, true);
+                
                 break;
             }
             default:

@@ -59,6 +59,8 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         UnlockFirefly(true);
         UnlockOrders(true);
         
+        Context.BoardLogic.EventGamesLogic.Unlock();
+        
         UIService.Get.OnShowWindowEvent += OnShowWindow;
         UIService.Get.OnCloseWindowEvent += OnCloseWindow;
         GameDataService.Current.QuestsManager.OnActiveQuestsListChanged += Update;
@@ -208,8 +210,8 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
                 
             var pieceView = Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
 
-            if (pieceEntity.ViewDefinition != null) pieceEntity.ViewDefinition.SetFade(alpha > 0.99f ? 1f : 0f, 1f);
-            
+            pieceEntity.ViewDefinition?.SetFade(alpha > 0.99f ? 1f : 0f, 1f);
+
             if (pieceView != null) pieceView.SetFade(alpha, 1f);
         }
     }

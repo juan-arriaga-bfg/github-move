@@ -10,9 +10,24 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
     [SerializeField] private Transform dot;
     [SerializeField] private GameObject shine;
     [SerializeField] private GameObject exclamationMark;
+    
+    private EventGame eGame;
 
-    private EventGame eventGame;
-    private AmountRange progressBorder = new AmountRange(12, 220);
+    private EventGame eventGame
+    {
+        get
+        {
+            if (eGame != null) return eGame;
+            
+            var logic = BoardService.Current?.FirstBoard?.BoardLogic.EventGamesLogic;
+
+            if (logic == null || logic.GetEventGame(EventGameType.OrderSoftLaunch, out eGame) == false) return null;
+            
+            return eGame;
+        }
+    }
+    
+    private readonly AmountRange progressBorder = new AmountRange(12, 220);
     private List<Toggle> dots;
     
     public override int CurrentValueAnimated
@@ -27,16 +42,23 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
 
     public override void OnViewShow(IWUIWindowView context)
     {
-        var logic = BoardService.Current?.FirstBoard?.BoardLogic.EventGamesLogic;
-
-        if (logic == null
-            || logic.GetEventGame(EventGameType.OrderSoftLaunch, out eventGame) == false
+        if (eventGame == null
             || eventGame.State == EventGameState.Default
             || eventGame.State == EventGameState.Claimed)
         {
             ResourcePanelUtils.TogglePanel(itemUid, false);
+            base.OnViewShow(context);
             return;
         }
+        
+        ResourcePanelUtils.TogglePanel(itemUid, true);
+        OnStartEventGame(eventGame.EventType);
+        base.OnViewShow(context);
+    }
+
+    public void OnStartEventGame(EventGameType gameType)
+    {
+        if (gameType != eventGame.EventType || dots != null) return;
         
         var amount = eventGame.Steps.Count;
         
@@ -48,14 +70,13 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
         dots = dot.parent.GetComponentsInChildren<Toggle>().ToList();
         
         UpdateMark();
-        
-        base.OnViewShow(context);
+        UpdateView();
     }
 
     public override void UpdateView()
     {
-        if (storageItem == null) return;
-
+        if (storageItem == null || eventGame == null) return;
+        
         currentValue = storageItem.Amount;
         SetLabelText(storageItem.Amount);
         UpdateProgress(currentValue);
@@ -141,7 +162,7 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
             return;
         }
         
-        ProfileService.Current.QueueComponent.RemoveAction($"{EventGameType.OrderSoftLaunch.ToString()}_Window");
+        ProfileService.Current.QueueComponent.RemoveAction($"{eventGame.EventType.ToString()}_Window");
         UIService.Get.ShowWindow(UIWindowType.EventWindow);
     }
 }

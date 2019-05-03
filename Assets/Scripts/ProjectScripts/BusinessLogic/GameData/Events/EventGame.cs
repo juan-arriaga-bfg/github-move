@@ -103,7 +103,12 @@ public class EventGame : ECSEntity
 
     private void Preview()
     {
-        ResourcePanelUtils.TogglePanel(Steps[0].Prices[0].Currency, true);
+        var panel = ResourcePanelUtils.GetPanel(Steps[0].Prices[0].Currency) as UITokensPanelViewController;
+
+        if (panel != null) panel.OnStartEventGame(EventType);
+        
+        ResourcePanelUtils.TogglePanel(Steps[0].Prices[0].Currency, true, true);
+        
         State = EventGameState.Preview;
         TimeController.Delay = (int) (IntroTime - StartTime).TotalSeconds;
         TimeController.OnComplete = Progress;
@@ -124,6 +129,7 @@ public class EventGame : ECSEntity
         TimeController.OnComplete = null;
         TimeController.Stop();
         State = EventGameState.Complete;
+        
         DefaultSafeQueueBuilder.BuildAndRun($"{EventType.ToString()}_Window", true, () =>
         {
             UIService.Get.ShowWindow(UIWindowType.EventWindow);
@@ -133,7 +139,7 @@ public class EventGame : ECSEntity
     public void Finish()
     {
         State = EventGameState.Claimed;
-        ResourcePanelUtils.TogglePanel(Steps[0].Prices[0].Currency, false);
+        ResourcePanelUtils.TogglePanel(Steps[0].Prices[0].Currency, false, true);
         RemovePieces();
         context.OnStop?.Invoke(EventType);
 

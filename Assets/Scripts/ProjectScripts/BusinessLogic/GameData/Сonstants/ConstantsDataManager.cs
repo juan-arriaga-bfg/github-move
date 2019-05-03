@@ -19,6 +19,8 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     
     public int StartLevelFirefly;
     
+    public int StartLevelEventGame;
+    
     public int MaxOrders;
 
     public int FreeTimeLimit;

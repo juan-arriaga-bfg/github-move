@@ -50,6 +50,11 @@ public class TutorialDataManager: IECSComponent
         return completed.Contains(TutorialBuilder.LockMarketStepIndex);
     }
 
+    public bool CheckUnlockEventGame()
+    {
+        return completed.Contains(TutorialBuilder.LockEventGameStepIndex);
+    }
+
     public bool IsCompeted(int id)
     {
         return completed.Contains(id);

@@ -45,6 +45,12 @@ public class ResourcePanelUtils
         
         resourcePanelWindow.ToggleFadePanels(state, ignorePanels);
     }
+
+    public static UIGenericResourcePanelViewController GetPanel(string currency)
+    {
+        var resourcePanelWindow = UIService.Get.GetShowedView<UIResourcePanelWindowView>(UIWindowType.ResourcePanelWindow);
+        return resourcePanelWindow == null ? null : resourcePanelWindow.GetPanel(currency);
+    }
 }
 
 public class UIResourcePanelWindowView : UIBaseWindowView 
@@ -97,6 +103,11 @@ public class UIResourcePanelWindowView : UIBaseWindowView
             panelFadeLockers.Add(itemUid, new LockerComponent());
             
         }
+    }
+
+    public UIGenericResourcePanelViewController GetPanel(string currency)
+    {
+        return !cachedResourcePanels.TryGetValue(currency, out var targetPanel) ? null : targetPanel.GetComponent<UIGenericResourcePanelViewController>();
     }
 
     public virtual void ToggleLockFadePanelFor(string currency, bool state, object context)

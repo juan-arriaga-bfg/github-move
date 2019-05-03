@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class EventGamesLogicComponent : ECSEntity
+public class EventGamesLogicComponent : ECSEntity, ILockerComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -13,11 +13,19 @@ public class EventGamesLogicComponent : ECSEntity
     public readonly Dictionary<EventGameType, Dictionary<long, EventGame>> EventGames = new Dictionary<EventGameType, Dictionary<long, EventGame>>();
     
     private readonly List<EventGame> waiting = new List<EventGame>();
-
+    
     private TimerComponent starter;
+    
+    private LockerComponent locker;
+    public LockerComponent Locker => locker ?? GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
+        locker = new LockerComponent();
+        RegisterComponent(locker);
+
+        if (GameDataService.Current.TutorialDataManager.CheckUnlockEventGame() == false) Locker.Lock(this);
+        
         starter = new TimerComponent
         {
             Delay = 30,
@@ -77,6 +85,11 @@ public class EventGamesLogicComponent : ECSEntity
         ServerSideConfigService.Current.OnDataReceived -= OnServerDataReceived;
         starter.OnComplete = null;
     }
+
+    public void Unlock()
+    {
+        Locker.Unlock(this);
+    }
     
     private void OnServerDataReceived(int guid, object data)
     {
@@ -99,7 +112,7 @@ public class EventGamesLogicComponent : ECSEntity
 
     private void AddEventGame(EventGame eventGame)
     {
-        if (eventGame.State == EventGameState.Default)
+        if (Locker.IsLocked || eventGame.State == EventGameState.Default)
         {
             if (waiting.IndexOf(eventGame) == -1) waiting.Add(eventGame);
             return;
@@ -154,8 +167,13 @@ public class EventGamesLogicComponent : ECSEntity
         return true;
     }
 
-    private void Check()
+    public void Check()
     {
+        starter.Stop();
+        starter.Start();
+        
+        if (Locker.IsLocked) return;
+        
         var now = SecuredTimeService.Current.UtcNow.ConvertToUnixTime();
         
         for (var i = waiting.Count - 1; i >= 0; i--)
@@ -168,7 +186,5 @@ public class EventGamesLogicComponent : ECSEntity
             waiting.Remove(game);
             AddEventGame(game);
         }
-        
-        starter.Start();
     }
 }
