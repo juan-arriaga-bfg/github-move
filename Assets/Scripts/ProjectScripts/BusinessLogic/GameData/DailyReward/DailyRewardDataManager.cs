@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BfgAnalytics;
 using UnityEngine;
 
 public class DailyRewardDataManager : ECSEntity, IDataManager, IDataLoader<List<DailyRewardDef>>
@@ -214,6 +215,8 @@ public class DailyRewardDataManager : ECSEntity, IDataManager, IDataLoader<List<
         IW.Logger.Log($"[DailyRewardDataManager] => ConsumeCurrentDay");
 
         IsActivated = true;
+        
+        Analytics.SendDailyRewardClaim(Day + 1);
         
         NextDay();
     }

@@ -89,6 +89,11 @@ namespace BfgAnalytics
             // todo: Договориться насчет type, name, action
             AnalyticsService.Current?.Event("economy", null, null, null, DefaultJsonData(), customJsonData);
         }
+        
+        public static void SendDailyRewardClaim(int day)
+        {
+            AnalyticsService.Current?.Event("activity", "dailyreward", day.ToString(), null, DefaultJsonData());
+        }
 
         private static JSONNode CreateTransaction(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
         {
