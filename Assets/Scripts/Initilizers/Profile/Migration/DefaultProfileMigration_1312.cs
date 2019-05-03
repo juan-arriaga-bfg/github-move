@@ -7,12 +7,12 @@ public partial class DefaultProfileMigration
     {
         if (profile.CodexSave != null && profile.CodexSave.Data != null)
         {
-            var idsForChange = new Dictionary<int, int>
+            var idsForChange = new List<KeyValuePair<int, int>>
             {
-                [5100101] = 5100103, //SK3_PR
-                [9000101] = 9000100, //Boost_CR
-                [7200101] = 7200105, //Soft5
-                [7200101] = 7200106, //Soft6
+                new KeyValuePair<int, int>(5100101, 5100103), //SK3_PR
+                new KeyValuePair<int, int>(9000101, 9000100), //Boost_CR
+                new KeyValuePair<int, int>(7200101, 7200105), //Soft5
+                new KeyValuePair<int, int>(7200101, 7200106), //Soft6
             };
             
             
