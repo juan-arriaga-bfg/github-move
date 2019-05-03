@@ -382,7 +382,6 @@ public class DevTools : UIContainerElementViewController
     public void OnDebug2Click()
     {
         Debug.Log("OnDebug2Click");
-        return;
         
         GameDataService.Current.QuestsManager.StartNewDailyQuest();
         return;
