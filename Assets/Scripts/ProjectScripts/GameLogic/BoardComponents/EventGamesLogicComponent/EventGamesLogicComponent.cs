@@ -7,8 +7,6 @@ public class EventGamesLogicComponent : ECSEntity
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 	
-    private BoardLogicComponent context;
-    
     public Action<EventGameType> OnStart;
     public Action<EventGameType> OnStop;
 
@@ -20,7 +18,6 @@ public class EventGamesLogicComponent : ECSEntity
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
-        context = entity as BoardLogicComponent;
         starter = new TimerComponent
         {
             Delay = 30,
@@ -28,7 +25,6 @@ public class EventGamesLogicComponent : ECSEntity
         };
 
         RegisterComponent(starter);
-        starter.Start();
         
         var save = ProfileService.Current.EventGameSave?.EventGames;
         var defs = GameDataService.Current.EventGameManager.Defs;
@@ -45,7 +41,7 @@ public class EventGamesLogicComponent : ECSEntity
                 if (game == null)
                 {
                     game = new EventGame {EventType = item.Key};
-                    game.InitData(DateTimeExtension.UnixTimeToDateTime(item.StartTime),DateTimeExtension.UnixTimeToDateTime(item.EndTime), item.Intro);
+                    game.InitData(item.StartTime, item.EndTime, item.IntroTime);
                 }
 
                 game.State = item.State;
@@ -70,9 +66,38 @@ public class EventGamesLogicComponent : ECSEntity
         {
             AddEventGame(game);
         }
+        
+        OnServerDataReceived(GameEventServerSideConfigLoader.ComponentGuid, ServerSideConfigService.Current.GetData<List<GameEventServerConfig>>());
+        ServerSideConfigService.Current.OnDataReceived += OnServerDataReceived;
+        Check();
+    }
+    
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {
+        ServerSideConfigService.Current.OnDataReceived -= OnServerDataReceived;
+        starter.OnComplete = null;
+    }
+    
+    private void OnServerDataReceived(int guid, object data)
+    {
+        if (guid != GameEventServerSideConfigLoader.ComponentGuid) return;
+
+        var serverData = (List<GameEventServerConfig>) data;
+        
+        if (serverData == null) return;
+        
+        foreach (var config in serverData)
+        {
+            if ((EventGameType) Enum.Parse(typeof(EventGameType), config.Type) != EventGameType.OrderSoftLaunch) continue;
+
+            var game = new EventGame {EventType = EventGameType.OrderSoftLaunch};
+            
+            game.InitData(config.Start, config.End, config.IntroDuration);
+            AddEventGame(game);
+        }
     }
 
-    public void AddEventGame(EventGame eventGame)
+    private void AddEventGame(EventGame eventGame)
     {
         if (eventGame.State == EventGameState.Default)
         {
@@ -91,7 +116,7 @@ public class EventGamesLogicComponent : ECSEntity
 
         if (games.TryGetValue(start, out var oldGame))
         {
-            oldGame.UpdateData(eventGame.EndTime, eventGame.IntroDuration);
+            oldGame.UpdateData(eventGame.EndTime, eventGame.IntroTime);
             return;
         }
 
@@ -109,6 +134,7 @@ public class EventGamesLogicComponent : ECSEntity
         
         RegisterComponent(eventGame, true);
         games.Add(start, eventGame);
+        eventGame.Init();
     }
 
     public bool GetEventGame(EventGameType key, out EventGame game)
@@ -138,6 +164,7 @@ public class EventGamesLogicComponent : ECSEntity
             
             if(game.StartTimeLong > now) continue;
 
+            game.State = EventGameState.Start;
             waiting.Remove(game);
             AddEventGame(game);
         }

@@ -36,18 +36,19 @@ public class UIEventWindowView : UIGenericPopupWindowView
         BoardService.Current.FirstBoard.BoardLogic.EventGamesLogic.GetEventGame(EventGameType.OrderSoftLaunch, out eventGame);
         
         var windowModel = Model as UIEventWindowModel;
+        var isCompleted = eventGame.State == EventGameState.Complete;
         
         SetTitle(windowModel.Title);
-        SetMessage(eventGame.IsCompleted ? windowModel.MessageFinish : windowModel.Message);
+        SetMessage(isCompleted ? windowModel.MessageFinish : windowModel.Message);
 
         vipLabel.Text = windowModel.VIPText;
-        btnShowLabel.Text = eventGame.IsCompleted ? windowModel.ButtonFinishText : windowModel.ButtonText;
+        btnShowLabel.Text = isCompleted ? windowModel.ButtonFinishText : windowModel.ButtonText;
         
-        messageIcon.SetActive(eventGame.IsCompleted == false);
-        messageTransform.sizeDelta = new Vector2(eventGame.IsCompleted ? 860 : 660, messageTransform.sizeDelta.y);
-        messageTransform.anchoredPosition = new Vector2(eventGame.IsCompleted ? -100 : 0, messageTransform.anchoredPosition.y);
+        messageIcon.SetActive(isCompleted == false);
+        messageTransform.sizeDelta = new Vector2(isCompleted ? 860 : 660, messageTransform.sizeDelta.y);
+        messageTransform.anchoredPosition = new Vector2(isCompleted ? -100 : 0, messageTransform.anchoredPosition.y);
 
-        if (windowModel.Timer != null) windowModel.Timer.OnTimeChanged += OnTimeChanged;
+        eventGame.TimeController.OnTimeChanged += OnTimeChanged;
         
         OnTimeChanged();
         
@@ -58,7 +59,7 @@ public class UIEventWindowView : UIGenericPopupWindowView
         
         var target = defs[defs.Count - 1].RealPrices[0].Amount;
         var real = ProfileService.Current.GetStorageItem(Currency.Token.Name).Amount;
-        var current = step == 0 ? (int) real : defs[step - 1].RealPrices[0].Amount + real - (eventGame.IsCompleted ? defs[step - 1].Prices[0].Amount : 0);
+        var current = step == 0 ? (int) real : defs[step - 1].RealPrices[0].Amount + real - (isCompleted ? defs[step - 1].Prices[0].Amount : 0);
         var progress = Mathf.Clamp(mainProgressBorder.Max * (current / (float) target) + mainProgressBorder.Min, mainProgressBorder.Min, mainProgressBorder.Max);
         
         var progressSecondMax = (secondProgressBorder.Max + secondProgressBorder.Min) * eventGame.Steps.Count;
@@ -103,16 +104,14 @@ public class UIEventWindowView : UIGenericPopupWindowView
 
     public override void OnViewClose()
     {
-        if (eventGame.IsCompleted) eventGame.Finish();
+        if (eventGame.State == EventGameState.Complete) eventGame.Finish();
         
         base.OnViewClose();
     }
     
     public override void OnViewCloseCompleted()
     {
-        var windowModel = Model as UIEventWindowModel;
-        
-        if(windowModel.Timer != null) windowModel.Timer.OnTimeChanged -= OnTimeChanged;
+        eventGame.TimeController.OnTimeChanged -= OnTimeChanged;
         
         base.OnViewCloseCompleted();
     }
@@ -156,7 +155,7 @@ public class UIEventWindowView : UIGenericPopupWindowView
 
     private void OnClick()
     {
-        if (eventGame.IsCompleted)
+        if (eventGame.State == EventGameState.Complete)
         {
             Controller.CloseCurrentWindow();
             return;
@@ -177,8 +176,8 @@ public class UIEventWindowView : UIGenericPopupWindowView
     
     private void OnTimeChanged()
     {
-        var windowModel = Model as UIEventPreviewWindowModel;
+        var windowModel = Model as UIEventWindowModel;
 
-//        timerLabel.Text = windowModel.TimerText;
+        timerLabel.Text = windowModel.TimerText(eventGame.TimeController);
     }
 }

@@ -20,6 +20,8 @@ public class FireflyView : BoardElementView
     
     private bool isClick;
     private HintArrowView arrow;
+
+    public FireflyType FireflyType => fireflyType;
     
     public void Init(BoardRenderer context, Vector2 start, Vector2 finish)
     {
@@ -144,7 +146,7 @@ public class FireflyView : BoardElementView
 
         var rewardId = fireflyType == FireflyType.Production
             ? GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name).GetNext().Piece
-            : PieceType.Soft1.Id;
+            : PieceType.Token1.Id;
         
         Plume.gameObject.SetActive(true);
         Context.Context.ActionExecutor.AddAction(new FireflyPieceSpawnAction

@@ -27,9 +27,14 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
 
     public override void OnViewShow(IWUIWindowView context)
     {
-        if (BoardService.Current.FirstBoard.BoardLogic.EventGamesLogic.GetEventGame(EventGameType.OrderSoftLaunch, out eventGame))
+        var logic = BoardService.Current?.FirstBoard?.BoardLogic.EventGamesLogic;
+
+        if (logic == null
+            || logic.GetEventGame(EventGameType.OrderSoftLaunch, out eventGame) == false
+            || eventGame.State == EventGameState.Default
+            || eventGame.State == EventGameState.Claimed)
         {
-            // скрыть с панели
+            ResourcePanelUtils.TogglePanel(itemUid, false);
             return;
         }
         
@@ -76,9 +81,13 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
         
         progress.sizeDelta = new Vector2(Mathf.Lerp(progressBorder.Min, progressBorder.Max, value/price), progress.sizeDelta.y);
         
-        if (eventGame.IsCompleted || CurrencyHelper.IsCanPurchase(itemUid, price) == false) return;
-
-        CurrencyHelper.Purchase(Currency.EventStep.Name, 1, itemUid, eventGame.IsLastStep ? 0 : price);
+        if (eventGame.State == EventGameState.Complete || CurrencyHelper.IsCanPurchase(itemUid, price) == false) return;
+        
+        CurrencyHelper.Purchase(Currency.EventStep.Name, 1, itemUid, eventGame.IsLastStep ? 0 : price, success =>
+        {
+            if (eventGame.IsLastStep) eventGame.Complete();
+        });
+        
         UpdateDots();
         UpdateMark();
     }
@@ -122,6 +131,17 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
     
     public void OnClick()
     {
+        if (eventGame.State == EventGameState.Preview)
+        {
+            var model = UIService.Get.GetCachedModel<UIEventPreviewWindowModel>(UIWindowType.EventPreviewWindow);
+
+            model.Countdown = eventGame.TimeController;
+            
+            UIService.Get.ShowWindow(UIWindowType.EventPreviewWindow);
+            return;
+        }
+        
+        ProfileService.Current.QueueComponent.RemoveAction($"{EventGameType.OrderSoftLaunch.ToString()}_Window");
         UIService.Get.ShowWindow(UIWindowType.EventWindow);
     }
 }

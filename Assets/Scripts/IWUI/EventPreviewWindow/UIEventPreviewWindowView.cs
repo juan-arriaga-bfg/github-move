@@ -17,6 +17,7 @@ public class UIEventPreviewWindowView : UIGenericPopupWindowView
         btnAcceptLabel.Text = windowModel.ButtonText;
 
         windowModel.Countdown.OnTimeChanged += OnTimeChanged;
+        windowModel.Countdown.OnComplete += Controller.CloseCurrentWindow;
         OnTimeChanged();
     }
 
@@ -32,6 +33,7 @@ public class UIEventPreviewWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIEventPreviewWindowModel;
         
         windowModel.Countdown.OnTimeChanged -= OnTimeChanged;
+        windowModel.Countdown.OnComplete -= Controller.CloseCurrentWindow;
         
         base.OnViewCloseCompleted();
     }

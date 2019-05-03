@@ -88,7 +88,7 @@ public class UIEventElementViewController : UIContainerElementViewController
 
     public override void OnViewClose(IWUIWindowView context)
     {
-        if (entity is UIEventElementEntity && eventGame.IsCompleted)
+        if (entity is UIEventElementEntity && eventGame.State == EventGameState.Complete)
         {
             OnNormalClick();
             OnPremiumClick();

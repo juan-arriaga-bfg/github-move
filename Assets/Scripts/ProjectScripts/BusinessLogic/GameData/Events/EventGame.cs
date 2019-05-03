@@ -10,6 +10,7 @@ public enum EventGameType
 public enum EventGameState
 {
     Default,
+    Start,
     Preview,
     InProgress,
     Complete,
@@ -40,38 +41,101 @@ public class EventGame : ECSEntity
     public bool IsPremium => false;
     
     public bool IsLastStep => Step == Steps.Count - 1;
-
-    public bool IsCompleted => Step == Steps.Count;
     
     private EventGamesLogicComponent context;
+    
+    public readonly TimerComponent TimeController = new TimerComponent();
 
     public DateTime StartTime { get; private set; }
+    public DateTime IntroTime { get; private set; }
     public DateTime EndTime { get; private set; }
-    public int IntroDuration { get; private set; }
     
     public long StartTimeLong => StartTime.ConvertToUnixTime();
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as EventGamesLogicComponent;
+        RegisterComponent(TimeController);
+    }
+    
+    public void InitData(long start, long end, long intro)
+    {
+        StartTime = DateTimeExtension.UnixTimeToDateTime(start);
+        IntroTime = DateTimeExtension.UnixTimeToDateTime(intro);
+        EndTime = DateTimeExtension.UnixTimeToDateTime(end);
     }
 
     public void InitData(DateTime start, DateTime end, int intro)
     {
         StartTime = start;
+        IntroTime = StartTime.AddHours(intro);
         EndTime = end;
-        IntroDuration = intro;
     }
 
-    public void UpdateData(DateTime end, int intro)
+    public void UpdateData(DateTime end, DateTime intro)
     {
+        IntroTime = intro;
         EndTime = end;
-        IntroDuration = intro;
+    }
+
+    public void Init()
+    {
+        switch (State)
+        {
+            case EventGameState.Start:
+                TimeController.Delay = (int) (StartTime - SecuredTimeService.Current.UtcNow).TotalSeconds;
+                TimeController.OnComplete = Preview;
+                TimeController.Start();
+                break;
+            case EventGameState.Preview:
+                Preview();
+                break;
+            case EventGameState.InProgress:
+                Progress();
+                break;
+            case EventGameState.Complete:
+                Complete();
+                break;
+            default:
+                return;
+        }
+    }
+
+    private void Preview()
+    {
+        ResourcePanelUtils.TogglePanel(Steps[0].Prices[0].Currency, true);
+        State = EventGameState.Preview;
+        TimeController.Delay = (int) (IntroTime - StartTime).TotalSeconds;
+        TimeController.OnComplete = Progress;
+        TimeController.Start(StartTime);
+    }
+
+    private void Progress()
+    {
+        State = EventGameState.InProgress;
+        TimeController.Delay = (int) (EndTime - StartTime).TotalSeconds;
+        TimeController.OnComplete = Complete;
+        TimeController.Start(StartTime);
+        context.OnStart?.Invoke(EventType);
+    }
+
+    public void Complete()
+    {
+        TimeController.OnComplete = null;
+        TimeController.Stop();
+        State = EventGameState.Complete;
+        DefaultSafeQueueBuilder.BuildAndRun($"{EventType.ToString()}_Window", true, () =>
+        {
+            UIService.Get.ShowWindow(UIWindowType.EventWindow);
+        });
     }
     
     public void Finish()
     {
+        State = EventGameState.Claimed;
+        ResourcePanelUtils.TogglePanel(Steps[0].Prices[0].Currency, false);
         RemovePieces();
+        context.OnStop?.Invoke(EventType);
 
         if (Step == Steps.Count)
         {

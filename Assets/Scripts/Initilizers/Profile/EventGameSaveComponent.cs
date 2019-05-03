@@ -58,7 +58,7 @@ public class EventGameSaveComponent : ECSEntity, IECSSerializeable
                     State = def.State,
                     StartTime = def.StartTimeLong,
                     EndTime = def.EndTime.ConvertToUnixTime(),
-                    Intro = def.IntroDuration,
+                    IntroTime = def.IntroTime.ConvertToUnixTime(),
                     Steps = steps
                 });
             }

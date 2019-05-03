@@ -15,7 +15,7 @@ public class EventGameSaveItemJsonConverter : JsonConverter
         var targetValue = (EventGameSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
-        serializer.Serialize(writer, $"{(int)targetValue.Key};{(int)targetValue.State};{targetValue.StartTime};{targetValue.EndTime};{targetValue.Intro};{WriteList(targetValue.Steps)}");
+        serializer.Serialize(writer, $"{(int)targetValue.Key};{(int)targetValue.State};{targetValue.StartTime};{targetValue.EndTime};{targetValue.IntroTime};{WriteList(targetValue.Steps)}");
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -29,7 +29,7 @@ public class EventGameSaveItemJsonConverter : JsonConverter
             State = (EventGameState) int.Parse(dataArray[1]),
             StartTime = long.Parse(dataArray[2]),
             EndTime = long.Parse(dataArray[3]),
-            Intro = int.Parse(dataArray[4]),
+            IntroTime = long.Parse(dataArray[4]),
             Steps = ReadList(dataArray[5])
         };
         
@@ -77,7 +77,7 @@ public class EventGameSaveItem
     
     private long startTime;
     private long endTime;
-    private int intro;
+    private long introTime;
 
     private List<KeyValuePair<bool, bool>> steps;
     
@@ -105,10 +105,10 @@ public class EventGameSaveItem
         set => endTime = value;
     }
 
-    public int Intro
+    public long IntroTime
     {
-        get => intro;
-        set => intro = value;
+        get => introTime;
+        set => introTime = value;
     }
     
     public List<KeyValuePair<bool, bool>> Steps

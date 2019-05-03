@@ -128,7 +128,8 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 	private void OnStopEvent(EventGameType name)
 	{
 		if (name != EventGameType.OrderSoftLaunch) return;
-		
+
+		DestroyAll(FireflyType.Event);
 		ResetLogic(FireflyLogicType.Normal);
 	}
 
@@ -304,6 +305,19 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		startTime = DateTime.UtcNow;
 		
 		if(isTutorialActive && views.Count != 0) views[0].AddArrow();
+	}
+
+	public void DestroyAll(FireflyType name)
+	{
+		for (var i = views.Count - 1; i >= 0; i--)
+		{
+			var view = views[i];
+			
+			if (view.FireflyType != name) continue;
+			
+			views.Remove(view);
+			context.Context.RendererContext.DestroyElement(view.gameObject);
+		}
 	}
 
 	public void DestroyAll()

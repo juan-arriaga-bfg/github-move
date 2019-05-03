@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<List<EventGameStepDef>>
@@ -10,7 +8,7 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     public int Guid => ComponentGuid;
     
     public Dictionary<EventGameType, List<EventGameStepDef>> Defs;
-    private List<EventGame> eventGames;
+    private List<EventGame> eventGames = new List<EventGame>();
     
     private GameDataManager context;
     
@@ -18,35 +16,12 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     {
         context = entity as GameDataManager;
         Reload();
-
-        ServerSideConfigService.Current.OnDataReceived += OnServerDataReceived;
     }
 	
     public void OnUnRegisterEntity(ECSEntity entity)
     {
-        ServerSideConfigService.Current.OnDataReceived -= OnServerDataReceived;
     }
-
-    private void OnServerDataReceived(int guid, object data)
-    {
-        if (guid != GameEventServerSideConfigLoader.ComponentGuid) return;
-
-        var serverData = (List<GameEventServerConfig>) data;
-        var logic = BoardService.Current?.FirstBoard?.BoardLogic.EventGamesLogic;
-        
-        if (serverData == null || logic == null) return;
-        
-        foreach (var config in serverData)
-        {
-            if ((EventGameType) Enum.Parse(typeof(EventGameType), config.Type) != EventGameType.OrderSoftLaunch) continue;
-
-            var game = new EventGame {EventType = EventGameType.OrderSoftLaunch};
-            
-            game.InitData(config.Start, config.End, config.IntroDuration);
-            logic.AddEventGame(game);
-        }
-    }
-
+    
     public void Reload()
     {
         Defs = new Dictionary<EventGameType, List<EventGameStepDef>>();
@@ -96,7 +71,7 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
         var serverData = ServerSideConfigService.Current.GetData<List<GameEventServerConfig>>();
         
         if (serverData == null) return;
-
+        
         foreach (var config in serverData)
         {
             if ((EventGameType) Enum.Parse(typeof(EventGameType), config.Type) != EventGameType.OrderSoftLaunch) continue;
@@ -112,7 +87,7 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     {
         var result = eventGames;
 
-        eventGames = null;
+        eventGames = new List<EventGame>();
         
         return result;
     }
