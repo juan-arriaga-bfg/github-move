@@ -5,28 +5,17 @@ using System.Runtime.Serialization;
 using System.Text;
 using Newtonsoft.Json;
 
-public interface ICodexDailyRewardSaveComponent
+public interface IDailyRewardSaveComponent
 {
     DailyRewardSaveComponent DailyRewardSave { get; }
 }
 
-public partial class UserProfile : ICodexDailyRewardSaveComponent
+public partial class UserProfile : IDailyRewardSaveComponent
 {
     protected DailyRewardSaveComponent dailyRewardSaveComponent;
 
     [JsonIgnore]
-    public DailyRewardSaveComponent DailyRewardSave
-    {
-        get
-        {
-            if (dailyRewardSaveComponent == null)
-            {
-                dailyRewardSaveComponent = GetComponent<DailyRewardSaveComponent>(DailyRewardSaveComponent.ComponentGuid);
-            }
-
-            return dailyRewardSaveComponent;
-        }
-    }
+    public DailyRewardSaveComponent DailyRewardSave => dailyRewardSaveComponent ?? (dailyRewardSaveComponent = GetComponent<DailyRewardSaveComponent>(DailyRewardSaveComponent.ComponentGuid));
 }
 
 public class DailyRewardSaveItemJsonConverter : JsonConverter
@@ -85,7 +74,6 @@ public class DailyRewardSaveItem
     public bool IsActivated;
 }
 
-// [JsonConverter(typeof(DailyRewardSaveComponentJsonConverter))]
 [JsonObject(MemberSerialization.OptIn)]
 public class DailyRewardSaveComponent : IECSComponent, IECSSerializeable
 {

@@ -1,78 +1,98 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using IW;
 using UnityEngine;
-
-
-public class AbTestDef
-{
-    public int GroupsCount;
-    public string UserGroup;
-    public string TestName;
-}
 
 public static class AbTestName
 {
     public static readonly string DAILY_REWARD = "daily_reward";
 }
 
-public class AbTestDataManager : ECSEntity
+public class AbTestDataManager : ECSEntity, IDataManager
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    private ECSEntity context;
+    private GameDataManager context;
 
     private string currentGroup;
 
-    private Dictionary<string, AbTestDef> tests;
-    public Dictionary<string, AbTestDef> Tests
-    {
-        get
-        {
-            if (tests == null)
-            {
-                tests = new Dictionary<string, AbTestDef>
-                {
-                    {AbTestName.DAILY_REWARD, new AbTestDef {GroupsCount = 3}},
-                };
-
-                foreach (var pair in tests)
-                {
-                    pair.Value.TestName = pair.Key;
-                    string group = GenerateTestGroup(pair.Value.GroupsCount);
-                    
-                    // if something went wrong with ids, disable tests!
-                    if (string.IsNullOrEmpty(group))
-                    {
-                        tests.Clear();
-                        break;
-                    }
-                    
-                    pair.Value.UserGroup = group;
-                }
-
-            }
-
-            return tests;
-        }
-    }
+    public const string GROUPS = "abcdefghijklmnop";
+    
+    public Dictionary<string, AbTestItem> Tests {get; private set; }
 
     public override void OnRegisterEntity(ECSEntity entity)
     {
-        context = entity;
+        context = (GameDataManager) entity;
+        
+        Reload();
     }
 
     public override void OnUnRegisterEntity(ECSEntity entity)
     {
         context = null;
     }
+    
+    public void Reload()
+    {
+        var save = context.UserProfile.GetComponent<AbTestSaveComponent>(AbTestSaveComponent.ComponentGuid);
+        
+        Tests = new Dictionary<string, AbTestItem>
+        {
+            {AbTestName.DAILY_REWARD, new AbTestItem {GroupsCount = 3}},
+        };
 
+        foreach (var pair in Tests)
+        {
+            string testName = pair.Key;
+            
+            pair.Value.TestName = testName;
+
+            AbTestItem savedData = save?.Tests?.FirstOrDefault(e => e.TestName == testName);
+            
+            var group = savedData != null 
+                ? savedData.UserGroup 
+                : GenerateTestGroup(pair.Value.GroupsCount);
+                    
+            // if something went wrong with ids, disable tests!
+            if (string.IsNullOrEmpty(group))
+            {
+                IW.Logger.LogError($"[AbTestController] => Reload: group is null or empty for test '{testName}'. All tests will be disabled!");
+                
+                Tests.Clear();
+                break;
+            }
+                    
+            pair.Value.UserGroup = group;
+
+            IW.Logger.Log($"[AbTestController] => Reload: Set group '{group}' for test '{testName}");
+        }
+    }
+
+    public void ForceSetGroup(string testName, string group)
+    {
+        AbTestItem item = Tests.Values.FirstOrDefault(e => e.TestName == testName);
+        if (item == null)
+        {
+            IW.Logger.LogError($"[AbTestController] => ForceSetGroupForTest: test '{testName} not found");
+            return;
+        }
+
+        if (!GROUPS.Contains(group))
+        {
+            IW.Logger.LogError($"[AbTestController] => ForceSetGroupForTest: Wrong group name  '{testName} not found");
+        }
+
+        IW.Logger.Log($"[AbTestController] => ForceSetGroupForTest: Set '{group}' group for '{testName}'"); 
+        item.UserGroup = group;
+    }
+    
     private string GetUserId()
     {
 #if UNITY_EDITOR
-        return ProfileService.Current.ClientID; 
+        return context.UserProfile.ClientID; 
 #else 
         return bfgRave.currentRaveId();
 #endif
@@ -82,8 +102,6 @@ public class AbTestDataManager : ECSEntity
     {
         IW.Logger.Log("[AbTestController] => GenerateTestGroup: groupsCount: " + groupsCount);
 
-        const string GROUPS = "abcdefghijklmnop";
-        
         if (groupsCount <= 0)
         {
             IW.Logger.LogError("[AbTestController] => GenerateTestGroup: groupsCount <= 0");

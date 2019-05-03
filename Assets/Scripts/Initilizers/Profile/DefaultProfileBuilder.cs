@@ -30,6 +30,7 @@
         profile.RegisterComponent(new FogSaveComponent());
         profile.RegisterComponent(new DailyRewardSaveComponent());
         profile.RegisterComponent(new AirShipSaveComponent());
+        profile.RegisterComponent(new AbTestSaveComponent());
     }
     
     public void SetDefaultSettings(UserProfile profile)
