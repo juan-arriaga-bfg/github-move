@@ -412,6 +412,14 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "87_KillTree", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Complete}, true);
                 break;
             }
+            case 29: // activate daily reward
+            {
+                step = new ActivateDailyRewardStep{IsIgnoreUi = true};
+                
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "66_CreatePiece_NPC_B3", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Start},true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "66_CreatePiece_NPC_B3", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Complete},true);
+                break;
+            }
             default:
                 return null;
         }

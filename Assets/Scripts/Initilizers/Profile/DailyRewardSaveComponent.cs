@@ -34,13 +34,12 @@ public class DailyRewardSaveComponent : ECSEntity, IECSSerializeable
 
     public override int Guid => ComponentGuid;
 
-    [JsonProperty("TimerStart")]
+    [JsonProperty]
     public long TimerStart;
-    
-    [JsonProperty("Day")]
+
+    [JsonProperty]
     public int Day;
-    
-        
+
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {

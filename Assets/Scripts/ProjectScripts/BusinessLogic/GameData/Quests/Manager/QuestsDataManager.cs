@@ -593,6 +593,11 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     {
         return cache[typeof(QuestEntity)].ContainsKey(id);
     }
+    
+    public bool IsQuestCompleted(string id)
+    {
+        return !string.IsNullOrEmpty(id) && FinishedQuests.Contains(id);
+    }
 
     public void StartNewDailyQuest()
     {

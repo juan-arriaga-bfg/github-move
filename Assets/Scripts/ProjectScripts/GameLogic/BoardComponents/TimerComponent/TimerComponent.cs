@@ -44,7 +44,7 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
 
     public string Tag;
 
-    private int lastProcessedSecond = -1;  
+    private int lastProcessedSecond = int.MinValue;  
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -145,9 +145,9 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     {
         OnExecute?.Invoke();
         
-        var elapsedSeconds = (int) StartTime.GetTime(UseUTC).TotalSeconds;
+        int elapsedSeconds = (int) StartTime.GetTime(UseUTC).TotalSeconds;
 
-        if (lastProcessedSecond < 0 || lastProcessedSecond != elapsedSeconds)
+        if (lastProcessedSecond == int.MinValue || lastProcessedSecond != elapsedSeconds)
         {
             lastProcessedSecond = elapsedSeconds;
             OnTimeChanged?.Invoke();
