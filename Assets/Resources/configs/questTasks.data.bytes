@@ -1895,6 +1895,30 @@
     }
   },
   {
+    "$type": "TaskCompleteOrderEntity, GameAssembly",
+    "Id": "165_CompleteOrder",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "CompleateOrderDailyQuestIcon",
+        "Title": "quest.complete.orders.title",
+        "Message": "quest.complete.orders.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCompleteOrderEntity, GameAssembly",
+    "Id": "166_CompleteOrder",
+    "TargetValue": 5,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "CompleateOrderDailyQuestIcon",
+        "Title": "quest.complete.orders.title",
+        "Message": "quest.complete.orders.message"
+      }
+    }
+  },
+  {
     "$type": "TaskCompleteDailyTaskEntity, GameAssembly",
     "Id": "Daily_ClearAll",
     "ComponentsCache": {
@@ -2054,7 +2078,7 @@
     "Id": "Daily_Quest_7",
     "Group": "Normal",
     "PieceUid": "Coins",
-    "TargetValue": 450,
+    "TargetValue": 250,
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
@@ -2094,13 +2118,13 @@
     "Id": "Daily_Quest_10",
     "Group": "Hard",
     "PieceUid": "Coins",
-    "TargetValue": 600,
+    "TargetValue": 450,
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
           {
             "Currency": "Crystals",
-            "Amount": 10
+            "Amount": 7
           }
         ]
       },

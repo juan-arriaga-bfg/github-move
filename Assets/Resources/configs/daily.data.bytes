@@ -3,86 +3,70 @@
     "Id": "Day1",
     "Rewards": [
       {
-        "Currency": "Coins",
-        "Amount": 10
+        "Currency": "Soft2",
+        "Amount": 2
       }
     ],
-    "Icon": "OfferShopIcon1"
+    "Icon": "Soft2"
   },
   {
     "Id": "Day2",
     "Rewards": [
       {
-        "Currency": "Coins",
-        "Amount": 20
-      },
-      {
-        "Currency": "Crystals",
-        "Amount": 5
+        "Currency": "Hard2",
+        "Amount": 2
       }
     ],
-    "Icon": "OfferShopIcon1"
+    "Icon": "Hard2"
   },
   {
     "Id": "Day3",
     "Rewards": [
       {
-        "Currency": "Coins",
-        "Amount": 100
-      },
-      {
-        "Currency": "Energy",
-        "Amount": 30
+        "Currency": "Hard3",
+        "Amount": 1
       }
     ],
-    "Icon": "OfferShopIcon1"
+    "Icon": "Hard3"
   },
   {
     "Id": "Day4",
     "Rewards": [
       {
         "Currency": "SK1_PR",
-        "Amount": 3
+        "Amount": 2
       }
     ],
-    "Icon": "OfferShopIcon1"
+    "Icon": "SK1_PR"
   },
   {
     "Id": "Day5",
     "Rewards": [
       {
-        "Currency": "Crystals",
-        "Amount": 10
-      },
-      {
-        "Currency": "SK1_PR",
-        "Amount": 5
+        "Currency": "Soft4",
+        "Amount": 3
       }
     ],
-    "Icon": "OfferShopIcon1"
+    "Icon": "Soft4"
   },
   {
     "Id": "Day6",
     "Rewards": [
       {
-        "Currency": "Soft1",
-        "Amount": 5
-      },
-      {
-        "Currency": "Soft2",
-        "Amount": 3
+        "Currency": "Hard4",
+        "Amount": 1
       }
     ],
-    "Icon": "OfferShopIcon1"
+    "Icon": "Hard4"
   },
   {
     "Id": "Day7",
     "Rewards": [
       {
-        "Currency": "Crystals",
-        "Amount": 100
+        "Currency": "Boost_CR",
+        "Amount": 1
       }
     ],
-    "Icon": "OfferShopIcon1"
+    "Icon": "Boost_CR"
   }
 ]

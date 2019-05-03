@@ -1921,5 +1921,33 @@
         "Value": "162_CreatePiece_NPC_E7"
       }
     ]
+  },
+  {
+    "Id": 149,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "165_CompleteOrder"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
+        "Id": "PieceUnlocked",
+        "Value": "NPC_F"
+      }
+    ]
+  },
+  {
+    "Id": 150,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "166_CompleteOrder"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
+        "Id": "PieceUnlocked",
+        "Value": "NPC_G"
+      }
+    ]
   }
 ]

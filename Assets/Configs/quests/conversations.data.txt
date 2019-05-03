@@ -977,5 +977,128 @@
         "Message": "conversation.quest.complete33"
       }
     ]
+  },
+  {
+    "Id": 62,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty",
+      "LeftOuter": "PussInBoots",
+      "RightInner": "RedHood"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "RedHood",
+        "Emotion": "Sad",
+        "Message": "conversation.35.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.35.message2"
+      },
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
+        "Message": "conversation.35.message3"
+      },
+      {
+        "CharacterId": "RedHood",
+        "Emotion": "Normal",
+        "Message": "conversation.35.message4"
+      }
+    ]
+  },
+  {
+    "Id": 87,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty",
+      "RightInner": "TigerLilly"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "TigerLilly",
+        "Emotion": "Normal",
+        "Message": "conversation.36.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.36.message2"
+      },
+      {
+        "CharacterId": "TigerLilly",
+        "Emotion": "Normal",
+        "Message": "conversation.36.message3"
+      }
+    ]
+  },
+  {
+    "Id": 149,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty",
+      "RightInner": "Mermaid"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "Mermaid",
+        "Emotion": "Happy",
+        "Message": "conversation.37.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Thinking",
+        "Message": "conversation.37.message2"
+      },
+      {
+        "CharacterId": "Mermaid",
+        "Emotion": "Sad",
+        "Message": "conversation.37.message3"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.37.message4"
+      },
+      {
+        "CharacterId": "Mermaid",
+        "Emotion": "Normal",
+        "Message": "conversation.37.message5"
+      }
+    ]
+  },
+  {
+    "Id": 150,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty",
+      "RightInner": "PeterPan",
+      "LeftOuter": "PussInBoots"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "PeterPan",
+        "Emotion": "Normal",
+        "Message": "conversation.38.message1"
+      },
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Normal",
+        "Message": "conversation.38.message2"
+      },
+      {
+        "CharacterId": "PeterPan",
+        "Emotion": "Normal",
+        "Message": "conversation.38.message3"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.38.message4"
+      },
+      {
+        "CharacterId": "PeterPan",
+        "Emotion": "Normal",
+        "Message": "conversation.38.message5"
+      }
+    ]
   }
 ]
