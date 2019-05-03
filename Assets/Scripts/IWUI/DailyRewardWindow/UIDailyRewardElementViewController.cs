@@ -63,6 +63,9 @@ public class UIDailyRewardElementViewController : UISimpleScrollElementViewContr
         var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(btnClaim.transform.position);
 
         CurrencyHelper.PurchaseAndProvideSpawn(contentEntity.Rewards, new CurrencyPair(), null, flyPosition);
+        
+        GameDataService.Current.DailyRewardManager.ClaimCurrentDay();
+        
         context.Controller.CloseCurrentWindow();
     }
 }
