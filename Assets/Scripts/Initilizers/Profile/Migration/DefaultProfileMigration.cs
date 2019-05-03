@@ -27,7 +27,10 @@ public partial class DefaultProfileMigration : IProfileMigration
         {724, Migrate724},
         
         // new Mine logic
-        {731, Migrate731}
+        {731, Migrate731},
+        
+        // codex unlock fix
+        {1312, Migrate1312}
     };
 
     public void Migrate(int clientVersion, UserProfile profile)
