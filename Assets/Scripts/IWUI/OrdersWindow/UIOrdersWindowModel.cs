@@ -11,7 +11,9 @@ public class UIOrdersWindowModel : IWWindowModel
     public string RecipesText => LocalizationService.Get("window.orders.toggle.recipes", "window.orders.toggle.recipes");
     public string IngredientsText => LocalizationService.Get("window.orders.toggle.ingredients", "window.orders.toggle.ingredients");
     
-    public Order Select; 
+    public Order Select;
+
+    public bool IsHighlightToken;
 
     public List<OrderDef> Recipes => GameDataService.Current.OrdersManager.Recipes;
     public List<Order> Orders => GameDataService.Current.OrdersManager.Orders;

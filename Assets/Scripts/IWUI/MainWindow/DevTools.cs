@@ -18,6 +18,8 @@ using UnityEngine.UI;
 public class DevTools : UIContainerElementViewController
 {
     [IWUIBinding("#ButtonsPanel")] private GameObject panel;
+    [IWUIBinding("#PanelToggle")] private GameObject panelToggle;
+    
     [IWUIBinding("#QuestDialogsToggle")] private Toggle questDialogsToggle;
     [IWUIBinding("#TutorialToggle")] private Toggle tutorialToggle;
     [IWUIBinding("#RemoverToggle")] private Toggle removerToggle;
@@ -41,6 +43,7 @@ public class DevTools : UIContainerElementViewController
         base.OnViewInit(context);
         
         panel.SetActive(isEnabled);
+        panelToggle.SetActive(isEnabled);
         
         questDialogsToggle.isOn = IsQuestDialogsEnabled();
         tutorialToggle.isOn = IsTutorialEnabled();
@@ -60,6 +63,7 @@ public class DevTools : UIContainerElementViewController
     {
         isEnabled = !isChecked;
         panel.SetActive(isEnabled);
+        panelToggle.SetActive(isEnabled);
     }
 
     public void OnExtendValueChanged(bool isChecked)
@@ -316,6 +320,9 @@ public class DevTools : UIContainerElementViewController
     
     public void OnDebug1Click()
     {
+        OnSpawnAirShipClick();
+        return;
+        
         UIService.Get.ShowWindow(UIWindowType.DailyRewardWindow);
         return;
         

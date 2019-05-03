@@ -70,6 +70,8 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     public override void OnViewShowCompleted()
     {
         base.OnViewShowCompleted();
+        
+        var windowModel = Model as UIOrdersWindowModel;
 
         InitButtonBase(btnMaskTop, Controller.CloseCurrentWindow);
         InitButtonBase(btnMaskBottom, Controller.CloseCurrentWindow);
@@ -77,6 +79,11 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         IsShowComplete = true;
         
         TackleBoxEvents.SendOrdersOpen();
+
+        if (windowModel.IsHighlightToken == false) return;
+        
+        Highlight();
+        windowModel.IsHighlightToken = false;
     }
 
     public override void OnViewCloseCompleted()
@@ -97,6 +104,14 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         }
         
         contentOrders.Select(select);
+    }
+
+    private void Highlight()
+    {
+        foreach (UIOrderElementViewController tab in contentOrders.Tabs)
+        {
+            tab.HighlightToken();
+        }
     }
     
     private void OnSelectToggle(int index)

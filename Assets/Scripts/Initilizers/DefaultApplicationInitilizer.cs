@@ -46,6 +46,9 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
            .AddComponent(new ShopServiceInitComponent()) 
            .AddComponent(new LocalAssetBundlesCacheInitComponent())
             
+           .AddComponent(new ServerSideConfigInitComponent()
+               .SetDependency(typeof(InternetMonitorInitComponent)))  
+            
            .AddComponent(new BfgSdkGdprInitComponent()                             // Listener for BFG SDK's GDPR popup events
                .SetDependency(typeof(BfgSdkUnityMessageHandlerInitComponent)))  
             
@@ -114,6 +117,8 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         }
         else
         {
+            ServerSideConfigService.Current?.UpdateAll();
+            
             energyLogic?.InitInSave();
             
             BoardService.Current?.FirstBoard?.TutorialLogic?.ResetStartTime();

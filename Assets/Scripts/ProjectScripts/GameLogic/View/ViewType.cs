@@ -11,7 +11,7 @@
     Warning = -1007,
     Lock = -1008,
     OrderBubble = -1009,
-    Firefly = -1010,
+    FireflyProduction = -1010,
     DefaultWorker = -1011,
     ExtraWorker = -1012,
     TutorialMergeFinger = -1013,
@@ -30,4 +30,5 @@
     Airbaloon = -1026,
     Coast = -1027,
     IslandFog = -1028,
+    FireflyEvent = -1029,
 }

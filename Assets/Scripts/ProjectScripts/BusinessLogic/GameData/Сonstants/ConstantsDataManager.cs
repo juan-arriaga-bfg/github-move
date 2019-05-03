@@ -17,26 +17,12 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     public int MinDelayBounceBubble;
     public int MaxDelayBounceBubble;
     
+    public int StartLevelFirefly;
+    
     public int MaxOrders;
 
     public int FreeTimeLimit;
-
-    public int MinDelayFirstSpawnFirefly;
-    public int MaxDelayFirstSpawnFirefly;
     
-    public int MinDelaySpawnFirefly;
-    public int MaxDelaySpawnFirefly;
-    
-    public int TapDelayFirefly;
-    
-    public int MinAmountFirefly;
-    public int MaxAmountFirefly;
-    
-    public float SpeedFirefly;
-    
-    public int StartLevelFirefly;
-    public int SleepDelayFirefly;
-
     public float HourBasePrice;
     public float DayBasePrice;
     

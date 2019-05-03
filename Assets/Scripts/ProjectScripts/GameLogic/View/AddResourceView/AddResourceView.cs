@@ -80,6 +80,7 @@ public class AddResourceView : BoardElementView
 		    || resource.Currency == Currency.Crystals.Name
 		    || resource.Currency == Currency.Energy.Name
 		    || resource.Currency == Currency.Mana.Name
+		    || resource.Currency == Currency.Token.Name
 		    || resource.Currency == Currency.Experience.Name)
 		{
 			DOTween.Sequence().InsertCallback(0.5f + delay, () =>
