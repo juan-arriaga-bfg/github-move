@@ -96,27 +96,49 @@ namespace Dws
                 {
                     HTTPRequest httpRequest = new HTTPRequest(new Uri(requestData.Url), (request, response) =>
                     {
-                        //PrintHeadersToLog(response);
-
-                        // Redirect!
-                        // todo: handle redirection loop
-                        if ((int) response.StatusCode >= 300 && (int) response.StatusCode <= 399)
+                        switch (request.State)
                         {
-                            var redirectUrl = response.Headers["Location"];
-                            WebRequestData newRequestData = new WebRequestData(redirectUrl.First(), requestData.Method);
-                            MakeRequest(newRequestData, callback);
-                            return;
+                            case HTTPRequestStates.Finished:
+                                // Redirect!
+                                // todo: handle redirection loop
+                                if ((int) response.StatusCode >= 300 && (int) response.StatusCode <= 399)
+                                {
+                                    var redirectUrl = response.Headers["Location"];
+                                    WebRequestData newRequestData = new WebRequestData(redirectUrl.First(), requestData.Method);
+                                    MakeRequest(newRequestData, callback);
+                                    return;
+                                }
+
+                                var statusCode = (HttpStatusCode)response.StatusCode;
+
+                                EditorMainThreadSync.Execute(() =>
+                                {
+                                    string resultText = response.DataAsText;
+                                    Debug.Log("WebHelper: MakeRequest: Return: " + resultText);
+                                    callback(new WebResponseData(statusCode, resultText, null));
+                                });
+                                break;
+                            case HTTPRequestStates.Error:
+                                Debug.LogError("Request Finished with Error! " +
+                                               (request.Exception != null ?
+                                                   (request.Exception.Message + "\n" + request.Exception.StackTrace) :
+                                                   "No Exception"));
+                                
+                                callback(new WebResponseData(null, request.Exception?.Message));
+                                break;
+                            case HTTPRequestStates.Aborted:
+                                Debug.LogWarning("Request Aborted!");
+                                callback(new WebResponseData(null, request.State.ToString()));
+                                break;
+                            case HTTPRequestStates.ConnectionTimedOut:
+                                Debug.LogError("Connection Timed Out!");
+                                callback(new WebResponseData(null, request.State.ToString()));
+                                break;
+                            case HTTPRequestStates.TimedOut:
+                                Debug.LogError("Processing the request Timed Out!");
+                                callback(new WebResponseData(null, request.State.ToString()));
+                                break;
                         }
-
-                        var statusCode = (HttpStatusCode)response.StatusCode;
-
-                        EditorMainThreadSync.Execute(() =>
-                        {
-                            string resultText = response.DataAsText;
-                            Debug.Log("WebHelper: MakeRequest: Return: " + resultText);
-                            callback(new WebResponseData(statusCode, resultText, null));
-                        });
-                        
                     });
                     httpRequest.Timeout = TimeSpan.FromSeconds(120);
                     httpRequest.MethodType = HTTPMethods.Get;
