@@ -634,4 +634,5 @@ public class R
      public const string FireflyProduction = "FireflyProduction";
      public const string FireflyEvent = "FireflyEvent";
      public const string EventFireflyExplosion = "EventFireflyExplosion";
+     public const string DestroyFadePieceAnimation = "DestroyFadePieceAnimation";
 }

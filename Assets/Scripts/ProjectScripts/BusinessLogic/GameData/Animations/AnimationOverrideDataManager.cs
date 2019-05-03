@@ -124,6 +124,11 @@ public class AnimationOverrideDataManager
             OnMergeSpawn = R.SpawnFakeMineAnimation
         });
         
+        AddPiece(defs, PieceType.LockedEmpty.Id, new AnimationDef
+        {
+            OnDestroyFromBoard = R.DestroyFadePieceAnimation
+        });
+        
         return defs;
     }
     

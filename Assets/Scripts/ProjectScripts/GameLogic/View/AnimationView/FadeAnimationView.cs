@@ -21,9 +21,17 @@ public class FadeAnimationView : AnimationView
         foreach (var spriteRenderer in spriteRenderers)
         {
             sequence.Insert(0, spriteRenderer.DOFade(to, duration).SetEase(easeType));
-        }   
+        }
        
-        sequence.InsertCallback(timeoutDuration, CompleteAnimation);
+        sequence.InsertCallback(timeoutDuration, () =>
+        {
+            CompleteAnimation();
+            
+            foreach (var spriteRenderer in spriteRenderers)
+            {
+                spriteRenderer.DOFade(1, 0);
+            }
+        });
         
     }
 }
