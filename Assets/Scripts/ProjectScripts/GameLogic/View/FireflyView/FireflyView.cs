@@ -151,7 +151,8 @@ public class FireflyView : BoardElementView
         {
             PieceId = rewardId,
             At = free[0],
-            View = this
+            View = this,
+            FireflyType = fireflyType
         });
     }
 

@@ -6,6 +6,7 @@
 	public int PieceId;
 	public BoardPosition At;
 	public FireflyView View;
+	public FireflyType FireflyType = FireflyType.Production;
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{
@@ -23,7 +24,8 @@
 		var animation = new FireflyPieceSpawnAnimation
 		{
 			CreatedPiece = piece,
-			Action = this
+			Action = this,
+			FireflyType = FireflyType
 		};
 
 		animation.OnCompleteEvent += (_) =>
