@@ -27,6 +27,9 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
         LocalNotificationsService.Current.Cleanup();
         LocalNotificationsService.Instance.SetManager(null);
         
+        ServerSideConfigService.Current.Cleanup();
+        ServerSideConfigService.Instance.SetManager(null);
+        
         var ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);
             
         foreach (var system in ecsSystems)

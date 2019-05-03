@@ -31,6 +31,7 @@
         profile.RegisterComponent(new DailyRewardSaveComponent());
         profile.RegisterComponent(new AirShipSaveComponent());
         profile.RegisterComponent(new AbTestSaveComponent());
+        profile.RegisterComponent(new EventGameSaveComponent());
     }
     
     public void SetDefaultSettings(UserProfile profile)

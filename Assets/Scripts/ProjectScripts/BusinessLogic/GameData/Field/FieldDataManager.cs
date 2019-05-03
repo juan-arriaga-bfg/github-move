@@ -1,5 +1,6 @@
 using Debug = IW.Logger;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FiledLayoutDef
@@ -11,50 +12,82 @@ public class FiledLayoutDef
 
 public class FieldDataManager : IECSComponent, IDataManager
 {
-	public static int ComponentGuid = ECSManager.GetNextGuid();
-	public int Guid => ComponentGuid;
+    public static int ComponentGuid = ECSManager.GetNextGuid();
+    public int Guid => ComponentGuid;
 
-	public Dictionary<int, List<BoardPosition>> Pieces = new Dictionary<int, List<BoardPosition>>();
+    /// <summary>
+    /// Include island and board pieces
+    /// </summary>
+    public Dictionary<int, List<BoardPosition>> AllPieces = new Dictionary<int, List<BoardPosition>>();
 
+    public Dictionary<int, List<BoardPosition>> IslandPieces = new Dictionary<int, List<BoardPosition>>();
+    public Dictionary<int, List<BoardPosition>> BoardPieces = new Dictionary<int, List<BoardPosition>>();
+    
     public int LayoutW;
     public int LayoutH;
     public int[] LayoutData;
     public List<BoardPosition> LockedCells;
-	
-	public void OnRegisterEntity(ECSEntity entity)
-	{
-		Reload();
-	}
-	
-	public void OnUnRegisterEntity(ECSEntity entity)
-	{
-	}
+    
+    public void OnRegisterEntity(ECSEntity entity)
+    {
+        Reload();
+    }
+    
+    public void OnUnRegisterEntity(ECSEntity entity)
+    {
+    }
 
-	public void Reload()
-	{
-		Pieces = new Dictionary<int, List<BoardPosition>>();
-		LoadContentData(new ResourceConfigDataMapper<Dictionary<string, List<BoardPosition>>>("configs/field.data", NSConfigsSettings.Instance.IsUseEncryption));
-		LoadLayoutData(new ResourceConfigDataMapper<FiledLayoutDef>("configs/layout.data", NSConfigsSettings.Instance.IsUseEncryption));
-	}
-	
-	public void LoadContentData(IDataMapper<Dictionary<string, List<BoardPosition>>> dataMapper)
-	{
-		dataMapper.LoadData((data, error)=> 
-		{
-			if (string.IsNullOrEmpty(error))
-			{
-				foreach (var pair in data)
-				{
-					Pieces.Add(PieceType.Parse(pair.Key), pair.Value);
-				}
-			}
-			else
-			{
-				Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
-			}
-		});
-	}
-	
+    public void Reload()
+    {
+        AllPieces = new Dictionary<int, List<BoardPosition>>();
+        LoadContentData(new ResourceConfigDataMapper<Dictionary<string, List<BoardPosition>>>("configs/field.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadLayoutData(new ResourceConfigDataMapper<FiledLayoutDef>("configs/layout.data", NSConfigsSettings.Instance.IsUseEncryption));
+    }
+    
+    public void LoadContentData(IDataMapper<Dictionary<string, List<BoardPosition>>> dataMapper)
+    {
+        dataMapper.LoadData((data, error)=> 
+        {
+            if (string.IsNullOrEmpty(error))
+            {
+                foreach (var pair in data)
+                {
+                    var pieceType = PieceType.Parse(pair.Key);
+                    AllPieces.Add(pieceType, pair.Value);
+                    
+                    var islandPiecePositions = new List<BoardPosition>();
+                    var boardPiecePositions = new List<BoardPosition>();
+                    var islandPositions = VIPIslandLogicComponent.IslandPositions;
+                    foreach (var pos in pair.Value)
+                    {
+                        if (islandPositions.Contains(pos))
+                        {
+                            islandPiecePositions.Add(pos);
+                        }
+                        else
+                        {
+                            boardPiecePositions.Add(pos);
+                        }
+                    }
+
+                    if (islandPiecePositions.Count > 0)
+                    {
+                        IslandPieces.Add(pieceType, islandPiecePositions);
+                    }
+
+                    if (boardPiecePositions.Count > 0)
+                    {
+                        BoardPieces.Add(pieceType, boardPiecePositions);
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
+            }
+        });
+    }
+    
     public void LoadLayoutData(IDataMapper<FiledLayoutDef> dataMapper)
     {
         dataMapper.LoadData((data, error)=> 

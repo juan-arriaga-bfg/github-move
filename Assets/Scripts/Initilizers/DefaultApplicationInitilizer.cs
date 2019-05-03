@@ -47,6 +47,9 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
            .AddComponent(new ShopServiceInitComponent()) 
            .AddComponent(new LocalAssetBundlesCacheInitComponent())
             
+           .AddComponent(new ServerSideConfigInitComponent()
+               .SetDependency(typeof(InternetMonitorInitComponent)))  
+            
            .AddComponent(new BfgSdkGdprInitComponent()                             // Listener for BFG SDK's GDPR popup events
                .SetDependency(typeof(BfgSdkUnityMessageHandlerInitComponent)))  
             
@@ -117,6 +120,8 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         {
             CultureInfo.CurrentCulture.ClearCachedData();
             TimeZoneInfo.ClearCachedData();
+            
+            ServerSideConfigService.Current?.UpdateAll();
             
             energyLogic?.InitInSave();
             

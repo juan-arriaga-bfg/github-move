@@ -1,0 +1,44 @@
+﻿[
+  {
+    "Uid": "Normal",
+    "AmountProduction": {
+      "Min": 2,
+      "Max": 5
+    },
+    "AmountEvent": {
+      "Min": 0,
+      "Max": 0
+    },
+    "DelayFirstSpawn": {
+      "Min": 10,
+      "Max": 60
+    },
+    "DelaySpawn": {
+      "Min": 10,
+      "Max": 20
+    },
+    "SleepDelay": 1800,
+    "TapDelay": 45
+  },
+  {
+    "Uid": "Event",
+    "AmountProduction": {
+      "Min": 2,
+      "Max": 3
+    },
+    "AmountEvent": {
+      "Min": 1,
+      "Max": 2
+    },
+    "DelayFirstSpawn": {
+      "Min": 10,
+      "Max": 60
+    },
+    "DelaySpawn": {
+      "Min": 10,
+      "Max": 20
+    },
+    "SleepDelay": 1800,
+    "TapDelay": 45
+  }
+]

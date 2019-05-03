@@ -13,9 +13,9 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 	public LockerComponent Locker => locker ?? GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
 	
 	private BoardLogicComponent context;
-
-	private List<Vector2> slots = new List<Vector2>();
-    
+	private FireflyDef Def;
+	
+	private readonly List<Vector2> slots = new List<Vector2>();
 	private readonly List<FireflyView> views = new List<FireflyView>();
     public List<FireflyView> Views => views;
 	
@@ -45,19 +45,21 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		
 		locker = new LockerComponent();
 		RegisterComponent(locker);
+		Locker.Lock(this);
 
-		restartTimer = new TimerComponent {Delay = GameDataService.Current.ConstantsManager.SleepDelayFirefly, OnComplete = () =>
+		restartTimer = new TimerComponent
 		{
-			index = 1;
-			isClick = false;
-			OnMatch();
-			restartTimer.Start();
-			IW.Logger.Log($"[FireflyLogicComponent] => restart session!");
-		}};
+			OnComplete = () =>
+			{
+				index = 1;
+				isClick = false;
+				OnMatch();
+				restartTimer.Start();
+				IW.Logger.Log($"[FireflyLogicComponent] => restart session!");
+			}
+		};
 		
 		RegisterComponent(restartTimer);
-		
-		Locker.Lock(this);
 		
 		UIService.Get.OnShowWindowEvent += OnShowWindow;
 		UIService.Get.OnCloseWindowEvent += OnCloseWindow;
@@ -86,8 +88,24 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		bottom = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, 0);
 		right = context.Context.BoardDef.GetWorldPosition(context.Context.BoardDef.Width + 5, context.Context.BoardDef.Height + 5);
 		
-		delay = Random.Range(GameDataService.Current.ConstantsManager.MinDelayFirstSpawnFirefly, GameDataService.Current.ConstantsManager.MaxDelayFirstSpawnFirefly + 1);
-		startTime = DateTime.UtcNow;
+		var isEventGameActive = context.EventGamesLogic.GetEventGame(EventGameType.OrderSoftLaunch, out var eventGame) && eventGame.State == EventGameState.InProgress;
+
+		ResetLogic(isEventGameActive ? FireflyLogicType.Event : FireflyLogicType.Normal);
+		
+		context.EventGamesLogic.OnStart += OnStartEvent;
+		context.EventGamesLogic.OnStop += OnStopEvent;
+	}
+	
+	public override void OnUnRegisterEntity(ECSEntity entity)
+	{
+		UIService.Get.OnShowWindowEvent -= OnShowWindow;
+		UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
+		ShopService.Current.OnPurchasedEvent -= UpdateFirefly;
+		
+		context.EventGamesLogic.OnStart -= OnStartEvent;
+		context.EventGamesLogic.OnStop -= OnStopEvent;
+
+		restartTimer.OnComplete = null;
 	}
 
 	public void ResetTutorialStartTime()
@@ -100,13 +118,31 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		restartTimer.Reset();
 	}
 
-	public override void OnUnRegisterEntity(ECSEntity entity)
+	private void OnStartEvent(EventGameType name)
 	{
-		UIService.Get.OnShowWindowEvent -= OnShowWindow;
-		UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
-		ShopService.Current.OnPurchasedEvent -= UpdateFirefly;
+		if (name != EventGameType.OrderSoftLaunch) return;
+		
+		ResetLogic(FireflyLogicType.Event);
+	}
 
-		restartTimer.OnComplete = null;
+	private void OnStopEvent(EventGameType name)
+	{
+		if (name != EventGameType.OrderSoftLaunch) return;
+
+		DestroyAll(FireflyType.Event);
+		ResetLogic(FireflyLogicType.Normal);
+	}
+
+	public void ResetLogic(FireflyLogicType logicType)
+	{
+		Def = GameDataService.Current.FireflyManager.Defs[logicType];
+
+		restartTimer.Delay = Def.SleepDelay;
+		
+		delay = Def.DelayFirstSpawn.Range();
+		startTime = DateTime.UtcNow;
+		
+		ResetSession();
 	}
 	
 	private void OnShowWindow(IWUIWindow window)
@@ -159,7 +195,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 	
 	public void Execute()
 	{
-		var amount = Random.Range(GameDataService.Current.ConstantsManager.MinAmountFirefly, GameDataService.Current.ConstantsManager.MaxAmountFirefly + 1);
+		var amount = Def.AmountProduction.Range() + Def.AmountEvent.Range();
 		
 		slots.Shuffle();
 		
@@ -172,18 +208,18 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 			
 			Vector2 start = context.Context.BoardDef.ViewCamera.ScreenToWorldPoint(slots[i]);
 			Vector2 finish = context.Context.BoardDef.ViewCamera.ScreenToWorldPoint(positionFinish);
+
+			var firefly = (int) (i < Def.AmountProduction.Value ? ViewType.FireflyProduction : ViewType.FireflyEvent);
+			var view = context.Context.RendererContext.CreateBoardElement<FireflyView>(firefly);
+			view.Init(context.Context.RendererContext, start, finish);
 			
-			var firefly = context.Context.RendererContext.CreateBoardElement<FireflyView>((int) ViewType.Firefly);
-			firefly.Init(context.Context.RendererContext, start, finish);
-			
-			views.Add(firefly);
+			views.Add(view);
 		}
 
-		if (isTutorialActive)
-		{
-			views[0].AddArrow();
-			ResetTutorialStartTime();
-		}
+		if (!isTutorialActive) return;
+		
+		views[0].AddArrow();
+		ResetTutorialStartTime();
 	}
 	
 	public bool IsExecuteable()
@@ -232,7 +268,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		if (isClick == false)
 		{
 			isClick = true;
-			delay = GameDataService.Current.ConstantsManager.TapDelayFirefly * index;
+			delay = Def.TapDelay * index;
 			startTime = DateTime.UtcNow;
 			index++;
 		}
@@ -242,7 +278,9 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		if (firefly == null) return false;
 
 		var amountFireflyBefore = ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount;
+		
 		firefly.OnClick();
+		
 		var amountFireflyAfter = ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount;
 
 		if (amountFireflyAfter != amountFireflyBefore && amountFireflyAfter == TUTORIAL_FIREFLY_COUNT)
@@ -257,7 +295,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 	{
 		if (isClick) return;
 
-		delay = Random.Range(GameDataService.Current.ConstantsManager.MinDelaySpawnFirefly, GameDataService.Current.ConstantsManager.MaxDelaySpawnFirefly + 1);
+		delay = Def.DelaySpawn.Range();
 		startTime = DateTime.UtcNow;
 	}
 
@@ -267,6 +305,19 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		startTime = DateTime.UtcNow;
 		
 		if(isTutorialActive && views.Count != 0) views[0].AddArrow();
+	}
+
+	public void DestroyAll(FireflyType name)
+	{
+		for (var i = views.Count - 1; i >= 0; i--)
+		{
+			var view = views[i];
+			
+			if (view.FireflyType != name) continue;
+			
+			views.Remove(view);
+			context.Context.RendererContext.DestroyElement(view.gameObject);
+		}
 	}
 
 	public void DestroyAll()

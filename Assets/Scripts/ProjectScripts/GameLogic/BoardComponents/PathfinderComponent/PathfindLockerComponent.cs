@@ -297,7 +297,8 @@ public class PathfindLockerComponent : ECSEntity
                     {
                         IsMatch = false,
                         Positions = new List<BoardPosition>() {emptyCell.CachedPosition},
-                        To = emptyCell.CachedPosition
+                        To = emptyCell.CachedPosition,
+                        AnimationResourceSearch = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnDestroyFromBoard)
                     });
                 }
             }

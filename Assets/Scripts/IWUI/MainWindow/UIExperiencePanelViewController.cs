@@ -12,10 +12,7 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
     [SerializeField] private Image progress;
 
     private bool isLevelUp;
-    public Action<int> OnLevelUp;
-
     private string kiloAbbreviation;
-
     private float progressMaxValue;
 
     private void Start()
@@ -25,7 +22,6 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
 
     public override int CurrentValueAnimated
     {
-        get { return currentValueAnimated; }
         set
         {
             currentValueAnimated = value;
@@ -35,8 +31,8 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
 
     public override void OnViewShow(IWUIWindowView context)
     {
-        base.OnViewShow(context);
         kiloAbbreviation = LocalizationService.Get("common.abbreviation.kilo", "common.abbreviation.kilo");
+        base.OnViewShow(context);
     }
 
     public override void UpdateView()

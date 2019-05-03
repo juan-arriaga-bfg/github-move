@@ -54,10 +54,7 @@ public class UISimpleScrollElementViewController : UIContainerElementViewControl
         }
     }
 
-    public Transform Anchor
-    {
-        get { return anchor; }
-    }
+    public Transform Anchor => anchor;
 
     public override void Init()
     {

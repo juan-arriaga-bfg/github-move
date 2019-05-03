@@ -6,6 +6,8 @@ public class CurrencyPair
     public string Currency;
     public int Amount;
     
+    public const string SaveSeparator = ":";
+    
     public string GetIcon()
     {
         var piece = PieceType.Parse(Currency);
@@ -19,16 +21,14 @@ public class CurrencyPair
     
     public override string ToString()
     {
-        return $"{Currency}: {Amount}";
+        return $"{Currency}{SaveSeparator}{Amount}";
     }
 
-    public string ToSaveString()
+    public CurrencyPair Copy()
     {
-        var def = global::Currency.GetCurrencyDef(Currency);
-
-        return def == null ? null : $"{def.Id},{Amount}";
+        return new CurrencyPair {Currency = this.Currency, Amount = this.Amount};
     }
-
+    
     public string ToStringIcon(bool noAmount = false, int iconSize = -1, int amountSize = -1)
     {
         var iconText = iconSize == -1 ? $"<sprite name={GetIcon()}>" : $"<size={iconSize}><sprite name={GetIcon()}></size>";
@@ -39,17 +39,15 @@ public class CurrencyPair
 
     public static CurrencyPair Parse(string value)
     {
-        var pair = new CurrencyPair();
-        var valueArray = value.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
-        var def = global::Currency.GetCurrencyDef(int.Parse(valueArray[0]));
+        var valueArray = value.Split(new[] {SaveSeparator}, StringSplitOptions.RemoveEmptyEntries);
 
-        if (def == null) return null;
+        if (valueArray.Length == 0 || string.IsNullOrEmpty(valueArray[0])) return null;
         
-        pair.Currency = def.Name;
-        
-        if(valueArray.Length < 2) return pair;
-
-        int.TryParse(valueArray[1], out pair.Amount);
+        var pair = new CurrencyPair
+        {
+            Currency = valueArray[0],
+            Amount = valueArray.Length > 0 && int.TryParse(valueArray[1], out var amount) ? amount : 0
+        };
         
         return pair;
     }

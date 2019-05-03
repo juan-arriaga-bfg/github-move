@@ -132,7 +132,6 @@ public class ConfigsGoogleLoader
         }
         
         var idsStr = string.Join(",", update.Select(e => e.Link).Distinct());
-        var req = new WebRequestData(GetUrl("getLastUpdated", "ids=" + idsStr));
         
         foreach (var configName in update.Select(elem => elem.Key))
         {
@@ -145,15 +144,15 @@ public class ConfigsGoogleLoader
             configStatus.State = LoadState.Validate;
         }
         
-        WebHelper.MakeRequest(req, (response) =>
+        WebHelper.MakeRequest(GetUrl("getLastUpdated", "ids=" + idsStr), (error, response) =>
         {
-            if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
+            if (!string.IsNullOrEmpty(error))
             {
-                Debug.LogErrorFormat("Can't check last updated. Response.IsOk = {0}. Error: {1}", response.IsOk, response.Error);
+                Debug.LogErrorFormat("Can't check last updated.");
                 return;
             }
                 
-            var root = JObject.Parse(response.Result);
+            var root = JObject.Parse(response);
             var result = root["result"];
 
             Dictionary<string, long> timestamps = new Dictionary<string, long>();
@@ -217,9 +216,6 @@ public class ConfigsGoogleLoader
         HashSet<string> uniqIds = new HashSet<string>(idsArray);
         var idsStr = string.Join(",", uniqIds);
 
-        //var gLink = update[index].Value;
-        var req = new WebRequestData(GetUrl("getLastUpdated", "ids=" + idsStr));
-        
         foreach (var configName in update.Select(elem => elem.Value.Key))
         {
             var configStatus = GetConfigInfo(configName);
@@ -234,7 +230,7 @@ public class ConfigsGoogleLoader
         
         ConfigManager.AsyncProgressStart();
         
-        WebHelper.MakeRequest(req, (response) =>
+        WebHelper.MakeRequest(GetUrl("getLastUpdated", "ids=" + idsStr), (error, response) =>
         {
             foreach (var configName in update.Select(elem => elem.Value.Key))
             {
@@ -242,13 +238,13 @@ public class ConfigsGoogleLoader
                 configStatus.State = LoadState.LastVersion;
             }
             
-            if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
+            if (!string.IsNullOrEmpty(error))
             {
-                Debug.LogErrorFormat("Can't check last updated. Response.IsOk = {0}. Error: {1}", response.IsOk, response.Error);
+                Debug.LogErrorFormat("Can't check last updated");
                 return;
             }
                 
-            var root = JObject.Parse(response.Result);
+            var root = JObject.Parse(response);
             var result = root["result"];
 
             Dictionary<string, long> timestamps = new Dictionary<string, long>();
@@ -339,8 +335,6 @@ public class ConfigsGoogleLoader
         {
             string text = string.Format("Downloading: '{0}'", gLink.Key);
             Debug.LogWarningFormat(text);
-        
-            var req = new WebRequestData(GetUrl(gLink.Link, gLink.Route, gLink.Pattern));
 
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -348,7 +342,7 @@ public class ConfigsGoogleLoader
         
             configStatus.State = LoadState.Load;
         
-            WebHelper.MakeRequest(req, (response) =>
+            WebHelper.MakeRequest(GetUrl(gLink.Link, gLink.Route, gLink.Pattern), (error, response) =>
             {
                 sw.Stop();
             
@@ -356,9 +350,9 @@ public class ConfigsGoogleLoader
                 
                 ConfigManager.AsyncProgressLoadStepComplete();
                 
-                if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
+                if (!string.IsNullOrEmpty(error))
                 {
-                    Debug.LogErrorFormat("Can't load data {0}. response.IsOk = {1}. Error: {2}", gLink.Key, response.IsOk, response.Error);
+                    Debug.LogErrorFormat("Can't load data {0}", gLink.Key);
                     configStatus.State = LoadState.Error;
                     if (ConfigsStatus.All(elem => elem.State != LoadState.Load))
                     {
@@ -369,7 +363,7 @@ public class ConfigsGoogleLoader
 
                 try
                 {
-                    var root   = JObject.Parse(response.Result);
+                    var root   = JObject.Parse(response);
                     var result = root["result"];
 
                     File.WriteAllText(Application.dataPath + path, JsonConvert.SerializeObject(result, Formatting.Indented), Encoding.UTF8);

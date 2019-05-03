@@ -51,7 +51,7 @@
     {
         if (Locker.IsLocked) return;
 
-        if (context.Context.PathfindLocker.HasPath(piece) == false) return;
+        if (context.Context.PathfindLocker.HasPath(piece) == false || context.VIPIslandLogic.Island.Contains(piece.CachedPosition) && context.VIPIslandLogic.State != VIPIslandState.Paid) return;
         
         if (GameDataService.Current.CodexManager.OnPieceBuilded(piece.PieceType) == false) return;
 

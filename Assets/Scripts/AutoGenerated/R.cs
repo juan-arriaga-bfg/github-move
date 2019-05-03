@@ -13,7 +13,6 @@ public class R
      public const string FogPiece = "FogPiece";
      public const string DefaultWorker = "DefaultWorker";
      public const string ExtraWorker = "ExtraWorker";
-     public const string Firefly = "Firefly";
      public const string A1Piece = "A1Piece";
      public const string A2Piece = "A2Piece";
      public const string A3Piece = "A3Piece";
@@ -632,4 +631,8 @@ public class R
      public const string CoastView = "CoastView";
      public const string IslandFogView = "IslandFogView";
      public const string BrokenBridgeAndFogView = "BrokenBridgeAndFogView";
+     public const string FireflyProduction = "FireflyProduction";
+     public const string FireflyEvent = "FireflyEvent";
+     public const string EventFireflyExplosion = "EventFireflyExplosion";
+     public const string DestroyFadePieceAnimation = "DestroyFadePieceAnimation";
 }

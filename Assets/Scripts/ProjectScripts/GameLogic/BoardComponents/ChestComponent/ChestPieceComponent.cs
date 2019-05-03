@@ -8,13 +8,13 @@ public class ChestPieceComponent : IECSComponent, IPieceBoardObserver
     public RewardsStoreComponent Rewards;
     public ChestDef Def;
 
-    private Piece contextPiece;
+    public Piece ContextPiece;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
-        contextPiece = entity as Piece;
+        ContextPiece = entity as Piece;
         
-        Def = GameDataService.Current.ChestsManager.GetChest(contextPiece.PieceType);
+        Def = GameDataService.Current.ChestsManager.GetChest(ContextPiece.PieceType);
         
         Rewards = new RewardsStoreComponent
         {
@@ -23,7 +23,7 @@ public class ChestPieceComponent : IECSComponent, IPieceBoardObserver
             IsTargetReplace = true
         };
         
-        contextPiece.RegisterComponent(Rewards);
+        ContextPiece.RegisterComponent(Rewards);
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)
@@ -54,7 +54,7 @@ public class ChestPieceComponent : IECSComponent, IPieceBoardObserver
         var sequence = GameDataService.Current.ChestsManager.GetSequence(Def.Uid);
         
         var character = GameDataService.Current.CharactersManager.GetSequence(
-            contextPiece.PieceType == PieceType.CH_NPC.Id
+            ContextPiece.PieceType == PieceType.CH_NPC.Id
                 ? GameDataService.Current.CharactersManager.ChestKey
                 : Currency.Character.Name);
 
@@ -73,6 +73,6 @@ public class ChestPieceComponent : IECSComponent, IPieceBoardObserver
 
     private void OnOpen(bool isComplete)
     {
-        if(isComplete) BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.OpenChest, contextPiece);
+        if(isComplete) BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.OpenChest, ContextPiece);
     }
 }

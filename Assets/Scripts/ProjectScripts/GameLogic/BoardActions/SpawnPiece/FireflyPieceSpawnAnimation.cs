@@ -5,7 +5,8 @@ public class FireflyPieceSpawnAnimation : BoardAnimation
 {
 	public Piece CreatedPiece;
 	public FireflyPieceSpawnAction Action;
-
+	public FireflyType FireflyType = FireflyType.Production;
+	
 	public override void Animate(BoardRenderer context)
 	{
 		var boardElement = context.CreatePieceAt(CreatedPiece, Action.At);
@@ -19,13 +20,12 @@ public class FireflyPieceSpawnAnimation : BoardAnimation
 		sequence.Insert(0f, Action.View.CachedTransform.DOMove(boardElement.CachedTransform.position, 0.3f));
 		sequence.Insert(0.3f, Action.View.CachedTransform.DOScale(Vector3.zero, 0.3f));
 		
-		
 		sequence.InsertCallback(0.3f, () =>
 		{
 			NSAudioService.Current.Play(SoundId.FireflyFall);
 		});
-		
-		sequence.InsertCallback(0.25f, () => ParticleView.Show(R.FireflyExplosion, particlePosition));
+		var explosionParticle = FireflyType == FireflyType.Production ? R.FireflyExplosion : R.EventFireflyExplosion;
+		sequence.InsertCallback(0.25f, () => ParticleView.Show(explosionParticle, particlePosition));
 		sequence.Insert(0.3f, boardElement.CachedTransform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack).OnComplete(
 			() =>
 			{
