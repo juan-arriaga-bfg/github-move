@@ -173,6 +173,9 @@ public class UIMessageWindowController : IWWindowController {
         model.Title = LocalizationService.Get("window.version.title", "window.version.title");
 
         model.Message += $"{LocalizationService.Get("window.version.game", "window.version.game")}: {IWProjectVersionSettings.Instance.CurrentVersion}\n";
+        
+        // todo: hide on PROD
+        model.Message += $"Server: {NetworkUtils.Instance.GetHostUrl()}\n";
 
         model.OnAccept = null;
         model.OnCancel = null;
