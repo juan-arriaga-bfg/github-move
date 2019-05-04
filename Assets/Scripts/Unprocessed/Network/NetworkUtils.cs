@@ -29,8 +29,8 @@ public class NetworkUtils
             ClientPlatform = Application.platform.ToString(),
             Protocol = "v3",
             // Host = "http://127.0.0.1:8080/nodejs101",           // Localhost
-            // Host = "http://134.17.4.143/nodejs101",                // Neskinsoft
-            Host = "https://f2p-qa.bigfishgames.com/nodejs101", // Bfg QA
+            Host = "http://134.17.4.143/nodejs101",                // Neskinsoft
+            // Host = "https://f2p-qa.bigfishgames.com/nodejs101", // Bfg QA
             GameVersion = IWVersion.Get.CurrentVersion
         };
     }
