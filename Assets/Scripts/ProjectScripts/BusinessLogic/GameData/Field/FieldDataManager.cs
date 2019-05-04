@@ -1,3 +1,4 @@
+using System;
 using Debug = IW.Logger;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,10 @@ public class FieldDataManager : IECSComponent, IDataManager
     /// <summary>
     /// Include island and board pieces
     /// </summary>
-    public Dictionary<int, List<BoardPosition>> AllPieces = new Dictionary<int, List<BoardPosition>>();
+    public Dictionary<int, List<BoardPosition>> AllPieces;
 
-    public Dictionary<int, List<BoardPosition>> IslandPieces = new Dictionary<int, List<BoardPosition>>();
-    public Dictionary<int, List<BoardPosition>> BoardPieces = new Dictionary<int, List<BoardPosition>>();
+    public Dictionary<int, List<BoardPosition>> IslandPieces;
+    public Dictionary<int, List<BoardPosition>> BoardPieces;
     
     public int LayoutW;
     public int LayoutH;
@@ -40,6 +41,9 @@ public class FieldDataManager : IECSComponent, IDataManager
     public void Reload()
     {
         AllPieces = new Dictionary<int, List<BoardPosition>>();
+        IslandPieces = new Dictionary<int, List<BoardPosition>>();
+        BoardPieces = new Dictionary<int, List<BoardPosition>>();
+
         LoadContentData(new ResourceConfigDataMapper<Dictionary<string, List<BoardPosition>>>("configs/field.data", NSConfigsSettings.Instance.IsUseEncryption));
         LoadLayoutData(new ResourceConfigDataMapper<FiledLayoutDef>("configs/layout.data", NSConfigsSettings.Instance.IsUseEncryption));
     }

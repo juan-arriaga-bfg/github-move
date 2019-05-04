@@ -658,13 +658,17 @@ public class DevTools : UIContainerElementViewController
                          
             .AddComponent(new InternetMonitorInitComponent()
                 .SetDependency(typeof(CleanupForReloadInitComponent)))
+            
+             .AddComponent(new ServerSideConfigInitComponent()
+                 .SetDependency(typeof(InternetMonitorInitComponent)))  
              
             .AddComponent(new ShopServiceInitComponent()
                 .SetDependency(typeof(CleanupForReloadInitComponent)))
             
             .AddComponent(new ProfileInitComponent()
-                .SetDependency(typeof(CleanupForReloadInitComponent)))
-            
+                .SetDependency(typeof(CleanupForReloadInitComponent))
+                .SetDependency(typeof(ServerSideConfigInitComponent)))
+
             .AddComponent(new GameDataInitComponent()
                 .SetDependency(typeof(ProfileInitComponent)))
          

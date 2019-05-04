@@ -56,7 +56,8 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
            .AddComponent(new SecuredTimeServiceInitComponent()                     // Anti-cheat protection for timers
                .SetDependency(typeof(BfgSdkGdprInitComponent)))  
             
-           .AddComponent(new ProfileInitComponent())
+           .AddComponent(new ProfileInitComponent()
+                .SetDependency(typeof(ServerSideConfigInitComponent)))
 
            .AddComponent(new UIServiceInitComponent()
                .SetDependency(typeof(LocalAssetBundlesCacheInitComponent)))  
