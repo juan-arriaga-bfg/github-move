@@ -73,7 +73,6 @@ public class UIEventElementViewController : UIContainerElementViewController
         premiumShine.SetActive(isPremiumActive && eventGame.IsPremium && IsComplete && contentEntity.GameStep.IsPremiumClaimed == false);
         
         btnNormal.gameObject.SetActive(normalShine.activeSelf);
-        btnPremium.gameObject.SetActive(premiumShine.activeSelf);
         
         CheckClaim();
     }
@@ -91,7 +90,7 @@ public class UIEventElementViewController : UIContainerElementViewController
         if (entity is UIEventElementEntity && (eventGame.State == EventGameState.Complete || eventGame.State == EventGameState.Claimed))
         {
             OnNormalClick();
-            OnPremiumClick();
+            ClaimPremiumReward();
         }
         
         base.OnViewClose(context);
@@ -119,7 +118,20 @@ public class UIEventElementViewController : UIContainerElementViewController
     {
         var contentEntity = entity as UIEventElementEntity;
 
-        if (btnPremium.gameObject.activeSelf == false || contentEntity.GameStep.IsPremiumClaimed) return;
+        if (contentEntity.GameStep.IsPremiumIgnored == false)
+        {
+            UIService.Get.ShowWindow(UIWindowType.EventSubscriptionWindow);
+            return;
+        }
+        
+        ClaimPremiumReward();
+    }
+
+    private void ClaimPremiumReward()
+    {
+        var contentEntity = entity as UIEventElementEntity;
+
+        if (premiumShine.activeSelf == false || contentEntity.GameStep.IsPremiumClaimed) return;
         
         contentEntity.GameStep.IsPremiumClaimed = true;
         Claim(contentEntity.GameStep.PremiumRewards, btnPremium.transform.position);
