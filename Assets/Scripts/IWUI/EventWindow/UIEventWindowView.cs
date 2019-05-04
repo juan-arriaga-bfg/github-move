@@ -49,6 +49,7 @@ public class UIEventWindowView : UIGenericPopupWindowView
         messageTransform.anchoredPosition = new Vector2(isCompleted ? -100 : 0, messageTransform.anchoredPosition.y);
 
         eventGame.TimeController.OnTimeChanged += OnTimeChanged;
+        eventGame.TimeController.OnComplete += OnTimeComplete;
         
         OnTimeChanged();
         
@@ -104,16 +105,12 @@ public class UIEventWindowView : UIGenericPopupWindowView
 
     public override void OnViewClose()
     {
+        eventGame.TimeController.OnTimeChanged -= OnTimeChanged;
+        eventGame.TimeController.OnComplete -= OnTimeComplete;
+        
         if (eventGame.State == EventGameState.Complete) eventGame.Finish();
         
         base.OnViewClose();
-    }
-    
-    public override void OnViewCloseCompleted()
-    {
-        eventGame.TimeController.OnTimeChanged -= OnTimeChanged;
-        
-        base.OnViewCloseCompleted();
     }
     
     private List<IUIContainerElementEntity> UpdateEntities()
@@ -177,5 +174,20 @@ public class UIEventWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIEventWindowModel;
 
         timerLabel.Text = windowModel.TimerText(eventGame.TimeController);
+    }
+
+    private void OnTimeComplete()
+    {
+        ProfileService.Current.QueueComponent.RemoveAction($"{eventGame.EventType.ToString()}_Window");
+        
+        var windowModel = Model as UIEventWindowModel;
+        
+        SetMessage(windowModel.MessageFinish);
+        
+        btnShowLabel.Text = windowModel.ButtonFinishText;
+        
+        messageIcon.SetActive(false);
+        messageTransform.sizeDelta = new Vector2(860, messageTransform.sizeDelta.y);
+        messageTransform.anchoredPosition = new Vector2(-100, messageTransform.anchoredPosition.y);
     }
 }
