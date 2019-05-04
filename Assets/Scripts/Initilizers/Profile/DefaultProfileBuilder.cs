@@ -28,7 +28,9 @@
         profile.RegisterComponent(new PendingIapSaveComponent());
         profile.RegisterComponent(new BaseInformationSaveComponent());
         profile.RegisterComponent(new FogSaveComponent());
+        profile.RegisterComponent(new DailyRewardSaveComponent());
         profile.RegisterComponent(new AirShipSaveComponent());
+        profile.RegisterComponent(new AbTestSaveComponent());
         profile.RegisterComponent(new EventGameSaveComponent());
     }
     

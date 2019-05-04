@@ -60,6 +60,8 @@ public class UIWindowType
 
     public const string SystemDevParamsWindowWindow = "SystemDevParamsWindowWindow";
     
+    public const string AbTestCheatSheetWindow = "AbTestCheatSheetWindow";
+
     public const string EventPreviewWindow = "EventPreviewWindow";
     
     public const string EventSubscriptionWindow = "EventSubscriptionWindow";

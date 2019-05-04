@@ -17,10 +17,4 @@ public class AirShipSaveComponent : ECSEntity, IECSSerializeable
     {
         Items = BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Save();
     }
-    
-    //
-    // [OnDeserialized]
-    // internal void OnDeserialized(StreamingContext context)
-    // {
-    // }
 }

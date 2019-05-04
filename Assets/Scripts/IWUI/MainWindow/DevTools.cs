@@ -89,6 +89,12 @@ public class DevTools : UIContainerElementViewController
         UIService.Get.ShowWindow(UIWindowType.PiecesCheatSheetWindow);
     }
     
+    public void OnAbTestCheatSheetClick()
+    {
+        var model = UIService.Get.GetCachedModel<UIAbTestCheatSheetWindowModel>(UIWindowType.AbTestCheatSheetWindow);
+        UIService.Get.ShowWindow(UIWindowType.AbTestCheatSheetWindow);
+    }
+    
     public void OnQuestsCheatSheetClick()
     {
         UIWaitWindowView.Show();

@@ -1,6 +1,7 @@
 using Debug = IW.Logger;
 using System;
 using System.Collections;
+using System.Globalization;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -94,14 +95,14 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         asyncInitManager.Run(onComplete);
     }
 
-    void OnApplicationPause(bool pauseStatus)
+    void OnApplicationPause(bool paused)
     {
         bool isGameLoaded = AsyncInitService.Current?.IsAllComponentsInited() ?? false;
         
-        Debug.Log($"OnApplicationPause: {(pauseStatus ? "PAUSE" : "UNPAUSE")} Loaded: {isGameLoaded}");
+        Debug.Log($"OnApplicationPause: {(paused ? "PAUSE" : "UNPAUSE")} Loaded: {isGameLoaded}");
 
         var energyLogic = BoardService.Current?.FirstBoard?.GetComponent<EnergyCurrencyLogicComponent>(EnergyCurrencyLogicComponent.ComponentGuid);
-        if (pauseStatus)
+        if (paused)
         {
             if (ProfileService.Instance != null && ProfileService.Instance.Manager != null && isGameLoaded)
             {
@@ -117,6 +118,9 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         }
         else
         {
+            CultureInfo.CurrentCulture.ClearCachedData();
+            TimeZoneInfo.ClearCachedData();
+            
             ServerSideConfigService.Current?.UpdateAll();
             
             energyLogic?.InitInSave();

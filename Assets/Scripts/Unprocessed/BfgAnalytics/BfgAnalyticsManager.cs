@@ -34,7 +34,8 @@ namespace BfgAnalytics
                .RegisterCollector(new JsonDataCollectorFlags(),     JsonDataGroup.Flags)
                .RegisterCollector(new JsonDataCollectorBalances(),  JsonDataGroup.Balances)
                .RegisterCollector(new JsonDataCollectorStandart(),  JsonDataGroup.Standart)
-               .RegisterCollector(new JsonDataCollectorStandart(),  JsonDataGroup.Transaction);
+               .RegisterCollector(new JsonDataCollectorStandart(),  JsonDataGroup.Transaction)
+               .RegisterCollector(new JsonDataCollectorAbTest(),    JsonDataGroup.Abtest);
         }
 
         public void Event(string category,

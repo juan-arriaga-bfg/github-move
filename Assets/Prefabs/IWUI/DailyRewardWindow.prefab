@@ -808,7 +808,7 @@ RectTransform:
   m_GameObject: {fileID: 2567051334158974376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_Children: []
   m_Father: {fileID: 1945914690860444111}
   m_RootOrder: 0
@@ -2852,11 +2852,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7687878963619632982}
     m_Modifications:
-    - target: {fileID: 282432712481099155, guid: 3c831165dbd12a246ba6a5ba8fc76161,
-        type: 3}
-      propertyPath: m_Name
-      value: Border
-      objectReference: {fileID: 0}
     - target: {fileID: 67788101072215225, guid: 3c831165dbd12a246ba6a5ba8fc76161,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2962,6 +2957,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 282432712481099155, guid: 3c831165dbd12a246ba6a5ba8fc76161,
+        type: 3}
+      propertyPath: m_Name
+      value: Border
+      objectReference: {fileID: 0}
     - target: {fileID: 281985039289789537, guid: 3c831165dbd12a246ba6a5ba8fc76161,
         type: 3}
       propertyPath: m_IsActive
@@ -2982,11 +2982,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1251848658600223716}
     m_Modifications:
-    - target: {fileID: 1255104125383204244, guid: 3627816cf9c35e440926e27582759e7f,
-        type: 3}
-      propertyPath: m_Name
-      value: Header
-      objectReference: {fileID: 0}
     - target: {fileID: 6633190175490733180, guid: 3627816cf9c35e440926e27582759e7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3097,6 +3092,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1255104125383204244, guid: 3627816cf9c35e440926e27582759e7f,
+        type: 3}
+      propertyPath: m_Name
+      value: Header
+      objectReference: {fileID: 0}
     - target: {fileID: 4928013482132415812, guid: 3627816cf9c35e440926e27582759e7f,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -3146,11 +3146,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2173403065056731620}
     m_Modifications:
-    - target: {fileID: 557776040532021858, guid: 474ad589c41831b4a95d01947b52125b,
-        type: 3}
-      propertyPath: m_Name
-      value: '#BackLayer'
-      objectReference: {fileID: 0}
     - target: {fileID: 334688565903309148, guid: 474ad589c41831b4a95d01947b52125b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3255,6 +3250,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 557776040532021858, guid: 474ad589c41831b4a95d01947b52125b,
+        type: 3}
+      propertyPath: m_Name
+      value: '#BackLayer'
+      objectReference: {fileID: 0}
+    - target: {fileID: 445111008376630612, guid: 474ad589c41831b4a95d01947b52125b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 474ad589c41831b4a95d01947b52125b, type: 3}
@@ -3271,11 +3276,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7687878963619632982}
     m_Modifications:
-    - target: {fileID: 4570172770642088417, guid: 00e1133361e00734ca9db89c6d9463e3,
-        type: 3}
-      propertyPath: m_Name
-      value: Back
-      objectReference: {fileID: 0}
     - target: {fileID: 4356982572343933543, guid: 00e1133361e00734ca9db89c6d9463e3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3380,6 +3380,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4570172770642088417, guid: 00e1133361e00734ca9db89c6d9463e3,
+        type: 3}
+      propertyPath: m_Name
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 4539174632680277719, guid: 00e1133361e00734ca9db89c6d9463e3,
         type: 3}

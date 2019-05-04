@@ -317,17 +317,6 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
             }
         }
 
-        if (DailyQuest != null)
-        {
-            if (pendingDailyTimer.HasValue)
-            {
-                StartDailyTimer(DateTimeExtension.UnixTimeToDateTime(pendingDailyTimer.Value));
-                pendingDailyTimer = null;
-            }
-            
-            LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
-        }
-        
         ConnectedToBoard = true;
     }
 
@@ -604,6 +593,11 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     {
         return cache[typeof(QuestEntity)].ContainsKey(id);
     }
+    
+    public bool IsQuestCompleted(string id)
+    {
+        return !string.IsNullOrEmpty(id) && FinishedQuests.Contains(id);
+    }
 
     public void StartNewDailyQuest()
     {
@@ -622,14 +616,21 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         if (ConnectedToBoard)
         {
             quest.ConnectToBoard();
+            StartDailyTimer();
         }
-
-        StartDailyTimer(CalculateDailyTimerStartTime());
     }
 
-    private void StartDailyTimer(DateTime startTime)
-    {   
+    public void StartDailyTimer()
+    {
+        if (!ConnectedToBoard)
+        {
+            Debug.LogError($"[QuestsDataManager] => StartDailyTimer: Do not call StartDailyTimer before ConnectedToBoard!");
+        }
+        
         StopDailyTimer();
+
+        DateTime startTime = pendingDailyTimer.HasValue ? UnixTimeHelper.UnixTimestampToDateTime(pendingDailyTimer.Value) : CalculateDailyTimerStartTime();
+        pendingDailyTimer = null;
         
         Debug.Log($"[QuestsDataManager] => StartDailyTimer: startTime: {startTime}, delay: {DAILY_TIMER_DELAY}");
 
@@ -645,13 +646,10 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         RegisterComponent(DailyTimer);
         DailyTimer.Start(startTime);
 
-        if (ConnectedToBoard)
-        {
-            LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
-        }
+        LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
     }
 
-    private void StopDailyTimer()
+    public void StopDailyTimer()
     {
         if (DailyTimer == null)
         {
