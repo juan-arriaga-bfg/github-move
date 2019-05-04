@@ -155,11 +155,9 @@ public class UIEventWindowView : UIGenericPopupWindowView
 
     private void OnClick()
     {
-        if (eventGame.State == EventGameState.Complete)
-        {
-            Controller.CloseCurrentWindow();
-            return;
-        }
+        Controller.CloseCurrentWindow();
+        
+        if (eventGame.State == EventGameState.Complete) return;
         
         var model = UIService.Get.GetCachedModel<UIOrdersWindowModel>(UIWindowType.OrdersWindow);
 

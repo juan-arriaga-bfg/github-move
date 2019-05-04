@@ -4,7 +4,17 @@ public class UIOrdersWindowModel : IWWindowModel
 {
     public string Title => LocalizationService.Get("window.orders.title", "window.orders.title");
     
-    public string OrdersMessage => LocalizationService.Get("window.orders.message.orders.empty", "window.orders.message.orders.empty");
+    public string OrdersMessage
+    {
+        get
+        {
+            var eventGameIsActive = BoardService.Current.FirstBoard.BoardLogic.EventGamesLogic.GetEventGame(EventGameType.OrderSoftLaunch, out var eventGame) && eventGame.State == EventGameState.InProgress;
+            var key = $"window.orders.message.orders.empty{(eventGameIsActive ? ".event" : "")}";
+            
+            return LocalizationService.Get(key, key);
+        }
+    }
+
     public string IngredientsMessage => LocalizationService.Get("window.orders.message.ingredients.empty", "window.orders.message.ingredients.empty");
     
     public string OrdersText => LocalizationService.Get("window.orders.toggle.orders", "window.orders.toggle.orders");

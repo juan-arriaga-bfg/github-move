@@ -1,3 +1,4 @@
+using System;
 using Debug = IW.Logger;
 using UnityEngine;
 using System.Collections.Generic;
@@ -192,16 +193,15 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         var views = new List<IUIContainerElementEntity>();
         
         if (entities == null) return views;
-        
+
         var entity = new UIOrderElementEntity
         {
             LabelText = string.Format(LocalizationService.Get("common.message.reward", "common.message.reward:{0}"), $"{Order.Separator}{entities.Reward}"),
             Data = entities,
             OnSelectEvent = null,
-            OnDeselectEvent = null
+            OnDeselectEvent = null,
+            OnOrderStageChangeFromTo = OnOrderStageChangeFromTo
         };
-        
-        entity.OnOrderStageChangeFromTo = OnOrderStageChangeFromTo;
         
         views.Add(entity);
         
@@ -215,11 +215,13 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         for (var i = 0; i < entities.Count; i++)
         {
             var def = entities[i];
+            var dataArray = def.Reward.Replace(Order.Separator, ":").Split(new[] {":"}, StringSplitOptions.RemoveEmptyEntries);
+            var rewardStr = $"{dataArray[0]} {dataArray[1]}{(dataArray.Length > 2 ? $"\n{dataArray[2]}" : "")}";
             
             var entity = new UIOrderElementEntity
             {
                 ContentId = def.Def.Uid,
-                LabelText = def.Reward.Replace(Order.Separator, "\n"),
+                LabelText = rewardStr,
                 Data = def,
                 OnSelectEvent = (view) =>
                 {
@@ -229,6 +231,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
                 },
                 OnDeselectEvent = null
             };
+            
             views.Add(entity);
         }
         
