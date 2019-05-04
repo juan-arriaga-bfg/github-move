@@ -62,7 +62,7 @@ public class UIDailyRewardElementViewController : UISimpleScrollElementViewContr
         var contentEntity = entity as UIDailyRewardElementEntity;
         var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(btnClaim.transform.position);
 
-        CurrencyHelper.PurchaseAndProvideSpawn(contentEntity.Rewards, new CurrencyPair(), null, flyPosition);
+        CurrencyHelper.PurchaseAndProvideSpawn(contentEntity.Rewards, null, null, flyPosition);
         
         GameDataService.Current.DailyRewardManager.ClaimCurrentDay();
         

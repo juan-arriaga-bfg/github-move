@@ -21,7 +21,7 @@ public static partial class CurrencyHelper
 
     public static void PurchaseAsyncOnlyCurrency(List<CurrencyPair> products, CurrencyPair price, Vector3 flyPosition, Action<bool> onSuccess)
     {
-        Purchase(new CurrencyPair {Currency = Currency.Cash.Name, Amount = 0}, price);
+        if (price != null) Purchase(new CurrencyPair {Currency = Currency.Cash.Name, Amount = 0}, price);
         PurchaseAsyncOnlyCurrency(products, flyPosition, onSuccess);
     }
     
@@ -83,7 +83,7 @@ public static partial class CurrencyHelper
     {
         if (piecesReward.Count == 0)
         {
-            PurchaseAsyncOnlyCurrency(currenciesReward, flyPosition, success => onComplete?.Invoke());
+            PurchaseAsyncOnlyCurrency(currenciesReward, price, flyPosition, success => onComplete?.Invoke());
             return;
         }
         
@@ -96,9 +96,9 @@ public static partial class CurrencyHelper
         if (isDataFalse || board.BoardLogic.EmptyCellsFinder.CheckInFrontOrFindRandomNear(point, free, amount) == false || free.Count < amount)
         {
             board.BoardLogic.AirShipLogic.Add(new Dictionary<int, int>(piecesReward));
-            PurchaseAsyncOnlyCurrency(currenciesReward, flyPosition, success => onComplete?.Invoke());
+            PurchaseAsyncOnlyCurrency(currenciesReward, price, flyPosition, success => onComplete?.Invoke());
         }
-
+        
         if (isDataFalse) return;
         
         board.ActionExecutor.PerformAction(new SpawnRewardPiecesAction
@@ -133,6 +133,12 @@ public static partial class CurrencyHelper
         
         var from = board.BoardDef.GetPiecePosition(point.X, point.Y);
         var flayPoint = board.BoardDef.ViewCamera.WorldToScreenPoint(from);
+
+        if (currenciesReward.Count == 0)
+        {
+            if (price != null) Purchase(new CurrencyPair {Currency = Currency.Cash.Name, Amount = 0}, price);
+            return true;
+        }
         
         for (var i = 0; i < currenciesReward.Count; i++)
         {
@@ -144,7 +150,7 @@ public static partial class CurrencyHelper
 
             if (transaction == null)
             {
-                if(i == 0) return false;
+                if (i == 0) return false;
                 
                 continue;
             }
