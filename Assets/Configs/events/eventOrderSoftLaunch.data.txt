@@ -4,28 +4,28 @@
     "Prices": [
       {
         "Currency": "Token",
-        "Amount": 25
+        "Amount": 15
       }
     ],
     "NormalRewards": [
       {
-        "Currency": "Mana2",
+        "Currency": "SK3_PR",
         "Amount": 1
       }
     ],
     "NormalRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 5
+      "Amount": 25
     },
     "PremiumRewards": [
       {
-        "Currency": "Mana2",
+        "Currency": "SK3_PR",
         "Amount": 1
       }
     ],
     "PremiumRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 5
+      "Amount": 35
     }
   },
   {
@@ -33,18 +33,18 @@
     "Prices": [
       {
         "Currency": "Token",
-        "Amount": 55
+        "Amount": 45
       }
     ],
     "NormalRewards": [
       {
-        "Currency": "Soft3",
+        "Currency": "Hard2",
         "Amount": 2
       }
     ],
     "NormalRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 11
+      "Amount": 4
     },
     "PremiumRewards": [
       {
@@ -54,7 +54,7 @@
     ],
     "PremiumRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 11
+      "Amount": 5
     }
   },
   {
@@ -62,7 +62,7 @@
     "Prices": [
       {
         "Currency": "Token",
-        "Amount": 70
+        "Amount": 75
       }
     ],
     "NormalRewards": [
@@ -73,17 +73,17 @@
     ],
     "NormalRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 15
+      "Amount": 10
     },
     "PremiumRewards": [
       {
-        "Currency": "SK2_PR",
-        "Amount": 2
+        "Currency": "Hard3",
+        "Amount": 1
       }
     ],
     "PremiumRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 15
+      "Amount": 9
     }
   },
   {
@@ -91,15 +91,12 @@
     "Prices": [
       {
         "Currency": "Token",
-        "Amount": 90
+        "Amount": 115
       }
     ],
-    "NormalRewardsPrice": {
-      "Amount": 20
-    },
     "PremiumRewards": [
       {
-        "Currency": "Hard2",
+        "Currency": "SK2_PR",
         "Amount": 2
       }
     ],
@@ -113,7 +110,7 @@
     "Prices": [
       {
         "Currency": "Token",
-        "Amount": 125
+        "Amount": 250
       }
     ],
     "NormalRewards": [
@@ -128,13 +125,13 @@
     },
     "PremiumRewards": [
       {
-        "Currency": "Soft6",
-        "Amount": 1
+        "Currency": "Hard3",
+        "Amount": 2
       }
     ],
     "PremiumRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 25
+      "Amount": 15
     }
   },
   {
@@ -142,21 +139,18 @@
     "Prices": [
       {
         "Currency": "Token",
-        "Amount": 155
+        "Amount": 350
       }
     ],
-    "NormalRewardsPrice": {
-      "Amount": 30
-    },
     "PremiumRewards": [
       {
-        "Currency": "Hard3",
-        "Amount": 2
+        "Currency": "Soft6",
+        "Amount": 1
       }
     ],
     "PremiumRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 30
+      "Amount": 50
     }
   },
   {
@@ -164,7 +158,7 @@
     "Prices": [
       {
         "Currency": "Token",
-        "Amount": 250
+        "Amount": 550
       }
     ],
     "NormalRewards": [
@@ -175,17 +169,17 @@
     ],
     "NormalRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 50
+      "Amount": 40
     },
     "PremiumRewards": [
       {
-        "Currency": "Boost_WR1",
-        "Amount": 4
+        "Currency": "Boost_WR",
+        "Amount": 3
       }
     ],
     "PremiumRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 50
+      "Amount": 90
     }
   },
   {
@@ -193,7 +187,7 @@
     "Prices": [
       {
         "Currency": "Token",
-        "Amount": 350
+        "Amount": 750
       }
     ],
     "NormalRewards": [
@@ -204,7 +198,7 @@
     ],
     "NormalRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 70
+      "Amount": 60
     },
     "PremiumRewards": [
       {
@@ -214,7 +208,7 @@
     ],
     "PremiumRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 70
+      "Amount": 25
     }
   },
   {
@@ -222,12 +216,9 @@
     "Prices": [
       {
         "Currency": "Token",
-        "Amount": 550
+        "Amount": 950
       }
     ],
-    "NormalRewardsPrice": {
-      "Amount": 110
-    },
     "PremiumRewards": [
       {
         "Currency": "CH_NPC",
@@ -236,7 +227,7 @@
     ],
     "PremiumRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 110
+      "Amount": 135
     }
   },
   {
@@ -244,7 +235,7 @@
     "Prices": [
       {
         "Currency": "Token",
-        "Amount": 750
+        "Amount": 1200
       }
     ],
     "NormalRewards": [
@@ -255,7 +246,7 @@
     ],
     "NormalRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 150
+      "Amount": 175
     },
     "PremiumRewards": [
       {
@@ -265,7 +256,7 @@
     ],
     "PremiumRewardsPrice": {
       "Currency": "Crystals",
-      "Amount": 150
+      "Amount": 255
     }
   }
 ]
