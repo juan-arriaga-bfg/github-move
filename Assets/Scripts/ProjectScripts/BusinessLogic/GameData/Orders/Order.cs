@@ -42,49 +42,14 @@ public class Order
             return result;
         }
     }
-
-    private Dictionary<int, int> piecesReward;
-    public Dictionary<int, int> PiecesReward
-    {
-        get
-        {
-            if (piecesReward == null)
-            {
-                InitReward();
-            }
-            
-            return piecesReward;
-        }
-    }
     
-    private List<CurrencyPair> currencysReward;
-    public List<CurrencyPair> CurrenciesReward
-    {
-        get
-        {
-            if (currencysReward == null)
-            {
-                InitReward();
-            }
-            
-            return currencysReward;
-        }
-    }
-
-    private void InitReward()
-    {
-        piecesReward = CurrencyHelper.FiltrationRewards(Def.Rewards, out currencysReward);
-    }
-    
-    private string reward;
     public string Reward
     {
         get
         {
-            if (string.IsNullOrEmpty(reward) == false) return reward;
+            var piecesReward = CurrencyHelper.FiltrationRewards(Def.Rewards, out var currenciesReward);
             
-            reward = CurrencyHelper.RewardsToString(Separator, PiecesReward, CurrenciesReward);
-            return reward;
+            return CurrencyHelper.RewardsToString(Separator, piecesReward, currenciesReward);;
         }
     }
 

@@ -12,7 +12,7 @@ public class OrderDef
         {
             var rewards = new List<CurrencyPair>(NormalRewards);
             var isEventGameActive = BoardService.Current.FirstBoard.BoardLogic.EventGamesLogic.GetEventGame(EventGameType.OrderSoftLaunch, out var eventGame) && eventGame.State == EventGameState.InProgress;
-
+            
             if (EventRewards != null && isEventGameActive) rewards.AddRange(EventRewards);
 
             return rewards;
