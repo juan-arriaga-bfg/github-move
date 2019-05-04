@@ -34,12 +34,16 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         
     public readonly HashSet<int> hidedPieceIds = new HashSet<int>
     {
+        PieceType.Fog.Id,
         PieceType.LockedEmpty.Id,
         PieceType.Boost_WR.Id,
         PieceType.CH_Free.Id,
         PieceType.CH_NPC.Id,
         PieceType.NPC_SleepingBeautyPlaid.Id,
         PieceType.NPC_Gnome.Id,
+        PieceType.Token1.Id,
+        PieceType.Token2.Id,
+        PieceType.Token3.Id,
     }; 
     
     public const int CHAR_CHAIN_VISIBLE_COUNT = 6; // Size of char parts' chain in the codex dialog
