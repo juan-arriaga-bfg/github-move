@@ -41,6 +41,7 @@ public class EventGame : ECSEntity
     public bool IsPremium => false;
     
     public bool IsLastStep => Step == Steps.Count - 1;
+    public bool IsCompleteStep => Step == Steps.Count;
     
     private EventGamesLogicComponent context;
     

@@ -106,7 +106,7 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
         
         CurrencyHelper.Purchase(Currency.EventStep.Name, 1, itemUid, eventGame.IsLastStep ? 0 : price, success =>
         {
-            if (eventGame.IsLastStep) eventGame.Complete();
+            if (eventGame.IsCompleteStep) eventGame.Complete();
         });
         
         UpdateDots();
