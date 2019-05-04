@@ -9,7 +9,7 @@ public abstract class ServerSideConfigLoaderBase: IECSComponent
 #if DEBUG
     private int checkInterval = 30;
 #else
-    private int checkInterval = 60 * 60 * 1;
+    private int checkInterval = 60 * 5;
 #endif
 
     private string url;
