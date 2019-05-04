@@ -11,8 +11,8 @@ public class UIEventPreviewWindowModel : IWWindowModel
         {
             var description = LocalizationService.Get("window.event.preview.timer", "window.event.preview.timer");
             var time = Countdown != null && Countdown.IsStarted 
-                ? Countdown.CompleteTime.GetTimeLeftText(Countdown.UseUTC, true, null, false, 2.5f)
-                : DateTime.UtcNow.GetTimeLeftText(true, true, null, false, 2.5f);
+                ? Countdown.CompleteTime.GetTimeLeftText(Countdown.UseUTC, true, null, false, 2.5f, true)
+                : DateTime.UtcNow.GetTimeLeftText(true, true, null, false, 2.5f, true);
             
             return $"<color=#FFFFFF><font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SubtitleFinal\">{description} </font></color>{time}";
         }

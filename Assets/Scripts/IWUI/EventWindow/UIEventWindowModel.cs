@@ -15,8 +15,8 @@ public class UIEventWindowModel : IWWindowModel
     {
         var description = LocalizationService.Get("window.event.timer", "window.event.timer");
         var time = timer != null && timer.IsStarted 
-            ? timer.CompleteTime.GetTimeLeftText(timer.UseUTC, true, null, false, 2.5f)
-            : DateTime.UtcNow.GetTimeLeftText(true, true, null, false, 2.5f);
+            ? timer.CompleteTime.GetTimeLeftText(timer.UseUTC, true, null, false, 2.5f, true)
+            : DateTime.UtcNow.GetTimeLeftText(true, true, null, false, 2.5f, true);
             
         return $"<color=#FFFFFF><font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SubtitleFinal\">{description} </font></color>{time}";
     }
