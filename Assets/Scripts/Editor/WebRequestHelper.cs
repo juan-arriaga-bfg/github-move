@@ -13,6 +13,8 @@ namespace Dws
     /// </summary>
     public static class WebHelper
     {
+        private static int counter;
+        
         static WebHelper()
         {
             HTTPManager.Setup();
@@ -27,10 +29,14 @@ namespace Dws
         /// <param name="callback"></param>
         public static void MakeRequest(string url, WebRequestCallback callback)
         {
-            Debug.Log("WebHelper: MakeRequest: " + url);
+            int num = ++counter;
+            
+            Debug.Log($"[WebHelper] => MakeRequest #{num}: " + url);
 
             HTTPRequest httpRequest = new HTTPRequest(new Uri(url), (req, res) =>
             {
+                Debug.Log($"[WebHelper] => Callback for #{num} received");
+                
                 bool IsConnectionError = false;
 
                 try

@@ -331,8 +331,8 @@ public class ConfigsGoogleLoader
             return;
         }
 
-        Task.Run(() =>
-        {
+        // Task.Run(() =>
+        // {
             string text = string.Format("Downloading: '{0}'", gLink.Key);
             Debug.LogWarningFormat(text);
 
@@ -384,7 +384,7 @@ public class ConfigsGoogleLoader
                     OnLoadComplete();
                 }
             });
-        });
+        // });
     }
     
     private static string GetUrl(string id, string route, string json)
