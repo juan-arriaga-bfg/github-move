@@ -128,7 +128,6 @@ public class UIProfileCheatSheetElementViewController : UIContainerElementViewCo
             try
             {
                 dm.SetupComponents(userProfile);
-                dm.Reload();
             }
             catch (Exception e)
             {

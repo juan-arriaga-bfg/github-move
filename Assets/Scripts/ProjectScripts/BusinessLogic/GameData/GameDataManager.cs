@@ -98,14 +98,4 @@
         RegisterComponent(new EventGameDataManager());
         RegisterComponent(new TutorialDataManager());
     }
-
-    public void Reload()
-    {
-        foreach (var component in componentsCache.Values)
-        {
-            var manager = component as IDataManager;
-
-            manager?.Reload();
-        }
-    }
 }
