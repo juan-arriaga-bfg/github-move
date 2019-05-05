@@ -22,10 +22,10 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 	private int index = 1;
 	private int delay = 1;
 
-	private DateTime tutorialStartTime = DateTime.UtcNow;
+	private DateTime tutorialStartTime;
 	
-	private DateTime startTime = DateTime.UtcNow;
-	private DateTime pauseTime = DateTime.UtcNow;
+	private DateTime startTime;
+	private DateTime pauseTime;
 	
 	private Vector2 bottom;
 	private Vector2 right;
@@ -42,7 +42,11 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		context = entity as BoardLogicComponent;
-		
+
+        startTime = SecuredTimeService.Current.UtcNow;
+        pauseTime = startTime;
+        tutorialStartTime = startTime;
+        
 		locker = new LockerComponent();
 		RegisterComponent(locker);
 		Locker.Lock(this);
@@ -110,7 +114,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 
 	public void ResetTutorialStartTime()
 	{
-		tutorialStartTime = DateTime.UtcNow;
+		tutorialStartTime = SecuredTimeService.Current.UtcNow;
 	}
 
 	public void ResetSession()
@@ -140,7 +144,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		restartTimer.Delay = Def.SleepDelay;
 		
 		delay = Def.DelayFirstSpawn.Range();
-		startTime = DateTime.UtcNow;
+		startTime = SecuredTimeService.Current.UtcNow;
 		
 		ResetSession();
 	}
@@ -151,7 +155,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 
 		if (Locker.IsLocked == false)
 		{
-			pauseTime = DateTime.UtcNow;
+			pauseTime = SecuredTimeService.Current.UtcNow;
 			
 			foreach (var view in views)
 			{
@@ -175,7 +179,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 			view.StartFly();
 		}
 
-		var seconds = (int)(DateTime.UtcNow - pauseTime).TotalSeconds;
+		var seconds = (int)(SecuredTimeService.Current.UtcNow - pauseTime).TotalSeconds;
 		
 		restartTimer.Add(seconds);
 		startTime = startTime.AddSeconds(seconds);
@@ -269,7 +273,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		{
 			isClick = true;
 			delay = Def.TapDelay * index;
-			startTime = DateTime.UtcNow;
+			startTime = SecuredTimeService.Current.UtcNow;
 			index++;
 		}
 		
@@ -296,13 +300,13 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 		if (isClick) return;
 
 		delay = Def.DelaySpawn.Range();
-		startTime = DateTime.UtcNow;
+		startTime = SecuredTimeService.Current.UtcNow;
 	}
 
 	public void Remove(FireflyView view)
 	{
 		views.Remove(view);
-		startTime = DateTime.UtcNow;
+		startTime = SecuredTimeService.Current.UtcNow;
 		
 		if(isTutorialActive && views.Count != 0) views[0].AddArrow();
 	}
