@@ -18,53 +18,6 @@ namespace Backend
         public string EndMessage;
     }
 
-    public enum ClientSupportFieldAction
-    {
-        Unknown,
-        Add,
-        Set
-    }
-
-    public struct ClientSupportFieldDescription
-    {
-        public string Path;
-        public object Value;
-        public Type Type;
-        public ClientSupportFieldAction Action;
-
-        // todo: FIX
-        public ClientSupportFieldDescription(string path, string value, string type, string action)
-        {
-            switch (action)
-            {
-                case "+":
-                case "add":
-                    Action = ClientSupportFieldAction.Add;
-                    break;
-                case "=":
-                case "set":
-                    Action = ClientSupportFieldAction.Set;
-                    break;
-                default:
-                    throw new Exception("Wrong action: " + action);
-            }
-
-            Type = Type.GetType(type);
-            if (Type == null)
-            {
-                throw new Exception("Wrong type: " + type);
-            }
-
-            Path = path;
-
-            // todo: FIX
-            // Value = Factory.CreateByHandlerType(Type);
-            // ((IConfigDeserializableFromTextItem)Value).Deserialize(value);
-
-            Value = null;
-        }
-    }
-
     public static class ClientSupport
     {
         public delegate void ConsumeAndApplyCallback(string error);
@@ -109,9 +62,6 @@ namespace Backend
                 {
                     throw new Exception("string.IsNullOrEmpty(configText) == true");
                 }
-
-                // XmlDocument doc = new XmlDocument();
-                // doc.LoadXml(configText);
             }
             catch (Exception e)
             {
@@ -123,115 +73,111 @@ namespace Backend
             ProfileSlots.SafeReplaceCurrentProfile(configText, onComplete);
         }
 
-        // todo: FIX
-        private static bool ApplyChangesForFieldsMode(JSONNode json, out string error)
+        private static void ApplyChangesForFieldsMode(JSONNode json, Action<string> onComplete)
         {
-            error = null;
-            var result = false;
-            // List<ClientSupportFieldDescription> fields = new List<ClientSupportFieldDescription>();
-            //
-            // string level = "0";
-            // bool completeAllStages = false;
-            // try
-            // {
-            //     var fieldsJson = json["configUpdate"]["data"]["fields"];
-            //     
-            //     level = json["configUpdate"]["setLevel"].Value;
-            //     
-            //     if (json["configUpdate"]["completeAllStages"] != null)
-            //     {
-            //         completeAllStages = json["configUpdate"]["completeAllStages"];
-            //     }
-            //
-            //     foreach (var fieldJson in fieldsJson.Children)
-            //     {
-            //         var field = new ClientSupportFieldDescription(fieldJson["p"], fieldJson["v"], fieldJson["t"], fieldJson["a"]);
-            //         fields.Add(field);
-            //     }
-            // }
-            // catch (Exception e)
-            // {
-            //     IW.Logger.Log("Error when parse ClientSupportDef json: " + e.Message);
-            //     error = string.Format(LocalizationService.Get("dlg.client.support.error.wrong.data"), 4);
-            //     return false;
-            // }
-            //
-            // // Апдейтаем конфиг
-            // bool result = UserManagerInitializer.ModifyConfigWithFailSafe(() =>
-            // {
-            //     // Уровни
-            //     CheatSheetLevelsController.UnlockLevelsAndProvideReward(level, completeAllStages);
-            //
-            //     foreach (var field in fields)
-            //     {
-            //         // Убедимся, что искомый путь существует
-            //         if (!UserManager.Instance.IsValueExists(field.Path))
-            //         {
-            //             Container container = UserManager.Instance;
-            //
-            //             if (field.Path.Contains("/"))
-            //             {
-            //                 var steps = field.Path.Split('/').ToList();
-            //                 //string lastStep = steps[steps.Count - 1];
-            //                 steps.RemoveAt(steps.Count - 1);
-            //
-            //
-            //                 for (int i = 0; i < steps.Count; i++)
-            //                 {
-            //                     string step = steps[i];
-            //                     if (!container.IsValueExists(step))
-            //                     {
-            //                         container.SetValue(step, new Container());
-            //                     }
-            //                     container = container.GetValue<Container>(step);
-            //                 }
-            //             }
-            //
-            //             // Создаем несуществующие поля
-            //             if (!UserManager.Instance.IsValueExists(field.Path))
-            //             {
-            //                 var fieldType = field.Value.GetType();
-            //
-            //                 // todo: it seems like a working code, but
-            //                 // there is a magic exception
-            //                 //
-            //                 //var handledType = Factory.GetHandlerTypeForHandler(fieldType);
-            //                 //var obj = handledType.IsValueType ? Activator.CreateInstance(handledType) : null;
-            //                 //UserManager.Instance.SetValue(field.Path, obj);
-            //
-            //                 // hack
-            //                 CreateEmptyRecord(field.Path, fieldType);
-            //             }
-            //         }
-            //
-            //         // Апдейтаем значения
-            //         switch (field.Action)
-            //         {
-            //             case ClientSupportFieldAction.Add:
-            //                 if (field.Type == typeof (ObscuredIntValue))
-            //                 {
-            //                     UserManager.Instance.ShiftValue(field.Path, (ObscuredInt) ((IGetValueAsObject) field.Value).GetValueAsObject());
-            //                 }
-            //                 else if (field.Type == typeof(int))
-            //                 {
-            //                     UserManager.Instance.ShiftValue(field.Path, (int)((IGetValueAsObject)field.Value).GetValueAsObject());
-            //                 }
-            //                 else
-            //                 {
-            //                     throw new ArgumentOutOfRangeException("Add action may be applied only for int and ObscuredInt types");
-            //                 }
-            //                 break;
-            //             case ClientSupportFieldAction.Set:
-            //                 UserManager.Instance.SetValue(field.Path, ((IGetValueAsObject)field.Value).GetValueAsObject());
-            //                 break;
-            //             default:
-            //                 throw new ArgumentOutOfRangeException();
-            //         }
-            //         IW.Logger.Log("Field updated: " + field.Path);
-            //     }
-            // });
+            ProfileSlots.Load(ProfileSlots.ActiveSlot, (manager, dataExistsOnPath, error) =>
+            {
+                if (!string.IsNullOrEmpty(error))
+                {
+                    onComplete(error);
+                    return;
+                }
 
-            return result;
+                try
+                {
+                    UserProfile userProfile = manager.CurrentProfile;
+                    
+                    var dm = new GameDataManager();
+                    dm.SetupComponents(userProfile);
+
+                    //     "data": {
+                    //         "currency": [
+                    //         {
+                    //             "id": "10",
+                    //             "action": "+",
+                    //             "value": "12"
+                    //         },
+                    //         {
+                    //             "id": "20",
+                    //             "action": "+",
+                    //             "value": "33"
+                    //         }
+                    //         ]
+                    //     }
+                    // }
+
+                    var data = json["configUpdate"]["data"];
+                    JSONNode currencies = data["currency"];
+
+                    if (currencies != null)
+                    {
+                        UserPurchasesComponent purchases = userProfile.Purchases;
+                        
+                        var arr = currencies.AsArray.Values;
+                        foreach (JSONNode item in arr)
+                        {
+                            int id = item["id"].AsInt;
+                            string action = item["action"].Value;
+                            int value = item["value"].AsInt;
+
+                            var def = Currency.GetCurrencyDef(id);
+                            if (def == null)
+                            {
+                                throw new Exception($"Unknown currency id '{id}'");
+                            }
+
+                            var storageItem = purchases.GetStorageItem(def.Name);
+
+                            // Hack for LEVEL
+                            if (id == Currency.Level.Id)
+                            {
+                                var lvlManager = dm.LevelsManager;
+                                int curLevel = storageItem.Amount;
+                                int targetLevel = action == "+" ? curLevel + value : value;
+
+                                int expToAdd = 0;
+                                foreach (var lvlDef in lvlManager.Levels)
+                                {
+                                    if (lvlDef.Index > curLevel - 1 && lvlDef.Index < targetLevel)
+                                    {
+                                        expToAdd += lvlDef.Price.Amount;
+                                    }
+                                }
+
+                                var expStorage = purchases.GetStorageItem(Currency.Experience.Name);
+                                expStorage.Amount += expToAdd;
+                                
+                                continue;
+                            }
+                            //
+                            
+                            switch (action)
+                            {
+                                case "+" :
+                                    storageItem.Amount += value;
+                                    break;       
+                                
+                                case "=" :
+                                    storageItem.Amount = value;
+                                    break;
+                                
+                                default:
+                                    throw new Exception($"Unknown action '{action}'");
+                            }
+                        }
+                    }
+
+                    IJsonDataMapper<UserProfile> dataMapper = new JsonStringDataMapper<UserProfile>(null);
+                    manager.UploadCurrentProfile(dataMapper);
+                    string fixedConfigText = dataMapper.GetJsonDataAsString();
+                    ProfileSlots.SafeReplaceCurrentProfile(fixedConfigText, onComplete);
+                }
+                catch (Exception e)
+                {
+                    IW.Logger.Log("Error when parse ClientSupportDef json: " + e.Message);
+                    onComplete(LocalizationService.Get("dlg.client.support.error.wrong.data"));
+                }
+            });
         }
 
         private static void ApplyChangesToConfig(ClientSupportDef def, Action<string> onComplete)
@@ -274,9 +220,9 @@ namespace Backend
                 case "full":
                     ApplyChangesForFullMode(json, onComplete);
                     break;
-                // case "fields":
-                //     result = ApplyChangesForFieldsMode(json, out error);
-                //     break;
+                case "fields":
+                    ApplyChangesForFieldsMode(json, onComplete);
+                    break;
                 default:
                     var mess = $"Unknown mode for update config: {method}";
                     IW.Logger.Log(mess);
