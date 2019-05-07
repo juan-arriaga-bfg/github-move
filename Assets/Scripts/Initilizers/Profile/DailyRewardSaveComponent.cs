@@ -75,8 +75,10 @@ public class DailyRewardSaveItem
 }
 
 [JsonObject(MemberSerialization.OptIn)]
-public class DailyRewardSaveComponent : IECSComponent, IECSSerializeable
+public class DailyRewardSaveComponent : IECSComponent, IECSSerializeable, IProfileSaveComponent
 {
+    public bool AllowDataCollect { get; set; }
+
     public static int ComponentGuid = ECSManager.GetNextGuid();
 
     public int Guid => ComponentGuid;
@@ -97,6 +99,11 @@ public class DailyRewardSaveComponent : IECSComponent, IECSSerializeable
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
+        if (!AllowDataCollect)
+        {
+            return;
+        }
+        
         if (Data == null)
         {
             Data = new DailyRewardSaveItem();

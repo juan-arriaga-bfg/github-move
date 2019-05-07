@@ -16,8 +16,10 @@ public partial class UserProfile : IMarketSaveComponent
 }
 
 [JsonObject(MemberSerialization.OptIn)]
-public class MarketSaveComponent : ECSEntity, IECSSerializeable
+public class MarketSaveComponent : ECSEntity, IECSSerializeable, IProfileSaveComponent
 {
+    public bool AllowDataCollect { get; set; }
+
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
     
@@ -38,6 +40,11 @@ public class MarketSaveComponent : ECSEntity, IECSSerializeable
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
+        if (!AllowDataCollect)
+        {
+            return;
+        }
+        
         if (BoardService.Current == null) return;
         
         var board = BoardService.Current.FirstBoard;

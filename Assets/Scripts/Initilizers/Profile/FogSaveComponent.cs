@@ -4,8 +4,10 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 [JsonObject(MemberSerialization.OptIn)]
-public class FogSaveComponent : BaseSaveComponent, IECSSerializeable
+public class FogSaveComponent : BaseSaveComponent, IECSSerializeable, IProfileSaveComponent
 {
+    public bool AllowDataCollect { get; set; }
+
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
@@ -20,6 +22,11 @@ public class FogSaveComponent : BaseSaveComponent, IECSSerializeable
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
+        if (!AllowDataCollect)
+        {
+            return;
+        }
+        
         var data = GameDataService.Current.FogsManager;
         
         InprogressFogs = new List<FogSaveItem>();

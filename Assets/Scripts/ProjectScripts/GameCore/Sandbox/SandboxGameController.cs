@@ -174,6 +174,8 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new FieldControllerComponent());
 
         boardController.RegisterComponent(new DataManagersTimersHandlerComponent());
+
+        ProfileService.Current.AllowDataCollect = true;
     }
     
     private List<BoardPosition> GenereateIgnorable(BoardController board)

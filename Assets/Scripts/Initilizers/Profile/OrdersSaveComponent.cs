@@ -17,8 +17,10 @@ public partial class UserProfile : IOrdersSaveComponent
 }
 
 [JsonObject(MemberSerialization.OptIn)]
-public class OrdersSaveComponent : ECSEntity, IECSSerializeable
+public class OrdersSaveComponent : ECSEntity, IECSSerializeable, IProfileSaveComponent
 {
+	public bool AllowDataCollect { get; set; }
+	
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
 	
@@ -34,6 +36,11 @@ public class OrdersSaveComponent : ECSEntity, IECSSerializeable
 	[OnSerializing]
 	internal void OnSerialization(StreamingContext context)
 	{
+		if (!AllowDataCollect)
+		{
+			return;
+		}
+		
 		if(BoardService.Current == null) return;
 		
 		var logic = BoardService.Current.FirstBoard.BoardLogic;
@@ -69,5 +76,4 @@ public class OrdersSaveComponent : ECSEntity, IECSSerializeable
 	internal void OnDeserialized(StreamingContext context)
 	{
 	}
-
 }

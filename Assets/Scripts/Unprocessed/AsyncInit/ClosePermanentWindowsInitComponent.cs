@@ -39,6 +39,8 @@ public class ClosePermanentWindowsInitComponent : AsyncInitComponentBase
     private void OnWindowClosed()
     {
         remainingWindows--;
+
+        IW.Logger.Log($"[ClosePermanentWindowsInitComponent] => Window closed: [{windowsToClose.Count - remainingWindows}/{windowsToClose.Count}]");
         
         if (remainingWindows == 0)
         {

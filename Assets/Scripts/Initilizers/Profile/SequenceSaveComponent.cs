@@ -3,8 +3,10 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 [JsonObject(MemberSerialization.OptIn)]
-public class SequenceSaveComponent : ECSEntity, IECSSerializeable
+public class SequenceSaveComponent : ECSEntity, IECSSerializeable, IProfileSaveComponent
 {
+    public bool AllowDataCollect { get; set; }
+
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
     
@@ -21,6 +23,11 @@ public class SequenceSaveComponent : ECSEntity, IECSSerializeable
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
+        if (!AllowDataCollect)
+        {
+            return;
+        }
+        
         var cache = GameDataService.Current.ComponentsCache;
         sequences = new List<SequenceSaveItem>();
 

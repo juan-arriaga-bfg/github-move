@@ -2,8 +2,10 @@
 using Newtonsoft.Json;
 
 [JsonObject(MemberSerialization.OptIn)]
-public class CurrencySaveComponent : ECSEntity, IECSSerializeable
+public class CurrencySaveComponent : ECSEntity, IECSSerializeable, IProfileSaveComponent
 {
+    public bool AllowDataCollect { get; set; }
+
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
@@ -16,6 +18,11 @@ public class CurrencySaveComponent : ECSEntity, IECSSerializeable
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
+        if (!AllowDataCollect)
+        {
+            return;
+        }
+        
         if(BoardService.Current == null) return;
         
         var board = BoardService.Current.FirstBoard;

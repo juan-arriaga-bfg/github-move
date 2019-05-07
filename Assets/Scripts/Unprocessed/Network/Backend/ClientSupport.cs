@@ -108,6 +108,7 @@ namespace Backend
 
                     var data = json["configUpdate"]["data"];
                     JSONNode currencies = data["currency"];
+                    JSONNode airship = data["airship"];
 
                     if (currencies != null)
                     {
@@ -164,6 +165,45 @@ namespace Backend
                                 default:
                                     throw new Exception($"Unknown action '{action}'");
                             }
+                        }
+                    }
+
+                    if (airship != null)
+                    {
+                        string airshipValue = airship.Value.ToString();
+                        if (!string.IsNullOrEmpty(airshipValue))
+                        {
+                            List<string> uids = airshipValue.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries).ToList();
+                        
+                            var airShipSaveComponent = userProfile.GetComponent<AirShipSaveComponent>(AirShipSaveComponent.ComponentGuid);
+
+                            Dictionary<int, int> payload = new Dictionary<int, int>();
+                            foreach (var uid in uids)
+                            {
+                                int id = PieceType.Parse(uid);
+                                if (id == PieceType.None.Id)
+                                {
+                                    throw new Exception($"Unknown piece uid '{uid}'");
+                                }
+
+                                if (!payload.ContainsKey(id))
+                                {
+                                    payload.Add(id, 0);
+                                }
+
+                                payload[id]++;
+                            }
+                            
+                            AirShipSaveItem saveItem = new AirShipSaveItem();
+                            saveItem.Position = Camera.main.transform.position;
+                            saveItem.Payload = payload;
+
+                            if (airShipSaveComponent.Items == null)
+                            {
+                                airShipSaveComponent.Items = new List<AirShipSaveItem>();
+                            }
+                            
+                            airShipSaveComponent.Items.Add(saveItem);
                         }
                     }
 

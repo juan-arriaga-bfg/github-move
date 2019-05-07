@@ -27,8 +27,10 @@ public partial class UserProfile : ICodexSaveComponent
 }
 
 [JsonObject(MemberSerialization.OptIn)]
-public class CodexSaveComponent : ECSEntity, IECSSerializeable
+public class CodexSaveComponent : ECSEntity, IECSSerializeable, IProfileSaveComponent
 {
+    public bool AllowDataCollect { get; set; }
+
     public static int ComponentGuid = ECSManager.GetNextGuid();
 
     public override int Guid => ComponentGuid;
@@ -42,6 +44,11 @@ public class CodexSaveComponent : ECSEntity, IECSSerializeable
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
+        if (!AllowDataCollect)
+        {
+            return;
+        }
+        
         var codexManager = GameDataService.Current?.CodexManager;
         if (codexManager == null)
         {

@@ -3,8 +3,10 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 [JsonObject(MemberSerialization.OptIn)]
-public class TutorialSaveComponent : ECSEntity, IECSSerializeable
+public class TutorialSaveComponent : ECSEntity, IECSSerializeable, IProfileSaveComponent
 {
+	public bool AllowDataCollect { get; set; }
+
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
 	
@@ -14,6 +16,11 @@ public class TutorialSaveComponent : ECSEntity, IECSSerializeable
 	[OnSerializing]
 	internal void OnSerialization(StreamingContext context)
 	{
+		if (!AllowDataCollect)
+		{
+			return;
+		}
+		
 		if(BoardService.Current == null || Complete != null) return;
 
         Complete = GameDataService.Current.TutorialDataManager.Completed;

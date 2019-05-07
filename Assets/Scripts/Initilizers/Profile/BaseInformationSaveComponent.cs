@@ -83,8 +83,10 @@ public class MatchesCounter
 }
 
 [JsonObject(MemberSerialization.OptIn)]
-public class BaseInformationSaveComponent : ECSEntity, IECSSerializeable
+public class BaseInformationSaveComponent : ECSEntity, IECSSerializeable, IProfileSaveComponent
 {
+    public bool AllowDataCollect { get; set; }
+
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 	
@@ -100,6 +102,12 @@ public class BaseInformationSaveComponent : ECSEntity, IECSSerializeable
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
+        if (!AllowDataCollect)
+        {
+            return;
+        }
+        
+        
     }
 
     [OnDeserialized]

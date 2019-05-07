@@ -16,8 +16,10 @@ public partial class UserProfile : IEventGameSaveComponent
 }
 
 [JsonObject(MemberSerialization.OptIn)]
-public class EventGameSaveComponent : ECSEntity, IECSSerializeable
+public class EventGameSaveComponent : ECSEntity, IECSSerializeable, IProfileSaveComponent
 {
+    public bool AllowDataCollect { get; set; }
+
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
     
@@ -33,6 +35,11 @@ public class EventGameSaveComponent : ECSEntity, IECSSerializeable
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
+        if (!AllowDataCollect)
+        {
+            return;
+        }
+        
         if (BoardService.Current?.FirstBoard?.BoardLogic.EventGamesLogic == null) return;
         
         var data = BoardService.Current?.FirstBoard?.BoardLogic.EventGamesLogic.EventGames;

@@ -67,6 +67,14 @@ public class RestoredPurchasesProvider : MonoBehaviour
     
     private void ScheduleProvide()
     {
+        bool isGameLoaded = AsyncInitService.Current?.IsAllComponentsInited() ?? false;
+
+        if (!isGameLoaded)
+        {
+            Debug.LogWarning($"[RestoredPurchasesProvider] => ScheduleProvide: isGameLoaded == false");
+            return;
+        }
+        
         if (ProfileService.Current == null)
         {
             Debug.LogWarning($"[RestoredPurchasesProvider] => ScheduleProvide: ProfileService.Current == null");

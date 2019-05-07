@@ -73,8 +73,10 @@ public class AbTestItem
 }
 
 [JsonObject(MemberSerialization.OptIn)]
-public class AbTestSaveComponent : IECSComponent, IECSSerializeable
+public class AbTestSaveComponent : IECSComponent, IECSSerializeable, IProfileSaveComponent
 {
+    public bool AllowDataCollect { get; set; }
+
     public static int ComponentGuid = ECSManager.GetNextGuid();
 
     public int Guid => ComponentGuid;
@@ -89,6 +91,11 @@ public class AbTestSaveComponent : IECSComponent, IECSSerializeable
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
+        if (!AllowDataCollect)
+        {
+            return;
+        }
+        
         Tests = GameDataService.Current.AbTestManager.Tests.Values.ToList();
     }
 }

@@ -27,8 +27,10 @@ public partial class UserProfile : IFieldDefComponent
 }
 
 [JsonObject(MemberSerialization.OptIn)]
-public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
+public class FieldDefComponent : BaseSaveComponent, IECSSerializeable, IProfileSaveComponent
 {
+	public bool AllowDataCollect { get; set; }
+
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
 
@@ -89,6 +91,11 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 	[OnSerializing]
 	internal void OnSerialization(StreamingContext context)
 	{
+		if (!AllowDataCollect)
+		{
+			return;
+		}
+		
 		if(BoardService.Current == null) return;
 		
 		var board = BoardService.Current.FirstBoard;

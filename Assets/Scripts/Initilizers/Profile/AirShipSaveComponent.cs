@@ -3,8 +3,10 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 [JsonObject(MemberSerialization.OptIn)]
-public class AirShipSaveComponent : ECSEntity, IECSSerializeable
+public class AirShipSaveComponent : ECSEntity, IECSSerializeable, IProfileSaveComponent
 {
+    public bool AllowDataCollect { get; set; }
+    
     public static int ComponentGuid = ECSManager.GetNextGuid();
 
     public override int Guid => ComponentGuid;
@@ -15,6 +17,11 @@ public class AirShipSaveComponent : ECSEntity, IECSSerializeable
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
+        if (!AllowDataCollect)  
+        {
+            return;
+        }
+        
         Items = BoardService.Current.FirstBoard.BoardLogic.AirShipLogic.Save();
     }
 }

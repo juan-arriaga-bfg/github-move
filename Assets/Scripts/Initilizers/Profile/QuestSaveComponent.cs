@@ -6,8 +6,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 [JsonObject(MemberSerialization.OptIn)]
-public class QuestSaveComponent : ECSEntity, IECSSerializeable
+public class QuestSaveComponent : ECSEntity, IECSSerializeable, IProfileSaveComponent
 {
+    public bool AllowDataCollect { get; set; }
+
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
@@ -21,6 +23,11 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
+        if (!AllowDataCollect)
+        {
+            return;
+        }
+        
         if(GameDataService.Current == null) return;
         
         Update();
@@ -56,7 +63,10 @@ public class QuestSaveData
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
-        QuestSaveDataProxy proxy = new QuestSaveDataProxy {Quest = Quest, Tasks = Tasks};
-        Data = JToken.FromObject(proxy);
+        if (Quest != null && Tasks != null)
+        {
+            QuestSaveDataProxy proxy = new QuestSaveDataProxy {Quest = Quest, Tasks = Tasks};
+            Data = JToken.FromObject(proxy);
+        }
     }
 }
