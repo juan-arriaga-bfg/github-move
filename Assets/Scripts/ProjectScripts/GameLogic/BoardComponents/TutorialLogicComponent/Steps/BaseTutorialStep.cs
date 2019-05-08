@@ -94,6 +94,7 @@ public class BaseTutorialStep : ECSEntity
 
 	protected virtual void Complete()
 	{
+		tutorialDataManager.SetCompleted(Id);
 		OnCompleteCallback?.Invoke(this);
 		StartAnimation(TutorialAnimationType.Complete);
 	}

@@ -62,6 +62,8 @@ public class TutorialDataManager: IECSComponent
 
     public void SetCompleted(int id)
     {
+        if (completed.Contains(id)) return;
+        
         completed.Add(id);
     }
     

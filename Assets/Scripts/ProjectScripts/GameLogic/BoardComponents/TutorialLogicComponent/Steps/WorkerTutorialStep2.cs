@@ -35,6 +35,12 @@ public class WorkerTutorialStep2 : LoopFingerTutorialStep
         base.Perform();
     }
 
+    protected override void Complete()
+    {
+        base.Complete();
+        GameDataService.Current.CharactersManager.UnlockNewCharacter(PieceType.Boost_WR.Id);
+    }
+
     public override void Execute()
     {
         var cache = Context.Context.BoardLogic.PositionsCache;

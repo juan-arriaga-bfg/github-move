@@ -60,7 +60,7 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
     
     public void UnlockNewCharacter(int id)
     {
-        if (Characters.Contains(id) == false) return;
+        if (id != PieceType.Boost_WR.Id && Characters.Contains(id) == false) return;
         
         Characters.Remove(id);
         UpdateSequence();
@@ -74,36 +74,35 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
     private void UpdateSequence()
     {
         var amount = Mathf.Min(3, Characters.Count);
+        var dataManager = (GameDataManager) context;
         
         CharactersWeights = new List<ItemWeight>();
         CharactersChestWeights = new List<ItemWeight>();
         
-        var dataManager = (GameDataManager) context;
-        
-        if (amount == 0)
-        {
-            CharactersWeights.Add(new ItemWeight{Uid = ReplacePiece.Abbreviations[0], Weight = 10});
-            CharactersChestWeights.Add(new ItemWeight{Uid = ReplacePiece.Abbreviations[0], Weight = 10});
-            dataManager.MarketManager.Defs.Find(item => item.Current?.RandomType == MarketRandomType.NPCChests)?.Update(true);
-            return;
-        }
-        
         for (var i = 0; i < defs.Count; i++)
         {
             var def = defs[i];
-            var isReplace = i < amount;
-            var chain = isReplace ? dataManager.MatchDefinition.GetChain(Characters[i]) : new List<int>();
+            var isNotReplace = i < amount;
+            var chain = isNotReplace ? dataManager.MatchDefinition.GetChain(Characters[i]) : new List<int>();
 
-            UpdateCurrentSequence(def.PieceWeights, CharactersWeights, isReplace, chain);
-            UpdateCurrentSequence(def.ChestWeights, CharactersChestWeights, isReplace, chain);
+            UpdateCurrentSequence(def.PieceWeights, CharactersWeights, isNotReplace, chain);
+            UpdateCurrentSequence(def.ChestWeights, CharactersChestWeights, isNotReplace, chain);
         }
+        
+        if (amount == 0) dataManager.MarketManager.Defs.Find(item => item.Current?.RandomType == MarketRandomType.NPCChests)?.Update(true);
     }
 
-    private void UpdateCurrentSequence(List<ItemWeight> target, List<ItemWeight> current, bool isReplace, List<int> chain)
+    private void UpdateCurrentSequence(List<ItemWeight> target, List<ItemWeight> current, bool isNotReplace, List<int> chain)
     {
-        foreach (var item in target)
+        var dataManager = (GameDataManager) context;
+        var weights = dataManager.TutorialDataManager.CheckUnlockWorker() == false
+            ? target.FindAll(weight => dataManager.MatchDefinition.GetLast(weight.Piece) != PieceType.Boost_WR.Id)
+            : target;
+        
+        foreach (var item in weights)
         {
-            var uid = isReplace ? PieceType.Parse(chain[int.Parse(item.Uid) - 1]) : ReplacePiece.Abbreviations[0];
+            var uid = int.TryParse(item.Uid, out var index) ? (isNotReplace ? PieceType.Parse(chain[index - 1]) : ReplacePiece.Abbreviations[0]) : item.Uid;
+            
             current.Add(new ItemWeight{Uid = uid, Weight = item.Weight});
         }
     }

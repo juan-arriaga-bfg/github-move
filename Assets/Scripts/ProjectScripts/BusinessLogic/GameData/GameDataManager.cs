@@ -77,6 +77,7 @@
         
         RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()));
         
+        RegisterComponent(new TutorialDataManager());
         RegisterComponent(new ChestsDataManager());
         RegisterComponent(new PiecesDataManager());
         RegisterComponent(new ObstaclesDataManager());
@@ -96,6 +97,5 @@
         RegisterComponent(new AbTestDataManager());
         RegisterComponent(new FireflyDataManager());
         RegisterComponent(new EventGameDataManager());
-        RegisterComponent(new TutorialDataManager());
     }
 }

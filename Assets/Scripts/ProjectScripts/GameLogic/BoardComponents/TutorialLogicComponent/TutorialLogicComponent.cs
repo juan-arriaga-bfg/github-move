@@ -148,7 +148,6 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             
             UnRegisterComponent(condition);
             components.Remove(condition);
-            tutorialDataManager.SetCompleted(condition.Id);
         }
         
         for (var i = components.Count - 1; i >= 0; i--)

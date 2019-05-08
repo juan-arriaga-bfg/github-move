@@ -161,6 +161,11 @@ public partial class CodexDataManager
                     },
                     new CodexChainDef
                     {
+                        Name = LocalizationService.Get("window.codex.branch.Boost_WR", "window.codex.branch.Boost_WR"),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Boost_WR1.Id)),
+                    },
+                    new CodexChainDef
+                    {
                         Name = LocalizationService.Get("window.codex.branch.SK_PR", "window.codex.branch.SK_PR"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.SK1_PR.Id)),
                     },
