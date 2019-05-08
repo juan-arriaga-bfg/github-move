@@ -181,6 +181,12 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         if (CheckLock(target) == false || target.PieceType != PieceType.Boost_CR.Id && def.Filter.Has(PieceTypeFilter.Workplace) == false) return false;
         if (CheckPieceState(target) == false && context.PartPiecesLogic.Work(targetPosition, true) == false) return false;
         
+        context.ActionExecutor.AddAction(new EjectionPieceAction
+        {
+            From = targetPosition,
+            Pieces = new Dictionary<int, int> {{PieceType.Boost_WR1.Id, 1}}
+        });
+        
         return true;
     }
 
