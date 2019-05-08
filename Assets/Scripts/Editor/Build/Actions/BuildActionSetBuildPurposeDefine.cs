@@ -3,11 +3,11 @@
 using System;
 using System.Collections.Generic;
 
-public class BuildActionSetBuildTypeDefine : BuildActionModifyDefines
+public class BuildActionSetBuildPurposeDefine : BuildActionModifyDefines
 {
-    public static string BUILD_QA    = "BUILD_QA";
-    public static string BUILD_PROD  = "BUILD_PROD";
-    public static string BUILD_STAGE = "BUILD_STAGE";
+    public const string BUILD_QA    = "BUILD_QA";
+    public const string BUILD_PROD  = "BUILD_PROD";
+    public const string BUILD_STAGE = "BUILD_STAGE";
     
     public override void Execute(ProjectBuilder context)
     {

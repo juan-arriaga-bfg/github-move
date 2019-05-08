@@ -33,7 +33,7 @@ public class ProjectBuilderAndroid
         }
         
         builder
-            .AddBuildAction(new BuildActionSetBuildTypeDefine())
+            .AddBuildAction(new BuildActionSetBuildPurposeDefine())
             .AddBuildAction(new BuildActionRebuildSpriteSheets())    
             .AddBuildAction(new BuildActionCleanupPreviousGradleExport())
             .AddBuildAction(new BuildActionPrepare())
