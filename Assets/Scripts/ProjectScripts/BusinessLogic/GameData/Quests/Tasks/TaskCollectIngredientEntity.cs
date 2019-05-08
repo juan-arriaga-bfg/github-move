@@ -8,6 +8,7 @@
 [TaskHighlight(typeof(HighlightTaskAnyBag))]
 [TaskHighlight(typeof(HighlightTaskPointToRandomChestExcludingFreeAndNpc))]
 [TaskHighlight(typeof(HighlightTaskPointToRandomBranchATree))]
+[TaskHighlight(typeof(HighlightTaskPointToRandomTree))]
 [TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 

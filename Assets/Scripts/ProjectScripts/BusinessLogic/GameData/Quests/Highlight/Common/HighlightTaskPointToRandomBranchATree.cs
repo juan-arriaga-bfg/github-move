@@ -1,9 +1,8 @@
 using Debug = IW.Logger;
 using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
-/// Highlight random obstacle that can produce chest
+/// Highlight random obstacle for 'A' branch
 /// </summary>
 public class HighlightTaskPointToRandomBranchATree : TaskHighlightUsingArrow
 {
