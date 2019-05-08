@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEngine;
 
 public class BuildActionModifyDefines : IProjectBuildAction
 {
@@ -55,6 +56,8 @@ public class BuildActionModifyDefines : IProjectBuildAction
         {
             resultDefinesStr = resultDefinesStr + define + ";";
         }
+
+        Debug.Log($"[{GetType()}] => Execute: Final defines set: {resultDefinesStr}");
         
         PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTarget, resultDefinesStr);
     }
