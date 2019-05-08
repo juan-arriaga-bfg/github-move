@@ -149,22 +149,26 @@ public class UIMarketWindowView : UIGenericPopupWindowView
 
         if (CurrencyHelper.IsCanPurchase(windowModel.Price, true) == false) return;
         
-        UIMessageWindowController.CreateMessage(
-            LocalizationService.Get("window.market.confirmation.title", "window.market.confirmation.title"),
-            LocalizationService.Get("window.market.confirmation.message", "window.market.confirmation.message"),
-            null,
-            () =>
-            {
-                CurrencyHelper.Purchase(Currency.Timer.Name, 1, windowModel.Price, success =>
-                {
-                    if(success == false) return;
+        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+        model.Title = LocalizationService.Get("window.market.confirmation.title", "window.market.confirmation.title");
+        model.Message = LocalizationService.Get("window.market.confirmation.message", "window.market.confirmation.message");
+        model.AcceptLabel = windowModel.ButtonReset;
+        model.CancelLabel = LocalizationService.Get("common.button.cancel", "common.button.cancel");
+        
+        model.IsBuy = true;
+
+        model.OnAccept = () =>  CurrencyHelper.Purchase(Currency.Timer.Name, 1, windowModel.Price, success =>
+        {
+            if(success == false) return;
             
-                    BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.Complete();
-                    Analytics.SendPurchase("skip_market", "item1", new List<CurrencyPair>{windowModel.Price}, null, false, false);
-                });
-            },
-            () => { }
-        );
+            BoardService.Current.FirstBoard.MarketLogic.ResetMarketTimer.Complete();
+            Analytics.SendPurchase("skip_market", "item1", new List<CurrencyPair>{windowModel.Price}, null, false, false);
+        });
+        
+        model.OnCancel = () => {};
+        
+        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
 
     private void UpdateSlots()
