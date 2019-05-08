@@ -30,11 +30,11 @@ public class NetworkUtils
             Protocol = "v3",
             
 #if BUILD_QA
-            Host = "https://f2p-qa.bigfishgames.com/nodejs101";
+            Host = "https://f2p-qa.bigfishgames.com/nodejs101",
 #elif BUILD_STAGE
-            Host = "https://f2p-st.bigfishgames.co m/nodejs10/";
+            Host = "https://f2p-st.bigfishgames.com/nodejs10",
 #elif BUILD_PROD
-            Host = "https://f2p.bigfishgames.com/nodejs10/";
+            Host = "https://f2p.bigfishgames.com/nodejs10",
 #endif
 
             GameVersion = IWVersion.Get.CurrentVersion
