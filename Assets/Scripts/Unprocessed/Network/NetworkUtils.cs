@@ -18,26 +18,41 @@ public class NetworkUtils
 {
     private static NetworkUtils s_instance;
 
-    BackendSettings m_backendSettings;
+    BackendSettings backendSettings;
     
     private NetworkUtils()
     {
         BestHTTP.HTTPManager.Setup();
 
-        m_backendSettings = new BackendSettings
+        backendSettings = new BackendSettings
         {
             ClientPlatform = Application.platform.ToString(),
             Protocol = "v3",
-            // Host = "http://127.0.0.1:8080/nodejs101",           // Localhost
-            Host = "http://134.17.4.143/nodejs101",                // Neskinsoft
-            // Host = "https://f2p-qa.bigfishgames.com/nodejs101", // Bfg QA
+            
+#if BUILD_QA
+            Host = "https://f2p-qa.bigfishgames.com/nodejs101";
+#elif BUILD_STAGE
+            Host = "https://f2p-st.bigfishgames.co m/nodejs10/";
+#elif BUILD_PROD
+            Host = "https://f2p.bigfishgames.com/nodejs10/";
+#endif
+
             GameVersion = IWVersion.Get.CurrentVersion
         };
+
+        // Fallback for Unity Editor and for debug overriding
+        if (backendSettings.Host == null)
+        // if (true)
+        {
+            backendSettings.Host = "http://127.0.0.1:8080/nodejs101";              // Localhost
+            // backendSettings.Host = "http://134.17.4.143/nodejs101";             // Neskinsoft
+            // backendSettings.Host = "https://f2p-qa.bigfishgames.com/nodejs101"; // Bfg QA
+        }
     }
 
     public string GetHostUrl()
     {
-        return m_backendSettings.Host;
+        return backendSettings.Host;
     }
 
     public static NetworkUtils Instance => s_instance ?? (s_instance = new NetworkUtils());
@@ -77,7 +92,7 @@ public class NetworkUtils
             return;
         }
 
-        string url = $"{m_backendSettings.Host}/{m_backendSettings.Protocol}/{(endpoint.StartsWith("/") ? endpoint.Remove(0, 1) : endpoint)}";
+        string url = $"{backendSettings.Host}/{backendSettings.Protocol}/{(endpoint.StartsWith("/") ? endpoint.Remove(0, 1) : endpoint)}";
         HTTPRequest request = new HTTPRequest(new Uri(url), method,
             (req, res) =>
             {
@@ -122,9 +137,9 @@ public class NetworkUtils
             request.FormUsage = HTTPFormUsage.UrlEncoded;
         }
 
-        request.AddHeader("X-Client-Version", m_backendSettings.GameVersion);
-        request.AddHeader("X-Client-Protocol", m_backendSettings.Protocol);
-        request.AddHeader("X-Client-Platform", m_backendSettings.ClientPlatform);
+        request.AddHeader("X-Client-Version", backendSettings.GameVersion);
+        request.AddHeader("X-Client-Protocol", backendSettings.Protocol);
+        request.AddHeader("X-Client-Platform", backendSettings.ClientPlatform);
 
         if (SocialUtils.IsLoggedInRave())
         {
