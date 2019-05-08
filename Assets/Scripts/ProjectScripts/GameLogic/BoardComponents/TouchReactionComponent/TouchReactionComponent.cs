@@ -23,7 +23,7 @@
 
     public bool Touch(BoardPosition position)
     {
-        if (Locker.IsLocked || ReactionCondition == null || ReactionDefinition == null) return false;
+        if (Locker == null || Locker.IsLocked || ReactionCondition == null || ReactionDefinition == null) return false;
         
         if (ReactionCondition.Check(position, context) == false) return false;
         
