@@ -75,6 +75,7 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
     {
         var amount = Mathf.Min(3, Characters.Count);
         var dataManager = (GameDataManager) context;
+        var ignoreSecond = amount > 1 && Characters[1] - Characters[0] != PieceType.NPC_B.Id - PieceType.NPC_A.Id;
         
         CharactersWeights = new List<ItemWeight>();
         CharactersChestWeights = new List<ItemWeight>();
@@ -85,8 +86,16 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
             var isNotReplace = i < amount;
             var chain = isNotReplace ? dataManager.MatchDefinition.GetChain(Characters[i]) : new List<int>();
 
-            UpdateCurrentSequence(def.PieceWeights, CharactersWeights, isNotReplace, chain);
-            UpdateCurrentSequence(def.ChestWeights, CharactersChestWeights, isNotReplace, chain);
+            var pieceWeights = i > 0 && ignoreSecond
+                ? def.PieceWeights.FindAll(weight => int.TryParse(weight.Uid, out _) == false)
+                : def.PieceWeights;
+            
+            var chestWeights = i > 0 && ignoreSecond
+                ? def.ChestWeights.FindAll(weight => int.TryParse(weight.Uid, out _) == false)
+                : def.ChestWeights;
+
+            UpdateCurrentSequence(pieceWeights, CharactersWeights, isNotReplace, chain);
+            UpdateCurrentSequence(chestWeights, CharactersChestWeights, isNotReplace, chain);
         }
         
         if (amount == 0) dataManager.MarketManager.Defs.Find(item => item.Current?.RandomType == MarketRandomType.NPCChests)?.Update(true);
