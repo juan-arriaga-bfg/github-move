@@ -31,8 +31,10 @@ namespace BfgAnalytics
         {
             JSONNode node = new JSONObject();
 
-            var creationDate = ProfileService.Current.BaseInformation.CreationDateTime;
-            node["profile_creation_date"] = $"{creationDate.Month}-{creationDate.Day}-{creationDate.Year}";
+            var profileService = ProfileService.Current;
+            
+            DateTime creationDate = UnixTimeHelper.UnixTimestampToDateTime(profileService.BaseInformation.CreationTimestamp);
+            node["profile_creation_date"] = $"{creationDate:MM-dd-yy}";
             node["last_fog"] = GameDataService.Current.FogsManager.LastOpenFog?.Uid ?? "";
             node["level"] = GetValueByCurrency(Currency.Level);
             node["level_progress"] = GetLevelProgress();
@@ -42,7 +44,7 @@ namespace BfgAnalytics
             node["top_pieces"] = GetTopPiecesInformation();
             node["orders_count"] = GetValueByCurrency(Currency.Order);
             node["daily_obj_count"] = GameDataService.Current.QuestsManager?.DailyQuestCompletedCount ?? 0;
-            node["effectiveness"] = ProfileService.Current.BaseInformation.MatchesCounter.Effectiveness;
+            node["effectiveness"] = profileService.BaseInformation.MatchesCounter.Effectiveness;
             
             return node;
         }

@@ -140,8 +140,21 @@ public class SellForCashManager: ECSEntity
         
         CurrencyHelper.PurchaseAndProvideSpawn(def.Products, null, null, CurrencyHelper.FlyPosition, null, false, true);
         IapService.Current.IapProvidedToPlayer(productId);
+
+        SavePurchaseForStats(productId);
     }
 
+    private void SavePurchaseForStats(string productId)
+    {
+        string storeId = IapService.Current.IapCollection.GetStoreId(productId);
+        string shortId = storeId
+                        .Replace("com.bigfishgames.mergetalesgoog.", "")
+                        .Replace("vi.",                              "")
+                        .Replace(".com.bigfishgames.mergetalesios",  "");
+        
+        ProfileService.Current.BaseInformation.IapsList.Add(shortId);
+    }
+    
     public void Purchase(string productId, Action<bool, string> onComplete)
     {
         this.onComplete = onComplete;

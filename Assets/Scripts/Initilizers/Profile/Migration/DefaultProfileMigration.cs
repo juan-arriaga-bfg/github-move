@@ -46,6 +46,11 @@ public partial class DefaultProfileMigration : IProfileMigration
             Debug.Log($"[Profile]: migration: Profile is just created, no migration required");
             return;
         }
+        
+        if (profile.SystemVersion != clientVersion)
+        {
+            profile.BaseInformation.UpdateTimestamp = UnixTimeHelper.DateTimeToUnixTimestamp(DateTime.UtcNow);
+        }
 
         MigrateIteration(clientVersion, profile);
         

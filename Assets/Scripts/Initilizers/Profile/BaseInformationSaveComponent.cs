@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 using IW.SimpleJSON;
@@ -90,11 +91,23 @@ public class BaseInformationSaveComponent : ECSEntity, IECSSerializeable, IProfi
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 	
+    /// <summary>
+    /// Time when player install the game from a Store
+    /// </summary>
     [JsonProperty]
-    public DateTime CreationDateTime = DateTime.UtcNow;
+    public long CreationTimestamp = UnixTimeHelper.DateTimeToUnixTimestamp(DateTime.UtcNow);
+    
+    /// <summary>
+    /// Time when player download and install a new client version
+    /// </summary>
+    [JsonProperty]
+    public long UpdateTimestamp;
 
     [JsonProperty]
     public bool IsPayer;
+    
+    [JsonProperty]
+    public List<string> IapsList = new List<string>();
 
     [JsonProperty]
     public MatchesCounter MatchesCounter = new MatchesCounter(0 ,0);
