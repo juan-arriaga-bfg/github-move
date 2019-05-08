@@ -14,15 +14,15 @@ public class BuildActionSetBuildPurposeDefine : BuildActionModifyDefines
         switch (context.CurrentBuildPurpose)
         {
             case ProjectBuilder.BuildPurpose.Qa:
-                definesToRemove = new HashSet<string> {BUILD_QA};
+                definesToAdd = new HashSet<string> {BUILD_QA};
                 break;
             
             case ProjectBuilder.BuildPurpose.Stage:
-                definesToRemove = new HashSet<string> {BUILD_STAGE};
+                definesToAdd = new HashSet<string> {BUILD_STAGE};
                 break;
             
             case ProjectBuilder.BuildPurpose.Prod:
-                definesToRemove = new HashSet<string> {BUILD_PROD};
+                definesToAdd = new HashSet<string> {BUILD_PROD};
                 break;
             
             default:
