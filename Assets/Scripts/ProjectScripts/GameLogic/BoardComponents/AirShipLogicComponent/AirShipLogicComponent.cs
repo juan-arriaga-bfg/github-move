@@ -298,4 +298,12 @@ public class AirShipLogicComponent : ECSEntity, ITouchableBoardObjectLogic
 
         return false;
     }
+
+    public void IsVisible(bool value)
+    {
+        foreach (var ship in defs.Values)
+        {
+            ship.View.gameObject.SetActive(value);
+        }
+    }
 }

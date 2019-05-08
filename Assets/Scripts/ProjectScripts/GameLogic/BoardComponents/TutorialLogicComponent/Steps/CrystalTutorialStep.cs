@@ -35,8 +35,9 @@ public class CrystalTutorialStep : LoopFingerTutorialStep
         
         startTime = DateTime.UtcNow.AddMilliseconds(10);
 
-        BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.Locker.Lock(this);
-        BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.DestroyAll();
+        Context.Context.BoardLogic.FireflyLogic.Locker.Lock(this);
+        Context.Context.BoardLogic.FireflyLogic.DestroyAll();
+        Context.Context.BoardLogic.AirShipLogic.IsVisible(false);
 
         UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow).IsTutorial = true;
     }
@@ -94,6 +95,7 @@ public class CrystalTutorialStep : LoopFingerTutorialStep
     {
         Context.FadeAll(1f, null);
         Context.UnlockAll();
+        Context.Context.BoardLogic.AirShipLogic.IsVisible(true);
 
         UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow).IsTutorial = false;
         BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.Locker.Unlock(this);
