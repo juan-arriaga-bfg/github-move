@@ -10,7 +10,7 @@ public class BuildActionModifyDefines : IProjectBuildAction
     public virtual HashSet<string> definesToAdd { get; protected set; }
     public virtual HashSet<string> definesToRemove { get; protected set; }
 
-    public void Execute(ProjectBuilder context)
+    public virtual void Execute(ProjectBuilder context)
     {
         // Lets collect all defines
         HashSet<string> resultDefines = new HashSet<string>();

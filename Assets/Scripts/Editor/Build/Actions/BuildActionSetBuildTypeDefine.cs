@@ -9,7 +9,7 @@ public class BuildActionSetBuildTypeDefine : BuildActionModifyDefines
     public static string BUILD_PROD  = "BUILD_PROD";
     public static string BUILD_STAGE = "BUILD_STAGE";
     
-    public void Execute(ProjectBuilder context)
+    public override void Execute(ProjectBuilder context)
     {
         switch (context.CurrentBuildPurpose)
         {

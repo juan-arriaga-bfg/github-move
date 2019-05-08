@@ -4,7 +4,7 @@ using IW;
 
 public class BuildActionDisableLogger : BuildActionModifyDefines
 { 
-    public void Execute(ProjectBuilder context)
+    public override void Execute(ProjectBuilder context)
     {
         definesToRemove = new HashSet<string> {Logger.ENABLE_DEFINE};
         
