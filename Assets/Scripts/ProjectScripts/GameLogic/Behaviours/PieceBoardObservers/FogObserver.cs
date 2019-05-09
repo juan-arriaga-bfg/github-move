@@ -9,7 +9,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 {
     public FogDef Def { get; private set; }
     public CurrencyPair AlreadyPaid { get; private set; }
-    public Dictionary<Piece, int> TempMana = new Dictionary<Piece, int>();
+    public readonly Dictionary<Piece, int> TempMana = new Dictionary<Piece, int>();
     
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
@@ -203,6 +203,13 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         }
         
         return true;
+    }
+
+    public int GetDeltaFill()
+    {
+        var temp = TempMana.Sum(pair => pair.Value);
+
+        return Mathf.Max(0, Def.Condition.Amount - (AlreadyPaid.Amount + temp));
     }
     
     public bool RequiredConditionReached()

@@ -8,10 +8,10 @@ public class TouchReactionDefinitionCollectMana : TouchReactionDefinitionCompone
         var fogs = data.VisibleFogPositions.Values.Select(e => data.GetFogObserver(e.GetCenter())).ToList();
 
         fogs = fogs.FindAll(fog => fog.CanBeCleared() && fog.CanBeFilled(piece, false));
-        fogs.Sort((a, b) => a.AlreadyPaid.Amount.CompareTo(b.AlreadyPaid.Amount));
-        fogs = fogs.FindAll(fog => fog.AlreadyPaid.Amount == fogs[0].AlreadyPaid.Amount);
+        fogs.Sort((a, b) => a.GetDeltaFill().CompareTo(b.GetDeltaFill()));
+        fogs = fogs.FindAll(fog => fog.GetDeltaFill() == fogs[0].GetDeltaFill());
         fogs.Sort((a, b) => a.Def.Level.CompareTo(b.Def.Level));
-
+        
         var observer = fogs[0];
         var target = observer.Context.CachedPosition;
 
