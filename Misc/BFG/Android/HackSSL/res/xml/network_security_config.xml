@@ -1,0 +1,15 @@
+<network-security-config>
+   <base-config>  
+      <trust-anchors>
+          <certificates src="system" />
+          <certificates src="user" />
+      </trust-anchors>
+   </base-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">cdn-f2p.bigfishgames.com</domain>
+        <domain includeSubdomains="true">cdn-games.bigfishsites.com</domain>
+        <domain includeSubdomains="true">api.int.bigfishgames.com</domain>
+        <domain includeSubdomains="true">cdn-games.bigfishgames.com</domain>
+        <domain includeSubdomains="true">bigfishgames-a.akamaihd.net</domain>
+    </domain-config>
+</network-security-config>
