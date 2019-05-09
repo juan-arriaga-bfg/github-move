@@ -223,9 +223,9 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     
     private float CalcCoefficient(float leftTime)
     {
-        if(leftTime <= 60)
-            return Mathf.Log(GameDataService.Current.ConstantsManager.HourBasePrice, 60);
-        return Mathf.Log(GameDataService.Current.ConstantsManager.DayBasePrice, 24 * 60);
+        return leftTime <= 60
+            ? Mathf.Log(GameDataService.Current.ConstantsManager.HourBasePrice, 60)
+            : Mathf.Log(GameDataService.Current.ConstantsManager.DayBasePrice, 24 * 60);
     }
     
     public bool IsFree()

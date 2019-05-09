@@ -47,11 +47,17 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     
     public void SetTimer(TimerComponent timer)
     {
-        if(timer == null) return;
-        if(this.timer != null) this.timer.OnTimeChanged -= UpdateView;
+        if (timer == null) return;
+        
+        if (this.timer != null)
+        {
+            this.timer.OnTimeChanged -= UpdateView;
+            this.timer.OnExecute -= FirstUpdateView;
+        }
         
         this.timer = timer;
         this.timer.OnTimeChanged += UpdateView;
+        this.timer.OnExecute += FirstUpdateView;
         this.timer.View = this;
         
         timerState = TimerViewSate.Default;
@@ -60,7 +66,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     
     public void SetState(TimerViewSate state, float duration = 0.2f)
     {
-        if(state == timerState || timerState == TimerViewSate.Free) return;
+        if(state == timerState || timerState == TimerViewSate.Free && (state == TimerViewSate.Select || state == TimerViewSate.Hide)) return;
         
         timerState = state;
         
@@ -88,6 +94,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
 
         timer.View = null;
         timer.OnTimeChanged -= UpdateView;
+        timer.OnExecute -= FirstUpdateView;
     }
 
     public override void ResetViewOnDestroy()
@@ -95,7 +102,19 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         timerState = TimerViewSate.Default;
         Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
         timer.OnTimeChanged -= UpdateView;
+        timer.OnExecute -= FirstUpdateView;
         base.ResetViewOnDestroy();
+    }
+
+    private void FirstUpdateView()
+    {
+        if (timer == null) return;
+        
+        UpdateView();
+
+        if (timer.StartTime.GetTime(timer.UseUTC).TotalSeconds <= 0) return;
+        
+        timer.OnExecute -= FirstUpdateView;
     }
 
     protected override void UpdateView()
@@ -105,7 +124,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         
         label.Text = timer.CompleteTime.GetTimeLeftText();
 
-        if ((int) timer.StartTime.GetTime(timer.UseUTC).TotalSeconds > 0 && timer.IsFree()) SetState(TimerViewSate.Free);
+        SetState(timer.IsFree() ? TimerViewSate.Free : TimerViewSate.Normal);
         if (smallButton.activeSelf) price.Text = timerState == TimerViewSate.Free ? LocalizationService.Get("common.button.free", "common.button.free") : timer.GetPrice().ToStringIcon();
     }
     
