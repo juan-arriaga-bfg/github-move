@@ -10,6 +10,6 @@ namespace BfgAnalytics
                    string type,
                    string action,
                    JsonDataGroup jsonDataGroups = JsonDataGroup.None,
-                   JSONNode customData = null);
+                   JSONObject customData = null);
     }
 }

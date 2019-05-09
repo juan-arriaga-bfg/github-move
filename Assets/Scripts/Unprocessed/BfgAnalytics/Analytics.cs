@@ -51,8 +51,8 @@ namespace BfgAnalytics
 
 		public static void SendTutorialStartStepEvent(string stepName)
         {   
-            JSONNode customJsonData = new JSONObject();
-            JSONNode ctrNode = new JSONObject();
+            JSONObject customJsonData = new JSONObject();
+            JSONObject ctrNode = new JSONObject();
 
             customJsonData["ctr"] = ctrNode;
 
@@ -63,8 +63,8 @@ namespace BfgAnalytics
 
         public static void SendTutorialEndStepEvent(string stepName, DateTime startTime)
         {
-            JSONNode customJsonData = new JSONObject();
-            JSONNode ctrNode = new JSONObject();
+            JSONObject customJsonData = new JSONObject();
+            JSONObject ctrNode = new JSONObject();
 
             customJsonData["ctr"] = ctrNode;
 
@@ -76,7 +76,7 @@ namespace BfgAnalytics
         
         public static void SendPurchase(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
         {
-            JSONNode customJsonData = CreateTransaction(location, reason, spend, collect, isIap, isFree);
+            JSONObject customJsonData = CreateTransaction(location, reason, spend, collect, isIap, isFree);
 
             AnalyticsService.Current?.Event("economy", null, null, DefaultJsonData(), customJsonData);
         }
@@ -86,10 +86,10 @@ namespace BfgAnalytics
             AnalyticsService.Current?.Event(day.ToString(), "dailyreward",null, DefaultJsonData());
         }
 
-        private static JSONNode CreateTransaction(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
+        private static JSONObject CreateTransaction(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
         {
-            JSONNode customJsonData = new JSONObject();
-            JSONNode transactionNode = new JSONObject();
+            JSONObject customJsonData = new JSONObject();
+            JSONObject transactionNode = new JSONObject();
             
             transactionNode["location"] = location;
             transactionNode["reason"] = reason;
@@ -118,18 +118,18 @@ namespace BfgAnalytics
         /// </summary>
         /// <param name="currencies"></param>
         /// <returns></returns>
-        private static JSONNode CreateCurrenciesJson(List<CurrencyPair> currencies)
+        private static JSONObject CreateCurrenciesJson(List<CurrencyPair> currencies)
         {
-            JSONNode CreateCurrencyNode(CurrencyPair pair)
+            JSONObject CreateCurrencyNode(CurrencyPair pair)
             {
-                JSONNode node = new JSONObject();
+                JSONObject node = new JSONObject();
                 node[pair.Currency] = new JSONNumber(pair.Amount);
                 return node;
             }
             
             var ret = new JSONObject();
-            var premium = new JSONArray();
-            var soft = new JSONArray();
+            var premium = new JSONObject();
+            var soft = new JSONObject();
 
             foreach (var pair in currencies)
             {
@@ -137,13 +137,13 @@ namespace BfgAnalytics
                 
                 if (pair.Currency == Currency.Crystals.Name)
                 {
-                    premium.Add(CreateCurrencyNode(pair));
+                    premium[pair.Currency] = pair.Amount;
                     continue;
                 }
 
                 if (pair.Currency == Currency.Coins.Name)
                 {
-                    soft.Add(CreateCurrencyNode(pair));
+                    soft[pair.Currency] = pair.Amount;
                     continue;
                 }
             }

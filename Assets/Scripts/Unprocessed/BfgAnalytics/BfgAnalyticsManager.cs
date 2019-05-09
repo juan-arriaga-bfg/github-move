@@ -42,7 +42,7 @@ namespace BfgAnalytics
                           string type,
                           string action,
                           JsonDataGroup jsonDataGroups = JsonDataGroup.None,
-                          JSONNode customData = null)
+                          JSONObject customData = null)
         {
             try
             {
@@ -52,20 +52,23 @@ namespace BfgAnalytics
                     return;
                 }
 
-                if (customData == null)
-                {
-                    customData = new JSONArray();
-                }
+                name   = name?.ToLower();
+                type   = type?.ToLower();
+                action = action?.ToLower();
+                
+                customData = customData ?? new JSONObject();
 
                 if (type != null)
                 {
-                    customData.Add("type", type);
+                    customData["type"] = type;
                 }
                 
                 if (action != null)
                 {
-                    customData.Add("action", action);
+                    customData["action"] = action;
                 }
+
+                string test = customData.ToString();
                 
                 string jsonData = jsonDataGenerator.CollectData(jsonDataGroups, customData);
                 
@@ -107,7 +110,7 @@ namespace BfgAnalytics
                 if (isOk)
                 {
 #if DEBUG
-                    Debug.Log($"[BfgAnalyticsManager] => Event: type: {type}, action: {action}, name: {name}, data groups: {jsonDataGroups.PrettyPrint()}");
+                    Debug.Log($"[BfgAnalyticsManager] => Event: type: '{type ?? "null"}', action: '{action ?? "null"}', name: '{name}', data groups: {jsonDataGroups.PrettyPrint()}");
     #if DEBUG_PRINT_SETS
                     Debug.Log($"[BfgAnalyticsManager] => Data:\n{IdentJson(jsonData)}");
     #endif

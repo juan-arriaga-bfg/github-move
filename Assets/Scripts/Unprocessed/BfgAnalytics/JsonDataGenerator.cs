@@ -27,14 +27,22 @@ namespace BfgAnalytics
             try
             {
                 JSONNode node = new JSONObject();
-            
+
+                if (customData != null)
+                {
+                    foreach (KeyValuePair<string, JSONNode> item in customData)
+                    {
+                        node.Add(item.Key, item.Value);
+                    }
+                }
+                
                 foreach (JsonDataGroup item in groups.AsArray())
                 {
                     if (item == JsonDataGroup.None)
                     {
                         continue;
                     }
-                    
+
                     if (groups.Has(item))
                     {
                         if (collectors.TryGetValue(item, out IJsonDataCollector collector))
@@ -47,14 +55,6 @@ namespace BfgAnalytics
                         {
                             throw new Exception($"No collector for group {item.ToString()} is registered!");
                         }
-                    }
-                }
-
-                if (customData != null)
-                {
-                    foreach (KeyValuePair<string, JSONNode> item in customData)
-                    {
-                        node.Add(item.Key, item.Value);
                     }
                 }
 
