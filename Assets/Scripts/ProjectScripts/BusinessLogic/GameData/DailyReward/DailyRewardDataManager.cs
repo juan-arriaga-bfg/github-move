@@ -6,6 +6,8 @@ using UnityEngine;
 public class DailyRewardDataManager : ECSEntity, IDataManager, IDataLoader<List<DailyRewardDef>>
 {
     public const string QUEST_ID = "66_CreatePiece_NPC_B3";
+
+    private const int MIN_DELAY_BETWEEN_REWARDS = 60 * 60;
     
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -142,6 +144,13 @@ public class DailyRewardDataManager : ECSEntity, IDataManager, IDataLoader<List<
         
         var todayDayStart = now.TruncDateTimeToDays();
 
+        long deltaSeconds = (long)(now.AddSeconds(MIN_DELAY_BETWEEN_REWARDS) - todayDayStart.AddSeconds(TIMER_DELAY)).TotalSeconds;
+        if (deltaSeconds > 0)
+        {
+            IW.Logger.Log($"[DailyRewardDataManager] => CalculateTimerStartTime: Timer adjusted by {deltaSeconds}s to fit min delay ({MIN_DELAY_BETWEEN_REWARDS})");
+            todayDayStart = todayDayStart.AddSeconds(deltaSeconds);
+        }
+        
         return todayDayStart;
     }
 
@@ -166,7 +175,7 @@ public class DailyRewardDataManager : ECSEntity, IDataManager, IDataLoader<List<
     {
         string userGroup = context.AbTestManager.Tests[AbTestName.DAILY_REWARD].UserGroup;
 
-        userGroup = "a";
+        // userGroup = "a";
         
         IW.Logger.Log($"[DailyRewardDataManager] => OnCompleteTimer: userGroup: {userGroup}");
         
