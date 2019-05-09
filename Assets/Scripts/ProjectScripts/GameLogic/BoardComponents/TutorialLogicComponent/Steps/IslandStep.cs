@@ -10,9 +10,12 @@ public class IslandStep : BaseTutorialStep
         
         base.Perform();
 
-        if (BoardService.Current.FirstBoard.BoardLogic.VIPIslandLogic.State != VIPIslandState.Fog) return;
+        var logic = BoardService.Current.FirstBoard.BoardLogic.VIPIslandLogic;
 
-		BoardService.Current.FirstBoard.BoardLogic.VIPIslandLogic.SpawnPieces();
+        if (logic.State != VIPIslandState.Fog) return;
+
+        logic.SpawnPieces();
+        logic.State = VIPIslandState.Broken;
         
         if (Context.Context.Manipulator.CameraManipulator.CameraMove.IsLocked == false)
         {
@@ -20,6 +23,6 @@ public class IslandStep : BaseTutorialStep
             Context.Context.Manipulator.CameraManipulator.MoveTo(position);
         }
         
-        DOTween.Sequence().InsertCallback(1f, () => BoardService.Current.FirstBoard.BoardLogic.VIPIslandLogic.UpdateView(VIPIslandState.Broken, true));
+        DOTween.Sequence().InsertCallback(1f, () => logic.UpdateView(VIPIslandState.Broken, true));
     }
 }
