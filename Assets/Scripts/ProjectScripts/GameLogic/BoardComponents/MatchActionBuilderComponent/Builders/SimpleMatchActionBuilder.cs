@@ -51,7 +51,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
             
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, matchDescription);
 
-        bool isEffective = matchField.Count > 0 && matchField.Count % 5 == 0;
+        bool isEffective = matchField.Count >= 15 || (matchField.Count > 0 && matchField.Count % 5 == 0);
         GameDataService.Current.UserProfile.BaseInformation.MatchesCounter.AddMatch(isEffective);
         
         // collect and purchase rewards before action
