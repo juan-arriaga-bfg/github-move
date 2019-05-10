@@ -105,32 +105,24 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             var current = ProfileService.Current.GetStorageItem(def.Currency).Amount;
 
             string message;
-            string color;
-            bool mark;
 
             if (order.State == OrderState.InProgress || order.State == OrderState.Complete)
             {
-                mark = false;
-                message = string.Empty;
-            }
-            else if (current >= def.Amount)
-            {
-                mark = true;
                 message = string.Empty;
             }
             else
             {
-                mark = false;
-                color = "EC5928";
-                message = $"<color=#{color}>{current}</color><size=45>/{def.Amount}</size>";
+                
+                var color = current >= def.Amount ? "00D46C" : "EC5928";
+                var currentMessage = $"<color=#{color}><font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR {(current >= def.Amount ? "SubtitleGreenFinal" : "SubtitleFinal")}\">{current}</font></color>";
+                message = $"{currentMessage}<size=45>/{def.Amount}</size>";
             }
 
-            var entity = new UIOrderIngredientElementEntity
+            var entity = new UISimpleScrollElementEntity
             {
                 ContentId = def.Currency,
                 LabelText = message,
                 Alpha = alpha,
-                Mark = mark,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
             };
@@ -215,8 +207,8 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             
             for (int i = innerElements.size - 1; i >= 0; i--)
             {
-                var innerElement = innerElements[i] as UIOrderIngredientElementViewController;
-                var innerElementEntity = innerElement.Entity as UIOrderIngredientElementEntity;
+                var innerElement = innerElements[i] as UISimpleScrollElementViewController;
+                var innerElementEntity = innerElement.Entity as UISimpleScrollElementEntity;
                 
                 var index = innerElements.size - 1 - i;
                 
