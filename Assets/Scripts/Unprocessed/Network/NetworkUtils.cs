@@ -44,8 +44,8 @@ public class NetworkUtils
         if (backendSettings.Host == null)
         // if (true)
         {
-            backendSettings.Host = "http://127.0.0.1:8080/nodejs101";              // Localhost
-            // backendSettings.Host = "http://134.17.4.143/nodejs101";             // Neskinsoft
+//            backendSettings.Host = "http://127.0.0.1:8080/nodejs101";              // Localhost
+            backendSettings.Host = "http://134.17.4.143/nodejs101";             // Neskinsoft
             // backendSettings.Host = "https://f2p-qa.bigfishgames.com/nodejs101"; // Bfg QA
         }
     }
