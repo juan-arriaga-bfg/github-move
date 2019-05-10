@@ -50,8 +50,9 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         };
             
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, matchDescription);
-        
-        GameDataService.Current.UserProfile.BaseInformation.MatchesCounter.AddMatch(matchField.Count >= 5);
+
+        bool isEffective = matchField.Count > 0 && matchField.Count % 5 == 0;
+        GameDataService.Current.UserProfile.BaseInformation.MatchesCounter.AddMatch(isEffective);
         
         // collect and purchase rewards before action
         return CreateAction(nextPieces, matchField, position, pieceType, ignoreBoost);
