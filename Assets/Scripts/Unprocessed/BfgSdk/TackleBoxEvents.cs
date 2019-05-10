@@ -5,8 +5,6 @@ using UnityEngine;
 
 public static class TackleBoxEvents
 {
-    private static bool isGameLaunchSent;
-    
     private static void Send(string id)
     {
         Debug.Log($"[TackleBoxEvents] => Send: {id}");
@@ -34,18 +32,6 @@ public static class TackleBoxEvents
     public static void SendEnergyClosed()
     {
         Send("energy_closed");
-    }
-
-    public static void SendGameLaunched()
-    {
-        if (isGameLaunchSent)
-        {
-            return;
-        }
-
-        Send("game_launched");
-        
-        isGameLaunchSent = true;
     }
 
     public static void SendGameResumed()
