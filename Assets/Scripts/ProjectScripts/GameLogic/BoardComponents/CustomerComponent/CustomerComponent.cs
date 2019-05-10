@@ -112,10 +112,10 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
     
     private void CreateOrder()
     {
-        NSAudioService.Current.Play(SoundId.OrderAppear);
-
         if (GameDataService.Current.OrdersManager.GetOrder(pieceContext.PieceType, out Order)) RestartCooldown();
         if (Order == null) return;
+        
+        NSAudioService.Current.Play(SoundId.OrderAppear);
         
         Timer.Delay = Order.Def.Delay;
         UpdateState(OrderState.Waiting);
