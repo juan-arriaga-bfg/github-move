@@ -179,9 +179,16 @@ public class EventGamesLogicComponent : ECSEntity, ILockerComponent
         for (var i = waiting.Count - 1; i >= 0; i--)
         {
             var game = waiting[i];
-            
-            if(game.StartTimeLong > now) continue;
 
+            if (game.StartTimeLong > now) continue;
+
+            if ((game.State == EventGameState.Default || game.State == EventGameState.Start) &&
+                game.EndTime.ConvertToUnixTime() <= now)
+            {
+                waiting.Remove(game);
+                continue;
+            }
+            
             game.State = EventGameState.Start;
             waiting.Remove(game);
             AddEventGame(game);
