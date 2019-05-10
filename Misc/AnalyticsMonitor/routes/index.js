@@ -7,8 +7,18 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Analytics monitor' });
 });
 
-router.get('/hacked-analytics/*', function(req, res, next) {
-    dataParser.add(req.url);
+router.post('/hacked-analytics/*', function(req, res, next) {
+    dataParser.add(req.body.data);
+    res.status(200).send("OK");
+});
+
+router.post('/hacked-analytics/', function(req, res, next) {
+    dataParser.add(req.body.data);
+    res.status(200).send("OK");
+});
+
+router.post('/hacked-analytics', function(req, res, next) {
+    dataParser.add(req.body.data);
     res.status(200).send("OK");
 });
 

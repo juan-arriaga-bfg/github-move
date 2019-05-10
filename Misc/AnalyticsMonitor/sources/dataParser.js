@@ -2,89 +2,44 @@
  * Created by keht on 23.12.2016.
  */
 
-var url = require("url");
-const querystring = require('querystring');
-var _ = require('underscore');
+const _ = require('underscore');
+const moment = require('moment');
 
-// Keep in sync with RobinHoodPuzzle\Assets\Scripts\RobinHood\BigFish\Analytics\AnalyticsController.cs
-var sets = {
-    BasicSet: [
-        'BFGUDID',
-        'raveID',
-        'googleAdvertisingId',
-        'androidId',
-        'platform',
-        'appVersion',
-        'appBuildVersion',
-        'sessionID',
-        'playSessionId',
-    ],
-    PlayerSet: [
-        'userlvl',
-        'maxlevel',
-        'timeplayed',
-        'ispaying',
-        'isfb',
-        'abgroup',
-        'ischeat',
-    ],
-    EconomySet: [
-        'premiumbal',
-        'itemid',
-        'sourceid',
-        'tierid',
-        'txnid',
-        'crbal',
-        'johnbal',
-        'ltbal',
-        'stonebal',
-        'lifebal',
-        'item_name',
-        'bundle_id',
-        'free_boost',
-    ],
-    ProgressionSet: [
-        'boost',
-        'restart',
-        'abandon',
-        'extra_moves',
-        'req_build',
-        'req_collect',
-        'req_score',
-        'req_moves',
-        'req_free_cells',
-        'storage_usage',
-        'cr_inv',
-        'lt_inv',
-        'john_inv',
-        'lvl_type',
-        'sheriff_attacks',
-        'blackknight_attacks',
-        'lighting_on_bomb_count',
-        'defuse_bomb_count',
-    ],
-    SocialSet: [
-        'login_channel'
-    ],
-};
+let dataId = 0;
 
-// Keep in sync with RobinHoodPuzzle\Assets\Scripts\RobinHood\BigFish\Analytics\AnalyticsController.cs
-var setsList = [
-    'BasicSet',
-    'PlayerSet',
-    'EconomySet',
-    'ProgressionSet',
-    'SocialSet',
-    'Unknown'
+const setsList = [
+    'flags',
+    'userstats',
+    'balances',
+    'standart',
+    'abtest',
+    'story',
+    'location'
 ];
+
+const mainParamsList = [
+    'eventName',
+    'name',
+    'type',
+    'action',
+];
+
+function toTitleCase(str) {
+    str = str.toLowerCase().split(' ');
+    for (var i = 0; i < str.length; i++) {
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+    }
+    return str.join(' ');
+}
 
 // Тут храним все поступившие данные (то что отправляет игра)
 var data = [];
 
 function add(url) {
+    const id = ++dataId;
     data.push({
-            id : data.length,
-            data : formatItem(url, data.length)
+            id : id,
+            data : formatItem(url, id)
         });
     console.log("New data recieved!")
 }
@@ -105,38 +60,58 @@ function get(idToStart) {
     return ret;
 }
 
+function replacer(match, pIndent, pKey, pVal, pEnd) {
+        var key = '<span class=json-key>';
+        var val = '<span class=json-value>';
+        var str = '<span class=json-string>';
+        var r = pIndent || '';
+        if (pKey)
+            r = r + key + pKey.replace(/[": ]/g, '') + '</span>: ';
+        if (pVal)
+            r = r + (pVal[0] == '"' ? str : val) + pVal + '</span>';
+        return r + (pEnd || '');
+    };
+
+function prettyPrint(obj) {
+    var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
+    return JSON.stringify(obj, null, 3)
+        .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
+        .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(jsonLine, replacer);
+};
+
+
 // Парсим урл из игры и превращаем его в красивый хтмл. На выходе - один элемент в таблице.
 function formatItem(data, id) {
     //data = "http://stackoverflow.com/" + "api/v1/2e784f89d0bf43b7b824607a5c4cae22/evt/?s=0&ts=1482491194&n=dialog_rave_stuck&v=0&l=1&st1=custom&st2=dialog&st3=closed&data=eyJHQUlEIjoic29tZV9nb29nbGVfYWR2ZXJ0aXNpbmdfaWQiLCJyYXZlSUQiOiI4OGYzN2JhOWJjZTc0YWM1ODQyN2MzMzViNDk0ODk1NyIsInRpbWVwbGF5ZWQiOiIxODgiLCJzdG9uZWJhbCI6IjAiLCJzZXNzaW9uSWQiOiI5MTEyYzZiYy02ZTRlLTQ2Y2EtOGQ1Yy1jY2Q2OTQ5NTI3MTciLCJiZmd1ZGlkIjoiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCIsImlzcGF5aW5nIjoiMCIsImlzY2hlYXQiOiIwIiwibGlmZWJhbCI6IjUiLCJwbGF0Zm9ybSI6ImFuZHJvaWQiLCJidWlsZCI6Ijk3IiwiYXBwVmVyc2lvbiI6IjEuMS4wIiwiYWJncm91cCI6IjEiLCJpc2ZiIjoiMCIsInByZW1pdW1iYWwiOiIwIiwiY3JiYWwiOiIwIiwibWF4bGV2ZWwiOiIxLTEiLCJsdGJhbCI6IjAiLCJqb2huYmFsIjoiMCJ9";
-    var parsedUrl = url.parse(data);
-    var params = querystring.parse(parsedUrl.query);
-
-    var mainParams = {
-        header: "Fields",
-        st1: params['st1'],
-        st2: params['st2'],
-        st3: params['st3'],
-        n: params['n'],
-        v: params['v'],
-        l: params['l'],
+    const params = data['eventData'];
+    const mainParams = {
+        header: "Main Fields",
+        eventName: params['details1'],
+        name: params['name'] ? params['name'] : 'null',
+        type: params['type'] ? params['type'] : 'null',
+        action: params['action'] ? params['action'] : 'null'
     };
 
-    var timestamp = {
-        id: id + '</br>' + timeConverter(params['ts'])
+    const now = moment();
+    const timestamp = {
+        id: id + '</br>' + now.format("DD.MM.YYYY") + '</br>' + now.format("HH:mm:ss")
     };
 
-    var b64string = params['data'];
-    var decodedData = Buffer.from(b64string, 'base64');
-    var jsonParams = JSON.parse(decodedData);
+    let ret = '';
 
-    var ret = '';
+    ret +=
+        '<head>' +
+        '<link rel="stylesheet" href="/stylesheets/table-entry.css" />' +
+        '<link rel="stylesheet" href="/stylesheets/json-highlight.css" />' +
+        '<script src="javascripts/rowTools.js"></script>' +
+        '</head>';
 
-    ret += '<head></head><link rel="stylesheet" href="/stylesheets/table-entry.css" /><script src="javascripts/rowTools.js"></script></head>';
     ret += openDiv(id);
     ret += openTable();
     ret += renderColumn(timestamp);
     ret += renderColumn(mainParams);
-    ret += renderJsonSets(jsonParams);
+    ret += renderJsonSets(params);
     ret += closeTable();
     ret += addTools(id);
     ret += addBr();
@@ -148,63 +123,52 @@ function formatItem(data, id) {
 
 // Парсим json sets
 function renderJsonSets(jsonParams) {
-    var ret = "";
-    var generatedSets = {};
+    let ret = "";
+    const generatedSets = {};
 
     // Собираем реальные значения из джейсона
-    var keys = [];
-    var values = [];
+    const keys = [];
+    const values = [];
 
-    for (var key in jsonParams) {
+    for (let key in jsonParams) {
         if (jsonParams.hasOwnProperty(key)) {
             keys.push(key);
             values.push(jsonParams[key]);
         }
     }
 
-    // Инициализируем выходной массив  // BasicSet, PlayerSet ...
-    for (var predefinedSetKey in sets) {
-        if (sets.hasOwnProperty(predefinedSetKey)) {
-            generatedSets[predefinedSetKey] = [];
-            generatedSets[predefinedSetKey].push({ header : predefinedSetKey});
-        }
+    for (let i = 0; i < setsList.length; i++) {
+        let key = setsList[i];
+        generatedSets[key] = [{ header : toTitleCase(key)}];
     }
-    generatedSets['Unknown'] = [];
-    generatedSets['Unknown'].push({header : 'Unknown'});
+
+    generatedSets['Unknown'] = [{header : 'Other'}];
 
     // Пробегаемся по полям, ищем к какому сету они относятся и добавляем
-    for (var i = 0; i < keys.length; i++) {
-        var key = keys[i];
-        var value = values[i];
-        var item = {};
-        item[key] = value;
+    for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        const value = values[i];
 
-        var isAssigned = false;
-        for (var predefinedSetKey in sets) {   // BasicSet, PlayerSet ...
-            if (sets.hasOwnProperty(predefinedSetKey)) {
-                var predefinedValues = sets[predefinedSetKey];
+        // const valueJsonStr = JSON.stringify(value, null, 1);
+        //let valueHl = valueJsonStr.replace(/\n/g, '</br>').replace(/\n/g, '</br>;');
 
-                if (_.contains(predefinedValues, key)) {
-                    if (!generatedSets[predefinedSetKey]) {
-                        generatedSets[predefinedSetKey] = [];
-                        generatedSets[predefinedSetKey].push({ header : predefinedSetKey});
-                    }
-                    generatedSets[predefinedSetKey].push( item );
 
-                    isAssigned = true;
-                    break;
-                }
+        let valueHl = prettyPrint(value).replace(/\n/g, '</br>').replace(/   /g, '&nbsp;&nbsp;');
+
+        let item = {};
+        item[key] = valueHl;
+
+        if (setsList.includes(key)) {
+            generatedSets[key].push(item);
+        } else {
+            if (!mainParamsList.includes(key)) {
+                generatedSets['Unknown'].push(item);
             }
-        }
-
-        // Не определенные ни в одну категорию айтемы попадают сюда
-        if (!isAssigned) {
-            generatedSets['Unknown'].push( item );
         }
     }
 
     // Генерим столбцы
-    for (var key in generatedSets) {
+    for (let key in generatedSets) {
         if (generatedSets.hasOwnProperty(key)) {
             ret += renderColumn(generatedSets[key]);
         }
@@ -271,7 +235,7 @@ function renderColumn(data) {
                     keys.push(key2);
                     values.push(item[key2]);
 
-                    if (key2 == 'header') {
+                    if (key2 === 'header') {
                         header = item[key2];
                     }
 
@@ -317,20 +281,6 @@ function renderColumn(data) {
 
     result += '</td>';
     return result;
-}
-
-
-function timeConverter(UNIX_timestamp){
-    var a = new Date(UNIX_timestamp * 1000);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours() >= 10 ? a.getHours() : '0' + a.getHours();
-    var min  = a.getMinutes() >= 10 ? a.getMinutes() : '0' + a.getMinutes();
-    var sec  = a.getSeconds() >= 10 ? a.getSeconds() : '0' + a.getSeconds();
-    var time = /*date + ' ' + month + ' ' + year + ' ' + */hour + ':' + min + ':' + sec ;
-    return time;
 }
 
 exports.add = add;
