@@ -7,14 +7,6 @@ namespace BfgAnalytics
 {
     public static class Analytics
     {
-        // Fields naming
-        // st1 - details1 - category= economy
-        // st2 - details2 - type
-        // st3 - details3 - name
-        // n   - name     - action
-        // l   - level    - placeholder
-        // v   - value    - value
-
         // https://docs.google.com/spreadsheets/d/1zMj09QQnhSDSs9hYdzrmM02KO044h853QaPOdFqLimc/edit#gid=1419311239
         
         public static JsonDataGroup DefaultJsonData()
@@ -29,76 +21,75 @@ namespace BfgAnalytics
         
         public static void SendQuestStartEvent(string questId)
         {
-            AnalyticsService.Current?.Event("progress", "quest", questId, "start", DefaultJsonData());
+            AnalyticsService.Current?.Event(questId, "quest", "start", DefaultJsonData());
         }
         
-        public static void SendQuestCompletedEvent(string id)
+        public static void SendQuestCompletedEvent(string questId)
         {
-            AnalyticsService.Current?.Event("progress", "quest", id, "end", DefaultJsonData());
+            AnalyticsService.Current?.Event(questId, "quest", "end", DefaultJsonData());
         }
         
-        public static void SendPieceUnlockedEvent(string id)
+        public static void SendPieceUnlockedEvent(string pieceId)
         {
-            AnalyticsService.Current?.Event("progress", "piece", id, "unlock", DefaultJsonData());
+            AnalyticsService.Current?.Event(pieceId, "piece", "unlock", DefaultJsonData());
         }
         
-        public static void SendCharUnlockedEvent(string id)
+        public static void SendCharUnlockedEvent(string charId)
         {
-            AnalyticsService.Current?.Event("progress", "character", id, "unlock", DefaultJsonData());
+            AnalyticsService.Current?.Event(charId, "character", "unlock", DefaultJsonData());
         }
         
-        public static void SendFogClearedEvent(string id)
+        public static void SendFogClearedEvent(string fogId)
         {
-            AnalyticsService.Current?.Event("progress", "fog", id, "unlock", DefaultJsonData());
+            AnalyticsService.Current?.Event(fogId, "fog", "unlock", DefaultJsonData());
         }
         
         public static void SendLevelReachedEvent(int level)
         {
-            AnalyticsService.Current?.Event("progress", "level", level.ToString(), null, DefaultJsonData());
+            AnalyticsService.Current?.Event(level.ToString(), "level",null, DefaultJsonData());
         }
 
-		public static void SendTutorialStartStepEvent(string name)
+		public static void SendTutorialStartStepEvent(string stepName)
         {   
-            JSONNode customJsonData = new JSONObject();
-            JSONNode ctrNode = new JSONObject();
+            JSONObject customJsonData = new JSONObject();
+            JSONObject ctrNode = new JSONObject();
 
             customJsonData["ctr"] = ctrNode;
 
             ctrNode["seconds"] = 0;
             
-            AnalyticsService.Current?.Event("ftue", null, name, "start", TutorialJsonData(), customJsonData);
+            AnalyticsService.Current?.Event(stepName, "ftue", "start", TutorialJsonData(), customJsonData);
         }
 
-        public static void SendTutorialEndStepEvent(string name, DateTime startTime)
+        public static void SendTutorialEndStepEvent(string stepName, DateTime startTime)
         {
-            JSONNode customJsonData = new JSONObject();
-            JSONNode ctrNode = new JSONObject();
+            JSONObject customJsonData = new JSONObject();
+            JSONObject ctrNode = new JSONObject();
 
             customJsonData["ctr"] = ctrNode;
 
             var seconds = (DateTime.UtcNow - startTime).TotalSeconds;
             ctrNode["seconds"] = (int)Math.Round(seconds);
             
-            AnalyticsService.Current?.Event("ftue", null, name, "end", TutorialJsonData(), customJsonData);
+            AnalyticsService.Current?.Event(stepName, "ftue", "end", TutorialJsonData(), customJsonData);
         }
         
         public static void SendPurchase(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
         {
-            JSONNode customJsonData = CreateTransaction(location, reason, spend, collect, isIap, isFree);
+            JSONObject customJsonData = CreateTransaction(location, reason, spend, collect, isIap, isFree);
 
-            // todo: Договориться насчет type, name, action
-            AnalyticsService.Current?.Event("economy", null, null, null, DefaultJsonData(), customJsonData);
+            AnalyticsService.Current?.Event("economy", null, null, DefaultJsonData(), customJsonData);
         }
         
         public static void SendDailyRewardClaim(int day)
         {
-            AnalyticsService.Current?.Event("activity", "dailyreward", day.ToString(), null, DefaultJsonData());
+            AnalyticsService.Current?.Event(day.ToString(), "dailyreward",null, DefaultJsonData());
         }
 
-        private static JSONNode CreateTransaction(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
+        private static JSONObject CreateTransaction(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
         {
-            JSONNode customJsonData = new JSONObject();
-            JSONNode transactionNode = new JSONObject();
+            JSONObject customJsonData = new JSONObject();
+            JSONObject transactionNode = new JSONObject();
             
             transactionNode["location"] = location;
             transactionNode["reason"] = reason;
@@ -127,18 +118,18 @@ namespace BfgAnalytics
         /// </summary>
         /// <param name="currencies"></param>
         /// <returns></returns>
-        private static JSONNode CreateCurrenciesJson(List<CurrencyPair> currencies)
+        private static JSONObject CreateCurrenciesJson(List<CurrencyPair> currencies)
         {
-            JSONNode CreateCurrencyNode(CurrencyPair pair)
+            JSONObject CreateCurrencyNode(CurrencyPair pair)
             {
-                JSONNode node = new JSONObject();
+                JSONObject node = new JSONObject();
                 node[pair.Currency] = new JSONNumber(pair.Amount);
                 return node;
             }
             
             var ret = new JSONObject();
-            var premium = new JSONArray();
-            var soft = new JSONArray();
+            var premium = new JSONObject();
+            var soft = new JSONObject();
 
             foreach (var pair in currencies)
             {
@@ -146,13 +137,13 @@ namespace BfgAnalytics
                 
                 if (pair.Currency == Currency.Crystals.Name)
                 {
-                    premium.Add(CreateCurrencyNode(pair));
+                    premium[pair.Currency] = pair.Amount;
                     continue;
                 }
 
                 if (pair.Currency == Currency.Coins.Name)
                 {
-                    soft.Add(CreateCurrencyNode(pair));
+                    soft[pair.Currency] = pair.Amount;
                     continue;
                 }
             }

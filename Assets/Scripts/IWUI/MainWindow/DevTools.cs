@@ -396,6 +396,8 @@ public class DevTools : UIContainerElementViewController
     {
         Debug.Log("OnDebug2Click");
         
+        Analytics.SendQuestCompletedEvent("SomeQuestId");
+        
         GameDataService.Current.QuestsManager.StartNewDailyQuest();
         return;
         

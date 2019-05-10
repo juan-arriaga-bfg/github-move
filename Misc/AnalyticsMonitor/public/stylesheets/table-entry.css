@@ -1,0 +1,26 @@
+table {
+    border-collapse: collapse;
+    font-family: monospace;
+    font-size: 10pt;
+}
+
+td, th {
+    border: 1px solid #999;
+    padding: 0.5rem;
+    vertical-align: top;
+    text-align: left;
+}
+
+a {
+    font-size: 10pt;
+    outline: 0;
+    text-decoration: underline;
+    color: #0099FF;
+}
+
+a:hover {
+    font-size: 10pt;
+    outline: 0;
+    text-decoration: underline;
+    color: #1712ff;
+}

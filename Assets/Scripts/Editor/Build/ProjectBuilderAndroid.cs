@@ -56,6 +56,8 @@ public class ProjectBuilderAndroid
             .AddPostBuildAction(new BuildActionReplaceBfgLibWithDebugVersion()) // optional
                        
             .AddPostBuildAction(new BuildActionCopyNotificationIcons()) // optional
+            
+            .AddPostBuildAction(new BuildActionInstallSSLHack())
                        
             .AddPostBuildAction(new BuildActionInstallGradleWrapper())
             .AddPostBuildAction(new BuildActionReset())

@@ -12,7 +12,7 @@ namespace BfgAnalytics
     {
         public bool IsEnabled { get; set; }
         
-        private JsonDataGenerator jsonDataGenerator;
+        private readonly JsonDataGenerator jsonDataGenerator;
 
         [UsedImplicitly]
         private string IdentJson(string json)
@@ -38,83 +38,64 @@ namespace BfgAnalytics
                .RegisterCollector(new JsonDataCollectorAbTest(),    JsonDataGroup.Abtest);
         }
 
-        public void Event(string category,
+        public void Event(string name,
                           string type,
-                          string name,
                           string action,
                           JsonDataGroup jsonDataGroups = JsonDataGroup.None,
-                          long placeholder = 1,
-                          long value = 0,
-                          JSONNode customData = null)
+                          JSONObject customData = null)
         {
             try
             {
-                string st1 = category.ToLower();
-                string st2 = string.IsNullOrEmpty(type) ? null : type.ToLower();
-                string st3 = string.IsNullOrEmpty(name) ? null : name.ToLower();
-
                 if (!IsEnabled)
                 {
-                    Debug.Log($"[BfgAnalyticsManager] => WARNING! Analytics Event call when IsEnabled == false for: {st1} | {st2} | {st3}");
+                    Debug.Log($"[BfgAnalyticsManager] => WARNING! Analytics Event call when IsEnabled == false for: {name} | {type} | {action}");
                     return;
                 }
 
-                string jsonData = jsonDataGenerator.CollectData(jsonDataGroups, customData);
+                name   = name?.ToLower();
+                type   = type?.ToLower();
+                action = action?.ToLower();
+                
+                customData = customData ?? new JSONObject();
 
+                if (type != null)
+                {
+                    customData["type"] = type;
+                }
+                
+                if (action != null)
+                {
+                    customData["action"] = action;
+                }
+
+                string test = customData.ToString();
+                
+                string jsonData = jsonDataGenerator.CollectData(jsonDataGroups, customData);
+                
                 bool isOk = false;
                 do
                 {
-                    if (string.IsNullOrEmpty(st1))
+                    if (string.IsNullOrEmpty(name))
                     {
-                        Debug.LogError("[BfgAnalyticsManager] => category is none");
+                        Debug.LogErrorFormat("[BfgAnalyticsManager] => Event: 'name' is required but null or empty value provided");
                         break;
                     }
-
-                    // if (string.IsNullOrEmpty(st2) && !string.IsNullOrEmpty(st3))
-                    // {
-                    //     Debug.LogError("[BfgAnalyticsManager] => 'type' is not set but 'name' has a value");
-                    //     break;
-                    // }
-
-                    if (st1.Length > 31)
+                    
+                    if (name.Length > 31)
                     {
-                        Debug.LogErrorFormat("[BfgAnalyticsManager] => Event: 'category' too long: {0}", st1);
+                        Debug.LogErrorFormat("[BfgAnalyticsManager] => Event: 'name' too long: {0}", name);
                         break;
                     }
-
-                    if (st2 != null && st2.Length > 31)
+                    
+                    if (type != null && type.Length > 31)
                     {
-                        Debug.LogErrorFormat("[BfgAnalyticsManager] => Event: 'type' too long: {0}", st2);
+                        Debug.LogErrorFormat("[BfgAnalyticsManager] => Event: 'type' too long: {0}", type);
                         break;
                     }
-
-                    if (st3 != null && st3.Length > 31)
-                    {
-                        Debug.LogErrorFormat("[BfgAnalyticsManager] => Event: 'name' too long: {0}", st3);
-                        break;
-                    }
-
-                    // if (string.IsNullOrEmpty(action))
-                    // {
-                    //     Debug.LogError("[BfgAnalyticsManager] => 'action' field is required");
-                    //     break;
-                    // }
-
+                    
                     if (action != null && action.Length > 31)
                     {
                         Debug.LogErrorFormat("[BfgAnalyticsManager] => 'action' field too long: '{0}'", action);
-                        break;
-                    }
-
-                    if (!(placeholder >= 0 && placeholder <= 255))
-                    {
-                        Debug.LogError("[BfgAnalyticsManager] => 'placeholder' value must be in 0-255");
-                        break;
-                    }
-
-                    if (!(placeholder >= 0 && placeholder <= 255))
-                    {
-                        Debug.LogError("[BfgAnalyticsManager] => 'placeholder' value must be in 0-255");
                         break;
                     }
 
@@ -129,21 +110,14 @@ namespace BfgAnalytics
                 if (isOk)
                 {
 #if DEBUG
-                    Debug.Log($"[BfgAnalyticsManager] => Event: category: {st1}, type:{st2}, name:{st3}, action: {action}, placeholder: {placeholder}, value: {value}, data: {jsonDataGroups.PrettyPrint()}");
+                    Debug.Log($"[BfgAnalyticsManager] => Event: type: '{type ?? "null"}', action: '{action ?? "null"}', name: '{name}', data groups: {jsonDataGroups.PrettyPrint()}");
     #if DEBUG_PRINT_SETS
                     Debug.Log($"[BfgAnalyticsManager] => Data:\n{IdentJson(jsonData)}");
     #endif
 #endif
 
 #if !UNITY_EDITOR
-                    // Fields naming
-                    // st1 - details1 - category
-                    // st2 - details2 - type
-                    // st3 - details3 - name
-                    // n   - name     - action
-                    // l   - placeholder    - placeholder
-                    // v   - value    - value
-                    bfgGameReporting.logCustomEventSerialized(action,value,placeholder,st1, st2, st3, jsonData);
+                    bfgGameReporting.logCustomEventSerialized(name, 0,0,null, null, null, jsonData);
 #endif
                 }
             }
@@ -151,15 +125,7 @@ namespace BfgAnalytics
             {
                 Debug.LogError("[BfgAnalyticsManager] => " + e);
             }
-            finally
-            {
-                //
-            }
         }
 
-        public void Event(string category, string type, string name, string action, JsonDataGroup jsonDataGroups, JSONNode customJsonData)
-        {
-            Event(category, type, name, action, jsonDataGroups, 1, 0, customJsonData);
-        }
     }
 }
