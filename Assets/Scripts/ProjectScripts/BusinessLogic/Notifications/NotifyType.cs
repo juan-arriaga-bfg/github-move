@@ -145,7 +145,7 @@ public class NotifyType
             var resultNotifiers = new List<Notifier>();
             foreach (var notifier in notifiers)
             {
-                if (notifier.Timer.CompleteTime - notifier.Timer.StartTime > new TimeSpan(0, 0, 2))
+                if (notifier.Timer.CompleteTime - notifier.Timer.StartTime > TimeSpan.FromSeconds(WorkerCurrencyLogicComponent.MinDelay))
                 {
                     resultNotifiers.Add(notifier);
                 }
@@ -182,7 +182,10 @@ public class NotifyType
                 
             foreach (var notifier in notifiers)
             {
-                if(LocalNotificationsService.Current.CorrectTime(DailyTimeout.TimeCorrector(notifier.Timer.CompleteTime)).Day == DateTime.UtcNow.Day)
+                var leftTime = notifier.Timer.CompleteTime.GetTimeLeft(notifier.Timer.UseUTC);
+                var localCorrect = DailyTimeout.TimeCorrector(DateTime.Now + leftTime);
+                var globalCorrect = LocalNotificationsService.Current.CorrectTime(localCorrect);
+                if (globalCorrect.Day == DateTime.UtcNow.Day)
                     resultNotifiers.Add(notifier);
             }
     

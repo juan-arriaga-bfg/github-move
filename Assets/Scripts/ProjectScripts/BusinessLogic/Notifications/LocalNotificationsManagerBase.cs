@@ -9,7 +9,6 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
     private List<Notifier> notifiers = new List<Notifier>();
     protected List<Notification> notifyItems = new List<Notification>();
 
-    public readonly TimeSpan NightBeginTime = new TimeSpan(24, 00, 00);
     public readonly TimeSpan NightEndTime   = new TimeSpan(8, 0, 0);
     public readonly TimeSpan MinimalTimeout = new TimeSpan(0, 2,0);
 
@@ -198,7 +197,7 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
         
         if (notifier.Timer != null)
         {
-            notifyDate = notifier.Timer.UseUTC ? notifier.Timer.CompleteTime.ToLocalTime() : notifier.Timer.CompleteTime;
+            notifyDate = DateTime.Now + notifier.Timer.CompleteTime.GetTimeLeft(notifier.Timer.UseUTC);
             if (notifier.NotifyType.TimeCorrector != null)
             {
                 notifyDate = notifier.NotifyType.TimeCorrector(notifyDate);
@@ -217,12 +216,8 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
         }
             
         var time = new TimeSpan(notifyDate.Hour, notifyDate.Minute, notifyDate.Second);
-        if (time >= NightBeginTime)
-        {
-            notifyDate = notifyDate.AddDays(1);
-            notifyDate = new DateTime(notifyDate.Year, notifyDate.Month, notifyDate.Day, NightEndTime.Hours, NightEndTime.Minutes, NightEndTime.Seconds);
-        }
-        else if(time < NightEndTime)
+
+        if(time < NightEndTime)
         {
             notifyDate = new DateTime(notifyDate.Year, notifyDate.Month, notifyDate.Day, NightEndTime.Hours, NightEndTime.Minutes, NightEndTime.Seconds);
         }

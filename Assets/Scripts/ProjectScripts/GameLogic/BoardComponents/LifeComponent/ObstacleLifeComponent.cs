@@ -32,15 +32,8 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         base.OnRegisterEntity(entity);
         
         HP = Context.Context.BoardLogic.MatchDefinition.GetIndexInChain(Context.PieceType);
-
-        LocalNotificationsService.Current.RegisterNotifier(new Notifier(TimerWork, NotifyType.RemoveObstacleComplete));    
-    }
-
-    public override void OnUnRegisterEntity(ECSEntity entity)
-    {
-        base.OnUnRegisterEntity(entity);
         
-        LocalNotificationsService.Current.UnRegisterNotifier(TimerWork);    
+         
     }
 
     protected override LifeSaveItem InitInSave(BoardPosition position)
@@ -73,6 +66,15 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         base.OnAddToBoard(position, context);
         
         Context.AddView(ViewType.ObstacleProgress);
+        
+        LocalNotificationsService.Current.RegisterNotifier(new Notifier(TimerMain, NotifyType.RemoveObstacleComplete));
+    }
+
+    public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
+    {
+        base.OnRemoveFromBoard(position, context);
+        
+        LocalNotificationsService.Current.UnRegisterNotifier(TimerMain);
     }
 
     protected override Dictionary<int, int> GetRewards()

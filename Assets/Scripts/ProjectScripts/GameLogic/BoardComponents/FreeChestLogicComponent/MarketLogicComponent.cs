@@ -115,19 +115,14 @@ public class MarketLogicComponent : ECSEntity
             
             FreeEnergyServiceTimer.Delay = int.MaxValue;
             FreeEnergyExpireServiceTimer.Delay = int.MaxValue;
+            
+            FreeEnergyServiceTimer.Start();
+            FreeEnergyExpireServiceTimer.Start();
         }
         else
         {
             EnergySlotState state = CheckEnergySlot(out int resetDelay, out int claimDelay);
-            
-            FreeEnergyServiceTimer.Delay = resetDelay;
-            
-            FreeEnergyExpireServiceTimer.Delay = claimDelay;
-            if (claimDelay == -1)
-            {
-                int delayForClaim = GameDataService.Current.ConstantsManager.DelayToClaimFreeEnergy;
-                FreeEnergyExpireServiceTimer.Delay = resetDelay + delayForClaim;
-            }
+            UpdateServiceTimers(resetDelay, claimDelay);
             
             switch (state)
             {
@@ -149,9 +144,6 @@ public class MarketLogicComponent : ECSEntity
             }
         }
 
-        FreeEnergyServiceTimer.Start();
-        FreeEnergyExpireServiceTimer.Start();
-
         RegisterNotifiers();
     }
 
@@ -163,6 +155,21 @@ public class MarketLogicComponent : ECSEntity
             LocalNotificationsService.Current.RegisterNotifier(new Notifier(FreeEnergyServiceTimer, NotifyType.FreeEnergyRefreshComplete));
             LocalNotificationsService.Current.RegisterNotifier(new Notifier(FreeEnergyExpireServiceTimer, NotifyType.FreeEnergyTimeout));
         }
+    }
+
+    private void UpdateServiceTimers(int resetDelay, int claimDelay)
+    {
+        FreeEnergyServiceTimer.Delay = resetDelay;
+            
+        FreeEnergyExpireServiceTimer.Delay = claimDelay;
+        if (claimDelay == -1)
+        {
+            int delayForClaim = GameDataService.Current.ConstantsManager.DelayToClaimFreeEnergy;
+            FreeEnergyExpireServiceTimer.Delay = resetDelay + delayForClaim;
+        }
+        
+        FreeEnergyServiceTimer.Start();
+        FreeEnergyExpireServiceTimer.Start();
     }
     
     public void FreeEnergyClaim()
@@ -179,6 +186,8 @@ public class MarketLogicComponent : ECSEntity
         
         ResetEnergyTimer.Delay = resetDelay;
         ResetEnergyTimer.Start();
+        
+        UpdateServiceTimers(resetDelay, claimDelay);
         
         RegisterNotifiers();
     }
