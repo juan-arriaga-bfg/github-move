@@ -38,7 +38,8 @@ public class SimpleAndroidNotificationsLocalNotificationsManager : LocalNotifica
                 Title = item.Title,
                 Message = item.Message,
                 LargeIcon = NotificationIcon.ic_notification_large.ToString(),
-                SmallIcon = NotificationIcon.ic_notification_small
+                SmallIcon = NotificationIcon.ic_notification_small,
+                Vibration = new[] {400, 400, 400, 400}
             };
             
             NotificationManager.SendCustom(notificationParams);
