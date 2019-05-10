@@ -14,7 +14,8 @@ const setsList = [
     'standart',
     'abtest',
     'story',
-    'location'
+    'location',
+    'transaction'
 ];
 
 const mainParamsList = [

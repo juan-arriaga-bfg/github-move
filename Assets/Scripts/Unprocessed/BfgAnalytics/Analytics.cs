@@ -78,7 +78,7 @@ namespace BfgAnalytics
         {
             JSONObject customJsonData = CreateTransaction(location, reason, spend, collect, isIap, isFree);
 
-            AnalyticsService.Current?.Event("economy", null,null, null, DefaultJsonData(), customJsonData);
+            AnalyticsService.Current?.Event("economy", "economy",null, null, DefaultJsonData(), customJsonData);
         }
         
         public static void SendDailyRewardClaim(int day)

@@ -75,11 +75,11 @@ namespace BfgAnalytics
                 bool isOk = false;
                 do
                 {
-                    // if (string.IsNullOrEmpty(name))
-                    // {
-                    //     Debug.LogErrorFormat("[BfgAnalyticsManager] => Event: 'name' is required but null or empty value provided");
-                    //     break;
-                    // }
+                    if (string.IsNullOrEmpty(name))
+                    {
+                        Debug.LogErrorFormat("[BfgAnalyticsManager] => Event: 'name' is required but null or empty value provided");
+                        break;
+                    }
                     
                     if (string.IsNullOrEmpty(eventName))
                     {
