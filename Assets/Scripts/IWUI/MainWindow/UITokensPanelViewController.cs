@@ -152,17 +152,6 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
     
     public void OnClick()
     {
-        if (eventGame.State == EventGameState.Preview)
-        {
-            var model = UIService.Get.GetCachedModel<UIEventPreviewWindowModel>(UIWindowType.EventPreviewWindow);
-
-            model.Countdown = eventGame.TimeController;
-            
-            UIService.Get.ShowWindow(UIWindowType.EventPreviewWindow);
-            return;
-        }
-        
-        ProfileService.Current.QueueComponent.RemoveAction($"{eventGame.EventType.ToString()}_Window");
-        UIService.Get.ShowWindow(UIWindowType.EventWindow);
+        eventGame.OpenWindow(true);
     }
 }

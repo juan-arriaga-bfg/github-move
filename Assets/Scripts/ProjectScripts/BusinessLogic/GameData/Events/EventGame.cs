@@ -114,6 +114,8 @@ public class EventGame : ECSEntity
         TimeController.Delay = (int) (IntroTime - StartTime).TotalSeconds;
         TimeController.OnComplete = Progress;
         TimeController.Start(StartTime);
+        
+        OpenWindow(false);
     }
 
     private void Progress()
@@ -123,6 +125,7 @@ public class EventGame : ECSEntity
         TimeController.OnComplete = Complete;
         TimeController.Start(StartTime);
         context.OnStart?.Invoke(EventType);
+        OpenWindow(false);
     }
 
     public void Complete()
@@ -130,11 +133,35 @@ public class EventGame : ECSEntity
         TimeController.OnComplete = null;
         TimeController.Stop();
         State = EventGameState.Complete;
-        
-        DefaultSafeQueueBuilder.BuildAndRun($"{EventType.ToString()}_Window", true, () =>
+        OpenWindow(false);
+    }
+
+    public void OpenWindow(bool isFast)
+    {
+        ProfileService.Current.QueueComponent.RemoveAction($"{EventType.ToString()}_Window");
+
+        void open ()
         {
+            if (State == EventGameState.Preview)
+            {
+                var model = UIService.Get.GetCachedModel<UIEventPreviewWindowModel>(UIWindowType.EventPreviewWindow);
+
+                model.Countdown = TimeController;
+            
+                UIService.Get.ShowWindow(UIWindowType.EventPreviewWindow);
+                return;
+            }
+            
             UIService.Get.ShowWindow(UIWindowType.EventWindow);
-        });
+        }
+
+        if (isFast)
+        {
+            open();
+            return;
+        }
+        
+        DefaultSafeQueueBuilder.BuildAndRun($"{EventType.ToString()}_Window", true, open);
     }
     
     public void Finish()
