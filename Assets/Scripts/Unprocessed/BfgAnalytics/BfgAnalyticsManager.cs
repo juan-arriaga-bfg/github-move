@@ -38,7 +38,8 @@ namespace BfgAnalytics
                .RegisterCollector(new JsonDataCollectorAbTest(),    JsonDataGroup.Abtest);
         }
 
-        public void Event(string name,
+        public void Event(string eventName,
+                          string name,
                           string type,
                           string action,
                           JsonDataGroup jsonDataGroups = JsonDataGroup.None,
@@ -52,9 +53,10 @@ namespace BfgAnalytics
                     return;
                 }
 
-                name   = name?.ToLower();
-                type   = type?.ToLower();
-                action = action?.ToLower();
+                eventName = eventName?.ToLower();
+                name      = name?.ToLower();
+                type      = type?.ToLower();
+                action    = action?.ToLower();
                 
                 customData = customData ?? new JSONObject();
 
@@ -68,20 +70,24 @@ namespace BfgAnalytics
                     customData["action"] = action;
                 }
 
-                string test = customData.ToString();
-                
                 string jsonData = jsonDataGenerator.CollectData(jsonDataGroups, customData);
                 
                 bool isOk = false;
                 do
                 {
-                    if (string.IsNullOrEmpty(name))
+                    // if (string.IsNullOrEmpty(name))
+                    // {
+                    //     Debug.LogErrorFormat("[BfgAnalyticsManager] => Event: 'name' is required but null or empty value provided");
+                    //     break;
+                    // }
+                    
+                    if (string.IsNullOrEmpty(eventName))
                     {
-                        Debug.LogErrorFormat("[BfgAnalyticsManager] => Event: 'name' is required but null or empty value provided");
+                        Debug.LogErrorFormat("[BfgAnalyticsManager] => Event: 'eventName' is required but null or empty value provided");
                         break;
                     }
                     
-                    if (name.Length > 31)
+                    if (name != null && name.Length > 31)
                     {
                         Debug.LogErrorFormat("[BfgAnalyticsManager] => Event: 'name' too long: {0}", name);
                         break;
@@ -110,7 +116,7 @@ namespace BfgAnalytics
                 if (isOk)
                 {
 #if DEBUG
-                    Debug.Log($"[BfgAnalyticsManager] => Event: type: '{type ?? "null"}', action: '{action ?? "null"}', name: '{name}', data groups: {jsonDataGroups.PrettyPrint()}");
+                    Debug.Log($"[BfgAnalyticsManager] => Event: type: '{type ?? "null"}', action: '{action ?? "null"}', name: '{name ?? "null"}', data groups: {jsonDataGroups.PrettyPrint()}");
     #if DEBUG_PRINT_SETS
                     Debug.Log($"[BfgAnalyticsManager] => Data:\n{IdentJson(jsonData)}");
     #endif

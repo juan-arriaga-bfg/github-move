@@ -6,7 +6,8 @@ namespace BfgAnalytics
     {
         bool IsEnabled { get; set; }
 
-        void Event(string name,
+        void Event(string eventName, // details1
+                   string name,
                    string type,
                    string action,
                    JsonDataGroup jsonDataGroups = JsonDataGroup.None,

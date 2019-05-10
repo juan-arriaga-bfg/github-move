@@ -21,32 +21,32 @@ namespace BfgAnalytics
         
         public static void SendQuestStartEvent(string questId)
         {
-            AnalyticsService.Current?.Event(questId, "quest", "start", DefaultJsonData());
+            AnalyticsService.Current?.Event("progress", questId, "quest", "start", DefaultJsonData());
         }
         
         public static void SendQuestCompletedEvent(string questId)
         {
-            AnalyticsService.Current?.Event(questId, "quest", "end", DefaultJsonData());
+            AnalyticsService.Current?.Event("progress", questId, "quest", "end", DefaultJsonData());
         }
         
         public static void SendPieceUnlockedEvent(string pieceId)
         {
-            AnalyticsService.Current?.Event(pieceId, "piece", "unlock", DefaultJsonData());
+            AnalyticsService.Current?.Event("progress", pieceId, "piece", "unlock", DefaultJsonData());
         }
         
         public static void SendCharUnlockedEvent(string charId)
         {
-            AnalyticsService.Current?.Event(charId, "character", "unlock", DefaultJsonData());
+            AnalyticsService.Current?.Event("progress", charId, "character", "unlock", DefaultJsonData());
         }
         
         public static void SendFogClearedEvent(string fogId)
         {
-            AnalyticsService.Current?.Event(fogId, "fog", "unlock", DefaultJsonData());
+            AnalyticsService.Current?.Event("progress", fogId, "fog", "unlock", DefaultJsonData());
         }
         
         public static void SendLevelReachedEvent(int level)
         {
-            AnalyticsService.Current?.Event(level.ToString(), "level",null, DefaultJsonData());
+            AnalyticsService.Current?.Event("progress", level.ToString(), "level",null, DefaultJsonData());
         }
 
 		public static void SendTutorialStartStepEvent(string stepName)
@@ -58,7 +58,7 @@ namespace BfgAnalytics
 
             ctrNode["seconds"] = 0;
             
-            AnalyticsService.Current?.Event(stepName, "ftue", "start", TutorialJsonData(), customJsonData);
+            AnalyticsService.Current?.Event("ftue", stepName, "ftue", "start", TutorialJsonData(), customJsonData);
         }
 
         public static void SendTutorialEndStepEvent(string stepName, DateTime startTime)
@@ -71,19 +71,19 @@ namespace BfgAnalytics
             var seconds = (DateTime.UtcNow - startTime).TotalSeconds;
             ctrNode["seconds"] = (int)Math.Round(seconds);
             
-            AnalyticsService.Current?.Event(stepName, "ftue", "end", TutorialJsonData(), customJsonData);
+            AnalyticsService.Current?.Event("ftue", stepName, "ftue", "end", TutorialJsonData(), customJsonData);
         }
         
         public static void SendPurchase(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
         {
             JSONObject customJsonData = CreateTransaction(location, reason, spend, collect, isIap, isFree);
 
-            AnalyticsService.Current?.Event("economy", null, null, DefaultJsonData(), customJsonData);
+            AnalyticsService.Current?.Event("economy", null,null, null, DefaultJsonData(), customJsonData);
         }
         
         public static void SendDailyRewardClaim(int day)
         {
-            AnalyticsService.Current?.Event(day.ToString(), "dailyreward",null, DefaultJsonData());
+            AnalyticsService.Current?.Event("activity", day.ToString(), "dailyreward",null, DefaultJsonData());
         }
 
         private static JSONObject CreateTransaction(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
