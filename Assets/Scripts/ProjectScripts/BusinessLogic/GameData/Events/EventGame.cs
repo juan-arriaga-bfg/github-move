@@ -115,7 +115,7 @@ public class EventGame : ECSEntity
         TimeController.OnComplete = Progress;
         TimeController.Start(StartTime);
         
-        OpenWindow(false);
+        if (IntroTime.ConvertToUnixTime() > SecuredTimeService.Current.UtcNow.ConvertToUnixTime()) OpenWindow(false);
     }
 
     private void Progress()
@@ -125,7 +125,8 @@ public class EventGame : ECSEntity
         TimeController.OnComplete = Complete;
         TimeController.Start(StartTime);
         context.OnStart?.Invoke(EventType);
-        OpenWindow(false);
+        
+        if (EndTime.ConvertToUnixTime() > SecuredTimeService.Current.UtcNow.ConvertToUnixTime()) OpenWindow(false);
     }
 
     public void Complete()
