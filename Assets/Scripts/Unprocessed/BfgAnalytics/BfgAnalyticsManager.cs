@@ -123,7 +123,7 @@ namespace BfgAnalytics
 #endif
 
 #if !UNITY_EDITOR
-                    bfgGameReporting.logCustomEventSerialized(name, 0,0,null, null, null, jsonData);
+                    bfgGameReporting.logCustomEventSerialized(name, 0,0, eventName, null, null, jsonData);
 #endif
                 }
             }
