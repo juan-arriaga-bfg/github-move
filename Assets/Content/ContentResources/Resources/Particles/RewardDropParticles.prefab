@@ -47,10 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99202a8b676b4890872a08c801c8cef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastBoardPosition:
-    X: 0
-    Y: 0
-    Z: 0
   cachedSortingGroup: {fileID: 0}
   IsFading: 0
   FadeValue: 0
@@ -1379,7 +1375,7 @@ ParticleSystem:
         serializedVersion: 2
         key0: {r: 0.96855664, g: 1, b: 0.2028302, a: 0}
         key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 0}
+        key2: {r: 0, g: 0, b: 0, a: 0.74509805}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -1395,7 +1391,7 @@ ParticleSystem:
         ctime7: 0
         atime0: 0
         atime1: 11180
-        atime2: 65535
+        atime2: 44911
         atime3: 65535
         atime4: 0
         atime5: 0
@@ -1403,7 +1399,7 @@ ParticleSystem:
         atime7: 0
         m_Mode: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 3
+        m_NumAlphaKeys: 4
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4713,7 +4709,7 @@ ParticleSystem:
 --- !u!199 &789310241570265294
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -4728,7 +4724,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -9604,7 +9600,7 @@ ParticleSystem:
 --- !u!199 &8594899219597205756
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -14338,7 +14334,7 @@ ParticleSystem:
 --- !u!199 &1207396344783479603
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -19063,7 +19059,7 @@ ParticleSystem:
 --- !u!199 &6208771896926442754
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -23838,7 +23834,7 @@ ParticleSystem:
 --- !u!199 &7421301140121386888
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
