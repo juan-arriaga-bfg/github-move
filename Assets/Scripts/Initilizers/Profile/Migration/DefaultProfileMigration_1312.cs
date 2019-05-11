@@ -13,6 +13,7 @@ public partial class DefaultProfileMigration
                 new KeyValuePair<int, int>(9000101, 9000100), //Boost_CR
                 new KeyValuePair<int, int>(7200101, 7200105), //Soft5
                 new KeyValuePair<int, int>(7200101, 7200106), //Soft6
+                new KeyValuePair<int, int>(9000201, 9000200), //Boost_WR
             };
             
             
