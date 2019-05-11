@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using BfgAnalytics;
+using DG.Tweening;
 using UnityEngine;
 
 public enum FireflyType
@@ -156,6 +157,11 @@ public class FireflyView : BoardElementView
             View = this,
             FireflyType = fireflyType
         });
+
+        if (fireflyType != FireflyType.Event)
+        {
+            Analytics.SendFireflyCollect();
+        }
     }
 
     private void Move()
