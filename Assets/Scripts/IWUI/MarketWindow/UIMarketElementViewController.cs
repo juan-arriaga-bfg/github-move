@@ -131,10 +131,28 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 #endif
 		
 		var contentEntity = entity as UIMarketElementEntity;
+
+		if (contentEntity.Def.IsPiece == false)
+		{
+			UIMessageWindowController.CreateMessage(
+				LocalizationService.Get("window.market.description.title", "window.market.description.title"),
+				contentEntity.Def.Description);
+			
+			return;
+		}
+
+		var def = PieceType.GetDefById(PieceType.Parse(contentEntity.Def.Reward.Currency));
+
+		if (def.Filter.Has(PieceTypeFilter.Chest) == false)
+		{
+			UIMessageWindowController.CreateMessage(
+				LocalizationService.Get("window.market.description.title", "window.market.description.title"),
+				contentEntity.Def.Description);
+			
+			return;
+		}
 		
-		UIMessageWindowController.CreateMessage(
-			LocalizationService.Get("window.market.description.title", "window.market.description.title"),
-			contentEntity.Def.Description);
+		UILootBoxWindowController.OpenChestWindow(def.Id);
 	}
 
 	private void OnClick()

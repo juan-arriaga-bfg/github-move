@@ -326,10 +326,7 @@ public class DevTools : UIContainerElementViewController
     
     public void OnDebug1Click()
     {
-        OnSpawnAirShipClick();
-        return;
-        
-        UIService.Get.ShowWindow(UIWindowType.DailyRewardWindow);
+        UILootBoxWindowController.OpenChestWindow(PieceType.CH3_A.Id);
         return;
         
         Debug.Log("OnDebug1Click");
@@ -349,7 +346,7 @@ public class DevTools : UIContainerElementViewController
             });
         }
 
-        void RemovePiee()
+        void RemovePiece()
         {
             var pos = new BoardPosition(19, 13, 1);
         
@@ -364,10 +361,10 @@ public class DevTools : UIContainerElementViewController
 
         DOTween.Sequence()
                .InsertCallback(0, CreatePiece)
-               .InsertCallback(1, RemovePiee)
+               .InsertCallback(1, RemovePiece)
                .InsertCallback(2, LeakWatcherToggle.TakeSnapshot)
                .InsertCallback(3, CreatePiece)
-               .InsertCallback(4, RemovePiee)
+               .InsertCallback(4, RemovePiece)
                .InsertCallback(5, LeakWatcherToggle.CompareSnapshot);
                 
         

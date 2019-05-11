@@ -69,6 +69,8 @@ public class UIWindowType
     public const string EventAlmostWindow = "EventAlmostWindow";
     
     public const string EventWindow = "EventWindow";
+    
+    public const string LootBoxWindow = "LootBoxWindow";
 
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {

@@ -5883,5 +5883,20 @@
     "Uid": "DestroyFadePieceAnimation",
     "ResourcePath": "Prefabs\\Animations/DestroyFadePieceAnimation",
     "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "NPC",
+    "ResourcePath": "Prefabs\\UI\\Pieces\\Characters/NPC",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "Ingredient",
+    "ResourcePath": "Prefabs\\UI\\Pieces/Ingredient",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "Production",
+    "ResourcePath": "Prefabs\\UI\\Pieces/Production",
+    "IsGenerateAutoName": false
   }
 ]
