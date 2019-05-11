@@ -13,6 +13,9 @@ public class UILootBoxWindowView : UIGenericPopupWindowView
     
     [IWUIBinding("#ButtonAccept")] private UIButtonViewController btnAccept;
     
+    [IWUIBinding("#IslandItem")] private GameObject itemIsland;
+    [IWUIBinding("#ChestItem")] private GameObject itemChest;
+    
     private Transform icon;
     
     public override void OnViewShow()
@@ -30,6 +33,9 @@ public class UILootBoxWindowView : UIGenericPopupWindowView
         
         CreateIcon(anchor, windowModel.ItemIcon);
         Fill(UpdateEntities(windowModel.Probability), content);
+        
+        itemIsland.SetActive(windowModel.IsIsland);
+        itemChest.SetActive(!windowModel.IsIsland);
     }
 
     public override void OnViewShowCompleted()

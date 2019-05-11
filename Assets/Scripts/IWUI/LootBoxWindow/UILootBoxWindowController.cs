@@ -20,6 +20,8 @@ public class UILootBoxWindowController : IWWindowController {
     {
         var model = UIService.Get.GetCachedModel<UILootBoxWindowModel>(UIWindowType.LootBoxWindow);
         var probability = new Dictionary<string, KeyValuePair<int, string>>();
+
+        model.IsIsland = chests.Count > 1;
         
         foreach (var chest in chests)
         {

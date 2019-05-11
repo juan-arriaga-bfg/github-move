@@ -10,5 +10,7 @@ public class UILootBoxWindowModel : IWWindowModel
     public string ItemName;
     public string ItemIcon;
 
+    public bool IsIsland;
+
     public List<KeyValuePair<string, string>> Probability;
 }
