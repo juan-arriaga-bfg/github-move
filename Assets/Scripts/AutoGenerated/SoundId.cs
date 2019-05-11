@@ -48,4 +48,6 @@ public class SoundId
      public const string BuyMarket = "BuyMarket";
      public const string OrderClaim = "OrderClaim";
      public const string CastleMagic = "CastleMagic";
+     public const string GetToken = "GetToken";
+     public const string GetIngredients = "GetIngredients";
 }

@@ -14,11 +14,20 @@ public class TouchReactionDefinitionCollectResource : TouchReactionDefinitionCom
             CurrencyHelper.Purchase(resources);
             piece.Context.BoardLogic.PieceFlyer.FlyToTarget(piece, position, Currency.Order.Name);
             GameDataService.Current.OrdersManager.UpdateOrders();
+
+            NSAudioService.Current.Play(SoundId.GetIngredients);
         }
         else
         {
             AddResourceView.Show(position, resources, -0.3f);
             Analytics.SendPurchase("board_main", $"item{piece.IndexInChain}", null, new List<CurrencyPair>{resources}, false, false);
+
+            if (resources.Currency == Currency.Coins.Name || 
+                resources.Currency == Currency.Crystals.Name ||
+                resources.Currency == Currency.Token.Name)
+            {
+                NSAudioService.Current.Play(SoundId.GetToken);
+            }
         }
         
         piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
