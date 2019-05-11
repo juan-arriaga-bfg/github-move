@@ -326,7 +326,7 @@ public class DevTools : UIContainerElementViewController
     
     public void OnDebug1Click()
     {
-        UILootBoxWindowController.OpenChestWindow(PieceType.CH3_A.Id);
+        UILootBoxWindowController.OpenIslandWindow();
         return;
         
         Debug.Log("OnDebug1Click");
