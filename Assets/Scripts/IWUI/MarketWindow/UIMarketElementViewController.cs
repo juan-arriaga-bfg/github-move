@@ -198,6 +198,12 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			return;
 		}
 		
+        if (UIService.Get.GetShowedWindowByName(UIWindowType.ConfirmationWindow) != null)
+        {
+            isClick = false;
+            return;
+        }
+        
 		var model = UIService.Get.GetCachedModel<UIConfirmationWindowModel>(UIWindowType.ConfirmationWindow);
 
 		model.Icon = contentEntity.Def.Icon;

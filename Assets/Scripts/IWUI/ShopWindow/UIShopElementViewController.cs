@@ -137,6 +137,12 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
     private void Confirmation()
     {
+        if (UIService.Get.GetShowedWindowByName(UIWindowType.ConfirmationWindow) != null)
+        {
+            isClick = false;
+            return;
+        }
+        
 	    var contentEntity = entity as UIShopElementEntity;
 	    var model = UIService.Get.GetCachedModel<UIConfirmationWindowModel>(UIWindowType.ConfirmationWindow);
 	    
