@@ -12,6 +12,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.MainWindow,
             UIWindowType.MessageWindow,
             UIWindowType.ChestMessage,
+            UIWindowType.IslandMessageWindow,
             UIWindowType.QuestWindow,
             UIWindowType.ErrorWindow,
             UIWindowType.CodexWindow,

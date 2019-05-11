@@ -118,44 +118,16 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
 
         isClick = true;
         
-        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        var model = UIService.Get.GetCachedModel<UIIslandMessageWindowModel>(UIWindowType.IslandMessageWindow);
         
-        model.Title = LocalizationService.Get("window.island.title", "window.island.title");
-        model.Message = LocalizationService.Get("window.island.message", "window.island.message");
-        model.Prefab = "VIPIsland";
-        model.AcceptLabel = string.Format(LocalizationService.Get("common.button.buy", "common.button.buy"), price.ToStringIcon());
+        model.Button = string.Format(LocalizationService.Get("common.button.buy", "common.button.buy"), price.ToStringIcon());
         
-        model.IsBuy = true;
-        model.IsTopMessage = true;
-        model.IsShine = true;
-        model.ButtonSize = 280;
-
         model.OnAccept = Purchase;
         model.OnClose = () => { isClick = false; };
         
-        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+        UIService.Get.ShowWindow(UIWindowType.IslandMessageWindow);
         
         return true;
-    }
-
-    public void HintClick()
-    {
-        var pieces = GameDataService.Current.FieldManager.IslandPieces;
-        var result = new List<int>();
-
-        foreach (var pair in pieces)
-        {
-            var def = PieceType.GetDefById(pair.Key);
-
-            if (def.Filter.Has(PieceTypeFilter.Chest) == false) continue;
-
-            for (var i = 0; i < pair.Value.Count; i++)
-            {
-                result.Add(pair.Key);
-            }
-        }
-        
-        UILootBoxWindowController.OpenProbabilityWindow(result);
     }
 
     private void Purchase()
