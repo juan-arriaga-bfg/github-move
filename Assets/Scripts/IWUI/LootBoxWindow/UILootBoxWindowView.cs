@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class UILootBoxWindowView : UIGenericPopupWindowView 
@@ -13,6 +12,9 @@ public class UILootBoxWindowView : UIGenericPopupWindowView
     [IWUIBinding("#ButtonAcceptLabel")] private NSText buttonAcceptLabel;
     
     [IWUIBinding("#ButtonAccept")] private UIButtonViewController btnAccept;
+    
+    [IWUIBinding("#IslandItem")] private GameObject itemIsland;
+    [IWUIBinding("#ChestItem")] private GameObject itemChest;
     
     private Transform icon;
     
@@ -31,6 +33,9 @@ public class UILootBoxWindowView : UIGenericPopupWindowView
         
         CreateIcon(anchor, windowModel.ItemIcon);
         Fill(UpdateEntities(windowModel.Probability), content);
+        
+        itemIsland.SetActive(windowModel.IsIsland);
+        itemChest.SetActive(!windowModel.IsIsland);
     }
 
     public override void OnViewShowCompleted()

@@ -10,6 +10,8 @@ public class UIWindowType
     
     public const string ChestMessage = "ChestMessageWindow";
     
+    public const string IslandMessageWindow = "IslandMessageWindow";
+    
     public const string QuestWindow = "QuestWindow";
     
     public const string ErrorWindow = "ErrorWindow";
@@ -71,7 +73,7 @@ public class UIWindowType
     public const string EventWindow = "EventWindow";
     
     public const string LootBoxWindow = "LootBoxWindow";
-
+    
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {
         MainWindow,

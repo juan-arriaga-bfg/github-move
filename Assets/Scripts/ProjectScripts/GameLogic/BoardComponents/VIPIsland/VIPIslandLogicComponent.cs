@@ -118,22 +118,14 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
 
         isClick = true;
         
-        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        var model = UIService.Get.GetCachedModel<UIIslandMessageWindowModel>(UIWindowType.IslandMessageWindow);
         
-        model.Title = LocalizationService.Get("window.island.title", "window.island.title");
-        model.Message = LocalizationService.Get("window.island.message", "window.island.message");
-        model.Prefab = "VIPIsland";
-        model.AcceptLabel = string.Format(LocalizationService.Get("common.button.buy", "common.button.buy"), price.ToStringIcon());
+        model.Button = string.Format(LocalizationService.Get("common.button.buy", "common.button.buy"), price.ToStringIcon());
         
-        model.IsBuy = true;
-        model.IsTopMessage = true;
-        model.IsShine = true;
-        model.ButtonSize = 280;
-
         model.OnAccept = Purchase;
         model.OnClose = () => { isClick = false; };
         
-        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+        UIService.Get.ShowWindow(UIWindowType.IslandMessageWindow);
         
         return true;
     }

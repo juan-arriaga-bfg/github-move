@@ -326,13 +326,7 @@ public class DevTools : UIContainerElementViewController
     
     public void OnDebug1Click()
     {
-        UILootBoxWindowController.OpenChestWindow(PieceType.CH3_A.Id);
-        return;
-        
         Debug.Log("OnDebug1Click");
-        var model = UIService.Get.GetCachedModel<UICharacterUnlockedWindowModel>(UIWindowType.CharacterUnlockedWindow);
-        model.TestMode = true;
-        UIService.Get.ShowWindow(UIWindowType.CharacterUnlockedWindow);
         return;
 
 #if UNITY_EDITOR
