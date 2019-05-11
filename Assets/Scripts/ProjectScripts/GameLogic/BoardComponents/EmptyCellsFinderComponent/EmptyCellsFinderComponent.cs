@@ -23,13 +23,7 @@ public class EmptyCellsFinderComponent : IECSComponent
 	{
 		if (amount == 1)
 		{
-			var pos = point.Down;
-
-			if (context.IsEmpty(pos))
-			{
-				field.Add(pos);
-				return true;
-			}
+			if (AddIsEmpty(point.Down, field, amount)) return true;
 		}
 		
 		if (context.EmptyCellsFinder.FindRandomNearWithPointInCenter(point, field, amount * 4) == false) return false;
