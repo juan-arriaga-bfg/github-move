@@ -347,7 +347,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             
             if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, order.GetAmountOfResult()))
             {
-                UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
+                UIErrorWindowController.AddNoFreeSpaceError();
                 return;
             }
 

@@ -294,7 +294,7 @@ public class AirShipView : BoardElementView
     private void AnimateError()
     {
         StopAnimation();
-        UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
+        UIErrorWindowController.AddNoFreeSpaceError();
         
         DOTween.Sequence()
             .SetId(body)

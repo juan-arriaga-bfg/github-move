@@ -181,7 +181,7 @@ public class RewardsStoreComponent : IECSComponent
             }
         }
         
-        UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
+        UIErrorWindowController.AddNoFreeSpaceError();
         return true;
     }
     
@@ -198,7 +198,7 @@ public class RewardsStoreComponent : IECSComponent
         
         if (current == 0 || context.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(context.CachedPosition, cells, current, 0.1f)) return false;
         
-        UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
+        UIErrorWindowController.AddNoFreeSpaceError();
         return true;
     }
     

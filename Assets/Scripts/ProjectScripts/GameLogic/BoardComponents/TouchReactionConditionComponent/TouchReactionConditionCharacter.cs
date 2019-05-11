@@ -37,7 +37,7 @@ public class TouchReactionConditionCharacter : TouchReactionConditionComponent
 			
 		if(piece.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, amount) == false)
 		{
-			UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
+            UIErrorWindowController.AddNoFreeSpaceError();
 			return false;
 		}
 		

@@ -85,6 +85,16 @@ namespace BfgAnalytics
         {
             AnalyticsService.Current?.Event("activity", day.ToString(), "dailyreward",null, DefaultJsonData());
         }
+        
+        public static void SendFireflyCollect()
+        {
+            AnalyticsService.Current?.Event("activity", "pixie", null, "collect", DefaultJsonData());
+        }
+        
+        public static void SendNoSpace()
+        {
+            AnalyticsService.Current?.Event("activity", "nospace", null, "show", DefaultJsonData());
+        }
 
         private static JSONObject CreateTransaction(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
         {
