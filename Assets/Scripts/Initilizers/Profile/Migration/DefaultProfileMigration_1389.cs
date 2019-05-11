@@ -2,18 +2,14 @@ using System.Collections.Generic;
 
 public partial class DefaultProfileMigration
 {
-    private static void Migrate1312(int clientVersion, UserProfile profile)
+    private static void Migrate1389(int clientVersion, UserProfile profile)
     {
         if (profile.CodexSave != null && profile.CodexSave.Data != null)
         {
             var idsForChange = new List<KeyValuePair<int, int>>
             {
-                new KeyValuePair<int, int>(5100101, 5100103), //SK3_PR
-                new KeyValuePair<int, int>(9000101, 9000100), //Boost_CR
-                new KeyValuePair<int, int>(7200101, 7200105), //Soft5
-                new KeyValuePair<int, int>(7200101, 7200106), //Soft6
+                new KeyValuePair<int, int>(9000201, 9000200), //Boost_WR
             };
-            
             
             foreach (var pair in idsForChange)
             {
