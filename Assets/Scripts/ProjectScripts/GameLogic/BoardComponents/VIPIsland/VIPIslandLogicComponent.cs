@@ -138,6 +138,26 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
         return true;
     }
 
+    public void HintClick()
+    {
+        var pieces = GameDataService.Current.FieldManager.IslandPieces;
+        var result = new List<int>();
+
+        foreach (var pair in pieces)
+        {
+            var def = PieceType.GetDefById(pair.Key);
+
+            if (def.Filter.Has(PieceTypeFilter.Chest) == false) continue;
+
+            for (var i = 0; i < pair.Value.Count; i++)
+            {
+                result.Add(pair.Key);
+            }
+        }
+        
+        UILootBoxWindowController.OpenProbabilityWindow(result);
+    }
+
     private void Purchase()
     {
         CurrencyHelper.Purchase(Currency.Island.Name, 1, price, success =>

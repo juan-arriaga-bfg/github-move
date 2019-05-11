@@ -56,28 +56,31 @@ public class UILootBoxWindowController : IWWindowController {
 
             if (data.CharactersAmount.Min > 0)
             {
-                var message = $"x{data.CharactersAmount.Min} {LocalizationService.Get($"window.market.hint.characters", $"window.market.hint.characters")}";
-
-                model.Probability.Add(new KeyValuePair<string, string>("NPC", message));
+                Replace("NPC", data.CharactersAmount.Min, "window.market.hint.characters", probability);
             }
 
             if (data.ResourcesAmount.Min > 0)
             {
-                var message = $"x{data.ResourcesAmount.Min} {LocalizationService.Get($"window.market.hint.ingredient", $"window.market.hint.ingredient")}";
-
-                model.Probability.Add(new KeyValuePair<string, string>("Ingredient", message));
+                Replace("Ingredient", data.ResourcesAmount.Min, "window.market.hint.ingredient", probability);
             }
 
             if (data.ProductionAmount.Min > 0)
             {
-                var message = $"x{data.ProductionAmount.Min} {LocalizationService.Get($"window.market.hint.production", $"window.market.hint.production")}";
-
-                model.Probability.Add(new KeyValuePair<string, string>("Production", message));
+                Replace("Production", data.ProductionAmount.Min, "window.market.hint.production", probability);
             }
         }
         
         model.Probability = new List<KeyValuePair<string, string>>();
+
+        AddSlot("NPC", probability, model.Probability);
+        AddSlot("Ingredient", probability, model.Probability);
+        AddSlot("Production", probability, model.Probability);
         
+        foreach (var pair in probability)
+        {
+            model.Probability.Insert(0, new KeyValuePair<string, string>(pair.Key, pair.Value.Value));
+        }
+
         if (model.Probability.Count > 3)
         {
             model.Probability.RemoveRange(2, model.Probability.Count - 3);
@@ -90,19 +93,20 @@ public class UILootBoxWindowController : IWWindowController {
     {
         if (dict.TryGetValue(key, out var value) == false)
         {
-            value = new KeyValuePair<int, string>(amount, $"x{amount}{LocalizationService.Get(messageKey, messageKey)}");
+            value = new KeyValuePair<int, string>(amount, $"x{amount} {LocalizationService.Get(messageKey, messageKey)}");
             dict.Add(key, value);
             return;
         }
         
         amount += value.Key;
-        dict[key] = new KeyValuePair<int, string>(amount, $"x{amount}{LocalizationService.Get(messageKey, messageKey)}");
+        dict[key] = new KeyValuePair<int, string>(amount, $"x{amount} {LocalizationService.Get(messageKey, messageKey)}");
     }
-    
-    public static void OpenIslandWindow()
+
+    private static void AddSlot(string key, Dictionary<string, KeyValuePair<int, string>> dict, List<KeyValuePair<string, string>> list)
     {
-        var model = UIService.Get.GetCachedModel<UILootBoxWindowModel>(UIWindowType.LootBoxWindow);
+        if (dict.TryGetValue(key, out var data) == false) return;
         
-        UIService.Get.ShowWindow(UIWindowType.LootBoxWindow);
+        list.Add(new KeyValuePair<string, string>(key, data.Value));
+        dict.Remove(key);
     }
 }

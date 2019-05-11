@@ -152,7 +152,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			return;
 		}
 		
-		UILootBoxWindowController.OpenProbabilityWindow(def.Id);
+		UILootBoxWindowController.OpenProbabilityWindow(new List<int>{def.Id});
 	}
 
 	private void OnClick()
