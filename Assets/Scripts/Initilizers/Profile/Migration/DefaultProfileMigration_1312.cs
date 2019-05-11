@@ -19,6 +19,12 @@ public partial class DefaultProfileMigration
             {
                 var startKey = pair.Key;
                 var pieceId = pair.Value;
+
+                if (profile.CodexSave.Data.ContainsKey(startKey) == false)
+                {
+                    continue;
+                }
+                
                 var chainState = profile.CodexSave.Data[startKey];
                 
                 if (chainState.PendingReward.Contains(pieceId))

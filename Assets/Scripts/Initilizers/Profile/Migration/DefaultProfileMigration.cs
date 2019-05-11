@@ -30,7 +30,10 @@ public partial class DefaultProfileMigration : IProfileMigration
         {731, Migrate731},
         
         // codex unlock fix
-        {1312, Migrate1312}
+        {1312, Migrate1312},
+        
+        // codex unlock fix
+        {1389, Migrate1389}
     };
 
     public void Migrate(int clientVersion, UserProfile profile)
