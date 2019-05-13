@@ -17,6 +17,8 @@
             .RegisterComponent(new TouchReactionDefinitionCollectMana())
             .RegisterComponent(new TouchReactionConditionMana()));
         
+        AddObserver(piece, new ManaPieceBoardObserver());
+        
         return piece;
     }
 }

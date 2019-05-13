@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using IW.SimpleJSON;
 
 namespace BfgAnalytics
@@ -20,6 +19,7 @@ namespace BfgAnalytics
             JSONNode node = new JSONObject();
             node["coins"] = (int)ProfileService.Current.GetStorageItem(Currency.Coins.Name).Amount;
             node["energy"] = (int)ProfileService.Current.GetStorageItem(Currency.Energy.Name).Amount;
+            node["mana"] = (int)ProfileService.Current.GetStorageItem(Currency.ManaFake.Name).Amount;
             return node;
         }
 

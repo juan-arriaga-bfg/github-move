@@ -9,10 +9,14 @@ public class FieldControllerComponent : IECSComponent
     public int Guid => ComponentGuid;
     
     private BoardController context;
+
+    public bool IsCreateComplete;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as BoardController;
+
+        IsCreateComplete = false;
         
         var fieldDef = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
         
@@ -123,6 +127,8 @@ public class FieldControllerComponent : IECSComponent
                 FogSectorsView.Rebuild(context.RendererContext);
                 context.Manipulator.CameraManipulator.CameraMove.UnLock(context);
                 controller.BoardLogic.VIPIslandLogic.Init();
+                
+                IsCreateComplete = true;
             }
         });
     }
