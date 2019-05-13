@@ -125,13 +125,13 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	private void OnClickInfo()
 	{
 		
+		var contentEntity = entity as UIMarketElementEntity;
+		
 #if DEBUG
-		UIMessageWindowController.CreateDefaultMessage($"Slot {GetIndex()}");
+		UIMessageWindowController.CreateDefaultMessage($"Slot {contentEntity.Def.Uid}");
 		return;
 #endif
 		
-		var contentEntity = entity as UIMarketElementEntity;
-
 		if (contentEntity.Def.IsPiece == false)
 		{
 			UIMessageWindowController.CreateMessage(
@@ -222,7 +222,13 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	{
 		var contentEntity = entity as UIMarketElementEntity;
 		
-		Analytics.SendPurchase($"screen_market{GetIndex()}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Price}, new List<CurrencyPair>{contentEntity.Def.Reward}, false, false);
+		Analytics.SendPurchase(
+			$"screen_market{contentEntity.Def.Uid}",
+			$"{contentEntity.Def.Reward.Currency}",
+			new List<CurrencyPair>{contentEntity.Def.Price},
+			new List<CurrencyPair>{contentEntity.Def.Reward}, 
+			false,
+			false);
 		
 		if (contentEntity.Def.IsPiece == false)
 		{
@@ -280,11 +286,5 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 
 		rewardPosition = position;
 		isReward = true;
-	}
-	
-	protected virtual int GetIndex()
-	{
-		var contentEntity = entity as UIMarketElementEntity;
-		return contentEntity.Def.Uid;
 	}
 }

@@ -4,6 +4,26 @@ public class UIEnergyShopWindowModel : UIShopWindowModel
 {
     protected override CurrencyDef ShopType => Currency.Energy;
 
+    public override string AnalyticReason(ShopDef def)
+    {
+        var reason = "";
+
+        switch (GameDataService.Current.ShopManager.Defs[ShopType.Name].IndexOf(def))
+        {
+            case 0:
+                reason = "bonus";
+                break;
+            case 2:
+                reason = "full";
+                break;
+            default:
+                reason = "adaptive";
+                break;
+        }
+        
+        return $"{ShopType.Name.ToLower()}_{reason}";
+    }
+
     public override List<ShopDef> Products
     {
         get

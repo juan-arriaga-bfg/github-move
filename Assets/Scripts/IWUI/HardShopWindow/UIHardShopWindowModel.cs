@@ -16,5 +16,12 @@ public class UIHardShopWindowModel : UIShopWindowModel
         }
     }
     
+    public override string AnalyticReason(ShopDef def)
+    {
+        var reason = def.Products.Count > 1 ? Currency.Offer.Name : ShopType.Name;
+        
+        return $"{reason.ToLower()}{def.Price.Amount}";
+    }
+    
     public override string AnalyticLocation => $"shop_premium";
 }

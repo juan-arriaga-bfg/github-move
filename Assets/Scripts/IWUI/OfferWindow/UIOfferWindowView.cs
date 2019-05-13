@@ -156,8 +156,8 @@ public class UIOfferWindowView : UIGenericPopupWindowView
         ProfileService.Instance.Manager.UploadCurrentProfile(true);
         
         Analytics.SendPurchase($"shop_{Currency.Offer.Name.ToLower()}",
-            $"item{ProfileService.Current.GetStorageItem(Currency.Offer.Name).Amount}",
-            new List<CurrencyPair> {offer.Price},
+            $"{Currency.Offer.Name.ToLower()}{offer.Price.Amount}",
+            null,
             new List<CurrencyPair>(offer.Products), true, false);
         
         Controller.CloseCurrentWindow();
