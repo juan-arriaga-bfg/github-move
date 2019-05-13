@@ -95,7 +95,11 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         buttonsPanel.SetActive(btnAccept.gameObject.activeSelf || btnBuy.gameObject.activeSelf || btnCancel.gameObject.activeSelf);
         
         StartCoroutine(UpdateLayoutCoroutine());
-        
+
+        Controller.Window.IgnoreBackButton = windowModel.ProhibitClose;
+        btnBackLayer.enabled = !windowModel.ProhibitClose;
+        btnClose.gameObject.SetActive(!windowModel.ProhibitClose);
+
         if (windowModel.Timer == null) return;
         
         windowModel.Timer.OnTimeChanged += UpdateTimer;
@@ -155,12 +159,26 @@ public class UIMessageWindowView : UIGenericPopupWindowView
 
     private void OnClickAccept()
     {
+        var windowModel = Model as UIMessageWindowModel;
+        if (windowModel.ProhibitClose)
+        {
+            windowModel.OnAccept?.Invoke();
+            return;
+        }
+        
         Controller.CloseCurrentWindow();
         isAccept = true;
     }
     
     private void OnClickCancel()
     {
+        var windowModel = Model as UIMessageWindowModel;
+        if (windowModel.ProhibitClose)
+        {
+            windowModel.OnCancel?.Invoke();
+            return;
+        }
+        
         Controller.CloseCurrentWindow();
         isCancel = true;
     }
@@ -178,6 +196,10 @@ public class UIMessageWindowView : UIGenericPopupWindowView
 
     private void CompleteTimer()
     {
-        Controller.CloseCurrentWindow();
+        var windowModel = Model as UIMessageWindowModel;
+        if (!windowModel.ProhibitClose)
+        {
+            Controller.CloseCurrentWindow();
+        }
     }
 }

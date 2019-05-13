@@ -45,6 +45,12 @@ public class UIMessageWindowModel : IWWindowModel
     public Action OnCancel { get; set; }
     public Action OnClose { get; set; }
     
+    /// <summary>
+    /// Disable (X), background click, hardware back button.
+    /// Also disables autoclose on accept and other actions 
+    /// </summary>
+    public bool ProhibitClose;
+    
     public void Reset()
     {
         Title = null;
@@ -69,5 +75,7 @@ public class UIMessageWindowModel : IWWindowModel
         
         AcceptColor = ButtonColor.Green;
         CancelColor = ButtonColor.Red;
+
+        ProhibitClose = false;
     }
 }

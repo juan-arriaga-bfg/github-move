@@ -57,7 +57,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
                .SetDependency(typeof(BfgSdkGdprInitComponent)))  
             
            .AddComponent(new ProfileInitComponent()
-                .SetDependency(typeof(ServerSideConfigInitComponent)))
+               .SetDependency(typeof(ServerSideConfigInitComponent)))
 
            .AddComponent(new UIServiceInitComponent()
                .SetDependency(typeof(LocalAssetBundlesCacheInitComponent)))  
@@ -72,11 +72,16 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
                .SetDependency(typeof(ProfileInitComponent)))
             
            .AddComponent(new IapInitComponent()                                     // In-app purchases implementation
-                .SetDependency(typeof(BfgSdkUnityMessageHandlerInitComponent))
-                .SetDependency(typeof(LocalizationInitComponent)))
+               .SetDependency(typeof(BfgSdkUnityMessageHandlerInitComponent))
+               .SetDependency(typeof(LocalizationInitComponent)))
             
            .AddComponent(new IapRestoreInitComponent()                              // Handler for restored In-app purchases 
                .SetDependency(typeof(IapInitComponent)))
+            
+           .AddComponent(new ForcedUpdateInitComponent()                             
+               .SetDependency(typeof(UIServiceInitComponent))
+               .SetDependency(typeof(ServerSideConfigInitComponent))
+               .SetDependency(typeof(ProfileInitComponent)))
             
            .AddComponent(new ShowLoadingWindowInitComponent()
                .SetDependency(typeof(LocalAssetBundlesCacheInitComponent))
@@ -130,7 +135,8 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
 
             if (isGameLoaded)
             {
-                LocalNotificationsService.Current.CancelNotifications();    
+                LocalNotificationsService.Current.CancelNotifications();  
+                ForcedUpdateService.Current.Check();
             }
             
             TackleBoxEvents.SendGameResumed();
