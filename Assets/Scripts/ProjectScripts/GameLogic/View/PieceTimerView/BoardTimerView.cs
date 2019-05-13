@@ -193,5 +193,6 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         sequence.Insert(0f, label.TextLabel.DOColor(color, duration));
         sequence.Insert(duration, timerTransform.DOScale(1f, duration));
         sequence.Insert(duration, label.TextLabel.DOColor(Color.white, duration));
+        sequence.OnKill(() => label.TextLabel.DOColor(Color.white, 0));
     }
 }
