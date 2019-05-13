@@ -88,6 +88,7 @@ public class DailyQuestEntity : QuestEntity
             int count = def.Value;
 
             List<TaskEntity> tasksPool = tasksDict[group];
+
             if (count > tasksPool.Count)
             {
                 Debug.LogError($"[DailyQuestEntity] => Not enough tasks in pool to fill '{def.Key}' group. At least {count} tasks expected.");
@@ -95,7 +96,7 @@ public class DailyQuestEntity : QuestEntity
             
             for (int i = 0; i < count && tasksPool.Count > 0; i++)
             {
-                int index = UnityEngine.Random.Range(0, tasksPool.Count);
+                int index = def.Key == TaskGroup.Permanent ? 0 : UnityEngine.Random.Range(0, tasksPool.Count);
                 ActiveTasks.Add(tasksPool[index]);
                 tasksPool.RemoveAt(index);
             }
