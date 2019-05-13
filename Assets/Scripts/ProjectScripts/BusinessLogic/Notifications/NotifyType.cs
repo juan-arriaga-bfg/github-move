@@ -191,7 +191,7 @@ public class NotifyType
     
             return resultNotifiers;
         },
-        TimeCorrector = notifyDate => notifyDate.Subtract(new TimeSpan(3, 30, 0))
+        TimeCorrector = notifyDate => notifyDate.Subtract(new TimeSpan(3, 0, 0))
     };
     
     public static readonly NotifyType FreeEnergyTimeout = new NotifyType
