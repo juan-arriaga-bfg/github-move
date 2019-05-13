@@ -182,4 +182,23 @@ public class UIMessageWindowController : IWWindowController {
 
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
+
+    public static void CreateProgressOverrideMessage(bool isLocal, Action onOverride, Action onCancel = null)
+    {
+        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        var messageKey = $"window.progress.override.message.{(isLocal ? "device" : "server")}";
+        
+        model.Title = LocalizationService.Get("window.progress.override.title", "window.progress.override.title");
+        model.Message = LocalizationService.Get(messageKey, messageKey);
+        model.Prefab = isLocal ? "LocalToServer" : "ServerToLocal";
+        
+        model.AcceptLabel = LocalizationService.Get("common.button.cancel", "common.button.cancel");
+        model.CancelLabel = LocalizationService.Get("common.button.override", "common.button.override");
+        
+        model.OnAccept = onCancel ?? (() => {});
+        model.OnClose = onCancel ?? (() => {});
+        model.OnCancel = onOverride;
+
+        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+    }
 }
