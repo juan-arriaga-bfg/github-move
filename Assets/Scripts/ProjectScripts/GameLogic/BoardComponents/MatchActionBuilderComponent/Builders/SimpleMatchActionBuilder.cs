@@ -50,7 +50,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
             CreatedPieceType = nextType,
         };
 
-        if (useBoost) SendAnalytics(nextType, PieceType.Boost_CR.Id);
+        if (useBoost) SpendAnalytics(nextType, PieceType.Boost_CR.Id);
             
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, matchDescription);
 
@@ -125,7 +125,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         Analytics.SendPurchase("board_merge", pair.Currency, null, new List<CurrencyPair>{pair}, false, false);
     }
     
-    private void SendAnalytics(int piece, int id)
+    private void SpendAnalytics(int piece, int id)
     {
         var pair = new CurrencyPair {Currency = PieceType.Parse(id), Amount = 1};
         Analytics.SendPurchase("board_merge", PieceType.Parse(piece), new List<CurrencyPair>{pair}, null, false, false);

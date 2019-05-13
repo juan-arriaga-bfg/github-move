@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using BfgAnalytics;
 
 public class CollapseFogToAction : IBoardAction
 {
@@ -63,7 +65,7 @@ public class CollapseFogToAction : IBoardAction
         
         var addedPieces = new Dictionary<BoardPosition, int>();
         
-        if(FogObserver.Def.Pieces != null)
+        if (FogObserver.Def.Pieces != null)
         {
             foreach (var piece in FogObserver.Def.Pieces)
             {
@@ -77,6 +79,8 @@ public class CollapseFogToAction : IBoardAction
                 }
             }
         }
+
+        CollectAnalytics(addedPieces, FogObserver.Def.Uid);
         
         foreach (var point in FogObserver.Mask)
         {
@@ -141,5 +145,25 @@ public class CollapseFogToAction : IBoardAction
         }
  
         return true;
+    }
+    
+    private void CollectAnalytics(Dictionary<BoardPosition, int> data, string fog)
+    {
+        var boosters = new Dictionary<int, CurrencyPair>
+        {
+            {PieceType.Boost_CR.Id, new CurrencyPair{Currency = PieceType.Boost_CR.Abbreviations[0]}},
+            {PieceType.Boost_WR.Id, new CurrencyPair{Currency = PieceType.Boost_WR.Abbreviations[0]}}
+        };
+        
+        foreach (var item in data)
+        {
+            if (boosters.TryGetValue(item.Value, out var pair) == false) continue;
+
+            pair.Amount += 1;
+        }
+
+        var collect = boosters.Values.ToList().FindAll(pair => pair.Amount > 0);
+        
+        Analytics.SendPurchase("board_main", fog, null, collect, false, false);
     }
 }

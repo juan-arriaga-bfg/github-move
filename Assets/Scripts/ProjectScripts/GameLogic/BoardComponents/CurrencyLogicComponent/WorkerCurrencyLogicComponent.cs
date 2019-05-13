@@ -188,7 +188,8 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         });
         
         var pair = new CurrencyPair {Currency = PieceType.Boost_WR.Abbreviations[0], Amount = 1};
-        Analytics.SendPurchase("board_main", PieceType.Parse(target.PieceType), new List<CurrencyPair>{pair}, null, false, false);
+        var reason = PieceType.Parse(context.BoardLogic.MatchDefinition.GetNext(target.PieceType));
+        Analytics.SendPurchase("board_main", reason, new List<CurrencyPair>{pair}, null, false, false);
         
         return true;
     }
