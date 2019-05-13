@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using BfgAnalytics;
 using UnityEngine;
 
 public interface IVIPIslandLogicComponent
@@ -139,8 +140,9 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
                 isClick = false;
                 return;
             }
-
+            
             UpdateView(VIPIslandState.Paid, true);
+            SendAnalytics();
         });
     }
 
@@ -230,5 +232,27 @@ public class VIPIslandLogicComponent : ECSEntity, ITouchableBoardObjectLogic
 
         views.Remove(id);
         context.Context.RendererContext.DestroyElement(view);
+    }
+    
+    private void SendAnalytics()
+    {
+        var pieces = GameDataService.Current.FieldManager.IslandPieces;
+        
+        var boosters = new Dictionary<int, CurrencyPair>
+        {
+            {PieceType.Boost_CR.Id, new CurrencyPair{Currency = PieceType.Boost_CR.Abbreviations[0]}},
+            {PieceType.Boost_WR.Id, new CurrencyPair{Currency = PieceType.Boost_WR.Abbreviations[0]}}
+        };
+        
+        foreach (var item in pieces)
+        {
+            if (boosters.TryGetValue(item.Key, out var pair) == false) continue;
+            
+            pair.Amount += item.Value.Count;
+        }
+        
+        var collect = boosters.Values.ToList().FindAll(pair => pair.Amount > 0);
+        
+        Analytics.SendPurchase("screen_island", "island1", new List<CurrencyPair>{price}, collect, false, false);
     }
 }

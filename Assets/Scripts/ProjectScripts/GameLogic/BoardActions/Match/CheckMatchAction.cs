@@ -14,10 +14,8 @@ public class CheckMatchAction : IBoardAction
 	{
 		MatchField = MatchField ?? new List<BoardPosition>();
 		var logic = gameBoardController.BoardLogic;
-		
-		int currentId;
-		
-		if (logic.FieldFinder.Find(At, MatchField, out currentId) == false) return false;
+
+		if (logic.FieldFinder.Find(At, MatchField, out var currentId) == false) return false;
 		
 		var action = logic.MatchActionBuilder.GetMatchAction(MatchField, currentId, At);
 

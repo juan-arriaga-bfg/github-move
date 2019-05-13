@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using BfgAnalytics;
 
 public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBuilder
@@ -42,6 +43,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         if (nextPieces.Count == 0) return null;
         
         nextPieces.Sort();
+        SendAnalytics(nextPieces.FindAll(id => id == nextType), nextType, useBoost && ignoreBoost == false);
         
         var matchDescription = new MatchDescription
         {
@@ -49,9 +51,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
             MatchedPiecesCount = matchField.Count,
             CreatedPieceType = nextType,
         };
-
-        if (useBoost) SpendAnalytics(nextType, PieceType.Boost_CR.Id);
-            
+        
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, matchDescription);
 
         bool isEffective = matchField.Count >= 15 || (matchField.Count > 0 && matchField.Count % 5 == 0);
@@ -72,7 +72,6 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         if (amountCurrent < AMOUNT_BONUS)
         {
             nextPieces = Add(1, nextType, nextPieces);
-            CollectAnalytics(nextType, 1);
 
             if (amountCurrent == AMOUNT_BONUS - 1)
             {
@@ -104,8 +103,6 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
                 break;
         }
         
-        CollectAnalytics(nextType, amount);
-        
         return nextPieces;
     }
     
@@ -118,16 +115,30 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
 
         return pieces;
     }
-
-    private void CollectAnalytics(int id, int amount)
-    {
-        var pair = new CurrencyPair {Currency = PieceType.Parse(id), Amount = amount};
-        Analytics.SendPurchase("board_merge", pair.Currency, null, new List<CurrencyPair>{pair}, false, false);
-    }
     
-    private void SpendAnalytics(int piece, int id)
+    private void SendAnalytics(List<int> data, int next, bool useBoost)
     {
-        var pair = new CurrencyPair {Currency = PieceType.Parse(id), Amount = 1};
-        Analytics.SendPurchase("board_merge", PieceType.Parse(piece), new List<CurrencyPair>{pair}, null, false, false);
+        var boosters = new Dictionary<int, CurrencyPair>
+        {
+            {PieceType.Boost_CR.Id, new CurrencyPair{Currency = PieceType.Boost_CR.Abbreviations[0]}},
+            {PieceType.Boost_WR.Id, new CurrencyPair{Currency = PieceType.Boost_WR.Abbreviations[0]}}
+        };
+        
+        foreach (var id in data)
+        {
+            if (boosters.TryGetValue(id, out var pair) == false) continue;
+
+            pair.Amount += 1;
+        }
+
+        var reason = PieceType.Parse(next);
+        var collect = boosters.Values.ToList().FindAll(pair => pair.Amount > 0);
+        var spend = useBoost
+            ? new List<CurrencyPair> {new CurrencyPair {Currency = PieceType.Boost_CR.Abbreviations[0], Amount = 1}}
+            : null; 
+        
+        if (collect.Count == 0 && spend == null) return;
+        
+        Analytics.SendPurchase("board_merge", reason, spend, collect, false, false);
     }
 }

@@ -80,7 +80,7 @@ public class CollapseFogToAction : IBoardAction
             }
         }
 
-        CollectAnalytics(addedPieces, FogObserver.Def.Uid);
+        SendAnalytics(addedPieces, FogObserver.Def.Uid);
         
         foreach (var point in FogObserver.Mask)
         {
@@ -147,7 +147,7 @@ public class CollapseFogToAction : IBoardAction
         return true;
     }
     
-    private void CollectAnalytics(Dictionary<BoardPosition, int> data, string fog)
+    private void SendAnalytics(Dictionary<BoardPosition, int> data, string fog)
     {
         var boosters = new Dictionary<int, CurrencyPair>
         {
@@ -163,6 +163,8 @@ public class CollapseFogToAction : IBoardAction
         }
 
         var collect = boosters.Values.ToList().FindAll(pair => pair.Amount > 0);
+
+        if (collect.Count == 0) return;
         
         Analytics.SendPurchase("board_main", fog, null, collect, false, false);
     }

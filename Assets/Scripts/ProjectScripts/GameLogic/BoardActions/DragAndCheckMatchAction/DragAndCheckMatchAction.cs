@@ -220,11 +220,8 @@ public class DragAndCheckMatchAction : IBoardAction
 
 		if (pieceFrom.PieceType == PieceType.Boost_CR.Id || pieceFrom.PieceType == pieceTo.PieceType)
 		{
-			IBoardAction action;
-			
-			if (pieceFrom.Matchable?.IsMatchable() == true && CheckMatch(board, new List<BoardPosition> {From}, out action))
+			if (pieceFrom.Matchable?.IsMatchable() == true && CheckMatch(board, new List<BoardPosition> {From}, out var action))
 			{
-				
 				board.ActionExecutor.PerformAction(action);
 				board.BoardLogic.FireflyLogic.OnMatch();
 				return;
@@ -234,10 +231,7 @@ public class DragAndCheckMatchAction : IBoardAction
 			return;
 		}
 		
-		BoardPosition free;
-		var isSwap = CheckSwapLogic(board, out free);
-		
-		if (isSwap)
+		if (CheckSwapLogic(board, out var free))
 		{
 			SwapPieces(board);
 			return;
@@ -251,12 +245,10 @@ public class DragAndCheckMatchAction : IBoardAction
 		matchField = matchField ?? new List<BoardPosition>();
 		
 		var logic = board.BoardLogic;
-		
-		int currentId;
 
 		action = null;
 		
-		if (logic.FieldFinder.Find(To, matchField, out currentId) == false) return false;
+		if (logic.FieldFinder.Find(To, matchField, out var currentId) == false) return false;
 		
 		action = logic.MatchActionBuilder.GetMatchAction(matchField, currentId, To);
 		
@@ -289,9 +281,7 @@ public class DragAndCheckMatchAction : IBoardAction
 	
 	private void MoveCheckAndAnimation(BoardController board)
 	{
-		BoardPosition free;
-
-		if (CheckSwapLogic(board, out free))
+		if (CheckSwapLogic(board, out var free))
 		{
 			SwapPieces(board);
 			return;

@@ -222,6 +222,8 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	{
 		var contentEntity = entity as UIMarketElementEntity;
 		
+		Analytics.SendPurchase($"market{GetIndex()}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Price}, new List<CurrencyPair>{contentEntity.Def.Reward}, false, false);
+		
 		if (contentEntity.Def.IsPiece == false)
 		{
 			var position = anchorPaid == null ? btnBack.transform.position : anchorPaid.position;
@@ -239,13 +241,11 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 				});
 			
 			contentEntity.Def.State = MarketItemState.Claimed;
-			Analytics.SendPurchase($"market{GetIndex()}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Price}, new List<CurrencyPair>{contentEntity.Def.Reward}, false, false);
 			Init();
 			
 			return;
 		}
 		
-		Analytics.SendPurchase($"market{GetIndex()}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Price}, null, false, false);
 		CurrencyHelper.Purchase(Currency.Market.Name, 1, contentEntity.Def.Price, success =>
 		{
 			if (success == false)
