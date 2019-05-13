@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BfgAnalytics;
 
 public class PartDef
 {
@@ -178,9 +179,10 @@ public class PartPiecesLogicComponent : IECSComponent
         
         if (action == null) return false;
         
+        SendAnalytics(positions, def.Id);
         Remove(position);
         Context.ActionExecutor.PerformAction(action);
-
+        
         if (!isExtra) return true;
         
         var result = Context.BoardLogic.GetPieceAt(positions[0])?.PieceState;
@@ -214,5 +216,21 @@ public class PartPiecesLogicComponent : IECSComponent
         }
 
         return result;
+    }
+    
+    private void SendAnalytics(List<BoardPosition> positions, int id)
+    {
+        var logic = Context.BoardLogic;
+        
+        foreach (var position in positions)
+        {
+            if (logic.GetPieceAt(position).PieceType != PieceType.Boost_CR.Id) continue;
+
+            var next = logic.MatchDefinition.GetNext(id);
+            var pair = new CurrencyPair {Currency = PieceType.Parse(PieceType.Boost_CR.Id), Amount = 1};
+            
+            Analytics.SendPurchase("board_merge", PieceType.Parse(next), new List<CurrencyPair>{pair}, null, false, false);
+            return;
+        }
     }
 }

@@ -124,22 +124,16 @@ namespace BfgAnalytics
         }
         
         /// <summary>
-        /// Create json like this: {"premium": {"crystals": 10}, "soft": {"coins": 500}}
+        /// Create json like this: {"premium": {"Crystals": 10}, "soft": {"Coins": 500}, "booster": {"Boost_CR": 5}}
         /// </summary>
         /// <param name="currencies"></param>
         /// <returns></returns>
         private static JSONObject CreateCurrenciesJson(List<CurrencyPair> currencies)
         {
-            JSONObject CreateCurrencyNode(CurrencyPair pair)
-            {
-                JSONObject node = new JSONObject();
-                node[pair.Currency] = new JSONNumber(pair.Amount);
-                return node;
-            }
-            
             var ret = new JSONObject();
             var premium = new JSONObject();
             var soft = new JSONObject();
+            var booster = new JSONObject();
 
             foreach (var pair in currencies)
             {
@@ -156,10 +150,19 @@ namespace BfgAnalytics
                     soft[pair.Currency] = pair.Amount;
                     continue;
                 }
+
+                var id = PieceType.Parse(pair.Currency);
+                
+                if (id == PieceType.Boost_CR.Id || id == PieceType.Boost_WR.Id)
+                {
+                    booster[pair.Currency] = pair.Amount;
+                    continue;
+                }
             }
 
             if (premium.Count > 0) ret.Add("premium", premium);
             if (soft.Count > 0) ret.Add("soft", soft);
+            if (booster.Count > 0) ret.Add("booster", booster);
 
             return ret;
         }

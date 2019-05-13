@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BfgAnalytics;
 
 public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBuilder
 {
@@ -48,6 +49,8 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
             MatchedPiecesCount = matchField.Count,
             CreatedPieceType = nextType,
         };
+
+        if (useBoost) SendAnalytics(nextType, PieceType.Boost_CR.Id);
             
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, matchDescription);
 
@@ -69,6 +72,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         if (amountCurrent < AMOUNT_BONUS)
         {
             nextPieces = Add(1, nextType, nextPieces);
+            CollectAnalytics(nextType, 1);
 
             if (amountCurrent == AMOUNT_BONUS - 1)
             {
@@ -95,9 +99,12 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
                 break;
             case 3:
             case 4:
-                nextPieces = Add(amount + 1, nextType, nextPieces);
+                amount += 1;
+                nextPieces = Add(amount, nextType, nextPieces);
                 break;
         }
+        
+        CollectAnalytics(nextType, amount);
         
         return nextPieces;
     }
@@ -110,5 +117,17 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         }
 
         return pieces;
+    }
+
+    private void CollectAnalytics(int id, int amount)
+    {
+        var pair = new CurrencyPair {Currency = PieceType.Parse(id), Amount = amount};
+        Analytics.SendPurchase("board_merge", pair.Currency, null, new List<CurrencyPair>{pair}, false, false);
+    }
+    
+    private void SendAnalytics(int piece, int id)
+    {
+        var pair = new CurrencyPair {Currency = PieceType.Parse(id), Amount = 1};
+        Analytics.SendPurchase("board_merge", PieceType.Parse(piece), new List<CurrencyPair>{pair}, null, false, false);
     }
 }

@@ -2,7 +2,7 @@ using Debug = IW.Logger;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using UnityEngine;
+using BfgAnalytics;
 
 public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 {
@@ -186,6 +186,9 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             From = targetPosition,
             Pieces = new Dictionary<int, int> {{PieceType.Boost_WR1.Id, 1}}
         });
+        
+        var pair = new CurrencyPair {Currency = PieceType.Boost_WR.Abbreviations[0], Amount = 1};
+        Analytics.SendPurchase("board_main", PieceType.Parse(target.PieceType), new List<CurrencyPair>{pair}, null, false, false);
         
         return true;
     }
