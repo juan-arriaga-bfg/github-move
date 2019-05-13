@@ -9,6 +9,8 @@ public class UIEventAlmostWindowModel : IWWindowModel
     public string MarkText => LocalizationService.Get("window.event.almost.mark", "window.event.almost.mark");
     public string ButtonText => string.Format(LocalizationService.Get("common.button.buy", "common.button.buy {0}"), Price.ToStringIcon());
 
+    public int Step;
+    
     public CurrencyPair Price;
     public List<CurrencyPair> Rewards;
 }

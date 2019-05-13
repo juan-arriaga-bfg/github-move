@@ -51,7 +51,7 @@ public class UIEventAlmostWindowView : UIGenericPopupWindowView
         var flyPosition = GetCanvas().worldCamera.WorldToScreenPoint(btnBuy.transform.position);
         
         CurrencyHelper.PurchaseAndProvideSpawn(windowModel.Rewards, windowModel.Price, null, flyPosition, null, false, true);
-//        Analytics.SendPurchase($"market{GetIndex()}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Price}, null, false, false);
+        Analytics.SendPurchase("screen_event_offer", $"stage{windowModel.Step}", new List<CurrencyPair>{windowModel.Price}, new List<CurrencyPair>(windowModel.Rewards), false, false);
         
         Controller.CloseCurrentWindow();
     }

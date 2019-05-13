@@ -78,6 +78,8 @@ namespace BfgAnalytics
         {
             JSONObject customJsonData = CreateTransaction(location, reason, spend, collect, isIap, isFree);
 
+            if (customJsonData == null) return;
+            
             AnalyticsService.Current?.Event("economy", "economy",null, null, DefaultJsonData(), customJsonData);
         }
         
@@ -100,6 +102,9 @@ namespace BfgAnalytics
         {
             JSONObject customJsonData = new JSONObject();
             JSONObject transactionNode = new JSONObject();
+
+            var isSpendNull = true;
+            var isCollectNull = true;
             
             transactionNode["location"] = location;
             transactionNode["reason"] = reason;
@@ -109,14 +114,24 @@ namespace BfgAnalytics
             if (spend != null)
             {
                 var node = CreateCurrenciesJson(spend);
-                if (node.Count != 0) transactionNode["spend"] = node;
+                if (node.Count != 0)
+                {
+                    transactionNode["spend"] = node;
+                    isSpendNull = false;
+                }
             }
             
             if (collect != null)
             {
                 var node = CreateCurrenciesJson(collect);
-                if (node.Count != 0) transactionNode["collect"] = node;
+                if (node.Count != 0)
+                {
+                    transactionNode["collect"] = node;
+                    isCollectNull = false;
+                }
             }
+
+            if (isSpendNull && isCollectNull) return null;
             
             customJsonData.Add("transaction", transactionNode);
             

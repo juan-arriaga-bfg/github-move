@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using BfgAnalytics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -112,6 +113,7 @@ public class UIEventElementViewController : UIContainerElementViewController
         
         contentEntity.GameStep.IsNormalClaimed = true;
         Claim(contentEntity.GameStep.NormalRewards, btnNormal.transform.position);
+        Analytics.SendPurchase("screen_event", $"stage{Index + 1}", null, new List<CurrencyPair>(contentEntity.GameStep.NormalRewards), false, false);
     }
     
     private void OnPremiumClick()
@@ -135,6 +137,7 @@ public class UIEventElementViewController : UIContainerElementViewController
         
         contentEntity.GameStep.IsPremiumClaimed = true;
         Claim(contentEntity.GameStep.PremiumRewards, btnPremium.transform.position);
+        Analytics.SendPurchase("screen_event", $"stage{Index + 1}_premium", null, new List<CurrencyPair>(contentEntity.GameStep.PremiumRewards), false, false);
     }
 
     private void Claim(List<CurrencyPair> reward, Vector3 position)

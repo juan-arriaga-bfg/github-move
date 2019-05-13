@@ -181,10 +181,11 @@ public class EventGame : ECSEntity
         var stepDef = Steps[Step];
         var model = UIService.Get.GetCachedModel<UIEventAlmostWindowModel>(UIWindowType.EventAlmostWindow);
         
-        RemoveCurrency();
-        
+        model.Step = Step + 1;
         model.Price = null;
         model.Rewards = new List<CurrencyPair>();
+        
+        RemoveCurrency();
 
         if (stepDef.IsNormalIgnored == false)
         {
