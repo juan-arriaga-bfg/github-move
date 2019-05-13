@@ -85,7 +85,12 @@ namespace BfgAnalytics
         
         public static void SendDailyRewardClaim(int day)
         {
-            AnalyticsService.Current?.Event("activity", day.ToString(), "dailyreward",null, DefaultJsonData());
+            AnalyticsService.Current?.Event("activity", $"day{day}", "dailyreward",null, DefaultJsonData());
+        }
+        
+        public static void SendEventStageClaim(int stage)
+        {
+            AnalyticsService.Current?.Event("activity", $"stage{stage}", "orderevent",null, DefaultJsonData());
         }
         
         public static void SendFireflyCollect()

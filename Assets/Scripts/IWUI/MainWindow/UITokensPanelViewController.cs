@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using BfgAnalytics;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -107,6 +108,7 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
         CurrencyHelper.Purchase(Currency.EventStep.Name, 1, itemUid, eventGame.IsLastStep ? 0 : price, success =>
         {
             if (eventGame.IsCompleteStep) eventGame.Complete();
+            Analytics.SendEventStageClaim(ProfileService.Current.GetStorageItem(Currency.EventStep.Name).Amount);
         });
         
         UpdateDots();
