@@ -24,7 +24,7 @@ public enum PieceTypeFilter
     Removable       = 0b_00000000000000001000000000000000,
     Bag             = 0b_00000000000000010000000000000000,
     Normal          = 0b_00000000000000100000000000000000,
-    Progress        = 0b_00000000000001000000000000000000, // top_pieces (аналитика)
+    Analytics        = 0b_00000000000001000000000000000000, // analytics
     OrderPiece      = 0b_00000000000010000000000000000000, // piece droped from order
 }
 

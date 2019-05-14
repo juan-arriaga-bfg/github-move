@@ -60,7 +60,7 @@ public class HighlightTaskUseWorker : TaskHighlightUsingArrow
         var workPlacesList = posCache.GetPiecePositionsByFilter(PieceTypeFilter.Mine);
         
         workPlacesList.AddRange(posCache.GetPiecePositionsByFilter(PieceTypeFilter.Obstacle));
-        workPlacesList.AddRange(posCache.GetPiecePositionsByFilter(PieceTypeFilter.Multicellular | PieceTypeFilter.Progress, PieceTypeFilter.Fake));
+        workPlacesList.AddRange(posCache.GetPiecePositionsByFilter(PieceTypeFilter.Multicellular | PieceTypeFilter.Analytics, PieceTypeFilter.Fake));
 
         if (workPlacesList.Count > 0)
         {

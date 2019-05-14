@@ -64,7 +64,7 @@ public class MarketItem
             foreach (var weight in def.PieceWeights)
             {
                 var pieceDef = PieceType.GetDefById(weight.Piece);
-                if (pieceDef.Filter.Has(PieceTypeFilter.Progress) == false || min < weight.Piece) continue;
+                if (pieceDef.Filter.Has(PieceTypeFilter.Analytics) == false || min < weight.Piece) continue;
 
                 min = weight.Piece;
             }
