@@ -24,7 +24,7 @@ public class SecuredTimeManager : ISecuredTimeManager
     /// <summary>
     /// Use only for debug purpose. This flag will disable server connection, the same as DEBUG_FORCE_USE_STANDARD_DATETIME define
     /// </summary>
-    public bool ForceUseLocalTime;
+    public bool ForceUseStandardDateTime;
 #endif
         
     private const string SAVE_KEY_MONOTONIC_TIME = "SecuredTime_MonotonicTime";
@@ -272,7 +272,7 @@ public class SecuredTimeManager : ISecuredTimeManager
                 return DateTime.UtcNow;
 #endif
 #if DEBUG
-                if (ForceUseLocalTime)
+                if (ForceUseStandardDateTime)
                 {
                     return DateTime.UtcNow; 
                 }
@@ -297,7 +297,7 @@ public class SecuredTimeManager : ISecuredTimeManager
                 return DateTime.Now;
 #endif
 #if DEBUG
-                if (ForceUseLocalTime)
+                if (ForceUseStandardDateTime)
                 {
                     return DateTime.Now; 
                 }
