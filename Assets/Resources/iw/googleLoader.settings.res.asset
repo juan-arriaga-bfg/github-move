@@ -64,7 +64,7 @@ MonoBehaviour:
   - Key: shop
     Link: 15hj4e6i2F9UkK_p-lSEvp8d1MJW0KNj3PmEL_1rQU_4
     Route: parse
-    Pattern: '[{"Uid":"","Products":[{"Currency":"","Amount":0}],"Extras":[{"Currency":"","Amount":0}],"Price":{"Currency":"","Amount":0},"Icon":"","Name":"","PurchaseKey":"","SaleKey":"","IsPermanent":true,"Sale":0,"Delays":[]}]'
+    Pattern: '[{"Uid":"","Cohort":"","Products":[{"Currency":"","Amount":0}],"Extras":[{"Currency":"","Amount":0}],"Price":{"Currency":"","Amount":0},"Icon":"","Name":"","PurchaseKey":"","SaleKey":"","IsPermanent":true,"Sale":0,"Delays":[]}]'
   - Key: market
     Link: 1sQoVUyJQqGwJDGcmg4NDllPEgWygwrh8Qgeih1TwYaE
     Route: parse

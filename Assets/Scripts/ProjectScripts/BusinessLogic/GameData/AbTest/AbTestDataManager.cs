@@ -9,6 +9,7 @@ using BFGSDK;
 public static class AbTestName
 {
     public static readonly string DAILY_REWARD = "daily_reward";
+    public static readonly string SHOP_PRICE = "shop_price";
 }
 
 public class AbTestDataManager : ECSEntity, IDataManager
@@ -43,6 +44,7 @@ public class AbTestDataManager : ECSEntity, IDataManager
         Tests = new Dictionary<string, AbTestItem>
         {
             {AbTestName.DAILY_REWARD, new AbTestItem {GroupsCount = 3}},
+            {AbTestName.SHOP_PRICE, new AbTestItem {GroupsCount = 3}},
         };
 
         foreach (var pair in Tests)

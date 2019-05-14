@@ -22,6 +22,7 @@
   },
   {
     "Uid": "Energy",
+    "Cohort": "A",
     "Products": [
       {
         "Currency": "Energy",
@@ -37,6 +38,39 @@
   },
   {
     "Uid": "Energy",
+    "Cohort": "B",
+    "Products": [
+      {
+        "Currency": "Energy",
+        "Amount": 1
+      }
+    ],
+    "Price": {
+      "Currency": "Coins",
+      "Amount": 5
+    },
+    "Icon": "EnergyShopIcon2",
+    "Name": "window.shop.energy.item2"
+  },
+  {
+    "Uid": "Energy",
+    "Cohort": "C",
+    "Products": [
+      {
+        "Currency": "Energy",
+        "Amount": 1
+      }
+    ],
+    "Price": {
+      "Currency": "Coins",
+      "Amount": 10
+    },
+    "Icon": "EnergyShopIcon2",
+    "Name": "window.shop.energy.item2"
+  },
+  {
+    "Uid": "Energy",
+    "Cohort": "A",
     "Products": [
       {
         "Currency": "Energy",
@@ -52,6 +86,52 @@
     "Price": {
       "Currency": "Coins",
       "Amount": 550
+    },
+    "Icon": "EnergyShopIcon3",
+    "Name": "window.shop.energy.item3",
+    "IsPermanent": true
+  },
+  {
+    "Uid": "Energy",
+    "Cohort": "B",
+    "Products": [
+      {
+        "Currency": "Energy",
+        "Amount": 80
+      }
+    ],
+    "Extras": [
+      {
+        "Currency": "Energy",
+        "Amount": 10
+      }
+    ],
+    "Price": {
+      "Currency": "Coins",
+      "Amount": 350
+    },
+    "Icon": "EnergyShopIcon3",
+    "Name": "window.shop.energy.item3",
+    "IsPermanent": true
+  },
+  {
+    "Uid": "Energy",
+    "Cohort": "C",
+    "Products": [
+      {
+        "Currency": "Energy",
+        "Amount": 80
+      }
+    ],
+    "Extras": [
+      {
+        "Currency": "Energy",
+        "Amount": 10
+      }
+    ],
+    "Price": {
+      "Currency": "Coins",
+      "Amount": 850
     },
     "Icon": "EnergyShopIcon3",
     "Name": "window.shop.energy.item3",

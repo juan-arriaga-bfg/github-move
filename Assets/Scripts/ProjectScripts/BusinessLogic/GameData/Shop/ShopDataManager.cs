@@ -6,16 +6,21 @@ public class ShopDataManager : IECSComponent, IDataManager, IDataLoader<List<Sho
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 	public int Guid => ComponentGuid;
-
+	
+	private GameDataManager context;
+	
 	public Dictionary<string, List<ShopDef>> Defs;
 
 	public void OnRegisterEntity(ECSEntity entity)
 	{
+		context = (GameDataManager)entity;
+		
 		Reload();
 	}
 
 	public void OnUnRegisterEntity(ECSEntity entity)
 	{
+		context = null;
 	}
 	
 	public void Reload()
@@ -30,8 +35,12 @@ public class ShopDataManager : IECSComponent, IDataManager, IDataLoader<List<Sho
 		{
 			if (string.IsNullOrEmpty(error))
 			{
+				var userGroup = context.AbTestManager.Tests[AbTestName.SHOP_PRICE].UserGroup;
+				
 				foreach (var def in data)
 				{
+					if (string.IsNullOrEmpty(def.Cohort) == false && def.Cohort.ToLower() != userGroup) continue;
+					
 					if (Defs.TryGetValue(def.Uid, out var list) == false)
 					{
 						list = new List<ShopDef>();

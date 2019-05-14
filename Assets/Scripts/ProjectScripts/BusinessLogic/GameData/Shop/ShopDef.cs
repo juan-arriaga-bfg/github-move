@@ -4,6 +4,7 @@ using System.Linq;
 public class ShopDef
 {
     public string Uid;
+    public string Cohort;
     public string Icon;
     public string Name;
     public string PurchaseKey;
