@@ -12,7 +12,7 @@ namespace BfgAnalytics
         Flags       = 0b_0000_0100,
         Story       = 0b_0000_1000,
         Standart    = 0b_0001_0000, 
-        Transaction = 0b_0010_0000,
+        // Transaction = 0b_0010_0000,
         Abtest      = 0b_0100_0000,
     }                 
 }                     
