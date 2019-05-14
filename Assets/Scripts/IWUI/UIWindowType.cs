@@ -74,6 +74,8 @@ public class UIWindowType
     
     public const string LootBoxWindow = "LootBoxWindow";
     
+    public const string SaveWindow = "SaveWindow";
+    
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {
         MainWindow,

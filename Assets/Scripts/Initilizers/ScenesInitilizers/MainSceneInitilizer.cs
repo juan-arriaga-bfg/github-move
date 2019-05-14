@@ -37,6 +37,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.EventSubscriptionWindow,
             UIWindowType.EventAlmostWindow,
             UIWindowType.LootBoxWindow,
+            UIWindowType.SaveWindow,
 #if DEBUG
             UIWindowType.CurrencyCheatSheetWindow,
             UIWindowType.PiecesCheatSheetWindow,

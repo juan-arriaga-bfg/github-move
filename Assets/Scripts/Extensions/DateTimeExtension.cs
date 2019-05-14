@@ -91,7 +91,7 @@ public static class DateTimeExtension
         return TimeFormat(datetime.GetTimeLeft(useUTC), false, null, true, mspace, daysConvert);
     }
     
-    private static string TimeFormat(TimeSpan time, bool icon, string format, bool isColon = true, float mspace = 3f, bool daysConvert = false)
+    public static string TimeFormat(TimeSpan time, bool icon, string format, bool isColon = true, float mspace = 3f, bool daysConvert = false)
     {
         var iconStr = icon ? $"<sprite name={Currency.Timer.Icon}> " : "";
         var mspaceStr = mspace.ToString(CultureInfo.InvariantCulture);
