@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class UIMessageWindowController : IWWindowController {
 
@@ -154,11 +155,11 @@ public class UIMessageWindowController : IWWindowController {
         
         model.OnAccept = () =>
         {
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
-            #else
+#else
             Application.Quit();
-            #endif
+#endif
         };
         model.OnCancel = () => {};
         
