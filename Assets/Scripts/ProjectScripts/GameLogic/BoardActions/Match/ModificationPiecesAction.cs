@@ -29,21 +29,15 @@ public class ModificationPiecesAction : IBoardAction
 		
 		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(To, free, NextPieces.Count * 2) == false) return false;
 		
-		
-		
 		var index = free.IndexOf(To);
 		
-//		Debug.LogWarning($"_free: {JsonConvert.SerializeObject(free.Select(x => x.ToString()).ToList(), Formatting.Indented)}");
-
 		free.RemoveAt(index != -1 ? index : 0);
-		free.Add(To);
+		
 		// sort by distance to center
 		free = free.OrderBy(x => BoardPosition.SqrMagnitude(x, To)).ToList();
+		free.Insert(NextPieces.Count - 1, To);
 		
 		NextPieces.Sort();
-		
-//		Debug.LogWarning($"_sorted: {JsonConvert.SerializeObject(free.Select(x => x.ToString()).ToList(), Formatting.Indented)}");
-//		Debug.LogWarning($"_next: {JsonConvert.SerializeObject(NextPieces.Select(x => x.ToString()).ToList(), Formatting.Indented)}");
 		
 		var pieces = new List<Piece>();
 		
@@ -51,7 +45,7 @@ public class ModificationPiecesAction : IBoardAction
 		{
 			var piece = gameBoardController.CreatePieceFromType(NextPieces[i]);
 			
-			if (free.Count <= i || i < 0) continue;
+			if (free.Count <= i || i < 0) break;
 			
 			var position = free[i];
 
@@ -65,12 +59,9 @@ public class ModificationPiecesAction : IBoardAction
 			}
 			
 			pieces.Add(piece);
-
-		    if (piece.Multicellular != null)
-		    {
-		        
-		    }
 		}
+		
+		free.RemoveRange(NextPieces.Count, free.Count - NextPieces.Count);
 		
 		gameBoardController.BoardLogic.LockCells(Positions, this);
 		gameBoardController.BoardLogic.LockCells(free, this);
