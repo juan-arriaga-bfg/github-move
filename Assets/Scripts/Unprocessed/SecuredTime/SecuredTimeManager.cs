@@ -1,4 +1,4 @@
-// #define DEBUG_USE_STANDARD_DATETIME // Uncomment to replace return values for Now and UTCNow with standard DateTime.Now and DateTime.UTCNow calls
+// #define DEBUG_FORCE_USE_STANDARD_DATETIME // Uncomment to replace return values for Now and UTCNow with standard DateTime.Now and DateTime.UTCNow calls
 using Debug = IW.Logger;
 using System;
 using System.Collections.Generic;
@@ -20,6 +20,13 @@ public class SecuredTimeManager : ISecuredTimeManager
 
     private List<IServerTimeProvider> timeProviders = new List<IServerTimeProvider>();
     
+#if DEBUG
+    /// <summary>
+    /// Use only for debug purpose. This flag will disable server connection, the same as DEBUG_FORCE_USE_STANDARD_DATETIME define
+    /// </summary>
+    public bool ForceUseLocalTime;
+#endif
+        
     private const string SAVE_KEY_MONOTONIC_TIME = "SecuredTime_MonotonicTime";
     private const string SAVE_KEY_SERVER_TIME    = "SecuredTime_ServerTime";
     private const string SAVE_KEY_LOCAL_TIME     = "SecuredTime_LocalTime";
@@ -261,10 +268,15 @@ public class SecuredTimeManager : ISecuredTimeManager
         get
         {
             {
-#if DEBUG_USE_STANDARD_DATETIME
+#if DEBUG_FORCE_USE_STANDARD_DATETIME
                 return DateTime.UtcNow;
 #endif
-                
+#if DEBUG
+                if (ForceUseLocalTime)
+                {
+                    return DateTime.UtcNow; 
+                }
+#endif                
                 long currentTicks = GetMonotonicTime();
                 long elapsedTicks = currentTicks - securedMonotonicTime;
 
@@ -281,9 +293,15 @@ public class SecuredTimeManager : ISecuredTimeManager
         get
         {
             {
-#if DEBUG_USE_STANDARD_DATETIME
+#if DEBUG_FORCE_USE_STANDARD_DATETIME
                 return DateTime.Now;
 #endif
+#if DEBUG
+                if (ForceUseLocalTime)
+                {
+                    return DateTime.Now; 
+                }
+#endif     
                 var utcNow = UtcNow;
                 var localNow = utcNow.ToLocalTime();
                 return localNow;
