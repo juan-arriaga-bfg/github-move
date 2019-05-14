@@ -61,6 +61,12 @@
             return;
         }
 
+        if (serverData.ForceVersion == "0" || serverData.NotifyVersion == "0")
+        {
+            IW.Logger.Log($"[ForcedUpdateManager] => Check: Forced update is not enabled on the server.");
+            return;
+        }
+
         try
         {
             string currentVersionStr = IWProjectVersionSettings.Instance.ProductionVersion;
