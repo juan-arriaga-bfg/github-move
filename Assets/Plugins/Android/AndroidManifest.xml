@@ -61,6 +61,14 @@
             <category android:name="android.intent.category.BROWSABLE"/>
             <data android:scheme="https" android:host="xh9-x.tlnk.io"/>
         </intent-filter>
+        <intent-filter android:autoVerify="true">
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+            <data android:host="mergewoodtales.onelink.me"/>
+            <data android:pathPrefix="/ES7h"/>
+            <data android:scheme="https"/>
+        </intent-filter>
     </activity>
     
     <!--    Rave Social manifest details-->
@@ -89,21 +97,6 @@
         <intent-filter>
             <action android:name="android.intent.action.BOOT_COMPLETED"/>
         </intent-filter>
-    </receiver>
-
-    
-
-    <!-- Appsflyer -->
-    <receiver android:name="com.appsflyer.SingleInstallBroadcastReceiver" android:exported="true">
-      <action android:name="com.android.vending.INSTALL_REFERRER" />
-      <intent-filter android:autoVerify=“true”>
-        <action android:name=“android.intent.action.VIEW”/>
-        <category android:name=“android.intent.category.BROWSABLE”/>
-        <category android:name=“android.intent.category.DEFAULT”/>
-        <data android:host=“mergewoodtales.onelink.me”/>
-        <data android:pathPrefix=“/ES7h”/>
-        <data android:scheme=“https”/>
-      </intent-filter>
     </receiver>
 </application>
 
