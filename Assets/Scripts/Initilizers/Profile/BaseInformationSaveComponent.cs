@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using IW.SimpleJSON;
 using Newtonsoft.Json;
+using UnityEngine;
 
 public interface IBaseInformationSaveComponent
 {
@@ -65,7 +66,7 @@ public class MatchesCounter
     
     public int EffectiveMatchesCount { get; private set; }
 
-    public float Effectiveness => TotalMatchesCount != 0 ? EffectiveMatchesCount / (float)TotalMatchesCount : -1;
+    public double Effectiveness => TotalMatchesCount != 0 ? Math.Round(EffectiveMatchesCount / (double)TotalMatchesCount, 3) : -1;
 
     public MatchesCounter(int totalCount, int effectiveCount)
     {

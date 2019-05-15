@@ -5,7 +5,7 @@ namespace BfgAnalytics
 {
     public class JsonDataCollectorStandart : IJsonDataCollector
     {
-        public string Name => "standart";
+        public string Name => "standard";
 
         public JSONNode CollectData()
         {

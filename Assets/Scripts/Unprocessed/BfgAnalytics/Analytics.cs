@@ -11,12 +11,12 @@ namespace BfgAnalytics
         
         public static JsonDataGroup DefaultJsonData()
         {
-            return JsonDataGroup.Standart | JsonDataGroup.Userstats | JsonDataGroup.Balances | JsonDataGroup.Flags | JsonDataGroup.Story | JsonDataGroup.Abtest;
+            return JsonDataGroup.Standard | JsonDataGroup.Userstats | JsonDataGroup.Balances | JsonDataGroup.Flags | JsonDataGroup.Story | JsonDataGroup.Abtest | JsonDataGroup.Location;
         }
 
         public static JsonDataGroup TutorialJsonData()
         {
-            return JsonDataGroup.Standart | JsonDataGroup.Abtest;
+            return JsonDataGroup.Standard | JsonDataGroup.Abtest;
         }
         
         public static void SendQuestStartEvent(string questId)
