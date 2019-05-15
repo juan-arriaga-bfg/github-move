@@ -25,6 +25,7 @@ public class DevTools : UIContainerElementViewController
     [IWUIBinding("#RemoverToggle")] private Toggle removerToggle;
     [IWUIBinding("#LoggerToggle")] private Toggle loggerToggle;
     [IWUIBinding("#IapToggle")] private Toggle iapToggle;
+    [IWUIBinding("#SecureTimerToggle")] private Toggle secureTimerToggle;
 
     [IWUIBinding("#CommonButtons")] private GameObject commonPanel;
     [IWUIBinding("#ExtendedButtons")] private GameObject extendedPanel;
@@ -50,6 +51,10 @@ public class DevTools : UIContainerElementViewController
         removerToggle.isOn = IsRemoverDebugEnabled();
         loggerToggle.isOn = IsLoggerEnabled();
         iapToggle.isOn = IsIapEnabled();
+        
+        #if DEBUG
+        secureTimerToggle.isOn = !SecuredTimeService.Current.ForceUseStandardDateTime;
+        #endif
 
         IW.Logger.IsEnabled = IsLoggerEnabled();
         
@@ -602,6 +607,15 @@ public class DevTools : UIContainerElementViewController
         return isRemoverDebugDisabled;
 #endif
         
+    }
+
+    public void OnSecureTimerValueChanged(bool isChecked)
+    {
+#if UNITY_EDITOR
+        EditorPrefs.SetBool("DEBUG_SECURE_TIMER", isChecked);
+#elif DEBUG
+        ObscuredPrefs.SetBool("DEBUG_SECURE_TIMER", isChecked);
+#endif
     }
 
     public static bool IsSequenceReset
