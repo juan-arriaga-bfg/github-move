@@ -101,7 +101,7 @@ public class EventGamesLogicComponent : ECSEntity, ILockerComponent
         
         foreach (var config in serverData)
         {
-            if ((EventGameType) Enum.Parse(typeof(EventGameType), config.Type) != EventGameType.OrderSoftLaunch) continue;
+            if (Enum.TryParse<EventGameType>(config.Type, false, out var gameType) == false || gameType != EventGameType.OrderSoftLaunch) continue;
 
             var game = new EventGame {EventType = EventGameType.OrderSoftLaunch};
             
