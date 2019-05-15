@@ -604,6 +604,25 @@ public class DevTools : UIContainerElementViewController
         
     }
 
+    public void OnSecureTimerValueChanged(bool isChecked)
+    {
+#if UNITY_EDITOR
+        EditorPrefs.SetBool("DEBUG_SECURE_TIMER", isChecked);
+        SecuredTimeService.Current.ForceUseStandardDateTime = isChecked;
+#elif DEBUG
+        ObscuredPrefs.SetBool("DEBUG_SECURE_TIMER", isChecked);
+        SecuredTimeService.Current.ForceUseStandardDateTime = isChecked;
+#endif
+    }
+
+    public bool IsSecureTimerEnabled()
+    {
+#if DEBUG
+        return SecuredTimeService.Current.ForceUseStandardDateTime;
+#endif
+        return false;
+    }
+
     public static bool IsSequenceReset
     {
         get
