@@ -28,16 +28,7 @@ public class SecuredTimeManager : ISecuredTimeManager
     /// <summary>
     /// Use only for debug purpose. This flag will disable server connection, the same as DEBUG_FORCE_USE_STANDARD_DATETIME define
     /// </summary>
-    public bool ForceUseStandardDateTime
-    {
-        get
-        {
-            #if UNITY_EDITOR
-            return !EditorPrefs.GetBool("DEBUG_SECURE_TIMER", true);
-            #endif
-            return !ObscuredPrefs.GetBool("DEBUG_SECURE_TIMER", true);
-        }
-    }
+    public bool ForceUseStandardDateTime;
 #endif
         
     private const string SAVE_KEY_MONOTONIC_TIME = "SecuredTime_MonotonicTime";

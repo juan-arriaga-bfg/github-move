@@ -53,7 +53,7 @@ public class DevTools : UIContainerElementViewController
         iapToggle.isOn = IsIapEnabled();
         
         #if DEBUG
-        secureTimerToggle.isOn = !SecuredTimeService.Current.ForceUseStandardDateTime;
+        secureTimerToggle.isOn = IsSecureTimerEnabled();
         #endif
 
         IW.Logger.IsEnabled = IsLoggerEnabled();
@@ -613,10 +613,32 @@ public class DevTools : UIContainerElementViewController
     {
 #if UNITY_EDITOR
         EditorPrefs.SetBool("DEBUG_SECURE_TIMER", isChecked);
+        SecuredTimeService.Current.ForceUseStandardDateTime = !isChecked;
 #elif DEBUG
         ObscuredPrefs.SetBool("DEBUG_SECURE_TIMER", isChecked);
+        SecuredTimeService.Current.ForceUseStandardDateTime = !isChecked;
 #endif
     }
+
+    public bool IsSecureTimerEnabled()
+    {
+#if UNITY_EDITOR
+        return EditorPrefs.GetBool("DEBUG_SECURE_TIMER", true);
+#elif DEBUG
+        return ObscuredPrefs.GetBool("DEBUG_SECURE_TIMER", true);
+#endif
+        return true;
+    }
+    
+    /*{
+        get
+        {
+#if UNITY_EDITOR
+            return !EditorPrefs.GetBool("DEBUG_SECURE_TIMER", true);
+#endif
+            return !ObscuredPrefs.GetBool("DEBUG_SECURE_TIMER", true);
+        }
+    }*/
 
     public static bool IsSequenceReset
     {
