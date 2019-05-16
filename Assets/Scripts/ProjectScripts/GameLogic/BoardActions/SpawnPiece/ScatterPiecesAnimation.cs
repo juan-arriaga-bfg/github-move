@@ -56,10 +56,7 @@ public class ScatterPiecesAnimation : BoardAnimation
                 {
                     sequence.InsertCallback(0.0f, () =>
                     {
-                        var particle = ParticleView.Show(R.RewardDropParticles, position).transform;
-                        
-                        particle.SetParent(element.transform, false);
-                        particle.localPosition = Vector3.zero;
+                        ShowRewardParticle(position, element.transform);
                     });
                 }
                 
@@ -111,7 +108,9 @@ public class ScatterPiecesAnimation : BoardAnimation
                 foreach (var pair in Replace)
                 {
                     var next = context.CreatePieceAt(pair.Value, pair.Key);
-                    if (RewardEffect) ParticleView.Show(R.RewardDropParticles, pair.Key);
+                    
+                    ShowRewardParticle(pair.Key, next.transform);
+                    
                     next.CachedTransform.localScale = Vector3.zero;
                     next.CachedTransform.DOScale(Vector3.one, replaceDuration).SetEase(Ease.OutBack);
                 }
@@ -141,6 +140,19 @@ public class ScatterPiecesAnimation : BoardAnimation
             
             CompleteAnimation(context);
         });
+    }
+
+    private void ShowRewardParticle(BoardPosition position, Transform parent)
+    {
+        if (RewardEffect)
+        {
+            var particleView = ParticleView.Show(R.RewardDropParticles, position);
+            particleView.SyncRendererLayers(new BoardPosition(position.X, position.Y, BoardLayer.Default.Layer));
+            if (parent != null)
+            {
+                particleView.transform.SetParent(parent);
+            }
+        }
     }
 
     private void PlaysSound()
