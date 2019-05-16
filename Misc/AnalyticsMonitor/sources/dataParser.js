@@ -11,7 +11,7 @@ const setsList = [
     'flags',
     'userstats',
     'balances',
-    'standart',
+    'standard',
     'abtest',
     'story',
     'location',
