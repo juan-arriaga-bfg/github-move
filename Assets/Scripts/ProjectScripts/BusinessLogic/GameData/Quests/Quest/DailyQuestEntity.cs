@@ -9,7 +9,7 @@ public class DailyQuestEntity : QuestEntity
 {   
     private readonly Dictionary<TaskGroup, int> tasksCount = new Dictionary<TaskGroup, int>
     {
-        {TaskGroup.Permanent, 3},
+        {TaskGroup.Permanent, int.MaxValue},
         {TaskGroup.Easy,      1},
         {TaskGroup.Normal,    2},
         {TaskGroup.Hard,      1},
@@ -86,17 +86,17 @@ public class DailyQuestEntity : QuestEntity
         {
             TaskGroup group = def.Key;
             int count = def.Value;
-
+            
             List<TaskEntity> tasksPool = tasksDict[group];
 
-            if (count > tasksPool.Count)
+            if (count > tasksPool.Count && group != TaskGroup.Permanent)
             {
                 Debug.LogError($"[DailyQuestEntity] => Not enough tasks in pool to fill '{def.Key}' group. At least {count} tasks expected.");
             }
             
             for (int i = 0; i < count && tasksPool.Count > 0; i++)
             {
-                int index = def.Key == TaskGroup.Permanent ? 0 : UnityEngine.Random.Range(0, tasksPool.Count);
+                int index = group == TaskGroup.Permanent ? 0 : UnityEngine.Random.Range(0, tasksPool.Count);
                 ActiveTasks.Add(tasksPool[index]);
                 tasksPool.RemoveAt(index);
             }
