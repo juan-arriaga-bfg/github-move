@@ -35,6 +35,7 @@ public class UIMainWindowView : UIBaseWindowView
     [IWUIBinding("#ButtonOrders")] private UIButtonViewController orderBaseButton;
     [IWUIBinding("#ButtonDailyQuest")] private UIButtonViewController dailyObjectiveBaseButton;
     [IWUIBinding("#ButtonOptions")] private UIButtonViewController optionsBaseButton;
+    [IWUIBinding("#ButtonOffer")] private UIButtonViewController offerBaseButton;
 
     [Header("Hint anchors")] 
     [SerializeField] private Transform hintAnchorOrdersButton;
@@ -92,6 +93,7 @@ public class UIMainWindowView : UIBaseWindowView
         orderBaseButton.OnClick(OnClickOrders);
         dailyObjectiveBaseButton.OnClick(OnClickDailyQuest);
         optionsBaseButton.OnClick(OnClickOptions);
+        offerBaseButton.OnClick(OnClickOffer);
     }
 
     public override void OnViewClose()
