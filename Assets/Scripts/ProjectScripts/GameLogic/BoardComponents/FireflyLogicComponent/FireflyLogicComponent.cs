@@ -45,7 +45,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 
         startTime = SecuredTimeService.Current.UtcNow;
         pauseTime = startTime;
-        tutorialStartTime = startTime;
+        tutorialStartTime = DateTime.UtcNow;
         
 		locker = new LockerComponent();
 		RegisterComponent(locker);
@@ -114,7 +114,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 
 	public void ResetTutorialStartTime()
 	{
-		tutorialStartTime = SecuredTimeService.Current.UtcNow;
+		tutorialStartTime = DateTime.UtcNow;
 	}
 
 	public void ResetSession()
