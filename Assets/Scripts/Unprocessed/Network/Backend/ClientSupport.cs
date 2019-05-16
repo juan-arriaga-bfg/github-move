@@ -24,6 +24,9 @@ namespace Backend
         public static void ConsumeAndApplyDef(ClientSupportDef def, ConsumeAndApplyCallback callback)
         {
             IW.Logger.Log("ClientSupport: ConsumeAndApplyDef");
+            
+            ProfileService.Instance.Manager.UploadCurrentProfile(false);
+                
             Consume(def, isOk =>
             {
                 if (!isOk)
