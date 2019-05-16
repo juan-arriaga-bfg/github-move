@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class UIEnergyLimitPanelViewController: UILimitPanelViewController
 {
+    [SerializeField] private UIButtonViewController button;
     [SerializeField] protected GameObject notifyIcon;
     private TimerComponent timer;
 
@@ -12,6 +13,12 @@ public class UIEnergyLimitPanelViewController: UILimitPanelViewController
         timer.OnStart += UpdateNotifyIcon;
         timer.OnComplete += UpdateNotifyIcon;
         UpdateNotifyIcon();
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        button.OnClick(OpenShop);
     }
 
     public override void UpdateView()
