@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BfgAnalytics;
 
@@ -48,15 +49,26 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         var matchDescription = new MatchDescription
         {
             SourcePieceType = pieceType,
-            MatchedPiecesCount = matchField.Count,
+            SourcePiecesCount = matchField.Count,
             CreatedPieceType = nextType,
+            CreatedPiecesCount = nextPieces.Count
         };
-        
+
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, matchDescription);
 
-        bool isEffective = matchField.Count >= 15 || (matchField.Count > 0 && matchField.Count % 5 == 0);
-        GameDataService.Current.UserProfile.BaseInformation.MatchesCounter.AddMatch(isEffective);
-        
+        try
+        {
+            bool isSourceFake = PieceType.GetDefById(pieceType).Filter.Has(PieceTypeFilter.Fake);
+            if (!isSourceFake)
+            {
+                GameDataService.Current.UserProfile.BaseInformation.MatchesCounter.AddMatch(matchDescription);
+            }
+        }
+        catch (Exception e)
+        {
+            IW.Logger.LogError(e);
+        }
+
         // collect and purchase rewards before action
         return CreateAction(nextPieces, matchField, position, pieceType, ignoreBoost);
     }

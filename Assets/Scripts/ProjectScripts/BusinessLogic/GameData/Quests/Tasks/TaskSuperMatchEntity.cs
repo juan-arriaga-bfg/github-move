@@ -70,9 +70,9 @@ public class TaskSuperMatchEntity : TaskCounterAboutPiece, IBoardEventListener
             return;
         }
         
-        if (matchDescr.MatchedPiecesCount >= CountToMatch)
+        if (matchDescr.SourcePiecesCount >= CountToMatch)
         {
-            CurrentValue += (int)(matchDescr.MatchedPiecesCount / CountToMatch);
+            CurrentValue += (int)(matchDescr.SourcePiecesCount / CountToMatch);
         }
     }
 

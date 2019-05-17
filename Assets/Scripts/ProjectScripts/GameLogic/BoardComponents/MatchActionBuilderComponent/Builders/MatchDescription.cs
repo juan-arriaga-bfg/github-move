@@ -1,6 +1,15 @@
 ﻿public class MatchDescription
 {
-    public int CreatedPieceType;
     public int SourcePieceType;
-    public int MatchedPiecesCount;
+    public int SourcePiecesCount;
+    public int CreatedPieceType;
+    public int CreatedPiecesCount;
+
+    public override string ToString()
+    {
+        string src = PieceType.Parse(SourcePieceType);
+        string dst = PieceType.Parse(CreatedPieceType);
+        
+        return $"{src} x {SourcePiecesCount} => {dst} x {CreatedPiecesCount}";
+    }
 }

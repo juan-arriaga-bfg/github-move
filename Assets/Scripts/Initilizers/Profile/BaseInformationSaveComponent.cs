@@ -74,15 +74,18 @@ public class MatchesCounter
         EffectiveMatchesCount = effectiveCount;
     }
     
-    public void AddMatch(bool effective)
+    public void AddMatch(MatchDescription matchDescription)
     {
+        int matchedCount = matchDescription.SourcePiecesCount;
+        bool isEffective = matchedCount >= 15 || (matchedCount > 0 && matchedCount % 5 == 0);
+        
         TotalMatchesCount++;
-        if (effective)
+        if (isEffective)
         {
             EffectiveMatchesCount++;
         }
-        
-        IW.Logger.Log($"[MatchesCounter] => AddMatch(effective: {effective}): Effectiveness: {TotalMatchesCount}/{EffectiveMatchesCount} = {Effectiveness}");
+
+        IW.Logger.Log($"[MatchesCounter] => AddMatch({matchDescription}, effective: {isEffective}): Effectiveness: {TotalMatchesCount}/{EffectiveMatchesCount} = {Effectiveness}");
     }
 }
 
