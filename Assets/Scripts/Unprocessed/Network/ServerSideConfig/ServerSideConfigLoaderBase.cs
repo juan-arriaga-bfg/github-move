@@ -166,7 +166,19 @@ public abstract class ServerSideConfigLoaderBase: IECSComponent
             }
             else
             {
-                IW.Logger.Log($"[{GetType()}] => Update: Skipped by interval: Now: {now}, Saved: {now}, Waiting: {(long)(diff.TotalSeconds)}/{checkInterval} seconds");
+                IW.Logger.Log($"[{GetType()}] => Update: Request skipped by interval: Now: {now}, Saved: {now}, Waiting: {(long)(diff.TotalSeconds)}/{checkInterval} seconds");
+                
+                if (cacheMode == ServerSideConfigLoaderCacheMode.Cache || cacheMode == ServerSideConfigLoaderCacheMode.Fallback)
+                {
+                    ProvideFromCache((error, data) =>
+                    {
+                        if (string.IsNullOrEmpty(error))
+                        {
+                            context.DataReceived(this, data);
+                        }
+                    });
+                }
+
                 return;
             }
         }
