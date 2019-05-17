@@ -101,7 +101,7 @@ public static class DateTimeExtension
 
         var d = isColon ? ":" : $"{LocalizationService.Get("common.abbreviation.day")} ";
         var h = isColon ? ":" : $"{LocalizationService.Get("common.abbreviation.hour")} ";
-        var m = isColon ? (daysConvert && temp.Days > 0 ? "" : ":") : $"{LocalizationService.Get("common.abbreviation.minute")} ";
+        var m = isColon ? (daysConvert && temp.Days > 0 ? "" : ":") : $"<space=0.6em>{LocalizationService.Get("common.abbreviation.minute")} ";
         var s = isColon ? "" : $"{LocalizationService.Get("common.abbreviation.second")} ";
         
         if (string.IsNullOrEmpty(format)) format = "{0}<mspace={1}em>{2}</mspace>";
