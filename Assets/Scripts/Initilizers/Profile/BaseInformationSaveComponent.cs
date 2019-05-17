@@ -85,7 +85,7 @@ public class MatchesCounter
             EffectiveMatchesCount++;
         }
 
-        IW.Logger.Log($"[MatchesCounter] => AddMatch({matchDescription}, effective: {isEffective}): Effectiveness: {TotalMatchesCount}/{EffectiveMatchesCount} = {Effectiveness}");
+        IW.Logger.Log($"[MatchesCounter] => AddMatch({matchDescription}, effective: {isEffective}): Effectiveness: {EffectiveMatchesCount}/{TotalMatchesCount} = {Effectiveness}");
     }
 }
 
