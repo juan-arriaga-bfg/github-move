@@ -3,17 +3,6 @@
 public class BoardArrowTutorialStep : BaseTutorialStep, IBoardEventListener
 {
     public List<int> Targets;
-    
-    protected override void OnFirstStart()
-    {
-        //nothing to do
-    }
-
-    private void EmitFirstStartEvent()
-    {
-        tutorialDataManager.SetStarted(Id);
-        OnFirstStartCallback?.Invoke(this);
-    }
 
     public override void PauseOff()
     {
@@ -64,11 +53,6 @@ public class BoardArrowTutorialStep : BaseTutorialStep, IBoardEventListener
     {
         var positions = GetPositions(targets);
 
-        if (positions.Count > 0 && IsFirstStartEvent())
-        {
-            EmitFirstStartEvent();
-        }
-        
         foreach (var position in positions)
         {
             if (Context.Context.BoardLogic.IsLockedCell(position)) continue;
