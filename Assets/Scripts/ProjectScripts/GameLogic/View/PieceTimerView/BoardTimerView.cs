@@ -25,6 +25,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     [SerializeField] private Transform timerTransform;
     
     private TimerComponent timer;
+    public TimerComponent Timer => timer;
     private bool isActiveHourglass;
 
     private TimerViewSate timerState;
@@ -160,7 +161,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     
     public void OnClick()
     {
-        if (timer.IsStarted == false) return;
+        if (timer.IsExecuteable() == false) return;
         
         OffChopSound();
 

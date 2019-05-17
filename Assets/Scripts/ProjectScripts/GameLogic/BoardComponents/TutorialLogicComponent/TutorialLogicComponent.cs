@@ -212,6 +212,10 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             pieceEntity.ViewDefinition?.SetFade(alpha > 0.99f ? 1f : 0f, 1f);
 
             if (pieceView != null) pieceView.SetFade(alpha, 1f);
+
+            var timer = pieceEntity.ViewDefinition?.GetView<BoardTimerView>(ViewType.BoardTimer)?.Timer;
+
+            if(timer != null) timer.IsPaused = !(alpha > 0.99f);
         }
     }
 

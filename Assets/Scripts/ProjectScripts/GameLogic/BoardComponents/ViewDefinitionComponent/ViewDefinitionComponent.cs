@@ -204,6 +204,11 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         
         view.Change(false);
     }
+    
+    public T GetView<T>(ViewType viewType) where T : UIBoardView
+    {
+        return views.TryGetValue(viewType, out var view) ? view as T : null;
+    }
 
     public List<UIBoardView> GetViews()
     {
