@@ -416,12 +416,8 @@ public static class TutorialBuilder
             case 29: // unlock EventGame
             {
                 if (LockEventGameStepIndex != index) Debug.LogError("Tutorial Error: LockEventGameStepIndex != index");
-                
-                step = new EventGameLockTutorialStep
-                {
-                    IsIgnoreDebug = false,
-                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("eventgame"),
-                };
+
+                step = new EventGameLockTutorialStep {IsIgnoreDebug = false};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = GameDataService.Current.ConstantsManager.StartLevelEventGame, ConditionType = TutorialConditionType.Complete}, true);
