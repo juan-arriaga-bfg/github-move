@@ -215,7 +215,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
 
             var timer = pieceEntity.ViewDefinition?.GetView<BoardTimerView>(ViewType.BoardTimer)?.Timer;
 
-            if(timer != null) timer.IsPaused = !(alpha > 0.99f);
+            if (timer != null) timer.IsPaused = !(alpha > 0.99f);
         }
     }
 
