@@ -138,6 +138,32 @@
     "Description": "window.market.description.chest"
   },
   {
+    "Uid": 17,
+    "UnlockLevel": 1,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "CH_Free",
+      "Weight": 1
+    },
+    "RandomType": "Base",
+    "Description": "window.market.description.free_chest"
+  },
+  {
+    "Uid": 16,
+    "UnlockLevel": 1,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "CH_NPC",
+      "Weight": 1
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 75
+    },
+    "RandomType": "NPCChests",
+    "Description": "window.market.description.npc_chest"
+  },
+  {
     "Uid": 9,
     "UnlockLevel": 1,
     "Amount": 2,
@@ -211,32 +237,6 @@
     },
     "RandomType": "Base",
     "Description": "window.market.description.boost_cr"
-  },
-  {
-    "Uid": 17,
-    "UnlockLevel": 1,
-    "Amount": 1,
-    "Weight": {
-      "Uid": "CH_Free",
-      "Weight": 1
-    },
-    "RandomType": "Base",
-    "Description": "window.market.description.free_chest"
-  },
-  {
-    "Uid": 16,
-    "UnlockLevel": 1,
-    "Amount": 1,
-    "Weight": {
-      "Uid": "CH_NPC",
-      "Weight": 1
-    },
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 75
-    },
-    "RandomType": "NPCChests",
-    "Description": "window.market.description.npc_chest"
   },
   {
     "Uid": 4,
