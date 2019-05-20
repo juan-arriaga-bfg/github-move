@@ -64,6 +64,7 @@ public class TutorialDataManager: IECSComponent
     {
         if (completed.Contains(id)) return;
         
+        IW.Logger.Log($"[TutorialDataManager] => SetCompleted({id})");
         completed.Add(id);
     }
     
@@ -74,6 +75,7 @@ public class TutorialDataManager: IECSComponent
     
     public void SetStarted(int id)
     {
+        IW.Logger.Log($"[TutorialDataManager] => SetStarted({id})");
         started.Add(id);
     }
 }
