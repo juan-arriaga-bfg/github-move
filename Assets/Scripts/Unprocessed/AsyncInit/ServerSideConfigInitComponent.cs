@@ -11,6 +11,10 @@ public class ServerSideConfigInitComponent : AsyncInitComponentBase
         manager.RegisterComponent(new ForcedUpdateServerSideConfigLoader()
             .SetUrl("forced-update/get")
             .SetCacheMode(ServerSideConfigLoaderCacheMode.Fallback));
+            
+        manager.RegisterComponent(new ClientUpdateServerSideConfigLoader()
+            .SetUrl("client-update/get")
+            .SetCacheMode(ServerSideConfigLoaderCacheMode.Cache));
 
         manager.UpdateAll();
         
