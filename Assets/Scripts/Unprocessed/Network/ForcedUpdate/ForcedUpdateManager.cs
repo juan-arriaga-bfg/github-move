@@ -138,19 +138,22 @@
 
         DefaultSafeQueueBuilder.BuildAndRun(QUEUE_ID, true, () =>
         {
-            DateTime now = DateTime.UtcNow;
-            if (lastNotifyTime != null)
+            if (!force)
             {
-                double dt = Math.Abs((now - lastNotifyTime.Value).TotalSeconds);
-                const int DELAY = 60 * 60;
-                if (dt < 60 * 60)
+                DateTime now = DateTime.UtcNow;
+                if (lastNotifyTime != null)
                 {
-                    IW.Logger.Log($"[ForcedUpdateManager] => ScheduleMessage: ShowWindow: Skip by time: {DELAY - dt}s remaining");
-                    return;
+                    double dt = Math.Abs((now - lastNotifyTime.Value).TotalSeconds);
+                    const int DELAY = 60 * 60;
+                    if (dt < 60 * 60)
+                    {
+                        IW.Logger.Log($"[ForcedUpdateManager] => ScheduleMessage: ShowWindow: Skip by time: {DELAY - dt}s remaining");
+                        return;
+                    }
                 }
-            }
 
-            lastNotifyTime = now;
+                lastNotifyTime = now;
+            }
 
             string btnUpdate = LocalizationService.Get("window.forced.update.btn.update", "window.forced.update.btn.update");
             
