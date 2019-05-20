@@ -146,8 +146,8 @@
                 if (dt < 60 * 60)
                 {
                     IW.Logger.Log($"[ForcedUpdateManager] => ScheduleMessage: ShowWindow: Skip by time: {DELAY - dt}s remaining");
+                    return;
                 }
-                return;
             }
 
             lastNotifyTime = now;
