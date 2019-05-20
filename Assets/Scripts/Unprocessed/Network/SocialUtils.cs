@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using BFGSDK;
 using CodeStage.AntiCheat.ObscuredTypes;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
@@ -322,9 +323,16 @@ public static class SocialUtils
                         var root = result.ResultAsJson;
 
                         ObscuredPrefs.SetString(BACKEND_TOKEN, root["backendToken"]);
+
+                        string supportId = root["supportId"];
                         ObscuredPrefs.SetString(BACKEND_SUPPORT_ID, root["supportId"]);
                         ObscuredPrefs.SetString(BACKEND_USER_ID, installId);
                         ObscuredPrefs.SetBool(BACKEND_IS_LOGGED_IN, true);
+
+                        if (long.TryParse(supportId, out long supportIdAsLong))
+                        {
+                            bfgManager.setUserID(supportIdAsLong);
+                        }
                         
                         callback(null, root["backendToken"], root["supportId"]);
                         return;
