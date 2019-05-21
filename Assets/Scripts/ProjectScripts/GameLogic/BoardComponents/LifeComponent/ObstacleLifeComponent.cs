@@ -27,6 +27,17 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         }
     }
 
+    public virtual int CalculateResultPrice()
+    {
+        int resultCost = 0;
+        for (int i = current; i < HP; i++)
+        {
+            resultCost += GameDataService.Current.ObstaclesManager.GetPriceByStep(Context.PieceType, i).Amount;
+        }
+
+        return resultCost;
+    } 
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);

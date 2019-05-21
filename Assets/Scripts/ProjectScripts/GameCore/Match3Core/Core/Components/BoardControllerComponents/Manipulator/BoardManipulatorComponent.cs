@@ -188,9 +188,8 @@ public class BoardManipulatorComponent : ECSEntity,
             pieceView.OnTap(pieceView.Piece.CachedPosition, pos);
             
             if (pieceView.AvailiableLockTouchMessage() && !context.PathfindLocker.HasPath(pieceView.Piece))
-            {
-                
-                UIErrorWindowController.AddError(LocalizationService.Get("message.error.pieceLock"));  
+            { 
+                ShowHintForLockObject(pieceView.Piece);
             }
 
             if (pieceView.Piece.TouchReaction != null)
@@ -205,6 +204,60 @@ public class BoardManipulatorComponent : ECSEntity,
         
         context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
         return false;
+    }
+
+    private void ShowHintForLockObject(Piece lockedObject)
+    {
+        Piece bestTarget = null;
+        int bestCurrentPrice = int.MaxValue;
+        FindTargetFor(lockedObject, ref bestTarget, ref bestCurrentPrice, 0, new HashSet<BoardPosition> {lockedObject.CachedPosition});
+        if (bestCurrentPrice == int.MaxValue)
+        {
+            IW.Logger.LogError("[BoardManipulatorComponent] => target for hint not found");
+            return;
+        }
+        
+        HintArrowView.Show(bestTarget.CachedPosition);
+    }
+
+    private void FindTargetFor(Piece currentPiece, ref Piece currentBestPiece, ref int minCost, int currentCost, HashSet<BoardPosition> checkedPositions)
+    {
+        var obstacleLife = currentPiece?.GetComponent<ObstacleLifeComponent>(LifeComponent.ComponentGuid);
+        
+        if (obstacleLife != null)
+        {
+            currentCost += obstacleLife.CalculateResultPrice();
+            if (currentCost >= minCost)
+            {
+                return;
+            }
+        }
+        
+        if (context.PathfindLocker.HasPath(currentPiece))
+        {
+            currentBestPiece = currentPiece;
+            minCost = currentCost;
+            return;
+        }
+
+        var checkedPositionsNow = new HashSet<BoardPosition>(checkedPositions);
+        var blockPositions = context.PathfindLocker.GetBlockPathPositions(currentPiece);
+        foreach (var blockPos in blockPositions)
+        {
+            if (checkedPositionsNow.Contains(blockPos))
+            {
+                continue;
+            }
+
+            checkedPositionsNow.Add(blockPos);
+            
+            var piece = context.BoardLogic.GetPieceAt(blockPos);
+            var obstacleLifeTarget = piece?.GetComponent<ObstacleLifeComponent>(LifeComponent.ComponentGuid);
+            if (obstacleLifeTarget != null)
+            {
+                FindTargetFor(piece, ref currentBestPiece, ref minCost, currentCost, checkedPositionsNow);
+            }
+        }
     }
 
     private bool CheckDrag(Vector2 startPos, Vector2 pos, float duration)

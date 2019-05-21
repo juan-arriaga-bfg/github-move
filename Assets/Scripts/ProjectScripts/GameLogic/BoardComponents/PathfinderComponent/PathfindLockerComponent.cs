@@ -63,6 +63,17 @@ public class PathfindLockerComponent : ECSEntity
 
     private Stack<Piece> unlockedEmptyPieces = new Stack<Piece>();
 
+    public List<BoardPosition> GetBlockPathPositions(Piece lockedPiece)
+    {
+        List<BoardPosition> blockPath;
+        if (blockPathPieces.TryGetValue(lockedPiece, out blockPath) == false)
+        {
+            return null;
+        }
+
+        return blockPath;
+    }
+    
     public List<Piece> CollectUnlockedEmptyCells()
     {
         var collapseEmptyPieces = unlockedEmptyPieces.ToList();
@@ -270,7 +281,7 @@ public class PathfindLockerComponent : ECSEntity
             {
                 foreach (var regPiece in region.RegionPieces)
                 {
-                    ClosePiece(regPiece, new List<BoardPosition>());
+                    ClosePiece(regPiece, region.BlockPathPieces);
                 }
                 regions.Add(region);
             }   
