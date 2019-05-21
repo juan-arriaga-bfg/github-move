@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using BfgAnalytics;
+using UnityEngine;
 
 public enum DailyRewardState
 {
@@ -63,7 +65,7 @@ public class UIDailyRewardElementViewController : UISimpleScrollElementViewContr
         var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(btnClaim.transform.position);
 
         CurrencyHelper.PurchaseAndProvideSpawn(contentEntity.Rewards, null, null, flyPosition, null, false, true);
-        
+        Analytics.SendPurchase("screen_dailyreward", $"day{transform.GetSiblingIndex()}", null, new List<CurrencyPair>(contentEntity.Rewards), false, false);
         GameDataService.Current.DailyRewardManager.ClaimCurrentDay();
         
         context.Controller.CloseCurrentWindow();
