@@ -48,8 +48,11 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
            .AddComponent(new LocalAssetBundlesCacheInitComponent())
             
            .AddComponent(new ServerSideConfigInitComponent()
-               .SetDependency(typeof(InternetMonitorInitComponent)))  
-            
+               .SetDependency(typeof(InternetMonitorInitComponent)))            
+           
+           .AddComponent(new SilentUpdateInitComponent()
+               .SetDependency(typeof(ServerSideConfigInitComponent)))  
+
            .AddComponent(new BfgSdkGdprInitComponent()                             // Listener for BFG SDK's GDPR popup events
                .SetDependency(typeof(BfgSdkUnityMessageHandlerInitComponent)))  
             
@@ -57,7 +60,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
                .SetDependency(typeof(BfgSdkGdprInitComponent)))  
             
            .AddComponent(new ProfileInitComponent()
-               .SetDependency(typeof(ServerSideConfigInitComponent)))
+               .SetDependency(typeof(SilentUpdateInitComponent)))
 
            .AddComponent(new UIServiceInitComponent()
                .SetDependency(typeof(LocalAssetBundlesCacheInitComponent)))  

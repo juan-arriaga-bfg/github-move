@@ -44,7 +44,7 @@ public class FieldDataManager : IECSComponent, IDataManager
         IslandPieces = new Dictionary<int, List<BoardPosition>>();
         BoardPieces = new Dictionary<int, List<BoardPosition>>();
 
-        LoadContentData(new ResourceConfigDataMapper<Dictionary<string, List<BoardPosition>>>("configs/field.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadContentData(new HybridConfigDataMapper<Dictionary<string, List<BoardPosition>>>("configs/field.data", NSConfigsSettings.Instance.IsUseEncryption));
         LoadLayoutData(new ResourceConfigDataMapper<FiledLayoutDef>("configs/layout.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
     

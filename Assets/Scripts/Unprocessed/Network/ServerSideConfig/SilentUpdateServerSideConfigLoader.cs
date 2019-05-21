@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using IW.SimpleJSON;
 
 /*
@@ -17,7 +18,13 @@ using IW.SimpleJSON;
   }
 ]
  */
-public class ClientUpdateServerConfig
+public class SilentUpdateItem
+{
+    public string Content;
+    public string FileName;
+}
+
+public class SilentUpdatePackage
 {
     public int Id; 
     public string VersionFrom; 
@@ -25,25 +32,42 @@ public class ClientUpdateServerConfig
     public string Url;
     public string Crc;
 
+    public List<SilentUpdateItem> Items;
+
     public override string ToString()
     {
         return $"[ID {Id}] v{VersionFrom} - v{VersionTo} at {Url} (MD5: {Crc})";
     }
+
+    public SilentUpdatePackage Clone()
+    {
+        SilentUpdatePackage package = new SilentUpdatePackage
+        {
+            Id = this.Id,
+            VersionFrom = this.VersionFrom,
+            VersionTo = this.VersionTo,
+            Url = this.Url,
+            Crc = this.Crc,
+            Items = Items != null ? Items.ToList() : null
+        };
+
+        return package;
+    }
 }
 
-public class ClientUpdateServerSideConfigLoader : ServerSideConfigLoaderBase
+public class SilentUpdateServerSideConfigLoader : ServerSideConfigLoaderBase
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
     
     protected override object ParseResponse(JSONNode data)
     {
-        List<ClientUpdateServerConfig> ret = new List<ClientUpdateServerConfig>();
+        List<SilentUpdatePackage> ret = new List<SilentUpdatePackage>();
         
         JSONNode.ValueEnumerator arr = data.AsArray.Values;
         foreach (JSONNode itemJson in arr)
         {
-            ClientUpdateServerConfig item = new ClientUpdateServerConfig
+            SilentUpdatePackage package = new SilentUpdatePackage
             {
                 Id = itemJson["id"].AsInt, 
                 VersionFrom = itemJson["version_from"],
@@ -52,13 +76,13 @@ public class ClientUpdateServerSideConfigLoader : ServerSideConfigLoaderBase
                 Crc = itemJson["crc"],
             };
 
-            ret.Add(item);
+            ret.Add(package);
         }
 
 #if DEBUG
         foreach (var item in ret)
         {
-            IW.Logger.Log($"ClientUpdateServerSideConfigLoader: Received Update data: {item}"); 
+            IW.Logger.Log($"SilentUpdateServerSideConfigLoader: Received Update data: {item}"); 
         }
 #endif 
 
