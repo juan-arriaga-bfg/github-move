@@ -22,7 +22,7 @@ public class TouchReactionConditionWorkplace : TouchReactionConditionComponent
 
 		if (life.TimerWork.IsFree())
 		{
-			life.TimerWork.FastComplete(string.Empty);
+			life.TimerWork.FastComplete(string.Empty, string.Empty);
 			return false;
 		}
 			
@@ -31,6 +31,7 @@ public class TouchReactionConditionWorkplace : TouchReactionConditionComponent
 		UIMessageWindowController.CreateTimerCompleteMessage(
 			LocalizationService.Get("window.timerComplete.message.default", "window.timerComplete.message.default"),
 			life.AnalyticsLocation,
+			PieceType.Parse(piece.PieceType),
 			life.TimerWork,
 			life.TimerWork.IsCanceled ? life.Cancel : default(Action));
 		

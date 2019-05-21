@@ -8,9 +8,13 @@ public class TouchReactionDefinitionBuilding : TouchReactionDefinitionComponent
 
 		if (piece.PieceState.State == BuildingState.InProgress)
 		{
+			var def = PieceType.GetDefById(piece.PieceType);
+			var location = $"skip_{(def.Filter.Has(PieceTypeFilter.Mine) ? "mine" : "build")}";
+			
 			UIMessageWindowController.CreateTimerCompleteMessage(
 				LocalizationService.Get("window.timerComplete.message.piece", "window.timerComplete.message.piece"),
-				"skip_build",
+				location,
+				PieceType.Parse(piece.PieceType).Replace("Fake", ""),
 				piece.PieceState.Timer,
 				piece.PieceState.Timer.IsCanceled ? piece.PieceState.Cancel : default(Action));
 			

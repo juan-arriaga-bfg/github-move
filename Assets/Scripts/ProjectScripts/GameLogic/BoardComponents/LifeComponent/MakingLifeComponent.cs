@@ -97,6 +97,7 @@ public class MakingLifeComponent : WorkplaceLifeComponent
         UIMessageWindowController.CreateTimerCompleteMessage(
             LocalizationService.Get("window.timerComplete.message.castle", "window.timerComplete.message.castle"),
             AnalyticsLocation,
+            PieceType.Parse(Context.PieceType),
             TimerCooldown);
 
         return false;

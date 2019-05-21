@@ -171,12 +171,13 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         if (life != null) analyticsLocation = life.AnalyticsLocation;
         else
         {
+            var def = PieceType.GetDefById(Context.PieceType);
             var building = Context.GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid);
             
-            if (building != null) analyticsLocation = "skip_build";
+            if (building != null) analyticsLocation = $"skip_{(def.Filter.Has(PieceTypeFilter.Mine) ? "mine" : "build")}";
         }
         
-        timer.FastComplete(analyticsLocation);
+        timer.FastComplete(analyticsLocation, PieceType.Parse(Context.PieceType).Replace("Fake", ""));
     }
 
     public override void Attention()
