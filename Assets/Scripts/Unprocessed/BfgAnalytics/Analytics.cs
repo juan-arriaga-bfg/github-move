@@ -41,6 +41,11 @@ namespace BfgAnalytics
         
         public static void SendFogClearedEvent(string fogId)
         {
+            AnalyticsService.Current?.Event("progress", fogId, "fog", "clear", DefaultJsonData());
+        }
+        
+        public static void SendFogUnlockEvent(string fogId)
+        {
             AnalyticsService.Current?.Event("progress", fogId, "fog", "unlock", DefaultJsonData());
         }
         
