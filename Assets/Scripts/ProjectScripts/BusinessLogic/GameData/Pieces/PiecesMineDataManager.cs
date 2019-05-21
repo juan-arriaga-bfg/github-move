@@ -23,7 +23,7 @@ public class PiecesMineDataManager : IECSComponent, IDataManager, IDataLoader<Li
 	
 	public void Reload()
 	{
-		LoadData(new ResourceConfigDataMapper<List<PieceMineDef>>("configs/piecesMine.data", NSConfigsSettings.Instance.IsUseEncryption));
+		LoadData(new HybridConfigDataMapper<List<PieceMineDef>>("configs/piecesMine.data", NSConfigsSettings.Instance.IsUseEncryption));
 	}
 	
 	public void LoadData(IDataMapper<List<PieceMineDef>> dataMapper)

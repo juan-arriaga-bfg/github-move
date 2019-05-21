@@ -37,7 +37,7 @@ public class HybridConfigDataMapper<T> : IJsonDataMapper<T>
 
             if (mapper == null)
             {
-                IW.Logger.LogError($"[HybridConfigDataMapper] => Can't load data with any mapper!");
+                IW.Logger.LogWarning($"[HybridConfigDataMapper] => Can't load data with any mapper for {dataPath}!");
                 return;
             }
 

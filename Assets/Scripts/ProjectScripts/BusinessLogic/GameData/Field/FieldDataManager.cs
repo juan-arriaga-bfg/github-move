@@ -45,7 +45,7 @@ public class FieldDataManager : IECSComponent, IDataManager
         BoardPieces = new Dictionary<int, List<BoardPosition>>();
 
         LoadContentData(new HybridConfigDataMapper<Dictionary<string, List<BoardPosition>>>("configs/field.data", NSConfigsSettings.Instance.IsUseEncryption));
-        LoadLayoutData(new ResourceConfigDataMapper<FiledLayoutDef>("configs/layout.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadLayoutData(new HybridConfigDataMapper<FiledLayoutDef>("configs/layout.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
     
     public void LoadContentData(IDataMapper<Dictionary<string, List<BoardPosition>>> dataMapper)

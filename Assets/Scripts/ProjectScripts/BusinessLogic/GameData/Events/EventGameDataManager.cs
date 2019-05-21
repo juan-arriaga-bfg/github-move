@@ -25,7 +25,7 @@ public class EventGameDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     public void Reload()
     {
         Defs = new Dictionary<EventGameType, List<EventGameStepDef>>();
-        LoadData(new ResourceConfigDataMapper<List<EventGameStepDef>>("configs/eventOrderSoftLaunch.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadData(new HybridConfigDataMapper<List<EventGameStepDef>>("configs/eventOrderSoftLaunch.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 	
     public void LoadData(IDataMapper<List<EventGameStepDef>> dataMapper)

@@ -26,7 +26,7 @@ public class ShopDataManager : IECSComponent, IDataManager, IDataLoader<List<Sho
 	public void Reload()
 	{
 		Defs = new Dictionary<string, List<ShopDef>>();
-		LoadData(new ResourceConfigDataMapper<List<ShopDef>>("configs/shop.data", NSConfigsSettings.Instance.IsUseEncryption));
+		LoadData(new HybridConfigDataMapper<List<ShopDef>>("configs/shop.data", NSConfigsSettings.Instance.IsUseEncryption));
 	}
 
 	public void LoadData(IDataMapper<List<ShopDef>> dataMapper)

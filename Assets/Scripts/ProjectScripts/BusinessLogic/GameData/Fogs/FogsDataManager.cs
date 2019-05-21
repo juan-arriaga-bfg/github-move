@@ -44,7 +44,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         VisibleFogPositions = null;
         ClearedFogPositions = null;
         FogObservers = new Dictionary<BoardPosition, FogObserver>();
-        LoadData(new ResourceConfigDataMapper<FogsDataManager>("configs/fogs.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadData(new HybridConfigDataMapper<FogsDataManager>("configs/fogs.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
     
     public void LoadData(IDataMapper<FogsDataManager> dataMapper)
