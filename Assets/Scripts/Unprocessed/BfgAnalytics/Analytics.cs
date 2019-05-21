@@ -165,7 +165,8 @@ namespace BfgAnalytics
                     continue;
                 }
 
-                if (pair.Currency == Currency.Coins.Name)
+                if (pair.Currency == Currency.Coins.Name
+                    || pair.Currency == Currency.Mana.Name )
                 {
                     soft[pair.Currency] = pair.Amount;
                     continue;
