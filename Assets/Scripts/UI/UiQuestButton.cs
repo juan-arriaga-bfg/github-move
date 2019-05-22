@@ -81,14 +81,13 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         ToggleButton();
     }
 
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+    }
+
     private void ToggleButton()
     {
-        if (button == null)
-        {
-            return;
-        }
-
-        button.interactable = interactive;
     }
 
     private void OnQuestChanged(QuestEntity quest, TaskEntity task)
@@ -247,6 +246,18 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             shine.SetActive(isComplete || !interactive);
         }
     }
+
+    private void AnimateButton()
+    {
+        var viewAnchor = button.transform;
+        DOTween.Kill(viewAnchor);
+        if (viewAnchor != null)
+        {
+            var sequence = DOTween.Sequence().SetId(viewAnchor);
+            sequence.Append(viewAnchor.DOScale(new Vector3(1.05f, 1.05f, 1f), 0.35f));
+            sequence.Append(viewAnchor.DOScale(new Vector3(1f, 1f, 1f), 0.35f));
+        }
+    }
     
     public void OnClick()
     {
@@ -259,6 +270,8 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         {
             return;
         }
+        
+        AnimateButton();
         
         if (UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow).IsTutorial)
         {

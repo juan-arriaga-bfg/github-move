@@ -11,7 +11,7 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
     [SerializeField] private Transform dot;
     [SerializeField] private GameObject shine;
     [SerializeField] private GameObject exclamationMark;
-    
+    [SerializeField] private UIButtonViewController button;
     private EventGame eGame;
 
     private EventGame eventGame
@@ -55,6 +55,12 @@ public class UITokensPanelViewController : UIGenericResourcePanelViewController
         ResourcePanelUtils.TogglePanel(itemUid, true);
         OnStartEventGame(eventGame.EventType);
         base.OnViewShow(context);
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        button.OnClick(OnClick);
     }
 
     public void OnStartEventGame(EventGameType gameType)
