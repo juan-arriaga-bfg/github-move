@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using IW.SimpleJSON;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 /*
 [
@@ -18,10 +20,11 @@ using IW.SimpleJSON;
   }
 ]
  */
+[JsonObject(MemberSerialization.OptIn)]
 public class SilentUpdateItem
 {
-    public string Content;
-    public string FileName;
+    public string Content; // Do not serialize
+    [JsonProperty] public string FileName;
 }
 
 public class SilentUpdatePackage
@@ -31,6 +34,7 @@ public class SilentUpdatePackage
     public string VersionTo; 
     public string Url;
     public string Crc;
+    public bool Installed;
 
     public List<SilentUpdateItem> Items;
 
@@ -48,6 +52,7 @@ public class SilentUpdatePackage
             VersionTo = this.VersionTo,
             Url = this.Url,
             Crc = this.Crc,
+            Installed = this.Installed,
             Items = Items != null ? Items.ToList() : null
         };
 

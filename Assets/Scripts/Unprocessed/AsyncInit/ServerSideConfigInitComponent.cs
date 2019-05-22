@@ -6,15 +6,16 @@ public class ServerSideConfigInitComponent : AsyncInitComponentBase
         ServerSideConfigService.Instance.SetManager(manager);
 
         manager.RegisterComponent(new GameEventServerSideConfigLoader()
-            .SetUrl("game-event/get"));
-            
+                                 .SetUrl("game-event/get"));
+
         manager.RegisterComponent(new ForcedUpdateServerSideConfigLoader()
-            .SetUrl("forced-update/get")
-            .SetCacheMode(ServerSideConfigLoaderCacheMode.Fallback));
-            
+                                 .SetUrl("forced-update/get")
+                                 .SetCacheMode(ServerSideConfigLoaderCacheMode.Fallback)
+                                 .SetCacheLifetime(-1));
+
         manager.RegisterComponent(new SilentUpdateServerSideConfigLoader()
-            .SetUrl("client-update/get")
-            .SetCacheMode(ServerSideConfigLoaderCacheMode.Cache));
+                                 .SetUrl("client-update/get")
+                                 .SetCacheMode(ServerSideConfigLoaderCacheMode.Cache));
 
         manager.UpdateAll();
         

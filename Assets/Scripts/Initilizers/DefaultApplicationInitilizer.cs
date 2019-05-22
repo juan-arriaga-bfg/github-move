@@ -7,8 +7,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class DefaultApplicationInitilizer : ApplicationInitializer 
+public class DefaultApplicationInitilizer : ApplicationInitializer
 {
+    private DateTime? moveToBackgroundTimestamp;
+    
     public override void Init(Action onComplete)
     {
 #if !DEBUG
@@ -44,15 +46,17 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
            .AddComponent(new ContentAndIconManagersInitComponent()) 
            .AddComponent(new EcsSystemProcessorInitComponent()) 
            .AddComponent(new AudioServiceInitComponent()) 
-           .AddComponent(new ShopServiceInitComponent()) 
            .AddComponent(new LocalAssetBundlesCacheInitComponent())
             
            .AddComponent(new ServerSideConfigInitComponent()
                .SetDependency(typeof(InternetMonitorInitComponent)))            
            
            .AddComponent(new SilentUpdateInitComponent()
-               .SetDependency(typeof(ServerSideConfigInitComponent)))  
-
+               .SetDependency(typeof(ServerSideConfigInitComponent)))
+            
+           .AddComponent(new ShopServiceInitComponent() 
+                .SetDependency(typeof(SilentUpdateInitComponent))) 
+            
            .AddComponent(new BfgSdkGdprInitComponent()                             // Listener for BFG SDK's GDPR popup events
                .SetDependency(typeof(BfgSdkUnityMessageHandlerInitComponent)))  
             
@@ -113,6 +117,8 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         var energyLogic = BoardService.Current?.FirstBoard?.GetComponent<EnergyCurrencyLogicComponent>(EnergyCurrencyLogicComponent.ComponentGuid);
         if (paused)
         {
+            moveToBackgroundTimestamp = DateTime.UtcNow;
+            
             if (ProfileService.Instance != null && ProfileService.Instance.Manager != null && isGameLoaded)
             {
                 ProfileService.Instance.Manager.UploadCurrentProfile(true);
@@ -127,6 +133,8 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         }
         else
         {
+            long timeInBackground = (long)Math.Abs(moveToBackgroundTimestamp.HasValue ? (DateTime.UtcNow - moveToBackgroundTimestamp.Value).TotalSeconds : 0);
+            
             CultureInfo.CurrentCulture.ClearCachedData();
             TimeZoneInfo.ClearCachedData();
             
@@ -140,6 +148,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             {
                 LocalNotificationsService.Current.CancelNotifications();  
                 ForcedUpdateService.Current.Check();
+                SilentUpdateService.Current.ApplyPendingAndReloadScene(timeInBackground);
             }
             
             TackleBoxEvents.SendGameResumed();

@@ -77,9 +77,9 @@ public class PrefsFileSystem
         return true;
     }
 
-    public bool RemoveFile(string path)
+    public bool DeleteFile(string path)
     {
-        IW.Logger.Log($"[PrefsFileSystem] => RemoveFile({path})");
+        IW.Logger.Log($"[PrefsFileSystem] => DeleteFile({path})");
         
         var absolutePath = GetAbsolutePath(path);
          

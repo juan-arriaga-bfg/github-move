@@ -1,16 +1,20 @@
  using System;
  using System.Collections.Generic;
  using System.IO;
+ using System.Linq;
  using System.Text;
  using BestHTTP;
+ using CodeStage.AntiCheat.ObscuredTypes;
  using ICSharpCode.SharpZipLib.Core;
  using ICSharpCode.SharpZipLib.Zip;
+ using Newtonsoft.Json;
 
  public class SilentUpdateManager : ECSEntity
 {    
+    private const int TIME_BEFORE_APPLY = 60 * 30;
+    
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
-
 
     private PrefsFileSystem prefsFileSystem;
 
@@ -20,22 +24,95 @@
     private const string CONFIGS_DIR = "configs";
 
     public readonly string PathToInstalledUpdates = $"{ROOT_DIR}/{INSTALLED_DIR}";
+    public readonly string UpdatesInfoPath = $"{ROOT_DIR}/info";
     
-    private AsyncTaskSeries<SilentUpdatePackage> series;
+    private AsyncTaskSeries<SilentUpdatePackage> taskSeries;
 
-    public void Init()
+    private List<SilentUpdatePackage> packagesInfo;
+
+    public Action<bool> OnInitComplete;
+
+    private void RaiseOnInitComplete(bool isOk)
     {
-        prefsFileSystem = new PrefsFileSystem(ROOT_DIR);
+        OnInitComplete?.Invoke(isOk);
+        OnInitComplete = null;
+    }
+    
+    public void Init(Action<bool> onInitComplete)
+    {
+        IW.Logger.Log($"[SilentUpdateManager] => Init: Current game version: {IWProjectVersionSettings.Instance.CurrentVersion}");
+
+        OnInitComplete = onInitComplete;
         
-        ApplyPendingUpdates();
+        prefsFileSystem = new PrefsFileSystem(ROOT_DIR);
+
+        LoadInfo();
+
+        ValidatePackages();
+        
+        ApplyPendingPackages();
         
         ServerSideConfigService.Current.OnDataReceived += OnDataReceived;
+        ServerSideConfigService.Current.OnDataRequestFailed += OnDataRequestFailed;
         Check();
+    }
+
+    private void ValidatePackages()
+    {
+        if (packagesInfo.Count == 0)
+        {
+            IW.Logger.Log($"[SilentUpdateManager] => ValidatePackages: No packages found");
+            return;
+        }
+        
+        List<int> idsToRemove = new List<int>();
+        
+        foreach (var update in packagesInfo)
+        {
+            if (!CheckPackageVersion(update))
+            {
+                idsToRemove.Add(update.Id);
+            }
+        }
+
+        if (idsToRemove.Count == 0)
+        {
+            IW.Logger.Log($"[SilentUpdateManager] => ValidatePackages: {packagesInfo.Count} packages found, all is OK");
+            return;
+        }
+        
+        IW.Logger.Log($"[SilentUpdateManager] => ValidatePackages: {idsToRemove.Count} packages are outdated!");
+
+        foreach (var id in idsToRemove)
+        {
+            RemovePackage(id);
+        }
+    }
+
+    private void LoadInfo()
+    {
+        var data = prefsFileSystem.ReadFile(UpdatesInfoPath);
+        
+        packagesInfo = string.IsNullOrEmpty(data) 
+            ? new List<SilentUpdatePackage>()
+            : JsonConvert.DeserializeObject<List<SilentUpdatePackage>>(data);
+    }
+
+    private void SaveInfo()
+    {
+        if (packagesInfo == null)
+        {
+            return;
+        }
+
+        string data = JsonConvert.SerializeObject(packagesInfo);
+        prefsFileSystem.WriteFile(UpdatesInfoPath, data);
     }
 
     public void Cleanup()
     {
         ServerSideConfigService.Current.OnDataReceived -= OnDataReceived;
+        ServerSideConfigService.Current.OnDataRequestFailed -= OnDataRequestFailed;
     }
 
     private void OnDataReceived(int guid, object data)
@@ -43,6 +120,14 @@
         if (guid == SilentUpdateServerSideConfigLoader.ComponentGuid)
         {
             Check();
+        }
+    }
+    
+    private void OnDataRequestFailed(int guid, string error)
+    {
+        if (guid == SilentUpdateServerSideConfigLoader.ComponentGuid)
+        {
+            RaiseOnInitComplete(false);
         }
     }
 
@@ -57,30 +142,36 @@
     
     public void Check()
     {
-        if (series != null)
+        if (taskSeries != null)
         {
-            IW.Logger.Log($"[SilentUpdateManager] => Check: Skip by series != null");
+            IW.Logger.Log($"[SilentUpdateManager] => Check: Skip by taskSeries != null");
             return;
         }
         
         List<SilentUpdatePackage> serverData = ServerSideConfigService.Current?.GetData<List<SilentUpdatePackage>>();
         if (serverData == null)
         {
-            IW.Logger.Log($"[SilentUpdateManager] => Check: Skip by no data");
+            IW.Logger.Log($"[SilentUpdateManager] => Check: Skip by no data received from server");
             return;
         }
 
-        series = new AsyncTaskSeries<SilentUpdatePackage>();
+        taskSeries = new AsyncTaskSeries<SilentUpdatePackage>();
         
         foreach (var data in serverData)
         {
             if (!CheckPackageVersion(data))
             {
-                IW.Logger.Log($"[SilentUpdateManager] => Check: Skip package: version mismatch: ID:{data.Id} (cur: {IWProjectVersionSettings.Instance.ProductionVersion}, from: {data.VersionFrom} to: {data.VersionTo})");
+                IW.Logger.Log($"[SilentUpdateManager] => Check: Skip package: Version mismatch: ID:{data.Id} (cur: {IWProjectVersionSettings.Instance.ProductionVersion}, from: {data.VersionFrom} to: {data.VersionTo})");
                 continue;
             }
+            
+            if (IsPackageInstalled(data.Id))
+            {
+                IW.Logger.Log($"[SilentUpdateManager] => Check: Skip package: Already installed: ID:{data.Id}");
+                continue;
+            }            
 
-            series.AddTask(onTaskComplete =>
+            taskSeries.AddTask(onTaskComplete =>
             {
                 var clone = data.Clone();
                 DownloadZip(clone, (isOk, package) =>
@@ -90,37 +181,168 @@
             });
         }
 
-        if (series.TasksCount == 0)
+        if (taskSeries.TasksCount == 0)
         {
-            series = null;
+            taskSeries = null;
+            RaiseOnInitComplete(true);
         }
         else
         {
-            series.Execute(OnZipsDownloaded);
+            taskSeries.Execute(OnZipsDownloaded);
         }
     }
 
+    private bool IsPackageInstalled(int id)
+    {
+        return packagesInfo.Any(e => e.Id == id && e.Installed);
+    }
+    
+    private bool IsPackageRegistered(int id)
+    {
+        return packagesInfo.Any(e => e.Id == id);
+    }
+
+    private bool RegisterPendingPackage(SilentUpdatePackage package)
+    {
+        if (IsPackageRegistered(package.Id))
+        {
+            IW.Logger.LogError($"[SilentUpdateManager] => RegisterPendingPackage: Already registered or installed: {package.Id}");
+            return false;
+        }
+        
+        packagesInfo.Add(package);
+        return true;
+    }
+
+    private string GetPathToInstalledFile(string fileNameFromPackage)
+    {
+        var targetFileName = Path.GetFileNameWithoutExtension(fileNameFromPackage);
+        var targetPath = $"{INSTALLED_DIR}/{CONFIGS_DIR}/{targetFileName}";
+        
+        return targetPath;
+    }
+    
+    private bool InstallPackage(int id)
+    {
+        SilentUpdatePackage package = packagesInfo.FirstOrDefault(e => e.Id == id && e.Installed == false);
+        if (package == null)
+        {
+            IW.Logger.LogError($"[SilentUpdateManager] => InstallPackage: Not found or already installed: {id}");
+            return false;
+        }
+
+        var pendingPackageDir = $"{PENDING_DIR}/{id}";
+        var files = prefsFileSystem.GetFiles(pendingPackageDir);
+        foreach (var file in files)
+        {
+            var targetPath = GetPathToInstalledFile(file);
+
+            IW.Logger.Log(prefsFileSystem.Exists(targetPath) 
+                ? $"[SilentUpdateManager] => InstallPackage: Installed: {targetPath} (existing file was replaced)" 
+                : $"[SilentUpdateManager] => InstallPackage: Installed: {targetPath}");
+                    
+            prefsFileSystem.Copy(file, targetPath);
+        }
+                
+        IW.Logger.Log($"[SilentUpdateManager] => InstallPackage: Installed package with ID: {id}");
+
+        prefsFileSystem.RemoveDirectory(pendingPackageDir);
+
+        package.Installed = true;
+        
+        SaveInfo();
+        
+        return true;
+    }
+
+    private SilentUpdatePackage GetPackageInfo(int id)
+    {
+        return packagesInfo.FirstOrDefault(e => e.Id == id);
+    }
+    
+    private void RemovePackage(int id)
+    {
+        if (!IsPackageRegistered(id))
+        {
+            IW.Logger.LogError($"[SilentUpdateManager] => RemovePackage: Not found: {id}");
+        }
+
+        if (!IsPackageInstalled(id))
+        {
+            var pendingPackageDir = $"{PENDING_DIR}/{id}";
+            prefsFileSystem.RemoveDirectory(pendingPackageDir);
+        }
+        else
+        {
+            SilentUpdatePackage package = GetPackageInfo(id);
+
+            List<string> filesToDelete = package.Items.Select(e => e.FileName).ToList();
+            IW.Logger.Log($"[SilentUpdateManager] => RemovePackage: Package ID {package.Id}, Content: {string.Join(" | ", filesToDelete)}");
+
+            List<SilentUpdatePackage> installedPackages = packagesInfo.Where(e => e.Installed).ToList();
+            foreach (var packageToCheck in installedPackages)
+            {
+                if (packageToCheck.Id <= package.Id)
+                {
+                    continue;
+                }
+
+                List<string> filesInPackageToCheck = packageToCheck.Items.Select(e => e.FileName).ToList();
+                foreach (var file in filesInPackageToCheck)
+                {
+                    if (filesToDelete.Contains(file))
+                    {
+                        IW.Logger.Log($"[SilentUpdateManager] => RemovePackage: Can't remove file {file} because it overriden in update {packageToCheck.Id}");
+                        filesToDelete.Remove(file);
+                    }
+                }
+            }
+            
+            foreach (var file in filesToDelete)
+            {
+                var targetPath = GetPathToInstalledFile(file);
+                prefsFileSystem.DeleteFile(targetPath);
+
+                IW.Logger.Log($"[SilentUpdateManager] => RemovePackage: File deleted: {targetPath}");
+            }
+        }
+        
+        packagesInfo.RemoveAll(e => e.Id == id);
+        
+        IW.Logger.Log($"[SilentUpdateManager] => RemovePackage: Package removed: ID {id}");
+        
+        SaveInfo();
+    }
+    
     private void OnZipsDownloaded(bool isOk, List<SilentUpdatePackage> successful, List<SilentUpdatePackage> failed)
     {
         if (!isOk)
         {
             IW.Logger.LogError($"[SilentUpdateManager] => Zip download or unpack failed");
-            return;
+            
         }
-
-        foreach (var package in successful)
+        else
         {
-            string root = $"{PENDING_DIR}/{package.Id}";
-                
-            prefsFileSystem.RemoveDirectory(root);
-
-            foreach (var item in package.Items)
+            foreach (var package in successful)
             {
-                prefsFileSystem.WriteFile($"{root}/{item.FileName}", item.Content);
-                
-                IW.Logger.Log($"[SilentUpdateManager] => Add to pending: package ID: {package.Id}, file: {item.FileName}");
+                string root = $"{PENDING_DIR}/{package.Id}";
+
+                prefsFileSystem.RemoveDirectory(root);
+
+                if (RegisterPendingPackage(package))
+                {
+                    foreach (var item in package.Items)
+                    {
+                        prefsFileSystem.WriteFile($"{root}/{item.FileName}", item.Content);
+                        IW.Logger.Log($"[SilentUpdateManager] => Add to pending: package ID: {package.Id}, file: {item.FileName}");
+                    }
+                }
             }
+
+            SaveInfo();
         }
+        
+        RaiseOnInitComplete(true);
     }
 
     private string GetMD5Hash(byte[] data)
@@ -194,12 +416,15 @@
     private delegate void DownloadZipCallback(bool isOk, SilentUpdatePackage package);
     private void DownloadZip(SilentUpdatePackage package, DownloadZipCallback callback)
     {
+        IW.Logger.Log($"[SilentUpdateManager] => DownloadZip: ID {package.Id}...");
         var request = new HTTPRequest(new Uri(package.Url), (req, response) =>
         {
-            if (response != null && response.StatusCode == 200)
+            if (response != null && response.IsSuccess)
             {
                 try
                 {
+                    IW.Logger.Log($"[SilentUpdateManager] => DownloadZip: ID {package.Id} RECEIVED");
+                    
                     var data = response.Data;
                     var hash = GetMD5Hash(data);
                     if (hash != package.Crc.ToUpper())
@@ -209,21 +434,24 @@
 
                     if (!Unzip(data, out var items))
                     {
-                        throw new Exception($"Can't unzip package with ID {package.Id}");
+                        throw new Exception($"[SilentUpdateManager] => DownloadZip: Can't unzip package with ID {package.Id}");
                     }
                     package.Items = items;
+                    
+                    IW.Logger.Log($"[SilentUpdateManager] => DownloadZip: ID {package.Id} OK");
                     
                     callback(true, package);
                 }
                 catch (Exception e)
                 {
-                    IW.Logger.LogError(e.Message);
+                    IW.Logger.Log($"[SilentUpdateManager] => DownloadZip: ID {package.Id} FAILED: {e.Message}");
                     callback(false, null);
                 }
             }
             else
             {
-                IW.Logger.Log(response != null ? "Response code = " + response.StatusCode : "Response is null");
+                string mess = response != null ? "Response code = " + response.StatusCode : "Response is null";
+                IW.Logger.Log($"[SilentUpdateManager] => DownloadZip: ID {package.Id} FAILED: {mess}");
                 callback(false, null);
             }
         });
@@ -233,55 +461,60 @@
         request.Send();
     }
 
-    private void ApplyPendingUpdates()
+    public bool ApplyPendingPackages()
     {
-        IW.Logger.Log($"[SilentUpdateManager] => ApplyPendingUpdates...");
+        IW.Logger.Log($"[SilentUpdateManager] => ApplyPendingPackages...");
 
         List<string> pendingPackages = prefsFileSystem.GetDirs(PENDING_DIR);
         
         if (pendingPackages.Count == 0)
         {
-            IW.Logger.Log($"[SilentUpdateManager] => No pending packages found...");
-            return;
+            IW.Logger.Log($"[SilentUpdateManager] => No pending packages found");
+            return false;
         }
 
         IW.Logger.Log($"[SilentUpdateManager] => {pendingPackages.Count} pending packages found");
 
         try
         {
-            List<int> pendingPackageIds = new List<int>(pendingPackages.Count);
-            foreach (var pendingPackage in pendingPackages)
-            {
-                string id = pendingPackage.Remove(0, PENDING_DIR.Length + 1);
-                pendingPackageIds.Add(int.Parse(id));
-            }
-            
+            List<int> pendingPackageIds = packagesInfo.Where(e => !e.Installed).Select(e => e.Id).ToList();
             pendingPackageIds.Sort();
 
             foreach (var id in pendingPackageIds)
             {
-                var packageDir = $"{PENDING_DIR}/{id}";
-                var files = prefsFileSystem.GetFiles(packageDir);
-                foreach (var file in files)
-                {
-                    var targetFileName = Path.GetFileNameWithoutExtension(file);
-                    var targetPath = $"{INSTALLED_DIR}/{CONFIGS_DIR}/{targetFileName}";
-
-                    IW.Logger.Log(prefsFileSystem.Exists(targetPath) 
-                        ? $"[SilentUpdateManager] => Installed: {targetPath} (existing file was replaced)" 
-                        : $"[SilentUpdateManager] => Installed: {targetPath}");
-                    
-                    prefsFileSystem.Copy(file, targetPath);
-                }
-                
-                IW.Logger.Log($"[SilentUpdateManager] => Installed package with ID: {id}");
-
-                prefsFileSystem.RemoveDirectory(packageDir);
+                InstallPackage(id);
             }
+
+            SaveInfo();
         }
         catch (Exception e)
         {
-            IW.Logger.Log($"[SilentUpdateManager] => ApplyPendingUpdates failed: {e.Message}");
+            IW.Logger.LogError($"[SilentUpdateManager] => ApplyPendingPackages failed: {e.Message}");
+        }
+
+        return true;
+    }
+
+    public void ApplyPendingAndReloadScene(long timeInBackground)
+    {
+        if (TIME_BEFORE_APPLY > timeInBackground)
+        {
+            IW.Logger.Log($"[SilentUpdateManager] => ApplyPendingAndReloadScene: Skip by time: {TIME_BEFORE_APPLY - timeInBackground}s remaining");
+            return;
+        }
+        
+        IW.Logger.Log($"[SilentUpdateManager] => ApplyPendingAndReloadScene");
+
+        bool isGameLoaded = AsyncInitService.Current?.IsAllComponentsInited() ?? false;
+        if (!isGameLoaded)
+        {
+            IW.Logger.Log($"[SilentUpdateManager] => ApplyPendingAndReloadScene: Skip by !isGameLoaded");
+            return;
+        }
+        
+        if (ApplyPendingPackages())
+        {
+            DevTools.ReloadScene();
         }
     }
 }
