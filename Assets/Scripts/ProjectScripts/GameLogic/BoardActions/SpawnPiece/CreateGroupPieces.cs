@@ -25,11 +25,18 @@ public class CreateGroupPieces:IBoardAction
         {
             var piece = gameBoardController.CreatePieceFromType(pair.Value);
             var pos = pair.Key;
-            if (gameBoardController.BoardLogic.AddPieceToBoard(pos.X, pos.Y, piece) == false)
+            
+            var def = PieceType.GetDefById(pair.Value);
+
+            if (def.Filter.Has(PieceTypeFilter.Fake)
+                && def.Filter.Has(PieceTypeFilter.Mine) == false
+                && piece.PieceState != null)
             {
-                continue;
+                piece.PieceState.StartState = BuildingState.Warning;
             }
-			
+            
+            if (gameBoardController.BoardLogic.AddPieceToBoard(pos.X, pos.Y, piece) == false) continue;
+            
             pieces.Add(pos, piece);
             positionsForLock.Add(pos);
         }
