@@ -9,7 +9,6 @@
     private readonly Dictionary<int, object> data = new Dictionary<int, object>();
 
     public Action<int, object> OnDataReceived;
-    public Action<int, string> OnDataRequestFailed;
 
     public readonly List<ServerSideConfigLoaderBase> loaders = new List<ServerSideConfigLoaderBase>();
     
@@ -32,7 +31,6 @@
     {
         InternetMonitorService.Current.OnStateChange -= OnInternetStateChanged;
         OnDataReceived = null;
-        OnDataRequestFailed = null;
     }
 
     private void OnInternetStateChanged(InternetConnectionState state)
@@ -87,10 +85,5 @@
         data.Add(sender.Guid, receivedData);
 
         OnDataReceived?.Invoke(sender.Guid, receivedData);
-    }
-
-    public void DataRequestFailed(IECSComponent sender, string error)
-    {
-        OnDataRequestFailed?.Invoke(sender.Guid, error);
     }
 }

@@ -22,7 +22,7 @@ public class PiecesDataManager : SequenceData, IDataLoader<List<PieceDef>>
         base.Reload();
         pieces = null;
         
-        LoadData(new HybridConfigDataMapper<List<PieceDef>>("configs/pieces.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadData(new ResourceConfigDataMapper<List<PieceDef>>("configs/pieces.data", NSConfigsSettings.Instance.IsUseEncryption));
 
         foreach (var component in componentsCache.Values)
         {

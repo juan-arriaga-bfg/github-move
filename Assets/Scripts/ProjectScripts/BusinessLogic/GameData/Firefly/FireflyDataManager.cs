@@ -20,7 +20,7 @@ public class FireflyDataManager : IECSComponent, IDataManager, IDataLoader<List<
     public void Reload()
     {
         Defs = new Dictionary<FireflyLogicType, FireflyDef>();
-        LoadData(new HybridConfigDataMapper<List<FireflyDef>>("configs/firefly.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadData(new ResourceConfigDataMapper<List<FireflyDef>>("configs/firefly.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 	
     public void LoadData(IDataMapper<List<FireflyDef>> dataMapper)

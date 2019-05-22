@@ -22,7 +22,7 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
     public override void Reload()
     {
         base.Reload();
-        LoadData(new HybridConfigDataMapper<List<CharacterDef>>("configs/characters.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadData(new ResourceConfigDataMapper<List<CharacterDef>>("configs/characters.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
     
     public void LoadData(IDataMapper<List<CharacterDef>> dataMapper)

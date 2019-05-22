@@ -19,12 +19,10 @@ public class SecuredTimeServiceInitComponent : AsyncInitComponentBase
         SecuredTimeManager timeManager = new SecuredTimeManager();
         SecuredTimeService.Instance.SetManager(timeManager);
 
-        var mainUrl = NetworkUtils.Instance.GetHostUrl();
-
         timeManager
-           .AddServerTimeProvider(new BfgServerTimeProvider().SetUrl($"{mainUrl}/time"))
+            // .AddServerTimeProvider(new BfgServerTimeProvider().SetUrl("https://f2p-qa.bigfishgames.com/nodejs101/time"))
            .AddServerTimeProvider(new BfgServerTimeProvider().SetUrl("https://f2p.bigfishgames.com/RobinHood/time"))
-           ;
+           .AddServerTimeProvider(new BfgServerTimeProvider().SetUrl("https://f2p-qa.bigfishgames.com/RobinHood1/time"));
 
         SecuredTimeManager = timeManager;
         
@@ -37,11 +35,6 @@ public class SecuredTimeServiceInitComponent : AsyncInitComponentBase
         SyncWithServer(0);
     }
 
-    private bool CanShowWindow()
-    {
-        return !isWindowShowed && AsyncInitService.Current != null && AsyncInitService.Current.IsCompleted<LocalizationInitComponent>();
-    }
-    
     private void SyncWithServer(float delay)
     {
         OnRetryScheduled?.Invoke(delay);
@@ -62,9 +55,9 @@ public class SecuredTimeServiceInitComponent : AsyncInitComponentBase
                         }
                         else
                         {
-                            if (CanShowWindow())
+                            if (!isWindowShowed)
                             {
-                                ShowErrorWindow();
+                                SHowErrorWindow();
                             }
                             SyncWithServer(RETRY_DELAY);
                         }
@@ -72,7 +65,7 @@ public class SecuredTimeServiceInitComponent : AsyncInitComponentBase
                 });
     }
 
-    private void ShowErrorWindow()
+    private void SHowErrorWindow()
     {
         if (isWindowShowed)
         {

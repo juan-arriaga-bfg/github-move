@@ -12,7 +12,7 @@ public class LevelsDataManager : SequenceData, IDataLoader<List<LevelsDef>>
 	{
 		base.Reload();
 		Levels = null;
-		LoadData(new HybridConfigDataMapper<List<LevelsDef>>("configs/levels.data", NSConfigsSettings.Instance.IsUseEncryption));
+		LoadData(new ResourceConfigDataMapper<List<LevelsDef>>("configs/levels.data", NSConfigsSettings.Instance.IsUseEncryption));
 	}
 	
 	public void UpdateSequence()

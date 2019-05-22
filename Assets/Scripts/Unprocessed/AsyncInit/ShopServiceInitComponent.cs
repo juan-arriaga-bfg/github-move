@@ -7,7 +7,7 @@ public class ShopServiceInitComponent : AsyncInitComponentBase
         //init shopmanager
         ShopManager shopManager = new ShopManager();
         shopManager.InitStorage(
-            new HybridConfigDataMapper<IEnumerable<ShopItem>>("configs/shopitems.data",
+            new ResourceConfigDataMapper<IEnumerable<ShopItem>>("configs/shopitems.data",
                 NSConfigsSettings.Instance.IsUseEncryption),
             (shopItems) => { });
          

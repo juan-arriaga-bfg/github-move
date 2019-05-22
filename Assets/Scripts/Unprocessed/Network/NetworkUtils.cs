@@ -11,6 +11,7 @@ public struct BackendSettings
     public string Host;
     public string Protocol;
     public string ClientPlatform;
+    public string GameVersion;
 }
 
 public class NetworkUtils
@@ -35,14 +36,16 @@ public class NetworkUtils
 #elif BUILD_PROD
             Host = "https://f2p.bigfishgames.com/nodejs10",
 #endif
+
+            GameVersion = IWVersion.Get.CurrentVersion
         };
 
         // Fallback for Unity Editor and for debug overriding
         if (backendSettings.Host == null)
         // if (true)
         {
-            backendSettings.Host = "http://127.0.0.1:8080/nodejs101";              // Localhost
-            // backendSettings.Host = "http://134.17.4.143/nodejs101";             // Neskinsoft
+//            backendSettings.Host = "http://127.0.0.1:8080/nodejs101";              // Localhost
+            backendSettings.Host = "http://134.17.4.143/nodejs101";             // Neskinsoft
             // backendSettings.Host = "https://f2p-qa.bigfishgames.com/nodejs101"; // Bfg QA
         }
     }
@@ -134,7 +137,7 @@ public class NetworkUtils
             request.FormUsage = HTTPFormUsage.UrlEncoded;
         }
 
-        request.AddHeader("X-Client-Version", IWVersion.Get.CurrentVersion);
+        request.AddHeader("X-Client-Version", backendSettings.GameVersion);
         request.AddHeader("X-Client-Protocol", backendSettings.Protocol);
         request.AddHeader("X-Client-Platform", backendSettings.ClientPlatform);
 

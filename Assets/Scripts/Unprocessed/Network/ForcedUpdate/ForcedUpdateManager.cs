@@ -10,6 +10,16 @@
     const string QUEUE_ID = "ForcedUpdate";
     
     private static DateTime? lastNotifyTime;
+    
+    private long VersionToLong(string versionStr)
+    {
+        string[] split = versionStr.Split('.');
+        long num = int.Parse(split[0]) * 10000000 
+                 + int.Parse(split[1]) * 10000 
+                 + int.Parse(split[2]);
+
+        return num;
+    }
 
     public void Init()
     {
@@ -62,9 +72,9 @@
             string currentVersionStr = IWProjectVersionSettings.Instance.ProductionVersion;
             IW.Logger.Log($"[ForcedUpdateManager] => Check: current: {currentVersionStr}, force: {serverData.ForceVersion}, notify: {serverData.NotifyVersion}");
 
-            long currentVersion = IWProjectVersionSettings.VersionToLong(currentVersionStr);
-            long forceVersion   = IWProjectVersionSettings.VersionToLong(serverData.ForceVersion);
-            long notifyVersion  = IWProjectVersionSettings.VersionToLong(serverData.NotifyVersion);
+            long currentVersion = VersionToLong(currentVersionStr);
+            long forceVersion   = VersionToLong(serverData.ForceVersion);
+            long notifyVersion  = VersionToLong(serverData.NotifyVersion);
 
             if (currentVersion < forceVersion)
             {

@@ -22,7 +22,7 @@ public class EnemiesDataManager : IECSComponent, IDataManager, IDataLoader<List<
     public void Reload()
     {
         enemyDefs = null;
-        LoadData(new HybridConfigDataMapper<List<EnemyDef>>("configs/enemies.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadData(new ResourceConfigDataMapper<List<EnemyDef>>("configs/enemies.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
     
     public void LoadData(IDataMapper<List<EnemyDef>> dataMapper)

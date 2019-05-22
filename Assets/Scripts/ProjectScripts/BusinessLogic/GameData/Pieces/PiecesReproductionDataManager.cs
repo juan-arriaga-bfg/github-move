@@ -21,7 +21,7 @@ public class PiecesReproductionDataManager : IECSComponent, IDataManager, IDataL
 	
 	public void Reload()
 	{
-		LoadData(new HybridConfigDataMapper<List<PieceReproductionDef>>("configs/piecesReproduction.data", NSConfigsSettings.Instance.IsUseEncryption));
+		LoadData(new ResourceConfigDataMapper<List<PieceReproductionDef>>("configs/piecesReproduction.data", NSConfigsSettings.Instance.IsUseEncryption));
 	}
 
 	public void LoadData(IDataMapper<List<PieceReproductionDef>> dataMapper)

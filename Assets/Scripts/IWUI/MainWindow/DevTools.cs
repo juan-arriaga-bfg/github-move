@@ -674,8 +674,6 @@ public class DevTools : UIContainerElementViewController
     // todo: move this somewhere
     public static void ReloadScene()
     {
-        IW.Logger.Log($"[DevTools] => ReloadScene");
-
         AsyncInitService.Current
             .AddComponent(new ShowLoadingWindowInitComponent())
             .AddComponent(new ClosePermanentWindowsInitComponent())

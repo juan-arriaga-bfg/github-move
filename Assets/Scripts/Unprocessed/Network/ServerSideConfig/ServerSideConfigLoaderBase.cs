@@ -37,11 +37,7 @@ public abstract class ServerSideConfigLoaderBase: IECSComponent
     private int checkInterval = 60 * 60;
 #endif
 
-#if DEBUG
-    private int cacheLifetime = 30;
-#else
-    private int cacheLifetime = 60 * 60;
-#endif
+    private int cacheLifetime = -1;
     
     private string url;
 
@@ -123,7 +119,7 @@ public abstract class ServerSideConfigLoaderBase: IECSComponent
         {
             ServerSideConfigLoaderCacheItem item = JsonConvert.DeserializeObject<ServerSideConfigLoaderCacheItem>(cacheStr);
 
-            if (cacheLifetime < 0)
+            if (cacheLifetime <= 0)
             {
                 return item;
             }
@@ -180,10 +176,6 @@ public abstract class ServerSideConfigLoaderBase: IECSComponent
                         {
                             context.DataReceived(this, data);
                         }
-                        else
-                        {
-                            context.DataRequestFailed(this, error);
-                        }
                     });
                 }
 
@@ -197,10 +189,6 @@ public abstract class ServerSideConfigLoaderBase: IECSComponent
             {
                 context.DataReceived(this, data);
                 ObscuredPrefs.SetString(timeKey, UnixTimeHelper.DateTimeToUnixTimestamp(DateTime.UtcNow).ToString());
-            }
-            else
-            {
-                context.DataRequestFailed(this, error);
             }
         });
     }

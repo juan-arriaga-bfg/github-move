@@ -16,7 +16,7 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
     {
         base.Reload();
         Obstacles = null;
-        LoadData(new HybridConfigDataMapper<List<ObstacleDef>>("configs/obstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadData(new ResourceConfigDataMapper<List<ObstacleDef>>("configs/obstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 
     public void LoadData(IDataMapper<List<ObstacleDef>> dataMapper)
