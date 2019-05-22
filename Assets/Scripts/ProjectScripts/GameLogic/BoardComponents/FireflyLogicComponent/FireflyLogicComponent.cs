@@ -212,11 +212,13 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent, IT
 			
 			Vector2 start = context.Context.BoardDef.ViewCamera.ScreenToWorldPoint(slots[i]);
 			Vector2 finish = context.Context.BoardDef.ViewCamera.ScreenToWorldPoint(positionFinish);
+			
+			IW.Logger.Log($"[Firefly] => Screen.width: {Screen.width}, Screen.height: {Screen.height}, slot: {i} - {slots[i]}, positionFinish: {positionFinish}, start: {start}, finish: {finish}");
 
 			var firefly = (int) (i < Def.AmountProduction.Value ? ViewType.FireflyProduction : ViewType.FireflyEvent);
 			var view = context.Context.RendererContext.CreateBoardElement<FireflyView>(firefly);
-			view.Init(context.Context.RendererContext, start, finish);
 			
+			view.Init(context.Context.RendererContext, start, finish);
 			views.Add(view);
 		}
 
