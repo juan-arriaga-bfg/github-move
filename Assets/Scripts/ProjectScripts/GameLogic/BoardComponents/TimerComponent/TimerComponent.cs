@@ -184,7 +184,7 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
         OnComplete?.Invoke();
     }
     
-    public void FastComplete(string analyticsLocation)
+    public void FastComplete(string analyticsLocation, string reason)
     {
         if (IsFree())
         {
@@ -200,7 +200,7 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
             if(success == false) return;
             
             NSAudioService.Current.Play(SoundId.TimeBoost);
-            Analytics.SendPurchase(analyticsLocation, "item1", new List<CurrencyPair>{currentPrice}, null, false, false);
+            Analytics.SendPurchase(analyticsLocation, reason, new List<CurrencyPair>{currentPrice}, null, false, false);
             
             Complete();
         });

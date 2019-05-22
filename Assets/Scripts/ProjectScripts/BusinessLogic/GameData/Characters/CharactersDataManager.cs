@@ -69,6 +69,7 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
         
         OnUpdateSequence?.Invoke();
         GameDataService.Current.FogsManager.UpdateFogObserver(id);
+        GameDataService.Current.FogsManager.UpdateUnlockedStates();
     }
 
     private void UpdateSequence()

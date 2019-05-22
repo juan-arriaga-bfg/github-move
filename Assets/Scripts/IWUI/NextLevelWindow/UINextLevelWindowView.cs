@@ -129,6 +129,8 @@ public class UINextLevelWindowView : UIGenericWindowView
         GameDataService.Current.LevelsManager.UpdateSequence();
         
         Analytics.SendLevelReachedEvent(GameDataService.Current.LevelsManager.Level);
+        GameDataService.Current.FogsManager.UpdateUnlockedStates();
+        
         TackleBoxEvents.SendLevelUp();
         
         base.OnViewCloseCompleted();
