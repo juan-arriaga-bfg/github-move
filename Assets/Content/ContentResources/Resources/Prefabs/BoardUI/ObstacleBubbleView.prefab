@@ -86,7 +86,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1124056801473990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 79a453906be14c42b7eafe3e83e2a0cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -95,7 +95,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -774,10 +774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1683ca82ac59d994d933a2b801c96603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastBoardPosition:
-    X: 0
-    Y: 0
-    Z: 0
   cachedSortingGroup: {fileID: 0}
   IsFading: 0
   FadeValue: 0
@@ -785,6 +781,9 @@ MonoBehaviour:
   group: {fileID: 225879918826164384}
   canvas: {fileID: 223683639147925892}
   anchor: {fileID: 0}
+  DefaultCameraLayer:
+    serializedVersion: 2
+    m_Bits: 1
   message: {fileID: 114338106244282586}
   price: {fileID: 114742302748384480}
   bar: {fileID: 114115951862281664}
