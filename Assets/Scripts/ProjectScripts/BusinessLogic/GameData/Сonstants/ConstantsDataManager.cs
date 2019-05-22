@@ -43,7 +43,7 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     
     public void Reload()
     {
-        LoadData(new ResourceConfigDataMapper<List<ConstantsDef>>("configs/constants.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadData(new HybridConfigDataMapper<List<ConstantsDef>>("configs/constants.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 
     public void LoadData(IDataMapper<List<ConstantsDef>> dataMapper)

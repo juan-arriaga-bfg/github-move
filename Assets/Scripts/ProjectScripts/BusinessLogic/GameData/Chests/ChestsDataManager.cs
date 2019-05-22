@@ -14,7 +14,7 @@ public class ChestsDataManager : SequenceData, IDataLoader<List<ChestDef>>
         
         Chests = null;
         
-        LoadData(new ResourceConfigDataMapper<List<ChestDef>>("configs/chests.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadData(new HybridConfigDataMapper<List<ChestDef>>("configs/chests.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 
     public void LoadData(IDataMapper<List<ChestDef>> dataMapper)

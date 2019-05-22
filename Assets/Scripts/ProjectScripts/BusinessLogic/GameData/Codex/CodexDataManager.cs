@@ -66,7 +66,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         ClearCodexContentCache();
 
         // Add records to configs/codex.data to unlock any piece in codex at the begining of the game: {"100": {"Unlocked": [100],"PendingReward": []}, ... }
-        LoadData(new ResourceConfigDataMapper<Dictionary<int, CodexChainState>>("configs/codex.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadData(new HybridConfigDataMapper<Dictionary<int, CodexChainState>>("configs/codex.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 
     public void LoadData(IDataMapper<Dictionary<int, CodexChainState>> dataMapper)

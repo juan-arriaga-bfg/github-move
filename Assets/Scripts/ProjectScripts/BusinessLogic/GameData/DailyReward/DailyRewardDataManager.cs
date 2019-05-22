@@ -47,7 +47,7 @@ public class DailyRewardDataManager : ECSEntity, IDataManager, IDataLoader<List<
         Cleanup();
         
         Defs = new List<DailyRewardDef>();
-        LoadData(new ResourceConfigDataMapper<List<DailyRewardDef>>("configs/daily.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadData(new HybridConfigDataMapper<List<DailyRewardDef>>("configs/daily.data", NSConfigsSettings.Instance.IsUseEncryption));
         
         var save = context.UserProfile.GetComponent<DailyRewardSaveComponent>(DailyRewardSaveComponent.ComponentGuid);
         if (save == null)

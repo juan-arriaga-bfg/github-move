@@ -29,7 +29,7 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
     public void Reload()
     {
         Defs = new List<MarketItem>();
-        LoadData(new ResourceConfigDataMapper<List<MarketDef>>("configs/market.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadData(new HybridConfigDataMapper<List<MarketDef>>("configs/market.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 
     public void LoadData(IDataMapper<List<MarketDef>> dataMapper)

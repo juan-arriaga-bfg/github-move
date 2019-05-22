@@ -21,7 +21,7 @@ public class PiecesMakingDataManager : IECSComponent, IDataManager, IDataLoader<
 	
 	public void Reload()
 	{
-		LoadData(new ResourceConfigDataMapper<List<PieceMakingDef>>("configs/piecesMaking.data", NSConfigsSettings.Instance.IsUseEncryption));
+		LoadData(new HybridConfigDataMapper<List<PieceMakingDef>>("configs/piecesMaking.data", NSConfigsSettings.Instance.IsUseEncryption));
 	}
 
 	public void LoadData(IDataMapper<List<PieceMakingDef>> dataMapper)

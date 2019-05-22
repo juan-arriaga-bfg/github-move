@@ -138,11 +138,17 @@ public static class SocialUtils
 #if DEBUG
         var sw = new Stopwatch();
         sw.Start();
-#endif 
-        MemoryStream dataStream = new MemoryStream(Encoding.UTF8.GetBytes(data));
-        MemoryStream zipped = CreateZipToMemoryStream(dataStream, "profile.data.txt");
-        var ret = zipped.ToArray();
+#endif
+        byte[] ret;
         
+        using (MemoryStream dataStream = new MemoryStream(Encoding.UTF8.GetBytes(data)))
+        {
+            using (MemoryStream zipped = CreateZipToMemoryStream(dataStream, "profile.data.txt"))
+            {
+                ret = zipped.ToArray();
+            } 
+        }
+
 #if DEBUG
         sw.Stop();
         IW.Logger.Log($"[SocialUtils] => SendProgress: Archive: Done in {sw.ElapsedMilliseconds}ms");
