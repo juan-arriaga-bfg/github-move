@@ -55,10 +55,10 @@ public static partial class CurrencyHelper
     {
         var piecesReward = FiltrationRewards(products, out var currenciesReward);
         
-        PurchaseAndProvideEjection(piecesReward, currenciesReward, price, position, onComplete);
+        PurchaseAndProvideEjection(piecesReward, currenciesReward, price, position, onComplete, null);
     }
     
-    public static void PurchaseAndProvideEjection(Dictionary<int, int> piecesReward, List<CurrencyPair> currenciesReward, CurrencyPair price = null, BoardPosition? position = null, Action onComplete = null)
+    public static void PurchaseAndProvideEjection(Dictionary<int, int> piecesReward, List<CurrencyPair> currenciesReward, CurrencyPair price = null, BoardPosition? position = null, Action onComplete = null, Action<List<BoardPosition>> OnSuccess = null)
     {
         if (GetAllData(currenciesReward, price, position, out var point, out var transactions) == false) return;
         
@@ -68,7 +68,8 @@ public static partial class CurrencyHelper
         {
             From = point,
             Pieces = piecesReward,
-            OnComplete = () => { OnCompleteAction(point, transactions, onComplete); }
+            OnComplete = () => { OnCompleteAction(point, transactions, onComplete); },
+            OnSuccess = OnSuccess
         });
     }
 

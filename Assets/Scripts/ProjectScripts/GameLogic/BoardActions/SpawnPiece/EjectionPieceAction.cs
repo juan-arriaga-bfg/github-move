@@ -53,6 +53,15 @@ public class EjectionPieceAction : IBoardAction
 			Pieces = pieces,
 			AnimationResourceSearch = AnimationResourceSearch
 		};
+		
+		var result = new List<BoardPosition>();
+		    
+		foreach (var piece in pieces)
+		{
+			result.Add(piece.Value.Multicellular?.GetTopPosition ?? piece.Value.CachedPosition);
+		}
+			
+		OnSuccess?.Invoke(result);
 
 		animation.OnCompleteEvent += (_) =>
 		{
@@ -64,15 +73,6 @@ public class EjectionPieceAction : IBoardAction
 			}
 
 			OnComplete?.Invoke();
-		    
-		    var result = new List<BoardPosition>();
-		    
-		    foreach (var piece in pieces)
-		    {
-		        result.Add(piece.Value.Multicellular?.GetTopPosition ?? piece.Value.CachedPosition);
-		    }
-			
-		    OnSuccess?.Invoke(result);
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

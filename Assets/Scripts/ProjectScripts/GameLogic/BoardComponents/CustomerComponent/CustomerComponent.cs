@@ -124,13 +124,23 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
 
     public void GetReward()
     {
-        CurrencyHelper.PurchaseAndProvideEjection(Order.Result, new List<CurrencyPair>(), null, pieceContext.CachedPosition, () => { Order = null; });
+        CurrencyHelper.PurchaseAndProvideEjection(Order.Result, new List<CurrencyPair>(), null, pieceContext.CachedPosition, () => { Order = null; }, SelectReward);
         
         Order.State = OrderState.Reward;
         
         GameDataService.Current.OrdersManager.RemoveOrder(Order, pieceContext.Context.BoardLogic);
         
         UpdateView();
+    }
+
+    private void SelectReward(List<BoardPosition> positions)
+    {
+        if(positions == null || positions.Count == 0 || pieceContext.Context.Manipulator.CameraManipulator.CameraMove.IsLocked) return;
+        
+        var position = positions[0];
+        var target = pieceContext.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Up.Y, position.Z);
+        
+        pieceContext.Context.Manipulator.CameraManipulator.MoveTo(target);
     }
 
     public void UpdateState(OrderState state)
