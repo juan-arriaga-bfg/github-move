@@ -256,7 +256,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1285553997013540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 79a453906be14c42b7eafe3e83e2a0cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -268,8 +268,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -709,10 +709,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4927e070164b6b4e901a4370c58c0bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastBoardPosition:
-    X: 0
-    Y: 0
-    Z: 0
   cachedSortingGroup: {fileID: 0}
   IsFading: 0
   FadeValue: 0
@@ -720,6 +716,9 @@ MonoBehaviour:
   group: {fileID: 225734263769533626}
   canvas: {fileID: 223618305795984518}
   anchor: {fileID: 0}
+  DefaultCameraLayer:
+    serializedVersion: 2
+    m_Bits: 1
   message: {fileID: 114256702966605080}
   button: {fileID: 114434606991835170}
 --- !u!1 &1890500939357838

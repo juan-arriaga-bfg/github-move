@@ -156,7 +156,7 @@
             }
 
             string btnUpdate = LocalizationService.Get("window.forced.update.btn.update", "window.forced.update.btn.update");
-            
+
             if (force)
             {
                 string forceTitle   = LocalizationService.Get("window.forced.update.force.title",   "window.forced.update.force.title");

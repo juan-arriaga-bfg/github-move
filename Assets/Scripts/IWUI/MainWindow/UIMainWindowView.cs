@@ -30,6 +30,13 @@ public class UIMainWindowView : UIBaseWindowView
 
     [IWUIBinding("#VersionLabel")] private Transform versionLabel;
 
+    [IWUIBinding("#ButtonShop")] private UIButtonViewController shopBaseButton;
+    [IWUIBinding("#ButtonCodex")] private UIButtonViewController codexBaseButton;
+    [IWUIBinding("#ButtonOrders")] private UIButtonViewController orderBaseButton;
+    [IWUIBinding("#ButtonDailyQuest")] private UIButtonViewController dailyObjectiveBaseButton;
+    [IWUIBinding("#ButtonOptions")] private UIButtonViewController optionsBaseButton;
+    [IWUIBinding("#ButtonOffer")] private UIButtonViewController offerBaseButton;
+
     [Header("Hint anchors")] 
     [SerializeField] private Transform hintAnchorOrdersButton;
     public Transform HintAnchorOrdersButton => hintAnchorOrdersButton;
@@ -75,6 +82,18 @@ public class UIMainWindowView : UIBaseWindowView
         OnActiveQuestsListChanged();
         
         UpdateCodexButton();
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
+        shopBaseButton.OnClick(OnClickShop);
+        codexBaseButton.OnClick(OnClickCodex);
+        orderBaseButton.OnClick(OnClickOrders);
+        dailyObjectiveBaseButton.OnClick(OnClickDailyQuest);
+        optionsBaseButton.OnClick(OnClickOptions);
+        offerBaseButton.OnClick(OnClickOffer);
     }
 
     public override void OnViewClose()

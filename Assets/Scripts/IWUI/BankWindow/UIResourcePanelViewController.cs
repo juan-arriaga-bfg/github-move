@@ -1,8 +1,10 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class UIResourcePanelViewController : UIGenericResourcePanelViewController 
+public class UIResourcePanelViewController : UIGenericResourcePanelViewController
 {
+    [SerializeField] private UIButtonViewController button;
+    
     public override int CurrentValueAnimated
     {
         set
@@ -10,6 +12,12 @@ public class UIResourcePanelViewController : UIGenericResourcePanelViewControlle
             currentValueAnimated = value;
             SetLabelText(currentValueAnimated);
         }
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        button.OnClick(OpenShop);
     }
 
     public override void UpdateView()

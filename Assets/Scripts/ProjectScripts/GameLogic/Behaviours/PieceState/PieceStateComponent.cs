@@ -107,21 +107,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
 
         if (item == null)
         {
-            // Hack to hide bubble on worker tutorial start
-            var stateToSet = StartState;
-            if (thisContext.PieceType == PieceType.A5Fake.Id)
-            {
-                if (thisContext.CachedPosition.Equals(new BoardPosition(15, 6, 1)))
-                {
-                    var tutorialManager = GameDataService.Current.TutorialDataManager;
-                    if (!tutorialManager.IsCompeted(10))
-                    {
-                        stateToSet = BuildingState.Warning;
-                    }
-                }
-            }
-            
-            State = stateToSet;
+            State = StartState;
             
             if (thisContext.Multicellular == null) return;
             
