@@ -9,6 +9,9 @@ public class PathfindRegion
         public HashSet<Piece> RegionPieces => piecesOnRegion;
 
         private BoardController board;
+
+        private List<BoardPosition> blockPathPieces = new List<BoardPosition>();
+        public List<BoardPosition> BlockPathPieces => blockPathPieces;
         
         public bool Contains(BoardPosition position)
         {
@@ -38,8 +41,6 @@ public class PathfindRegion
                 piecesOnRegion.Remove(pieceOnPos);
         }
 
-        
-
         public bool RecalculateState(Action<HashSet<Piece>> onRegionOpen, Piece changedPiece = null)
         {
             if (changedPiece != null &&
@@ -54,7 +55,7 @@ public class PathfindRegion
                 
             var firstPiece = piecesOnRegion.First();
             var canPath = board.Pathfinder.HasPath(firstPiece.CachedPosition, board.AreaAccessController.AvailiablePositions, 
-                                                   out _, firstPiece, board.Pathfinder.GetCondition(firstPiece));
+                                                   out blockPathPieces, firstPiece, board.Pathfinder.GetCondition(firstPiece));
             if (canPath)
             {
                 onRegionOpen?.Invoke(piecesOnRegion);

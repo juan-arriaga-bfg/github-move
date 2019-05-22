@@ -116,6 +116,7 @@ public class PathfinderComponent:ECSEntity
             }
         }
         
+        blockagePositions = new List<BoardPosition>(blockagePositionsHash);
         return false;
     }
     
@@ -189,9 +190,10 @@ public class PathfinderComponent:ECSEntity
             }
             
             var targetPiece = board.BoardLogic.GetPieceAt(currentNeighbour);
-            if(!checkedPositions.Contains(currentNeighbour) && predicate.Invoke(currentNeighbour))
+            var isValid = predicate.Invoke(currentNeighbour);
+            if(!checkedPositions.Contains(currentNeighbour) && isValid)
                 checkedNeigbours.Add(currentNeighbour); 
-            else if(targetPiece != null && !unavailiable.Contains(targetPiece.CachedPosition))
+            if(targetPiece != null && isValid == false)
                 unavailiable.Add(targetPiece.CachedPosition);
         }
         

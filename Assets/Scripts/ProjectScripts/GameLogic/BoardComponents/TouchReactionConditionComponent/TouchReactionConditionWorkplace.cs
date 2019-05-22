@@ -4,12 +4,6 @@ public class TouchReactionConditionWorkplace : TouchReactionConditionComponent
 {
 	public override bool Check(BoardPosition position, Piece piece)
 	{
-		if (piece.Context?.PathfindLocker.HasPath(piece) == false)
-		{
-			UIErrorWindowController.AddError(LocalizationService.Get("message.error.pieceLock", "message.error.pieceLock"));
-			return false;
-		}
-		
 		var life = piece.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
 
 		if (life == null || IsDone) return true;
