@@ -41,6 +41,11 @@ namespace BfgAnalytics
         
         public static void SendFogClearedEvent(string fogId)
         {
+            AnalyticsService.Current?.Event("progress", fogId, "fog", "clear", DefaultJsonData());
+        }
+        
+        public static void SendFogUnlockEvent(string fogId)
+        {
             AnalyticsService.Current?.Event("progress", fogId, "fog", "unlock", DefaultJsonData());
         }
         
@@ -165,7 +170,8 @@ namespace BfgAnalytics
                     continue;
                 }
 
-                if (pair.Currency == Currency.Coins.Name)
+                if (pair.Currency == Currency.Coins.Name
+                    || pair.Currency == Currency.Mana.Name )
                 {
                     soft[pair.Currency] = pair.Amount;
                     continue;

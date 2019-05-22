@@ -23,7 +23,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     {
         context = null;
     }
-    
+    private List<FogDef> unlockedFogs;
     public List<FogDef> Fogs { get; set; }
     
     public Dictionary<BoardPosition, FogDef> VisibleFogPositions;
@@ -140,6 +140,46 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
             
             observer.UpdateResource(0);
         }
+    }
+
+    public void UpdateUnlockedStates()
+    {
+        var currentUnlockedFogs = GetUnlockedFogDefs();
+        if (unlockedFogs == null)
+        {
+            unlockedFogs = currentUnlockedFogs;
+            return;
+        }
+        
+        foreach (var fog in currentUnlockedFogs)
+        {
+            if (unlockedFogs.Contains(fog) == false)
+            {
+                Analytics.SendFogUnlockEvent(fog.Uid);
+            }
+        }
+
+        unlockedFogs = currentUnlockedFogs;
+    }
+
+    public List<FogDef> GetUnlockedFogDefs()
+    {
+        var unlockedFogs = new List<FogDef>();
+        foreach (var fogPosition in VisibleFogPositions.Keys)
+        {
+            var fogObserver = FogObservers[fogPosition];
+            if (fogObserver == null)
+            {
+                continue;
+            }
+
+            if (fogObserver.RequiredConditionReached() && fogObserver.IsActive)
+            {
+                unlockedFogs.Add(fogObserver.Def);
+            }
+        }
+
+        return unlockedFogs;
     }
     
     public bool IsFogCleared(string uid)

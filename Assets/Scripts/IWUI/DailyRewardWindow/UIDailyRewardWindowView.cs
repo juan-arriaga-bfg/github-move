@@ -30,8 +30,8 @@ public class UIDailyRewardWindowView : UIGenericPopupWindowView
     private void Scroll(int index)
     {
         DOTween.Kill(content);
-
-        var posX = Mathf.Clamp((-content.CachedRectTransform.sizeDelta.x / content.Tabs.size) * index, -content.CachedRectTransform.sizeDelta.x, 0);
+        
+        var posX = Mathf.Clamp((-content.CachedRectTransform.sizeDelta.x / (content.Tabs.size-1)) * index, -content.CachedRectTransform.sizeDelta.x, 0);
 
         if (Mathf.Abs(content.CachedRectTransform.anchoredPosition.x - posX) <= 0.01f) return;
 

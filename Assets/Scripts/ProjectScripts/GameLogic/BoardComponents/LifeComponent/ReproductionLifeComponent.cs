@@ -110,6 +110,7 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
             UIMessageWindowController.CreateTimerCompleteMessage(
                 LocalizationService.Get("window.timerComplete.message.production", "window.timerComplete.message.production"),
                 AnalyticsLocation,
+                PieceType.Parse(Context.PieceType),
                 TimerCooldown);
             
             return false;
