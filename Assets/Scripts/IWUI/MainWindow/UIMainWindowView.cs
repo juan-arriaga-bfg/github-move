@@ -82,6 +82,8 @@ public class UIMainWindowView : UIBaseWindowView
         OnActiveQuestsListChanged();
         
         UpdateCodexButton();
+        
+        offerBaseButton.SetActiveState(false);
     }
 
     public override void OnViewShowCompleted()
