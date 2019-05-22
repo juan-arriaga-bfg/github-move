@@ -80,8 +80,8 @@ public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatc
             for (var j = 0; j < line.Count; j++)
             {
                 var pos = new BoardPosition(position.X - i, position.Y - j, position.Z);
-                
-                if(definition.Context.IsPointValid(pos) == false) continue;
+
+                if (definition.Context.IsPointValid(pos) == false) continue;
                 
                 starts.Add(pos);
             }

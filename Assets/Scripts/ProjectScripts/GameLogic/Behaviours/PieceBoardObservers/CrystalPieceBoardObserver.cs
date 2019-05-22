@@ -8,7 +8,7 @@ public class CrystalPieceBoardObserver : PartPieceBoardObserver
     {
         base.OnRegisterEntity(entity);
         
-        var types = PieceType.GetIdsByFilter(PieceTypeFilter.Normal | PieceTypeFilter.Multicellular, PieceTypeFilter.Fake);
+        var types = PieceType.GetIdsByFilter(PieceTypeFilter.Workplace | PieceTypeFilter.Multicellular, PieceTypeFilter.Mine);
         
         foreach (var id in types)
         {
